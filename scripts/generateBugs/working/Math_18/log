@@ -1,0 +1,659 @@
+---
+Begin generate bug_id: Math_18
+num_of_hunks: 5
+use working dir: ./working/data/Math_18
+Try to checkout Math_18
+build dir: ['./working/data/Math_18/target/classes', './working/data/Math_18/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+trace file: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+trace file: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+trace file: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+trace file: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+trying to replace old failing tests
+edit: replace from 438 range 41 at src/test/java/org/apache/commons/math3/optimization/direct/CMAESOptimizerTest.java
+to
+    @Test
+    public void testFitAccuracyDependsOnBoundary$catena_0() {
+        final CMAESOptimizer optimizer = new CMAESOptimizer();
+        final MultivariateFunction fitnessFunction = new MultivariateFunction() {
+                public double value(double[] parameters) {
+                    final double target = 11.1;
+                    final double error = target - parameters[0];
+                    return error * error;
+                }
+            };
+
+        final double[] start = { 1 };
+ 
+        // No bounds.
+        PointValuePair result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                                   start);
+        final double resNoBound = result.getPoint()[0];
+
+        // Optimum is near the lower bound.
+        final double[] lower = { -20 };
+        final double[] upper = { 5e16 };
+        result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                    start, lower, upper);
+        final double resNearLo = result.getPoint()[0];
+
+        // Optimum is near the upper bound.
+        lower[0] = -5e16;
+        upper[0] = 20;
+        result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                    start, lower, upper);
+        final double resNearHi = result.getPoint()[0];
+
+        // System.out.println("resNoBound=" + resNoBound +
+        //                    " resNearLo=" + resNearLo +
+        //                    " resNearHi=" + resNearHi);
+
+        // The two values currently differ by a substantial amount, indicating that
+        // the bounds definition can prevent reaching the optimum.
+        Assert.assertEquals(resNoBound, resNearLo, 1e-3);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals(resNoBound, resNearHi, 1e-3);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testFitAccuracyDependsOnBoundary$catena_1() {
+        final CMAESOptimizer optimizer = new CMAESOptimizer();
+        final MultivariateFunction fitnessFunction = new MultivariateFunction() {
+                public double value(double[] parameters) {
+                    final double target = 11.1;
+                    final double error = target - parameters[0];
+                    return error * error;
+                }
+            };
+
+        final double[] start = { 1 };
+ 
+        // No bounds.
+        PointValuePair result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                                   start);
+        final double resNoBound = result.getPoint()[0];
+
+        // Optimum is near the lower bound.
+        final double[] lower = { -20 };
+        final double[] upper = { 5e16 };
+        result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                    start, lower, upper);
+        final double resNearLo = result.getPoint()[0];
+
+        // Optimum is near the upper bound.
+        lower[0] = -5e16;
+        upper[0] = 20;
+        result = optimizer.optimize(100000, fitnessFunction, GoalType.MINIMIZE,
+                                    start, lower, upper);
+        final double resNearHi = result.getPoint()[0];
+
+        // System.out.println("resNoBound=" + resNoBound +
+        //                    " resNearLo=" + resNearLo +
+        //                    " resNearHi=" + resNearHi);
+
+        // The two values currently differ by a substantial amount, indicating that
+        // the bounds definition can prevent reaching the optimum.
+        try{ Assert.assertEquals(resNoBound, resNearLo, 1e-3);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals(resNoBound, resNearHi, 1e-3);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math3/optimization/direct/CMAESOptimizerTest.java
+new test num: 2
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 141.25 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+pattern: 00001
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00010
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00100
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+patches are written to file
+running tests...
+used time: Finished in 137.90 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+No new failing tests but only 1 hunk
+pattern: 01000
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+patches are written to file
+running tests...
+used time: Finished in 125.81 seconds
+Failing tests: 2
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testMath864
+Includes new failing tests, set to unusable
+pattern: 10000
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+patches are written to file
+running tests...
+used time: Finished in 126.85 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+No new failing tests but only 1 hunk
+pattern: 00011
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00101
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 129.91 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 00110
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 127.83 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 01001
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01010
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01100
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+patches are written to file
+running tests...
+used time: Finished in 135.02 seconds
+Failing tests: 2
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testMath864
+Includes new failing tests, set to unusable
+pattern: 10001
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10010
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10100
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+patches are written to file
+running tests...
+used time: Finished in 127.21 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 11000
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+patches are written to file
+running tests...
+used time: Finished in 135.96 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1']
+select new bug
+Pattern: 11000
+failing tests: org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+pattern: 00111
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 139.43 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 01011
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01101
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 132.09 seconds
+Failing tests: 3
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testConstrainedRosen
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testMath864
+Includes new failing tests, set to unusable
+pattern: 01110
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 156.15 seconds
+Failing tests: 2
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testMath864
+Includes new failing tests, set to unusable
+pattern: 10011
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10101
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 144.06 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 10110
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 140.56 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 11001
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11010
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11100
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+patches are written to file
+running tests...
+used time: Finished in 162.73 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+pattern: 01111
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 149.68 seconds
+Failing tests: 3
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testConstrainedRosen
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testMath864
+Includes new failing tests, set to unusable
+pattern: 10111
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 156.51 seconds
+Failing tests: 1
+	org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 11011
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11101
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 148.42 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+pattern: 11110
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 145.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+pattern: 11111
+try to fix hunk: 0
+replace from 932 with range 1 to
+                res[i] = x[i] / diff;
+
+try to fix hunk: 1
+replace from 958 with range 1 to
+                res[i] = diff * x[i];
+
+try to fix hunk: 2
+insert before 990 with             final double[] bLoEnc = encode(boundaries[0]);
+            final double[] bHiEnc = encode(boundaries[1]);
+
+try to fix hunk: 3
+replace from 992 with range 1 to
+                if (x[i] < bLoEnc[i]) {
+
+try to fix hunk: 4
+replace from 995 with range 1 to
+                if (x[i] > bHiEnc[i]) {
+
+patches are written to file
+running tests...
+used time: Finished in 151.41 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 1 new bugs

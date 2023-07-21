@@ -1,0 +1,148 @@
+---
+Begin generate bug_id: Math_87
+num_of_hunks: 3
+use working dir: ./working/data/Math_87
+Try to checkout Math_87
+build dir: ['./working/data/Math_87/target/classes', './working/data/Math_87/target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+trace file: src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+trace file: src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+trying to replace old failing tests
+edit: replace from 67 range 11 at src/test/org/apache/commons/math/optimization/linear/SimplexSolverTest.java
+to
+    @Test
+    public void testSingleVariableAndConstraint$catena_0() throws OptimizationException {
+        LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { 3 }, 0);
+        Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+        constraints.add(new LinearConstraint(new double[] { 1 }, Relationship.LEQ, 10));
+
+        SimplexSolver solver = new SimplexSolver();
+        RealPointValuePair solution = solver.optimize(f, constraints, GoalType.MAXIMIZE, false);
+        assertEquals(10.0, solution.getPoint()[0], 0.0);                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(30.0, solution.getValue(), 0.0);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSingleVariableAndConstraint$catena_1() throws OptimizationException {
+        LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { 3 }, 0);
+        Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+        constraints.add(new LinearConstraint(new double[] { 1 }, Relationship.LEQ, 10));
+
+        SimplexSolver solver = new SimplexSolver();
+        RealPointValuePair solution = solver.optimize(f, constraints, GoalType.MAXIMIZE, false);
+        try{ assertEquals(10.0, solution.getPoint()[0], 0.0);                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(30.0, solution.getValue(), 0.0);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/math/optimization/linear/SimplexSolverTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 42.47 seconds
+Failing tests: 2
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_1
+pattern: 001
+try to fix hunk: 2
+delete from 280 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+replace from 278 with range 1 to
+            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+
+patches are written to file
+running tests...
+used time: Finished in 25.67 seconds
+Failing tests: 2
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_1
+No new failing tests but only 1 hunk
+pattern: 100
+try to fix hunk: 0
+replace from 275 with range 2 to
+            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 011
+try to fix hunk: 1
+replace from 278 with range 1 to
+            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+
+try to fix hunk: 2
+delete from 280 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+replace from 275 with range 2 to
+            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+
+try to fix hunk: 2
+delete from 280 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.59 seconds
+Failing tests: 12
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testRestrictVariablesToNonNegative
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testEpsilon
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSimplexSolver
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testInfeasibleSolution
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testMath272
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testModelWithNoArtificialVars
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testMinimization
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testLargeModel
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testSolutionWithNegativeDecisionVariable
+	org.apache.commons.math.optimization.linear.SimplexTableauTest::testInitialization
+	org.apache.commons.math.optimization.linear.SimplexTableauTest::testdiscardArtificialVariables
+	org.apache.commons.math.optimization.linear.SimplexTableauTest::testSerial
+Includes new failing tests, set to unusable
+pattern: 110
+try to fix hunk: 0
+replace from 275 with range 2 to
+            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+
+try to fix hunk: 1
+replace from 278 with range 1 to
+            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+replace from 275 with range 2 to
+            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+
+try to fix hunk: 1
+replace from 278 with range 1 to
+            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+
+try to fix hunk: 2
+delete from 280 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.79 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0', 'org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_1']
+select new bug
+Pattern: 111
+failing tests: org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0@org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_1
+Find 1 new bugs

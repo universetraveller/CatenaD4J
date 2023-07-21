@@ -1,0 +1,144 @@
+---
+Begin generate bug_id: Mockito_13
+num_of_hunks: 3
+use working dir: ./working/data/Mockito_13
+Try to checkout Mockito_13
+build dir: ['./working/data/Mockito_13/target/classes', './working/data/Mockito_13/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/MockHandler.java
+trace file: src/org/mockito/internal/MockHandler.java
+trace file: src/org/mockito/internal/MockHandler.java
+trying to replace old failing tests
+edit: replace from 21 range 15 at test/org/mockitousage/bugs/VerifyingWithAnExtraCallToADifferentMockTest.java
+to
+    @Test 
+    public void shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_0() {
+        //given
+        when(mock.otherMethod()).thenReturn("foo");
+        
+        //when
+        mockTwo.simpleMethod("foo");
+        
+        //then
+        verify(mockTwo).simpleMethod(mock.otherMethod());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            verify(mockTwo, never()).simpleMethod(mock.otherMethod());
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (NeverWantedButInvoked e) {}
+    }     @Test 
+    public void shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1() {
+        //given
+        when(mock.otherMethod()).thenReturn("foo");
+        
+        //when
+        mockTwo.simpleMethod("foo");
+        
+        //then
+        try{ verify(mockTwo).simpleMethod(mock.otherMethod());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            verify(mockTwo, never()).simpleMethod(mock.otherMethod());
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (NeverWantedButInvoked e) {}
+    }
+trace file: test/org/mockitousage/bugs/VerifyingWithAnExtraCallToADifferentMockTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 129.81 seconds
+Failing tests: 1
+	org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1
+pattern: 001
+try to fix hunk: 2
+insert before 83 with                 mockingProgress.verificationStarted(verificationMode);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+insert before 81 with             } else {
+
+patches are written to file
+running tests...
+used time: Finished in 147.58 seconds
+Failing tests: 1
+	org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1
+No new failing tests but only 1 hunk
+pattern: 100
+try to fix hunk: 0
+replace from 77 with range 1 to
+            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                
+
+patches are written to file
+running tests...
+used time: Finished in 131.42 seconds
+Failing tests: 1
+	org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+insert before 81 with             } else {
+
+try to fix hunk: 2
+insert before 83 with                 mockingProgress.verificationStarted(verificationMode);
+
+patches are written to file
+running tests...
+used time: Finished in 137.96 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1']
+select new bug
+Pattern: 011
+failing tests: org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1
+pattern: 101
+try to fix hunk: 0
+replace from 77 with range 1 to
+            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                
+
+try to fix hunk: 2
+insert before 83 with                 mockingProgress.verificationStarted(verificationMode);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+replace from 77 with range 1 to
+            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                
+
+try to fix hunk: 1
+insert before 81 with             } else {
+
+patches are written to file
+running tests...
+used time: Finished in 157.26 seconds
+Failing tests: 1
+	org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 111
+try to fix hunk: 0
+replace from 77 with range 1 to
+            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                
+
+try to fix hunk: 1
+insert before 81 with             } else {
+
+try to fix hunk: 2
+insert before 83 with                 mockingProgress.verificationStarted(verificationMode);
+
+patches are written to file
+running tests...
+used time: Finished in 125.58 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 1 new bugs

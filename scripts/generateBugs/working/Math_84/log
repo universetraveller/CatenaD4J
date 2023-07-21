@@ -1,0 +1,1403 @@
+---
+Begin generate bug_id: Math_84
+num_of_hunks: 3
+use working dir: ./working/data/Math_84
+Try to checkout Math_84
+build dir: ['./working/data/Math_84/target/classes', './working/data/Math_84/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+trace file: src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+trace file: src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+trying to replace old failing tests
+edit: replace from 69 range 60 at src/test/java/org/apache/commons/math/optimization/direct/MultiDirectionalTest.java
+to
+  @Test
+  public void testMinimizeMaximize$catena_0()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_1()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_2()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                       /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_3()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() > 120);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_4()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() < 150);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_5()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_6()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_7()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                         /***** ORIGINAL ASSERTION IS HERE *****/              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_8()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      Assert.assertTrue(optimizer.getEvaluations() > 120);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_9()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() < 150);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_10()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_11()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_12()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                       /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_13()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() > 120);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_14()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() < 150);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_15()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_16()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_17()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                       /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_18()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() > 180);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 220);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   @Test
+  public void testMinimizeMaximize$catena_19()
+      throws FunctionEvaluationException, ConvergenceException {
+
+      // the following function has 4 local extrema:
+      final double xM        = -3.841947088256863675365;
+      final double yM        = -1.391745200270734924416;
+      final double xP        =  0.2286682237349059125691;
+      final double yP        = -yM;
+      final double valueXmYm =  0.2373295333134216789769; // local  maximum
+      final double valueXmYp = -valueXmYm;                // local  minimum
+      final double valueXpYm = -0.7290400707055187115322; // global minimum
+      final double valueXpYp = -valueXpYm;                // global maximum
+      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+          private static final long serialVersionUID = -7039124064449091152L;
+          public double value(double[] variables) throws FunctionEvaluationException {
+              final double x = variables[0];
+              final double y = variables[1];
+              return ((x == 0) || (y == 0)) ? 0 : (Math.atan(x) * Math.atan(x + 2) * Math.atan(y) * Math.atan(y) / (x * y));
+          }
+      };
+
+      MultiDirectional optimizer = new MultiDirectional();
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-11, 1.0e-30));
+      optimizer.setMaxIterations(200);
+      optimizer.setStartConfiguration(new double[] { 0.2, 0.2 });
+      RealPointValuePair optimum;
+
+      // minimization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { -3.0, 0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 4.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYp, optimum.getValue(),    8.0e-13);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimum = optimizer.optimize(fourExtrema, GoalType.MINIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYm, optimum.getValue(),    2.0e-12);                    }catch(Throwable __SHOULD_BE_IGNORED){}              
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      // maximization
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { -3.0, 0.0 });
+      try{ Assert.assertEquals(xM,        optimum.getPoint()[0], 7.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yM,        optimum.getPoint()[1], 3.0e-7);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXmYm, optimum.getValue(),    2.0e-14);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 120);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() < 150);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      optimizer.setConvergenceChecker(new SimpleScalarValueChecker(1.0e-15, 1.0e-30));
+      optimum = optimizer.optimize(fourExtrema, GoalType.MAXIMIZE, new double[] { +1, 0 });
+      try{ Assert.assertEquals(xP,        optimum.getPoint()[0], 2.0e-8);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(yP,        optimum.getPoint()[1], 3.0e-6);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(valueXpYp, optimum.getValue(),    2.0e-12);                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertTrue(optimizer.getEvaluations() > 180);                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertTrue(optimizer.getEvaluations() < 220);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+  }
+edit: replace from 192 range 26 at src/test/java/org/apache/commons/math/optimization/direct/MultiDirectionalTest.java
+to
+  @Test
+  public void testMath283$catena_0()
+      throws FunctionEvaluationException, OptimizationException {
+      // fails because MultiDirectional.iterateSimplex is looping forever
+      // the while(true) should be replaced with a convergence check
+      MultiDirectional multiDirectional = new MultiDirectional();
+      multiDirectional.setMaxIterations(100);
+      multiDirectional.setMaxEvaluations(1000);
+
+      final Gaussian2D function = new Gaussian2D(0.0, 0.0, 1.0);
+
+      RealPointValuePair estimate = multiDirectional.optimize(function,
+                                    GoalType.MAXIMIZE, function.getMaximumPosition());
+
+      final double EPSILON = 1e-5;
+
+      final double expectedMaximum = function.getMaximum();
+      final double actualMaximum = estimate.getValue();
+      Assert.assertEquals(expectedMaximum, actualMaximum, EPSILON);                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+      final double[] expectedPosition = function.getMaximumPosition();
+      final double[] actualPosition = estimate.getPoint();
+      try{ Assert.assertEquals(expectedPosition[0], actualPosition[0], EPSILON );                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ Assert.assertEquals(expectedPosition[1], actualPosition[1], EPSILON );                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      
+  }   @Test
+  public void testMath283$catena_1()
+      throws FunctionEvaluationException, OptimizationException {
+      // fails because MultiDirectional.iterateSimplex is looping forever
+      // the while(true) should be replaced with a convergence check
+      MultiDirectional multiDirectional = new MultiDirectional();
+      multiDirectional.setMaxIterations(100);
+      multiDirectional.setMaxEvaluations(1000);
+
+      final Gaussian2D function = new Gaussian2D(0.0, 0.0, 1.0);
+
+      RealPointValuePair estimate = multiDirectional.optimize(function,
+                                    GoalType.MAXIMIZE, function.getMaximumPosition());
+
+      final double EPSILON = 1e-5;
+
+      final double expectedMaximum = function.getMaximum();
+      final double actualMaximum = estimate.getValue();
+      try{ Assert.assertEquals(expectedMaximum, actualMaximum, EPSILON);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      final double[] expectedPosition = function.getMaximumPosition();
+      final double[] actualPosition = estimate.getPoint();
+      Assert.assertEquals(expectedPosition[0], actualPosition[0], EPSILON );                                /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ Assert.assertEquals(expectedPosition[1], actualPosition[1], EPSILON );                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      
+  }   @Test
+  public void testMath283$catena_2()
+      throws FunctionEvaluationException, OptimizationException {
+      // fails because MultiDirectional.iterateSimplex is looping forever
+      // the while(true) should be replaced with a convergence check
+      MultiDirectional multiDirectional = new MultiDirectional();
+      multiDirectional.setMaxIterations(100);
+      multiDirectional.setMaxEvaluations(1000);
+
+      final Gaussian2D function = new Gaussian2D(0.0, 0.0, 1.0);
+
+      RealPointValuePair estimate = multiDirectional.optimize(function,
+                                    GoalType.MAXIMIZE, function.getMaximumPosition());
+
+      final double EPSILON = 1e-5;
+
+      final double expectedMaximum = function.getMaximum();
+      final double actualMaximum = estimate.getValue();
+      try{ Assert.assertEquals(expectedMaximum, actualMaximum, EPSILON);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      final double[] expectedPosition = function.getMaximumPosition();
+      final double[] actualPosition = estimate.getPoint();
+      try{ Assert.assertEquals(expectedPosition[0], actualPosition[0], EPSILON );                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      Assert.assertEquals(expectedPosition[1], actualPosition[1], EPSILON );                                /***** ORIGINAL ASSERTION IS HERE *****/
+      
+  }
+trace file: src/test/java/org/apache/commons/math/optimization/direct/MultiDirectionalTest.java
+new test num: 23
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 42.31 seconds
+Failing tests: 6
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_0
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_1
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_2
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_4
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_5
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_9
+pattern: 001
+try to fix hunk: 2
+insert before 94 with             final int iter = getIterations();
+            boolean converged = true;
+            for (int i = 0; i < simplex.length; ++i) {
+                converged &= checker.converged(iter, original[i], simplex[i]);
+            }
+            if (converged) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+insert before 92 with                 return;
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 100
+try to fix hunk: 0
+insert before 64 with         final RealConvergenceChecker checker = getConvergenceChecker();
+
+patches are written to file
+running tests...
+used time: Finished in 29.69 seconds
+Failing tests: 6
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_0
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_1
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_2
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_4
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_5
+	org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_9
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+insert before 92 with                 return;
+            }
+
+try to fix hunk: 2
+insert before 94 with             final int iter = getIterations();
+            boolean converged = true;
+            for (int i = 0; i < simplex.length; ++i) {
+                converged &= checker.converged(iter, original[i], simplex[i]);
+            }
+            if (converged) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+insert before 64 with         final RealConvergenceChecker checker = getConvergenceChecker();
+
+try to fix hunk: 2
+insert before 94 with             final int iter = getIterations();
+            boolean converged = true;
+            for (int i = 0; i < simplex.length; ++i) {
+                converged &= checker.converged(iter, original[i], simplex[i]);
+            }
+            if (converged) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+insert before 64 with         final RealConvergenceChecker checker = getConvergenceChecker();
+
+try to fix hunk: 1
+insert before 92 with                 return;
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+insert before 64 with         final RealConvergenceChecker checker = getConvergenceChecker();
+
+try to fix hunk: 1
+insert before 92 with                 return;
+            }
+
+try to fix hunk: 2
+insert before 94 with             final int iter = getIterations();
+            boolean converged = true;
+            for (int i = 0; i < simplex.length; ++i) {
+                converged &= checker.converged(iter, original[i], simplex[i]);
+            }
+            if (converged) {
+
+patches are written to file
+running tests...
+used time: Finished in 27.35 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_9', 'org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_0', 'org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_5', 'org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_2', 'org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_4', 'org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_1']
+select new bug
+Pattern: 111
+failing tests: org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_9@org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_0@org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_5@org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_2@org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMinimizeMaximize$catena_4@org.apache.commons.math.optimization.direct.MultiDirectionalTest::testMath283$catena_1
+Find 1 new bugs

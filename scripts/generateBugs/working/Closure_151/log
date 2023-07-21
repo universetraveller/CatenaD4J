@@ -1,0 +1,172 @@
+---
+Begin generate bug_id: Closure_151
+num_of_hunks: 3
+use working dir: ./working/data/Closure_151
+Try to checkout Closure_151
+build dir: ['./working/data/Closure_151/build/classes', './working/data/Closure_151/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/CommandLineRunner.java
+trace file: src/com/google/javascript/jscomp/CommandLineRunner.java
+trace file: src/com/google/javascript/jscomp/CommandLineRunner.java
+trying to replace old failing tests
+edit: replace from 449 range 10 at test/com/google/javascript/jscomp/CommandLineRunnerTest.java
+to
+  public void testVersionFlag$catena_0() {
+    args.add("--version");
+    testSame("");                                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(
+        0,
+        new String(errReader.toByteArray()).indexOf(
+            "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+            "Version: HEAD\n" +
+            "Built on:"));                                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testVersionFlag$catena_1() {
+    args.add("--version");
+    try{ testSame("");                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(
+        0,
+        new String(errReader.toByteArray()).indexOf(
+            "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+            "Version: HEAD\n" +
+            "Built on:"));                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/CommandLineRunnerTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 172.30 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_0
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+pattern: 001
+try to fix hunk: 2
+insert before 418 with     if (flags.version) {
+      ResourceBundle config = ResourceBundle.getBundle(configResource);
+      err.println(
+          "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+          "Version: " + config.getString("compiler.version") + "\n" +
+          "Built on: " + config.getString("compiler.date"));
+      err.flush();
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+insert before 367 with   private static final String configResource =
+      "com.google.javascript.jscomp.parsing.ParserConfig";
+
+patches are written to file
+running tests...
+used time: Finished in 157.06 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_0
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+No new failing tests but only 1 hunk
+pattern: 100
+try to fix hunk: 0
+insert before 301 with     @Option(name = "--version",
+        usage = "Prints the compiler version to stderr.")
+    private boolean version = false;
+
+patches are written to file
+running tests...
+used time: Finished in 155.80 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+insert before 367 with   private static final String configResource =
+      "com.google.javascript.jscomp.parsing.ParserConfig";
+
+try to fix hunk: 2
+insert before 418 with     if (flags.version) {
+      ResourceBundle config = ResourceBundle.getBundle(configResource);
+      err.println(
+          "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+          "Version: " + config.getString("compiler.version") + "\n" +
+          "Built on: " + config.getString("compiler.date"));
+      err.flush();
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+insert before 301 with     @Option(name = "--version",
+        usage = "Prints the compiler version to stderr.")
+    private boolean version = false;
+
+try to fix hunk: 2
+insert before 418 with     if (flags.version) {
+      ResourceBundle config = ResourceBundle.getBundle(configResource);
+      err.println(
+          "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+          "Version: " + config.getString("compiler.version") + "\n" +
+          "Built on: " + config.getString("compiler.date"));
+      err.flush();
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+insert before 301 with     @Option(name = "--version",
+        usage = "Prints the compiler version to stderr.")
+    private boolean version = false;
+
+try to fix hunk: 1
+insert before 367 with   private static final String configResource =
+      "com.google.javascript.jscomp.parsing.ParserConfig";
+
+patches are written to file
+running tests...
+used time: Finished in 159.46 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 111
+try to fix hunk: 0
+insert before 301 with     @Option(name = "--version",
+        usage = "Prints the compiler version to stderr.")
+    private boolean version = false;
+
+try to fix hunk: 1
+insert before 367 with   private static final String configResource =
+      "com.google.javascript.jscomp.parsing.ParserConfig";
+
+try to fix hunk: 2
+insert before 418 with     if (flags.version) {
+      ResourceBundle config = ResourceBundle.getBundle(configResource);
+      err.println(
+          "Closure Compiler (http://code.google.com/p/closure/compiler)\n" +
+          "Version: " + config.getString("compiler.version") + "\n" +
+          "Built on: " + config.getString("compiler.date"));
+      err.flush();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 161.98 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1']
+select new bug
+Pattern: 111
+failing tests: com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+Find 1 new bugs

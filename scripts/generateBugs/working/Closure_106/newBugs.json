@@ -1,0 +1,107 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/GlobalNamespace.java",
+            "replaced_with": "      Preconditions.checkNotNull(declaration);\n      if (declaration.getTwin() != null) {\n        return false;\n      }\n",
+            "patch_type": "insert",
+            "next_line_no": 907
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/rhino/JSDocInfoBuilder.java",
+            "from_line_no": 189,
+            "to_line_no": 189,
+            "replaced": "    if (parseDocumentation) {\n",
+            "patch_type": "delete",
+            "next_line_no": 190
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/rhino/JSDocInfoBuilder.java",
+            "from_line_no": 191,
+            "to_line_no": 191,
+            "replaced": "    }\n",
+            "patch_type": "delete",
+            "next_line_no": 192
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments",
+            "com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing",
+            "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign",
+            "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator"
+        ],
+        "com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments": {
+            "file_path": "test/com/google/javascript/jscomp/CheckSideEffectsTest.java",
+            "Instance": "Begin: Pos(85, 10)\nEnd: Pos(88, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CheckSideEffectsTest.java\nName: testJSDocComments\nChilds: [StatementAssertion<Begin: Pos(86, 5), End: Pos(86, 74)>,\nStatementAssertion<Begin: Pos(87, 5), End: Pos(87, 73)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CheckSideEffectsTest.java",
+            "name": "testJSDocComments",
+            "begin": "Pos(85, 10)",
+            "end": "Pos(88, 3)",
+            "begin_line_no": 85,
+            "end_line_no": 88,
+            "child": [
+                "Begin: Pos(86, 5)\nEnd: Pos(86, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(87, 5)\nEnd: Pos(87, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testJSDocComments$catena_0() {\n    test(\"function A() { /** This is a jsdoc comment */ this.foo; }\", ok);                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ test(\"function A() { /* This is a normal comment */ this.foo; }\", e);                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testJSDocComments$catena_1() {\n    try{ test(\"function A() { /** This is a jsdoc comment */ this.foo; }\", ok);                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    test(\"function A() { /* This is a normal comment */ this.foo; }\", e);                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testJSDocComments$catena_0() {\n    test(\"function A() { /** This is a jsdoc comment */ this.foo; }\", ok);                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ test(\"function A() { /* This is a normal comment */ this.foo; }\", e);                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testJSDocComments$catena_1() {\n    try{ test(\"function A() { /** This is a jsdoc comment */ this.foo; }\", ok);                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    test(\"function A() { /* This is a normal comment */ this.foo; }\", e);                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing": {
+            "file_path": "test/com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "Instance": "Begin: Pos(1110, 10)\nEnd: Pos(1113, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java\nName: testTwinReferenceCancelsChildCollapsing\nChilds: [StatementAssertion<Begin: Pos(1111, 5), End: Pos(1112, 73)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "name": "testTwinReferenceCancelsChildCollapsing",
+            "begin": "Pos(1110, 10)",
+            "end": "Pos(1113, 3)",
+            "begin_line_no": 1110,
+            "end_line_no": 1113,
+            "child": [
+                "Begin: Pos(1111, 5)\nEnd: Pos(1112, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign": {
+            "file_path": "test/com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "Instance": "Begin: Pos(1105, 10)\nEnd: Pos(1108, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java\nName: testCrashInNestedAssign\nChilds: [StatementAssertion<Begin: Pos(1106, 5), End: Pos(1107, 55)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "name": "testCrashInNestedAssign",
+            "begin": "Pos(1105, 10)",
+            "end": "Pos(1108, 3)",
+            "begin_line_no": 1105,
+            "end_line_no": 1108,
+            "child": [
+                "Begin: Pos(1106, 5)\nEnd: Pos(1107, 55)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator": {
+            "file_path": "test/com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "Instance": "Begin: Pos(1100, 10)\nEnd: Pos(1103, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java\nName: testCrashInCommaOperator\nChilds: [StatementAssertion<Begin: Pos(1101, 5), End: Pos(1102, 46)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_106/test//com/google/javascript/jscomp/CollapsePropertiesTest.java",
+            "name": "testCrashInCommaOperator",
+            "begin": "Pos(1100, 10)",
+            "end": "Pos(1103, 3)",
+            "begin_line_no": 1100,
+            "end_line_no": 1103,
+            "child": [
+                "Begin: Pos(1101, 5)\nEnd: Pos(1102, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "011": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments$catena_0"
+        ]
+    }
+}

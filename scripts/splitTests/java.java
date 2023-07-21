@@ -311,6 +311,7 @@ public class FunctionInjectorTest extends TestCase {
         "foo", INLINE_BLOCK);
   }
 
+  @Test
   public void testCanInlineReferenceToFunction35() {
     helperCanInlineReferenceToFunction(CanInlineResult.NO,
         "function foo(a){return true;}; " +

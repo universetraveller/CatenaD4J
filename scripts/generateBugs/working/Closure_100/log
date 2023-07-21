@@ -1,0 +1,84 @@
+---
+Begin generate bug_id: Closure_100
+num_of_hunks: 2
+use working dir: ./working/data/Closure_100
+Try to checkout Closure_100
+build dir: ['./working/data/Closure_100/build/classes', './working/data/Closure_100/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/CheckGlobalThis.java
+trace file: src/com/google/javascript/jscomp/CheckGlobalThis.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 9
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 144.72 seconds
+Failing tests: 9
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction6
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction7
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction8
+	com.google.javascript.jscomp.CheckGlobalThisTest::testGlobalThis7
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod2
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod3
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction1
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction2
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction3
+pattern: 01
+try to fix hunk: 1
+replace from 146 with range 1 to
+    return parent != null && NodeUtil.isGet(parent);
+
+patches are written to file
+running tests...
+used time: Finished in 131.61 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction6
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction7
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod2
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod3
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction4
+Includes new failing tests, set to unusable
+pattern: 10
+try to fix hunk: 0
+insert before 99 with       int pType = parent.getType();
+      if (!(pType == Token.BLOCK ||
+            pType == Token.SCRIPT ||
+            pType == Token.NAME ||
+            pType == Token.ASSIGN)) {
+        return false;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 131.96 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction8
+	com.google.javascript.jscomp.CheckGlobalThisTest::testGlobalThis7
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction1
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction2
+	com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction3
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 99 with       int pType = parent.getType();
+      if (!(pType == Token.BLOCK ||
+            pType == Token.SCRIPT ||
+            pType == Token.NAME ||
+            pType == Token.ASSIGN)) {
+        return false;
+      }
+
+try to fix hunk: 1
+replace from 146 with range 1 to
+    return parent != null && NodeUtil.isGet(parent);
+
+patches are written to file
+running tests...
+used time: Finished in 134.43 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.CheckGlobalThisTest::testGlobalThis7', 'com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction8', 'com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction1', 'com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction3', 'com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction2']
+select new bug
+Pattern: 11
+failing tests: com.google.javascript.jscomp.CheckGlobalThisTest::testGlobalThis7@com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction8@com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction1@com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction3@com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction2
+Find 1 new bugs

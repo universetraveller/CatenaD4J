@@ -9,12 +9,13 @@ class filelog:
         self.file = open(filename, 'a')
     def log(self, cont, console=False):
         self.file.write('{}\n'.format(cont))
+        self.file.flush()
         if console:
             print(cont)
     def end(self):
         self.file.close()
 def run(waitlist):
-    logger = filelog('./running/log1')
+    logger = filelog('./running/log5')
     root = {}
     check_list = []
     exception_list = []
@@ -34,7 +35,7 @@ def run(waitlist):
             test = failing_test.split('::')
             path2file = '{}/{}.java'.format(path, test[0].replace('.', '/'))
             logger.log('file: {}'.format(path2file))
-            temp['file_path'] = path2file
+            temp['file_path'] = '{}/{}.java'.format(database.get(i).get('dir.src.tests'), test[0].replace('.', '/'))
             try:
                 fti, check = spliter.process_test_node_v2(path2file, test[1])
             except Exception as E:
@@ -72,12 +73,16 @@ def run(waitlist):
         logger.log(i)
     return root
 if __name__ == '__main__':
+    _debug = 0
     with open('./2toMore', 'r') as f:
         waitlist = f.read().splitlines()
     path2d4j = '/root/defects4j'
     path2buggy = '/root/workbench/exportInfo/d4j_buggy'
     with open('./database.json', 'r') as f:
         database = json.load(f)
+    if _debug:
+        run(['Lang_36'])
+        exit()
     root = run(waitlist)
-    with open('./running/res1.json', 'w') as f:
+    with open('./running/res5.json', 'w') as f:
         f.write(json.dumps(root, indent=4))

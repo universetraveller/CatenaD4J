@@ -1,0 +1,75 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "replaced_with": "        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n",
+            "patch_type": "insert",
+            "next_line_no": 523
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "replaced_with": "          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n",
+            "patch_type": "insert",
+            "next_line_no": 529
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "replaced_with": "            if (calledFn.getType() == Token.GETELEM) {\n              return false;\n            } else if (calledFn.getType() == Token.GETPROP &&\n                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n              return false;\n            }\n          }\n",
+            "patch_type": "insert",
+            "next_line_no": 532
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "from_line_no": 533,
+            "to_line_no": 533,
+            "replaced_with": "          return true;\n        }\n        return false;\n",
+            "replaced": "          return NodeUtil.isExpressionNode(maybeExpr);\n",
+            "patch_type": "replace",
+            "next_line_no": 534
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291"
+        ],
+        "com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291": {
+            "file_path": "test/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java",
+            "Instance": "Begin: Pos(566, 10)\nEnd: Pos(572, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_87/test//com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java\nName: testIssue291\nChilds: [StatementAssertion<Begin: Pos(567, 5), End: Pos(567, 64)>,\nStatementAssertion<Begin: Pos(568, 5), End: Pos(568, 41)>,\nStatementAssertion<Begin: Pos(569, 5), End: Pos(569, 59)>,\nStatementAssertion<Begin: Pos(570, 5), End: Pos(570, 61)>,\nStatementAssertion<Begin: Pos(571, 5), End: Pos(571, 37)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_87/test//com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java",
+            "name": "testIssue291",
+            "begin": "Pos(566, 10)",
+            "end": "Pos(572, 3)",
+            "begin_line_no": 566,
+            "end_line_no": 572,
+            "child": [
+                "Begin: Pos(567, 5)\nEnd: Pos(567, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(568, 5)\nEnd: Pos(568, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(569, 5)\nEnd: Pos(569, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(570, 5)\nEnd: Pos(570, 61)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(571, 5)\nEnd: Pos(571, 37)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testIssue291$catena_0() {\n    fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue291$catena_1() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f.onchange(); }\");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue291$catena_2() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue291$catena_3() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue291$catena_4() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f['x'](); }\");                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testIssue291$catena_0() {\n    fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testIssue291$catena_1() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f.onchange(); }\");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testIssue291$catena_2() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "3": "  public void testIssue291$catena_3() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ foldSame(\"if (f) { f['x'](); }\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "4": "  public void testIssue291$catena_4() {\n    try{ fold(\"if (true) { f.onchange(); }\", \"if (1) f.onchange();\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.onchange(); }\");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ foldSame(\"if (f) { f.bar(); } else { f.onchange(); }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ fold(\"if (f) { f.bonchange(); }\", \"f && f.bonchange();\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    foldSame(\"if (f) { f['x'](); }\");                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "1111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1",
+            "com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2",
+            "com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4"
+        ]
+    }
+}

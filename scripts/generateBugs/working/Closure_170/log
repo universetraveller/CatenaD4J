@@ -1,0 +1,760 @@
+---
+Begin generate bug_id: Closure_170
+num_of_hunks: 5
+use working dir: ./working/data/Closure_170
+Try to checkout Closure_170
+build dir: ['./working/data/Closure_170/build/classes', './working/data/Closure_170/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+trace file: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+trace file: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+trace file: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+trace file: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+trying to replace old failing tests
+edit: replace from 577 range 6 at test/com/google/javascript/jscomp/FlowSensitiveInlineVariablesTest.java
+to
+  public void testVarAssinInsideHookIssue965$catena_0() {
+    noInline("var i = 0; return 1 ? (i = 5) : 0, i;");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) ? i : 0;");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) || i;");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) * i;");                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testVarAssinInsideHookIssue965$catena_1() {
+    try{ noInline("var i = 0; return 1 ? (i = 5) : 0, i;");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    noInline("var i = 0; return (1 ? (i = 5) : 0) ? i : 0;");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) || i;");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) * i;");                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testVarAssinInsideHookIssue965$catena_2() {
+    try{ noInline("var i = 0; return 1 ? (i = 5) : 0, i;");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) ? i : 0;");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    noInline("var i = 0; return (1 ? (i = 5) : 0) || i;");                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) * i;");                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testVarAssinInsideHookIssue965$catena_3() {
+    try{ noInline("var i = 0; return 1 ? (i = 5) : 0, i;");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) ? i : 0;");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ noInline("var i = 0; return (1 ? (i = 5) : 0) || i;");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    noInline("var i = 0; return (1 ? (i = 5) : 0) * i;");                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/FlowSensitiveInlineVariablesTest.java
+new test num: 4
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 304.00 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_0
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_2
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_3
+pattern: 00001
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 286.43 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_0
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_2
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_3
+No new failing tests but only 1 hunk
+pattern: 00010
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00100
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+patches are written to file
+running tests...
+used time: Finished in 294.83 seconds
+Failing tests: 25
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testShadowedVariableInnerFunction
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleVar
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testNoInlineGetProp3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIfNameIsLeftSideOfAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testMultiDefinitionsBeforeUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testAssignmentBeforeDefinition
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression8
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression9
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineArguments
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineSameVariableInStraightLine
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineInDifferentPaths
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions11
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions13
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testDefinitionAfterUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies2
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIntoExpressions
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue698
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue777
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testRemoveWithLabels
+	com.google.javascript.jscomp.IntegrationTest::testFlowSensitiveInlineVariables2
+	com.google.javascript.jscomp.IntegrationTest::testIssue550
+Includes new failing tests, set to unusable
+pattern: 01000
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10000
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00011
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00101
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 300.02 seconds
+Failing tests: 25
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testShadowedVariableInnerFunction
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleVar
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testNoInlineGetProp3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIfNameIsLeftSideOfAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testMultiDefinitionsBeforeUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testAssignmentBeforeDefinition
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression8
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression9
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineArguments
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineSameVariableInStraightLine
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineInDifferentPaths
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions11
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions13
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testDefinitionAfterUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies2
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIntoExpressions
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue698
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue777
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testRemoveWithLabels
+	com.google.javascript.jscomp.IntegrationTest::testFlowSensitiveInlineVariables2
+	com.google.javascript.jscomp.IntegrationTest::testIssue550
+Includes new failing tests, set to unusable
+pattern: 00110
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01001
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01010
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01100
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10001
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10010
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10100
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11000
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00111
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01011
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01101
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01110
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10011
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10101
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10110
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11001
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11010
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11100
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01111
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10111
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11011
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 285.38 seconds
+Failing tests: 26
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleForIn
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testShadowedVariableInnerFunction
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleVar
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSwitchCase
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testNoInlineGetProp3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIfNameIsLeftSideOfAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testSimpleAssign
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testMultiDefinitionsBeforeUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testAssignmentBeforeDefinition
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression8
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpression9
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineArguments
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineSameVariableInStraightLine
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineInDifferentPaths
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions11
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions13
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testDefinitionAfterUse
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies2
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIntoExpressions
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue777
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions1
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions3
+	com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testRemoveWithLabels
+	com.google.javascript.jscomp.IntegrationTest::testFlowSensitiveInlineVariables1
+	com.google.javascript.jscomp.IntegrationTest::testFlowSensitiveInlineVariables2
+Includes new failing tests, set to unusable
+pattern: 11101
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11110
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11111
+try to fix hunk: 0
+replace from 482 with range 1 to
+          if (n.isName() && n.getString().equals(varName)) {
+
+try to fix hunk: 1
+replace from 488 with range 2 to
+            if (parent.isAssign() && (parent.getFirstChild() == n)
+                && isAssignChain(parent, cfgNode)) {
+
+try to fix hunk: 2
+insert before 491 with               return;
+            } else {
+
+try to fix hunk: 3
+insert before 492 with             }
+
+try to fix hunk: 4
+insert before 495 with         private boolean isAssignChain(Node child, Node ancestor) {
+          for (Node n = child; n != ancestor; n = n.getParent()) {
+            if (!n.isAssign()) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 281.07 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_2', 'com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_1', 'com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_0', 'com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_3']
+select new bug
+Pattern: 11111
+failing tests: com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_2@com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_1@com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_0@com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_3
+Find 1 new bugs

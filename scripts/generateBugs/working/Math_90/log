@@ -1,0 +1,87 @@
+---
+Begin generate bug_id: Math_90
+num_of_hunks: 2
+use working dir: ./working/data/Math_90
+Try to checkout Math_90
+build dir: ['./working/data/Math_90/target/classes', './working/data/Math_90/target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/math/stat/Frequency.java
+trace file: src/java/org/apache/commons/math/stat/Frequency.java
+trying to replace old failing tests
+edit: replace from 193 range 14 at src/test/org/apache/commons/math/stat/FrequencyTest.java
+to
+    public void testAddNonComparable$catena_0(){
+        try {
+            f.addValue(new Object()); // This was OK
+            fail("Expected ClassCastException");                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (ClassCastException expected) {
+        }
+        f.clear();
+        f.addValue(1);
+        try {
+            f.addValue(new Object());
+            try{ fail("Expected ClassCastException");         }catch(Throwable __SHOULD_BE_IGNORED){} // Previously would have been IllegalArgument
+        } catch (ClassCastException expected) {
+        }
+    }     public void testAddNonComparable$catena_1(){
+        try {
+            f.addValue(new Object()); // This was OK
+            try{ fail("Expected ClassCastException");                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ClassCastException expected) {
+        }
+        f.clear();
+        f.addValue(1);
+        try {
+            f.addValue(new Object());
+            fail("Expected ClassCastException");              /***** ORIGINAL ASSERTION IS HERE *****/ // Previously would have been IllegalArgument
+        } catch (ClassCastException expected) {
+        }
+    }
+trace file: src/test/org/apache/commons/math/stat/FrequencyTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 33.88 seconds
+Failing tests: 2
+	org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0
+	org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1
+pattern: 01
+try to fix hunk: 1
+insert before 121 with     public void addValue(Comparable<?>v){
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 110 with         addValue((Comparable<?>) v);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11
+try to fix hunk: 0
+insert before 110 with         addValue((Comparable<?>) v);
+    }
+
+try to fix hunk: 1
+insert before 121 with     public void addValue(Comparable<?>v){
+
+patches are written to file
+running tests...
+used time: Finished in 21.92 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0', 'org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1']
+select new bug
+Pattern: 11
+failing tests: org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0@org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1
+Find 1 new bugs

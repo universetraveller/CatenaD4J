@@ -1,0 +1,196 @@
+---
+Begin generate bug_id: Math_74
+num_of_hunks: 3
+use working dir: ./working/data/Math_74
+Try to checkout Math_74
+build dir: ['./working/data/Math_74/target/classes', './working/data/Math_74/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+trace file: src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+trace file: src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+trying to replace old failing tests
+edit: replace from 135 range 20 at src/test/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegratorTest.java
+to
+    @Test
+    public void polynomial$catena_0() throws DerivativeException, IntegratorException {
+        TestProblem6 pb = new TestProblem6();
+        double range = Math.abs(pb.getFinalTime() - pb.getInitialTime());
+
+        for (int nSteps = 1; nSteps < 7; ++nSteps) {
+            AdamsMoultonIntegrator integ =
+                new AdamsMoultonIntegrator(nSteps, 1.0e-6 * range, 0.1 * range, 1.0e-9, 1.0e-9);
+            TestProblemHandler handler = new TestProblemHandler(pb, integ);
+            integ.addStepHandler(handler);
+            integ.integrate(pb, pb.getInitialTime(), pb.getInitialState(),
+                            pb.getFinalTime(), new double[pb.getDimension()]);                              /***** ORIGINAL ASSERTION IS HERE *****/
+            if (nSteps < 4) {
+                try{ assertTrue(integ.getEvaluations() > 140);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            } else {
+                try{ assertTrue(integ.getEvaluations() < 90);                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+
+    }     @Test
+    public void polynomial$catena_1() throws DerivativeException, IntegratorException {
+        TestProblem6 pb = new TestProblem6();
+        double range = Math.abs(pb.getFinalTime() - pb.getInitialTime());
+
+        for (int nSteps = 1; nSteps < 7; ++nSteps) {
+            AdamsMoultonIntegrator integ =
+                new AdamsMoultonIntegrator(nSteps, 1.0e-6 * range, 0.1 * range, 1.0e-9, 1.0e-9);
+            TestProblemHandler handler = new TestProblemHandler(pb, integ);
+            integ.addStepHandler(handler);
+            try{ integ.integrate(pb, pb.getInitialTime(), pb.getInitialState(),
+                            pb.getFinalTime(), new double[pb.getDimension()]);                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (nSteps < 4) {
+                assertTrue(integ.getEvaluations() > 140);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+            } else {
+                try{ assertTrue(integ.getEvaluations() < 90);                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+
+    }     @Test
+    public void polynomial$catena_2() throws DerivativeException, IntegratorException {
+        TestProblem6 pb = new TestProblem6();
+        double range = Math.abs(pb.getFinalTime() - pb.getInitialTime());
+
+        for (int nSteps = 1; nSteps < 7; ++nSteps) {
+            AdamsMoultonIntegrator integ =
+                new AdamsMoultonIntegrator(nSteps, 1.0e-6 * range, 0.1 * range, 1.0e-9, 1.0e-9);
+            TestProblemHandler handler = new TestProblemHandler(pb, integ);
+            integ.addStepHandler(handler);
+            try{ integ.integrate(pb, pb.getInitialTime(), pb.getInitialState(),
+                            pb.getFinalTime(), new double[pb.getDimension()]);                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (nSteps < 4) {
+                try{ assertTrue(integ.getEvaluations() > 140);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            } else {
+                assertTrue(integ.getEvaluations() < 90);                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+
+    }
+trace file: src/test/java/org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegratorTest.java
+new test num: 3
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 37.92 seconds
+Failing tests: 1
+	org.apache.commons.math.ode.nonstiff.AdamsMoultonIntegratorTest::polynomial$catena_2
+pattern: 001
+try to fix hunk: 2
+replace from 250 with range 1 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+replace from 247 with range 2 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 100
+try to fix hunk: 0
+replace from 245 with range 1 to
+          final double[] scale = new double[y0.length];
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 011
+try to fix hunk: 1
+replace from 247 with range 2 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
+              }
+
+try to fix hunk: 2
+replace from 250 with range 1 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+replace from 245 with range 1 to
+          final double[] scale = new double[y0.length];
+
+try to fix hunk: 2
+replace from 250 with range 1 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+replace from 245 with range 1 to
+          final double[] scale = new double[y0.length];
+
+try to fix hunk: 1
+replace from 247 with range 2 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+replace from 245 with range 1 to
+          final double[] scale = new double[y0.length];
+
+try to fix hunk: 1
+replace from 247 with range 2 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
+              }
+
+try to fix hunk: 2
+replace from 250 with range 1 to
+              for (int i = 0; i < scale.length; ++i) {
+                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
+              }
+
+patches are written to file
+running tests...
+used time: Finished in 26.57 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.ode.nonstiff.AdamsMoultonIntegratorTest::polynomial$catena_2']
+select new bug
+Pattern: 111
+failing tests: org.apache.commons.math.ode.nonstiff.AdamsMoultonIntegratorTest::polynomial$catena_2
+Find 1 new bugs

@@ -1,0 +1,189 @@
+---
+Begin generate bug_id: Mockito_2
+num_of_hunks: 3
+use working dir: ./working/data/Mockito_2
+Try to checkout Mockito_2
+build dir: ['./working/data/Mockito_2/build/classes/main', './working/data/Mockito_2/build/classes/test']
+init FileManager
+trace file: src/org/mockito/internal/util/Timer.java
+trace file: src/org/mockito/internal/util/Timer.java
+trace file: src/org/mockito/internal/util/Timer.java
+trying to replace old failing tests
+edit: replace from 44 range 9 at test/org/mockito/internal/util/TimerTest.java
+to
+    @Test
+    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0() {
+        try {
+            new Timer(-1);
+            Assert.fail("It is forbidden to create timer with negative value of timer's duration.");         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (FriendlyReminderException e) {
+            try{ Assert.assertTrue(true);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_1() {
+        try {
+            new Timer(-1);
+            try{ Assert.fail("It is forbidden to create timer with negative value of timer's duration.");    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (FriendlyReminderException e) {
+            Assert.assertTrue(true);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 10 range 9 at test/org/mockito/verification/NegativeDurationTest.java
+to
+    @Test
+    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0() {
+        try {
+            Mockito.timeout(-1);
+            Assert.fail("It is forbidden to invoke Mockito.timeout() with negative value.");                /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (FriendlyReminderException e) {
+            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_1() {
+        try {
+            Mockito.timeout(-1);
+            try{ Assert.fail("It is forbidden to invoke Mockito.timeout() with negative value.");           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (FriendlyReminderException e) {
+            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 20 range 9 at test/org/mockito/verification/NegativeDurationTest.java
+to
+    @Test
+    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_0() {
+        try {
+            Mockito.after(-1);
+            Assert.fail("It is forbidden to invoke Mockito.after() with negative value.");                  /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (FriendlyReminderException e) {
+            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_1() {
+        try {
+            Mockito.after(-1);
+            try{ Assert.fail("It is forbidden to invoke Mockito.after() with negative value.");             }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (FriendlyReminderException e) {
+            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: test/org/mockito/internal/util/TimerTest.java
+trace file: test/org/mockito/verification/NegativeDurationTest.java
+new test num: 6
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 338.38 seconds
+Failing tests: 3
+	org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0
+pattern: 001
+try to fix hunk: 2
+insert before 28 with     private void validateInput(long durationMillis) {
+        if (durationMillis < 0) {
+            new Reporter().cannotCreateTimerWithNegativeDurationTime(durationMillis);
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+insert before 10 with         validateInput(durationMillis);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 100
+try to fix hunk: 0
+insert before 3 with import org.mockito.exceptions.Reporter;
+
+patches are written to file
+running tests...
+used time: Finished in 293.01 seconds
+Failing tests: 3
+	org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+insert before 10 with         validateInput(durationMillis);
+
+try to fix hunk: 2
+insert before 28 with     private void validateInput(long durationMillis) {
+        if (durationMillis < 0) {
+            new Reporter().cannotCreateTimerWithNegativeDurationTime(durationMillis);
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+insert before 3 with import org.mockito.exceptions.Reporter;
+
+try to fix hunk: 2
+insert before 28 with     private void validateInput(long durationMillis) {
+        if (durationMillis < 0) {
+            new Reporter().cannotCreateTimerWithNegativeDurationTime(durationMillis);
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 217.35 seconds
+Failing tests: 3
+	org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0
+	org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0
+Can independently fix []
+Could not fix independently
+pattern: 110
+try to fix hunk: 0
+insert before 3 with import org.mockito.exceptions.Reporter;
+
+try to fix hunk: 1
+insert before 10 with         validateInput(durationMillis);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+insert before 3 with import org.mockito.exceptions.Reporter;
+
+try to fix hunk: 1
+insert before 10 with         validateInput(durationMillis);
+
+try to fix hunk: 2
+insert before 28 with     private void validateInput(long durationMillis) {
+        if (durationMillis < 0) {
+            new Reporter().cannotCreateTimerWithNegativeDurationTime(durationMillis);
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 161.25 seconds
+Failing tests: 0
+Can independently fix ['org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0', 'org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0', 'org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0']
+select new bug
+Pattern: 111
+failing tests: org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0@org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0@org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0
+Find 1 new bugs

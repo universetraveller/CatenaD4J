@@ -1,0 +1,63 @@
+---
+Begin generate bug_id: Closure_101
+num_of_hunks: 2
+use working dir: ./working/data/Closure_101
+Try to checkout Closure_101
+build dir: ['./working/data/Closure_101/build/classes', './working/data/Closure_101/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/CommandLineRunner.java
+trace file: src/com/google/javascript/jscomp/CommandLineRunner.java
+trying to replace old failing tests
+edit: replace from 154 range 6 at test/com/google/javascript/jscomp/CommandLineRunnerTest.java
+to
+  public void testProcessClosurePrimitives$catena_0() {
+    test("var goog = {}; goog.provide('goog.dom');",
+         "var goog = {}; goog.dom = {};");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    args.add("--process_closure_primitives=false");
+    try{ testSame("var goog = {}; goog.provide('goog.dom');");                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testProcessClosurePrimitives$catena_1() {
+    try{ test("var goog = {}; goog.provide('goog.dom');",
+         "var goog = {}; goog.dom = {};");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    args.add("--process_closure_primitives=false");
+    testSame("var goog = {}; goog.provide('goog.dom');");                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/CommandLineRunnerTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 140.77 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CommandLineRunnerTest::testProcessClosurePrimitives$catena_1
+pattern: 01
+try to fix hunk: 1
+insert before 437 with     options.closurePass = flags.process_closure_primitives;
+
+patches are written to file
+running tests...
+used time: Finished in 118.93 seconds
+Failing tests: 0
+No new failing tests but only 1 hunk
+pattern: 10
+try to fix hunk: 0
+delete from 433 with range 3
+patches are written to file
+running tests...
+used time: Finished in 117.95 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CommandLineRunnerTest::testProcessClosurePrimitives$catena_1
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+delete from 433 with range 3
+try to fix hunk: 1
+insert before 437 with     options.closurePass = flags.process_closure_primitives;
+
+patches are written to file
+running tests...
+used time: Finished in 121.95 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

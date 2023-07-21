@@ -1,0 +1,59 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/Weight.java",
+            "from_line_no": 43,
+            "to_line_no": 46,
+            "replaced_with": "        weightMatrix = new DiagonalMatrix(weight);\n",
+            "replaced": "        weightMatrix = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(dim, dim);\n        for (int i = 0; i < dim; i++) {\n            weightMatrix.setEntry(i, i, weight[i]);\n        }\n",
+            "patch_type": "replace",
+            "next_line_no": 47
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/AbstractLeastSquaresOptimizer.java",
+            "replaced_with": "        if (m instanceof DiagonalMatrix) {\n            final int dim = m.getRowDimension();\n            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n            for (int i = 0; i < dim; i++) {\n                sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n            }\n            return sqrtM;\n        } else {\n",
+            "patch_type": "insert",
+            "next_line_no": 267
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/AbstractLeastSquaresOptimizer.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 269
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.math3.fitting.PolynomialFitterTest::testLargeSample"
+        ],
+        "org.apache.commons.math3.fitting.PolynomialFitterTest::testLargeSample": {
+            "file_path": "src/test/java/org/apache/commons/math3/fitting/PolynomialFitterTest.java",
+            "Instance": "Begin: Pos(223, 5)\nEnd: Pos(248, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Math_14/src/test/java//org/apache/commons/math3/fitting/PolynomialFitterTest.java\nName: testLargeSample\nChilds: [StatementAssertion<Begin: Pos(244, 17), End: Pos(244, 62)>,\nStatementAssertion<Begin: Pos(247, 9), End: Pos(247, 44)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Math_14/src/test/java//org/apache/commons/math3/fitting/PolynomialFitterTest.java",
+            "name": "testLargeSample",
+            "begin": "Pos(223, 5)",
+            "end": "Pos(248, 5)",
+            "begin_line_no": 223,
+            "end_line_no": 248,
+            "child": [
+                "Begin: Pos(244, 17)\nEnd: Pos(244, 62)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(247, 9)\nEnd: Pos(247, 44)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testLargeSample$catena_0() {\n        Random randomizer = new Random(0x5551480dca5b369bl);\n        double maxError = 0;\n        for (int degree = 0; degree < 10; ++degree) {\n            PolynomialFunction p = buildRandomPolynomial(degree, randomizer);\n\n            PolynomialFitter fitter = new PolynomialFitter(new LevenbergMarquardtOptimizer());\n            for (int i = 0; i < 40000; ++i) {\n                double x = -1.0 + i / 20000.0;\n                fitter.addObservedPoint(1.0, x,\n                                        p.value(x) + 0.1 * randomizer.nextGaussian());\n            }\n\n            final double[] init = new double[degree + 1];\n            PolynomialFunction fitted = new PolynomialFunction(fitter.fit(init));\n\n            for (double x = -1.0; x < 1.0; x += 0.01) {\n                double error = FastMath.abs(p.value(x) - fitted.value(x)) /\n                              (1.0 + FastMath.abs(p.value(x)));\n                maxError = FastMath.max(maxError, error);\n                Assert.assertTrue(FastMath.abs(error) < 0.01);                                              /***** ORIGINAL ASSERTION IS HERE *****/\n            }\n        }\n        try{ Assert.assertTrue(maxError > 0.001);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testLargeSample$catena_1() {\n        Random randomizer = new Random(0x5551480dca5b369bl);\n        double maxError = 0;\n        for (int degree = 0; degree < 10; ++degree) {\n            PolynomialFunction p = buildRandomPolynomial(degree, randomizer);\n\n            PolynomialFitter fitter = new PolynomialFitter(new LevenbergMarquardtOptimizer());\n            for (int i = 0; i < 40000; ++i) {\n                double x = -1.0 + i / 20000.0;\n                fitter.addObservedPoint(1.0, x,\n                                        p.value(x) + 0.1 * randomizer.nextGaussian());\n            }\n\n            final double[] init = new double[degree + 1];\n            PolynomialFunction fitted = new PolynomialFunction(fitter.fit(init));\n\n            for (double x = -1.0; x < 1.0; x += 0.01) {\n                double error = FastMath.abs(p.value(x) - fitted.value(x)) /\n                              (1.0 + FastMath.abs(p.value(x)));\n                maxError = FastMath.max(maxError, error);\n                try{ Assert.assertTrue(FastMath.abs(error) < 0.01);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n            }\n        }\n        Assert.assertTrue(maxError > 0.001);                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testLargeSample$catena_0() {\n        Random randomizer = new Random(0x5551480dca5b369bl);\n        double maxError = 0;\n        for (int degree = 0; degree < 10; ++degree) {\n            PolynomialFunction p = buildRandomPolynomial(degree, randomizer);\n\n            PolynomialFitter fitter = new PolynomialFitter(new LevenbergMarquardtOptimizer());\n            for (int i = 0; i < 40000; ++i) {\n                double x = -1.0 + i / 20000.0;\n                fitter.addObservedPoint(1.0, x,\n                                        p.value(x) + 0.1 * randomizer.nextGaussian());\n            }\n\n            final double[] init = new double[degree + 1];\n            PolynomialFunction fitted = new PolynomialFunction(fitter.fit(init));\n\n            for (double x = -1.0; x < 1.0; x += 0.01) {\n                double error = FastMath.abs(p.value(x) - fitted.value(x)) /\n                              (1.0 + FastMath.abs(p.value(x)));\n                maxError = FastMath.max(maxError, error);\n                Assert.assertTrue(FastMath.abs(error) < 0.01);                                              /***** ORIGINAL ASSERTION IS HERE *****/\n            }\n        }\n        try{ Assert.assertTrue(maxError > 0.001);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testLargeSample$catena_1() {\n        Random randomizer = new Random(0x5551480dca5b369bl);\n        double maxError = 0;\n        for (int degree = 0; degree < 10; ++degree) {\n            PolynomialFunction p = buildRandomPolynomial(degree, randomizer);\n\n            PolynomialFitter fitter = new PolynomialFitter(new LevenbergMarquardtOptimizer());\n            for (int i = 0; i < 40000; ++i) {\n                double x = -1.0 + i / 20000.0;\n                fitter.addObservedPoint(1.0, x,\n                                        p.value(x) + 0.1 * randomizer.nextGaussian());\n            }\n\n            final double[] init = new double[degree + 1];\n            PolynomialFunction fitted = new PolynomialFunction(fitter.fit(init));\n\n            for (double x = -1.0; x < 1.0; x += 0.01) {\n                double error = FastMath.abs(p.value(x) - fitted.value(x)) /\n                              (1.0 + FastMath.abs(p.value(x)));\n                maxError = FastMath.max(maxError, error);\n                try{ Assert.assertTrue(FastMath.abs(error) < 0.01);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n            }\n        }\n        Assert.assertTrue(maxError > 0.001);                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.apache.commons.math3.fitting.PolynomialFitterTest::testLargeSample$catena_1",
+            "org.apache.commons.math3.fitting.PolynomialFitterTest::testLargeSample$catena_0"
+        ]
+    }
+}

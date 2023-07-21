@@ -1,5 +1,6 @@
 import javalang
 import json
+import difflib
 def code_to_AST(code:str):
     return javalang.parse.parse(code)
 def file_to_AST(f):
@@ -56,6 +57,11 @@ class Pos:
         if self.col > obj.col:
             return True
         return False
+    def set_coord(self, new_row=None, new_col=None):
+        if not new_row == None:
+            self.row = new_row
+        if not new_col == None:
+            self.col = new_col
     def __str__(self):
         return 'Pos({}, {})'.format(self.row, self.col)
 class ParseError(Exception):
@@ -136,6 +142,14 @@ def least_pos_of_node(node, tokens=None):
         if _pos > _max:
             _max = _pos
     return _max
+def begin_pos_of_node(node):
+    _min = _try_get_node_pos(node)
+    for _, i in node:
+        _pos = _try_get_node_pos(i)
+        if _pos > Pos(0, 0):
+            if _pos < _min:
+                _min = _pos
+    return _min
 def _can_return(token, least):
     if least is None:
         return True
@@ -218,6 +232,16 @@ def catch_block(code, _begin:Pos, _end:Pos):
     return _catch_block(codeList, _begin, _end)
 def _catch_block(cl, begin, end):
     return '\n'.join(cl[begin.row-1:end.row])
+def get_char(codeList, pos):
+    if pos < Pos(1, 1):
+        raise IndexError("Invalid position {}".format(pos))
+    if type(codeList) == str:
+        codeList = codeList.splitlines()
+    try:
+        # use try is better than use if to check
+        return codeList[pos.row-1][pos.col-1]
+    except:
+        raise IndexError("Invalid position {}, may be out of range".format(pos))
 def insert_at_pos(s, pos, codeList, back=False):
     isString = False
     if type(codeList) == str:
@@ -273,3 +297,76 @@ def anyMatchPartial(matchList, shouldMatched):
         if i in parseUpperCase(shouldMatched):
             return True
     return False
+# to fix unmatched position from javalang
+def convert_to_javalang_code(code):
+    t = javalang.tokenizer.JavaTokenizer(code)
+    t.pre_tokenize()
+    return t.data
+def map_pos(code1, code2, pos):
+    line1 = code1[pos.row-1]
+    line2 = code2[pos.row-1]
+    if line1 == line2:
+        return
+    pos.set_coord(None, _map_pos_scan(line1, line2, pos.col))
+def _map_pos_scan(l1, l2, p):
+    for op in difflib.SequenceMatcher(None, l1, l2).get_opcodes():
+        if op[0] == 'equal':
+            if p-1 > op[3] and p-1 < op[4]:
+                return op[1]+p-op[3]
+def next_right_hb_lines(idx, tks):
+    for i in tks[idx+1:]:
+        if i.value == '}':
+            return i.position.line - tks[idx].position.line
+def pre_left_hb_lines(idx, tks):
+    for i in tks[:idx][::-1]:
+        if i.value == '{':
+            return tks[idx].position.line - i.position.line
+def reformat_tokens(tokens):
+    indent = 0
+    closed_block = False
+    ident_last = False
+    output = list()
+    for idx in range(len(tokens)):
+        token = tokens[idx]
+        if closed_block:
+            closed_block = False
+            indent -= 4
+            if not tokens[idx-1].value == '{':
+                output.append(' ' * indent)
+            output.append('}')
+            if token.value == '}':
+                output.append('\n')
+            if isinstance(token, (javalang.tokenizer.Literal, javalang.tokenizer.Keyword, javalang.tokenizer.Identifier)):
+                if not token.value in ('catch', ';', 'else', 'while'):
+                    output.append('\n')
+                    output.append(' ' * indent)
+        if token.value == '{':
+            indent += 4
+            output.append(' {')
+            if next_right_hb_lines(idx, tokens) > 2:
+                output.append('\n')
+                output.append(' ' * indent)
+        elif token.value == '}':
+            closed_block = True
+        elif token.value == ',':
+            output.append(', ')
+        elif isinstance(token, (javalang.tokenizer.Literal, javalang.tokenizer.Keyword, javalang.tokenizer.Identifier)):
+            if ident_last:
+                # If the last token was a literla/keyword/identifer put a space in between
+                output.append(' ')
+            ident_last = True
+            output.append(token.value)
+        elif isinstance(token, javalang.tokenizer.Operator):
+            output.append(' ' + token.value + ' ')
+        elif token.value == ';':
+            output.append(';')
+            if not tokens[idx+1].value == '}' or pre_left_hb_lines(idx, tokens) > 1:
+                output.append('\n')
+                output.append(' ' * indent)
+        else:
+            output.append(token.value)
+        ident_last = isinstance(token, (javalang.tokenizer.Literal, javalang.tokenizer.Keyword, javalang.tokenizer.Identifier))
+    if closed_block:
+        output.append('}')
+    output.append('\n')
+    return ''.join(output)

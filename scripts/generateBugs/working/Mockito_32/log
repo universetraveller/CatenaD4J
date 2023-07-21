@@ -1,0 +1,88 @@
+---
+Begin generate bug_id: Mockito_32
+num_of_hunks: 2
+use working dir: ./working/data/Mockito_32
+Try to checkout Mockito_32
+build dir: ['./working/data/Mockito_32/target/classes', './working/data/Mockito_32/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/configuration/SpyAnnotationEngine.java
+trace file: src/org/mockito/internal/configuration/SpyAnnotationEngine.java
+trying to replace old failing tests
+edit: replace from 22 range 12 at test/org/mockitousage/bugs/SpyShouldHaveNiceNameTest.java
+to
+    @Test
+    public void shouldPrintNiceName$catena_0() {
+        //when
+        veryCoolSpy.add(1);
+
+        try {
+            verify(veryCoolSpy).add(2);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch(AssertionError e) {
+            try{ Assertions.assertThat(e.getMessage()).contains("veryCoolSpy");                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void shouldPrintNiceName$catena_1() {
+        //when
+        veryCoolSpy.add(1);
+
+        try {
+            verify(veryCoolSpy).add(2);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch(AssertionError e) {
+            Assertions.assertThat(e.getMessage()).contains("veryCoolSpy");                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: test/org/mockitousage/bugs/SpyShouldHaveNiceNameTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 156.12 seconds
+Failing tests: 1
+	org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1
+pattern: 01
+try to fix hunk: 1
+replace from 49 with range 1 to
+                        field.set(testClass, Mockito.mock(instance.getClass(), withSettings()
+                                .spiedInstance(instance)
+                                .defaultAnswer(Mockito.CALLS_REAL_METHODS)
+                                .name(field.getName())));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 19 with import static org.mockito.Mockito.withSettings;
+
+patches are written to file
+running tests...
+used time: Finished in 149.60 seconds
+Failing tests: 1
+	org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 19 with import static org.mockito.Mockito.withSettings;
+
+try to fix hunk: 1
+replace from 49 with range 1 to
+                        field.set(testClass, Mockito.mock(instance.getClass(), withSettings()
+                                .spiedInstance(instance)
+                                .defaultAnswer(Mockito.CALLS_REAL_METHODS)
+                                .name(field.getName())));
+
+patches are written to file
+running tests...
+used time: Finished in 152.08 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1']
+select new bug
+Pattern: 11
+failing tests: org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1
+Find 1 new bugs

@@ -1,0 +1,71 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+            "from_line_no": 104,
+            "to_line_no": 109,
+            "replaced_with": "    private static final ThreadLocal<Set<IDKey>> REGISTRY = new ThreadLocal<Set<IDKey>>();\n",
+            "replaced": "    private static final ThreadLocal<Set<IDKey>> REGISTRY = new ThreadLocal<Set<IDKey>>() {\n        @Override\n        protected Set<IDKey> initialValue() {\n            return new HashSet<IDKey>();\n        }\n    };\n",
+            "patch_type": "replace",
+            "next_line_no": 110
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+            "from_line_no": 152,
+            "to_line_no": 152,
+            "replaced_with": "        Set<IDKey> registry = getRegistry();\n        return registry != null && registry.contains(new IDKey(value));\n",
+            "replaced": "        return getRegistry().contains(new IDKey(value));\n",
+            "patch_type": "replace",
+            "next_line_no": 153
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+            "replaced_with": "        synchronized (HashCodeBuilder.class) {\n            if (getRegistry() == null) {\n                REGISTRY.set(new HashSet<IDKey>());\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 522
+        },
+        "3": {
+            "file_name": "src/main/java/org/apache/commons/lang3/builder/HashCodeBuilder.java",
+            "from_line_no": 538,
+            "to_line_no": 538,
+            "replaced_with": "        Set<IDKey> s = getRegistry();\n        if (s != null) {\n            s.remove(new IDKey(value));\n            synchronized (HashCodeBuilder.class) {\n                if (s.isEmpty()) {\n                    REGISTRY.remove();\n                }\n            }\n        }\n",
+            "replaced": "        getRegistry().remove(new IDKey(value));\n",
+            "patch_type": "replace",
+            "next_line_no": 539
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.lang3.builder.HashCodeBuilderTest::testReflectionObjectCycle"
+        ],
+        "org.apache.commons.lang3.builder.HashCodeBuilderTest::testReflectionObjectCycle": {
+            "file_path": "src/test/java/org/apache/commons/lang3/builder/HashCodeBuilderTest.java",
+            "Instance": "Begin: Pos(500, 12)\nEnd: Pos(527, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Lang_32/src/test/java//org/apache/commons/lang3/builder/HashCodeBuilderTest.java\nName: testReflectionObjectCycle\nChilds: [StatementAssertion<Begin: Pos(524, 9), End: Pos(524, 50)>,\nStatementAssertion<Begin: Pos(526, 9), End: Pos(526, 50)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Lang_32/src/test/java//org/apache/commons/lang3/builder/HashCodeBuilderTest.java",
+            "name": "testReflectionObjectCycle",
+            "begin": "Pos(500, 12)",
+            "end": "Pos(527, 5)",
+            "begin_line_no": 500,
+            "end_line_no": 527,
+            "child": [
+                "Begin: Pos(524, 9)\nEnd: Pos(524, 50)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(526, 9)\nEnd: Pos(526, 50)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testReflectionObjectCycle$catena_0() {\n        ReflectionTestCycleA a = new ReflectionTestCycleA();\n        ReflectionTestCycleB b = new ReflectionTestCycleB();\n        a.b = b;\n        b.a = a;\n        \n        // Used to caused:\n        // java.lang.StackOverflowError\n        // at java.lang.ClassLoader.getCallerClassLoader(Native Method)\n        // at java.lang.Class.getDeclaredFields(Class.java:992)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:373)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleB.hashCode(HashCodeBuilderTest.java:53)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:383)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleA.hashCode(HashCodeBuilderTest.java:42)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n\n        a.hashCode();\n        assertNull(HashCodeBuilder.getRegistry());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        b.hashCode();\n        try{ assertNull(HashCodeBuilder.getRegistry());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testReflectionObjectCycle$catena_1() {\n        ReflectionTestCycleA a = new ReflectionTestCycleA();\n        ReflectionTestCycleB b = new ReflectionTestCycleB();\n        a.b = b;\n        b.a = a;\n        \n        // Used to caused:\n        // java.lang.StackOverflowError\n        // at java.lang.ClassLoader.getCallerClassLoader(Native Method)\n        // at java.lang.Class.getDeclaredFields(Class.java:992)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:373)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleB.hashCode(HashCodeBuilderTest.java:53)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:383)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleA.hashCode(HashCodeBuilderTest.java:42)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n\n        a.hashCode();\n        try{ assertNull(HashCodeBuilder.getRegistry());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        b.hashCode();\n        assertNull(HashCodeBuilder.getRegistry());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testReflectionObjectCycle$catena_0() {\n        ReflectionTestCycleA a = new ReflectionTestCycleA();\n        ReflectionTestCycleB b = new ReflectionTestCycleB();\n        a.b = b;\n        b.a = a;\n        \n        // Used to caused:\n        // java.lang.StackOverflowError\n        // at java.lang.ClassLoader.getCallerClassLoader(Native Method)\n        // at java.lang.Class.getDeclaredFields(Class.java:992)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:373)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleB.hashCode(HashCodeBuilderTest.java:53)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:383)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleA.hashCode(HashCodeBuilderTest.java:42)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n\n        a.hashCode();\n        assertNull(HashCodeBuilder.getRegistry());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        b.hashCode();\n        try{ assertNull(HashCodeBuilder.getRegistry());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testReflectionObjectCycle$catena_1() {\n        ReflectionTestCycleA a = new ReflectionTestCycleA();\n        ReflectionTestCycleB b = new ReflectionTestCycleB();\n        a.b = b;\n        b.a = a;\n        \n        // Used to caused:\n        // java.lang.StackOverflowError\n        // at java.lang.ClassLoader.getCallerClassLoader(Native Method)\n        // at java.lang.Class.getDeclaredFields(Class.java:992)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:373)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleB.hashCode(HashCodeBuilderTest.java:53)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionAppend(HashCodeBuilder.java:383)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:349)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode(HashCodeBuilder.java:155)\n        // at\n        // org.apache.commons.lang.builder.HashCodeBuilderTest$ReflectionTestCycleA.hashCode(HashCodeBuilderTest.java:42)\n        // at org.apache.commons.lang.builder.HashCodeBuilder.append(HashCodeBuilder.java:422)\n\n        a.hashCode();\n        try{ assertNull(HashCodeBuilder.getRegistry());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        b.hashCode();\n        assertNull(HashCodeBuilder.getRegistry());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "1111": {
+        "failing_tests": [
+            "org.apache.commons.lang3.builder.HashCodeBuilderTest::testReflectionObjectCycle$catena_0",
+            "org.apache.commons.lang3.builder.HashCodeBuilderTest::testReflectionObjectCycle$catena_1"
+        ]
+    }
+}

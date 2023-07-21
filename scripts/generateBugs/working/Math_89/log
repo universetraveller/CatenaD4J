@@ -1,0 +1,89 @@
+---
+Begin generate bug_id: Math_89
+num_of_hunks: 2
+use working dir: ./working/data/Math_89
+Try to checkout Math_89
+build dir: ['./working/data/Math_89/target/classes', './working/data/Math_89/target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/math/stat/Frequency.java
+trace file: src/java/org/apache/commons/math/stat/Frequency.java
+trying to replace old failing tests
+edit: replace from 193 range 14 at src/test/org/apache/commons/math/stat/FrequencyTest.java
+to
+    public void testAddNonComparable$catena_0(){
+        try {
+            f.addValue(new Object()); // This was previously OK
+            fail("Expected IllegalArgumentException");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException expected) {
+        }
+        f.clear();
+        f.addValue(1);
+        try {
+            f.addValue(new Object());
+            try{ fail("Expected IllegalArgumentException");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException expected) {
+        }
+    }     public void testAddNonComparable$catena_1(){
+        try {
+            f.addValue(new Object()); // This was previously OK
+            try{ fail("Expected IllegalArgumentException");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException expected) {
+        }
+        f.clear();
+        f.addValue(1);
+        try {
+            f.addValue(new Object());
+            fail("Expected IllegalArgumentException");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException expected) {
+        }
+    }
+trace file: src/test/org/apache/commons/math/stat/FrequencyTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 29.82 seconds
+Failing tests: 2
+	org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0
+	org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1
+pattern: 01
+try to fix hunk: 1
+insert before 111 with         } else {
+            throw new IllegalArgumentException("Object must implement Comparable");
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 110 with         if (v instanceof Comparable<?>){
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11
+try to fix hunk: 0
+insert before 110 with         if (v instanceof Comparable<?>){
+
+try to fix hunk: 1
+insert before 111 with         } else {
+            throw new IllegalArgumentException("Object must implement Comparable");
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 22.67 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1', 'org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0']
+select new bug
+Pattern: 11
+failing tests: org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_1@org.apache.commons.math.stat.FrequencyTest::testAddNonComparable$catena_0
+Find 1 new bugs

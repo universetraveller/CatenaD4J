@@ -1,0 +1,95 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "from_line_no": 153,
+            "to_line_no": 158,
+            "replaced": "    if (n.getParent() == null) {\n      List<DiGraphEdge<Node,Branch>> outEdges = gNode.getOutEdges();\n      if (outEdges.size() == 1) {\n        return tryRemoveUnconditionalBranching(outEdges.get(0).getDestination().getValue());\n      }\n    }\n",
+            "patch_type": "delete",
+            "next_line_no": 159
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "from_line_no": 160,
+            "to_line_no": 166,
+            "replaced": "      case Token.BLOCK:\n        if (n.hasChildren()) {\n          Node first = n.getFirstChild();\n          return tryRemoveUnconditionalBranching(first);\n        } else {\n          return tryRemoveUnconditionalBranching(ControlFlowAnalysis.computeFollowNode(n));\n        }\n",
+            "patch_type": "delete",
+            "next_line_no": 167
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "from_line_no": 183,
+            "to_line_no": 183,
+            "replaced_with": "          Node fallThrough = computeFollowing(n);\n",
+            "replaced": "          Node fallThrough = tryRemoveUnconditionalBranching(computeFollowing(n));\n",
+            "patch_type": "replace",
+            "next_line_no": 184
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "replaced_with": "    while (next != null && next.getType() == Token.BLOCK) {\n      if (next.hasChildren()) {\n        next = next.getFirstChild();\n      } else {\n        next = computeFollowing(next);\n      }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 196
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311"
+        ],
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(234, 10)\nEnd: Pos(250, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_85/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testCascadedRemovalOfUnlessUnconditonalJumps\nChilds: [StatementAssertion<Begin: Pos(235, 5), End: Pos(236, 64)>,\nStatementAssertion<Begin: Pos(238, 5), End: Pos(239, 57)>,\nStatementAssertion<Begin: Pos(241, 5), End: Pos(243, 79)>,\nStatementAssertion<Begin: Pos(244, 5), End: Pos(246, 72)>,\nStatementAssertion<Begin: Pos(248, 5), End: Pos(249, 68)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_85/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testCascadedRemovalOfUnlessUnconditonalJumps",
+            "begin": "Pos(234, 10)",
+            "end": "Pos(250, 3)",
+            "begin_line_no": 234,
+            "end_line_no": 250,
+            "child": [
+                "Begin: Pos(235, 5)\nEnd: Pos(236, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(238, 5)\nEnd: Pos(239, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(241, 5)\nEnd: Pos(243, 79)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(244, 5)\nEnd: Pos(246, 72)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(248, 5)\nEnd: Pos(249, 68)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_0() {\n    test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_1() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_2() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_3() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    /***** ORIGINAL ASSERTION IS HERE *****/\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_4() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_0() {\n    test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_1() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_2() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "3": "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_3() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    /***** ORIGINAL ASSERTION IS HERE *****/\n\n    try{ testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "4": "  public void testCascadedRemovalOfUnlessUnconditonalJumps$catena_4() {\n    try{ test(\"switch (a) { case 'a': break; case 'b': break; case 'c': break }\",\n         \"switch (a) { case 'a': break; case 'b': case 'c': }\");                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    // Only one break removed per pass.\n    try{ test(\"switch (a) { case 'a': break; case 'b': case 'c': }\",\n         \"switch (a) { case 'a': case 'b': case 'c': }\");                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b':return; case 'c':return }}\",\n      \"function foo() { switch (a) { case 'a':return; case 'b': case 'c': }}\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ test(\"function foo() {\" +\n      \"  switch (a) { case 'a':return; case 'b': case 'c': }}\",\n      \"function foo() { switch (a) { case 'a': case 'b': case 'c': }}\");                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    testSame(\"function foo() {\" +\n             \"switch (a) { case 'a':return 2; case 'b':return 1}}\");                                        /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(252, 10)\nEnd: Pos(273, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_85/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testIssue311\nChilds: [StatementAssertion<Begin: Pos(253, 5), End: Pos(272, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_85/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testIssue311",
+            "begin": "Pos(252, 10)",
+            "end": "Pos(273, 3)",
+            "begin_line_no": 252,
+            "end_line_no": 273,
+            "child": [
+                "Begin: Pos(253, 5)\nEnd: Pos(272, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "0011": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps$catena_2",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps$catena_0",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311"
+        ]
+    }
+}

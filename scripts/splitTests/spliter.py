@@ -3,7 +3,25 @@ import javalang
 import copy
 
 
-
+def sanity_check_pos_char(code_lines, pos):
+    ch = get_char(code_lines, pos)
+    if ch == ';' or ch == '}':
+        return True
+    print('Invalid char {} got'.format(ch))
+    return False
+def syntax_check(code):
+    try:
+        compile_check = code_to_AST(code)
+    except:
+        raise SyntaxError("Failed to construct AST, may contains syntax faults")
+def check_range(l):
+    for i in l:
+        for j in l:
+            if j == i:
+                continue
+            if (j & i):
+                return False
+    return True
 class Assertion:
     def __init__(self, begin, end, source, name='<Unknown>'):
         self.begin = begin
@@ -14,15 +32,23 @@ class Assertion:
     def __gt__(self, obj):
         return self.begin > obj.begin
     def fill_child(self, child):
+        range_sets = []
         for i in child:
             if isinstance(i, Assertion):
+                range_sets.append(i.line_range())
                 self.child.append(i)
+        # the line would not intersect otherwise the algorithm will fail
+        if not check_range(range_sets):
+            print('NOTICE: lines have intersection')
+            print(self.source)
         # no need to do it for having developed parse_node_body_v2
         '''
         self.child.sort()
         tag = False
         for i in range(len(self.child)):
         '''
+    def line_range(self):
+        return set(range(self.begin.row, self.end.row+1))
     def childView(self):
         now = '['
         for i in self.child:
@@ -35,13 +61,23 @@ class StatementAssertion(Assertion):
     pass
 class BlockAssertion(Assertion):
     pass
-name_pattern = '{}_catena_{}'
+CONFIG_UTIL_INSERT = 1 # use util.insert_at_pos() or not
+CONFIG_COMMENT_ORI = 1 # tag a comment to show there is no try-catch, but it seems when use insert_at_pos it is easy to recognize
+CONFIG_ALIGN       = 1
+if CONFIG_COMMENT_ORI:
+    _comment_append = '/***** ORIGINAL ASSERTION IS HERE *****/'
+# patch for Lang_34: is named ori_* it will fail after fixing for the new bug in fixed code
+name_pattern = '{}$catena_{}'
 class failing_test(Assertion):
     def split(self):
         self.splited = []
         if len(self.child) <= 1:
             return False
         code = open(self.source, 'r').read()
+        if CONFIG_UTIL_INSERT:
+            javalang_code = convert_to_javalang_code(code)
+            #javalang_style_code_lines = javalang_code.splitlines()
+            javalang_style_code_lines = javalang_code.split('\n')[:-1]
         # name map
         tree = code_to_AST(code)
         nodes_map = traverse_get_global(tree)
@@ -50,22 +86,84 @@ class failing_test(Assertion):
             named.append(i)
         # generate
         _code_lines = code.splitlines()
+        if CONFIG_ALIGN:
+            # for formatting
+            __end_length = []
+            for __one_child in self.child:
+                if __one_child.end.row != __one_child.begin.row:
+                    offset = 0
+                else:
+                    # for add try{ before code
+                    offset = 5
+                __end_length.append(offset + len(_code_lines[__one_child.end.row-1]))
+            __max_end_length = max(__end_length) + 4
+            if __max_end_length < 108:
+                __max_end_length = 108
         for i in range(len(self.child)):
             code_lines = copy.deepcopy(_code_lines)
-            for j in range(len(self.child)):
+            for j in reversed(range(len(self.child))):
                 if j == i:
-                    continue
+                    if CONFIG_COMMENT_ORI and not CONFIG_UTIL_INSERT:
+                        code_lines[self.child[j].end.row-1] += _comment_append
+                        continue
+                    if not CONFIG_COMMENT_ORI:
+                        continue
                 st = self.child[j]
-                beg = st.begin.row
-                end = st.end.row
+                beg = st.begin
+                end = st.end
+                # use try catch to skip assertions
+                # there is one bug that original line may ends with comments
+                # to solve it there is a good way that use insert_at_pos() but there is no guard of the accuracy for Pos
+                # another way is insert with line using reversed order of self.child, but there is also no guard for the original order
+                # temporarily use insert_at_pos(); if Pos is incorrect, compilation error occurs
+                # add sanity checker there
+                # patch for inserting order
+                # you should insert after first, otherwise the column will change
+                # and for unexpected same line node, insert with reversed order
+                if CONFIG_UTIL_INSERT:
+                    map_pos(code_lines, javalang_style_code_lines, beg)
+                    map_pos(code_lines, javalang_style_code_lines, end)
+                    if not sanity_check_pos_char(code_lines, end):
+                        print(self.source)
+                    if CONFIG_ALIGN:
+                        nr_space = __max_end_length - __end_length[j]
+                    else:
+                        nr_space = 0
+                    if j == i:
+                        if CONFIG_COMMENT_ORI:
+                            offset = 0
+                            if beg.row == end.row:
+                                offset = 5
+                            code_lines = insert_at_pos(' '*(nr_space+offset) + _comment_append, end, code_lines, True)
+                        continue
+                    code_lines = insert_at_pos(' '*nr_space + '}catch(Throwable __SHOULD_BE_IGNORED){}', end, code_lines, True)
+                    # add a space could make it easy to find untagged one
+                    code_lines = insert_at_pos('try{ ', beg, code_lines)
+                else:
+                    beg = beg.row
+                    end = end.row
+                    code_lines[beg-1] = 'try{{{}'.format(code_lines[beg-1])
+                    code_lines[end] = '}}catch(Throwable __SHOULD_BE_IGNORED){{}}{}'.format(code_lines[end])
+                # use comments to skip assertions
+                '''
                 for line_idx in range(beg-1, end):
                     code_lines[line_idx] = '//{}'.format(code_lines[line_idx])
+                '''
                 '''
                 code_lines = insert_at_pos('/*', beg, code_lines)
                 code_lines = insert_at_pos('*/', end, code_lines, True)
                 '''
             new_code = '\n'.join(code_lines)
+            syntax_check(new_code)
             new_code = catch_block(new_code, self.begin, self.end)
+            new_i = int(i)
+            while name_pattern.format(self.name, new_i) in named:
+                new_i += 100
+            new_name = name_pattern.format(self.name, new_i)
+            named.append(new_name)
+            name_pos = new_code.find(self.name)
+            self.splited.append('{}{}{}'.format(new_code[:name_pos], new_name, new_code[name_pos+len(self.name):]))
+            '''
             new_tokens = tokenize_java_code(new_code)
             for idx in range(len(new_tokens)):
                 token = new_tokens[idx]
@@ -79,6 +177,7 @@ class failing_test(Assertion):
                 new_tokens[idx].value = new_name
                 self.splited.append(javalang.tokenizer.reformat_tokens(new_tokens))
                 break
+            '''
         return True
 cache = get_member_cache()
 class Appendable:
@@ -132,16 +231,16 @@ def containsAssert(node, _globals, check=None):
     if node.member in cache:
         return True
     if anyMatchPartial(activeTokens, node.member):
-        check.append('Use pattern matching')
+        check.append('Use pattern matching: {}.{}'.format(node.qualifier, node.member))
         return True
     if node.qualifier in activeQualifiers:
-        check.append('Use qualifier matching')
+        check.append('Use qualifier matching: {}.{}'.format(node.qualifier, node.member))
         return True
     if not node.member in _globals:
         return False
     ret = containsAssertList(node.member, _globals)
     if ret:
-        check.append('Use list matching')
+        check.append('Use list matching: {}.{}'.format(node.qualifier, node.member))
     return ret
 def read_if_statement(node, _globals, tokens):
     pass
@@ -180,7 +279,14 @@ def parse_node_body_v2(node, _globals, tokens):
             continue
         '''
         invocation = se.expression
+        # invocation may not be method invocation
+        # example: this.validate();
+        '''
         if not isinstance(invocation, javalang.tree.MethodInvocation):
+            continue
+        '''
+        if not hasattr(invocation, 'selectors'):
+            # statements include no attribute selectors may be considered as not invocation
             continue
         if invocation.selectors:
             for sel in invocation.selectors:
@@ -250,7 +356,7 @@ def process_test_node_v2(filename, name, _globals=None, tokens=None):
         tokens = tokenize_java_code(open(filename, 'r').read())
     # tokens: Separator tokens of file code
     node = get_only_node(name, _globals)
-    begin_pos = try_get_node_pos(node)
+    begin_pos = begin_pos_of_node(node)
     least = least_pos_of_node(node)
     end_pos = parse_ending_point(begin_pos, tokens, least)
     test = failing_test(begin_pos, end_pos, filename, name)
@@ -259,7 +365,7 @@ def process_test_node_v2(filename, name, _globals=None, tokens=None):
     return test, check
 def process_test_node(filename, name, _globals, tokens):
     node = get_only_node(name, _globals)
-    begin_pos = try_get_node_pos(node)
+    begin_pos = begin_pos_of_node(node)
     least = least_pos_of_node(node)
     end_pos = parse_ending_point(begin_pos, tokens, least)
     test = failing_test(begin_pos, end_pos, filename, name)

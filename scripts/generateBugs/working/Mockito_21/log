@@ -1,0 +1,779 @@
+---
+Begin generate bug_id: Mockito_21
+num_of_hunks: 5
+use working dir: ./working/data/Mockito_21
+Try to checkout Mockito_21
+build dir: ['./working/data/Mockito_21/build/classes/main', './working/data/Mockito_21/build/classes/test']
+init FileManager
+trace file: src/org/mockito/internal/creation/instance/ConstructorInstantiator.java
+trace file: src/org/mockito/internal/creation/instance/ConstructorInstantiator.java
+trace file: src/org/mockito/internal/creation/instance/ConstructorInstantiator.java
+trace file: src/org/mockito/internal/creation/instance/ConstructorInstantiator.java
+trace file: src/org/mockito/internal/creation/instance/ConstructorInstantiator.java
+trying to replace old failing tests
+edit: replace from 19 range 4 at test/org/mockito/internal/creation/instance/ConstructorInstantiatorTest.java
+to
+    @Test public void creates_instances_of_inner_classes$catena_0() {
+        assertEquals(new ConstructorInstantiator(this).newInstance(SomeInnerClass.class).getClass(), SomeInnerClass.class);                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new ConstructorInstantiator(new ChildOfThis()).newInstance(SomeInnerClass.class).getClass(), SomeInnerClass.class);    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void creates_instances_of_inner_classes$catena_1() {
+        try{ assertEquals(new ConstructorInstantiator(this).newInstance(SomeInnerClass.class).getClass(), SomeInnerClass.class);                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new ConstructorInstantiator(new ChildOfThis()).newInstance(SomeInnerClass.class).getClass(), SomeInnerClass.class);         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: test/org/mockito/internal/creation/instance/ConstructorInstantiatorTest.java
+new test num: 2
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 353.10 seconds
+Failing tests: 1
+	org.mockito.internal.creation.instance.ConstructorInstantiatorTest::creates_instances_of_inner_classes$catena_1
+pattern: 00001
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 307.44 seconds
+Failing tests: 1
+	org.mockito.internal.creation.instance.ConstructorInstantiatorTest::creates_instances_of_inner_classes$catena_1
+No new failing tests but only 1 hunk
+pattern: 00010
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00100
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01000
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10000
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00011
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00101
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00110
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01001
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01010
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01100
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10001
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10010
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10100
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11000
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00111
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01011
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01101
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01110
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10011
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10101
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10110
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11001
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11010
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11100
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01111
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10111
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11011
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11101
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11110
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11111
+try to fix hunk: 0
+replace from 17 with range 1 to
+        return withParams(cls, outerClassInstance);
+
+try to fix hunk: 1
+replace from 20 with range 1 to
+    private static <T> T withParams(Class<T> cls, Object... params) {
+
+try to fix hunk: 2
+replace from 24 with range 2 to
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                Class<?>[] types = constructor.getParameterTypes();
+                if (paramsMatch(types, params)) {
+                    return (T) constructor.newInstance(params);
+                }
+            }
+
+try to fix hunk: 3
+insert before 29 with         throw paramsException(cls, null);
+
+try to fix hunk: 4
+insert before 36 with     private static boolean paramsMatch(Class<?>[] types, Object[] params) {
+        if (params.length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (!types[i].isInstance(params[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 207.41 seconds
+Failing tests: 0
+Can independently fix ['org.mockito.internal.creation.instance.ConstructorInstantiatorTest::creates_instances_of_inner_classes$catena_1']
+select new bug
+Pattern: 11111
+failing tests: org.mockito.internal.creation.instance.ConstructorInstantiatorTest::creates_instances_of_inner_classes$catena_1
+Find 1 new bugs

@@ -1,0 +1,72 @@
+---
+Begin generate bug_id: Lang_48
+num_of_hunks: 2
+use working dir: ./working/data/Lang_48
+Try to checkout Lang_48
+build dir: ['./working/data/Lang_48/target/classes', './working/data/Lang_48/target/tests']
+init FileManager
+trace file: src/java/org/apache/commons/lang/builder/EqualsBuilder.java
+trace file: src/java/org/apache/commons/lang/builder/EqualsBuilder.java
+trying to replace old failing tests
+edit: replace from 381 range 6 at src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java
+to
+    public void testBigDecimal$catena_0() {
+        BigDecimal o1 = new BigDecimal("2.0");
+        BigDecimal o2 = new BigDecimal("2.00");
+        assertTrue(new EqualsBuilder().append(o1, o1).isEquals());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(new EqualsBuilder().append(o1, o2).isEquals());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBigDecimal$catena_1() {
+        BigDecimal o1 = new BigDecimal("2.0");
+        BigDecimal o2 = new BigDecimal("2.00");
+        try{ assertTrue(new EqualsBuilder().append(o1, o1).isEquals());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(new EqualsBuilder().append(o1, o2).isEquals());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/lang/builder/EqualsBuilderTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 27.16 seconds
+Failing tests: 1
+	org.apache.commons.lang.builder.EqualsBuilderTest::testBigDecimal$catena_1
+pattern: 01
+try to fix hunk: 1
+insert before 382 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 380 with             if (lhs instanceof java.math.BigDecimal) {
+                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11
+try to fix hunk: 0
+insert before 380 with             if (lhs instanceof java.math.BigDecimal) {
+                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);
+            } else {
+
+try to fix hunk: 1
+insert before 382 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 19.50 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.lang.builder.EqualsBuilderTest::testBigDecimal$catena_1']
+select new bug
+Pattern: 11
+failing tests: org.apache.commons.lang.builder.EqualsBuilderTest::testBigDecimal$catena_1
+Find 1 new bugs

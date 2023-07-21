@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/joda/time/Partial.java",
+            "from_line_no": 218,
+            "to_line_no": 218,
+            "replaced_with": "                if (compare < 0) {\n",
+            "replaced": "                if (compare < 0 || (compare != 0 && loopUnitField.isSupported() == false)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 219
+        },
+        "1": {
+            "file_name": "src/main/java/org/joda/time/Partial.java",
+            "replaced_with": "                            if (fieldType.getRangeDurationType() == null) {\n                                break;\n                            }\n",
+            "patch_type": "insert",
+            "next_line_no": 449
+        },
+        "2": {
+            "file_name": "src/main/java/org/joda/time/field/UnsupportedDurationField.java",
+            "replaced_with": "        if (durationField.isSupported()) {\n            return 1;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 227
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange"
+        ],
+        "org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange": {
+            "file_path": "src/test/java/org/joda/time/TestPartial_Basics.java",
+            "Instance": "Begin: Pos(467, 12)\nEnd: Pos(473, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_2/src/test/java//org/joda/time/TestPartial_Basics.java\nName: testWith_baseAndArgHaveNoRange\nChilds: [StatementAssertion<Begin: Pos(470, 9), End: Pos(470, 39)>,\nStatementAssertion<Begin: Pos(471, 9), End: Pos(471, 65)>,\nStatementAssertion<Begin: Pos(472, 9), End: Pos(472, 66)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_2/src/test/java//org/joda/time/TestPartial_Basics.java",
+            "name": "testWith_baseAndArgHaveNoRange",
+            "begin": "Pos(467, 12)",
+            "end": "Pos(473, 5)",
+            "begin_line_no": 467,
+            "end_line_no": 473,
+            "child": [
+                "Begin: Pos(470, 9)\nEnd: Pos(470, 39)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(471, 9)\nEnd: Pos(471, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(472, 9)\nEnd: Pos(472, 66)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testWith_baseAndArgHaveNoRange$catena_0() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        assertEquals(2, result.size());                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testWith_baseAndArgHaveNoRange$catena_1() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testWith_baseAndArgHaveNoRange$catena_2() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testWith_baseAndArgHaveNoRange$catena_0() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        assertEquals(2, result.size());                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testWith_baseAndArgHaveNoRange$catena_1() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testWith_baseAndArgHaveNoRange$catena_2() {\n        Partial test = new Partial(DateTimeFieldType.year(), 1);\n        Partial result = test.with(DateTimeFieldType.era(), 1);\n        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    }
+}

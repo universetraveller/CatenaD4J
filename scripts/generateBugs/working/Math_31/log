@@ -1,0 +1,349 @@
+---
+Begin generate bug_id: Math_31
+num_of_hunks: 4
+use working dir: ./working/data/Math_31
+Try to checkout Math_31
+build dir: ['./working/data/Math_31/target/classes', './working/data/Math_31/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math3/util/ContinuedFraction.java
+trace file: src/main/java/org/apache/commons/math3/util/ContinuedFraction.java
+trace file: src/main/java/org/apache/commons/math3/util/ContinuedFraction.java
+trace file: src/main/java/org/apache/commons/math3/util/ContinuedFraction.java
+trying to replace old failing tests
+edit: replace from 146 range 13 at src/test/java/org/apache/commons/math3/distribution/FDistributionTest.java
+to
+    @Test
+    public void testMath785$catena_0() {
+        // this test was failing due to inaccurate results from ContinuedFraction.
+
+        try {
+            double prob = 0.01;
+            FDistribution f = new FDistribution(200000, 200000);
+            double result = f.inverseCumulativeProbability(prob);
+            Assert.assertTrue(result < 1.0);                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (Exception e) {
+            try{ Assert.fail("Failing to calculate inverse cumulative probability");                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testMath785$catena_1() {
+        // this test was failing due to inaccurate results from ContinuedFraction.
+
+        try {
+            double prob = 0.01;
+            FDistribution f = new FDistribution(200000, 200000);
+            double result = f.inverseCumulativeProbability(prob);
+            try{ Assert.assertTrue(result < 1.0);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (Exception e) {
+            Assert.fail("Failing to calculate inverse cumulative probability");                             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/org/apache/commons/math3/distribution/FDistributionTest.java
+new test num: 2
+ori test num: 1
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 127.03 seconds
+Failing tests: 2
+	org.apache.commons.math3.distribution.BinomialDistributionTest::testMath718
+	org.apache.commons.math3.distribution.FDistributionTest::testMath785$catena_1
+pattern: 0001
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0010
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0100
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1000
+try to fix hunk: 0
+delete from 134 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0011
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0101
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0110
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1001
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1010
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1100
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0111
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+used time: Finished in 114.88 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math3.distribution.FDistributionTest::testMath785$catena_1', 'org.apache.commons.math3.distribution.BinomialDistributionTest::testMath718']
+select new bug
+Pattern: 0111
+failing tests: org.apache.commons.math3.distribution.FDistributionTest::testMath785$catena_1@org.apache.commons.math3.distribution.BinomialDistributionTest::testMath718
+pattern: 1011
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1101
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1110
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1111
+try to fix hunk: 0
+delete from 134 with range 2
+try to fix hunk: 1
+replace from 143 with range 24 to
+            double dN = a + b * dPrev;
+            if (Precision.equals(dN, 0.0, small)) {
+                dN = small;
+            }
+            double cN = a + b / cPrev;
+            if (Precision.equals(cN, 0.0, small)) {
+                cN = small;
+
+try to fix hunk: 2
+replace from 169 with range 2 to
+            dN = 1 / dN;
+            final double deltaN = cN * dN;
+            hN = hPrev * deltaN;
+
+try to fix hunk: 3
+replace from 185 with range 5 to
+            dPrev = dN;
+            cPrev = cN;
+            hPrev = hN;
+
+patches are written to file
+running tests...
+used time: Finished in 117.41 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 1 new bugs

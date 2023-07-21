@@ -1,0 +1,420 @@
+---
+Begin generate bug_id: Math_100
+num_of_hunks: 3
+use working dir: ./working/data/Math_100
+Try to checkout Math_100
+build dir: ['./working/data/Math_100/target/classes', './working/data/Math_100/target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/math/estimation/AbstractEstimator.java
+trace file: src/java/org/apache/commons/math/estimation/AbstractEstimator.java
+trace file: src/java/org/apache/commons/math/estimation/AbstractEstimator.java
+trying to replace old failing tests
+edit: replace from 451 range 37 at src/test/org/apache/commons/math/estimation/GaussNewtonEstimatorTest.java
+to
+  public void testBoundParameters$catena_0() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_1() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_2() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_3() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_4() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_5() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      assertEquals(0, errors[i0], 1.0e-10);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertEquals(0, errors[i1], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+  }   public void testBoundParameters$catena_6() throws EstimationException {
+      EstimatedParameter[] p = {
+        new EstimatedParameter("unbound0", 2, false),
+        new EstimatedParameter("unbound1", 2, false),
+        new EstimatedParameter("bound",    2, true)
+      };
+      LinearProblem problem = new LinearProblem(new LinearMeasurement[] {
+        new LinearMeasurement(new double[] { 1.0, 1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              3.0),
+        new LinearMeasurement(new double[] { 1.0, -1.0, 1.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              1.0),
+        new LinearMeasurement(new double[] { 1.0, 3.0, 2.0 },
+                              new EstimatedParameter[] { p[0], p[1], p[2] },
+                              7.0)
+      });
+
+      GaussNewtonEstimator estimator = new GaussNewtonEstimator(100, 1.0e-6, 1.0e-6);
+      estimator.estimate(problem);
+      try{ assertTrue(estimator.getRMS(problem) < 1.0e-10);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+      double[][] covariances = estimator.getCovariances(problem);
+      int i0 = 0, i1 = 1;
+      if (problem.getUnboundParameters()[0].getName().endsWith("1")) {
+          i0 = 1;
+          i1 = 0;
+      }
+      try{ assertEquals(11.0 / 24, covariances[i0][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i0][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals(-3.0 / 24, covariances[i1][i0], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertEquals( 3.0 / 24, covariances[i1][i1], 1.0e-10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+      double[] errors = estimator.guessParametersErrors(problem);
+      try{ assertEquals(0, errors[i0], 1.0e-10);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertEquals(0, errors[i1], 1.0e-10);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+  }
+trace file: src/test/org/apache/commons/math/estimation/GaussNewtonEstimatorTest.java
+new test num: 7
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 32.36 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+pattern: 001
+try to fix hunk: 2
+replace from 207 with range 1 to
+        double[] errors = new double[problem.getUnboundParameters().length];
+
+patches are written to file
+running tests...
+used time: Finished in 23.42 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+No new failing tests but only 1 hunk
+pattern: 010
+try to fix hunk: 1
+replace from 202 with range 1 to
+        int p = problem.getUnboundParameters().length;
+
+patches are written to file
+running tests...
+used time: Finished in 23.51 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+No new failing tests but only 1 hunk
+pattern: 100
+try to fix hunk: 0
+replace from 166 with range 1 to
+        final int cols = problem.getUnboundParameters().length;
+
+patches are written to file
+running tests...
+used time: Finished in 23.23 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+replace from 202 with range 1 to
+        int p = problem.getUnboundParameters().length;
+
+try to fix hunk: 2
+replace from 207 with range 1 to
+        double[] errors = new double[problem.getUnboundParameters().length];
+
+patches are written to file
+running tests...
+used time: Finished in 22.38 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+Can independently fix []
+Could not fix independently
+pattern: 101
+try to fix hunk: 0
+replace from 166 with range 1 to
+        final int cols = problem.getUnboundParameters().length;
+
+try to fix hunk: 2
+replace from 207 with range 1 to
+        double[] errors = new double[problem.getUnboundParameters().length];
+
+patches are written to file
+running tests...
+used time: Finished in 25.19 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+Can independently fix []
+Could not fix independently
+pattern: 110
+try to fix hunk: 0
+replace from 166 with range 1 to
+        final int cols = problem.getUnboundParameters().length;
+
+try to fix hunk: 1
+replace from 202 with range 1 to
+        int p = problem.getUnboundParameters().length;
+
+patches are written to file
+running tests...
+used time: Finished in 22.60 seconds
+Failing tests: 7
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5
+	org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+Can independently fix []
+Could not fix independently
+pattern: 111
+try to fix hunk: 0
+replace from 166 with range 1 to
+        final int cols = problem.getUnboundParameters().length;
+
+try to fix hunk: 1
+replace from 202 with range 1 to
+        int p = problem.getUnboundParameters().length;
+
+try to fix hunk: 2
+replace from 207 with range 1 to
+        double[] errors = new double[problem.getUnboundParameters().length];
+
+patches are written to file
+running tests...
+used time: Finished in 26.61 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2', 'org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1']
+select new bug
+Pattern: 111
+failing tests: org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2@org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+Find 1 new bugs

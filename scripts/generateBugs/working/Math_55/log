@@ -1,0 +1,739 @@
+---
+Begin generate bug_id: Math_55
+num_of_hunks: 5
+use working dir: ./working/data/Math_55
+Try to checkout Math_55
+build dir: ['./working/data/Math_55/target/classes', './working/data/Math_55/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/geometry/Vector3D.java
+trace file: src/main/java/org/apache/commons/math/geometry/Vector3D.java
+trace file: src/main/java/org/apache/commons/math/geometry/Vector3D.java
+trace file: src/main/java/org/apache/commons/math/geometry/Vector3D.java
+trace file: src/main/java/org/apache/commons/math/geometry/Vector3D.java
+trying to replace old failing tests
+edit: replace from 155 range 12 at src/test/java/org/apache/commons/math/geometry/Vector3DTest.java
+to
+    @Test
+    public void testCrossProductCancellation$catena_0() {
+        Vector3D v1 = new Vector3D(9070467121.0, 4535233560.0, 1);
+        Vector3D v2 = new Vector3D(9070467123.0, 4535233561.0, 1);
+        checkVector(Vector3D.crossProduct(v1, v2), -1, 2, 1);                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        double scale    = FastMath.scalb(1.0, 100);
+        Vector3D big1   = new Vector3D(scale, v1);
+        Vector3D small2 = new Vector3D(1 / scale, v2);
+        try{ checkVector(Vector3D.crossProduct(big1, small2), -1, 2, 1);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testCrossProductCancellation$catena_1() {
+        Vector3D v1 = new Vector3D(9070467121.0, 4535233560.0, 1);
+        Vector3D v2 = new Vector3D(9070467123.0, 4535233561.0, 1);
+        try{ checkVector(Vector3D.crossProduct(v1, v2), -1, 2, 1);                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double scale    = FastMath.scalb(1.0, 100);
+        Vector3D big1   = new Vector3D(scale, v1);
+        Vector3D small2 = new Vector3D(1 / scale, v2);
+        checkVector(Vector3D.crossProduct(big1, small2), -1, 2, 1);                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/apache/commons/math/geometry/Vector3DTest.java
+new test num: 2
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 202.02 seconds
+Failing tests: 2
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1
+pattern: 00001
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00010
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00100
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01000
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10000
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 187.78 seconds
+Failing tests: 2
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1
+No new failing tests but only 1 hunk
+pattern: 00011
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00101
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00110
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01001
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01010
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01100
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10001
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10010
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10100
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11000
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+patches are written to file
+running tests...
+used time: Finished in 179.52 seconds
+Failing tests: 2
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 00111
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01011
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01101
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01110
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10011
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10101
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10110
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11001
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11010
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11100
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+patches are written to file
+running tests...
+used time: Finished in 190.95 seconds
+Failing tests: 2
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 01111
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10111
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11011
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11101
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11110
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+patches are written to file
+running tests...
+used time: Finished in 189.43 seconds
+Failing tests: 2
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+	org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1
+Can independently fix []
+Could not fix independently
+pattern: 11111
+try to fix hunk: 0
+insert before 459 with       final double n1 = v1.getNormSq();
+      final double n2 = v2.getNormSq();
+      if ((n1 * n2) < MathUtils.SAFE_MIN) {
+          return ZERO;
+      }
+
+try to fix hunk: 1
+insert before 462 with       final int deltaExp = (FastMath.getExponent(n1) - FastMath.getExponent(n2)) / 4;
+      final double x1    = FastMath.scalb(v1.x, -deltaExp);
+      final double y1    = FastMath.scalb(v1.y, -deltaExp);
+      final double z1    = FastMath.scalb(v1.z, -deltaExp);
+      final double x2    = FastMath.scalb(v2.x,  deltaExp);
+      final double y2    = FastMath.scalb(v2.y,  deltaExp);
+      final double z2    = FastMath.scalb(v2.z,  deltaExp);
+
+try to fix hunk: 2
+insert before 470 with       final double ratio = (x1 * x2 + y1 * y2 + z1 * z2) / FastMath.scalb(n2, 2 * deltaExp);
+      final double rho   = FastMath.rint(256 * ratio) / 256;
+
+try to fix hunk: 3
+insert before 471 with       final double x3 = x1 - rho * x2;
+      final double y3 = y1 - rho * y2;
+      final double z3 = z1 - rho * z2;
+
+try to fix hunk: 4
+replace from 473 with range 1 to
+      return new Vector3D(y3 * z2 - z3 * y2, z3 * x2 - x3 * z2, x3 * y2 - y3 * x2);
+
+patches are written to file
+running tests...
+used time: Finished in 198.88 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1', 'org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0']
+select new bug
+Pattern: 11111
+failing tests: org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_1@org.apache.commons.math.geometry.Vector3DTest::testCrossProductCancellation$catena_0
+Find 1 new bugs

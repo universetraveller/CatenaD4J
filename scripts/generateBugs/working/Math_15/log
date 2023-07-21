@@ -1,0 +1,78 @@
+---
+Begin generate bug_id: Math_15
+num_of_hunks: 2
+use working dir: ./working/data/Math_15
+Try to checkout Math_15
+build dir: ['./working/data/Math_15/target/classes', './working/data/Math_15/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math3/util/FastMath.java
+trace file: src/main/java/org/apache/commons/math3/util/FastMath.java
+trying to replace old failing tests
+edit: replace from 160 range 9 at src/test/java/org/apache/commons/math3/util/FastMathTest.java
+to
+    @Test
+    public void testMath904$catena_0() {
+        final double x = -1;
+        final double y = (5 + 1e-15) * 1e15;
+        Assert.assertEquals(Math.pow(x, y),
+                            FastMath.pow(x, y), 0);                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals(Math.pow(x, -y),
+                            FastMath.pow(x, -y), 0);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMath904$catena_1() {
+        final double x = -1;
+        final double y = (5 + 1e-15) * 1e15;
+        try{ Assert.assertEquals(Math.pow(x, y),
+                            FastMath.pow(x, y), 0);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals(Math.pow(x, -y),
+                            FastMath.pow(x, -y), 0);                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math3/util/FastMathTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 151.54 seconds
+Failing tests: 2
+	org.apache.commons.math3.util.FastMathTest::testMath904$catena_0
+	org.apache.commons.math3.util.FastMathTest::testMath904$catena_1
+pattern: 01
+try to fix hunk: 1
+replace from 1541 with range 1 to
+            if (y >= TWO_POWER_53 || y <= -TWO_POWER_53) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 313 with     private static final double TWO_POWER_53 = 2 * TWO_POWER_52;
+
+patches are written to file
+running tests...
+used time: Finished in 131.92 seconds
+Failing tests: 2
+	org.apache.commons.math3.util.FastMathTest::testMath904$catena_0
+	org.apache.commons.math3.util.FastMathTest::testMath904$catena_1
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 313 with     private static final double TWO_POWER_53 = 2 * TWO_POWER_52;
+
+try to fix hunk: 1
+replace from 1541 with range 1 to
+            if (y >= TWO_POWER_53 || y <= -TWO_POWER_53) {
+
+patches are written to file
+running tests...
+used time: Finished in 131.43 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math3.util.FastMathTest::testMath904$catena_1', 'org.apache.commons.math3.util.FastMathTest::testMath904$catena_0']
+select new bug
+Pattern: 11
+failing tests: org.apache.commons.math3.util.FastMathTest::testMath904$catena_1@org.apache.commons.math3.util.FastMathTest::testMath904$catena_0
+Find 1 new bugs

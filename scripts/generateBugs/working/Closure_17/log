@@ -1,0 +1,65 @@
+---
+Begin generate bug_id: Closure_17
+num_of_hunks: 2
+use working dir: ./working/data/Closure_17
+Try to checkout Closure_17
+build dir: ['./working/data/Closure_17/build/classes', './working/data/Closure_17/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/TypedScopeCreator.java
+trace file: src/com/google/javascript/jscomp/TypedScopeCreator.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 271.20 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.TypeCheckTest::testIssue688
+pattern: 01
+try to fix hunk: 1
+insert before 1293 with                 return rValueInfo.getType().evaluate(scope, typeRegistry);
+              } else if (rValue.getJSType() != null
+                  && !rValue.getJSType().isUnknownType()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+replace from 1291 with range 1 to
+              JSDocInfo rValueInfo = rValue.getJSDocInfo();
+              if (rValueInfo != null && rValueInfo.hasType()) {
+
+patches are written to file
+running tests...
+used time: Finished in 253.74 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.TypeCheckTest::testUndeclaredGlobalProperty2
+	com.google.javascript.jscomp.TypeCheckTest::testIssue688
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testDeclaredConstType1
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testDeclaredConstType2
+Includes new failing tests, set to unusable
+pattern: 11
+try to fix hunk: 0
+replace from 1291 with range 1 to
+              JSDocInfo rValueInfo = rValue.getJSDocInfo();
+              if (rValueInfo != null && rValueInfo.hasType()) {
+
+try to fix hunk: 1
+insert before 1293 with                 return rValueInfo.getType().evaluate(scope, typeRegistry);
+              } else if (rValue.getJSType() != null
+                  && !rValue.getJSType().isUnknownType()) {
+
+patches are written to file
+running tests...
+used time: Finished in 266.80 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.TypeCheckTest::testIssue688']
+select new bug
+Pattern: 11
+failing tests: com.google.javascript.jscomp.TypeCheckTest::testIssue688
+Find 1 new bugs

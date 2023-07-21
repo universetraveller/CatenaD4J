@@ -1,0 +1,60 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+            "replaced_with": "        try {\n",
+            "patch_type": "insert",
+            "next_line_no": 2962
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+            "replaced_with": "        } catch (ArrayStoreException ase) {\n",
+            "patch_type": "insert",
+            "next_line_no": 2963
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+            "replaced_with": "            final Class<?> type2 = array2.getClass().getComponentType();\n            if (!type1.isAssignableFrom(type2)){\n                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n            }\n            throw ase; // No, so rethrow original\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 2964
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testJira567"
+        ],
+        "org.apache.commons.lang3.ArrayUtilsAddTest::testJira567": {
+            "file_path": "src/test/org/apache/commons/lang3/ArrayUtilsAddTest.java",
+            "Instance": "Begin: Pos(32, 12)\nEnd: Pos(44, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Lang_37/src/test//org/apache/commons/lang3/ArrayUtilsAddTest.java\nName: testJira567\nChilds: [StatementAssertion<Begin: Pos(36, 9), End: Pos(36, 33)>,\nStatementAssertion<Begin: Pos(37, 9), End: Pos(37, 67)>,\nStatementAssertion<Begin: Pos(41, 16), End: Pos(41, 70)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Lang_37/src/test//org/apache/commons/lang3/ArrayUtilsAddTest.java",
+            "name": "testJira567",
+            "begin": "Pos(32, 12)",
+            "end": "Pos(44, 5)",
+            "begin_line_no": 32,
+            "end_line_no": 44,
+            "child": [
+                "Begin: Pos(36, 9)\nEnd: Pos(36, 33)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(37, 9)\nEnd: Pos(37, 67)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(41, 16)\nEnd: Pos(41, 70)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testJira567$catena_0(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        assertEquals(2,n.length);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(Number.class,n.getClass().getComponentType());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               try{ fail(\"Should have generated IllegalArgumentException\");                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException expected) {\n        }\n    }",
+                "    public void testJira567$catena_1(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        try{ assertEquals(2,n.length);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(Number.class,n.getClass().getComponentType());                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               try{ fail(\"Should have generated IllegalArgumentException\");                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException expected) {\n        }\n    }",
+                "    public void testJira567$catena_2(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        try{ assertEquals(2,n.length);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Number.class,n.getClass().getComponentType());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               fail(\"Should have generated IllegalArgumentException\");                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException expected) {\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testJira567$catena_0(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        assertEquals(2,n.length);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(Number.class,n.getClass().getComponentType());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               try{ fail(\"Should have generated IllegalArgumentException\");                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException expected) {\n        }\n    }",
+                "1": "    public void testJira567$catena_1(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        try{ assertEquals(2,n.length);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(Number.class,n.getClass().getComponentType());                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               try{ fail(\"Should have generated IllegalArgumentException\");                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException expected) {\n        }\n    }",
+                "2": "    public void testJira567$catena_2(){\n        Number[] n;\n        // Valid array construction\n        n = ArrayUtils.addAll(new Number[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n        try{ assertEquals(2,n.length);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Number.class,n.getClass().getComponentType());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try {\n            // Invalid - can't store Long in Integer array\n               n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});\n               fail(\"Should have generated IllegalArgumentException\");                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException expected) {\n        }\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testJira567$catena_1",
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testJira567$catena_0",
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testJira567$catena_2"
+        ]
+    }
+}

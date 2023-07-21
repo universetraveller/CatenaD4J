@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java",
+            "replaced_with": "        upperSpectra = Math.max(upperSpectra, upper);\n",
+            "patch_type": "insert",
+            "next_line_no": 603
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java",
+            "from_line_no": 905,
+            "to_line_no": 906,
+            "replaced_with": "                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {\n                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||\n",
+            "replaced": "                    for (int i = 4 * i0; i < 4 * n0 - 11; i += 4) {\n                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) &&\n",
+            "patch_type": "replace",
+            "next_line_no": 907
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java",
+            "from_line_no": 1543,
+            "to_line_no": 1543,
+            "replaced_with": "                if (end - start > 3) {\n",
+            "replaced": "                if (end - start > 2) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1544
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308"
+        ],
+        "org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308": {
+            "file_path": "src/test/java/org/apache/commons/math/linear/EigenDecompositionImplTest.java",
+            "Instance": "Begin: Pos(112, 12)\nEnd: Pos(143, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Math_81/src/test/java//org/apache/commons/math/linear/EigenDecompositionImplTest.java\nName: testMath308\nChilds: [StatementAssertion<Begin: Pos(139, 13), End: Pos(139, 68)>,\nStatementAssertion<Begin: Pos(140, 13), End: Pos(140, 108)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Math_81/src/test/java//org/apache/commons/math/linear/EigenDecompositionImplTest.java",
+            "name": "testMath308",
+            "begin": "Pos(112, 12)",
+            "end": "Pos(143, 5)",
+            "begin_line_no": 112,
+            "end_line_no": 143,
+            "child": [
+                "Begin: Pos(139, 13)\nEnd: Pos(139, 68)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(140, 13)\nEnd: Pos(140, 108)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testMath308$catena_0() {\n\n        double[] mainTridiagonal = {\n            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437\n        };\n        double[] secondaryTridiagonal = {\n            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225\n        };\n\n        // the reference values have been computed using routine DSTEMR\n        // from the fortran library LAPACK version 3.2.1\n        double[] refEigenValues = {\n            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099\n        };\n        RealVector[] refEigenVectors = {\n            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),\n            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),\n            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),\n            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),\n            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })\n        };\n\n        EigenDecomposition decomposition =\n            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);\n\n        double[] eigenValues = decomposition.getRealEigenvalues();\n        for (int i = 0; i < refEigenValues.length; ++i) {\n            assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);    }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n\n    }",
+                "    public void testMath308$catena_1() {\n\n        double[] mainTridiagonal = {\n            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437\n        };\n        double[] secondaryTridiagonal = {\n            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225\n        };\n\n        // the reference values have been computed using routine DSTEMR\n        // from the fortran library LAPACK version 3.2.1\n        double[] refEigenValues = {\n            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099\n        };\n        RealVector[] refEigenVectors = {\n            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),\n            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),\n            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),\n            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),\n            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })\n        };\n\n        EigenDecomposition decomposition =\n            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);\n\n        double[] eigenValues = decomposition.getRealEigenvalues();\n        for (int i = 0; i < refEigenValues.length; ++i) {\n            try{ assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);         /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n\n    }"
+            ],
+            "func": {
+                "0": "    public void testMath308$catena_0() {\n\n        double[] mainTridiagonal = {\n            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437\n        };\n        double[] secondaryTridiagonal = {\n            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225\n        };\n\n        // the reference values have been computed using routine DSTEMR\n        // from the fortran library LAPACK version 3.2.1\n        double[] refEigenValues = {\n            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099\n        };\n        RealVector[] refEigenVectors = {\n            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),\n            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),\n            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),\n            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),\n            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })\n        };\n\n        EigenDecomposition decomposition =\n            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);\n\n        double[] eigenValues = decomposition.getRealEigenvalues();\n        for (int i = 0; i < refEigenValues.length; ++i) {\n            assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);    }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n\n    }",
+                "1": "    public void testMath308$catena_1() {\n\n        double[] mainTridiagonal = {\n            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437\n        };\n        double[] secondaryTridiagonal = {\n            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225\n        };\n\n        // the reference values have been computed using routine DSTEMR\n        // from the fortran library LAPACK version 3.2.1\n        double[] refEigenValues = {\n            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099\n        };\n        RealVector[] refEigenVectors = {\n            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),\n            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),\n            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),\n            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),\n            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })\n        };\n\n        EigenDecomposition decomposition =\n            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);\n\n        double[] eigenValues = decomposition.getRealEigenvalues();\n        for (int i = 0; i < refEigenValues.length; ++i) {\n            try{ assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);         /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n\n    }"
+            }
+        }
+    }
+}

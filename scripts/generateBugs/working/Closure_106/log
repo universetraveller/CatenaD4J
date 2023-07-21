@@ -1,0 +1,127 @@
+---
+Begin generate bug_id: Closure_106
+num_of_hunks: 3
+use working dir: ./working/data/Closure_106
+Try to checkout Closure_106
+build dir: ['./working/data/Closure_106/build/classes', './working/data/Closure_106/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/GlobalNamespace.java
+trace file: src/com/google/javascript/rhino/JSDocInfoBuilder.java
+trace file: src/com/google/javascript/rhino/JSDocInfoBuilder.java
+trying to replace old failing tests
+edit: replace from 85 range 4 at test/com/google/javascript/jscomp/CheckSideEffectsTest.java
+to
+  public void testJSDocComments$catena_0() {
+    test("function A() { /** This is a jsdoc comment */ this.foo; }", ok);                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("function A() { /* This is a normal comment */ this.foo; }", e);                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testJSDocComments$catena_1() {
+    try{ test("function A() { /** This is a jsdoc comment */ this.foo; }", ok);                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("function A() { /* This is a normal comment */ this.foo; }", e);                                   /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/CheckSideEffectsTest.java
+new test num: 2
+ori test num: 3
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 104.44 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments$catena_0
+	com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing
+	com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign
+	com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator
+pattern: 001
+try to fix hunk: 2
+delete from 191 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+delete from 189 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 100
+try to fix hunk: 0
+insert before 907 with       Preconditions.checkNotNull(declaration);
+      if (declaration.getTwin() != null) {
+        return false;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 96.56 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments$catena_0
+No new failing tests but only 1 hunk
+pattern: 011
+try to fix hunk: 1
+delete from 189 with range 1
+try to fix hunk: 2
+delete from 191 with range 1
+patches are written to file
+running tests...
+used time: Finished in 98.47 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing
+	com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign
+	com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator
+Can independently fix ['com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments$catena_0']
+select new bug
+Pattern: 011
+failing tests: com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments$catena_0
+pattern: 101
+try to fix hunk: 0
+insert before 907 with       Preconditions.checkNotNull(declaration);
+      if (declaration.getTwin() != null) {
+        return false;
+      }
+
+try to fix hunk: 2
+delete from 191 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+insert before 907 with       Preconditions.checkNotNull(declaration);
+      if (declaration.getTwin() != null) {
+        return false;
+      }
+
+try to fix hunk: 1
+delete from 189 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+insert before 907 with       Preconditions.checkNotNull(declaration);
+      if (declaration.getTwin() != null) {
+        return false;
+      }
+
+try to fix hunk: 1
+delete from 189 with range 1
+try to fix hunk: 2
+delete from 191 with range 1
+patches are written to file
+running tests...
+used time: Finished in 93.37 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 1 new bugs

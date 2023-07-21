@@ -1,0 +1,89 @@
+---
+Begin generate bug_id: Chart_5
+num_of_hunks: 2
+use working dir: ./working/data/Chart_5
+Try to checkout Chart_5
+build dir: ['./working/data/Chart_5/build', './working/data/Chart_5/build-tests']
+init FileManager
+trace file: source/org/jfree/data/xy/XYSeries.java
+trace file: source/org/jfree/data/xy/XYSeries.java
+trying to replace old failing tests
+edit: replace from 476 range 8 at tests/org/jfree/data/xy/junit/XYSeriesTests.java
+to
+    public void testBug1955483$catena_0() {
+        XYSeries series = new XYSeries("Series", true, true);
+        series.addOrUpdate(1.0, 1.0);
+        series.addOrUpdate(1.0, 2.0);
+        assertEquals(new Double(1.0), series.getY(0));                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug1955483$catena_1() {
+        XYSeries series = new XYSeries("Series", true, true);
+        series.addOrUpdate(1.0, 1.0);
+        series.addOrUpdate(1.0, 2.0);
+        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Double(2.0), series.getY(1));                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug1955483$catena_2() {
+        XYSeries series = new XYSeries("Series", true, true);
+        series.addOrUpdate(1.0, 1.0);
+        series.addOrUpdate(1.0, 2.0);
+        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, series.getItemCount());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: tests/org/jfree/data/xy/junit/XYSeriesTests.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 52.47 seconds
+Failing tests: 3
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_0
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_1
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_2
+pattern: 01
+try to fix hunk: 1
+replace from 548 with range 1 to
+        if (index >= 0) {
+
+patches are written to file
+running tests...
+used time: Finished in 32.11 seconds
+Failing tests: 4
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_0
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_1
+	org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_2
+	org.jfree.data.xy.junit.XYSeriesTests::testAddOrUpdate3
+Includes new failing tests, set to unusable
+pattern: 10
+try to fix hunk: 0
+insert before 544 with         if (this.allowDuplicateXValues) {
+            add(x, y);
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 31.00 seconds
+Failing tests: 0
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 544 with         if (this.allowDuplicateXValues) {
+            add(x, y);
+            return null;
+        }
+
+try to fix hunk: 1
+replace from 548 with range 1 to
+        if (index >= 0) {
+
+patches are written to file
+running tests...
+used time: Finished in 31.90 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

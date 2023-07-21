@@ -1,0 +1,77 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/joda/time/format/DateTimeFormatter.java",
+            "replaced_with": "        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n",
+            "patch_type": "insert",
+            "next_line_no": 708
+        },
+        "1": {
+            "file_name": "src/main/java/org/joda/time/format/DateTimeFormatter.java",
+            "from_line_no": 710,
+            "to_line_no": 710,
+            "replaced": "        int defaultYear = chrono.year().get(instantLocal);\n",
+            "patch_type": "delete",
+            "next_line_no": 711
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_newYork_startOfYear",
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_tokyo_endOfYear"
+        ],
+        "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_newYork_startOfYear": {
+            "file_path": "src/test/java/org/joda/time/format/TestDateTimeFormatter.java",
+            "Instance": "Begin: Pos(929, 12)\nEnd: Pos(934, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_7/src/test/java//org/joda/time/format/TestDateTimeFormatter.java\nName: testParseInto_monthDay_feb29_newYork_startOfYear\nChilds: [StatementAssertion<Begin: Pos(932, 9), End: Pos(932, 56)>,\nStatementAssertion<Begin: Pos(933, 9), End: Pos(933, 84)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_7/src/test/java//org/joda/time/format/TestDateTimeFormatter.java",
+            "name": "testParseInto_monthDay_feb29_newYork_startOfYear",
+            "begin": "Pos(929, 12)",
+            "end": "Pos(934, 5)",
+            "begin_line_no": 929,
+            "end_line_no": 934,
+            "child": [
+                "Begin: Pos(932, 9)\nEnd: Pos(932, 56)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(933, 9)\nEnd: Pos(933, 84)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testParseInto_monthDay_feb29_newYork_startOfYear$catena_0() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 1, 1, 0, 0, 0, 0, NEWYORK);\n        assertEquals(4, f.parseInto(result, \"2 29\", 0));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0, NEWYORK), result);                   }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testParseInto_monthDay_feb29_newYork_startOfYear$catena_1() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 1, 1, 0, 0, 0, 0, NEWYORK);\n        try{ assertEquals(4, f.parseInto(result, \"2 29\", 0));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0, NEWYORK), result);                        /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testParseInto_monthDay_feb29_newYork_startOfYear$catena_0() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 1, 1, 0, 0, 0, 0, NEWYORK);\n        assertEquals(4, f.parseInto(result, \"2 29\", 0));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0, NEWYORK), result);                   }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testParseInto_monthDay_feb29_newYork_startOfYear$catena_1() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 1, 1, 0, 0, 0, 0, NEWYORK);\n        try{ assertEquals(4, f.parseInto(result, \"2 29\", 0));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0, NEWYORK), result);                        /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_tokyo_endOfYear": {
+            "file_path": "src/test/java/org/joda/time/format/TestDateTimeFormatter.java",
+            "Instance": "Begin: Pos(957, 12)\nEnd: Pos(962, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_7/src/test/java//org/joda/time/format/TestDateTimeFormatter.java\nName: testParseInto_monthDay_feb29_tokyo_endOfYear\nChilds: [StatementAssertion<Begin: Pos(960, 9), End: Pos(960, 56)>,\nStatementAssertion<Begin: Pos(961, 9), End: Pos(961, 87)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_7/src/test/java//org/joda/time/format/TestDateTimeFormatter.java",
+            "name": "testParseInto_monthDay_feb29_tokyo_endOfYear",
+            "begin": "Pos(957, 12)",
+            "end": "Pos(962, 5)",
+            "begin_line_no": 957,
+            "end_line_no": 962,
+            "child": [
+                "Begin: Pos(960, 9)\nEnd: Pos(960, 56)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(961, 9)\nEnd: Pos(961, 87)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testParseInto_monthDay_feb29_tokyo_endOfYear$catena_0() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 12, 31, 23, 59, 59, 999, TOKYO);\n        assertEquals(4, f.parseInto(result, \"2 29\", 0));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new MutableDateTime(2004, 2, 29, 23, 59, 59, 999, TOKYO), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testParseInto_monthDay_feb29_tokyo_endOfYear$catena_1() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 12, 31, 23, 59, 59, 999, TOKYO);\n        try{ assertEquals(4, f.parseInto(result, \"2 29\", 0));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new MutableDateTime(2004, 2, 29, 23, 59, 59, 999, TOKYO), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testParseInto_monthDay_feb29_tokyo_endOfYear$catena_0() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 12, 31, 23, 59, 59, 999, TOKYO);\n        assertEquals(4, f.parseInto(result, \"2 29\", 0));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new MutableDateTime(2004, 2, 29, 23, 59, 59, 999, TOKYO), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testParseInto_monthDay_feb29_tokyo_endOfYear$catena_1() {\n        DateTimeFormatter f = DateTimeFormat.forPattern(\"M d\").withLocale(Locale.UK);\n        MutableDateTime result = new MutableDateTime(2004, 12, 31, 23, 59, 59, 999, TOKYO);\n        try{ assertEquals(4, f.parseInto(result, \"2 29\", 0));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new MutableDateTime(2004, 2, 29, 23, 59, 59, 999, TOKYO), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_newYork_startOfYear$catena_0",
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_tokyo_endOfYear$catena_0",
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_tokyo_endOfYear$catena_1",
+            "org.joda.time.format.TestDateTimeFormatter::testParseInto_monthDay_feb29_newYork_startOfYear$catena_1"
+        ]
+    }
+}

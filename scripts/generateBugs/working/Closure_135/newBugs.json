@@ -1,0 +1,70 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/DevirtualizePrototypeMethods.java",
+            "replaced_with": "        newName.setJSType(child.getJSType());\n",
+            "patch_type": "insert",
+            "next_line_no": 362
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
+            "replaced_with": "  @Override\n  public boolean hasOwnProperty(String name) {\n    return super.hasOwnProperty(name) || \"prototype\".equals(name);\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 412
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
+            "replaced_with": "        if (objType.equals(prototype)) {\n          return true;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 472
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.DevirtualizePrototypeMethodsTest::testRewritePrototypeMethods2",
+            "com.google.javascript.jscomp.TypeCheckTest::testGoodExtends9"
+        ],
+        "com.google.javascript.jscomp.DevirtualizePrototypeMethodsTest::testRewritePrototypeMethods2": {
+            "file_path": "test/com/google/javascript/jscomp/DevirtualizePrototypeMethodsTest.java",
+            "check": [
+                "Use pattern matching: .enableTypeCheck",
+                "Use pattern matching: .checkTypes"
+            ],
+            "Instance": "Begin: Pos(141, 10)\nEnd: Pos(147, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_135/test//com/google/javascript/jscomp/DevirtualizePrototypeMethodsTest.java\nName: testRewritePrototypeMethods2\nChilds: [StatementAssertion<Begin: Pos(143, 5), End: Pos(143, 38)>,\nStatementAssertion<Begin: Pos(144, 5), End: Pos(146, 74)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_135/test//com/google/javascript/jscomp/DevirtualizePrototypeMethodsTest.java",
+            "name": "testRewritePrototypeMethods2",
+            "begin": "Pos(141, 10)",
+            "end": "Pos(147, 3)",
+            "begin_line_no": 141,
+            "end_line_no": 147,
+            "child": [
+                "Begin: Pos(143, 5)\nEnd: Pos(143, 38)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(144, 5)\nEnd: Pos(146, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testRewritePrototypeMethods2$catena_0() throws Exception {\n    // type checking on\n    enableTypeCheck(CheckLevel.ERROR);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ checkTypes(RewritePrototypeMethodTestInput.INPUT,\n               RewritePrototypeMethodTestInput.EXPECTED,\n               RewritePrototypeMethodTestInput.EXPECTED_TYPE_CHECKING_ON);                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testRewritePrototypeMethods2$catena_1() throws Exception {\n    // type checking on\n    try{ enableTypeCheck(CheckLevel.ERROR);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    checkTypes(RewritePrototypeMethodTestInput.INPUT,\n               RewritePrototypeMethodTestInput.EXPECTED,\n               RewritePrototypeMethodTestInput.EXPECTED_TYPE_CHECKING_ON);                                  /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testRewritePrototypeMethods2$catena_0() throws Exception {\n    // type checking on\n    enableTypeCheck(CheckLevel.ERROR);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ checkTypes(RewritePrototypeMethodTestInput.INPUT,\n               RewritePrototypeMethodTestInput.EXPECTED,\n               RewritePrototypeMethodTestInput.EXPECTED_TYPE_CHECKING_ON);                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testRewritePrototypeMethods2$catena_1() throws Exception {\n    // type checking on\n    try{ enableTypeCheck(CheckLevel.ERROR);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    checkTypes(RewritePrototypeMethodTestInput.INPUT,\n               RewritePrototypeMethodTestInput.EXPECTED,\n               RewritePrototypeMethodTestInput.EXPECTED_TYPE_CHECKING_ON);                                  /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.TypeCheckTest::testGoodExtends9": {
+            "file_path": "test/com/google/javascript/jscomp/TypeCheckTest.java",
+            "Instance": "Begin: Pos(2635, 10)\nEnd: Pos(2642, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_135/test//com/google/javascript/jscomp/TypeCheckTest.java\nName: testGoodExtends9\nChilds: [StatementAssertion<Begin: Pos(2636, 5), End: Pos(2641, 63)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_135/test//com/google/javascript/jscomp/TypeCheckTest.java",
+            "name": "testGoodExtends9",
+            "begin": "Pos(2635, 10)",
+            "end": "Pos(2642, 3)",
+            "begin_line_no": 2635,
+            "end_line_no": 2642,
+            "child": [
+                "Begin: Pos(2636, 5)\nEnd: Pos(2641, 63)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    }
+}

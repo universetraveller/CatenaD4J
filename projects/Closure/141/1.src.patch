@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/com/google/javascript/jscomp/PureFunctionIdentifier.java",
+            "replaced_with": "    if (NodeUtil.isGetProp(name) || NodeUtil.isName(name)) {\n",
+            "patch_type": "insert",
+            "next_line_no": 177
+        },
+        {
+            "file_name": "src/com/google/javascript/jscomp/PureFunctionIdentifier.java",
+            "replaced_with": "    } else if (name.getType() == Token.OR || name.getType() == Token.HOOK) {\n      Node firstVal;\n      if (name.getType() == Token.HOOK) {\n        firstVal = name.getFirstChild().getNext();\n      } else {\n        firstVal = name.getFirstChild();\n      }\n\n      Collection<Definition> defs1 = getCallableDefinitions(definitionProvider,\n                                                            firstVal);\n      Collection<Definition> defs2 = getCallableDefinitions(definitionProvider,\n                                                            firstVal.getNext());\n      if (defs1 != null && defs2 != null) {\n        defs1.addAll(defs2);\n        return defs1;\n      } else {\n        return null;\n      }\n    } else {\n      return null;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 198
+        }
+    ]
+}

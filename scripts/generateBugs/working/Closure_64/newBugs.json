@@ -1,0 +1,73 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "from_line_no": 1432,
+            "to_line_no": 1432,
+            "replaced_with": "        String code = toSource(root, sourceMap, inputSeqNum == 0);\n",
+            "replaced": "        String code = toSource(root, sourceMap);\n",
+            "patch_type": "replace",
+            "next_line_no": 1433
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "from_line_no": 1461,
+            "to_line_no": 1461,
+            "replaced_with": "    return toSource(n, null, true);\n",
+            "replaced": "    return toSource(n, null);\n",
+            "patch_type": "replace",
+            "next_line_no": 1462
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "from_line_no": 1467,
+            "to_line_no": 1467,
+            "replaced_with": "  private String toSource(Node n, SourceMap sourceMap, boolean firstOutput) {\n",
+            "replaced": "  private String toSource(Node n, SourceMap sourceMap) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1468
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "from_line_no": 1473,
+            "to_line_no": 1473,
+            "replaced_with": "    builder.setTagAsStrict(firstOutput &&\n",
+            "replaced": "    builder.setTagAsStrict(\n",
+            "patch_type": "replace",
+            "next_line_no": 1474
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CommandLineRunnerTest::testES5StrictUseStrictMultipleInputs"
+        ],
+        "com.google.javascript.jscomp.CommandLineRunnerTest::testES5StrictUseStrictMultipleInputs": {
+            "file_path": "test/com/google/javascript/jscomp/CommandLineRunnerTest.java",
+            "Instance": "Begin: Pos(797, 10)\nEnd: Pos(804, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_64/test//com/google/javascript/jscomp/CommandLineRunnerTest.java\nName: testES5StrictUseStrictMultipleInputs\nChilds: [StatementAssertion<Begin: Pos(802, 5), End: Pos(802, 64)>,\nStatementAssertion<Begin: Pos(803, 5), End: Pos(803, 73)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_64/test//com/google/javascript/jscomp/CommandLineRunnerTest.java",
+            "name": "testES5StrictUseStrictMultipleInputs",
+            "begin": "Pos(797, 10)",
+            "end": "Pos(804, 3)",
+            "begin_line_no": 797,
+            "end_line_no": 804,
+            "child": [
+                "Begin: Pos(802, 5)\nEnd: Pos(802, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(803, 5)\nEnd: Pos(803, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testES5StrictUseStrictMultipleInputs$catena_0() {\n    args.add(\"--language_in=ECMASCRIPT5_STRICT\");\n    Compiler compiler = compile(new String[] {\"var x = f.function\",\n        \"var y = f.function\", \"var z = f.function\"});\n    String outputSource = compiler.toSource();\n    assertEquals(\"'use strict'\", outputSource.substring(0, 12));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(outputSource.substring(13).indexOf(\"'use strict'\"), -1);                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testES5StrictUseStrictMultipleInputs$catena_1() {\n    args.add(\"--language_in=ECMASCRIPT5_STRICT\");\n    Compiler compiler = compile(new String[] {\"var x = f.function\",\n        \"var y = f.function\", \"var z = f.function\"});\n    String outputSource = compiler.toSource();\n    try{ assertEquals(\"'use strict'\", outputSource.substring(0, 12));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(outputSource.substring(13).indexOf(\"'use strict'\"), -1);                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testES5StrictUseStrictMultipleInputs$catena_0() {\n    args.add(\"--language_in=ECMASCRIPT5_STRICT\");\n    Compiler compiler = compile(new String[] {\"var x = f.function\",\n        \"var y = f.function\", \"var z = f.function\"});\n    String outputSource = compiler.toSource();\n    assertEquals(\"'use strict'\", outputSource.substring(0, 12));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(outputSource.substring(13).indexOf(\"'use strict'\"), -1);                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testES5StrictUseStrictMultipleInputs$catena_1() {\n    args.add(\"--language_in=ECMASCRIPT5_STRICT\");\n    Compiler compiler = compile(new String[] {\"var x = f.function\",\n        \"var y = f.function\", \"var z = f.function\"});\n    String outputSource = compiler.toSource();\n    try{ assertEquals(\"'use strict'\", outputSource.substring(0, 12));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(outputSource.substring(13).indexOf(\"'use strict'\"), -1);                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "1111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CommandLineRunnerTest::testES5StrictUseStrictMultipleInputs$catena_1"
+        ]
+    }
+}

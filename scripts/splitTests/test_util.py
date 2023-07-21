@@ -163,6 +163,31 @@ def test_parse_ending_point_1():
     end = util.Pos(1189, 49)
     node = util._node_of_pos(tree1, beg)
     assertEquals(end, util.parse_ending_point(beg, sep1, util.least_pos_of_node(node)))
+def test_parse_ending_point_2():
+    with open('./test_resource/code_pedp', 'r') as f:
+        f = f.read()
+    tokens = util.tokenize_java_code(f)
+    tree = util.code_to_AST(f)
+    beg = util.Pos(130, 5)
+    assertEquals(util.Pos(130, 44), util.parse_ending_point(beg, tokens, util.least_pos_of_node(util._node_of_pos(tree, beg))))
+    beg = util.Pos(85, 5)
+    assertEquals(util.Pos(85, 45), util.parse_ending_point(beg, tokens, util.least_pos_of_node(util._node_of_pos(tree, beg))))
+# this bug is for javalang tokenizer's pre_tokenize() converting escaping characters
+def test_parse_ending_point_3():
+    with open('./test_resource/code_pedp1', 'r') as f:
+        f = f.read()
+    jlc = util.convert_to_javalang_code(f).splitlines()
+    orc = f.splitlines()
+    tokens = util.tokenize_java_code(f)
+    tree = util.code_to_AST(f)
+    beg = util.Pos(71, 5)
+    pos = util.parse_ending_point(beg, tokens, util.least_pos_of_node(util._node_of_pos(tree, beg)))
+    util.map_pos(orc, jlc, pos)
+    assertEquals(util.Pos(71, 32), pos)
+    beg = util.Pos(72, 5)
+    pos = util.parse_ending_point(beg, tokens, util.least_pos_of_node(util._node_of_pos(tree, beg)))
+    util.map_pos(orc, jlc, pos)
+    assertEquals(util.Pos(72, 33), pos)
 def test_catch_block():
     with open('./test_resource/code1.java', 'r') as f:
         code1 = f.read()
@@ -249,6 +274,31 @@ def test_insert_at_pos():
     assertListEquals(inserted.splitlines(), util.insert_at_pos('0', util.Pos(2, 16),  testStr.splitlines()))
     assertEquals(inserted, util.insert_at_pos('0', util.Pos(2, 15), testStr, True))
     assertListEquals(inserted.splitlines(), util.insert_at_pos('0', util.Pos(2, 15),  testStr.splitlines(), True))
+def test_insert_at_pos_1():
+    with open('./test_resource/code_pedp', 'r') as f:
+        f = f.read()
+    tokens = util.tokenize_java_code(f)
+    tree = util.code_to_AST(f)
+    beg = util.Pos(85, 5)
+    assertEquals(util.Pos(85, 45), util.parse_ending_point(beg, tokens, util.least_pos_of_node(util._node_of_pos(tree, beg))))
+    f = f.splitlines()
+    newf = util.insert_at_pos('}catch(Throwable __SHOULD_BE_IGNORED){}', util.Pos(85, 45), f, True)
+    assertEquals('    fold("x = [\'a\'].join(\',\')", "x = \\"a\\"");}catch(Throwable __SHOULD_BE_IGNORED){}', newf[84])
+def test_get_char():
+    testStr = '''for i in range(5):
+        print(1)
+        print(i)'''
+    assertEquals('f', util.get_char(testStr.splitlines(), util.Pos(1, 1)))
+    assertEquals(' ', util.get_char(testStr.splitlines(), util.Pos(2, 1)))
+    assertEquals('p', util.get_char(testStr.splitlines(), util.Pos(2, 9)))
+    assertEquals('1', util.get_char(testStr.splitlines(), util.Pos(2, 15)))
+    assertEquals(')', util.get_char(testStr.splitlines(), util.Pos(2, 16)))
+    assertEquals('i', util.get_char(testStr.splitlines(), util.Pos(3, 15)))
+    try:
+        util.get_char(testStr.splitlines(), util.Pos(0, 0))
+        fail('Should raise IndexError')
+    except IndexError:
+        pass
 from inspect import isfunction
 import traceback
 def run_tests():

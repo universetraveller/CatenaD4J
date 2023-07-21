@@ -1,0 +1,601 @@
+---
+Begin generate bug_id: Math_67
+num_of_hunks: 2
+use working dir: ./working/data/Math_67
+Try to checkout Math_67
+build dir: ['./working/data/Math_67/target/classes', './working/data/Math_67/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizer.java
+trace file: src/main/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizer.java
+trying to replace old failing tests
+edit: replace from 55 range 46 at src/test/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizerTest.java
+to
+    @Test
+    public void testQuinticMin$catena_0() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            fail("an exception should have been thrown");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_1() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            fail("wrong exception caught");                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_2() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            fail("an exception should have been thrown");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_3() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            fail("wrong exception caught");                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_4() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_5() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_6() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_7() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_8() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        assertTrue(minimizer.getEvaluations()    >= 510);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_9() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(minimizer.getEvaluations()    <= 530);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_10() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(minimizer.getIterationCount() >= 150);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(minimizer.getIterationCount() <= 170);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testQuinticMin$catena_11() throws MathException {
+        // The quintic function has zeros at 0, +-0.5 and +-1.
+        // The function has extrema (first derivative is zero) at 0.27195613 and 0.82221643,
+        UnivariateRealFunction f = new QuinticFunction();
+        UnivariateRealOptimizer underlying = new BrentOptimizer();
+        JDKRandomGenerator g = new JDKRandomGenerator();
+        g.setSeed(4312000053l);
+        MultiStartUnivariateRealOptimizer minimizer =
+            new MultiStartUnivariateRealOptimizer(underlying, 5, g);
+        minimizer.setAbsoluteAccuracy(10 * minimizer.getAbsoluteAccuracy());
+        minimizer.setRelativeAccuracy(10 * minimizer.getRelativeAccuracy());
+
+        try {
+            minimizer.getOptima();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            minimizer.getOptimaValues();
+            try{ fail("an exception should have been thrown");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalStateException ise) {
+            // expected
+        } catch (Exception e) {
+            try{ fail("wrong exception caught");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertEquals(-0.27195612846834, minimizer.optimize(f, GoalType.MINIMIZE, -0.3, -0.2), 1.0e-13);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.27195612846834, minimizer.getResult(), 1.0e-13);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-0.04433426954946, minimizer.getFunctionValue(), 1.0e-13);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        double[] optima = minimizer.getOptima();
+        double[] optimaValues = minimizer.getOptimaValues();
+        for (int i = 0; i < optima.length; ++i) {
+            try{ assertEquals(f.value(optima[i]), optimaValues[i], 1.0e-10);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try{ assertTrue(minimizer.getEvaluations()    >= 510);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getEvaluations()    <= 530);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(minimizer.getIterationCount() >= 150);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(minimizer.getIterationCount() <= 170);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizerTest.java
+new test num: 12
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 39.88 seconds
+Failing tests: 2
+	org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin$catena_5
+	org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin$catena_6
+pattern: 01
+try to fix hunk: 1
+replace from 97 with range 1 to
+        return optima[0];
+
+patches are written to file
+running tests...
+used time: Finished in 30.87 seconds
+Failing tests: 1
+	org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin$catena_6
+No new failing tests but only 1 hunk
+pattern: 10
+try to fix hunk: 0
+replace from 92 with range 1 to
+        return optimaValues[0];
+
+patches are written to file
+running tests...
+used time: Finished in 33.82 seconds
+Failing tests: 1
+	org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin$catena_5
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+replace from 92 with range 1 to
+        return optimaValues[0];
+
+try to fix hunk: 1
+replace from 97 with range 1 to
+        return optima[0];
+
+patches are written to file
+running tests...
+used time: Finished in 31.47 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

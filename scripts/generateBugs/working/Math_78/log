@@ -1,0 +1,296 @@
+---
+Begin generate bug_id: Math_78
+num_of_hunks: 3
+use working dir: ./working/data/Math_78
+Try to checkout Math_78
+build dir: ['./working/data/Math_78/target/classes', './working/data/Math_78/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/ode/events/EventState.java
+trace file: src/main/java/org/apache/commons/math/ode/events/EventState.java
+trace file: src/main/java/org/apache/commons/math/ode/events/EventState.java
+trying to replace old failing tests
+edit: replace from 31 range 39 at src/test/java/org/apache/commons/math/ode/events/EventStateTest.java
+to
+    @Test
+    public void closeEvents$catena_0()
+        throws EventException, ConvergenceException, DerivativeException {
+
+        final double r1  = 90.0;
+        final double r2  = 135.0;
+        final double gap = r2 - r1;
+        EventHandler closeEventsGenerator = new EventHandler() {
+            public void resetState(double t, double[] y) {
+            }
+            public double g(double t, double[] y) {
+                return (t - r1) * (r2 - t);
+            }
+            public int eventOccurred(double t, double[] y, boolean increasing) {
+                return CONTINUE;
+            }
+        };
+
+        final double tolerance = 0.1;
+        EventState es = new EventState(closeEventsGenerator, 1.5 * gap, tolerance, 10);
+
+        double t0 = r1 - 0.5 * gap;
+        es.reinitializeBegin(t0, new double[0]);
+        AbstractStepInterpolator interpolator =
+            new DummyStepInterpolator(new double[0], true);
+        interpolator.storeTime(t0);
+
+        interpolator.shift();
+        interpolator.storeTime(0.5 * (r1 + r2));
+        Assert.assertTrue(es.evaluateStep(interpolator));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals(r1, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        es.stepAccepted(es.getEventTime(), new double[0]);
+
+        interpolator.shift();
+        interpolator.storeTime(r2 + 0.4 * gap);
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals(r2, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void closeEvents$catena_1()
+        throws EventException, ConvergenceException, DerivativeException {
+
+        final double r1  = 90.0;
+        final double r2  = 135.0;
+        final double gap = r2 - r1;
+        EventHandler closeEventsGenerator = new EventHandler() {
+            public void resetState(double t, double[] y) {
+            }
+            public double g(double t, double[] y) {
+                return (t - r1) * (r2 - t);
+            }
+            public int eventOccurred(double t, double[] y, boolean increasing) {
+                return CONTINUE;
+            }
+        };
+
+        final double tolerance = 0.1;
+        EventState es = new EventState(closeEventsGenerator, 1.5 * gap, tolerance, 10);
+
+        double t0 = r1 - 0.5 * gap;
+        es.reinitializeBegin(t0, new double[0]);
+        AbstractStepInterpolator interpolator =
+            new DummyStepInterpolator(new double[0], true);
+        interpolator.storeTime(t0);
+
+        interpolator.shift();
+        interpolator.storeTime(0.5 * (r1 + r2));
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals(r1, es.getEventTime(), tolerance);                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        es.stepAccepted(es.getEventTime(), new double[0]);
+
+        interpolator.shift();
+        interpolator.storeTime(r2 + 0.4 * gap);
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals(r2, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void closeEvents$catena_2()
+        throws EventException, ConvergenceException, DerivativeException {
+
+        final double r1  = 90.0;
+        final double r2  = 135.0;
+        final double gap = r2 - r1;
+        EventHandler closeEventsGenerator = new EventHandler() {
+            public void resetState(double t, double[] y) {
+            }
+            public double g(double t, double[] y) {
+                return (t - r1) * (r2 - t);
+            }
+            public int eventOccurred(double t, double[] y, boolean increasing) {
+                return CONTINUE;
+            }
+        };
+
+        final double tolerance = 0.1;
+        EventState es = new EventState(closeEventsGenerator, 1.5 * gap, tolerance, 10);
+
+        double t0 = r1 - 0.5 * gap;
+        es.reinitializeBegin(t0, new double[0]);
+        AbstractStepInterpolator interpolator =
+            new DummyStepInterpolator(new double[0], true);
+        interpolator.storeTime(t0);
+
+        interpolator.shift();
+        interpolator.storeTime(0.5 * (r1 + r2));
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals(r1, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        es.stepAccepted(es.getEventTime(), new double[0]);
+
+        interpolator.shift();
+        interpolator.storeTime(r2 + 0.4 * gap);
+        Assert.assertTrue(es.evaluateStep(interpolator));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals(r2, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void closeEvents$catena_3()
+        throws EventException, ConvergenceException, DerivativeException {
+
+        final double r1  = 90.0;
+        final double r2  = 135.0;
+        final double gap = r2 - r1;
+        EventHandler closeEventsGenerator = new EventHandler() {
+            public void resetState(double t, double[] y) {
+            }
+            public double g(double t, double[] y) {
+                return (t - r1) * (r2 - t);
+            }
+            public int eventOccurred(double t, double[] y, boolean increasing) {
+                return CONTINUE;
+            }
+        };
+
+        final double tolerance = 0.1;
+        EventState es = new EventState(closeEventsGenerator, 1.5 * gap, tolerance, 10);
+
+        double t0 = r1 - 0.5 * gap;
+        es.reinitializeBegin(t0, new double[0]);
+        AbstractStepInterpolator interpolator =
+            new DummyStepInterpolator(new double[0], true);
+        interpolator.storeTime(t0);
+
+        interpolator.shift();
+        interpolator.storeTime(0.5 * (r1 + r2));
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals(r1, es.getEventTime(), tolerance);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        es.stepAccepted(es.getEventTime(), new double[0]);
+
+        interpolator.shift();
+        interpolator.storeTime(r2 + 0.4 * gap);
+        try{ Assert.assertTrue(es.evaluateStep(interpolator));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals(r2, es.getEventTime(), tolerance);                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/apache/commons/math/ode/events/EventStateTest.java
+new test num: 4
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 34.88 seconds
+Failing tests: 2
+	org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_2
+	org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_3
+pattern: 001
+try to fix hunk: 2
+insert before 199 with                             throw MathRuntimeException.createInternalError(null);
+                        }
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 010
+try to fix hunk: 1
+insert before 198 with                         final double epsilon = (forward ? 0.25 : -0.25) * convergence;
+                        for (int k = 0; (k < 4) && (ga * gb > 0); ++k) {
+                            ta += epsilon;
+                            interpolator.setInterpolatedTime(ta);
+                            ga = handler.g(ta, interpolator.getInterpolatedState());
+                        }
+                        if (ga * gb > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 100
+try to fix hunk: 0
+insert before 191 with                     if (ga * gb > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 011
+try to fix hunk: 1
+insert before 198 with                         final double epsilon = (forward ? 0.25 : -0.25) * convergence;
+                        for (int k = 0; (k < 4) && (ga * gb > 0); ++k) {
+                            ta += epsilon;
+                            interpolator.setInterpolatedTime(ta);
+                            ga = handler.g(ta, interpolator.getInterpolatedState());
+                        }
+                        if (ga * gb > 0) {
+
+try to fix hunk: 2
+insert before 199 with                             throw MathRuntimeException.createInternalError(null);
+                        }
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 101
+try to fix hunk: 0
+insert before 191 with                     if (ga * gb > 0) {
+
+try to fix hunk: 2
+insert before 199 with                             throw MathRuntimeException.createInternalError(null);
+                        }
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 110
+try to fix hunk: 0
+insert before 191 with                     if (ga * gb > 0) {
+
+try to fix hunk: 1
+insert before 198 with                         final double epsilon = (forward ? 0.25 : -0.25) * convergence;
+                        for (int k = 0; (k < 4) && (ga * gb > 0); ++k) {
+                            ta += epsilon;
+                            interpolator.setInterpolatedTime(ta);
+                            ga = handler.g(ta, interpolator.getInterpolatedState());
+                        }
+                        if (ga * gb > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 111
+try to fix hunk: 0
+insert before 191 with                     if (ga * gb > 0) {
+
+try to fix hunk: 1
+insert before 198 with                         final double epsilon = (forward ? 0.25 : -0.25) * convergence;
+                        for (int k = 0; (k < 4) && (ga * gb > 0); ++k) {
+                            ta += epsilon;
+                            interpolator.setInterpolatedTime(ta);
+                            ga = handler.g(ta, interpolator.getInterpolatedState());
+                        }
+                        if (ga * gb > 0) {
+
+try to fix hunk: 2
+insert before 199 with                             throw MathRuntimeException.createInternalError(null);
+                        }
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 35.41 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_2', 'org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_3']
+select new bug
+Pattern: 111
+failing tests: org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_2@org.apache.commons.math.ode.events.EventStateTest::closeEvents$catena_3
+Find 1 new bugs

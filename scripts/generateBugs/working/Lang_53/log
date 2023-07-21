@@ -1,0 +1,679 @@
+---
+Begin generate bug_id: Lang_53
+num_of_hunks: 4
+use working dir: ./working/data/Lang_53
+Try to checkout Lang_53
+build dir: ['./working/data/Lang_53/target/classes', './working/data/Lang_53/target/tests']
+init FileManager
+trace file: src/java/org/apache/commons/lang/time/DateUtils.java
+trace file: src/java/org/apache/commons/lang/time/DateUtils.java
+trace file: src/java/org/apache/commons/lang/time/DateUtils.java
+trace file: src/java/org/apache/commons/lang/time/DateUtils.java
+trying to replace old failing tests
+edit: replace from 705 range 58 at src/test/org/apache/commons/lang/time/DateUtilsTest.java
+to
+    public void testRoundLang346$catena_0() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_1() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_2() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_3() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_4() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_5() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_6() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundLang346$catena_7() throws Exception
+    {
+        TimeZone.setDefault(defaultZone);
+        dateTimeParser.setTimeZone(defaultZone);
+        Calendar testCalendar = Calendar.getInstance();
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        Date date = testCalendar.getTime();
+        try{ assertEquals("Minute Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 08:09:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        date = testCalendar.getTime();
+        try{ assertEquals("Minute No Round Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:00.000"),
+                     DateUtils.round(date, Calendar.MINUTE));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+
+        try{ assertEquals("Second Round Up with 600 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:51.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:50.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 600);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Up with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:21.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 20);
+        testCalendar.set(Calendar.MILLISECOND, 200);
+        date = testCalendar.getTime();
+        try{ assertEquals("Second Round Down with 200 Milli Seconds Failed",
+                     dateTimeParser.parse("July 2, 2007 08:08:20.000"),
+                     DateUtils.round(date, Calendar.SECOND));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 8, 50);
+        date = testCalendar.getTime();
+        try{ assertEquals("Hour Round Down Failed",
+                     dateTimeParser.parse("July 2, 2007 08:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        testCalendar.set(2007, 6, 2, 8, 31, 50);
+        date = testCalendar.getTime();
+        assertEquals("Hour Round Up Failed",
+                     dateTimeParser.parse("July 2, 2007 09:00:00.000"),
+                     DateUtils.round(date, Calendar.HOUR));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/lang/time/DateUtilsTest.java
+new test num: 8
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 28.17 seconds
+Failing tests: 3
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_2
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_4
+pattern: 0001
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0010
+try to fix hunk: 2
+insert before 652 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0100
+try to fix hunk: 1
+delete from 645 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1000
+try to fix hunk: 0
+insert before 643 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0011
+try to fix hunk: 2
+insert before 652 with         }
+
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.46 seconds
+Failing tests: 2
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_2
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_4
+Can independently fix ['org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0']
+select new bug
+Pattern: 0011
+failing tests: org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0
+pattern: 0101
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0110
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 2
+insert before 652 with         }
+
+patches are written to file
+running tests...
+used time: Finished in 20.01 seconds
+Failing tests: 2
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_2
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_4
+Can independently fix ['org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0']
+select new bug
+Pattern: 0110
+failing tests: org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0
+pattern: 1001
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1010
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 2
+insert before 652 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1100
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 1
+delete from 645 with range 1
+patches are written to file
+running tests...
+used time: Finished in 24.31 seconds
+Failing tests: 1
+	org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_0
+Can independently fix ['org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_4', 'org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_2']
+select new bug
+Pattern: 1100
+failing tests: org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_4@org.apache.commons.lang.time.DateUtilsTest::testRoundLang346$catena_2
+pattern: 0111
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 2
+insert before 652 with         }
+
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1011
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 2
+insert before 652 with         }
+
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1101
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1110
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 2
+insert before 652 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1111
+try to fix hunk: 0
+insert before 643 with         }
+
+try to fix hunk: 1
+delete from 645 with range 1
+try to fix hunk: 2
+insert before 652 with         }
+
+try to fix hunk: 3
+delete from 654 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.70 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 3 new bugs

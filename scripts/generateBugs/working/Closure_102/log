@@ -1,0 +1,96 @@
+---
+Begin generate bug_id: Closure_102
+num_of_hunks: 2
+use working dir: ./working/data/Closure_102
+Try to checkout Closure_102
+build dir: ['./working/data/Closure_102/build/classes', './working/data/Closure_102/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/Normalize.java
+trace file: src/com/google/javascript/jscomp/Normalize.java
+trying to replace old failing tests
+edit: replace from 181 range 14 at test/com/google/javascript/jscomp/CompilerRunnerTest.java
+to
+  public void testIssue115$catena_0() {
+    CompilerRunner.FLAG_compilation_level.setForTest(
+        CompilationLevel.SIMPLE_OPTIMIZATIONS);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ CompilerRunner.FLAG_warning_level.setForTest(
+        WarningLevel.VERBOSE);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f() { " +
+         "  var arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}",
+         "function f() { " +
+         "  arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}");                                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue115$catena_1() {
+    try{ CompilerRunner.FLAG_compilation_level.setForTest(
+        CompilationLevel.SIMPLE_OPTIMIZATIONS);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    CompilerRunner.FLAG_warning_level.setForTest(
+        WarningLevel.VERBOSE);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("function f() { " +
+         "  var arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}",
+         "function f() { " +
+         "  arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}");                                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue115$catena_2() {
+    try{ CompilerRunner.FLAG_compilation_level.setForTest(
+        CompilationLevel.SIMPLE_OPTIMIZATIONS);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ CompilerRunner.FLAG_warning_level.setForTest(
+        WarningLevel.VERBOSE);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("function f() { " +
+         "  var arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}",
+         "function f() { " +
+         "  arguments = Array.prototype.slice.call(arguments, 0);" +
+         "  return arguments[0]; " +
+         "}");                                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/CompilerRunnerTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 131.51 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CompilerRunnerTest::testIssue115$catena_2
+pattern: 01
+try to fix hunk: 1
+delete from 94 with range 1
+patches are written to file
+running tests...
+used time: Finished in 119.88 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.CompilerRunnerTest::testIssue115$catena_2
+	com.google.javascript.jscomp.CompilerRunnerTest::testCheckSymbolsOffForDefault
+	com.google.javascript.jscomp.InlineFunctionsTest::testComplexNoVarSub
+	com.google.javascript.jscomp.InlineVariablesTest::testInlineUndefined3
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations
+Includes new failing tests, set to unusable
+pattern: 10
+try to fix hunk: 0
+insert before 89 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+used time: Finished in 117.55 seconds
+Failing tests: 0
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 89 with     removeDuplicateDeclarations(root);
+
+try to fix hunk: 1
+delete from 94 with range 1
+patches are written to file
+running tests...
+used time: Finished in 116.15 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

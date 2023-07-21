@@ -1,0 +1,806 @@
+---
+Begin generate bug_id: Time_17
+num_of_hunks: 5
+use working dir: ./working/data/Time_17
+Try to checkout Time_17
+build dir: ['./working/data/Time_17/build/classes', './working/data/Time_17/build/tests']
+init FileManager
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trying to replace old failing tests
+edit: replace from 1249 range 15 at src/test/java/org/joda/time/TestDateTimeZoneCutover.java
+to
+    public void testBug3476684_adjustOffset$catena_0() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        assertSame(base, base.withEarlierOffsetAtOverlap());                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertSame(base, base.withLaterOffsetAtOverlap());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug3476684_adjustOffset$catena_1() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        try{ assertSame(base, base.withEarlierOffsetAtOverlap());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertSame(base, base.withLaterOffsetAtOverlap());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug3476684_adjustOffset$catena_2() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        try{ assertSame(base, base.withEarlierOffsetAtOverlap());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertSame(base, base.withLaterOffsetAtOverlap());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug3476684_adjustOffset$catena_3() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        try{ assertSame(base, base.withEarlierOffsetAtOverlap());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertSame(base, base.withLaterOffsetAtOverlap());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug3476684_adjustOffset$catena_4() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        try{ assertSame(base, base.withEarlierOffsetAtOverlap());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertSame(base, base.withLaterOffsetAtOverlap());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBug3476684_adjustOffset$catena_5() {
+        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
+        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
+        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
+        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
+        
+        try{ assertSame(base, base.withEarlierOffsetAtOverlap());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertSame(base, base.withLaterOffsetAtOverlap());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/joda/time/TestDateTimeZoneCutover.java
+new test num: 6
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 44.10 seconds
+Failing tests: 1
+	org.joda.time.TestDateTimeZoneCutover::testBug3476684_adjustOffset$catena_3
+pattern: 00001
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00010
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00100
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01000
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10000
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+patches are written to file
+running tests...
+used time: Finished in 34.44 seconds
+Failing tests: 0
+No new failing tests but only 1 hunk
+pattern: 00011
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00101
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00110
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01001
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01010
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01100
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10001
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10010
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10100
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11000
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 00111
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01011
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01101
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01110
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10011
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10101
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10110
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11001
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11010
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11100
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 01111
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10111
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11011
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11101
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11110
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11111
+try to fix hunk: 0
+replace from 1167 with range 3 to
+        long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;
+        long offsetBefore = getOffset(instantBefore);
+        long offsetAfter = getOffset(instantAfter);
+        if (offsetBefore <= offsetAfter) {
+
+try to fix hunk: 1
+replace from 1174 with range 2 to
+        long diff = offsetBefore - offsetAfter;
+        long transition = nextTransition(instantBefore);
+        long overlapStart = transition - diff;
+        long overlapEnd = transition + diff;
+        if (instant < overlapStart || instant >= overlapEnd) {
+          return instant;  // not an overlap
+        }
+
+try to fix hunk: 2
+insert before 1178 with         long afterStart = instant - overlapStart;
+        if (afterStart >= diff) {
+
+try to fix hunk: 3
+insert before 1179 with           return earlierOrLater ? instant : instant - diff;
+        } else {
+
+try to fix hunk: 4
+insert before 1180 with           return earlierOrLater ? instant + diff : instant;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 32.46 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

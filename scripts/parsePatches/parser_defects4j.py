@@ -58,7 +58,7 @@ class Parser:
             raise IsNotImplementedException()
     def parse_file(self, filename):
         for patched_file in unidiff.PatchSet.from_filename(filename, encoding=self.encoding):
-            name = patched_file.source_file[HEAD_OF_FILENAME:]
+            name = patched_file.source_file.lstrip('a/')
             superHunks = []
             for superHunk in patched_file:
                 superHunks.append(superHunk)
@@ -147,6 +147,6 @@ class Parser:
         self.root = root
         return self.root
 if __name__ == '__main__':
-    parser = Parser(['./136.src.patch'])
+    parser = Parser(['./136.src.patch', './7.src.patch'])
     parser.parse()
     print(parser.dump_d4j_patch())

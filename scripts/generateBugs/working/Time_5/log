@@ -1,0 +1,139 @@
+---
+Begin generate bug_id: Time_5
+num_of_hunks: 2
+use working dir: ./working/data/Time_5
+Try to checkout Time_5
+build dir: ['./working/data/Time_5/target/classes', './working/data/Time_5/target/test-classes']
+init FileManager
+trace file: src/main/java/org/joda/time/Period.java
+trace file: src/main/java/org/joda/time/Period.java
+trying to replace old failing tests
+edit: replace from 1520 range 6 at src/test/java/org/joda/time/TestPeriod_Basics.java
+to
+    public void testNormalizedStandard_periodType_months1$catena_0() {
+        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(PeriodType.months());
+        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNormalizedStandard_periodType_months1$catena_1() {
+        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(PeriodType.months());
+        try{ assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 1527 range 6 at src/test/java/org/joda/time/TestPeriod_Basics.java
+to
+    public void testNormalizedStandard_periodType_months2$catena_0() {
+        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(PeriodType.months());
+        assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNormalizedStandard_periodType_months2$catena_1() {
+        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(PeriodType.months());
+        try{ assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 1551 range 10 at src/test/java/org/joda/time/TestPeriod_Basics.java
+to
+    public void testNormalizedStandard_periodType_monthsWeeks$catena_0() {
+        PeriodType type = PeriodType.forFields(new DurationFieldType[]{
+                        DurationFieldType.months(),
+                        DurationFieldType.weeks(),
+                        DurationFieldType.days()});
+        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(type);
+        assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNormalizedStandard_periodType_monthsWeeks$catena_1() {
+        PeriodType type = PeriodType.forFields(new DurationFieldType[]{
+                        DurationFieldType.months(),
+                        DurationFieldType.weeks(),
+                        DurationFieldType.days()});
+        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);
+        Period result = test.normalizedStandard(type);
+        try{ assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/joda/time/TestPeriod_Basics.java
+new test num: 6
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 47.45 seconds
+Failing tests: 6
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_0
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_0
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_0
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1
+pattern: 01
+try to fix hunk: 1
+replace from 1633 with range 2 to
+            if (type.isSupported(DurationFieldType.MONTHS_TYPE)) {
+                int normalizedMonths = FieldUtils.safeToInt(totalMonths);
+                result = result.withMonths(normalizedMonths);
+                totalMonths = totalMonths - normalizedMonths;
+            }
+            if (totalMonths != 0) {
+                throw new UnsupportedOperationException("Unable to normalize as PeriodType is missing either years or months but period has a month/year amount: " + toString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+replace from 1628 with range 4 to
+            long totalMonths = years * 12L + months;
+            if (type.isSupported(DurationFieldType.YEARS_TYPE)) {
+                int normalizedYears = FieldUtils.safeToInt(totalMonths / 12);
+                result = result.withYears(normalizedYears);
+                totalMonths = totalMonths - (normalizedYears * 12);
+
+patches are written to file
+running tests...
+used time: Finished in 38.30 seconds
+Failing tests: 9
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_yearMonthDay
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_yearMonthWeekDay
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_yearMonth1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_yearMonth1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_yearMonthWeekDay
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1
+	org.joda.time.TestPeriod_Basics::testNormalizedStandard_yearMonthDay
+Includes new failing tests, set to unusable
+pattern: 11
+try to fix hunk: 0
+replace from 1628 with range 4 to
+            long totalMonths = years * 12L + months;
+            if (type.isSupported(DurationFieldType.YEARS_TYPE)) {
+                int normalizedYears = FieldUtils.safeToInt(totalMonths / 12);
+                result = result.withYears(normalizedYears);
+                totalMonths = totalMonths - (normalizedYears * 12);
+
+try to fix hunk: 1
+replace from 1633 with range 2 to
+            if (type.isSupported(DurationFieldType.MONTHS_TYPE)) {
+                int normalizedMonths = FieldUtils.safeToInt(totalMonths);
+                result = result.withMonths(normalizedMonths);
+                totalMonths = totalMonths - normalizedMonths;
+            }
+            if (totalMonths != 0) {
+                throw new UnsupportedOperationException("Unable to normalize as PeriodType is missing either years or months but period has a month/year amount: " + toString());
+
+patches are written to file
+running tests...
+used time: Finished in 35.12 seconds
+Failing tests: 0
+Can independently fix ['org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_0', 'org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1', 'org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_0', 'org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_0', 'org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1', 'org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1']
+select new bug
+Pattern: 11
+failing tests: org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_0@org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1@org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_0@org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_0@org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1@org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1
+Find 1 new bugs

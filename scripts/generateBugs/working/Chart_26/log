@@ -1,0 +1,294 @@
+---
+Begin generate bug_id: Chart_26
+num_of_hunks: 2
+use working dir: ./working/data/Chart_26
+Try to checkout Chart_26
+build dir: ['./working/data/Chart_26/build', './working/data/Chart_26/build-tests']
+init FileManager
+trace file: source/org/jfree/chart/axis/Axis.java
+trace file: source/org/jfree/chart/axis/Axis.java
+trying to replace old failing tests
+edit: replace from 475 range 41 at tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
+to
+    public void testSerialization3$catena_0() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Test Chart",
+            "Category Axis",
+            "Value Axis",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+        JFreeChart chart2 = null;
+        
+        // serialize and deserialize the chart....
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(chart);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            chart2 = (JFreeChart) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            fail(e.toString());                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        // now check that the chart is usable...
+        boolean passed = true;
+        try {
+            chart2.createBufferedImage(300, 200);
+        }
+        catch (Exception e) {
+            passed = false;  
+            e.printStackTrace();            
+        }
+        try{ assertTrue(passed);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSerialization3$catena_1() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Test Chart",
+            "Category Axis",
+            "Value Axis",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+        JFreeChart chart2 = null;
+        
+        // serialize and deserialize the chart....
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(chart);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            chart2 = (JFreeChart) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            try{ fail(e.toString());                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // now check that the chart is usable...
+        boolean passed = true;
+        try {
+            chart2.createBufferedImage(300, 200);
+        }
+        catch (Exception e) {
+            passed = false;  
+            e.printStackTrace();            
+        }
+        assertTrue(passed);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 520 range 45 at tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
+to
+    public void testSerialization4$catena_0() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Test Chart",
+            "Category Axis",
+            "Value Axis",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.addRangeMarker(new ValueMarker(1.1), Layer.FOREGROUND);
+        plot.addRangeMarker(new IntervalMarker(2.2, 3.3), Layer.BACKGROUND);
+        JFreeChart chart2 = null;
+        
+        // serialize and deserialize the chart....
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(chart);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            chart2 = (JFreeChart) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            fail(e.toString());                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try{ assertEquals(chart, chart2);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // now check that the chart is usable...
+        boolean passed = true;
+        try {
+            chart2.createBufferedImage(300, 200);
+        }
+        catch (Exception e) {
+            passed = false;  
+            e.printStackTrace();            
+        }
+        try{ assertTrue(passed);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSerialization4$catena_1() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Test Chart",
+            "Category Axis",
+            "Value Axis",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.addRangeMarker(new ValueMarker(1.1), Layer.FOREGROUND);
+        plot.addRangeMarker(new IntervalMarker(2.2, 3.3), Layer.BACKGROUND);
+        JFreeChart chart2 = null;
+        
+        // serialize and deserialize the chart....
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(chart);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            chart2 = (JFreeChart) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            try{ fail(e.toString());                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        assertEquals(chart, chart2);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        // now check that the chart is usable...
+        boolean passed = true;
+        try {
+            chart2.createBufferedImage(300, 200);
+        }
+        catch (Exception e) {
+            passed = false;  
+            e.printStackTrace();            
+        }
+        try{ assertTrue(passed);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSerialization4$catena_2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Test Chart",
+            "Category Axis",
+            "Value Axis",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.addRangeMarker(new ValueMarker(1.1), Layer.FOREGROUND);
+        plot.addRangeMarker(new IntervalMarker(2.2, 3.3), Layer.BACKGROUND);
+        JFreeChart chart2 = null;
+        
+        // serialize and deserialize the chart....
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(chart);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            chart2 = (JFreeChart) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            try{ fail(e.toString());                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try{ assertEquals(chart, chart2);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // now check that the chart is usable...
+        boolean passed = true;
+        try {
+            chart2.createBufferedImage(300, 200);
+        }
+        catch (Exception e) {
+            passed = false;  
+            e.printStackTrace();            
+        }
+        assertTrue(passed);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: tests/org/jfree/chart/plot/junit/CategoryPlotTests.java
+new test num: 5
+ori test num: 20
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 46.32 seconds
+Failing tests: 22
+	org.jfree.chart.junit.AreaChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.BarChart3DTests::testDrawWithNullInfo
+	org.jfree.chart.junit.BarChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo2
+	org.jfree.chart.junit.LineChart3DTests::testDrawWithNullInfo
+	org.jfree.chart.junit.LineChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.StackedAreaChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.StackedBarChart3DTests::testDrawWithNullInfo
+	org.jfree.chart.junit.StackedBarChartTests::testDrawWithNullInfo
+	org.jfree.chart.junit.WaterfallChartTests::testDrawWithNullInfo
+	org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization3$catena_1
+	org.jfree.chart.plot.junit.CategoryPlotTests::test1654215
+	org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization4$catena_2
+	org.jfree.chart.renderer.category.junit.BoxAndWhiskerRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.GroupedStackedBarRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.IntervalBarRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.LayeredBarRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.LevelRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.MinMaxCategoryRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullInfo
+	org.jfree.chart.renderer.category.junit.StatisticalLineAndShapeRendererTests::testDrawWithNullInfo
+pattern: 01
+try to fix hunk: 1
+insert before 1197 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 10
+try to fix hunk: 0
+insert before 1192 with             if (owner != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 11
+try to fix hunk: 0
+insert before 1192 with             if (owner != null) {
+
+try to fix hunk: 1
+insert before 1197 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 27.77 seconds
+Failing tests: 0
+Can independently fix ['org.jfree.chart.renderer.category.junit.MinMaxCategoryRendererTests::testDrawWithNullInfo', 'org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization4$catena_2', 'org.jfree.chart.junit.LineChartTests::testDrawWithNullInfo', 'org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization3$catena_1', 'org.jfree.chart.plot.junit.CategoryPlotTests::test1654215', 'org.jfree.chart.junit.StackedBarChartTests::testDrawWithNullInfo', 'org.jfree.chart.junit.StackedAreaChartTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.StatisticalLineAndShapeRendererTests::testDrawWithNullInfo', 'org.jfree.chart.junit.StackedBarChart3DTests::testDrawWithNullInfo', 'org.jfree.chart.junit.BarChartTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.LayeredBarRendererTests::testDrawWithNullInfo', 'org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo', 'org.jfree.chart.junit.BarChart3DTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.BoxAndWhiskerRendererTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.LevelRendererTests::testDrawWithNullInfo', 'org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo2', 'org.jfree.chart.renderer.category.junit.IntervalBarRendererTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullInfo', 'org.jfree.chart.renderer.category.junit.GroupedStackedBarRendererTests::testDrawWithNullInfo', 'org.jfree.chart.junit.WaterfallChartTests::testDrawWithNullInfo', 'org.jfree.chart.junit.AreaChartTests::testDrawWithNullInfo', 'org.jfree.chart.junit.LineChart3DTests::testDrawWithNullInfo']
+select new bug
+Pattern: 11
+failing tests: org.jfree.chart.renderer.category.junit.MinMaxCategoryRendererTests::testDrawWithNullInfo@org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization4$catena_2@org.jfree.chart.junit.LineChartTests::testDrawWithNullInfo@org.jfree.chart.plot.junit.CategoryPlotTests::testSerialization3$catena_1@org.jfree.chart.plot.junit.CategoryPlotTests::test1654215@org.jfree.chart.junit.StackedBarChartTests::testDrawWithNullInfo@org.jfree.chart.junit.StackedAreaChartTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.StatisticalLineAndShapeRendererTests::testDrawWithNullInfo@org.jfree.chart.junit.StackedBarChart3DTests::testDrawWithNullInfo@org.jfree.chart.junit.BarChartTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.LayeredBarRendererTests::testDrawWithNullInfo@org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo@org.jfree.chart.junit.BarChart3DTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.BoxAndWhiskerRendererTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.LevelRendererTests::testDrawWithNullInfo@org.jfree.chart.junit.GanttChartTests::testDrawWithNullInfo2@org.jfree.chart.renderer.category.junit.IntervalBarRendererTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullInfo@org.jfree.chart.renderer.category.junit.GroupedStackedBarRendererTests::testDrawWithNullInfo@org.jfree.chart.junit.WaterfallChartTests::testDrawWithNullInfo@org.jfree.chart.junit.AreaChartTests::testDrawWithNullInfo@org.jfree.chart.junit.LineChart3DTests::testDrawWithNullInfo
+Find 1 new bugs

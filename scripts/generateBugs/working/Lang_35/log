@@ -1,0 +1,99 @@
+---
+Begin generate bug_id: Lang_35
+num_of_hunks: 2
+use working dir: ./working/data/Lang_35
+Try to checkout Lang_35
+build dir: ['./working/data/Lang_35/target/classes', './working/data/Lang_35/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/ArrayUtils.java
+trace file: src/main/java/org/apache/commons/lang3/ArrayUtils.java
+trying to replace old failing tests
+edit: replace from 227 range 18 at src/test/java/org/apache/commons/lang3/ArrayUtilsAddTest.java
+to
+    public void testLANG571$catena_0(){
+        String[] stringArray=null;
+        String aString=null;
+        try {
+            @SuppressWarnings("unused")
+            String[] sa = ArrayUtils.add(stringArray, aString);
+            fail("Should have caused IllegalArgumentException");                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException iae){
+            //expected
+        }
+        try {
+            @SuppressWarnings("unused")
+            String[] sa = ArrayUtils.add(stringArray, 0, aString);
+            try{ fail("Should have caused IllegalArgumentException");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException iae){
+            //expected
+        }
+    }     public void testLANG571$catena_1(){
+        String[] stringArray=null;
+        String aString=null;
+        try {
+            @SuppressWarnings("unused")
+            String[] sa = ArrayUtils.add(stringArray, aString);
+            try{ fail("Should have caused IllegalArgumentException");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException iae){
+            //expected
+        }
+        try {
+            @SuppressWarnings("unused")
+            String[] sa = ArrayUtils.add(stringArray, 0, aString);
+            fail("Should have caused IllegalArgumentException");                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException iae){
+            //expected
+        }
+    }
+trace file: src/test/java/org/apache/commons/lang3/ArrayUtilsAddTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 26.54 seconds
+Failing tests: 2
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1
+pattern: 01
+try to fix hunk: 1
+replace from 3574 with range 1 to
+            throw new IllegalArgumentException("Array and element cannot both be null");            
+
+patches are written to file
+running tests...
+used time: Finished in 20.80 seconds
+Failing tests: 2
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1
+No new failing tests but only 1 hunk
+pattern: 10
+try to fix hunk: 0
+replace from 3295 with range 1 to
+            throw new IllegalArgumentException("Arguments cannot both be null");            
+
+patches are written to file
+running tests...
+used time: Finished in 20.81 seconds
+Failing tests: 2
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0
+	org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+replace from 3295 with range 1 to
+            throw new IllegalArgumentException("Arguments cannot both be null");            
+
+try to fix hunk: 1
+replace from 3574 with range 1 to
+            throw new IllegalArgumentException("Array and element cannot both be null");            
+
+patches are written to file
+running tests...
+used time: Finished in 20.46 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0', 'org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1']
+select new bug
+Pattern: 11
+failing tests: org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0@org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1
+Find 1 new bugs

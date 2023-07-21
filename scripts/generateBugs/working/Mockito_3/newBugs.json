@@ -1,0 +1,287 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+            "from_line_no": 127,
+            "to_line_no": 128,
+            "replaced_with": "            for (Matcher m : uniqueMatcherSet(indexOfVararg)) {\n",
+            "replaced": "            for (int position = indexOfVararg; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n",
+            "patch_type": "replace",
+            "next_line_no": 129
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+            "from_line_no": 130,
+            "to_line_no": 130,
+            "replaced_with": "                    Object rawArgument = invocation.getRawArguments()[indexOfVararg];\n                    for (int i = 0; i < Array.getLength(rawArgument); i++) {\n                        ((CapturesArguments) m).captureFrom(Array.get(rawArgument, i));\n                    }\n",
+            "replaced": "                    ((CapturesArguments) m).captureFrom(invocation.getRawArguments()[position - indexOfVararg]);\n",
+            "patch_type": "replace",
+            "next_line_no": 131
+        },
+        "2": {
+            "file_name": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+            "replaced_with": "    private Set<Matcher> uniqueMatcherSet(int indexOfVararg) {\n        HashSet<Matcher> set = new HashSet<Matcher>();\n        for (int position = indexOfVararg; position < matchers.size(); position++) {\n            Matcher matcher = matchers.get(position);\n            if(matcher instanceof MatcherDecorator) {\n                set.add(((MatcherDecorator) matcher).getActualMatcher());\n            } else {\n                set.add(matcher);\n            }\n        }\n        return set;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 143
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg",
+            "org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs",
+            "org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive"
+        ],
+        "org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg": {
+            "file_path": "test/org/mockito/internal/invocation/InvocationMatcherTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(142, 5)\nEnd: Pos(155, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockito/internal/invocation/InvocationMatcherTest.java\nName: should_capture_varargs_as_vararg\nChilds: [StatementAssertion<Begin: Pos(154, 9), End: Pos(154, 74)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockito/internal/invocation/InvocationMatcherTest.java",
+            "name": "should_capture_varargs_as_vararg",
+            "begin": "Pos(142, 5)",
+            "end": "Pos(155, 5)",
+            "begin_line_no": 142,
+            "end_line_no": 155,
+            "child": [
+                "Begin: Pos(154, 9)\nEnd: Pos(154, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs": {
+            "file_path": "test/org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java",
+            "Instance": "Begin: Pos(43, 5)\nEnd: Pos(52, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java\nName: shouldVerifyCorrectlyNumberOfInvocationsWithVarargs\nChilds: [StatementAssertion<Begin: Pos(50, 9), End: Pos(50, 79)>,\nStatementAssertion<Begin: Pos(51, 9), End: Pos(51, 55)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java",
+            "name": "shouldVerifyCorrectlyNumberOfInvocationsWithVarargs",
+            "begin": "Pos(43, 5)",
+            "end": "Pos(52, 5)",
+            "begin_line_no": 43,
+            "end_line_no": 52,
+            "child": [
+                "Begin: Pos(50, 9)\nEnd: Pos(50, 79)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(51, 9)\nEnd: Pos(51, 55)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0() {\n        //when\n        table.newRow(\"qux\", \"foo\", \"bar\", \"baz\");\n        table.newRow(\"abc\", \"def\");\n        \n        //then\n        verify(table).newRow(anyString(), eq(\"foo\"), anyString(), anyString());                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(table).newRow(anyString(), anyString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_1() {\n        //when\n        table.newRow(\"qux\", \"foo\", \"bar\", \"baz\");\n        table.newRow(\"abc\", \"def\");\n        \n        //then\n        try{ verify(table).newRow(anyString(), eq(\"foo\"), anyString(), anyString());                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(table).newRow(anyString(), anyString());                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0() {\n        //when\n        table.newRow(\"qux\", \"foo\", \"bar\", \"baz\");\n        table.newRow(\"abc\", \"def\");\n        \n        //then\n        verify(table).newRow(anyString(), eq(\"foo\"), anyString(), anyString());                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(table).newRow(anyString(), anyString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_1() {\n        //when\n        table.newRow(\"qux\", \"foo\", \"bar\", \"baz\");\n        table.newRow(\"abc\", \"def\");\n        \n        //then\n        try{ verify(table).newRow(anyString(), eq(\"foo\"), anyString(), anyString());                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(table).newRow(anyString(), anyString());                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg": {
+            "file_path": "test/org/mockitousage/bugs/varargs/VarargsNotPlayingWithAnyObjectTest.java",
+            "Instance": "Begin: Pos(24, 5)\nEnd: Pos(35, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/bugs/varargs/VarargsNotPlayingWithAnyObjectTest.java\nName: shouldMatchAnyVararg\nChilds: [StatementAssertion<Begin: Pos(28, 9), End: Pos(28, 51)>,\nStatementAssertion<Begin: Pos(29, 9), End: Pos(29, 69)>,\nStatementAssertion<Begin: Pos(31, 9), End: Pos(31, 49)>,\nStatementAssertion<Begin: Pos(33, 9), End: Pos(33, 36)>,\nStatementAssertion<Begin: Pos(34, 9), End: Pos(34, 56)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/bugs/varargs/VarargsNotPlayingWithAnyObjectTest.java",
+            "name": "shouldMatchAnyVararg",
+            "begin": "Pos(24, 5)",
+            "end": "Pos(35, 5)",
+            "begin_line_no": 24,
+            "end_line_no": 35,
+            "child": [
+                "Begin: Pos(28, 9)\nEnd: Pos(28, 51)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(29, 9)\nEnd: Pos(29, 69)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(31, 9)\nEnd: Pos(31, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(33, 9)\nEnd: Pos(33, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(34, 9)\nEnd: Pos(34, 56)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shouldMatchAnyVararg$catena_0() {\n        mock.run(\"a\", \"b\");\n\n        verify(mock).run(anyString(), anyString());                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldMatchAnyVararg$catena_1() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(mock).run((String) anyObject(), (String) anyObject());                                       /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldMatchAnyVararg$catena_2() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        verify(mock).run((String[]) anyVararg());                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldMatchAnyVararg$catena_3() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        verify(mock, never()).run();                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldMatchAnyVararg$catena_4() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(mock, never()).run(anyString(), eq(\"f\"));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shouldMatchAnyVararg$catena_0() {\n        mock.run(\"a\", \"b\");\n\n        verify(mock).run(anyString(), anyString());                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void shouldMatchAnyVararg$catena_1() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(mock).run((String) anyObject(), (String) anyObject());                                       /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test\n    public void shouldMatchAnyVararg$catena_2() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        verify(mock).run((String[]) anyVararg());                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    @Test\n    public void shouldMatchAnyVararg$catena_3() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        verify(mock, never()).run();                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify(mock, never()).run(anyString(), eq(\"f\"));                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "4": "    @Test\n    public void shouldMatchAnyVararg$catena_4() {\n        mock.run(\"a\", \"b\");\n\n        try{ verify(mock).run(anyString(), anyString());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ verify(mock).run((String) anyObject(), (String) anyObject());                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ verify(mock).run((String[]) anyVararg());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        try{ verify(mock, never()).run();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify(mock, never()).run(anyString(), eq(\"f\"));                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(266, 5)\nEnd: Pos(279, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: should_capture_all_vararg\nChilds: [StatementAssertion<Begin: Pos(276, 9), End: Pos(276, 77)>,\nStatementAssertion<Begin: Pos(278, 9), End: Pos(278, 104)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "should_capture_all_vararg",
+            "begin": "Pos(266, 5)",
+            "end": "Pos(279, 5)",
+            "begin_line_no": 266,
+            "end_line_no": 279,
+            "child": [
+                "Begin: Pos(276, 9)\nEnd: Pos(276, 77)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(278, 9)\nEnd: Pos(278, 104)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_capture_all_vararg$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n        mock.mixedVarargs(42, \"again ?!\");\n\n        // then\n        verify(mock, times(2)).mixedVarargs(any(), argumentCaptor.capture());                                    /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\", \"again ?!\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_all_vararg$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n        mock.mixedVarargs(42, \"again ?!\");\n\n        // then\n        try{ verify(mock, times(2)).mixedVarargs(any(), argumentCaptor.capture());                               }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\", \"again ?!\");         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_capture_all_vararg$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n        mock.mixedVarargs(42, \"again ?!\");\n\n        // then\n        verify(mock, times(2)).mixedVarargs(any(), argumentCaptor.capture());                                    /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\", \"again ?!\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void should_capture_all_vararg$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n        mock.mixedVarargs(42, \"again ?!\");\n\n        // then\n        try{ verify(mock, times(2)).mixedVarargs(any(), argumentCaptor.capture());                               }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\", \"again ?!\");         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(294, 5)\nEnd: Pos(306, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: captures_correctly_when_captor_used_multiple_times\nChilds: [StatementAssertion<Begin: Pos(304, 9), End: Pos(304, 119)>,\nStatementAssertion<Begin: Pos(305, 9), End: Pos(305, 92)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "captures_correctly_when_captor_used_multiple_times",
+            "begin": "Pos(294, 5)",
+            "end": "Pos(306, 5)",
+            "begin_line_no": 294,
+            "end_line_no": 306,
+            "child": [
+                "Begin: Pos(304, 9)\nEnd: Pos(304, 119)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(305, 9)\nEnd: Pos(305, 92)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void captures_correctly_when_captor_used_multiple_times$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        // this is only for backwards compatibility. It does not make sense in real to do so.\n        verify(mock).mixedVarargs(any(), argumentCaptor.capture(), argumentCaptor.capture(), argumentCaptor.capture());         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void captures_correctly_when_captor_used_multiple_times$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        // this is only for backwards compatibility. It does not make sense in real to do so.\n        try{ verify(mock).mixedVarargs(any(), argumentCaptor.capture(), argumentCaptor.capture(), argumentCaptor.capture());    }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void captures_correctly_when_captor_used_multiple_times$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        // this is only for backwards compatibility. It does not make sense in real to do so.\n        verify(mock).mixedVarargs(any(), argumentCaptor.capture(), argumentCaptor.capture(), argumentCaptor.capture());         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void captures_correctly_when_captor_used_multiple_times$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        // this is only for backwards compatibility. It does not make sense in real to do so.\n        try{ verify(mock).mixedVarargs(any(), argumentCaptor.capture(), argumentCaptor.capture(), argumentCaptor.capture());    }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(253, 5)\nEnd: Pos(264, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: should_capture_vararg\nChilds: [StatementAssertion<Begin: Pos(262, 9), End: Pos(262, 67)>,\nStatementAssertion<Begin: Pos(263, 9), End: Pos(263, 92)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "should_capture_vararg",
+            "begin": "Pos(253, 5)",
+            "end": "Pos(264, 5)",
+            "begin_line_no": 253,
+            "end_line_no": 264,
+            "child": [
+                "Begin: Pos(262, 9)\nEnd: Pos(262, 67)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(263, 9)\nEnd: Pos(263, 92)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_capture_vararg$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        verify(mock).mixedVarargs(any(), argumentCaptor.capture());                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_vararg$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        try{ verify(mock).mixedVarargs(any(), argumentCaptor.capture());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_capture_vararg$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        verify(mock).mixedVarargs(any(), argumentCaptor.capture());                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void should_capture_vararg$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.mixedVarargs(42, \"a\", \"b\", \"c\");\n\n        // then\n        try{ verify(mock).mixedVarargs(any(), argumentCaptor.capture());                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly(\"a\", \"b\", \"c\");                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(308, 5)\nEnd: Pos(319, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: captures_correctly_when_captor_used_on_pure_vararg_method\nChilds: [StatementAssertion<Begin: Pos(317, 9), End: Pos(317, 63)>,\nStatementAssertion<Begin: Pos(318, 9), End: Pos(318, 83)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "captures_correctly_when_captor_used_on_pure_vararg_method",
+            "begin": "Pos(308, 5)",
+            "end": "Pos(319, 5)",
+            "begin_line_no": 308,
+            "end_line_no": 319,
+            "child": [
+                "Begin: Pos(317, 9)\nEnd: Pos(317, 63)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(318, 9)\nEnd: Pos(318, 83)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void captures_correctly_when_captor_used_on_pure_vararg_method$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.varargs(42, \"capturedValue\");\n\n        // then\n        verify(mock).varargs(eq(42), argumentCaptor.capture());                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getValue()).contains(\"capturedValue\");                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void captures_correctly_when_captor_used_on_pure_vararg_method$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.varargs(42, \"capturedValue\");\n\n        // then\n        try{ verify(mock).varargs(eq(42), argumentCaptor.capture());                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getValue()).contains(\"capturedValue\");                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void captures_correctly_when_captor_used_on_pure_vararg_method$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.varargs(42, \"capturedValue\");\n\n        // then\n        verify(mock).varargs(eq(42), argumentCaptor.capture());                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getValue()).contains(\"capturedValue\");                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void captures_correctly_when_captor_used_on_pure_vararg_method$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);\n\n        // when\n        mock.varargs(42, \"capturedValue\");\n\n        // then\n        try{ verify(mock).varargs(eq(42), argumentCaptor.capture());                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getValue()).contains(\"capturedValue\");                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(239, 5)\nEnd: Pos(251, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper\nChilds: [StatementAssertion<Begin: Pos(248, 9), End: Pos(248, 59)>,\nStatementAssertion<Begin: Pos(249, 9), End: Pos(249, 65)>,\nStatementAssertion<Begin: Pos(250, 9), End: Pos(250, 97)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper",
+            "begin": "Pos(239, 5)",
+            "end": "Pos(251, 5)",
+            "begin_line_no": 239,
+            "end_line_no": 251,
+            "child": [
+                "Begin: Pos(248, 9)\nEnd: Pos(248, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(249, 9)\nEnd: Pos(249, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(250, 9)\nEnd: Pos(250, 97)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        verify(mock).varargsbyte(argumentCaptor.capture());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        verify(mock).varargsbyte(argumentCaptor.capture());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(Byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive": {
+            "file_path": "test/org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "check": [
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(225, 5)\nEnd: Pos(237, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java\nName: should_capture_byte_vararg_by_creating_captor_with_primitive\nChilds: [StatementAssertion<Begin: Pos(234, 9), End: Pos(234, 59)>,\nStatementAssertion<Begin: Pos(235, 9), End: Pos(235, 65)>,\nStatementAssertion<Begin: Pos(236, 9), End: Pos(236, 97)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_3/test//org/mockitousage/matchers/CapturingArgumentsTest.java",
+            "name": "should_capture_byte_vararg_by_creating_captor_with_primitive",
+            "begin": "Pos(225, 5)",
+            "end": "Pos(237, 5)",
+            "begin_line_no": 225,
+            "end_line_no": 237,
+            "child": [
+                "Begin: Pos(234, 9)\nEnd: Pos(234, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(235, 9)\nEnd: Pos(235, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(236, 9)\nEnd: Pos(236, 97)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        verify(mock).varargsbyte(argumentCaptor.capture());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_0() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        verify(mock).varargsbyte(argumentCaptor.capture());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test\n    public void should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2() throws Exception {\n        // given\n        ArgumentCaptor<Byte> argumentCaptor = ArgumentCaptor.forClass(byte.class);\n\n        // when\n        mock.varargsbyte((byte) 1, (byte) 2);\n\n        // then\n        try{ verify(mock).varargsbyte(argumentCaptor.capture());                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals((byte) 2, (byte) argumentCaptor.getValue());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg$catena_1",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1",
+            "org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_0",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_1",
+            "org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_0",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1",
+            "org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_0",
+            "org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_1",
+            "org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1",
+            "org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0"
+        ]
+    }
+}

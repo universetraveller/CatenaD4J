@@ -1,0 +1,121 @@
+---
+Begin generate bug_id: Chart_16
+num_of_hunks: 2
+use working dir: ./working/data/Chart_16
+Try to checkout Chart_16
+build dir: ['./working/data/Chart_16/build', './working/data/Chart_16/build-tests']
+init FileManager
+trace file: source/org/jfree/data/category/DefaultIntervalCategoryDataset.java
+trace file: source/org/jfree/data/category/DefaultIntervalCategoryDataset.java
+trying to replace old failing tests
+edit: replace from 259 range 15 at tests/org/jfree/data/category/junit/DefaultIntervalCategoryDatasetTests.java
+to
+    public void testCloning2$catena_0() {
+    	DefaultIntervalCategoryDataset d1 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+        		    new double[0][0]);
+        DefaultIntervalCategoryDataset d2 = null;
+        try {
+            d2 = (DefaultIntervalCategoryDataset) d1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertTrue(d1 != d2);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(d1.getClass() == d2.getClass());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(d1.equals(d2));                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}	
+    }     public void testCloning2$catena_1() {
+    	DefaultIntervalCategoryDataset d1 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+        		    new double[0][0]);
+        DefaultIntervalCategoryDataset d2 = null;
+        try {
+            d2 = (DefaultIntervalCategoryDataset) d1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        try{ assertTrue(d1 != d2);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(d1.getClass() == d2.getClass());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(d1.equals(d2));                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}	
+    }     public void testCloning2$catena_2() {
+    	DefaultIntervalCategoryDataset d1 
+                = new DefaultIntervalCategoryDataset(new double[0][0], 
+        		    new double[0][0]);
+        DefaultIntervalCategoryDataset d2 = null;
+        try {
+            d2 = (DefaultIntervalCategoryDataset) d1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        try{ assertTrue(d1 != d2);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(d1.getClass() == d2.getClass());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(d1.equals(d2));                                                                         /***** ORIGINAL ASSERTION IS HERE *****/	
+    }
+trace file: tests/org/jfree/data/category/junit/DefaultIntervalCategoryDatasetTests.java
+new test num: 3
+ori test num: 7
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 48.76 seconds
+Failing tests: 10
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetCategoryIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testSetCategoryKeys
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetSeriesIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowCount
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnCount
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_0
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_1
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_2
+pattern: 01
+try to fix hunk: 1
+replace from 338 with range 1 to
+        if (categoryKeys.length != getCategoryCount()) {
+
+patches are written to file
+running tests...
+used time: Finished in 27.61 seconds
+Failing tests: 9
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetCategoryIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetSeriesIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowCount
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnCount
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnIndex
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_0
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_1
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2$catena_2
+No new failing tests but only 1 hunk
+pattern: 10
+try to fix hunk: 0
+replace from 207 with range 2 to
+                this.seriesKeys = new Comparable[0];
+                this.categoryKeys = new Comparable[0];
+
+patches are written to file
+running tests...
+used time: Finished in 33.30 seconds
+Failing tests: 1
+	org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testSetCategoryKeys
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+replace from 207 with range 2 to
+                this.seriesKeys = new Comparable[0];
+                this.categoryKeys = new Comparable[0];
+
+try to fix hunk: 1
+replace from 338 with range 1 to
+        if (categoryKeys.length != getCategoryCount()) {
+
+patches are written to file
+running tests...
+used time: Finished in 29.52 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

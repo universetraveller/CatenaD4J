@@ -1,0 +1,97 @@
+---
+Begin generate bug_id: Math_4
+num_of_hunks: 2
+use working dir: ./working/data/Math_4
+Try to checkout Math_4
+build dir: ['./working/data/Math_4/target/classes', './working/data/Math_4/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
+trace file: src/main/java/org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
+trying to replace old failing tests
+edit: replace from 156 range 7 at src/test/java/org/apache/commons/math3/geometry/euclidean/threed/SubLineTest.java
+to
+    @Test
+    public void testIntersectionNotIntersecting$catena_0() throws MathIllegalArgumentException {
+        SubLine sub1 = new SubLine(new Vector3D(1, 1, 1), new Vector3D(1.5, 1, 1));
+        SubLine sub2 = new SubLine(new Vector3D(2, 3, 0), new Vector3D(2, 3, 0.5));
+        Assert.assertNull(sub1.intersection(sub2, true));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertNull(sub1.intersection(sub2, false));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testIntersectionNotIntersecting$catena_1() throws MathIllegalArgumentException {
+        SubLine sub1 = new SubLine(new Vector3D(1, 1, 1), new Vector3D(1.5, 1, 1));
+        SubLine sub2 = new SubLine(new Vector3D(2, 3, 0), new Vector3D(2, 3, 0.5));
+        try{ Assert.assertNull(sub1.intersection(sub2, true));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertNull(sub1.intersection(sub2, false));                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 147 range 7 at src/test/java/org/apache/commons/math3/geometry/euclidean/twod/SubLineTest.java
+to
+    @Test
+    public void testIntersectionParallel$catena_0() {
+        final SubLine sub1 = new SubLine(new Vector2D(0, 1), new Vector2D(0, 2));
+        final SubLine sub2 = new SubLine(new Vector2D(66, 3), new Vector2D(66, 4));
+        Assert.assertNull(sub1.intersection(sub2, true));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertNull(sub1.intersection(sub2, false));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testIntersectionParallel$catena_1() {
+        final SubLine sub1 = new SubLine(new Vector2D(0, 1), new Vector2D(0, 2));
+        final SubLine sub2 = new SubLine(new Vector2D(66, 3), new Vector2D(66, 4));
+        try{ Assert.assertNull(sub1.intersection(sub2, true));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertNull(sub1.intersection(sub2, false));                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math3/geometry/euclidean/threed/SubLineTest.java
+trace file: src/test/java/org/apache/commons/math3/geometry/euclidean/twod/SubLineTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 175.18 seconds
+Failing tests: 4
+	org.apache.commons.math3.geometry.euclidean.threed.SubLineTest::testIntersectionNotIntersecting$catena_0
+	org.apache.commons.math3.geometry.euclidean.threed.SubLineTest::testIntersectionNotIntersecting$catena_1
+	org.apache.commons.math3.geometry.euclidean.twod.SubLineTest::testIntersectionParallel$catena_0
+	org.apache.commons.math3.geometry.euclidean.twod.SubLineTest::testIntersectionParallel$catena_1
+pattern: 01
+try to fix hunk: 1
+insert before 118 with         if (v2D == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 162.67 seconds
+Failing tests: 2
+	org.apache.commons.math3.geometry.euclidean.threed.SubLineTest::testIntersectionNotIntersecting$catena_0
+	org.apache.commons.math3.geometry.euclidean.threed.SubLineTest::testIntersectionNotIntersecting$catena_1
+No new failing tests but only 1 hunk
+pattern: 10
+try to fix hunk: 0
+insert before 114 with         if (v1D == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 157.43 seconds
+Failing tests: 2
+	org.apache.commons.math3.geometry.euclidean.twod.SubLineTest::testIntersectionParallel$catena_0
+	org.apache.commons.math3.geometry.euclidean.twod.SubLineTest::testIntersectionParallel$catena_1
+No new failing tests but only 1 hunk
+pattern: 11
+try to fix hunk: 0
+insert before 114 with         if (v1D == null) {
+            return null;
+        }
+
+try to fix hunk: 1
+insert before 118 with         if (v2D == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 150.15 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 0 new bugs

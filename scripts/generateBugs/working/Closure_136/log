@@ -1,0 +1,424 @@
+---
+Begin generate bug_id: Closure_136
+num_of_hunks: 4
+use working dir: ./working/data/Closure_136
+Try to checkout Closure_136
+build dir: ['./working/data/Closure_136/build/classes', './working/data/Closure_136/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/MethodCompilerPass.java
+trace file: src/com/google/javascript/jscomp/MethodCompilerPass.java
+trace file: src/com/google/javascript/jscomp/RenameVars.java
+trace file: src/com/google/javascript/jscomp/RenameVars.java
+trying to replace old failing tests
+edit: replace from 94 range 11 at test/com/google/javascript/jscomp/MethodCheckTest.java
+to
+  public void testSeparateMethods$catena_0() {
+    testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_1() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_2() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    testSame("Boz.staticMethod1(1);");                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_3() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    testSame("Boz.staticMethod2(1, 2);");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_4() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_5() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    testSame("Boz.staticMethod1(1, 2);");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testSame("Boz.staticMethod2(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testSeparateMethods$catena_6() {
+    try{ testSame("var f = new Foo();f.oneOrTwoArg2(1);");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("var f = new Baz();f.oneOrTwoArg2(1, 2);");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1);");                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod2(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Can't detect these incorrect usuages as they are defined indirectly.
+    try{ testSame("var f = new Bar();f.oneOrTwoArg2(1, 2, 3);");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ testSame("Boz.staticMethod1(1, 2);");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    testSame("Boz.staticMethod2(1);");                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 459 range 22 at test/com/google/javascript/jscomp/RenameVarsTest.java
+to
+  public void testDollarSignSuperExport2$catena_0() {
+    boolean normalizedExpectedJs = false;
+    super.enableNormalize(false);
+
+    useGoogleCodingConvention = false;
+    // See http://code.google.com/p/closure-compiler/issues/detail?id=32
+    test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var c = function($super,    a,         b){};" +
+            "var d = function($super,    a){};");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+
+    localRenamingOnly = false;
+    try{ test("var $super = 1", "var a = 1");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    useGoogleCodingConvention = true;
+    try{ test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var d = function(a,     b,    c         ){};" +
+            "var e = function(     a,    b){};");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    super.disableNormalize();
+  }   public void testDollarSignSuperExport2$catena_1() {
+    boolean normalizedExpectedJs = false;
+    super.enableNormalize(false);
+
+    useGoogleCodingConvention = false;
+    // See http://code.google.com/p/closure-compiler/issues/detail?id=32
+    try{ test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var c = function($super,    a,         b){};" +
+            "var d = function($super,    a){};");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    localRenamingOnly = false;
+    test("var $super = 1", "var a = 1");                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+
+    useGoogleCodingConvention = true;
+    try{ test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var d = function(a,     b,    c         ){};" +
+            "var e = function(     a,    b){};");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    super.disableNormalize();
+  }   public void testDollarSignSuperExport2$catena_2() {
+    boolean normalizedExpectedJs = false;
+    super.enableNormalize(false);
+
+    useGoogleCodingConvention = false;
+    // See http://code.google.com/p/closure-compiler/issues/detail?id=32
+    try{ test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var c = function($super,    a,         b){};" +
+            "var d = function($super,    a){};");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    localRenamingOnly = false;
+    try{ test("var $super = 1", "var a = 1");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    useGoogleCodingConvention = true;
+    test("var x = function($super,duper,$fantastic){};" +
+            "var y = function($super,duper){};",
+         "var d = function(a,     b,    c         ){};" +
+            "var e = function(     a,    b){};");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+
+    super.disableNormalize();
+  }
+trace file: test/com/google/javascript/jscomp/RenameVarsTest.java
+trace file: test/com/google/javascript/jscomp/MethodCheckTest.java
+new test num: 10
+ori test num: 2
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 130.22 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_1
+	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_3
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_4
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_5
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_6
+	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+pattern: 0001
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0010
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0100
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+patches are written to file
+running tests...
+used time: Finished in 118.76 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+No new failing tests but only 1 hunk
+pattern: 1000
+try to fix hunk: 0
+delete from 102 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0011
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 129.49 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_1
+	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_3
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_4
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_5
+	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_6
+Can independently fix ['com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0']
+select new bug
+Pattern: 0011
+failing tests: com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+pattern: 0101
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 0110
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1001
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1010
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1100
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+patches are written to file
+running tests...
+used time: Finished in 120.31 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+Can independently fix []
+Could not fix independently
+pattern: 0111
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 122.94 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+pattern: 1011
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1101
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1110
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+pattern: 1111
+try to fix hunk: 0
+delete from 102 with range 1
+try to fix hunk: 1
+replace from 106 with range 20 to
+    } else {
+
+try to fix hunk: 2
+insert before 203 with         if (local) {
+
+try to fix hunk: 3
+insert before 204 with           String newName =
+            MakeDeclaredNamesUnique.ContextualRenameInverter.getOrginalName(
+                name);
+          if (!newName.equals(name)) {
+            n.setString(newName);
+          }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 123.93 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+Find 1 new bugs
