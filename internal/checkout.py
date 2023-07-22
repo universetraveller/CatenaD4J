@@ -2,6 +2,7 @@ from . import util
 from . import loaders
 from . import config
 from . import backend
+from . import reset
 class Task:
     def __init__(self):
         self.proj = None
@@ -73,7 +74,7 @@ def generate_c4j_info(task, p):
     info += 'project={}\n'.format(task.proj)
     info += 'bugid={}\n'.format(task.bug_id)
     info += 'cid={}\n'.format(task.cid)
-    info += 'buggy={}\n'.format(task.buggy)
+    info += 'vtag={}\n'.format('b' if task.buggy else 'f')
     util.printc('Trying to commit changes')
     util.system('cd {} && git add .'.format(p))
     #util.system('cd {} && git commit -m "catena4j"'.format(p))
@@ -81,7 +82,7 @@ def generate_c4j_info(task, p):
     if not ret[0]:
         util.printc('Command git commit returns non-zero (may be nothing to commit)')
     if ret[1].strip():
-        util.printc(ret[1])
+        util.printc(ret[1], head='')
     commit_id = util.run_and_get(['git', 'rev-parse', 'HEAD'], at=p)
     if not commit_id[0]:
         util.printc(commit_id[1])
@@ -95,6 +96,71 @@ def generate_c4j_info(task, p):
 def checkout_internal(task):
     task.loader.load(task.proj, task.bug_id, task.cid, task.buggy, task.working_dir)
     generate_c4j_info(task, task.working_dir)
+__RESET_NOT_IMPLEMENTED__ = 1
+__FALSE = 0
+__RESET = 1
+__RESET_AND_FIX = 2
+__RESET_AND_LOAD = 3
+def test_line_match(line, want):
+    return line.split('=')[1].strip() == want
+def should_trap_d4j(task):
+    if not util.exists(f'{task.working_dir}/.defects4j.config'):
+        return __FALSE
+    with open(f'{task.working_dir}/.defects4j.config', 'r') as f:
+        info = f.read().splitlines()
+    bid = ''
+    for line in info:
+        if 'pid' in line:
+            if not test_line_match(line, task.proj):
+                return __FALSE
+        if 'bid' in line:
+            bid = line.split('=')[1].strip()
+    if not bid[:-1] == task.bug_id:
+        return __FALSE
+    if bid.endswith('f'):
+        return __FALSE
+    if __RESET_NOT_IMPLEMENTED__:
+        util.printc('reset command is not implemented, use default checkout')
+        return __FALSE
+    # bid endswith 'b' in this case
+    return __RESET_AND_LOAD
+def should_trap(task):
+    if not util.exists(f'{task.working_dir}/.catena4j.info'):
+        return should_trap_d4j(task)
+    with open(f'{task.working_dir}/.catena4j.info', 'r') as f:
+        info = f.read().splitlines()
+    ver_tag = ''
+    for line in info:
+        if 'project' in line:
+            if not test_line_match(line, task.proj):
+                return __FALSE
+        elif 'bugid' in line:
+            if not test_line_match(line, task.bug_id):
+                return __FALSE
+        elif 'cid' in line:
+            if not test_line_match(line, task.cid):
+                return __FALSE
+        elif 'vtag' in line:
+            ver_tag = line.split('=')[1].strip()
+    if ver_tag == 'f' and task.buggy:
+        return __FALSE
+    if __RESET_NOT_IMPLEMENTED__:
+        util.printc('reset command is not implemented, use default checkout')
+        return __FALSE
+    if ver_tag == 'b' and not task.buggy:
+        return __RESET_AND_FIX
+    return __RESET
+def try_to_reset(task):
+    level = should_trap(task)
+    if level > __FALSE:
+        reset.reset_internal(task.wd)
+        if level == __RESET_AND_FIX:
+            task.loader.fix(task.proj, task.bug_id, task.cid, task.working_dir)
+            return 0
+        if level == __RESET_AND_LOAD:
+            return 1
+        return 0
+    return 1
 def CHECKOUT(args):
     stat, task = validate(args)
     if stat == INVALID:
@@ -102,4 +168,6 @@ def CHECKOUT(args):
     if stat == D4J:
         backend.d4j_backend()
     if stat == COMMON:
-        checkout_internal(task)
+        if try_to_reset(task):
+            checkout_internal(task)
+        util.task_printc('Tasks all done').finish()

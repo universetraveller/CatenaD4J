@@ -75,9 +75,10 @@ def EXPORT(args):
         attr = task.loader.get_attr(task.proj, task.bug_id, task.cid, task.prop)
         if not task.opf == None:
             with open(task.opf, 'r') as f:
-                for i in attr:
-                    f.write(i)
-                    f.write('\n')
+                f.write(attr)
+                f.flush()
         else:
-            for i in attr:
-                print(i)
+            end_ch = '\n'
+            if attr.endswith('\n'):
+                end_ch = ''
+            print(attr, end=end_ch, flush=True)

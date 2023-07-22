@@ -13,7 +13,7 @@ def is_help_cmd():
         return True
     return False
 def d4j_backend():
-    util.printc('Try to run defects4j ...')
+    util.task_printc('Try to run defects4j').finish()
     util.invoke_d4j_direct(' '.join(sys.argv[1:]))
     return
 def c4j_backend(args):
