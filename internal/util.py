@@ -2,7 +2,6 @@ from . import config
 import subprocess
 import os
 import sys
-
 class C4JInsideError(Exception):
     pass
 def printc(obj, flag=0, head=config.p_head, end='\n'):
@@ -22,6 +21,12 @@ class INVOKE0:
         self.do = do
     def run(self):
         self.do()
+class INVOKE1:
+    def __init__(self, do, arg):
+        self.do = do
+        self.arg = arg
+    def run(self):
+        self.do(arg)
 class task_printer:
     def __init__(self, title, finishing, failed, anchor, head):
         self.finishing = finishing
@@ -78,3 +83,5 @@ def run_and_get(cmd, at:str):
         return True, ret.stdout.decode('utf-8')
 def exists(name):
     return os.path.exists(name)
+def config_run(config, default, func, *args, **argsm):
+    return func(*args, **argsm) if config else default

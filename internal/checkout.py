@@ -75,32 +75,46 @@ def generate_c4j_info(task, p):
     info += 'bugid={}\n'.format(task.bug_id)
     info += 'cid={}\n'.format(task.cid)
     info += 'vtag={}\n'.format('b' if task.buggy else 'f')
-    util.printc('Trying to commit changes')
+    if util.config_run(config.CONFIG_RESET_IN_CHECKOUT, 0, reset.git_clean, p):
+        return -1
+    commit_task = util.task_printc('Trying to commit changes')
     util.system('cd {} && git add .'.format(p))
     #util.system('cd {} && git commit -m "catena4j"'.format(p))
     ret = util.run_and_get(['git', 'commit', '-m', '"catena4j"'], at=p)
     if not ret[0]:
+        commit_task.fail()
         util.printc('Command git commit returns non-zero (may be nothing to commit)')
+        return -1
+    commit_task.finish()
+    '''
     if ret[1].strip():
-        util.printc(ret[1], head='')
+        util.printc(ret[1].rstrip(), head='')
+    '''
+    capture_task = util.task_printc('Capture commit id')
     commit_id = util.run_and_get(['git', 'rev-parse', 'HEAD'], at=p)
     if not commit_id[0]:
         util.printc(commit_id[1])
         util.printc('Failed to capture commit id, see error info.')
+        capture_task.fail()
+        return -1
     else:
         info += 'commit={}\n'.format(commit_id[1])
-        util.printc('Commit id: {}'.format(commit_id[1]))
+        #util.printc('Commit id: {}'.format(commit_id[1].rstrip()))
+        capture_task.finish()
+    write_task = util.task_printc('Generate info file')
     with open('{}/.catena4j.info'.format(p), 'w') as w:
         w.write(info)
-    util.printc('Info file generated.')
+    write_task.finish()
+    return 0
 def checkout_internal(task):
     task.loader.load(task.proj, task.bug_id, task.cid, task.buggy, task.working_dir)
-    generate_c4j_info(task, task.working_dir)
-__RESET_NOT_IMPLEMENTED__ = 1
+    return generate_c4j_info(task, task.working_dir)
+#__RESET_NOT_IMPLEMENTED__ = 1
 __FALSE = 0
 __RESET = 1
 __RESET_AND_FIX = 2
 __RESET_AND_LOAD = 3
+__CLEAN = 4
 def test_line_match(line, want):
     return line.split('=')[1].strip() == want
 def should_trap_d4j(task):
@@ -119,9 +133,11 @@ def should_trap_d4j(task):
         return __FALSE
     if bid.endswith('f'):
         return __FALSE
+    '''
     if __RESET_NOT_IMPLEMENTED__:
         util.printc('reset command is not implemented, use default checkout')
         return __FALSE
+    '''
     # bid endswith 'b' in this case
     return __RESET_AND_LOAD
 def should_trap(task):
@@ -144,19 +160,21 @@ def should_trap(task):
             ver_tag = line.split('=')[1].strip()
     if ver_tag == 'f' and task.buggy:
         return __FALSE
+    '''
     if __RESET_NOT_IMPLEMENTED__:
         util.printc('reset command is not implemented, use default checkout')
         return __FALSE
+    '''
     if ver_tag == 'b' and not task.buggy:
         return __RESET_AND_FIX
     return __RESET
 def try_to_reset(task):
     level = should_trap(task)
     if level > __FALSE:
-        reset.reset_internal(task.wd)
+        reset.reset_internal(task.working_dir)
         if level == __RESET_AND_FIX:
             task.loader.fix(task.proj, task.bug_id, task.cid, task.working_dir)
-            return 0
+            return generate_c4j_info(task, task.working_dir)
         if level == __RESET_AND_LOAD:
             return 1
         return 0
@@ -168,6 +186,11 @@ def CHECKOUT(args):
     if stat == D4J:
         backend.d4j_backend()
     if stat == COMMON:
-        if try_to_reset(task):
-            checkout_internal(task)
-        util.task_printc('Tasks all done').finish()
+        ret_v = util.config_run(config.CONFIG_RESET_IN_CHECKOUT, 1, try_to_reset, task)
+        if ret_v > 0:
+            ret_v = checkout_internal(task)
+        done_task = util.task_printc('Tasks all done')
+        if ret_v:
+            done_task.fail()
+        else:
+            done_task.finish()

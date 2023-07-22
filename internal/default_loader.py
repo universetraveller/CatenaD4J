@@ -48,7 +48,7 @@ class DefaultPathLoader:
         # checkout buggy version
         if util.invoke_d4j_direct('checkout', p=proj, v=f'{bid}b', w=wd):
             util.printc('Exit checkout tasks')
-            return
+            raise util.C4JInsideError(f'Failed to check out {bid}b')
         # apply test patch
         test_manager = ProjectManager.FileManager.FileManager(wd, ProjectManager.FileTypes.EditCacheFile)
         test_patch = json.loads(self.get_attr(proj, bid, cid, 'test.patch'))

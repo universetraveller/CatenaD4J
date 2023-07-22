@@ -1,6 +1,7 @@
 from . import util
 from . import checkout
 from . import export
+from . import reset
 
 def no_impl(*arglist, **argmap):
     raise util.C4JInsideError("The method is not implemented")
@@ -10,6 +11,7 @@ __entry_map = {
 # Register commands with method implementation there or use function register_command()
         "checkout" : checkout.CHECKOUT,
         "export" : export.EXPORT,
+        "reset" : reset.RESET,
         "ver" : no_impl,
         "info" : no_impl
 # End
