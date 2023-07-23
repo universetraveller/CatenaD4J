@@ -1,4 +1,5 @@
 from .import util
+from .import config
 __INVALID = -1
 __VALID = 0
 __C4J_RESET = 1
@@ -40,9 +41,25 @@ def git_reset(wd, commit):
         util.printc(res[1])
         util.printc('Fail to reset, see error info.')
         return -1
+def get_line_attr(line):
+    return line.split('=')[1].strip()
+def reset_c4j_tag(info, wd):
+    for line in info.splitlines():
+        if 'project' in line:
+            pid = get_line_attr(line)
+        if 'bugid' in line:
+            bid = get_line_attr(line)
+        if 'cid' in line:
+            cid = get_line_attr(line)
+        if 'vtag' in line:
+            vtag = get_line_attr(line)
+    tag = config.TAG_PATTERN.format(pid=pid, bid=bid, cid=cid, buggy=vtag)
+    return git_reset(wd, tag)
 def reset_c4j(wd):
     with open(f'{wd}/.catena4j.info', 'r') as f:
         info = f.read()
+    if config.CONFIG_GIT_TAG:
+        return reset_c4j_tag(info, wd)
     catch_task = util.task_printc('Catch commit id')
     commit = None
     for line in info.splitlines():

@@ -85,3 +85,5 @@ def exists(name):
     return os.path.exists(name)
 def config_run(config, default, func, *args, **argsm):
     return func(*args, **argsm) if config else default
+def get_c4j_tag(pid, bid, cid, buggy):
+    return config.TAG_PATTERN.format(pid=pid, bid=bid, cid=cid, buggy='BUGGY' if buggy else 'FIXED')
