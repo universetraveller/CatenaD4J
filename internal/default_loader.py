@@ -59,7 +59,7 @@ class DefaultPathLoader:
         util.task_printc('Buggy program version checked out for {}-{}{}{}'.format(proj, bid, 'b' if buggy else 'f', cid)).finish()
         if not buggy:
             self.fix(proj, bid, cid, wd, buggy=False)
-    def fix(self, proj, bid, cid, wd, buggy='f'):
+    def fix(self, proj, bid, cid, wd, buggy=False):
         src_patch = json.loads(self.get_attr(proj, bid, cid, 'src.patch'))
         _src_files, _src_edits = self.parse_src_patch(src_patch)
         self.load_fixed_done(_src_files, _src_edits, wd)

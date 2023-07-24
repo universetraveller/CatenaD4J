@@ -27,6 +27,19 @@ class INVOKE1:
         self.arg = arg
     def run(self):
         self.do(arg)
+class INVOKE:
+    def __init__(self, __func, *args, **argsm):
+        self.func = __func
+        self.args = args
+        self.argsm = argsm
+    def run(self):
+        self.result = self.func(*self.args, **self.argsm)
+        return self.result
+    def invoke(self, *args, **argsm):
+        self.result = self.func(*args, **argsm)
+        return self.result
+    def get_result(self):
+        return self.result
 class task_printer:
     def __init__(self, title, finishing, failed, anchor, head):
         self.finishing = finishing
