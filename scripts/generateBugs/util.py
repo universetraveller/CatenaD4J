@@ -40,7 +40,7 @@ CMDFAIL = 1
 def cleanup(path, build_dir):
     for i in build_dir:
         runCommand(['rm', '-rf', '{}/{}'.format(path, i)])
-def get_failing_tests(path, build_dir:list, timeout=3600):
+def get_failing_tests(path, build_dir:list, timeout=900):
     start_time = time.time()
     result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
     used_time = 'Finished in {:.2f} seconds'.format(time.time() - start_time)

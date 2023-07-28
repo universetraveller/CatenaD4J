@@ -130,5 +130,19 @@ def parse_all_statstic1_all_proj():
     projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
     for i in projs:
         assert not parse_all_statstic1_name(i)
+def parse_max_timeout():
+    assert not get_data()
+    time_list = []
+    for i in data:
+        f = data[i][0]
+        for j in f:
+            if 'used time: Finished in' in j:
+                time_list.append(float(j.replace('used time: Finished in', '').replace('seconds', '')))
+                print(time_list[-1])
+    time_list.sort()
+    max_5 = time_list[-5:]
+    print('max time:')
+    for i in max_5:
+        print(i)
 if __name__ == '__main__':
-    parse_all_statstic1_all_proj()
+    parse_max_timeout()
