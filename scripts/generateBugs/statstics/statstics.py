@@ -141,8 +141,118 @@ def parse_max_timeout():
                 print(time_list[-1])
     time_list.sort()
     max_5 = time_list[-5:]
-    print('max time:')
-    for i in max_5:
+    print('max 5:')
+    for i in max_5[::-1]:
         print(i)
+    print(f'min: {time_list[0]}')
+    print(f'avg: {sum(time_list)/len(time_list)}')
+def parse_all_statstic2():
+    locale = open(f'./statstics2.csv', 'a')
+    locale.write('bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk\n')
+    isolated = 0
+    divisible = 0
+    indivisible = 0
+    into_single=0
+    for name in data:
+        tp = data[name]
+        log = tp[0]
+        nbn = new_bugs_num(log)
+        if nbn == -1:
+            locale.write(f'{name}, {NO_DATA}, 0, NONE\n')
+            alert(f'{name} no ending')
+        else:
+            bgdict = tp[1]
+            bl = new_bugs_from_bgdict(bgdict)
+            if not len(bl):
+                alert(f'Empty new BUGS at {name}')
+                continue
+            if len(bl) == 1 and is_all('1', bl[0]):
+                locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
+                indivisible += 1
+            single = 0
+            multi = []
+            for fix in bl:
+                if fix.count('1') == 1:
+                    single += 1
+                elif fix.count('1') > 1 and not is_all('1', fix):
+                    multi.append(fix)
+                else:
+                    print(f'invalid arg {fix}')
+            divisible += 1
+            isolated += len(multi)
+            into_single += single
+            if len(multi) == 0:
+                stat = 'INVALID_DIVISIBLE_BUG'
+            elif single == 0:
+                stat = 'VALID_DIVISIBLE_BUG'
+            else:
+                stat = 'MIXED_DIVISIBLE_BUG'
+            hs = '/'
+            for i in bl:
+                if i.count('1') > 1:
+                    hs+='{}/'.format(i.count('1'))
+            locale.write(f'{name}, {stat}, {single}, {len(multi)}, {hs}\n')
+    locale.write(f'STATSTICS, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Divide_into_single={into_single}\n')
+    locale.close()
+    print(f'statstics2 ends')
+    return 0
+def parse_all_statstic2_name(name):
+    locale = open(f'./statstics2_{pname}.csv', 'a')
+    locale.write('bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk\n')
+    isolated = 0
+    divisible = 0
+    indivisible = 0
+    into_single=0
+    for name in data:
+        if not pname in name:
+            continue
+        tp = data[name]
+        name = name.replace(pname+'_', '')
+        log = tp[0]
+        nbn = new_bugs_num(log)
+        if nbn == -1:
+            locale.write(f'{name}, {NO_DATA}, 0, NONE\n')
+            alert(f'{name} no ending')
+        else:
+            bgdict = tp[1]
+            bl = new_bugs_from_bgdict(bgdict)
+            if not len(bl):
+                alert(f'Empty new BUGS at {name}')
+                continue
+            if len(bl) == 1 and is_all('1', bl[0]):
+                locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
+                indivisible += 1
+            single = 0
+            multi = []
+            for fix in bl:
+                if fix.count('1') == 1:
+                    single += 1
+                elif fix.count('1') > 1 and not is_all('1', fix):
+                    multi.append(fix)
+                else:
+                    print(f'invalid arg {fix}')
+            divisible += 1
+            isolated += len(multi)
+            into_single += single
+            if len(multi) == 0:
+                stat = 'INVALID_DIVISIBLE_BUG'
+            elif single == 0:
+                stat = 'VALID_DIVISIBLE_BUG'
+            else:
+                stat = 'MIXED_DIVISIBLE_BUG'
+            hs = '/'
+            for i in bl:
+                if i.count('1') > 1:
+                    hs+='{}/'.format(i.count('1'))
+            locale.write(f'{name}, {stat}, {single}, {len(multi)}, {hs}\n')
+    locale.write(f'STATSTICS, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Divide_into_single={into_single}\n')
+    locale.close()
+    print(f'statstics2_{pname} ends')
+    return 0
+def parse_all_statstic2_all_proj():
+    assert not get_data()
+    projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+    for i in projs:
+        assert not parse_all_statstic1_name(i)
 if __name__ == '__main__':
     parse_max_timeout()

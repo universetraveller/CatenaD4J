@@ -98,7 +98,6 @@ class Generator:
     def _run(self):
         self.useNewFailingTests()
         tasks = util.getFixPattern(self.hunk_num)
-        start_time = 
         for task in tasks:
             self.taskSingleHunk(task)
     def hunk_block_to_edit(self, hb):
@@ -209,10 +208,11 @@ class Generator:
                         thisHunk.set_status(UNSELECTABLE)
                     else:
                         assert len(thisHunk.failing_tests) < len(firstHunk.failing_tests)
+                        canFix = firstHunk.failing_tests - thisHunk.failing_tests
                         self.log('select new bug')
                         self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
-                        self.log('new failing tests:\n{}'.format('\n'.join(list(thisHunk.failing_tests))))
-                        self.newBugs[util.getLabel(fix_pattern)] = thisHunk.failing_tests
+                        self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
+                        self.newBugs[util.getLabel(fix_pattern)] = canFix
             self.hunks.append(thisHunk)
         else:
             self.log('what tag it is? {}'.format(failure.tag))
