@@ -8,6 +8,7 @@ CONFIG_RESET_IN_CHECKOUT=0
 CONFIG_GIT_TAG=1
 if CONFIG_GIT_TAG:
     TAG_PATTERN = 'C4J_{pid}_{bid}_{cid}_{buggy}'
+CONFIG_PRE_FIX=0
 pyver = sys.version
 version = '0.0.1'
 p_head = 'CatenaD4j# '

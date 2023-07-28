@@ -2,6 +2,7 @@ import util
 import ProjectManager as PM
 import json
 import os
+import timeout_decorator
 
 # status
 COMMON = 0
@@ -30,6 +31,7 @@ def allSame(fp, t):
         if not i == t:
             return False
     return True
+_generator_run_timeout=3600
 class Generator:
     def __init__(self, proj, bug_id):
         self.proj = proj
@@ -51,12 +53,14 @@ class Generator:
     def set_method_base(self, mb:dict):
         self.method_base = mb
         self.setting -= 1
+    @timeout_decorator.timeout(_generator_run_timeout, timeout_exception=TimeoutError, exception_message='generator.run() timeout')
     def run(self):
         if self.setting > 0:
             raise ValueError('Not completed setting')
         self.log('---\nBegin generate bug_id: {}_{}'.format(self.proj, self.bug_id))
         hunk_num = self.patch_base['num_of_hunks']
         self.log('num_of_hunks: {}'.format(hunk_num))
+        self.log(f'timeout for running: {_generator_run_timeout}')
         if hunk_num == 1:
             self.log('Skip')
         else:
@@ -94,6 +98,7 @@ class Generator:
     def _run(self):
         self.useNewFailingTests()
         tasks = util.getFixPattern(self.hunk_num)
+        start_time = 
         for task in tasks:
             self.taskSingleHunk(task)
     def hunk_block_to_edit(self, hb):
@@ -160,10 +165,14 @@ class Generator:
             if thisHunk.count() == 0:
                 thisHunk.set_status(UNSELECTABLE)
             else:
+                # patch 29.7.2023 for new requirement that keeps signle hunk bugs
+                thisHunk.set_status(COMMON)
+                '''
                 if thisHunk.count() == 1:
                     thisHunk.set_status(UNSELECTABLE)
                 else:
                     thisHunk.set_status(COMMON)
+                '''
                 firstHunk = self.hunks[0]
                 #firstHunk = self.virtualHunk
                 newFT = thisHunk.failing_tests - firstHunk.failing_tests
@@ -185,17 +194,30 @@ class Generator:
                     if not len(canFix) == 0:
                         self.log('select new bug')
                         self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
-                        self.log('failing tests: {}'.format('@'.join(list(canFix))))
+                        self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
                         self.newBugs[util.getLabel(fix_pattern)] = canFix
                     else:
                         self.log('Could not fix independently')
                         thisHunk.set_status(UNSELECTABLE)
                 else:
-                    self.log('No new failing tests but only 1 hunk')
+                    # patch 29.7.2023
+                    # single hunk fixed and contains no new failing tests indicates 2 cases:
+                    # failing tests are same as firstHunk 
+                    # or part of failing tests of firstHunk are fixed
+                    if len(thisHunk.failing_tests) == len(firstHunk.failing_tests):
+                        self.log('No new failing tests but only 1 hunk')
+                        thisHunk.set_status(UNSELECTABLE)
+                    else:
+                        assert len(thisHunk.failing_tests) < len(firstHunk.failing_tests)
+                        self.log('select new bug')
+                        self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
+                        self.log('new failing tests:\n{}'.format('\n'.join(list(thisHunk.failing_tests))))
+                        self.newBugs[util.getLabel(fix_pattern)] = thisHunk.failing_tests
             self.hunks.append(thisHunk)
         else:
             self.log('what tag it is? {}'.format(failure.tag))
             raise ValueError('what tag it is? {}'.format(failure.tag))
+        self.log('processed: {}'.format(util.getLabel(fix_pattern)))
     def useNewFailingTests(self):
         self.log('trying to replace old failing tests')
         self.name_pattern = '{}$catena_{}'

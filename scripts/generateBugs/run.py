@@ -12,7 +12,7 @@ def task(bug_id, info, method):
     os.makedirs('./working/{}'.format(bug_id))
     logger = util.SimpleLogger('./working/{}/log'.format(bug_id))
     try:
-        if bug_id in ('Time_21',):
+        if bug_id in ('Time_21', 'Lang_2', 'Closure_63', 'Closure_93'):
             raise Exception('{} is a deprecated bug'.format(bug_id))
         info = info[bug_id]
         method = method[bug_id]
@@ -40,9 +40,9 @@ def main():
         js1 = json.load(f)
     with open('./res5.json', 'r') as f:
         js2 = json.load(f)
-    with open('./2to5', 'r') as f:
+    with open('./2toMore', 'r') as f:
         bug_ids = f.read().splitlines()
-    _debug = True
+    _debug = False
     if _debug:
         #bug_ids = ['Lang_34', 'Math_44']
         '''
