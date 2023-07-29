@@ -2,6 +2,7 @@ import subprocess
 import traceback
 import itertools
 import time
+import math
 
 def runCommand(cmd, encoding='utf-8', cwd=None, timeout=None):
     try:
@@ -60,12 +61,27 @@ def get_failing_tests(path, build_dir:list, timeout=900):
     else:
         cleanup(path, build_dir)
         return Failure(-100, [], result[2], CMDFAIL)
-def getFixPattern(num):
-    '''
-        Get all combination cases of the hunks
-        Why default maxnum is 11:
-            the number of cases of the 4 hunks bugs is 11
-    '''
+def math_log2(n):
+    return math.log2(n)
+def iter_getFixPattern(num, _max):
+    final = [(False,)*num]
+    _round = 1
+    generator =  itertools.combinations(range(num), _round)
+    while len(final) < _max:
+        try:
+            get = next(generator)
+        except StopIteration:
+            _round += 1
+            generator =  itertools.combinations(range(num), _round)
+        else:
+            base = [False]*num
+            for i in get:
+                base[i] = True
+            final.append(tuple(base))
+    return final
+def getFixPattern(num, _max):
+    if num > math_log2(_max):
+        return iter_getFixPattern(num, _max)
     fix = [False, True]
     raw = list(itertools.product(fix, repeat=num))
     raw.sort(key=lambda x : x.count(True))

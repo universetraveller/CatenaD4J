@@ -12,7 +12,11 @@ def check_log(p):
     with open(p+'/log', 'r') as f:
         f = f.read().splitlines()
     if not f[-1].startswith('Find'):
-        return 0
+        num = 0
+        for i in f:
+            if 'select new bug' in i:
+                num += 1
+        return num
     return int(f[-1].replace('Find', '').replace('new bugs', ''))
 def moreCheck(name, l):
     c = 0

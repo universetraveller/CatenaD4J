@@ -42,6 +42,8 @@ def main():
         js2 = json.load(f)
     with open('./2toMore', 'r') as f:
         bug_ids = f.read().splitlines()
+    if not os.path.exists('./exceptions/'):
+        os.makedirs('./exceptions/')
     _debug = False
     if _debug:
         #bug_ids = ['Lang_34', 'Math_44']

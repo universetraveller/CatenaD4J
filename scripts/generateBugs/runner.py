@@ -32,6 +32,7 @@ def allSame(fp, t):
             return False
     return True
 _generator_run_timeout=3600
+_max_patterns = 2048
 class Generator:
     def __init__(self, proj, bug_id):
         self.proj = proj
@@ -60,6 +61,8 @@ class Generator:
         self.log('---\nBegin generate bug_id: {}_{}'.format(self.proj, self.bug_id))
         hunk_num = self.patch_base['num_of_hunks']
         self.log('num_of_hunks: {}'.format(hunk_num))
+        if int(hunk_num) > util.math_log2(_max_patterns):
+            self.log(f'NOTICE: may not contains full fix patterns for hunks are too more ({hunk_num} hunks)')
         self.log(f'timeout for running: {_generator_run_timeout}')
         if hunk_num == 1:
             self.log('Skip')
@@ -91,13 +94,17 @@ class Generator:
     def initFM(self):
         self.log('init FileManager')
         self.FM = PM.FileManager.FileManager(self.path, PM.FileTypes.EditCacheFile)
+        traced = set()
         for i in range(self.hunk_num):
             patch_hunk = self.patch_base[str(i)]
-            self.log('trace file: {}'.format(patch_hunk['file_name']))
-            self.FM.trace_file(patch_hunk['file_name'], 'h{}'.format(str(i)))
+            hunk_file_name = patch_hunk['file_name']
+            if not hunk_file_name in traced:
+                self.log('trace file: {}'.format(hunk_file_name))
+                self.FM.trace_file(hunk_file_name, 'h{}'.format(str(i)))
+                traced.add(hunk_file_name)
     def _run(self):
         self.useNewFailingTests()
-        tasks = util.getFixPattern(self.hunk_num)
+        tasks = util.getFixPattern(self.hunk_num, _max_patterns)
         for task in tasks:
             self.taskSingleHunk(task)
     def hunk_block_to_edit(self, hb):

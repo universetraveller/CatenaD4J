@@ -5,6 +5,12 @@ alert = print
 def new_bugs_num(log_list):
     last_line = log_list[-1]
     if not last_line.startswith('Find'):
+        num = 0
+        for i in log_list:
+            if 'select new bug' in i:
+                num += 1
+        if not num == 0:
+            return num
         return -1
     return int(last_line.replace('Find', '').replace('new bugs', ''))
 def new_bugs_from_bgdict(bgdict):
@@ -158,14 +164,18 @@ def parse_all_statstic2():
         log = tp[0]
         nbn = new_bugs_num(log)
         if nbn == -1:
-            locale.write(f'{name}, {NO_DATA}, 0, NONE\n')
+            locale.write(f'{name}, {NO_DATA}, NONE, NONE, NONE\n')
             alert(f'{name} no ending')
         else:
             bgdict = tp[1]
             bl = new_bugs_from_bgdict(bgdict)
             if not len(bl):
-                alert(f'Empty new BUGS at {name}')
+                alert(f'Empty new BUGS at {pname}_{name}')
+                if not -1 == nbn:
+                    alert(f'Two bugs num not equals {pname}_{name}')
                 continue
+            if not len(bl) == nbn:
+                alert(f'Two bugs num not equals {pname}_{name}')
             if len(bl) == 1 and is_all('1', bl[0]):
                 locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
                 indivisible += 1
@@ -211,14 +221,18 @@ def parse_all_statstic2_name(name):
         log = tp[0]
         nbn = new_bugs_num(log)
         if nbn == -1:
-            locale.write(f'{name}, {NO_DATA}, 0, NONE\n')
+            locale.write(f'{name}, {NO_DATA}, NONE, NONE, NONE\n')
             alert(f'{name} no ending')
         else:
             bgdict = tp[1]
             bl = new_bugs_from_bgdict(bgdict)
             if not len(bl):
-                alert(f'Empty new BUGS at {name}')
+                alert(f'Empty new BUGS at {pname}_{name}')
+                if not -1 == nbn:
+                    alert(f'Two bugs num not equals {pname}_{name}')
                 continue
+            if not len(bl) == nbn:
+                alert(f'Two bugs num not equals {pname}_{name}')
             if len(bl) == 1 and is_all('1', bl[0]):
                 locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
                 indivisible += 1
