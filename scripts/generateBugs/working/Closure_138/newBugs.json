@@ -1,0 +1,160 @@
+{
+    "original": {
+        "num_of_hunks": 7,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java",
+            "from_line_no": 208,
+            "to_line_no": 208,
+            "replaced": "        if (paramType != null) {\n",
+            "patch_type": "delete",
+            "next_line_no": 209
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java",
+            "from_line_no": 218,
+            "to_line_no": 218,
+            "replaced": "            }\n",
+            "patch_type": "delete",
+            "next_line_no": 219
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/TypeInference.java",
+            "from_line_no": 632,
+            "to_line_no": 633,
+            "replaced_with": "      if (var != null) {\n",
+            "replaced": "      if (var != null &&\n          !(var.isTypeInferred() && unflowableVarNames.contains(varName))) {\n",
+            "patch_type": "replace",
+            "next_line_no": 634
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/TypeInference.java",
+            "replaced_with": "        boolean isInferred = var.isTypeInferred();\n        boolean unflowable =\n            isInferred && unflowableVarNames.contains(varName);\n",
+            "patch_type": "insert",
+            "next_line_no": 639
+        },
+        "4": {
+            "file_name": "src/com/google/javascript/jscomp/TypeInference.java",
+            "replaced_with": "        boolean nonLocalInferredSlot =\n            isInferred &&\n            syntacticScope.getParent() != null &&\n            var == syntacticScope.getParent().getSlot(varName);\n",
+            "patch_type": "insert",
+            "next_line_no": 643
+        },
+        "5": {
+            "file_name": "src/com/google/javascript/jscomp/TypeInference.java",
+            "replaced_with": "        if (!unflowable && !nonLocalInferredSlot) {\n",
+            "patch_type": "insert",
+            "next_line_no": 644
+        },
+        "6": {
+            "file_name": "src/com/google/javascript/jscomp/TypeInference.java",
+            "replaced_with": "          }\n",
+            "patch_type": "insert",
+            "next_line_no": 647
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsArrayOnNull",
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunctionOnNull",
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsObjectOnNull",
+            "com.google.javascript.jscomp.TypeCheckTest::testIssue124b",
+            "com.google.javascript.jscomp.TypeCheckTest::testIssue124"
+        ],
+        "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsArrayOnNull": {
+            "file_path": "test/com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "check": [
+                "Use pattern matching: .testClosureFunction"
+            ],
+            "Instance": "Begin: Pos(124, 10)\nEnd: Pos(129, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java\nName: testGoogIsArrayOnNull\nChilds: [StatementAssertion<Begin: Pos(125, 5), End: Pos(128, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "name": "testGoogIsArrayOnNull",
+            "begin": "Pos(124, 10)",
+            "end": "Pos(129, 3)",
+            "begin_line_no": 124,
+            "end_line_no": 129,
+            "child": [
+                "Begin: Pos(125, 5)\nEnd: Pos(128, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunctionOnNull": {
+            "file_path": "test/com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "check": [
+                "Use pattern matching: .testClosureFunction"
+            ],
+            "Instance": "Begin: Pos(131, 10)\nEnd: Pos(136, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java\nName: testGoogIsFunctionOnNull\nChilds: [StatementAssertion<Begin: Pos(132, 5), End: Pos(135, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "name": "testGoogIsFunctionOnNull",
+            "begin": "Pos(131, 10)",
+            "end": "Pos(136, 3)",
+            "begin_line_no": 131,
+            "end_line_no": 136,
+            "child": [
+                "Begin: Pos(132, 5)\nEnd: Pos(135, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsObjectOnNull": {
+            "file_path": "test/com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "check": [
+                "Use pattern matching: .testClosureFunction"
+            ],
+            "Instance": "Begin: Pos(138, 10)\nEnd: Pos(143, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java\nName: testGoogIsObjectOnNull\nChilds: [StatementAssertion<Begin: Pos(139, 5), End: Pos(142, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "name": "testGoogIsObjectOnNull",
+            "begin": "Pos(138, 10)",
+            "end": "Pos(143, 3)",
+            "begin_line_no": 138,
+            "end_line_no": 143,
+            "child": [
+                "Begin: Pos(139, 5)\nEnd: Pos(142, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.TypeCheckTest::testIssue124b": {
+            "file_path": "test/com/google/javascript/jscomp/TypeCheckTest.java",
+            "Instance": "Begin: Pos(4154, 10)\nEnd: Pos(4164, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/TypeCheckTest.java\nName: testIssue124b\nChilds: [StatementAssertion<Begin: Pos(4155, 5), End: Pos(4163, 23)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/TypeCheckTest.java",
+            "name": "testIssue124b",
+            "begin": "Pos(4154, 10)",
+            "end": "Pos(4164, 3)",
+            "begin_line_no": 4154,
+            "end_line_no": 4164,
+            "child": [
+                "Begin: Pos(4155, 5)\nEnd: Pos(4163, 23)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.TypeCheckTest::testIssue124": {
+            "file_path": "test/com/google/javascript/jscomp/TypeCheckTest.java",
+            "Instance": "Begin: Pos(4145, 10)\nEnd: Pos(4152, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/TypeCheckTest.java\nName: testIssue124\nChilds: [StatementAssertion<Begin: Pos(4146, 5), End: Pos(4151, 13)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_138/test//com/google/javascript/jscomp/TypeCheckTest.java",
+            "name": "testIssue124",
+            "begin": "Pos(4145, 10)",
+            "end": "Pos(4152, 3)",
+            "begin_line_no": 4145,
+            "end_line_no": 4152,
+            "child": [
+                "Begin: Pos(4146, 5)\nEnd: Pos(4151, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "1100000": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsObjectOnNull",
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunctionOnNull",
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsArrayOnNull"
+        ]
+    },
+    "1101111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.TypeCheckTest::testIssue124b",
+            "com.google.javascript.jscomp.TypeCheckTest::testIssue124"
+        ]
+    }
+}

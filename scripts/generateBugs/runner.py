@@ -282,8 +282,6 @@ class Generator:
         self.new_num = new_num
         self.ori_num = ori_num
     def analyze(self, path):
-        self.save(path, ending=True)
-    def save(self, path, ending=False):
         num1 = 0
         for i in self.hunks:
             if i.status == COMMON:
@@ -295,8 +293,10 @@ class Generator:
             self.log('EXCEPTION: Broken bugs finding')
             self.log('Find {} new bugs from inside hunks'.format(num1))
             self.log('Find {} new bugs from checking'.format(num2))
-        elif ending:
+        else:
             self.log('Find {} new bugs'.format(num2))
+        self.save(path, ending=True)
+    def save(self, path, ending=False):
         if not ending:
             self.log('Save found bug')
         bug_path = f'{path}/newBugs.json'

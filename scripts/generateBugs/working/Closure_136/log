@@ -1,13 +1,12 @@
 ---
 Begin generate bug_id: Closure_136
 num_of_hunks: 4
+timeout for running: 3600
 use working dir: ./working/data/Closure_136
 Try to checkout Closure_136
 build dir: ['./working/data/Closure_136/build/classes', './working/data/Closure_136/build/test']
 init FileManager
 trace file: src/com/google/javascript/jscomp/MethodCompilerPass.java
-trace file: src/com/google/javascript/jscomp/MethodCompilerPass.java
-trace file: src/com/google/javascript/jscomp/RenameVars.java
 trace file: src/com/google/javascript/jscomp/RenameVars.java
 trying to replace old failing tests
 edit: replace from 94 range 11 at test/com/google/javascript/jscomp/MethodCheckTest.java
@@ -149,14 +148,14 @@ to
 
     super.disableNormalize();
   }
-trace file: test/com/google/javascript/jscomp/RenameVarsTest.java
 trace file: test/com/google/javascript/jscomp/MethodCheckTest.java
+trace file: test/com/google/javascript/jscomp/RenameVarsTest.java
 new test num: 10
 ori test num: 2
 pattern: 0000
 patches are written to file
 running tests...
-used time: Finished in 130.22 seconds
+used time: Finished in 119.69 seconds
 Failing tests: 6
 	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_1
 	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_3
@@ -164,6 +163,7 @@ Failing tests: 6
 	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_5
 	com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_6
 	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+processed: 0000
 pattern: 0001
 try to fix hunk: 3
 insert before 204 with           String newName =
@@ -180,6 +180,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 0001
 pattern: 0010
 try to fix hunk: 2
 insert before 203 with         if (local) {
@@ -190,6 +191,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 0010
 pattern: 0100
 try to fix hunk: 1
 replace from 106 with range 20 to
@@ -197,10 +199,19 @@ replace from 106 with range 20 to
 
 patches are written to file
 running tests...
-used time: Finished in 118.76 seconds
+used time: Finished in 108.22 seconds
 Failing tests: 1
 	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
-No new failing tests but only 1 hunk
+select new bug
+Pattern: 0100
+new failing tests:
+com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_4
+com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_3
+com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_1
+com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_6
+com.google.javascript.jscomp.MethodCheckTest::testSeparateMethods$catena_5
+Save found bug
+processed: 0100
 pattern: 1000
 try to fix hunk: 0
 delete from 102 with range 1
@@ -210,6 +221,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1000
 pattern: 0011
 try to fix hunk: 2
 insert before 203 with         if (local) {
@@ -225,7 +237,7 @@ insert before 204 with           String newName =
 
 patches are written to file
 running tests...
-used time: Finished in 129.49 seconds
+used time: Finished in 110.00 seconds
 Failing tests: 5
 	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_1
 	com.google.javascript.jscomp.InlineGettersTest::testIssue2508576_3
@@ -235,7 +247,10 @@ Failing tests: 5
 Can independently fix ['com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0']
 select new bug
 Pattern: 0011
-failing tests: com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+new failing tests:
+com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
+Save found bug
+processed: 0011
 pattern: 0101
 try to fix hunk: 1
 replace from 106 with range 20 to
@@ -256,6 +271,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 0101
 pattern: 0110
 try to fix hunk: 1
 replace from 106 with range 20 to
@@ -270,6 +286,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 0110
 pattern: 1001
 try to fix hunk: 0
 delete from 102 with range 1
@@ -288,6 +305,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1001
 pattern: 1010
 try to fix hunk: 0
 delete from 102 with range 1
@@ -300,6 +318,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1010
 pattern: 1100
 try to fix hunk: 0
 delete from 102 with range 1
@@ -309,11 +328,12 @@ replace from 106 with range 20 to
 
 patches are written to file
 running tests...
-used time: Finished in 120.31 seconds
+used time: Finished in 116.38 seconds
 Failing tests: 1
 	com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0
 Can independently fix []
 Could not fix independently
+processed: 1100
 pattern: 0111
 try to fix hunk: 1
 replace from 106 with range 20 to
@@ -333,10 +353,11 @@ insert before 204 with           String newName =
 
 patches are written to file
 running tests...
-used time: Finished in 122.94 seconds
+used time: Finished in 110.24 seconds
 Failing tests: 0
 Can independently fix []
 Could not fix independently
+processed: 0111
 pattern: 1011
 try to fix hunk: 0
 delete from 102 with range 1
@@ -358,6 +379,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1011
 pattern: 1101
 try to fix hunk: 0
 delete from 102 with range 1
@@ -380,6 +402,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1101
 pattern: 1110
 try to fix hunk: 0
 delete from 102 with range 1
@@ -396,6 +419,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 1110
 pattern: 1111
 try to fix hunk: 0
 delete from 102 with range 1
@@ -417,8 +441,9 @@ insert before 204 with           String newName =
 
 patches are written to file
 running tests...
-used time: Finished in 123.93 seconds
+used time: Finished in 110.77 seconds
 Failing tests: 0
 Can independently fix []
 Could not fix independently
-Find 1 new bugs
+processed: 1111
+Find 2 new bugs

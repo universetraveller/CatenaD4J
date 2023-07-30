@@ -1,12 +1,11 @@
 ---
 Begin generate bug_id: Math_29
 num_of_hunks: 2
+timeout for running: 3600
 use working dir: ./working/data/Math_29
-clean up: ./working/data/Math_29
 Try to checkout Math_29
 build dir: ['./working/data/Math_29/target/classes', './working/data/Math_29/target/test-classes']
 init FileManager
-trace file: src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java
 trace file: src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java
 trying to replace old failing tests
 NOTICE: skip org.apache.commons.math3.linear.SparseRealVectorTest::testEbeDivideMixedTypes for cannot find node in method_base
@@ -17,11 +16,12 @@ ori test num: 3
 pattern: 00
 patches are written to file
 running tests...
-used time: Finished in 77.14 seconds
+used time: Finished in 110.28 seconds
 Failing tests: 3
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeDivideMixedTypes
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplyMixedTypes
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplySameType
+processed: 00
 pattern: 01
 try to fix hunk: 1
 insert before 374 with         if (v.isNaN() || v.isInfinite()) {
@@ -39,10 +39,16 @@ insert before 374 with         if (v.isNaN() || v.isInfinite()) {
 
 patches are written to file
 running tests...
-used time: Finished in 52.41 seconds
+used time: Finished in 97.61 seconds
 Failing tests: 1
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeDivideMixedTypes
-No new failing tests but only 1 hunk
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplyMixedTypes
+org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplySameType
+Save found bug
+processed: 01
 pattern: 10
 try to fix hunk: 0
 replace from 349 with range 4 to
@@ -52,11 +58,16 @@ replace from 349 with range 4 to
 
 patches are written to file
 running tests...
-used time: Finished in 49.27 seconds
+used time: Finished in 96.86 seconds
 Failing tests: 2
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplyMixedTypes
 	org.apache.commons.math3.linear.SparseRealVectorTest::testEbeMultiplySameType
-No new failing tests but only 1 hunk
+select new bug
+Pattern: 10
+new failing tests:
+org.apache.commons.math3.linear.SparseRealVectorTest::testEbeDivideMixedTypes
+Save found bug
+processed: 10
 pattern: 11
 try to fix hunk: 0
 replace from 349 with range 4 to
@@ -80,8 +91,9 @@ insert before 374 with         if (v.isNaN() || v.isInfinite()) {
 
 patches are written to file
 running tests...
-used time: Finished in 49.32 seconds
+used time: Finished in 101.90 seconds
 Failing tests: 0
 Can independently fix []
 Could not fix independently
-Find 0 new bugs
+processed: 11
+Find 2 new bugs

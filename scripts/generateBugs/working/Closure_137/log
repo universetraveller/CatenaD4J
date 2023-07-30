@@ -1,0 +1,5885 @@
+---
+Begin generate bug_id: Closure_137
+num_of_hunks: 30
+NOTICE: may not contains full fix patterns for hunks are too much (30 hunks)
+timeout for running: 3600
+use working dir: ./working/data/Closure_137
+Try to checkout Closure_137
+build dir: ['./working/data/Closure_137/build/classes', './working/data/Closure_137/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/MakeDeclaredNamesUnique.java
+trace file: src/com/google/javascript/jscomp/NodeUtil.java
+trace file: src/com/google/javascript/jscomp/Normalize.java
+trying to replace old failing tests
+edit: replace from 204 range 12 at test/com/google/javascript/jscomp/MakeDeclaredNamesUniqueTest.java
+to
+  public void testArguments$catena_0() {
+    // Set the test type
+    this.useDefaultRenamer = true;
+
+    invert = true;
+    // Don't distinguish between "arguments", it can't be made unique.
+    testSameWithInversion(
+        "function foo(){var arguments;function bar(){var arguments;}}");                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    // Don't introduce new references to arguments, it is special.
+    try{ testSameWithInversion(
+        "function foo(){var arguments$$1;}");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testArguments$catena_1() {
+    // Set the test type
+    this.useDefaultRenamer = true;
+
+    invert = true;
+    // Don't distinguish between "arguments", it can't be made unique.
+    try{ testSameWithInversion(
+        "function foo(){var arguments;function bar(){var arguments;}}");                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    // Don't introduce new references to arguments, it is special.
+    testSameWithInversion(
+        "function foo(){var arguments$$1;}");                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 104 range 12 at test/com/google/javascript/jscomp/MakeDeclaredNamesUniqueTest.java
+to
+  public void testMakeLocalNamesUniqueWithContext1$catena_0() {
+    // Set the test type
+    this.useDefaultRenamer = true;
+
+    invert = true;
+    test(
+        "var a;function foo(){var a$$inline_1; a = 1}",
+        "var a;function foo(){var a$$inline_1; a = 1}");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test(
+        "var a;function foo(){var a$$inline_1;}",
+        "var a;function foo(){var a;}");                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMakeLocalNamesUniqueWithContext1$catena_1() {
+    // Set the test type
+    this.useDefaultRenamer = true;
+
+    invert = true;
+    try{ test(
+        "var a;function foo(){var a$$inline_1; a = 1}",
+        "var a;function foo(){var a$$inline_1; a = 1}");                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    test(
+        "var a;function foo(){var a$$inline_1;}",
+        "var a;function foo(){var a;}");                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/MakeDeclaredNamesUniqueTest.java
+new test num: 4
+ori test num: 3
+pattern: 000000000000000000000000000000
+patches are written to file
+running tests...
+used time: Finished in 115.74 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+processed: 000000000000000000000000000000
+pattern: 100000000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000000000
+pattern: 010000000000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+patches are written to file
+running tests...
+used time: Finished in 117.11 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+No new failing tests but only 1 hunk
+processed: 010000000000000000000000000000
+pattern: 001000000000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000000000
+pattern: 000100000000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+patches are written to file
+running tests...
+used time: Finished in 113.09 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+No new failing tests but only 1 hunk
+processed: 000100000000000000000000000000
+pattern: 000010000000000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+patches are written to file
+running tests...
+used time: Finished in 115.02 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+No new failing tests but only 1 hunk
+processed: 000010000000000000000000000000
+pattern: 000001000000000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000000000
+pattern: 000000100000000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000000000
+pattern: 000000010000000000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000000000
+pattern: 000000001000000000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000000000
+pattern: 000000000100000000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000000000
+pattern: 000000000010000000000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000000000
+pattern: 000000000001000000000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000000000
+pattern: 000000000000100000000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000000000
+pattern: 000000000000010000000000000000
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000010000000000000000
+pattern: 000000000000001000000000000000
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000001000000000000000
+pattern: 000000000000000100000000000000
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000100000000000000
+pattern: 000000000000000010000000000000
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000010000000000000
+pattern: 000000000000000001000000000000
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000001000000000000
+pattern: 000000000000000000100000000000
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000100000000000
+pattern: 000000000000000000010000000000
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000010000000000
+pattern: 000000000000000000001000000000
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000001000000000
+pattern: 000000000000000000000100000000
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000100000000
+pattern: 000000000000000000000010000000
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000010000000
+pattern: 000000000000000000000001000000
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000001000000
+pattern: 000000000000000000000000100000
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000000100000
+pattern: 000000000000000000000000010000
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+used time: Finished in 109.74 seconds
+Failing tests: 24
+	com.google.javascript.jscomp.GatherRawExportsTest::testExportsFound13
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables10
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables11
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables12
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables14
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables17
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables18
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMaskedFunction
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction1
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction2
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction3
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables6
+	com.google.javascript.jscomp.InlineFunctionsTest::testAnonymousFunctionOmega
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext2
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+	com.google.javascript.jscomp.NormalizeTest::testMakeLocalNamesUnique
+Includes new failing tests, set to unusable
+processed: 000000000000000000000000010000
+pattern: 000000000000000000000000001000
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000000001000
+pattern: 000000000000000000000000000100
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 111.20 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+No new failing tests but only 1 hunk
+processed: 000000000000000000000000000100
+pattern: 000000000000000000000000000010
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+used time: Finished in 107.22 seconds
+Failing tests: 10
+	com.google.javascript.jscomp.CommandLineRunnerTest::testCheckSymbolsOffForDefault
+	com.google.javascript.jscomp.CommandLineRunnerTest::testIssue115
+	com.google.javascript.jscomp.InlineFunctionsTest::testComplexNoVarSub
+	com.google.javascript.jscomp.InlineVariablesTest::testInlineUndefined3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+Includes new failing tests, set to unusable
+processed: 000000000000000000000000000010
+pattern: 000000000000000000000000000001
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+used time: Finished in 107.96 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+No new failing tests but only 1 hunk
+processed: 000000000000000000000000000001
+pattern: 110000000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110000000000000000000000000000
+pattern: 101000000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000000000000000000000000000
+pattern: 100100000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100000000000000000000000000
+pattern: 100010000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010000000000000000000000000
+pattern: 100001000000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001000000000000000000000000
+pattern: 100000100000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000100000000000000000000000
+pattern: 100000010000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000010000000000000000000000
+pattern: 100000001000000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000001000000000000000000000
+pattern: 100000000100000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000100000000000000000000
+pattern: 100000000010000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000010000000000000000000
+pattern: 100000000001000000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000001000000000000000000
+pattern: 100000000000100000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000100000000000000000
+pattern: 100000000000010000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000010000000000000000
+pattern: 100000000000001000000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000001000000000000000
+pattern: 100000000000000100000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000100000000000000
+pattern: 100000000000000010000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000010000000000000
+pattern: 100000000000000001000000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000001000000000000
+pattern: 100000000000000000100000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000100000000000
+pattern: 100000000000000000010000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000010000000000
+pattern: 100000000000000000001000000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000001000000000
+pattern: 100000000000000000000100000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000100000000
+pattern: 100000000000000000000010000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000010000000
+pattern: 100000000000000000000001000000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000001000000
+pattern: 100000000000000000000000100000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000100000
+pattern: 100000000000000000000000010000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000010000
+pattern: 100000000000000000000000001000
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000001000
+pattern: 100000000000000000000000000100
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000000100
+pattern: 100000000000000000000000000010
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000000010
+pattern: 100000000000000000000000000001
+try to fix hunk: 0
+replace from 26 with range 1 to
+import com.google.javascript.jscomp.NodeTraversal.ScopedCallback;
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000000001
+pattern: 011000000000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000000000000000000000000000
+pattern: 010100000000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+patches are written to file
+running tests...
+used time: Finished in 107.35 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 010100000000000000000000000000
+pattern: 010010000000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+patches are written to file
+running tests...
+used time: Finished in 111.96 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 010010000000000000000000000000
+pattern: 010001000000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001000000000000000000000000
+pattern: 010000100000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000100000000000000000000000
+pattern: 010000010000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000010000000000000000000000
+pattern: 010000001000000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000001000000000000000000000
+pattern: 010000000100000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000100000000000000000000
+pattern: 010000000010000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000010000000000000000000
+pattern: 010000000001000000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000001000000000000000000
+pattern: 010000000000100000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000100000000000000000
+pattern: 010000000000010000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000010000000000000000
+pattern: 010000000000001000000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000001000000000000000
+pattern: 010000000000000100000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000100000000000000
+pattern: 010000000000000010000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000010000000000000
+pattern: 010000000000000001000000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000001000000000000
+pattern: 010000000000000000100000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000100000000000
+pattern: 010000000000000000010000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000010000000000
+pattern: 010000000000000000001000000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000001000000000
+pattern: 010000000000000000000100000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000100000000
+pattern: 010000000000000000000010000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000010000000
+pattern: 010000000000000000000001000000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000001000000
+pattern: 010000000000000000000000100000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000000100000
+pattern: 010000000000000000000000010000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+used time: Finished in 109.31 seconds
+Failing tests: 24
+	com.google.javascript.jscomp.GatherRawExportsTest::testExportsFound13
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables10
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables11
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables12
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables14
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables17
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables18
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMaskedFunction
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction1
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction2
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction3
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables6
+	com.google.javascript.jscomp.InlineFunctionsTest::testAnonymousFunctionOmega
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext2
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+	com.google.javascript.jscomp.NormalizeTest::testMakeLocalNamesUnique
+Includes new failing tests, set to unusable
+processed: 010000000000000000000000010000
+pattern: 010000000000000000000000001000
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+used time: Finished in 109.47 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 010000000000000000000000001000
+pattern: 010000000000000000000000000100
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 111.37 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 010000000000000000000000000100
+pattern: 010000000000000000000000000010
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+used time: Finished in 109.40 seconds
+Failing tests: 10
+	com.google.javascript.jscomp.CommandLineRunnerTest::testCheckSymbolsOffForDefault
+	com.google.javascript.jscomp.CommandLineRunnerTest::testIssue115
+	com.google.javascript.jscomp.InlineFunctionsTest::testComplexNoVarSub
+	com.google.javascript.jscomp.InlineVariablesTest::testInlineUndefined3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+Includes new failing tests, set to unusable
+processed: 010000000000000000000000000010
+pattern: 010000000000000000000000000001
+try to fix hunk: 1
+insert before 48 with   public static final String ARGUMENTS = "arguments";
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+used time: Finished in 115.92 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 010000000000000000000000000001
+pattern: 001100000000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100000000000000000000000000
+pattern: 001010000000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010000000000000000000000000
+pattern: 001001000000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001000000000000000000000000
+pattern: 001000100000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000100000000000000000000000
+pattern: 001000010000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000010000000000000000000000
+pattern: 001000001000000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000001000000000000000000000
+pattern: 001000000100000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000100000000000000000000
+pattern: 001000000010000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000010000000000000000000
+pattern: 001000000001000000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000001000000000000000000
+pattern: 001000000000100000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000100000000000000000
+pattern: 001000000000010000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000010000000000000000
+pattern: 001000000000001000000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000001000000000000000
+pattern: 001000000000000100000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000100000000000000
+pattern: 001000000000000010000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000010000000000000
+pattern: 001000000000000001000000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000001000000000000
+pattern: 001000000000000000100000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000100000000000
+pattern: 001000000000000000010000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000010000000000
+pattern: 001000000000000000001000000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000001000000000
+pattern: 001000000000000000000100000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000100000000
+pattern: 001000000000000000000010000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000010000000
+pattern: 001000000000000000000001000000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000001000000
+pattern: 001000000000000000000000100000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000100000
+pattern: 001000000000000000000000010000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000010000
+pattern: 001000000000000000000000001000
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000001000
+pattern: 001000000000000000000000000100
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000000100
+pattern: 001000000000000000000000000010
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000000010
+pattern: 001000000000000000000000000001
+try to fix hunk: 2
+replace from 235 with range 2 to
+  static class ContextualRenameInverter
+      implements ScopedCallback, CompilerPass {
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000000001
+pattern: 000110000000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+patches are written to file
+running tests...
+used time: Finished in 113.07 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 000110000000000000000000000000
+pattern: 000101000000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101000000000000000000000000
+pattern: 000100100000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100100000000000000000000000
+pattern: 000100010000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100010000000000000000000000
+pattern: 000100001000000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100001000000000000000000000
+pattern: 000100000100000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000100000000000000000000
+pattern: 000100000010000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000010000000000000000000
+pattern: 000100000001000000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000001000000000000000000
+pattern: 000100000000100000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000100000000000000000
+pattern: 000100000000010000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000010000000000000000
+pattern: 000100000000001000000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000001000000000000000
+pattern: 000100000000000100000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000100000000000000
+pattern: 000100000000000010000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000010000000000000
+pattern: 000100000000000001000000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000001000000000000
+pattern: 000100000000000000100000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000100000000000
+pattern: 000100000000000000010000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000010000000000
+pattern: 000100000000000000001000000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000001000000000
+pattern: 000100000000000000000100000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000100000000
+pattern: 000100000000000000000010000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000010000000
+pattern: 000100000000000000000001000000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000001000000
+pattern: 000100000000000000000000100000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000000100000
+pattern: 000100000000000000000000010000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+used time: Finished in 117.37 seconds
+Failing tests: 24
+	com.google.javascript.jscomp.GatherRawExportsTest::testExportsFound13
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables10
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables11
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables12
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables14
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables17
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables18
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMaskedFunction
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction1
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction2
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction3
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables6
+	com.google.javascript.jscomp.InlineFunctionsTest::testAnonymousFunctionOmega
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext2
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+	com.google.javascript.jscomp.NormalizeTest::testMakeLocalNamesUnique
+Includes new failing tests, set to unusable
+processed: 000100000000000000000000010000
+pattern: 000100000000000000000000001000
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000000001000
+pattern: 000100000000000000000000000100
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 111.63 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 000100000000000000000000000100
+pattern: 000100000000000000000000000010
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+used time: Finished in 110.18 seconds
+Failing tests: 10
+	com.google.javascript.jscomp.CommandLineRunnerTest::testCheckSymbolsOffForDefault
+	com.google.javascript.jscomp.CommandLineRunnerTest::testIssue115
+	com.google.javascript.jscomp.InlineFunctionsTest::testComplexNoVarSub
+	com.google.javascript.jscomp.InlineVariablesTest::testInlineUndefined3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+Includes new failing tests, set to unusable
+processed: 000100000000000000000000000010
+pattern: 000100000000000000000000000001
+try to fix hunk: 3
+insert before 240 with     private Set<String> referencedNames = ImmutableSet.of();
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+used time: Finished in 107.94 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 000100000000000000000000000001
+pattern: 000011000000000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011000000000000000000000000
+pattern: 000010100000000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010100000000000000000000000
+pattern: 000010010000000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010010000000000000000000000
+pattern: 000010001000000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010001000000000000000000000
+pattern: 000010000100000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000100000000000000000000
+pattern: 000010000010000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000010000000000000000000
+pattern: 000010000001000000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000001000000000000000000
+pattern: 000010000000100000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000100000000000000000
+pattern: 000010000000010000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000010000000000000000
+pattern: 000010000000001000000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000001000000000000000
+pattern: 000010000000000100000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000100000000000000
+pattern: 000010000000000010000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000010000000000000
+pattern: 000010000000000001000000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000001000000000000
+pattern: 000010000000000000100000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000100000000000
+pattern: 000010000000000000010000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000010000000000
+pattern: 000010000000000000001000000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000001000000000
+pattern: 000010000000000000000100000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000100000000
+pattern: 000010000000000000000010000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000010000000
+pattern: 000010000000000000000001000000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000001000000
+pattern: 000010000000000000000000100000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000000100000
+pattern: 000010000000000000000000010000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+used time: Finished in 103.52 seconds
+Failing tests: 24
+	com.google.javascript.jscomp.GatherRawExportsTest::testExportsFound13
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables10
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables11
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables12
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables14
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables17
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables18
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMaskedFunction
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction1
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction2
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction3
+	com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineOfNonGlobalFunction4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables4
+	com.google.javascript.jscomp.InlineFunctionsTest::testShadowVariables6
+	com.google.javascript.jscomp.InlineFunctionsTest::testAnonymousFunctionOmega
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext2
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+	com.google.javascript.jscomp.NormalizeTest::testMakeLocalNamesUnique
+Includes new failing tests, set to unusable
+processed: 000010000000000000000000010000
+pattern: 000010000000000000000000001000
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000000001000
+pattern: 000010000000000000000000000100
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 98.18 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 000010000000000000000000000100
+pattern: 000010000000000000000000000010
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+used time: Finished in 91.16 seconds
+Failing tests: 10
+	com.google.javascript.jscomp.CommandLineRunnerTest::testCheckSymbolsOffForDefault
+	com.google.javascript.jscomp.CommandLineRunnerTest::testIssue115
+	com.google.javascript.jscomp.InlineFunctionsTest::testComplexNoVarSub
+	com.google.javascript.jscomp.InlineVariablesTest::testInlineUndefined3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations1
+Includes new failing tests, set to unusable
+processed: 000010000000000000000000000010
+pattern: 000010000000000000000000000001
+try to fix hunk: 4
+insert before 242 with     private Deque<Set<String>> referenceStack = new ArrayDeque<Set<String>>();
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+used time: Finished in 103.50 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion3
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testOnlyInversion4
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testMakeLocalNamesUniqueWithContext1$catena_1
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_0
+	com.google.javascript.jscomp.MakeDeclaredNamesUniqueTest::testArguments$catena_1
+	com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations2
+Can independently fix []
+Could not fix independently
+processed: 000010000000000000000000000001
+pattern: 000001100000000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 6
+delete from 266 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001100000000000000000000000
+pattern: 000001010000000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001010000000000000000000000
+pattern: 000001001000000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001001000000000000000000000
+pattern: 000001000100000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000100000000000000000000
+pattern: 000001000010000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000010000000000000000000
+pattern: 000001000001000000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000001000000000000000000
+pattern: 000001000000100000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000100000000000000000
+pattern: 000001000000010000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000010000000000000000
+pattern: 000001000000001000000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000001000000000000000
+pattern: 000001000000000100000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000100000000000000
+pattern: 000001000000000010000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000010000000000000
+pattern: 000001000000000001000000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000001000000000000
+pattern: 000001000000000000100000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000100000000000
+pattern: 000001000000000000010000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000010000000000
+pattern: 000001000000000000001000000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000001000000000
+pattern: 000001000000000000000100000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000100000000
+pattern: 000001000000000000000010000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000010000000
+pattern: 000001000000000000000001000000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000001000000
+pattern: 000001000000000000000000100000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000100000
+pattern: 000001000000000000000000010000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000010000
+pattern: 000001000000000000000000001000
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000001000
+pattern: 000001000000000000000000000100
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000000100
+pattern: 000001000000000000000000000010
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000000010
+pattern: 000001000000000000000000000001
+try to fix hunk: 5
+replace from 244 with range 1 to
+    private Map<String, List<Node>> nameMap = Maps.newHashMap();
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000000000001
+pattern: 000000110000000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000110000000000000000000000
+pattern: 000000101000000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000101000000000000000000000
+pattern: 000000100100000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100100000000000000000000
+pattern: 000000100010000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100010000000000000000000
+pattern: 000000100001000000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100001000000000000000000
+pattern: 000000100000100000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000100000000000000000
+pattern: 000000100000010000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000010000000000000000
+pattern: 000000100000001000000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000001000000000000000
+pattern: 000000100000000100000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000100000000000000
+pattern: 000000100000000010000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000010000000000000
+pattern: 000000100000000001000000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000001000000000000
+pattern: 000000100000000000100000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000100000000000
+pattern: 000000100000000000010000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000010000000000
+pattern: 000000100000000000001000000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000001000000000
+pattern: 000000100000000000000100000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000100000000
+pattern: 000000100000000000000010000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000010000000
+pattern: 000000100000000000000001000000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000001000000
+pattern: 000000100000000000000000100000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000100000
+pattern: 000000100000000000000000010000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000010000
+pattern: 000000100000000000000000001000
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000001000
+pattern: 000000100000000000000000000100
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000000100
+pattern: 000000100000000000000000000010
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000000010
+pattern: 000000100000000000000000000001
+try to fix hunk: 6
+delete from 266 with range 3
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000000001
+pattern: 000000011000000000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000011000000000000000000000
+pattern: 000000010100000000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010100000000000000000000
+pattern: 000000010010000000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010010000000000000000000
+pattern: 000000010001000000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010001000000000000000000
+pattern: 000000010000100000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000100000000000000000
+pattern: 000000010000010000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000010000000000000000
+pattern: 000000010000001000000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000001000000000000000
+pattern: 000000010000000100000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000100000000000000
+pattern: 000000010000000010000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000010000000000000
+pattern: 000000010000000001000000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000001000000000000
+pattern: 000000010000000000100000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000100000000000
+pattern: 000000010000000000010000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000010000000000
+pattern: 000000010000000000001000000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000001000000000
+pattern: 000000010000000000000100000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000100000000
+pattern: 000000010000000000000010000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000010000000
+pattern: 000000010000000000000001000000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000001000000
+pattern: 000000010000000000000000100000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000100000
+pattern: 000000010000000000000000010000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000010000
+pattern: 000000010000000000000000001000
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000001000
+pattern: 000000010000000000000000000100
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000000100
+pattern: 000000010000000000000000000010
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000000010
+pattern: 000000010000000000000000000001
+try to fix hunk: 7
+insert before 273 with     public void enterScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+        return;
+      }
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000000001
+pattern: 000000001100000000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001100000000000000000000
+pattern: 000000001010000000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001010000000000000000000
+pattern: 000000001001000000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001001000000000000000000
+pattern: 000000001000100000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000100000000000000000
+pattern: 000000001000010000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000010000000000000000
+pattern: 000000001000001000000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000001000000000000000
+pattern: 000000001000000100000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000100000000000000
+pattern: 000000001000000010000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000010000000000000
+pattern: 000000001000000001000000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000001000000000000
+pattern: 000000001000000000100000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000100000000000
+pattern: 000000001000000000010000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000010000000000
+pattern: 000000001000000000001000000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000001000000000
+pattern: 000000001000000000000100000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000100000000
+pattern: 000000001000000000000010000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000010000000
+pattern: 000000001000000000000001000000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000001000000
+pattern: 000000001000000000000000100000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000100000
+pattern: 000000001000000000000000010000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000010000
+pattern: 000000001000000000000000001000
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000001000
+pattern: 000000001000000000000000000100
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000000100
+pattern: 000000001000000000000000000010
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000000010
+pattern: 000000001000000000000000000001
+try to fix hunk: 8
+replace from 274 with range 4 to
+      referenceStack.push(referencedNames);
+      referencedNames = Sets.newHashSet();
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000000001
+pattern: 000000000110000000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000110000000000000000000
+pattern: 000000000101000000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000101000000000000000000
+pattern: 000000000100100000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100100000000000000000
+pattern: 000000000100010000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100010000000000000000
+pattern: 000000000100001000000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100001000000000000000
+pattern: 000000000100000100000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000100000000000000
+pattern: 000000000100000010000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000010000000000000
+pattern: 000000000100000001000000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000001000000000000
+pattern: 000000000100000000100000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000100000000000
+pattern: 000000000100000000010000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000010000000000
+pattern: 000000000100000000001000000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000001000000000
+pattern: 000000000100000000000100000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000100000000
+pattern: 000000000100000000000010000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000010000000
+pattern: 000000000100000000000001000000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000001000000
+pattern: 000000000100000000000000100000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000100000
+pattern: 000000000100000000000000010000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000010000
+pattern: 000000000100000000000000001000
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000001000
+pattern: 000000000100000000000000000100
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000000100
+pattern: 000000000100000000000000000010
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000000010
+pattern: 000000000100000000000000000001
+try to fix hunk: 9
+replace from 284 with range 8 to
+    public void exitScope(NodeTraversal t) {
+      if (t.inGlobalScope()) {
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000000000001
+pattern: 000000000011000000000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000011000000000000000000
+pattern: 000000000010100000000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010100000000000000000
+pattern: 000000000010010000000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010010000000000000000
+pattern: 000000000010001000000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010001000000000000000
+pattern: 000000000010000100000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000100000000000000
+pattern: 000000000010000010000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000010000000000000
+pattern: 000000000010000001000000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000001000000000000
+pattern: 000000000010000000100000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000100000000000
+pattern: 000000000010000000010000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000010000000000
+pattern: 000000000010000000001000000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000001000000000
+pattern: 000000000010000000000100000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000100000000
+pattern: 000000000010000000000010000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000010000000
+pattern: 000000000010000000000001000000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000001000000
+pattern: 000000000010000000000000100000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000100000
+pattern: 000000000010000000000000010000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000010000
+pattern: 000000000010000000000000001000
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000001000
+pattern: 000000000010000000000000000100
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000000100
+pattern: 000000000010000000000000000010
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000000010
+pattern: 000000000010000000000000000001
+try to fix hunk: 10
+replace from 295 with range 6 to
+      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+        Var v = it.next();
+        handleScopeVar(v);
+      }
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000010000000000000000001
+pattern: 000000000001100000000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001100000000000000000
+pattern: 000000000001010000000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001010000000000000000
+pattern: 000000000001001000000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001001000000000000000
+pattern: 000000000001000100000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000100000000000000
+pattern: 000000000001000010000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000010000000000000
+pattern: 000000000001000001000000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000001000000000000
+pattern: 000000000001000000100000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000100000000000
+pattern: 000000000001000000010000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000010000000000
+pattern: 000000000001000000001000000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000001000000000
+pattern: 000000000001000000000100000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000100000000
+pattern: 000000000001000000000010000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000010000000
+pattern: 000000000001000000000001000000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000001000000
+pattern: 000000000001000000000000100000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000100000
+pattern: 000000000001000000000000010000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000010000
+pattern: 000000000001000000000000001000
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000001000
+pattern: 000000000001000000000000000100
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000000100
+pattern: 000000000001000000000000000010
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000000010
+pattern: 000000000001000000000000000001
+try to fix hunk: 11
+insert before 304 with       Set<String> current = referencedNames;
+      referencedNames = referenceStack.pop();
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000000001
+pattern: 000000000000110000000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000110000000000000000
+pattern: 000000000000101000000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000101000000000000000
+pattern: 000000000000100100000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 15
+replace from 325 with range 7 to
+          referencedNames.add(newName);
+          List<Node> references = nameMap.get(name);
+          Preconditions.checkState(references != null);
+          for (Node n : references) {
+            Preconditions.checkState(n.getType() == Token.NAME);
+            n.setString(newName);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100100000000000000
+pattern: 000000000000100010000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 16
+insert before 334 with         nameMap.remove(name);
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100010000000000000
+pattern: 000000000000100001000000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 17
+replace from 335 with range 1 to
+    @Override
+    public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+      return true;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100001000000000000
+pattern: 000000000000100000100000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 18
+insert before 337 with     @Override
+    public void visit(NodeTraversal t, Node node, Node parent) {
+      if (t.inGlobalScope()) {
+        return;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000100000000000
+pattern: 000000000000100000010000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 19
+insert before 339 with       if (NodeUtil.isReferenceName(node)) {
+        String name = node.getString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000010000000000
+pattern: 000000000000100000001000000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 20
+insert before 341 with         referencedNames.add(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000001000000000
+pattern: 000000000000100000000100000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 21
+insert before 342 with         if (containsSeparator(name)) {
+          addCandidateNameReference(name, node);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000100000000
+pattern: 000000000000100000000010000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 22
+insert before 346 with     private void addCandidateNameReference(String name, Node n) {
+      List<Node> nodes = nameMap.get(name);
+      if (null == nodes) {
+        nodes = Lists.newLinkedList();
+        nameMap.put(name, nodes);
+      }
+      nodes.add(n);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000010000000
+pattern: 000000000000100000000001000000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 23
+insert before 392 with       if (!name.equals(ARGUMENTS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000001000000
+pattern: 000000000000100000000000100000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 24
+insert before 401 with             }
+            declarations.put(name, newName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000100000
+pattern: 000000000000100000000000010000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 25
+delete from 402 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000010000
+pattern: 000000000000100000000000001000
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 26
+insert before 462 with       Preconditions.checkState(!name.equals(ARGUMENTS));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000001000
+pattern: 000000000000100000000000000100
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 27
+insert before 1043 with   static boolean isReferenceName(Node n) {
+    return isName(n) && !n.getString().isEmpty() && !isLabelName(n);
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000000100
+pattern: 000000000000100000000000000010
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 28
+delete from 82 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000000010
+pattern: 000000000000100000000000000001
+try to fix hunk: 12
+replace from 307 with range 4 to
+      if (!referenceStack.isEmpty()) {
+        referencedNames.addAll(current);
+      }
+    }
+
+try to fix hunk: 29
+insert before 102 with     removeDuplicateDeclarations(root);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000000001
+pattern: 000000000000011000000000000000
+try to fix hunk: 13
+insert before 317 with     void handleScopeVar(Var v) {
+      String name  = v.getName();
+      if (containsSeparator(name)) {
+        String newName = getOrginalName(name);
+
+try to fix hunk: 14
+replace from 318 with range 5 to
+        if (TokenStream.isJSIdentifier(newName) &&
+            !referencedNames.contains(newName) && 
+            !newName.equals(ARGUMENTS)) {
+          referencedNames.remove(name);
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "run.py", line 30, in task
+    generator.run()
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 83, in run
+    self._run()
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 109, in _run
+    self.taskSingleHunk(task)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 138, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/util.py", line 46, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/util.py", line 9, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 495, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 1028, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 1868, in _communicate
+    ready = selector.select(timeout)
+  File "/usr/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

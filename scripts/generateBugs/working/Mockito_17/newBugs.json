@@ -1,0 +1,80 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/org/mockito/internal/creation/MockSettingsImpl.java",
+            "replaced_with": "    private boolean serializable;\n",
+            "patch_type": "insert",
+            "next_line_no": 20
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/creation/MockSettingsImpl.java",
+            "from_line_no": 22,
+            "to_line_no": 22,
+            "replaced_with": "        this.serializable = true;\n        return this;\n",
+            "replaced": "        return this.extraInterfaces(java.io.Serializable.class);\n",
+            "patch_type": "replace",
+            "next_line_no": 23
+        },
+        "2": {
+            "file_name": "src/org/mockito/internal/creation/MockSettingsImpl.java",
+            "from_line_no": 74,
+            "to_line_no": 74,
+            "replaced_with": "        return serializable;\n",
+            "replaced": "        return extraInterfaces != null && java.util.Arrays.asList(extraInterfaces).contains(java.io.Serializable.class);\n",
+            "patch_type": "replace",
+            "next_line_no": 75
+        },
+        "3": {
+            "file_name": "src/org/mockito/internal/util/MockUtil.java",
+            "replaced_with": "import java.io.Serializable;\n",
+            "patch_type": "insert",
+            "next_line_no": 19
+        },
+        "4": {
+            "file_name": "src/org/mockito/internal/util/MockUtil.java",
+            "replaced_with": "        if (settings.isSerializable()) {\n            ancillaryTypes = interfaces == null ? new Class<?>[] {Serializable.class} : new ArrayUtils().concat(interfaces, Serializable.class);\n        } else {\n",
+            "patch_type": "insert",
+            "next_line_no": 45
+        },
+        "5": {
+            "file_name": "src/org/mockito/internal/util/MockUtil.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 46
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockitousage.basicapi.MocksSerializationTest::shouldBeSerializeAndHaveExtraInterfaces"
+        ],
+        "org.mockitousage.basicapi.MocksSerializationTest::shouldBeSerializeAndHaveExtraInterfaces": {
+            "file_path": "test/org/mockitousage/basicapi/MocksSerializationTest.java",
+            "Instance": "Begin: Pos(305, 5)\nEnd: Pos(314, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_17/test//org/mockitousage/basicapi/MocksSerializationTest.java\nName: shouldBeSerializeAndHaveExtraInterfaces\nChilds: [StatementAssertion<Begin: Pos(312, 9), End: Pos(312, 38)>,\nStatementAssertion<Begin: Pos(313, 9), End: Pos(313, 41)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_17/test//org/mockitousage/basicapi/MocksSerializationTest.java",
+            "name": "shouldBeSerializeAndHaveExtraInterfaces",
+            "begin": "Pos(305, 5)",
+            "end": "Pos(314, 5)",
+            "begin_line_no": 305,
+            "end_line_no": 314,
+            "child": [
+                "Begin: Pos(312, 9)\nEnd: Pos(312, 38)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(313, 9)\nEnd: Pos(313, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shouldBeSerializeAndHaveExtraInterfaces$catena_0() throws Exception {\n        //when\n        IMethods mock = mock(IMethods.class, withSettings().serializable().extraInterfaces(List.class));\n        IMethods mockTwo = mock(IMethods.class, withSettings().extraInterfaces(List.class).serializable());\n\n        //then\n        serializeAndBack((List) mock);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serializeAndBack((List) mockTwo);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldBeSerializeAndHaveExtraInterfaces$catena_1() throws Exception {\n        //when\n        IMethods mock = mock(IMethods.class, withSettings().serializable().extraInterfaces(List.class));\n        IMethods mockTwo = mock(IMethods.class, withSettings().extraInterfaces(List.class).serializable());\n\n        //then\n        try{ serializeAndBack((List) mock);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        serializeAndBack((List) mockTwo);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shouldBeSerializeAndHaveExtraInterfaces$catena_0() throws Exception {\n        //when\n        IMethods mock = mock(IMethods.class, withSettings().serializable().extraInterfaces(List.class));\n        IMethods mockTwo = mock(IMethods.class, withSettings().extraInterfaces(List.class).serializable());\n\n        //then\n        serializeAndBack((List) mock);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serializeAndBack((List) mockTwo);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void shouldBeSerializeAndHaveExtraInterfaces$catena_1() throws Exception {\n        //when\n        IMethods mock = mock(IMethods.class, withSettings().serializable().extraInterfaces(List.class));\n        IMethods mockTwo = mock(IMethods.class, withSettings().extraInterfaces(List.class).serializable());\n\n        //then\n        try{ serializeAndBack((List) mock);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        serializeAndBack((List) mockTwo);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111111": {
+        "failing_tests": [
+            "org.mockitousage.basicapi.MocksSerializationTest::shouldBeSerializeAndHaveExtraInterfaces$catena_0",
+            "org.mockitousage.basicapi.MocksSerializationTest::shouldBeSerializeAndHaveExtraInterfaces$catena_1"
+        ]
+    }
+}
