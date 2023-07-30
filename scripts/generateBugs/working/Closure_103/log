@@ -1,12 +1,12 @@
 ---
 Begin generate bug_id: Closure_103
 num_of_hunks: 3
+timeout for running: 3600
 use working dir: ./working/data/Closure_103
 Try to checkout Closure_103
 build dir: ['./working/data/Closure_103/build/classes', './working/data/Closure_103/build/test']
 init FileManager
 trace file: src/com/google/javascript/jscomp/ControlFlowAnalysis.java
-trace file: src/com/google/javascript/jscomp/DisambiguateProperties.java
 trace file: src/com/google/javascript/jscomp/DisambiguateProperties.java
 trying to replace old failing tests
 new test num: 0
@@ -14,11 +14,12 @@ ori test num: 3
 pattern: 000
 patches are written to file
 running tests...
-used time: Finished in 109.02 seconds
+used time: Finished in 104.08 seconds
 Failing tests: 3
 	com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException
 	com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf
 	com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty
+processed: 000
 pattern: 001
 try to fix hunk: 2
 insert before 766 with         if (maybeType != null && maybeType.hasOwnProperty(field)) {
@@ -32,6 +33,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 001
 pattern: 010
 try to fix hunk: 1
 insert before 763 with       if (foundType == null) {
@@ -44,16 +46,23 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 010
 pattern: 100
 try to fix hunk: 0
 insert before 894 with       case Token.INSTANCEOF:
 
 patches are written to file
 running tests...
-used time: Finished in 101.48 seconds
+used time: Finished in 91.72 seconds
 Failing tests: 1
 	com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty
-No new failing tests but only 1 hunk
+select new bug
+Pattern: 100
+new failing tests:
+com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException
+com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf
+Save found bug
+processed: 100
 pattern: 011
 try to fix hunk: 1
 insert before 763 with       if (foundType == null) {
@@ -68,14 +77,17 @@ insert before 766 with         if (maybeType != null && maybeType.hasOwnProperty
 
 patches are written to file
 running tests...
-used time: Finished in 96.18 seconds
+used time: Finished in 99.51 seconds
 Failing tests: 2
 	com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException
 	com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf
 Can independently fix ['com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty']
 select new bug
 Pattern: 011
-failing tests: com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty
+new failing tests:
+com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty
+Save found bug
+processed: 011
 pattern: 101
 try to fix hunk: 0
 insert before 894 with       case Token.INSTANCEOF:
@@ -92,6 +104,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 101
 pattern: 110
 try to fix hunk: 0
 insert before 894 with       case Token.INSTANCEOF:
@@ -107,6 +120,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 110
 pattern: 111
 try to fix hunk: 0
 insert before 894 with       case Token.INSTANCEOF:
@@ -124,8 +138,9 @@ insert before 766 with         if (maybeType != null && maybeType.hasOwnProperty
 
 patches are written to file
 running tests...
-used time: Finished in 104.62 seconds
+used time: Finished in 96.15 seconds
 Failing tests: 0
 Can independently fix []
 Could not fix independently
-Find 1 new bugs
+processed: 111
+Find 2 new bugs

@@ -1,12 +1,11 @@
 ---
 Begin generate bug_id: Mockito_3
 num_of_hunks: 3
+timeout for running: 3600
 use working dir: ./working/data/Mockito_3
 Try to checkout Mockito_3
 build dir: ['./working/data/Mockito_3/build/classes/main', './working/data/Mockito_3/build/classes/test']
 init FileManager
-trace file: src/org/mockito/internal/invocation/InvocationMatcher.java
-trace file: src/org/mockito/internal/invocation/InvocationMatcher.java
 trace file: src/org/mockito/internal/invocation/InvocationMatcher.java
 trying to replace old failing tests
 edit: replace from 43 range 10 at test/org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java
@@ -273,14 +272,14 @@ to
         Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly((byte) 1, (byte) 2);           /***** ORIGINAL ASSERTION IS HERE *****/
     }
 trace file: test/org/mockitousage/matchers/CapturingArgumentsTest.java
-trace file: test/org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java
 trace file: test/org/mockitousage/bugs/varargs/VarargsNotPlayingWithAnyObjectTest.java
+trace file: test/org/mockitousage/bugs/varargs/VarargsAndAnyObjectPicksUpExtraInvocationsTest.java
 new test num: 21
 ori test num: 1
 pattern: 000
 patches are written to file
 running tests...
-used time: Finished in 433.46 seconds
+used time: Finished in 381.51 seconds
 Failing tests: 14
 	org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg
 	org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0
@@ -296,6 +295,7 @@ Failing tests: 14
 	org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1
 	org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2
 	org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1
+processed: 000
 pattern: 001
 try to fix hunk: 2
 insert before 143 with     private Set<Matcher> uniqueMatcherSet(int indexOfVararg) {
@@ -313,7 +313,7 @@ insert before 143 with     private Set<Matcher> uniqueMatcherSet(int indexOfVara
 
 patches are written to file
 running tests...
-used time: Finished in 393.73 seconds
+used time: Finished in 364.53 seconds
 Failing tests: 14
 	org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg
 	org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0
@@ -330,6 +330,7 @@ Failing tests: 14
 	org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2
 	org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1
 No new failing tests but only 1 hunk
+processed: 001
 pattern: 010
 try to fix hunk: 1
 replace from 130 with range 1 to
@@ -340,11 +341,12 @@ replace from 130 with range 1 to
 
 patches are written to file
 running tests...
-used time: Finished in 396.09 seconds
+used time: Finished in 362.52 seconds
 Failing tests: 2
 	org.mockitousage.basicapi.UsingVarargsTest::shouldVerifyWithNullVarArgArray
 	org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1
 Includes new failing tests, set to unusable
+processed: 010
 pattern: 100
 try to fix hunk: 0
 replace from 127 with range 2 to
@@ -356,6 +358,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 100
 pattern: 011
 try to fix hunk: 1
 replace from 130 with range 1 to
@@ -380,11 +383,12 @@ insert before 143 with     private Set<Matcher> uniqueMatcherSet(int indexOfVara
 
 patches are written to file
 running tests...
-used time: Finished in 313.00 seconds
+used time: Finished in 372.12 seconds
 Failing tests: 2
 	org.mockitousage.basicapi.UsingVarargsTest::shouldVerifyWithNullVarArgArray
 	org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1
 Includes new failing tests, set to unusable
+processed: 011
 pattern: 101
 try to fix hunk: 0
 replace from 127 with range 2 to
@@ -410,6 +414,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 101
 pattern: 110
 try to fix hunk: 0
 replace from 127 with range 2 to
@@ -428,6 +433,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 110
 pattern: 111
 try to fix hunk: 0
 replace from 127 with range 2 to
@@ -456,10 +462,26 @@ insert before 143 with     private Set<Matcher> uniqueMatcherSet(int indexOfVara
 
 patches are written to file
 running tests...
-used time: Finished in 196.47 seconds
+used time: Finished in 315.42 seconds
 Failing tests: 0
-Can independently fix ['org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1', 'org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_1', 'org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_0', 'org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1', 'org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0']
+Can independently fix ['org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1', 'org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2', 'org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1', 'org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2', 'org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_0', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg$catena_1', 'org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1']
 select new bug
 Pattern: 111
-failing tests: org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg$catena_1@org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1@org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_0@org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1@org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_1@org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg@org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2@org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2@org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_0@org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1@org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_0@org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_1@org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1@org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0
+new failing tests:
+org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_1
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_vararg$catena_1
+org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_1
+org.mockitousage.bugs.varargs.VarargsAndAnyObjectPicksUpExtraInvocationsTest::shouldVerifyCorrectlyNumberOfInvocationsWithVarargs$catena_0
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_2
+org.mockito.internal.invocation.InvocationMatcherTest::should_capture_varargs_as_vararg
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_1
+org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_1
+org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_on_pure_vararg_method$catena_0
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive_wrapper$catena_2
+org.mockitousage.bugs.varargs.VarargsNotPlayingWithAnyObjectTest::shouldMatchAnyVararg$catena_0
+org.mockitousage.matchers.CapturingArgumentsTest::captures_correctly_when_captor_used_multiple_times$catena_0
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_all_vararg$catena_1
+org.mockitousage.matchers.CapturingArgumentsTest::should_capture_byte_vararg_by_creating_captor_with_primitive$catena_1
+Save found bug
+processed: 111
 Find 1 new bugs

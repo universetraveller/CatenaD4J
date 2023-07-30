@@ -51,5 +51,11 @@
                 "1": "    @Test\n    public void testCalendarTimezoneRespected$catena_1() {\n        String[] availableZones = TimeZone.getAvailableIDs();\n        TimeZone currentZone = TimeZone.getDefault();\n        \n        TimeZone anotherZone = null;\n        for (String zone : availableZones) {\n            if (!zone.equals(currentZone.getID())) {\n                anotherZone = TimeZone.getTimeZone(zone);\n            }\n        }\n        \n        try{ assertNotNull(\"Cannot find another timezone\", anotherZone);                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        final String pattern = \"h:mma z\";\n        final Calendar cal = Calendar.getInstance(anotherZone);\n        \n        SimpleDateFormat sdf = new SimpleDateFormat(pattern);\n        sdf.setTimeZone(anotherZone);\n        String expectedValue = sdf.format(cal.getTime());\n        String actualValue = FastDateFormat.getInstance(pattern).format(cal);\n        assertEquals(expectedValue, actualValue);                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
             }
         }
+    },
+    "001": {
+        "failing_tests": [
+            "org.apache.commons.lang3.time.FastDateFormat_PrinterTest::testCalendarTimezoneRespected$catena_1",
+            "org.apache.commons.lang3.time.FastDatePrinterTest::testCalendarTimezoneRespected$catena_1"
+        ]
     }
 }

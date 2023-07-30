@@ -1,12 +1,12 @@
 ---
 Begin generate bug_id: Closure_173
 num_of_hunks: 3
+timeout for running: 3600
 use working dir: ./working/data/Closure_173
 Try to checkout Closure_173
 build dir: ['./working/data/Closure_173/build/classes', './working/data/Closure_173/build/test']
 init FileManager
 trace file: src/com/google/javascript/jscomp/CodeGenerator.java
-trace file: src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java
 trace file: src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java
 trying to replace old failing tests
 edit: replace from 166 range 205 at test/com/google/javascript/jscomp/CodePrinterTest.java
@@ -25319,18 +25319,19 @@ to
         "var a,b,c; (a || b) || c; (a * b) * c; (a | b) | c");                                              }catch(Throwable __SHOULD_BE_IGNORED){}
     testSame("var a,b,c; a % (b % c); a / (b / c); a - (b - c);");                                          /***** ORIGINAL ASSERTION IS HERE *****/
   }
-trace file: test/com/google/javascript/jscomp/CodePrinterTest.java
 trace file: test/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java
+trace file: test/com/google/javascript/jscomp/CodePrinterTest.java
 new test num: 126
 ori test num: 1
 pattern: 000
 patches are written to file
 running tests...
-used time: Finished in 275.04 seconds
+used time: Finished in 276.90 seconds
 Failing tests: 3
 	com.google.javascript.jscomp.CodePrinterTest::testPrint$catena_16
 	com.google.javascript.jscomp.CodePrinterTest::testIssue1062
 	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
+processed: 000
 pattern: 001
 try to fix hunk: 2
 insert before 108 with   private Node tryRotateAssociativeOperator(Node n) {
@@ -25357,12 +25358,13 @@ insert before 108 with   private Node tryRotateAssociativeOperator(Node n) {
 
 patches are written to file
 running tests...
-used time: Finished in 276.14 seconds
+used time: Finished in 275.42 seconds
 Failing tests: 3
 	com.google.javascript.jscomp.CodePrinterTest::testPrint$catena_16
 	com.google.javascript.jscomp.CodePrinterTest::testIssue1062
 	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
 No new failing tests but only 1 hunk
+processed: 001
 pattern: 010
 try to fix hunk: 1
 insert before 102 with       case Token.MUL:
@@ -25379,6 +25381,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 010
 pattern: 100
 try to fix hunk: 0
 replace from 130 with range 6 to
@@ -25386,10 +25389,16 @@ replace from 130 with range 6 to
 
 patches are written to file
 running tests...
-used time: Finished in 286.81 seconds
+used time: Finished in 273.63 seconds
 Failing tests: 1
 	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
-No new failing tests but only 1 hunk
+select new bug
+Pattern: 100
+new failing tests:
+com.google.javascript.jscomp.CodePrinterTest::testPrint$catena_16
+com.google.javascript.jscomp.CodePrinterTest::testIssue1062
+Save found bug
+processed: 100
 pattern: 011
 try to fix hunk: 1
 insert before 102 with       case Token.MUL:
@@ -25425,14 +25434,17 @@ insert before 108 with   private Node tryRotateAssociativeOperator(Node n) {
 
 patches are written to file
 running tests...
-used time: Finished in 279.72 seconds
+used time: Finished in 273.26 seconds
 Failing tests: 2
 	com.google.javascript.jscomp.CodePrinterTest::testPrint$catena_16
 	com.google.javascript.jscomp.CodePrinterTest::testIssue1062
 Can independently fix ['com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0']
 select new bug
 Pattern: 011
-failing tests: com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
+new failing tests:
+com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
+Save found bug
+processed: 011
 pattern: 101
 try to fix hunk: 0
 replace from 130 with range 6 to
@@ -25463,11 +25475,12 @@ insert before 108 with   private Node tryRotateAssociativeOperator(Node n) {
 
 patches are written to file
 running tests...
-used time: Finished in 294.86 seconds
+used time: Finished in 273.40 seconds
 Failing tests: 1
 	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0
 Can independently fix []
 Could not fix independently
+processed: 101
 pattern: 110
 try to fix hunk: 0
 replace from 130 with range 6 to
@@ -25488,6 +25501,7 @@ seems testing failed, see output:
 <OUTPUT>
 <Common Compile Failed>
 <ENDOUTPUT>
+processed: 110
 pattern: 111
 try to fix hunk: 0
 replace from 130 with range 6 to
@@ -25527,8 +25541,9 @@ insert before 108 with   private Node tryRotateAssociativeOperator(Node n) {
 
 patches are written to file
 running tests...
-used time: Finished in 285.43 seconds
+used time: Finished in 268.56 seconds
 Failing tests: 0
 Can independently fix []
 Could not fix independently
-Find 1 new bugs
+processed: 111
+Find 2 new bugs

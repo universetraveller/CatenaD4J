@@ -1,0 +1,1764 @@
+---
+Begin generate bug_id: Closure_162
+num_of_hunks: 13
+NOTICE: may not contains full fix patterns for hunks are too much (13 hunks)
+timeout for running: 3600
+use working dir: ./working/data/Closure_162
+Try to checkout Closure_162
+build dir: ['./working/data/Closure_162/build/classes', './working/data/Closure_162/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/Scope.java
+trace file: src/com/google/javascript/jscomp/ScopedAliases.java
+trying to replace old failing tests
+edit: replace from 311 range 20 at test/com/google/javascript/jscomp/ScopedAliasesTest.java
+to
+  public void testForwardJsDoc$catena_0() {
+    testScoped(
+        "/**\n" +
+        " * @constructor\n" +
+        " */\n" +
+        "foo.Foo = function() {};" +
+        "/** @param {Foo.Bar} x */ function actual(x) {3}" +
+        "var Foo = foo.Foo;" +
+        "/** @constructor */ Foo.Bar = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function expected(x) {}",
+
+        "/**\n" +
+        " * @constructor\n" +
+        " */\n" +
+        "foo.Foo = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function actual(x) {3}" +
+        "/** @constructor */ foo.Foo.Bar = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function expected(x) {}");                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ verifyTypes();                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testForwardJsDoc$catena_1() {
+    try{ testScoped(
+        "/**\n" +
+        " * @constructor\n" +
+        " */\n" +
+        "foo.Foo = function() {};" +
+        "/** @param {Foo.Bar} x */ function actual(x) {3}" +
+        "var Foo = foo.Foo;" +
+        "/** @constructor */ Foo.Bar = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function expected(x) {}",
+
+        "/**\n" +
+        " * @constructor\n" +
+        " */\n" +
+        "foo.Foo = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function actual(x) {3}" +
+        "/** @constructor */ foo.Foo.Bar = function() {};" +
+        "/** @param {foo.Foo.Bar} x */ function expected(x) {}");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    verifyTypes();                                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/ScopedAliasesTest.java
+new test num: 2
+ori test num: 0
+pattern: 0000000000000
+patches are written to file
+running tests...
+used time: Finished in 221.31 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+processed: 0000000000000
+pattern: 1000000000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 205.92 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+No new failing tests but only 1 hunk
+processed: 1000000000000
+pattern: 0100000000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000000000
+pattern: 0010000000000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000000
+pattern: 0001000000000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000000000
+pattern: 0000100000000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100000000
+pattern: 0000010000000
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 200.54 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+No new failing tests but only 1 hunk
+processed: 0000010000000
+pattern: 0000001000000
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001000000
+pattern: 0000000100000
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000100000
+pattern: 0000000010000
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+used time: Finished in 201.33 seconds
+Failing tests: 36
+	com.google.javascript.jscomp.ScopedAliasesTest::testPropertiesNotChanged
+	com.google.javascript.jscomp.ScopedAliasesTest::testObjectJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testArrayJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocSubType
+	com.google.javascript.jscomp.ScopedAliasesTest::testWorksInClosures
+	com.google.javascript.jscomp.ScopedAliasesTest::testOneLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocReturn
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testNullType
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocExtends
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoSymbolsInTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitiveInSameVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordAliasFromMultipleGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordMultipleAliases
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocTypedef
+	com.google.javascript.jscomp.ScopedAliasesTest::testFunctionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasOfSymbolInGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_0
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionReturnThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocEnum
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocType
+	com.google.javascript.jscomp.ScopedAliasesTest::testMultipleTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordOneAlias
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocImplements
+	com.google.javascript.jscomp.ScopedAliasesTest::testFourLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocParameter
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionAssignsToVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testOverridden
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testUnionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testShadowedVar
+Includes new failing tests, set to unusable
+processed: 0000000010000
+pattern: 0000000001000
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+used time: Finished in 196.00 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testNonAliasLocal
+Includes new failing tests, set to unusable
+processed: 0000000001000
+pattern: 0000000000100
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+used time: Finished in 196.30 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasRedefinition
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000000100
+pattern: 0000000000010
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000000010
+pattern: 0000000000001
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000000001
+pattern: 1100000000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000000000
+pattern: 1010000000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000000000
+pattern: 1001000000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000000000
+pattern: 1000100000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100000000
+pattern: 1000010000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 189.84 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+Can independently fix []
+Could not fix independently
+processed: 1000010000000
+pattern: 1000001000000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001000000
+pattern: 1000000100000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000100000
+pattern: 1000000010000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+used time: Finished in 204.37 seconds
+Failing tests: 36
+	com.google.javascript.jscomp.ScopedAliasesTest::testPropertiesNotChanged
+	com.google.javascript.jscomp.ScopedAliasesTest::testObjectJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testArrayJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocSubType
+	com.google.javascript.jscomp.ScopedAliasesTest::testWorksInClosures
+	com.google.javascript.jscomp.ScopedAliasesTest::testOneLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocReturn
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testNullType
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocExtends
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoSymbolsInTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitiveInSameVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordAliasFromMultipleGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordMultipleAliases
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocTypedef
+	com.google.javascript.jscomp.ScopedAliasesTest::testFunctionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasOfSymbolInGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_0
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionReturnThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocEnum
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocType
+	com.google.javascript.jscomp.ScopedAliasesTest::testMultipleTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordOneAlias
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocImplements
+	com.google.javascript.jscomp.ScopedAliasesTest::testFourLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocParameter
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionAssignsToVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testOverridden
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testUnionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testShadowedVar
+Includes new failing tests, set to unusable
+processed: 1000000010000
+pattern: 1000000001000
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+used time: Finished in 206.51 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testNonAliasLocal
+Includes new failing tests, set to unusable
+processed: 1000000001000
+pattern: 1000000000100
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+used time: Finished in 207.58 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasRedefinition
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+Includes new failing tests, set to unusable
+processed: 1000000000100
+pattern: 1000000000010
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000010
+pattern: 1000000000001
+try to fix hunk: 0
+insert before 568 with   Iterable<Var> getVarIterable() {
+    return vars.values();
+  }
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000001
+pattern: 0110000000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000000000
+pattern: 0101000000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101000000000
+pattern: 0100100000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100000000
+pattern: 0100010000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100010000000
+pattern: 0100001000000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100001000000
+pattern: 0100000100000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000100000
+pattern: 0100000010000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000010000
+pattern: 0100000001000
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000001000
+pattern: 0100000000100
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000000100
+pattern: 0100000000010
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000000010
+pattern: 0100000000001
+try to fix hunk: 1
+insert before 226 with         findAliases(t);
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000000001
+pattern: 0011000000000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000000000
+pattern: 0010100000000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100000000
+pattern: 0010010000000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010000000
+pattern: 0010001000000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001000000
+pattern: 0010000100000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000100000
+pattern: 0010000010000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000010000
+pattern: 0010000001000
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000001000
+pattern: 0010000000100
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000100
+pattern: 0010000000010
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000010
+pattern: 0010000000001
+try to fix hunk: 2
+insert before 271 with     private void findAliases(NodeTraversal t) {
+      Scope scope = t.getScope();
+      for (Var v : scope.getVarIterable()) {
+        Node n = v.getNode();
+        int type = n.getType();
+        Node parent = n.getParent();
+        if (parent.getType() == Token.VAR) {
+          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+            String name = n.getString();
+            Var aliasVar = scope.getVar(name);
+            aliases.put(name, aliasVar);
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000001
+pattern: 0001100000000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100000000
+pattern: 0001010000000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010000000
+pattern: 0001001000000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001000000
+pattern: 0001000100000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000100000
+pattern: 0001000010000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000010000
+pattern: 0001000001000
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000001000
+pattern: 0001000000100
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000000100
+pattern: 0001000000010
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000000010
+pattern: 0001000000001
+try to fix hunk: 3
+insert before 272 with             String qualifiedName =
+                aliasVar.getInitialValue().getQualifiedName();
+            transformation.addAlias(name, qualifiedName);
+          } else {
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000000001
+pattern: 0000110000000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000110000000
+pattern: 0000101000000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000101000000
+pattern: 0000100100000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100100000
+pattern: 0000100010000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100010000
+pattern: 0000100001000
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100001000
+pattern: 0000100000100
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100000100
+pattern: 0000100000010
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100000010
+pattern: 0000100000001
+try to fix hunk: 4
+insert before 273 with             report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+          }
+        }
+      }
+    }
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100000001
+pattern: 0000011000000
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000011000000
+pattern: 0000010100000
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010100000
+pattern: 0000010010000
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+used time: Finished in 209.66 seconds
+Failing tests: 36
+	com.google.javascript.jscomp.ScopedAliasesTest::testPropertiesNotChanged
+	com.google.javascript.jscomp.ScopedAliasesTest::testObjectJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testArrayJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocSubType
+	com.google.javascript.jscomp.ScopedAliasesTest::testWorksInClosures
+	com.google.javascript.jscomp.ScopedAliasesTest::testOneLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocReturn
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testNullType
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocExtends
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoSymbolsInTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitiveInSameVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordAliasFromMultipleGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordMultipleAliases
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocTypedef
+	com.google.javascript.jscomp.ScopedAliasesTest::testFunctionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasOfSymbolInGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_0
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionReturnThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocEnum
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocType
+	com.google.javascript.jscomp.ScopedAliasesTest::testMultipleTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordOneAlias
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocImplements
+	com.google.javascript.jscomp.ScopedAliasesTest::testFourLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocParameter
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionAssignsToVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testOverridden
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testUnionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testShadowedVar
+Includes new failing tests, set to unusable
+processed: 0000010010000
+pattern: 0000010001000
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+used time: Finished in 203.62 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testNonAliasLocal
+Includes new failing tests, set to unusable
+processed: 0000010001000
+pattern: 0000010000100
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+used time: Finished in 218.93 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasRedefinition
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+Includes new failing tests, set to unusable
+processed: 0000010000100
+pattern: 0000010000010
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010000010
+pattern: 0000010000001
+try to fix hunk: 5
+insert before 303 with       if (t.getScopeDepth() < 2) {
+        return;
+      }
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010000001
+pattern: 0000001100000
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001100000
+pattern: 0000001010000
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001010000
+pattern: 0000001001000
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001001000
+pattern: 0000001000100
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001000100
+pattern: 0000001000010
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001000010
+pattern: 0000001000001
+try to fix hunk: 6
+insert before 304 with       int type = n.getType();
+      Var aliasVar = null;
+      if (type == Token.NAME) {
+        String name = n.getString();
+        Var lexicalVar = t.getScope().getVar(n.getString());
+        if (lexicalVar != null && lexicalVar == aliases.get(name)) {
+          aliasVar = lexicalVar;
+        }
+      }
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001000001
+pattern: 0000000110000
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+try to fix hunk: 8
+delete from 314 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000110000
+pattern: 0000000101000
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000101000
+pattern: 0000000100100
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000100100
+pattern: 0000000100010
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+try to fix hunk: 11
+replace from 342 with range 5 to
+        if (aliasVar != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000100010
+pattern: 0000000100001
+try to fix hunk: 7
+replace from 307 with range 6 to
+        if (aliasVar != null && NodeUtil.isLValue(n)) {
+          if (aliasVar.getNode() == n) {
+            aliasDefinitionsInOrder.add(n);
+
+try to fix hunk: 12
+delete from 355 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000100001
+pattern: 0000000011000
+try to fix hunk: 8
+delete from 314 with range 4
+try to fix hunk: 9
+replace from 322 with range 1 to
+            report(t, n, GOOG_SCOPE_ALIAS_REDEFINED, n.getString());
+
+patches are written to file
+running tests...
+used time: Finished in 210.18 seconds
+Failing tests: 37
+	com.google.javascript.jscomp.ScopedAliasesTest::testPropertiesNotChanged
+	com.google.javascript.jscomp.ScopedAliasesTest::testObjectJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testArrayJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocSubType
+	com.google.javascript.jscomp.ScopedAliasesTest::testWorksInClosures
+	com.google.javascript.jscomp.ScopedAliasesTest::testOneLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocReturn
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testNullType
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocExtends
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoSymbolsInTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitiveInSameVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordAliasFromMultipleGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordMultipleAliases
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocTypedef
+	com.google.javascript.jscomp.ScopedAliasesTest::testFunctionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testAliasOfSymbolInGoogScope
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_0
+	com.google.javascript.jscomp.ScopedAliasesTest::testForwardJsDoc$catena_1
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionReturnThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocEnum
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocThis
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocType
+	com.google.javascript.jscomp.ScopedAliasesTest::testMultipleTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testRecordOneAlias
+	com.google.javascript.jscomp.ScopedAliasesTest::testTwoScopes
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocImplements
+	com.google.javascript.jscomp.ScopedAliasesTest::testFourLevel
+	com.google.javascript.jscomp.ScopedAliasesTest::testNonAliasLocal
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionThrows
+	com.google.javascript.jscomp.ScopedAliasesTest::testJsDocParameter
+	com.google.javascript.jscomp.ScopedAliasesTest::testScopedFunctionAssignsToVar
+	com.google.javascript.jscomp.ScopedAliasesTest::testOverridden
+	com.google.javascript.jscomp.ScopedAliasesTest::testTransitive
+	com.google.javascript.jscomp.ScopedAliasesTest::testUnionJsDoc
+	com.google.javascript.jscomp.ScopedAliasesTest::testShadowedVar
+Includes new failing tests, set to unusable
+processed: 0000000011000
+pattern: 0000000010100
+try to fix hunk: 8
+delete from 314 with range 4
+try to fix hunk: 10
+delete from 325 with range 4
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "run.py", line 30, in task
+    generator.run()
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 83, in run
+    self._run()
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 109, in _run
+    self.taskSingleHunk(task)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/runner.py", line 138, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/util.py", line 46, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/util.py", line 9, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 495, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 1028, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.8/subprocess.py", line 1868, in _communicate
+    ready = selector.select(timeout)
+  File "/usr/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/workbench/CatenaD4j/scripts/generateBugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

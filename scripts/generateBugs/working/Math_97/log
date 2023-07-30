@@ -1,56 +1,6 @@
----
-Begin generate bug_id: Math_97
-num_of_hunks: 5
-use working dir: ./working/data/Math_97
-Try to checkout Math_97
-build dir: ['./working/data/Math_97/target/classes', './working/data/Math_97/target/test-classes']
-init FileManager
-trace file: src/java/org/apache/commons/math/analysis/BrentSolver.java
-trace file: src/java/org/apache/commons/math/analysis/BrentSolver.java
-trace file: src/java/org/apache/commons/math/analysis/BrentSolver.java
-trace file: src/java/org/apache/commons/math/analysis/BrentSolver.java
-trace file: src/java/org/apache/commons/math/analysis/BrentSolver.java
-trying to replace old failing tests
-edit: replace from 271 range 11 at src/test/org/apache/commons/math/analysis/BrentSolverTest.java
-to
-    public void testRootEndpoints$catena_0() throws Exception {
-        UnivariateRealFunction f = new SinFunction();
-        UnivariateRealSolver solver = new BrentSolver(f);
-        
-        // endpoint is root
-        double result = solver.solve(Math.PI, 4);
-        assertEquals(result, Math.PI, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+EXCEPTION: Inside Exception Math_97 would run forever with parallel
+Traceback (most recent call last):
+  File "run.py", line 19, in task
+    raise Exception(f'{bug_id} would run forever with parallel')
+Exception: Math_97 would run forever with parallel
 
-        result = solver.solve(3, Math.PI);
-        try{ assertEquals(result, Math.PI, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
-    }     public void testRootEndpoints$catena_1() throws Exception {
-        UnivariateRealFunction f = new SinFunction();
-        UnivariateRealSolver solver = new BrentSolver(f);
-        
-        // endpoint is root
-        double result = solver.solve(Math.PI, 4);
-        try{ assertEquals(result, Math.PI, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
-
-        result = solver.solve(3, Math.PI);
-        assertEquals(result, Math.PI, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
-    }
-trace file: src/test/org/apache/commons/math/analysis/BrentSolverTest.java
-new test num: 2
-ori test num: 0
-pattern: 00000
-patches are written to file
-running tests...
-used time: Finished in 7.31 seconds
-Failing tests: 2
-	org.apache.commons.math.analysis.BrentSolverTest::testRootEndpoints$catena_0
-	org.apache.commons.math.analysis.BrentSolverTest::testRootEndpoints$catena_1
-pattern: 00001
-try to fix hunk: 4
-insert before 149 with             if (yMin == 0.0) {
-                ret = min;
-            } else {
-                ret = max;
-            }
-
-patches are written to file
-running tests...

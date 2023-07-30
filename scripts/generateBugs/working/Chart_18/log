@@ -1,0 +1,1473 @@
+---
+Begin generate bug_id: Chart_18
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/Chart_18
+Try to checkout Chart_18
+build dir: ['./working/data/Chart_18/build', './working/data/Chart_18/build-tests']
+init FileManager
+trace file: source/org/jfree/data/DefaultKeyedValues.java
+trace file: source/org/jfree/data/DefaultKeyedValues2D.java
+trying to replace old failing tests
+edit: replace from 349 range 18 at tests/org/jfree/data/junit/DefaultKeyedValues2DTests.java
+to
+    public void testRemoveColumnByKey$catena_0() {
+    	DefaultKeyedValues2D d = new DefaultKeyedValues2D();
+    	d.addValue(new Double(1.0), "R1", "C1");
+    	d.addValue(new Double(2.0), "R2", "C2");
+    	d.removeColumn("C2");
+    	d.addValue(new Double(3.0), "R2", "C2");
+    	assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    	
+    	// check for unknown column
+    	boolean pass = false;
+    	try {
+    		d.removeColumn("XXX");
+    	}
+    	catch (UnknownKeyException e) {
+    		pass = true;
+    	}
+    	try{ assertTrue(pass);                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRemoveColumnByKey$catena_1() {
+    	DefaultKeyedValues2D d = new DefaultKeyedValues2D();
+    	d.addValue(new Double(1.0), "R1", "C1");
+    	d.addValue(new Double(2.0), "R2", "C2");
+    	d.removeColumn("C2");
+    	d.addValue(new Double(3.0), "R2", "C2");
+    	try{ assertEquals(3.0, d.getValue("R2", "C2").doubleValue(), EPSILON);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    	
+    	// check for unknown column
+    	boolean pass = false;
+    	try {
+    		d.removeColumn("XXX");
+    	}
+    	catch (UnknownKeyException e) {
+    		pass = true;
+    	}
+    	assertTrue(pass);                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 355 range 19 at tests/org/jfree/data/junit/DefaultKeyedValuesTests.java
+to
+    public void testRemoveValue$catena_0() {
+        DefaultKeyedValues data = new DefaultKeyedValues();
+        data.addValue("A", new Double(1.0));
+        data.addValue("B", null);
+        data.addValue("C", new Double(3.0));
+        data.addValue("D", new Double(2.0));
+        assertEquals(1, data.getIndex("B"));                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        data.removeValue("B");
+        try{ assertEquals(-1, data.getIndex("B"));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        boolean pass = false;
+        try {
+            data.removeValue("XXX");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;   
+        }
+        try{ assertTrue(pass);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRemoveValue$catena_1() {
+        DefaultKeyedValues data = new DefaultKeyedValues();
+        data.addValue("A", new Double(1.0));
+        data.addValue("B", null);
+        data.addValue("C", new Double(3.0));
+        data.addValue("D", new Double(2.0));
+        try{ assertEquals(1, data.getIndex("B"));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        data.removeValue("B");
+        assertEquals(-1, data.getIndex("B"));                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        boolean pass = false;
+        try {
+            data.removeValue("XXX");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;   
+        }
+        try{ assertTrue(pass);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRemoveValue$catena_2() {
+        DefaultKeyedValues data = new DefaultKeyedValues();
+        data.addValue("A", new Double(1.0));
+        data.addValue("B", null);
+        data.addValue("C", new Double(3.0));
+        data.addValue("D", new Double(2.0));
+        try{ assertEquals(1, data.getIndex("B"));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        data.removeValue("B");
+        try{ assertEquals(-1, data.getIndex("B"));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        boolean pass = false;
+        try {
+            data.removeValue("XXX");
+        }
+        catch (UnknownKeyException e) {
+            pass = true;   
+        }
+        assertTrue(pass);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 238 range 8 at tests/org/jfree/data/junit/DefaultKeyedValuesTests.java
+to
+    public void testGetIndex2$catena_0() {
+    	DefaultKeyedValues v = new DefaultKeyedValues();
+    	assertEquals(-1, v.getIndex("K1"));                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    	v.addValue("K1", 1.0);
+    	try{ assertEquals(0, v.getIndex("K1"));                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    	v.removeValue("K1");
+    	try{ assertEquals(-1, v.getIndex("K1"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetIndex2$catena_1() {
+    	DefaultKeyedValues v = new DefaultKeyedValues();
+    	try{ assertEquals(-1, v.getIndex("K1"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    	v.addValue("K1", 1.0);
+    	assertEquals(0, v.getIndex("K1"));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    	v.removeValue("K1");
+    	try{ assertEquals(-1, v.getIndex("K1"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetIndex2$catena_2() {
+    	DefaultKeyedValues v = new DefaultKeyedValues();
+    	try{ assertEquals(-1, v.getIndex("K1"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    	v.addValue("K1", 1.0);
+    	try{ assertEquals(0, v.getIndex("K1"));                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    	v.removeValue("K1");
+    	assertEquals(-1, v.getIndex("K1"));                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: tests/org/jfree/data/junit/DefaultKeyedValuesTests.java
+trace file: tests/org/jfree/data/junit/DefaultKeyedValues2DTests.java
+new test num: 8
+ori test num: 1
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 47.18 seconds
+Failing tests: 5
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+used time: Finished in 28.74 seconds
+Failing tests: 5
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+No new failing tests but only 1 hunk
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+patches are written to file
+running tests...
+used time: Finished in 28.37 seconds
+Failing tests: 4
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+select new bug
+Pattern: 001000
+new failing tests:
+org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+Save found bug
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+delete from 320 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+delete from 318 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 26.74 seconds
+Failing tests: 5
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Can independently fix []
+Could not fix independently
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+used time: Finished in 26.38 seconds
+Failing tests: 4
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Can independently fix []
+Could not fix independently
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.51 seconds
+Failing tests: 2
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+Can independently fix ['org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0', 'org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955', 'org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2']
+select new bug
+Pattern: 110000
+new failing tests:
+org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Save found bug
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 25.02 seconds
+Failing tests: 5
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Can independently fix []
+Could not fix independently
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 27.71 seconds
+Failing tests: 4
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Can independently fix []
+Could not fix independently
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+used time: Finished in 25.32 seconds
+Failing tests: 1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+Can independently fix ['org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1']
+select new bug
+Pattern: 110100
+new failing tests:
+org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+Save found bug
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+patches are written to file
+running tests...
+used time: Finished in 27.60 seconds
+Failing tests: 3
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 27.98 seconds
+Failing tests: 4
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2$catena_2
+Can independently fix []
+Could not fix independently
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 27.55 seconds
+Failing tests: 2
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+Can independently fix []
+Could not fix independently
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+patches are written to file
+running tests...
+used time: Finished in 27.70 seconds
+Failing tests: 3
+	org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_0
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 26.94 seconds
+Failing tests: 1
+	org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue$catena_2
+Can independently fix []
+Could not fix independently
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 25.98 seconds
+Failing tests: 1
+	org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+delete from 318 with range 1
+try to fix hunk: 1
+delete from 320 with range 1
+try to fix hunk: 2
+replace from 335 with range 1 to
+            throw new UnknownKeyException("The key (" + key 
+                    + ") is not recognised.");
+
+try to fix hunk: 3
+insert before 455 with     	if (columnKey == null) {
+    		throw new IllegalArgumentException("Null 'columnKey' argument.");
+    	}
+    	if (!this.columnKeys.contains(columnKey)) {
+    		throw new UnknownKeyException("Unknown key: " + columnKey);
+    	}
+
+try to fix hunk: 4
+insert before 458 with             int index = rowData.getIndex(columnKey);
+            if (index >= 0) {
+
+try to fix hunk: 5
+insert before 459 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 24.33 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111111
+Find 3 new bugs
