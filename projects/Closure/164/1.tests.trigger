@@ -1,0 +1,4 @@
+com.google.javascript.rhino.jstype.FunctionTypeTest::testSupAndInfOfReturnTypesWithNumOfParams$catena_1
+com.google.javascript.jscomp.LooseTypeCheckTest::testMethodInference7
+com.google.javascript.jscomp.TypeCheckTest::testMethodInference7
+com.google.javascript.rhino.jstype.FunctionTypeTest::testSupAndInfOfReturnTypesWithNumOfParams$catena_0

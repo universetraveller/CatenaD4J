@@ -1,0 +1,1 @@
+org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin$catena_6

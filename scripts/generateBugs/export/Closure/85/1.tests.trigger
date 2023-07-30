@@ -1,3 +1,3 @@
-com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps$catena_2
 com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps$catena_0
 com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311
+com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps$catena_2

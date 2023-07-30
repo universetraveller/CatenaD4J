@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/com/google/javascript/jscomp/DeadAssignmentsElimination.java",
+            "replaced_with": "        VariableLiveness v1 = isVariableReadBeforeKill(\n          n.getFirstChild(), variable);\n        VariableLiveness v2 = isVariableReadBeforeKill(\n          n.getLastChild(), variable);\n",
+            "patch_type": "insert",
+            "next_line_no": 362
+        },
+        {
+            "file_name": "src/com/google/javascript/jscomp/DeadAssignmentsElimination.java",
+            "replaced_with": "        if (v1 != VariableLiveness.MAYBE_LIVE) {\n          return v1;\n        } else if (v2 == VariableLiveness.READ) {\n          return VariableLiveness.READ;\n        } else {\n          return VariableLiveness.MAYBE_LIVE;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 364
+        }
+    ]
+}

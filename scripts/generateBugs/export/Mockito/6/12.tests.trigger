@@ -1,0 +1,3 @@
+org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyMap$catena_2
+org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyMap$catena_1
+org.mockitousage.matchers.AnyXMatchersAcceptNullsTest::shouldNotAcceptNullInAnyXMatchers$catena_3

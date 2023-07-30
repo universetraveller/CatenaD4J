@@ -1,0 +1,1 @@
+com.google.javascript.jscomp.RenameVarsTest::testDollarSignSuperExport2$catena_0

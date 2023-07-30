@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.RemoveConstantExpressionsTest::testNew1
+com.google.javascript.jscomp.RemoveConstantExpressionsTest::testCall1

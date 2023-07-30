@@ -1,1 +1,1 @@
-com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation$catena_1
+com.google.javascript.jscomp.CoalesceVariableNamesTest::testParameter4

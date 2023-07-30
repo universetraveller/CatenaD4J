@@ -73,8 +73,8 @@ class Generator:
                 self.cleanup()
             self.checkout()
             self.build_dir = []
-            self.build_dir.append('{}/{}'.format(self.path, self.info_base['dir.bin.classes']))
-            self.build_dir.append('{}/{}'.format(self.path, self.info_base['dir.bin.tests']))
+            self.build_dir.append(self.info_base['dir.bin.classes'])
+            self.build_dir.append(self.info_base['dir.bin.tests'])
             self.log('build dir: {}'.format(self.build_dir))
             self.hunk_num = hunk_num
             self.hunks = []

@@ -1,0 +1,2 @@
+org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooHigh
+org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooLow

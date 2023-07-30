@@ -1,1 +1,2 @@
-com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty
+com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException
+com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf

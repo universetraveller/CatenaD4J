@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "replaced_with": "      case Token.MUL:\n      case Token.AND:\n      case Token.OR:\n      case Token.BITOR:\n      case Token.BITXOR:\n      case Token.BITAND:\n        return tryRotateAssociativeOperator(node);\n",
+            "patch_type": "insert",
+            "next_line_no": 102
+        },
+        {
+            "file_name": "src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java",
+            "replaced_with": "  private Node tryRotateAssociativeOperator(Node n) {\n    if (!late) {\n      return n;\n    }\n    Preconditions.checkArgument(NodeUtil.isAssociative(n.getType()));\n    Node rhs = n.getLastChild();\n    if (n.getType() == rhs.getType()) {\n      Node parent = n.getParent();\n      Node first = n.getFirstChild().detachFromParent();\n      Node second = rhs.getFirstChild().detachFromParent();\n      Node third = rhs.getLastChild().detachFromParent();\n      Node newLhs = new Node(n.getType(), first, second)\n          .copyInformationFrom(n);\n      Node newRoot = new Node(rhs.getType(), newLhs, third)\n          .copyInformationFrom(rhs);\n      parent.replaceChild(n, newRoot);\n      reportCodeChange();\n      return newRoot;\n    }\n    return n;\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 108
+        }
+    ]
+}

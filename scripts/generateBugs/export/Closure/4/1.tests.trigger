@@ -1,0 +1,3 @@
+com.google.javascript.jscomp.TypeCheckTest::testImplementsLoop
+com.google.javascript.jscomp.TypeCheckTest::testConversionFromInterfaceToRecursiveConstructor
+com.google.javascript.jscomp.TypeCheckTest::testImplementsExtendsLoop

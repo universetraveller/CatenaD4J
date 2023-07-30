@@ -1,1 +1,1 @@
-com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_1
+com.google.javascript.jscomp.CommandLineRunnerTest::testVersionFlag$catena_0

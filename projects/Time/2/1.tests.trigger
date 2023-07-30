@@ -1,0 +1,3 @@
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1

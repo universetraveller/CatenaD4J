@@ -56,10 +56,10 @@ def get_failing_tests(path, build_dir:list, timeout=900):
         #with open('{}/failing_tests'.format(path), 'r') as f:
         #    details = f.read()
         details = used_time
-        cleanup('.', build_dir)
+        cleanup(path, build_dir)
         return Failure(num, names, details, D4J_TEST)
     else:
-        cleanup('.', build_dir)
+        cleanup(path, build_dir)
         return Failure(-100, [], result[2], CMDFAIL)
 def math_log2(n):
     return math.log2(n)
