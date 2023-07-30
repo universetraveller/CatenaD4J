@@ -153,41 +153,44 @@ def parse_max_timeout():
     print(f'min: {time_list[0]}')
     print(f'avg: {sum(time_list)/len(time_list)}')
 def parse_all_statstic2():
+    assert not get_data()
     locale = open(f'./statstics2.csv', 'a')
     locale.write('bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk\n')
     isolated = 0
     divisible = 0
     indivisible = 0
     into_single=0
+    timeout=0
     for name in data:
         tp = data[name]
         log = tp[0]
         nbn = new_bugs_num(log)
         if nbn == -1:
             locale.write(f'{name}, {NO_DATA}, NONE, NONE, NONE\n')
+            timeout+=1
             alert(f'{name} no ending')
         else:
             bgdict = tp[1]
             bl = new_bugs_from_bgdict(bgdict)
             if not len(bl):
-                alert(f'Empty new BUGS at {pname}_{name}')
+                alert(f'Empty new BUGS at {name}')
                 if not -1 == nbn:
-                    alert(f'Two bugs num not equals {pname}_{name}')
+                    alert(f'Two bugs num not equals {name}')
                 continue
             if not len(bl) == nbn:
                 alert(f'Two bugs num not equals {pname}_{name}')
             if len(bl) == 1 and is_all('1', bl[0]):
                 locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
                 indivisible += 1
+                continue
             single = 0
             multi = []
             for fix in bl:
                 if fix.count('1') == 1:
                     single += 1
-                elif fix.count('1') > 1 and not is_all('1', fix):
-                    multi.append(fix)
                 else:
-                    print(f'invalid arg {fix}')
+                    assert fix.count('1') > 1
+                    multi.append(fix)
             divisible += 1
             isolated += len(multi)
             into_single += single
@@ -202,7 +205,7 @@ def parse_all_statstic2():
                 if i.count('1') > 1:
                     hs+='{}/'.format(i.count('1'))
             locale.write(f'{name}, {stat}, {single}, {len(multi)}, {hs}\n')
-    locale.write(f'STATSTICS, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Divide_into_single={into_single}\n')
+    locale.write(f'No_data={timeout}, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Single_divided={into_single}\n')
     locale.close()
     print(f'statstics2 ends')
     return 0
@@ -213,6 +216,7 @@ def parse_all_statstic2_name(name):
     divisible = 0
     indivisible = 0
     into_single=0
+    timeout=0
     for name in data:
         if not pname in name:
             continue
@@ -222,6 +226,7 @@ def parse_all_statstic2_name(name):
         nbn = new_bugs_num(log)
         if nbn == -1:
             locale.write(f'{name}, {NO_DATA}, NONE, NONE, NONE\n')
+            timeout+=1
             alert(f'{name} no ending')
         else:
             bgdict = tp[1]
@@ -236,15 +241,15 @@ def parse_all_statstic2_name(name):
             if len(bl) == 1 and is_all('1', bl[0]):
                 locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
                 indivisible += 1
+                continue
             single = 0
             multi = []
             for fix in bl:
                 if fix.count('1') == 1:
                     single += 1
-                elif fix.count('1') > 1 and not is_all('1', fix):
-                    multi.append(fix)
                 else:
-                    print(f'invalid arg {fix}')
+                    assert fix.count('1') > 1
+                    multi.append(fix)
             divisible += 1
             isolated += len(multi)
             into_single += single
@@ -259,7 +264,7 @@ def parse_all_statstic2_name(name):
                 if i.count('1') > 1:
                     hs+='{}/'.format(i.count('1'))
             locale.write(f'{name}, {stat}, {single}, {len(multi)}, {hs}\n')
-    locale.write(f'STATSTICS, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Divide_into_single={into_single}\n')
+    locale.write(f'No_data={timeout}, Divisible={divisible}, Indivisible={indivisible}, Isolated={isolated}, Single_divided={into_single}\n')
     locale.close()
     print(f'statstics2_{pname} ends')
     return 0
@@ -269,4 +274,4 @@ def parse_all_statstic2_all_proj():
     for i in projs:
         assert not parse_all_statstic1_name(i)
 if __name__ == '__main__':
-    parse_max_timeout()
+    parse_all_statstic2()
