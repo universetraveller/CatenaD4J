@@ -5,6 +5,7 @@ import traceback
 import json
 import joblib
 import tqdm
+import time
 def task(bug_id, info, method):
     if os.path.exists('./working/{}'.format(bug_id)):
         print('clean up: ./working/{}'.format(bug_id))
@@ -14,6 +15,8 @@ def task(bug_id, info, method):
     try:
         if bug_id in ('Time_21', 'Lang_2', 'Closure_63', 'Closure_93'):
             raise Exception('{} is a deprecated bug'.format(bug_id))
+        if bug_id in ('Math_97', 'Lang_17'):
+            raise Exception(f'{bug_id} would run forever with parallel')
         info = info[bug_id]
         method = method[bug_id]
         bug_id = bug_id.split('_')
@@ -60,5 +63,9 @@ def main():
     else:
         parallel(bug_ids, js1, js2)
 
+def run_time(runnable):
+    start = time.time()
+    runnable()
+    return time.time() - start
 if __name__ == '__main__':
-    main()
+    print(f'Real time: {run_time(main)}s')

@@ -62,7 +62,7 @@ class Generator:
         hunk_num = self.patch_base['num_of_hunks']
         self.log('num_of_hunks: {}'.format(hunk_num))
         if int(hunk_num) > util.math_log2(_max_patterns):
-            self.log(f'NOTICE: may not contains full fix patterns for hunks are too more ({hunk_num} hunks)')
+            self.log(f'NOTICE: may not contains full fix patterns for hunks are too much ({hunk_num} hunks)')
         self.log(f'timeout for running: {_generator_run_timeout}')
         if hunk_num == 1:
             self.log('Skip')
@@ -202,6 +202,7 @@ class Generator:
                         self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
                         self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
                         self.newBugs[util.getLabel(fix_pattern)] = canFix
+                        self.save('./working/{}_{}'.format(self.proj, self.bug_id))
                     else:
                         self.log('Could not fix independently')
                         thisHunk.set_status(UNSELECTABLE)
@@ -220,6 +221,7 @@ class Generator:
                         self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
                         self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
                         self.newBugs[util.getLabel(fix_pattern)] = canFix
+                        self.save('./working/{}_{}'.format(self.proj, self.bug_id))
             self.hunks.append(thisHunk)
         else:
             self.log('what tag it is? {}'.format(failure.tag))
@@ -280,6 +282,8 @@ class Generator:
         self.new_num = new_num
         self.ori_num = ori_num
     def analyze(self, path):
+        self.save(path, ending=True)
+    def save(self, path, ending=False):
         num1 = 0
         for i in self.hunks:
             if i.status == COMMON:
@@ -291,13 +295,23 @@ class Generator:
             self.log('EXCEPTION: Broken bugs finding')
             self.log('Find {} new bugs from inside hunks'.format(num1))
             self.log('Find {} new bugs from checking'.format(num2))
-        else:
+        elif ending:
             self.log('Find {} new bugs'.format(num2))
-        root = {}
-        root['original'] = self.patch_base
-        root['method'] = self.method_base
+        if not ending:
+            self.log('Save found bug')
+        bug_path = f'{path}/newBugs.json'
+        if not ending and os.path.exists(bug_path):
+            with open(bug_path, 'r') as f:
+                root = json.load(f)
+        else:
+            root = {}
+        if ending or not 'original' in root:
+            root['original'] = self.patch_base
+        if ending or not 'method' in root:
+            root['method'] = self.method_base
         for i in self.newBugs:
-            root[i] = {}
-            root[i]['failing_tests']  = list(self.newBugs[i])
-        with open('{}/newBugs.json'.format(path), 'w') as f:
+            if ending or not i in root:
+                root[i] = {}
+                root[i]['failing_tests']  = list(self.newBugs[i])
+        with open(bug_path, 'w') as f:
             f.write(json.dumps(root, indent=4))
