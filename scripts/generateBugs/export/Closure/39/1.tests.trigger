@@ -1,1 +1,1 @@
-com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1

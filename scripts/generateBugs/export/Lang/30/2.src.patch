@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+            "from_line_no": 1576,
+            "to_line_no": 1576,
+            "replaced_with": "            boolean chFound = searchChars.indexOf(ch) >= 0;\n            if (i + 1 < strLen && Character.isHighSurrogate(ch)) {\n                char ch2 = str.charAt(i + 1);\n                if (chFound && searchChars.indexOf(ch2) < 0) {\n",
+            "replaced": "            if (searchChars.indexOf(ch) < 0) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1577
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+            "replaced_with": "                }\n            } else {\n                if (!chFound) {\n                    return i;\n                }\n",
+            "patch_type": "insert",
+            "next_line_no": 1578
+        }
+    ]
+}

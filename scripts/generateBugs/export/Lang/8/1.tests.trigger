@@ -1,0 +1,2 @@
+org.apache.commons.lang3.time.FastDateFormat_PrinterTest::testCalendarTimezoneRespected$catena_1
+org.apache.commons.lang3.time.FastDatePrinterTest::testCalendarTimezoneRespected$catena_1

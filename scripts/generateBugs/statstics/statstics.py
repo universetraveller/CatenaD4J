@@ -165,6 +165,8 @@ def parse_all_statstic2():
         tp = data[name]
         log = tp[0]
         nbn = new_bugs_num(log)
+        if not nbn:
+            print('WARNNING: nbn==0')
         if nbn == -1:
             locale.write(f'{name}, {NO_DATA}, NONE, NONE, NONE\n')
             timeout+=1
@@ -274,4 +276,4 @@ def parse_all_statstic2_all_proj():
     for i in projs:
         assert not parse_all_statstic1_name(i)
 if __name__ == '__main__':
-    parse_all_statstic2()
+    parse_all_statstic2_all_proj()

@@ -1,0 +1,5 @@
+com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining1
+com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818
+com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineIfParametersModified9
+com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6
+com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineIfParametersModified8

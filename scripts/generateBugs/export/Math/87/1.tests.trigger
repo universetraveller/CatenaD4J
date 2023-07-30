@@ -1,2 +1,2 @@
-org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0
 org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_1
+org.apache.commons.math.optimization.linear.SimplexSolverTest::testSingleVariableAndConstraint$catena_0

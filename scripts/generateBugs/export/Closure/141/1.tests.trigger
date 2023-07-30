@@ -1,5 +1,5 @@
-com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGViaHookWithSideEffects
 com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGWithSideEffects
 com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrG
 com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGViaHook
 com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionForGorH
+com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGViaHookWithSideEffects

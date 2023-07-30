@@ -1,0 +1,6 @@
+org.joda.time.TestDuration_Basics::testToPeriod_fixedZone$catena_4
+org.joda.time.TestDuration_Basics::testToPeriod_fixedZone$catena_3
+org.joda.time.TestPeriod_Constructors::testConstructor_long_fixedZone$catena_5
+org.joda.time.TestDuration_Basics::testToPeriod_fixedZone$catena_2
+org.joda.time.TestPeriod_Constructors::testConstructor_long_fixedZone$catena_4
+org.joda.time.TestPeriod_Constructors::testConstructor_long_fixedZone$catena_3

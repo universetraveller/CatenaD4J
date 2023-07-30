@@ -1,5 +1,4 @@
-com.google.javascript.jscomp.CheckGlobalThisTest::testGlobalThis7
-com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction8
-com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction1
-com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction3
-com.google.javascript.jscomp.CheckGlobalThisTest::testInnerFunction2
+com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction6
+com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod2
+com.google.javascript.jscomp.CheckGlobalThisTest::testStaticMethod3
+com.google.javascript.jscomp.CheckGlobalThisTest::testStaticFunction7

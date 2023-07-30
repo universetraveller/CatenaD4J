@@ -1,0 +1,4 @@
+org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
