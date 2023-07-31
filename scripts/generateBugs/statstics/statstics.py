@@ -211,7 +211,7 @@ def parse_all_statstic2():
     locale.close()
     print(f'statstics2 ends')
     return 0
-def parse_all_statstic2_name(name):
+def parse_all_statstic2_name(pname):
     locale = open(f'./statstics2_{pname}.csv', 'a')
     locale.write('bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk\n')
     isolated = 0
@@ -274,6 +274,6 @@ def parse_all_statstic2_all_proj():
     assert not get_data()
     projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
     for i in projs:
-        assert not parse_all_statstic1_name(i)
+        assert not parse_all_statstic2_name(i)
 if __name__ == '__main__':
     parse_all_statstic2_all_proj()

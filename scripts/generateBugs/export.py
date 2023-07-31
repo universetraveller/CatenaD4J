@@ -99,6 +99,18 @@ def main():
                         assert ft.split('::')[1] in new
                         assert new.strip() == moreCheck(ft.split('::')[1], met[arr[0]]['splited']).strip()
                         __ed[arr[0]]['to'].append(new)
+                # add original should_passed tests
+                # for fixing bugs like Chart_2
+                for orit in met['failing_tests']:
+                    if not orit in met:
+                        print(f'skip {orit} in {proj}_{bid} at adding original tests')
+                        continue
+                    if not orit in __ed and not orit in one[1]['failing_tests']:
+                        __ed[orit] = {}
+                        __ed[orit]['begin_line_no'] = met[orit]['begin_line_no']
+                        __ed[orit]['end_line_no'] = met[orit]['end_line_no']
+                        __ed[orit]['file_path'] = met[orit]['file_path']
+                        __ed[orit]['to'] = ['']
                 #node['edit'] = __ed
                 with open('./export/{}/{}/{}.classes.modified'.format(proj, bid, i), 'w') as w:
                     for oclz in clz:

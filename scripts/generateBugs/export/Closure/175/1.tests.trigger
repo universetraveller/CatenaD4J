@@ -1,5 +1,5 @@
+com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a
+com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b
 com.google.javascript.jscomp.InlineFunctionsTest::testIssue1101
 com.google.javascript.jscomp.InlineFunctionsTest::testInlineMutableArgsReferencedOnce
-com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a
 com.google.javascript.jscomp.InlineFunctionsTest::testCostBasedInlining10
-com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b
