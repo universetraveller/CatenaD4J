@@ -180,7 +180,7 @@ def parse_all_statstic2():
                     alert(f'Two bugs num not equals {name}')
                 continue
             if not len(bl) == nbn:
-                alert(f'Two bugs num not equals {pname}_{name}')
+                alert(f'Two bugs num not equals {name}')
             if len(bl) == 1 and is_all('1', bl[0]):
                 locale.write(f'{name}, {INDIVISIBLE}, 0, 0, {len(bl[0])}\n') 
                 indivisible += 1
@@ -275,5 +275,45 @@ def parse_all_statstic2_all_proj():
     projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
     for i in projs:
         assert not parse_all_statstic2_name(i)
+def print_short_logs(num_of_line, spec=''):
+    assert not get_data()
+    for name in data:
+        if spec and spec != name:
+            continue
+        log = data[name][0]
+        if spec:
+            print(log[-num_of_line:])
+        if len(log) < num_of_line:
+            print(name)
+    print(len(data))
+def print_no_ending_bugs():
+    assert not get_data()
+    unk = 0
+    div = 0
+    for name in data:
+        tp = data[name]
+        log = tp[0]
+        nbn = new_bugs_num(log)
+        if not nbn:
+            print('WARNNING: nbn==0')
+        if nbn == -1:
+            print(f'{name}: Timeout / Unknown')
+            unk += 1
+        else:
+            bgdict = tp[1]
+            bl = new_bugs_from_bgdict(bgdict)
+            if not len(bl):
+                alert(f'Empty new BUGS at {name}')
+                if not -1 == nbn:
+                    alert(f'Two bugs num not equals {name}')
+                continue
+            if not len(bl) == nbn:
+                alert(f'Two bugs num not equals {name}')
+            if len(bl) == 1 and is_all('1', bl[0]):
+                continue
+            if 'TimeoutError' in '\n'.join(log[-2:]):
+                print(f'{name}: Timeout / Divisible')
+                div += 1
+    print(f'unk: {unk}, div: {div}')
 if __name__ == '__main__':
-    parse_all_statstic2_all_proj()
+    print_no_ending_bugs()
