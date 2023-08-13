@@ -10,4 +10,6 @@
 * export 'tests.trigger' or 'classes.modified'  
 `catena4j export -p <property_name> -w <working_dir> -o <output_file>`  
 ## Active bugs  
-You can check all available cids with its bug_id in file './projects/<project_name>/bugs-registry.csv'  
+You can check all available cids with its bug_id in file './projects/<project_name>/bugs-registry.csv'
+## Statistics
+Check [here](scripts/generateBugs/statstics) for the statistics
