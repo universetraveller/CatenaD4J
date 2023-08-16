@@ -1,0 +1,7 @@
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_6
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_4
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_0
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_1
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_3
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_2
+org.apache.commons.math.estimation.GaussNewtonEstimatorTest::testBoundParameters$catena_5

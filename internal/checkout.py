@@ -43,14 +43,13 @@ def sanity_check(task):
     util.printc('Cannot find cid in bugs-registry')
     return False
 def validate(args):
+    validator = util.args_validator(args, 'wvp', cmd='checkout')
+    validator.validate()
+    if not validator.is_valid():
+        validator.print_all(util.printc)
+        return INVALID, None
     if not util.exists('{}/projects/{}'.format(config.root, args.p)):
         return D4J, None
-    if not args.o == None:
-        util.printc('Unknown parameter: -o')
-        return INVALID, None
-    if args.w == None or args.v == None or args.p == None:
-        util.printc('Incompleted parameters')
-        return INVALID, None
     if not 'b' in args.v and not 'f' in args.v:
         util.printc('Incompleted version parameter for -v')
         return INVALID, None

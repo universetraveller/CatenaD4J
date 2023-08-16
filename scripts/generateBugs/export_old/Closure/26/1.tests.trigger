@@ -1,0 +1,9 @@
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testDash
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testWithoutExports$catena_0
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testModuleName$catena_5
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testModuleName$catena_6
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testVarRenaming
+com.google.javascript.jscomp.CommandLineRunnerTest::testTransformAMDAndProcessCJS
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testWithoutExports$catena_1
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testExports$catena_0
+com.google.javascript.jscomp.CommandLineRunnerTest::testProcessCJS

@@ -25,11 +25,12 @@ class Task:
         self.wd = None
         self.opf = None
 def validate(args):
-    if not args.v == None:
-        return False
-    if args.p == None:
-        return False
-    return True
+    validator = util.args_validator(args, 'p',  'wo', 'export')
+    validator.validate()
+    if validator.is_valid():
+        return True
+    validator.print_all(util.printc)
+    return False
 INVALID = -1
 COMMON= 0
 D4J = 1
@@ -66,6 +67,7 @@ def tokenize(args):
 def EXPORT(args):
     if not validate(args):
         print_help()
+        return
     task = tokenize(args)
     if task.stat == INVALID:
         util.printc('Task ends with invalid arguments')

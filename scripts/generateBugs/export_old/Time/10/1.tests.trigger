@@ -1,0 +1,6 @@
+org.joda.time.TestMonths::testFactory_monthsBetween_RPartial_MonthDay$catena_1
+org.joda.time.TestDays::testFactory_daysBetween_RPartial_MonthDay$catena_3
+org.joda.time.TestDays::testFactory_daysBetween_RPartial_MonthDay$catena_1
+org.joda.time.TestMonths::testFactory_monthsBetween_RPartial_MonthDay$catena_4
+org.joda.time.TestDays::testFactory_daysBetween_RPartial_MonthDay$catena_7
+org.joda.time.TestDays::testFactory_daysBetween_RPartial_MonthDay$catena_5

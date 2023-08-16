@@ -2,6 +2,7 @@ from . import util
 from . import checkout
 from . import export
 from . import reset
+from . import ids
 
 def no_impl(*arglist, **argmap):
     raise util.C4JInsideError("The method is not implemented")
@@ -12,6 +13,9 @@ __entry_map = {
         "checkout" : checkout.CHECKOUT,
         "export" : export.EXPORT,
         "reset" : reset.RESET,
+        "pids" : ids.PIDS,
+        "bids" : ids.BIDS,
+        "cids" : ids.CIDS,
         "ver" : no_impl,
         "info" : no_impl
 # End

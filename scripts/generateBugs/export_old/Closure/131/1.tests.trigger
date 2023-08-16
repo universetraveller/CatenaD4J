@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.ConvertToDottedPropertiesTest::testQuotedProps$catena_3
+com.google.javascript.jscomp.ConvertToDottedPropertiesTest::testDoNotConvert$catena_15

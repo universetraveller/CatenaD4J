@@ -1,0 +1,10 @@
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput2
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput5$catena_0
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput4
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput1$catena_0
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput5$catena_1
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testBasicMappingGoldenOutput
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testLiteralMappingsGoldenOutput
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput0a
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput3
+com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput1$catena_1

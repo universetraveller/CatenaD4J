@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/joda/time/DateTimeZone.java",
+            "replaced_with": "    public long convertLocalToUTC(long instantLocal, boolean strict, long originalInstantUTC) {\n        int offsetOriginal = getOffset(originalInstantUTC);\n        long instantUTC = instantLocal - offsetOriginal;\n        int offsetLocalFromOriginal = getOffset(instantUTC);\n        if (offsetLocalFromOriginal == offsetOriginal) {\n            return instantUTC;\n        }\n        return convertLocalToUTC(instantLocal, strict);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 936
+        },
+        {
+            "file_name": "src/main/java/org/joda/time/chrono/ZonedChronology.java",
+            "from_line_no": 467,
+            "to_line_no": 467,
+            "replaced_with": "            long result = iZone.convertLocalToUTC(localInstant, false, instant);\n",
+            "replaced": "            long result = iZone.convertLocalToUTC(localInstant, false);\n",
+            "patch_type": "replace",
+            "next_line_no": 468
+        }
+    ]
+}

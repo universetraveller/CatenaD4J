@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/lang/ClassUtils.java",
+            "replaced_with": "        StringBuffer arrayPrefix = new StringBuffer();\n",
+            "patch_type": "insert",
+            "next_line_no": 191
+        },
+        {
+            "file_name": "src/java/org/apache/commons/lang/ClassUtils.java",
+            "replaced_with": "        if (className.startsWith(\"[\")) {\n            while (className.charAt(0) == '[') {\n                className = className.substring(1);\n                arrayPrefix.append(\"[]\");\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 193
+        },
+        {
+            "file_name": "src/java/org/apache/commons/lang/ClassUtils.java",
+            "replaced_with": "            if (className.charAt(0) == 'L' && className.charAt(className.length() - 1) == ';') {\n                className = className.substring(1, className.length() - 1);\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 194
+        },
+        {
+            "file_name": "src/java/org/apache/commons/lang/ClassUtils.java",
+            "from_line_no": 203,
+            "to_line_no": 203,
+            "replaced_with": "        return out + arrayPrefix;\n",
+            "replaced": "        return out;\n",
+            "patch_type": "replace",
+            "next_line_no": 204
+        }
+    ]
+}

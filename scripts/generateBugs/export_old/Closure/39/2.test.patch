@@ -1,0 +1,18 @@
+{
+    "com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord": {
+        "begin_line_no": 46,
+        "end_line_no": 63,
+        "file_path": "test/com/google/javascript/rhino/jstype/RecordTypeTest.java",
+        "to": [
+            "  public void testRecursiveRecord$catena_2() {\n    ProxyObjectType loop = new ProxyObjectType(registry, NUMBER_TYPE);\n    JSType record = new RecordTypeBuilder(registry)\n        .addProperty(\"loop\", loop, null)\n        .addProperty(\"number\", NUMBER_TYPE, null)\n        .addProperty(\"string\", STRING_TYPE, null)\n        .build();\n    try{ assertEquals(\"{loop: number, number: number, string: string}\",\n        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n\n    loop.setReferencedType(record);\n    try{ assertEquals(\"{loop: {...}, number: number, string: string}\",\n        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"{loop: ?, number: number, string: string}\",\n        record.toAnnotationString());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n\n    try{ Asserts.assertEquivalenceOperations(record, loop);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }"
+        ]
+    },
+    "com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString": {
+        "begin_line_no": 65,
+        "end_line_no": 80,
+        "file_path": "test/com/google/javascript/rhino/jstype/RecordTypeTest.java",
+        "to": [
+            ""
+        ]
+    }
+}

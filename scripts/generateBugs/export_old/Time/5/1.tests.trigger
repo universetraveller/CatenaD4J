@@ -1,0 +1,6 @@
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_0
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_0
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_0
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1
+org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1

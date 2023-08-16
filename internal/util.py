@@ -88,6 +88,8 @@ def invoke_d4j_direct(cmd, **args):
     return 0
 def system(cmd):
     os.system(cmd)
+def listdir(path):
+    return os.listdir(path)
 def run_and_get(cmd, at:str):
     ret = subprocess.run(cmd, cwd=at, capture_output=True)
     if ret.returncode:
@@ -100,3 +102,52 @@ def config_run(config, default, func, *args, **argsm):
     return func(*args, **argsm) if config else default
 def get_c4j_tag(pid, bid, cid, buggy):
     return config.TAG_PATTERN.format(pid=pid, bid=bid, cid=cid, buggy='BUGGY' if buggy else 'FIXED')
+class args_validator:
+    CMD=10
+    MISARG=1
+    UNKARG=2
+    def __init__(self, args, pos, opt=[], cmd=''):
+        self.args = vars(args)
+        self.pos = pos
+        self.opt = opt
+        self.cmd = cmd
+        self.msg = []
+    def is_valid(self):
+        return not len(self.msg)
+    @property
+    def valid(self):
+        return self.is_valid()
+    def validate_cmd(self):
+        if self.cmd:
+            if not self.args['command'] == self.cmd:
+                exception_cmd = self.args['command']
+                self.msg.append('Incorrect command name {exception_cmd}, expected:{self.cmd}')
+        self.args.pop('command')
+    def validate(self):
+        self.validate_cmd()
+        # positional arguments should exist
+        for arg in self.pos:
+            if not arg in self.args or self.args[arg] is None:
+                arg = f'-{arg}' if len(arg) == 1 else f'--{arg}'
+                self.msg.append(f'Incomplete arguments: missing {arg}')
+        # positional and optional arguments are allowed to exist 
+        # other arguments should not exist
+        for arg in self.args:
+            if arg in self.pos or arg in self.opt:
+                continue
+            if not self.args[arg] is None:
+                arg = f'-{arg}' if len(arg) == 1 else f'--{arg}'
+                self.msg.append(f'Unknown parameter: {arg}')
+    def msg_level(self, msg):
+        if msg.startswith('Incorrect command name'):
+            return args_validator.CMD
+        if msg.startswith('Incomplete arguments:'):
+            return args_validator.MISARG
+        if msg.startswith('Unknown parameter:'):
+            return args_validator.UNKARG
+        return 0
+    def print_all(self, func, level=config.validator_log_level):
+        for i in self.msg:
+            if self.msg_level(i) < level:
+                continue
+            func(i)

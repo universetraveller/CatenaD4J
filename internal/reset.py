@@ -12,7 +12,9 @@ def search_config_file(wd):
     else:
         return __INVALID
 def validate(args):
-    if not (args.p == None and args.o == None and args.v == None):
+    validator = util.args_validator(args, '', 'w', 'reset')
+    validator.validate()
+    if not validator.is_valid():
         return __INVALID
     return __VALID
 def git_clean(wd):

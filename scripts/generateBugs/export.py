@@ -1,6 +1,7 @@
 import glob
 import os
 import json
+import log_parser
 def get_all_works():
     works = []
     paths = glob.glob('./working/*')
@@ -27,6 +28,10 @@ def moreCheck(name, l):
             c+=1
     assert c == 1
     return s
+def lst_in_use(lst):
+    if len(lst) == 0:
+        return ['']
+    return lst
 _db = json.load(open('./database.json', 'r'))
 def getClz(fn, proj, bid):
     _dir = _db[f'{proj}_{bid}']['dir.src.classes']
@@ -52,6 +57,7 @@ def main():
                 with open('./export/{}/bugs-registry.csv'.format(proj), 'a') as ab:
                     ab.write('bid,cid,loader\n')
             nb = json.load(open(t[1]+'/newBugs.json', 'r'))
+            log = log_parser.read_log(f'{t[1]}/log')
             collection = []
             for i in nb:
                 if i == 'original':
@@ -61,6 +67,7 @@ def main():
                 else:
                     collection.append((i, nb[i]))
             assert len(collection) == num
+            first_failing = log_parser.get_failing_tests(log, '0'*ori['num_of_hunks'])
             for i in range(1, num+1):
                 with open('./export/{}/bugs-registry.csv'.format(proj), 'a') as ab:
                     ab.write('{},{},default\n'.format(bid, i))
@@ -105,12 +112,52 @@ def main():
                     if not orit in met:
                         print(f'skip {orit} in {proj}_{bid} at adding original tests')
                         continue
+                    if len(met[orit]['func']) == 0:
+                        assert len(met[orit]['splited']) == 0
+                        assert not orit in __ed
+                        if orit in first_failing and not orit in one[1]['failing_tests']:
+                            __ed[orit] = {}
+                            __ed[orit]['begin_line_no'] = met[orit]['begin_line_no']
+                            __ed[orit]['end_line_no'] = met[orit]['end_line_no']
+                            __ed[orit]['file_path'] = met[orit]['file_path']
+                            __ed[orit]['to'] = ['']
+                    else:
+                        ori_lst = []
+                        if not orit in __ed:
+                            __ed[orit] = {}
+                            __ed[orit]['begin_line_no'] = met[orit]['begin_line_no']
+                            __ed[orit]['end_line_no'] = met[orit]['end_line_no']
+                            __ed[orit]['file_path'] = met[orit]['file_path']
+                            __ed[orit]['to'] = []
+                        assert len(met[orit]['splited']) == len(met[orit]['func'])
+                        for one_new_test in met[orit]['splited']:
+                            add = True
+                            for check_test in first_failing:
+                                if not check_test.startswith(orit):
+                                    continue
+                                if check_test.split('::')[1]+'()' in one_new_test:
+                                    add = False
+                                    break
+                                elif check_test.split('::')[1] in one_new_test:
+                                    __inside_trunk_pos = one_new_test.find("(")
+                                    __inside_trunk_check_pre = one_new_test[one_new_test.find(check_test.split('::')[1]):__inside_trunk_pos]
+                                    assert __inside_trunk_check_pre.startswith(check_test.split('::')[1])
+                                    __inside_trunk_check = __inside_trunk_check_pre.replace(check_test.split("::")[1], '')
+                                    for __inside_trunk_check_ch in __inside_trunk_check:
+                                        assert not __inside_trunk_check_ch > '9' and not __inside_trunk_check_ch < '0'
+                            if add:
+                                ori_lst.append(one_new_test)
+                        __ed[orit]['to'].extend(ori_lst)
+                        __ed[orit]['to'] = lst_in_use(__ed[orit]['to'])
+                        assert len(__ed[orit]['to'])
+                    '''
                     if not orit in __ed and not orit in one[1]['failing_tests']:
                         __ed[orit] = {}
                         __ed[orit]['begin_line_no'] = met[orit]['begin_line_no']
                         __ed[orit]['end_line_no'] = met[orit]['end_line_no']
                         __ed[orit]['file_path'] = met[orit]['file_path']
                         __ed[orit]['to'] = ['']
+                    '''
                 #node['edit'] = __ed
                 with open('./export/{}/{}/{}.classes.modified'.format(proj, bid, i), 'w') as w:
                     for oclz in clz:
