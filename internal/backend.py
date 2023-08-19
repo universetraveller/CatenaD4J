@@ -17,7 +17,7 @@ def d4j_backend():
     util.invoke_d4j_direct(' '.join(sys.argv[1:]))
     return
 def c4j_backend(args):
-    if not args.command in config.c4j_cmds:
+    if not args.command in entries.names():
         d4j_backend()
     else:
         entries.invoke(args.command, args)

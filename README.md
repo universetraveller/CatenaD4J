@@ -89,7 +89,7 @@ The implementation of the dataset is in folder `internal`.
 
 By implementing custom command as python function which processes args namespace, we can add our custom function to command-entries with a command name, and then add this command name to config file, so that we can use this custom command in command line.  
 ### Example of custom command
-Command `cids` can be an example of creating custom command. First, we implement our command `cids` in [ids.py](internal/ids.py) as `def CIDS(args)`, then we add it into [entries.py](internal/entries.py) by adding this function to `__entry_map` or using function `register_command` and `c4j_cmds` in [config.py](internal/config.py). Then when try to input `catena4j cids` it can print some messages.  
+Command `cids` can be an example of creating custom command. First, we implement our command `cids` in [ids.py](internal/ids.py) as `def CIDS(args)`, then we add it into [entries.py](internal/entries.py) by adding this function to `__entry_map` or using function `register_command`. Then when try to input `catena4j cids` it can print some messages.  
 
 ### Custom loader
 By implementing custom loader as python class we can take control of bug loading. Add our new loader to [loaders.py](internal/loaders.py) and modify the loader specification of any bug in bugs-registry then the script would use our custom loader to load the bug.  
