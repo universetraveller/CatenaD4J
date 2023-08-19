@@ -13,5 +13,17 @@ pyver = sys.version
 version = '0.3.1'
 validator_log_level=2
 p_head = 'CatenaD4j# '
-helper = '''
+helper = '''usage: catana4j <command> [options]
+
+Commands:
+    checkout    Check out the specific version of a bug
+    export      Export specific infomation of a bug
+    reset       Reset all unstaged modification for a working directory
+    pids        Print available project_names
+    bids        Print available bug_ids that contains at least one cid
+    cids        Print available catena ids for a bug_id
+    info        Not implemented now
+    test        Not implemented now
+    compile     Not implemented now
+    ver         Not implemented now
 '''

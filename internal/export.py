@@ -13,7 +13,7 @@ def sanity_check(task):
     return False
 def print_help():
     util.printc('usage: catena4j export -p properties [-w working_directory] [-o output_file]')
-__PROP_TO_TRAP = ['tests.trigger', 'classes.modified', 'patch']
+__PROP_TO_TRAP = ['tests.trigger', 'classes.modified', 'src.patch']
 class Task:
     def __init__(self):
         self.stat = None
