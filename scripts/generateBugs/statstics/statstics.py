@@ -157,7 +157,7 @@ def parse_all_statstic2():
     return 0
 def parse_all_statstic2_name(pname):
     locale = open(f'./statstics2_{pname}.csv', 'a')
-    locale.write('bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk\n')
+    locale.write(f'bug_id, category, num_divided_into_single_hunk, num_divided_into_multi_hunk, hunks_multi_hunk{head_ci()}\n')
     isolated = 0
     divisible = 0
     indivisible = 0
