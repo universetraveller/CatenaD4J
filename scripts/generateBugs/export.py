@@ -2,6 +2,7 @@ import glob
 import os
 import json
 import log_parser
+import sys
 def get_all_works():
     works = []
     paths = glob.glob('./working/*')
@@ -36,7 +37,48 @@ _db = json.load(open('./database.json', 'r'))
 def getClz(fn, proj, bid):
     _dir = _db[f'{proj}_{bid}']['dir.src.classes']
     return fn.replace(f'{_dir}/', '').replace('.java', '').replace('/', '.')
+arg_prefix = '-'
+def parse_args(args):
+    if not args:
+        raise ValueError('len(args) == 0')
+    idx = -1
+    while idx < len(args):
+        idx += 1
+        arg = args[idx]
+        if arg.startswith(arg_prefix*2):
+            if not name is None:
+                raise ValueError('name is not None')
+            name = arg[2:]
+        elif arg.startswith(arg_prefix*1):
+            if not name is None:
+                raise ValueError('name is not None')
+            name = arg[1:]
+        elif not args.startswith(arg_prefix):
+            if not value is None:
+                raise ValueError('value is not None')
+            if name is None:
+                raise ValueError('name is None')
+            value = arg
+        else:
+            if not name is None:
+                raise ValueError('invalid')
+        if name is None or value is None:
+            continue
+        else:
+            if name == 'mode' or name == 'm':
+                return value
+def _skip_0(col, mode):
+    if len(col) > 1 or mode == 'all':
+        return False
+    if 'skip_indivisible' in mode.split(','):
+        if '0' in col[0]:
+            return False
+        assert not col[0].replace('1', '')
+        return True
+    return False
 def main():
+    mode = parse_args(sys.argv[1:])
+    print(mode)
     if not os.path.exists('./export'):
         os.makedirs('./export')
     tasks = get_all_works()
@@ -67,6 +109,8 @@ def main():
                 else:
                     collection.append((i, nb[i]))
             assert len(collection) == num
+            if _skip_0(collection, mode):
+                continue
             first_failing = log_parser.get_failing_tests(log, '0'*ori['num_of_hunks'])
             for i in range(1, num+1):
                 with open('./export/{}/bugs-registry.csv'.format(proj), 'a') as ab:
@@ -168,4 +212,5 @@ def main():
                 s = json.dumps(node, indent=4)
                 with open('./export/{}/{}/{}.src.patch'.format(proj, bid, i), 'w') as w:
                     w.write(s)
-main()
+if __name__ == '__main__':
+    main()
