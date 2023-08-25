@@ -38,10 +38,15 @@ def getClz(fn, proj, bid):
     _dir = _db[f'{proj}_{bid}']['dir.src.classes']
     return fn.replace(f'{_dir}/', '').replace('.java', '').replace('/', '.')
 arg_prefix = '-'
+_args_alias  = {
+        'm' : 'mode'
+        }
 def parse_args(args):
     if not args:
         raise ValueError('len(args) == 0')
     idx = -1
+    name = None
+    value = None
     while idx < len(args):
         idx += 1
         arg = args[idx]
@@ -52,8 +57,8 @@ def parse_args(args):
         elif arg.startswith(arg_prefix*1):
             if not name is None:
                 raise ValueError('name is not None')
-            name = arg[1:]
-        elif not args.startswith(arg_prefix):
+            name = _args_alias[arg[1:]]
+        elif not arg.startswith(arg_prefix):
             if not value is None:
                 raise ValueError('value is not None')
             if name is None:
@@ -65,8 +70,12 @@ def parse_args(args):
         if name is None or value is None:
             continue
         else:
-            if name == 'mode' or name == 'm':
+            if name == 'mode':
                 return value
+            name = None
+            value = None
+def test_mode():
+    print(parse_args(sys.argv[1:]))
 def _skip_0(col, mode):
     if len(col) > 1 or mode == 'all':
         return False
