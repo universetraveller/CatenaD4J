@@ -80,9 +80,9 @@ def _skip_0(col, mode):
     if len(col) > 1 or mode == 'all':
         return False
     if 'skip_indivisible' in mode.split(','):
-        if '0' in col[0]:
+        if '0' in col[0][0]:
             return False
-        assert not col[0].replace('1', '')
+        assert not col[0][0].replace('1', '')
         return True
     return False
 def main():
@@ -101,9 +101,10 @@ def main():
         num = check_log(t[1])
         if num:
             print('{}:{}'.format(name, num))
-            projd = './export/{}/{}'.format(proj, bid)
-            if not os.path.exists(projd):
-                os.makedirs(projd)
+            proj_root = './export/{}'.format(proj)
+            projd = '{}/{}'.format(proj_root, bid)
+            if not os.path.exists(proj_root):
+                os.makedirs(proj_root)
             if not os.path.exists('./export/{}/bugs-registry.csv'.format(proj)):
                 with open('./export/{}/bugs-registry.csv'.format(proj), 'a') as ab:
                     ab.write('bid,cid,loader\n')
@@ -120,6 +121,8 @@ def main():
             assert len(collection) == num
             if _skip_0(collection, mode):
                 continue
+            if not os.path.exists(projd):
+                os.makedirs(projd)
             first_failing = log_parser.get_failing_tests(log, '0'*ori['num_of_hunks'])
             for i in range(1, num+1):
                 with open('./export/{}/bugs-registry.csv'.format(proj), 'a') as ab:
