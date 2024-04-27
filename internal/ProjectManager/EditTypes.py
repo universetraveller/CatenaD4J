@@ -37,9 +37,9 @@ class LineEdit:
     def translate_into_meta_line_edits(self):
         self.translate(_to='meta_line_edits')
     def translate(self, _to:str):
-        self.index_edits = []
         if self.translated:
             return
+        self.index_edits = []
         if _to == 'meta_line_edits':
             self.translated = True
             if self._type == INSERT_BEFORE:
