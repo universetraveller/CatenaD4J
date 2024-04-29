@@ -1,0 +1,315 @@
+---
+Begin generate bug_id: Mockito_20
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Mockito_20
+Try to checkout Mockito_20
+build dir: ['./working/data/Mockito_20/build/classes/main', './working/data/Mockito_20/build/classes/test']
+init FileManager
+trace file: src/org/mockito/internal/creation/bytebuddy/ByteBuddyMockMaker.java
+trying to replace old failing tests
+edit: replace from 123 range 29 at test/org/mockitousage/annotation/SpyAnnotationTest.java
+to
+    @Test
+    public void should_spy_inner_class$catena_0() throws Exception {
+    	 
+     class WithMockAndSpy {
+    		@Spy private InnerStrength strength;
+    		@Mock private List<String> list;
+
+            abstract class InnerStrength {
+            	private final String name;
+
+            	InnerStrength() {
+            		// Make sure that @Mock fields are always injected before @Spy fields.
+            		assertNotNull(list);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+            		// Make sure constructor is indeed called.
+            		this.name = "inner";
+            	}
+            	
+            	abstract String strength();
+            	
+            	String fullStrength() {
+            		return name + " " + strength();
+            	}
+            }
+    	}
+		WithMockAndSpy outer = new WithMockAndSpy();
+        MockitoAnnotations.initMocks(outer);
+        when(outer.strength.strength()).thenReturn("strength");
+        try{ assertEquals("inner strength", outer.strength.fullStrength());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void should_spy_inner_class$catena_1() throws Exception {
+    	 
+     class WithMockAndSpy {
+    		@Spy private InnerStrength strength;
+    		@Mock private List<String> list;
+
+            abstract class InnerStrength {
+            	private final String name;
+
+            	InnerStrength() {
+            		// Make sure that @Mock fields are always injected before @Spy fields.
+            		try{ assertNotNull(list);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            		// Make sure constructor is indeed called.
+            		this.name = "inner";
+            	}
+            	
+            	abstract String strength();
+            	
+            	String fullStrength() {
+            		return name + " " + strength();
+            	}
+            }
+    	}
+		WithMockAndSpy outer = new WithMockAndSpy();
+        MockitoAnnotations.initMocks(outer);
+        when(outer.strength.strength()).thenReturn("strength");
+        assertEquals("inner strength", outer.strength.fullStrength());                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 92 range 14 at test/org/mockitousage/annotation/SpyAnnotationTest.java
+to
+    @Test
+    public void should_report_when_constructor_is_explosive$catena_0() throws Exception {
+		class FailingSpy {
+	        @Spy
+            ThrowingConstructor throwingConstructor;
+		}
+
+        try {
+            MockitoAnnotations.initMocks(new FailingSpy());
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (MockitoException e) {
+            try{ Assertions.assertThat(e.getMessage()).contains("Unable to create mock instance");          }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void should_report_when_constructor_is_explosive$catena_1() throws Exception {
+		class FailingSpy {
+	        @Spy
+            ThrowingConstructor throwingConstructor;
+		}
+
+        try {
+            MockitoAnnotations.initMocks(new FailingSpy());
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            Assertions.assertThat(e.getMessage()).contains("Unable to create mock instance");               /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 59 range 12 at test/org/mockitousage/constructor/CreatingMocksWithConstructorTest.java
+to
+    @Test
+    public void exception_message_when_constructor_not_found$catena_0() {
+        try {
+            //when
+            spy(HasConstructor.class);
+            //then
+            fail();                                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (MockitoException e) {
+            try{ assertEquals("Unable to create mock instance of type 'HasConstructor'", e.getMessage());    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertContains("0-arg constructor", e.getCause().getMessage());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void exception_message_when_constructor_not_found$catena_1() {
+        try {
+            //when
+            spy(HasConstructor.class);
+            //then
+            try{ fail();                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            assertEquals("Unable to create mock instance of type 'HasConstructor'", e.getMessage());         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertContains("0-arg constructor", e.getCause().getMessage());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void exception_message_when_constructor_not_found$catena_2() {
+        try {
+            //when
+            spy(HasConstructor.class);
+            //then
+            try{ fail();                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            try{ assertEquals("Unable to create mock instance of type 'HasConstructor'", e.getMessage());    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertContains("0-arg constructor", e.getCause().getMessage());                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 72 range 12 at test/org/mockitousage/constructor/CreatingMocksWithConstructorTest.java
+to
+    @Test
+    public void mocking_inner_classes_with_wrong_outer_instance$catena_0() {
+        try {
+            //when
+            mock(InnerClass.class, withSettings().useConstructor().outerInstance("foo").defaultAnswer(CALLS_REAL_METHODS));
+            //then
+            fail();                                                                                                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (MockitoException e) {
+            try{ assertEquals("Unable to create mock instance of type 'InnerClass'", e.getMessage());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertContains("Please ensure that the outer instance has correct type and that the target class has 0-arg constructor.", e.getCause().getMessage());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void mocking_inner_classes_with_wrong_outer_instance$catena_1() {
+        try {
+            //when
+            mock(InnerClass.class, withSettings().useConstructor().outerInstance("foo").defaultAnswer(CALLS_REAL_METHODS));
+            //then
+            try{ fail();                                                                                                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            assertEquals("Unable to create mock instance of type 'InnerClass'", e.getMessage());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertContains("Please ensure that the outer instance has correct type and that the target class has 0-arg constructor.", e.getCause().getMessage());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void mocking_inner_classes_with_wrong_outer_instance$catena_2() {
+        try {
+            //when
+            mock(InnerClass.class, withSettings().useConstructor().outerInstance("foo").defaultAnswer(CALLS_REAL_METHODS));
+            //then
+            try{ fail();                                                                                                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            try{ assertEquals("Unable to create mock instance of type 'InnerClass'", e.getMessage());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertContains("Please ensure that the outer instance has correct type and that the target class has 0-arg constructor.", e.getCause().getMessage());         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: test/org/mockitousage/constructor/CreatingMocksWithConstructorTest.java
+trace file: test/org/mockitousage/annotation/SpyAnnotationTest.java
+new test num: 10
+ori test num: 4
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 351.41 seconds
+Failing tests: 8
+	org.mockitousage.annotation.SpyAnnotationTest::should_report_when_constructor_is_explosive$catena_0
+	org.mockitousage.annotation.SpyAnnotationTest::should_spy_inner_class$catena_1
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_spy_abstract_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::exception_message_when_constructor_not_found$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_create_mock_with_constructor
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_inner_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::mocking_inner_classes_with_wrong_outer_instance$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_abstract_classes
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 45 with range 1 to
+                    "  instance creation by : " + instantiator.getClass().getSimpleName(),
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 34 with range 1 to
+            mockInstance = instantiator.newInstance(mockedProxyType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 32 with         Instantiator instantiator = new InstantiatorProvider().getInstantiator(settings);
+
+patches are written to file
+running tests...
+used time: Finished in 253.52 seconds
+Failing tests: 8
+	org.mockitousage.annotation.SpyAnnotationTest::should_report_when_constructor_is_explosive$catena_0
+	org.mockitousage.annotation.SpyAnnotationTest::should_spy_inner_class$catena_1
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_spy_abstract_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::exception_message_when_constructor_not_found$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_create_mock_with_constructor
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_inner_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::mocking_inner_classes_with_wrong_outer_instance$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_abstract_classes
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 34 with range 1 to
+            mockInstance = instantiator.newInstance(mockedProxyType);
+
+try to fix hunk: 2
+replace from 45 with range 1 to
+                    "  instance creation by : " + instantiator.getClass().getSimpleName(),
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 32 with         Instantiator instantiator = new InstantiatorProvider().getInstantiator(settings);
+
+try to fix hunk: 2
+replace from 45 with range 1 to
+                    "  instance creation by : " + instantiator.getClass().getSimpleName(),
+
+patches are written to file
+running tests...
+used time: Finished in 187.48 seconds
+Failing tests: 8
+	org.mockitousage.annotation.SpyAnnotationTest::should_report_when_constructor_is_explosive$catena_0
+	org.mockitousage.annotation.SpyAnnotationTest::should_spy_inner_class$catena_1
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_spy_abstract_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::exception_message_when_constructor_not_found$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_create_mock_with_constructor
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_inner_classes
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::mocking_inner_classes_with_wrong_outer_instance$catena_0
+	org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_abstract_classes
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 32 with         Instantiator instantiator = new InstantiatorProvider().getInstantiator(settings);
+
+try to fix hunk: 1
+replace from 34 with range 1 to
+            mockInstance = instantiator.newInstance(mockedProxyType);
+
+patches are written to file
+running tests...
+used time: Finished in 179.30 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_abstract_classes', 'org.mockitousage.annotation.SpyAnnotationTest::should_report_when_constructor_is_explosive$catena_0', 'org.mockitousage.constructor.CreatingMocksWithConstructorTest::exception_message_when_constructor_not_found$catena_0', 'org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_inner_classes', 'org.mockitousage.annotation.SpyAnnotationTest::should_spy_inner_class$catena_1', 'org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_spy_abstract_classes', 'org.mockitousage.constructor.CreatingMocksWithConstructorTest::mocking_inner_classes_with_wrong_outer_instance$catena_0', 'org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_create_mock_with_constructor']
+select new bug
+Pattern: 110
+new failing tests:
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_abstract_classes
+org.mockitousage.annotation.SpyAnnotationTest::should_report_when_constructor_is_explosive$catena_0
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::exception_message_when_constructor_not_found$catena_0
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_mock_inner_classes
+org.mockitousage.annotation.SpyAnnotationTest::should_spy_inner_class$catena_1
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_spy_abstract_classes
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::mocking_inner_classes_with_wrong_outer_instance$catena_0
+org.mockitousage.constructor.CreatingMocksWithConstructorTest::can_create_mock_with_constructor
+Save found bug
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 32 with         Instantiator instantiator = new InstantiatorProvider().getInstantiator(settings);
+
+try to fix hunk: 1
+replace from 34 with range 1 to
+            mockInstance = instantiator.newInstance(mockedProxyType);
+
+try to fix hunk: 2
+replace from 45 with range 1 to
+                    "  instance creation by : " + instantiator.getClass().getSimpleName(),
+
+patches are written to file
+running tests...
+used time: Finished in 162.22 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

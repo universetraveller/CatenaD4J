@@ -1,2 +1,0 @@
-com.google.javascript.jscomp.CommandLineRunnerTest::testCharSetExpansion$catena_1
-com.google.javascript.jscomp.CommandLineRunnerTest::testCharSetExpansion$catena_3

@@ -1,0 +1,12 @@
+{
+    "com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalQualifiedNameInLocalScope": {
+        "begin_line_no": 775,
+        "end_line_no": 785,
+        "file_path": "test/com/google/javascript/jscomp/TypedScopeCreatorTest.java",
+        "to": [
+            "  public void testGlobalQualifiedNameInLocalScope$catena_1() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertNotNull(globalScope.getVar(\"ns.foo\"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+            "  public void testGlobalQualifiedNameInLocalScope$catena_2() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n  }",
+            "  public void testGlobalQualifiedNameInLocalScope$catena_0() {\n    testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }"
+        ]
+    }
+}

@@ -1,0 +1,82 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "from_line_no": 482,
+            "to_line_no": 482,
+            "replaced_with": "          if (n.isName() && n.getString().equals(varName)) {\n",
+            "replaced": "          if (n.isName() && n.getString().equals(varName) &&\n",
+            "patch_type": "replace",
+            "next_line_no": 483
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "from_line_no": 488,
+            "to_line_no": 489,
+            "replaced_with": "            if (parent.isAssign() && (parent.getFirstChild() == n)\n                && isAssignChain(parent, cfgNode)) {\n",
+            "replaced": "              !(parent.isAssign() &&\n               (parent.getFirstChild() == n))) {\n",
+            "patch_type": "replace",
+            "next_line_no": 490
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "replaced_with": "              return;\n            } else {\n",
+            "patch_type": "insert",
+            "next_line_no": 491
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "replaced_with": "            }\n",
+            "patch_type": "insert",
+            "next_line_no": 492
+        },
+        "4": {
+            "file_name": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "replaced_with": "        private boolean isAssignChain(Node child, Node ancestor) {\n          for (Node n = child; n != ancestor; n = n.getParent()) {\n            if (!n.isAssign()) {\n              return false;\n            }\n          }\n          return true;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 495
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965"
+        ],
+        "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965": {
+            "file_path": "test/com/google/javascript/jscomp/FlowSensitiveInlineVariablesTest.java",
+            "Instance": "Begin: Pos(577, 10)\nEnd: Pos(582, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_170/test//com/google/javascript/jscomp/FlowSensitiveInlineVariablesTest.java\nName: testVarAssinInsideHookIssue965\nChilds: [StatementAssertion<Begin: Pos(578, 5), End: Pos(578, 54)>,\nStatementAssertion<Begin: Pos(579, 5), End: Pos(579, 61)>,\nStatementAssertion<Begin: Pos(580, 5), End: Pos(580, 58)>,\nStatementAssertion<Begin: Pos(581, 5), End: Pos(581, 57)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_170/test//com/google/javascript/jscomp/FlowSensitiveInlineVariablesTest.java",
+            "name": "testVarAssinInsideHookIssue965",
+            "begin": "Pos(577, 10)",
+            "end": "Pos(582, 3)",
+            "begin_line_no": 577,
+            "end_line_no": 582,
+            "child": [
+                "Begin: Pos(578, 5)\nEnd: Pos(578, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(579, 5)\nEnd: Pos(579, 61)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(580, 5)\nEnd: Pos(580, 58)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(581, 5)\nEnd: Pos(581, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testVarAssinInsideHookIssue965$catena_0() {\n    noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testVarAssinInsideHookIssue965$catena_1() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testVarAssinInsideHookIssue965$catena_2() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testVarAssinInsideHookIssue965$catena_3() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testVarAssinInsideHookIssue965$catena_0() {\n    noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testVarAssinInsideHookIssue965$catena_1() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testVarAssinInsideHookIssue965$catena_2() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "3": "  public void testVarAssinInsideHookIssue965$catena_3() {\n    try{ noInline(\"var i = 0; return 1 ? (i = 5) : 0, i;\");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) ? i : 0;\");                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ noInline(\"var i = 0; return (1 ? (i = 5) : 0) || i;\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    noInline(\"var i = 0; return (1 ? (i = 5) : 0) * i;\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "11111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_3",
+            "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_0",
+            "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_1",
+            "com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testVarAssinInsideHookIssue965$catena_2"
+        ]
+    }
+}

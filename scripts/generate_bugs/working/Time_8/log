@@ -1,0 +1,723 @@
+---
+Begin generate bug_id: Time_8
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Time_8
+Try to checkout Time_8
+build dir: ['./working/data/Time_8/target/classes', './working/data/Time_8/target/test-classes']
+init FileManager
+trace file: src/main/java/org/joda/time/DateTimeZone.java
+trying to replace old failing tests
+edit: replace from 303 range 37 at src/test/java/org/joda/time/TestDateTimeZone.java
+to
+    public void testForOffsetHoursMinutes_int_int$catena_0() {
+        assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_1() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));             /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_2() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_3() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));               /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_4() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_5() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_6() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_7() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));             /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_8() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_9() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_10() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));             /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_11() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));            /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_12() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_13() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_14() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+    }             public void testForOffsetHoursMinutes_int_int$catena_15() {
+        try{ assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, -15);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        
+        try{ assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-2, 60);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(24, 0);
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {}
+        try {
+            DateTimeZone.forOffsetHoursMinutes(-24, 0);
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {}
+    }        
+trace file: src/test/java/org/joda/time/TestDateTimeZone.java
+new test num: 16
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 52.77 seconds
+Failing tests: 2
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 286 with range 1 to
+                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);
+
+patches are written to file
+running tests...
+used time: Finished in 33.63 seconds
+Failing tests: 2
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 282 with         if (hoursOffset > 0 && minutesOffset < 0) {
+            throw new IllegalArgumentException("Positive hours must not have negative minutes: " + minutesOffset);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 40.24 seconds
+Failing tests: 2
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 279 with range 1 to
+        if (minutesOffset < -59 || minutesOffset > 59) {
+
+patches are written to file
+running tests...
+used time: Finished in 32.14 seconds
+Failing tests: 2
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_4
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+Includes new failing tests, set to unusable
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 282 with         if (hoursOffset > 0 && minutesOffset < 0) {
+            throw new IllegalArgumentException("Positive hours must not have negative minutes: " + minutesOffset);
+        }
+
+try to fix hunk: 2
+replace from 286 with range 1 to
+                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);
+
+patches are written to file
+running tests...
+used time: Finished in 38.97 seconds
+Failing tests: 2
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 279 with range 1 to
+        if (minutesOffset < -59 || minutesOffset > 59) {
+
+try to fix hunk: 2
+replace from 286 with range 1 to
+                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);
+
+patches are written to file
+running tests...
+used time: Finished in 35.57 seconds
+Failing tests: 1
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_4
+Includes new failing tests, set to unusable
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 279 with range 1 to
+        if (minutesOffset < -59 || minutesOffset > 59) {
+
+try to fix hunk: 1
+insert before 282 with         if (hoursOffset > 0 && minutesOffset < 0) {
+            throw new IllegalArgumentException("Positive hours must not have negative minutes: " + minutesOffset);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 32.90 seconds
+Failing tests: 1
+	org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+Can independently fix ['org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7']
+select new bug
+Pattern: 110
+new failing tests:
+org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7
+Save found bug
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 279 with range 1 to
+        if (minutesOffset < -59 || minutesOffset > 59) {
+
+try to fix hunk: 1
+insert before 282 with         if (hoursOffset > 0 && minutesOffset < 0) {
+            throw new IllegalArgumentException("Positive hours must not have negative minutes: " + minutesOffset);
+        }
+
+try to fix hunk: 2
+replace from 286 with range 1 to
+                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);
+
+patches are written to file
+running tests...
+used time: Finished in 35.61 seconds
+Failing tests: 0
+Can independently fix ['org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9']
+select new bug
+Pattern: 111
+new failing tests:
+org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_9
+Save found bug
+processed: 111
+Find 2 new bugs

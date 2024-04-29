@@ -1,1 +1,0 @@
-org.joda.time.format.TestDateTimeFormatterBuilder::test_printParseZoneDawsonCreek$catena_1

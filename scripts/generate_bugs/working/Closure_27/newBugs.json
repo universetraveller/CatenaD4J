@@ -1,0 +1,92 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/com/google/javascript/rhino/IR.java",
+            "replaced_with": "  private static Node blockUnchecked(Node stmt) {\n    return new Node(Token.BLOCK, stmt);\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 111
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/rhino/IR.java",
+            "from_line_no": 224,
+            "to_line_no": 225,
+            "replaced_with": "    Preconditions.checkState(tryBody.isBlock());\n    Preconditions.checkState(finallyBody.isBlock());\n",
+            "replaced": "    Preconditions.checkState(tryBody.isLabelName());\n    Preconditions.checkState(finallyBody.isLabelName());\n",
+            "patch_type": "replace",
+            "next_line_no": 226
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/rhino/IR.java",
+            "from_line_no": 233,
+            "to_line_no": 233,
+            "replaced_with": "    Node catchBody = blockUnchecked(catchNode).copyInformationFrom(catchNode);\n",
+            "replaced": "    Node catchBody = block(catchNode).copyInformationFrom(catchNode);\n",
+            "patch_type": "replace",
+            "next_line_no": 234
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.rhino.IRTest::testIssue727_1",
+            "com.google.javascript.rhino.IRTest::testIssue727_2",
+            "com.google.javascript.rhino.IRTest::testIssue727_3"
+        ],
+        "com.google.javascript.rhino.IRTest::testIssue727_1": {
+            "file_path": "test/com/google/javascript/rhino/IRTest.java",
+            "Instance": "Begin: Pos(47, 10)\nEnd: Pos(56, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java\nName: testIssue727_1\nChilds: [StatementAssertion<Begin: Pos(48, 5), End: Pos(55, 23)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java",
+            "name": "testIssue727_1",
+            "begin": "Pos(47, 10)",
+            "end": "Pos(56, 3)",
+            "begin_line_no": 47,
+            "end_line_no": 56,
+            "child": [
+                "Begin: Pos(48, 5)\nEnd: Pos(55, 23)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.rhino.IRTest::testIssue727_2": {
+            "file_path": "test/com/google/javascript/rhino/IRTest.java",
+            "Instance": "Begin: Pos(58, 10)\nEnd: Pos(71, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java\nName: testIssue727_2\nChilds: [StatementAssertion<Begin: Pos(59, 5), End: Pos(70, 31)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java",
+            "name": "testIssue727_2",
+            "begin": "Pos(58, 10)",
+            "end": "Pos(71, 3)",
+            "begin_line_no": 58,
+            "end_line_no": 71,
+            "child": [
+                "Begin: Pos(59, 5)\nEnd: Pos(70, 31)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.rhino.IRTest::testIssue727_3": {
+            "file_path": "test/com/google/javascript/rhino/IRTest.java",
+            "Instance": "Begin: Pos(73, 10)\nEnd: Pos(86, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java\nName: testIssue727_3\nChilds: [StatementAssertion<Begin: Pos(74, 5), End: Pos(85, 23)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_27/test//com/google/javascript/rhino/IRTest.java",
+            "name": "testIssue727_3",
+            "begin": "Pos(73, 10)",
+            "end": "Pos(86, 3)",
+            "begin_line_no": 73,
+            "end_line_no": 86,
+            "child": [
+                "Begin: Pos(74, 5)\nEnd: Pos(85, 23)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "010": {
+        "failing_tests": [
+            "com.google.javascript.rhino.IRTest::testIssue727_1"
+        ]
+    },
+    "101": {
+        "failing_tests": [
+            "com.google.javascript.rhino.IRTest::testIssue727_2",
+            "com.google.javascript.rhino.IRTest::testIssue727_3"
+        ]
+    }
+}

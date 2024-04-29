@@ -1,0 +1,1 @@
+com.google.javascript.jscomp.PeepholeReplaceKnownMethodsTest::testNoStringJoin$catena_0

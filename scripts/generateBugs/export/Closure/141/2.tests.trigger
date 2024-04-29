@@ -1,3 +1,0 @@
-com.google.javascript.jscomp.ExpresssionDecomposerTest::testCanExposeExpression7
-com.google.javascript.jscomp.ExpresssionDecomposerTest::testCanExposeExpression2$catena_10
-com.google.javascript.jscomp.InlineFunctionsTest::testDecomposeAnonymousInCall

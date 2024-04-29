@@ -1,1 +1,0 @@
-com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldArithmetic$catena_5

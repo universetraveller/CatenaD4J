@@ -1,0 +1,1095 @@
+---
+Begin generate bug_id: Lang_1
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Lang_1
+Try to checkout Lang_1
+build dir: ['./working/data/Lang_1/target/classes', './working/data/Lang_1/target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+trying to replace old failing tests
+edit: replace from 249 range 36 at src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java
+to
+    @Test
+    public void TestLang747$catena_0() {
+        assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_1() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_2() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_3() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_4() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_5() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_6() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_7() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_8() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_9() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_10() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_11() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_12() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_13() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_14() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_15() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_16() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_17() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_18() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));                  /***** ORIGINAL ASSERTION IS HERE *****/
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_19() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_20() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_21() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_22() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_23() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));                 /***** ORIGINAL ASSERTION IS HERE *****/
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_24() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void TestLang747$catena_25() {
+        try{ assertEquals(Integer.valueOf(0x8000),      NumberUtils.createNumber("0x8000"));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x80000),     NumberUtils.createNumber("0x80000"));                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x800000),    NumberUtils.createNumber("0x800000"));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x8000000"));                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x7FFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x80000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0xFFFFFFFF"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Integer.valueOf(0x8000000),   NumberUtils.createNumber("0x08000000"));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Integer.valueOf(0x7FFFFFFF),  NumberUtils.createNumber("0x007FFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000L),    NumberUtils.createNumber("0x080000000"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0xFFFFFFFFL),    NumberUtils.createNumber("0x00FFFFFFFF"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(Long.valueOf(0x800000000L),        NumberUtils.createNumber("0x800000000"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000L),       NumberUtils.createNumber("0x8000000000"));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000L),      NumberUtils.createNumber("0x80000000000"));                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000L),     NumberUtils.createNumber("0x800000000000"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x8000000000000L),    NumberUtils.createNumber("0x8000000000000"));                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x80000000000000"));               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x800000000000000"));              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x7FFFFFFFFFFFFFFF"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x8000000000000000"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0xFFFFFFFFFFFFFFFF"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Leading zero tests
+        try{ assertEquals(Long.valueOf(0x80000000000000L),   NumberUtils.createNumber("0x00080000000000000"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x800000000000000L),  NumberUtils.createNumber("0x0800000000000000"));             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Long.valueOf(0x7FFFFFFFFFFFFFFFL), NumberUtils.createNumber("0x07FFFFFFFFFFFFFFF"));            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // N.B. Cannot use a hex constant such as 0x8000000000000000L here as that is interpreted as a negative long
+        try{ assertEquals(new BigInteger("8000000000000000", 16), NumberUtils.createNumber("0x00008000000000000000"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new BigInteger("FFFFFFFFFFFFFFFF", 16), NumberUtils.createNumber("0x0FFFFFFFFFFFFFFFF"));            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java
+new test num: 26
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 40.52 seconds
+Failing tests: 7
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_5
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_6
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_8
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_19
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_20
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_21
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_23
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 471 with range 1 to
+            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 468 with range 1 to
+            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 467 with             char firstSigDigit = 0; // strip leading zeroes
+            for(int i = pfxLen; i < str.length(); i++) {
+                firstSigDigit = str.charAt(i);
+                if (firstSigDigit == '0') { // count leading zeroes
+                    pfxLen++;
+                } else {
+                    break;
+                }
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 32.17 seconds
+Failing tests: 8
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_5
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_6
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_9
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_10
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_19
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_20
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_24
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_25
+Includes new failing tests, set to unusable
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 468 with range 1 to
+            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long
+
+try to fix hunk: 2
+replace from 471 with range 1 to
+            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 467 with             char firstSigDigit = 0; // strip leading zeroes
+            for(int i = pfxLen; i < str.length(); i++) {
+                firstSigDigit = str.charAt(i);
+                if (firstSigDigit == '0') { // count leading zeroes
+                    pfxLen++;
+                } else {
+                    break;
+                }
+            }
+
+try to fix hunk: 2
+replace from 471 with range 1 to
+            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int
+
+patches are written to file
+running tests...
+used time: Finished in 32.43 seconds
+Failing tests: 4
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_19
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_20
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_24
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_25
+Includes new failing tests, set to unusable
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 467 with             char firstSigDigit = 0; // strip leading zeroes
+            for(int i = pfxLen; i < str.length(); i++) {
+                firstSigDigit = str.charAt(i);
+                if (firstSigDigit == '0') { // count leading zeroes
+                    pfxLen++;
+                } else {
+                    break;
+                }
+            }
+
+try to fix hunk: 1
+replace from 468 with range 1 to
+            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long
+
+patches are written to file
+running tests...
+used time: Finished in 36.75 seconds
+Failing tests: 4
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_5
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_6
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_9
+	org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_10
+Includes new failing tests, set to unusable
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 467 with             char firstSigDigit = 0; // strip leading zeroes
+            for(int i = pfxLen; i < str.length(); i++) {
+                firstSigDigit = str.charAt(i);
+                if (firstSigDigit == '0') { // count leading zeroes
+                    pfxLen++;
+                } else {
+                    break;
+                }
+            }
+
+try to fix hunk: 1
+replace from 468 with range 1 to
+            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long
+
+try to fix hunk: 2
+replace from 471 with range 1 to
+            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int
+
+patches are written to file
+running tests...
+used time: Finished in 33.41 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_20', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_19', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_5', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_23', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_21', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_8', 'org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_6']
+select new bug
+Pattern: 111
+new failing tests:
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_20
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_19
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_5
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_23
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_21
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_8
+org.apache.commons.lang3.math.NumberUtilsTest::TestLang747$catena_6
+Save found bug
+processed: 111
+Find 1 new bugs

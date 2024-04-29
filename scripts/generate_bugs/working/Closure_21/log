@@ -1,0 +1,629 @@
+---
+Begin generate bug_id: Closure_21
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_21
+Try to checkout Closure_21
+build dir: ['./working/data/Closure_21/build/classes', './working/data/Closure_21/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/CheckSideEffects.java
+trying to replace old failing tests
+edit: replace from 49 range 32 at test/com/google/javascript/jscomp/CheckSideEffectsTest.java
+to
+  public void testUselessCode$catena_0() {
+    test("function f(x) { if(x) return; }", ok);                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_1() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_2() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    test("if(x) x = y;", ok);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_3() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_4() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    test("x = 3;", ok);                                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_5() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_6() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    test("var x = 'test'", ok);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_7() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_8() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    test("", ok);                                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_9() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("foo();;;;bar();;;;", ok);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_10() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    test("var a, b; a = 5, b = 6", ok);                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_11() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_12() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_13() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_14() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_15() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("var a, b; a = (b = 7, 6)", ok);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_16() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testUselessCode$catena_17() {
+    try{ test("function f(x) { if(x) return; }", ok);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function f(x) { if(x); }", "function f(x) { if(x); }", e);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("if(x) x = y;", ok);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("if(x) x == bar();", "if(x) JSCOMPILER_PRESERVE(x == bar());", e);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("x = 3;", ok);                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("x == 3;", "JSCOMPILER_PRESERVE(x == 3);", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var x = 'test'", ok);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var x = 'test'\n'str'",
+         "var x = 'test'\nJSCOMPILER_PRESERVE('str')", e);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("", ok);                                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("foo();;;;bar();;;;", ok);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ test("var a, b; a = 5, b = 6", ok);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = 5, b == 6",
+         "var a, b; a = 5, JSCOMPILER_PRESERVE(b == 6)", e);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (5, 6)",
+         "var a, b; a = (JSCOMPILER_PRESERVE(5), 6)", e);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), 6, 7)",
+         "var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (bar(), bar(), 7, 8)",
+         "var a, b; a = (bar(), bar(), JSCOMPILER_PRESERVE(7), 8)", e);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("var a, b; a = (b = 7, 6)", ok);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ test("function x(){}\nfunction f(a, b){}\nf(1,(x(), 2));", ok);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    test("function x(){}\nfunction f(a, b){}\nf(1,(2, 3));",
+         "function x(){}\nfunction f(a, b){}\n" +
+         "f(1,(JSCOMPILER_PRESERVE(2), 3));", e);                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/CheckSideEffectsTest.java
+new test num: 18
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 255.88 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_13
+	com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_14
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 113 with range 18 to
+    if (!isResultUsed &&
+
+patches are written to file
+running tests...
+used time: Finished in 235.86 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCodeInFor
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 101 with range 1 to
+    if (n.isExprResult() || n.isBlock()) {
+
+patches are written to file
+running tests...
+used time: Finished in 239.15 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_13
+	com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_14
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 101 with range 1 to
+    if (n.isExprResult() || n.isBlock()) {
+
+try to fix hunk: 1
+replace from 113 with range 18 to
+    if (!isResultUsed &&
+
+patches are written to file
+running tests...
+used time: Finished in 250.34 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_14', 'com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_13']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_14
+com.google.javascript.jscomp.CheckSideEffectsTest::testUselessCode$catena_13
+Save found bug
+processed: 11
+Find 1 new bugs

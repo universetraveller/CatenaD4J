@@ -1,0 +1,364 @@
+---
+Begin generate bug_id: Closure_171
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_171
+Try to checkout Closure_171
+build dir: ['./working/data/Closure_171/build/classes', './working/data/Closure_171/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/TypeInference.java
+trace file: src/com/google/javascript/jscomp/TypedScopeCreator.java
+trying to replace old failing tests
+edit: replace from 437 range 18 at test/com/google/javascript/jscomp/TypedScopeCreatorTest.java
+to
+  public void testMethodBeforeFunction2$catena_0() throws Exception {
+    testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    try{ assertEquals("Window", x.toString());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertFalse(x.isPropertyTypeDeclared("alert"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    try{ assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMethodBeforeFunction2$catena_1() throws Exception {
+    try{ testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    assertEquals("Window", x.toString());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertFalse(x.isPropertyTypeDeclared("alert"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    try{ assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMethodBeforeFunction2$catena_2() throws Exception {
+    try{ testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    try{ assertEquals("Window", x.toString());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertFalse(x.isPropertyTypeDeclared("alert"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    try{ assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMethodBeforeFunction2$catena_3() throws Exception {
+    try{ testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    try{ assertEquals("Window", x.toString());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertFalse(x.isPropertyTypeDeclared("alert"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    try{ assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMethodBeforeFunction2$catena_4() throws Exception {
+    try{ testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    try{ assertEquals("Window", x.toString());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertFalse(x.isPropertyTypeDeclared("alert"));                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    try{ assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMethodBeforeFunction2$catena_5() throws Exception {
+    try{ testSame(
+        "var y = Window.prototype;" +
+        "Window.prototype = {alert: function(message) {}};" +
+        "/** @constructor */ function Window() {}\n" +
+        "var window = new Window(); \n" +
+        "var x = window;");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    ObjectType x = (ObjectType) findNameType("x", globalScope);
+    try{ assertEquals("Window", x.toString());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(x.getImplicitPrototype().hasOwnProperty("alert"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("function (this:Window, ?): undefined",
+        x.getPropertyType("alert").toString());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertFalse(x.isPropertyTypeDeclared("alert"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType y = (ObjectType) findNameType("y", globalScope);
+    assertEquals("function (this:Window, ?): undefined",
+        y.getPropertyType("alert").toString());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 532 range 21 at test/com/google/javascript/jscomp/TypedScopeCreatorTest.java
+to
+  public void testPropertiesOnInterface2$catena_0() throws Exception {
+    testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_1() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    assertEquals("function (this:I): ?", i.getType().toString());                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_2() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertTrue(i.getType().isInterface());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_3() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    assertEquals("I.prototype", iPrototype.toString());                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_4() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertTrue(iPrototype.isFunctionPrototypeType());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_5() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    assertEquals("number", iPrototype.getPropertyType("bar").toString());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_6() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPropertiesOnInterface2$catena_7() throws Exception {
+    try{ testSame("/** @interface */ var I = function() {};" +
+        "I.prototype = {baz: function(){}};" +
+        "/** @type {number} */ I.prototype.bar;");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Var i = globalScope.getVar("I");
+    try{ assertEquals("function (this:I): ?", i.getType().toString());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(i.getType().isInterface());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    ObjectType iPrototype = (ObjectType)
+        ((ObjectType) i.getType()).getPropertyType("prototype");
+    try{ assertEquals("I.prototype", iPrototype.toString());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(iPrototype.isFunctionPrototypeType());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("number", iPrototype.getPropertyType("bar").toString());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ assertEquals("function (this:I): undefined",
+        iPrototype.getPropertyType("baz").toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    assertEquals(iPrototype, globalScope.getVar("I.prototype").getType());                                  /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/TypedScopeCreatorTest.java
+new test num: 14
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 311.83 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.TypeCheckTest::testIssue1023
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_7
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 1669 with       if (qName != null && qName.endsWith(".prototype")) {
+        return false;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 281.01 seconds
+Failing tests: 23
+	com.google.javascript.jscomp.DisambiguatePropertiesTest::testOneType2
+	com.google.javascript.jscomp.DisambiguatePropertiesTest::testOneType3
+	com.google.javascript.jscomp.DisambiguatePropertiesTest::testTwoTypes2
+	com.google.javascript.jscomp.DisambiguatePropertiesTest::testTwoTypes3
+	com.google.javascript.jscomp.LooseTypeCheckTest::testAddMethodsPrototypeTwoWays
+	com.google.javascript.jscomp.LooseTypeCheckTest::testAddingMethodsPrototypeIdiomAndObjectLiteralSimpleNamespace
+	com.google.javascript.jscomp.TypeCheckTest::testAddMethodsPrototypeTwoWays
+	com.google.javascript.jscomp.TypeCheckTest::testAddingMethodsPrototypeIdiomAndObjectLiteralSimpleNamespace
+	com.google.javascript.jscomp.TypeCheckTest::testConstructorType8
+	com.google.javascript.jscomp.TypeCheckTest::testIssue537a
+	com.google.javascript.jscomp.TypeCheckTest::testIssue537b
+	com.google.javascript.jscomp.TypeCheckTest::testAnonymousPrototype1
+	com.google.javascript.jscomp.TypeCheckTest::testAnonymousPrototype2
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testAddMethodsPrototypeTwoWays
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPrototypeInit
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalThis2
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPrototypePropertyMethodWithoutAnnotation
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_6
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_2
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_3
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testInferredPrototypeProperty2
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertyOnUnknownSuperClass2
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 731 with range 6 to
+    if (objectType == null || n.getBooleanProp(Node.REFLECTED_OBJECT)) {
+
+patches are written to file
+running tests...
+used time: Finished in 279.16 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.TypeCheckTest::testIssue1023
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_7
+	com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 731 with range 6 to
+    if (objectType == null || n.getBooleanProp(Node.REFLECTED_OBJECT)) {
+
+try to fix hunk: 1
+insert before 1669 with       if (qName != null && qName.endsWith(".prototype")) {
+        return false;
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 308.99 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_7', 'com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5', 'com.google.javascript.jscomp.TypeCheckTest::testIssue1023']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_7
+com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5
+com.google.javascript.jscomp.TypeCheckTest::testIssue1023
+Save found bug
+processed: 11
+Find 1 new bugs

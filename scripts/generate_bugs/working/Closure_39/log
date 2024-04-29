@@ -1,0 +1,243 @@
+---
+Begin generate bug_id: Closure_39
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Closure_39
+Try to checkout Closure_39
+build dir: ['./working/data/Closure_39/build/classes', './working/data/Closure_39/build/test']
+init FileManager
+trace file: src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
+trying to replace old failing tests
+edit: replace from 46 range 18 at test/com/google/javascript/rhino/jstype/RecordTypeTest.java
+to
+  public void testRecursiveRecord$catena_0() {
+    ProxyObjectType loop = new ProxyObjectType(registry, NUMBER_TYPE);
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("loop", loop, null)
+        .addProperty("number", NUMBER_TYPE, null)
+        .addProperty("string", STRING_TYPE, null)
+        .build();
+    assertEquals("{loop: number, number: number, string: string}",
+        record.toString());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+    loop.setReferencedType(record);
+    try{ assertEquals("{loop: {...}, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("{loop: ?, number: number, string: string}",
+        record.toAnnotationString());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ Asserts.assertEquivalenceOperations(record, loop);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testRecursiveRecord$catena_1() {
+    ProxyObjectType loop = new ProxyObjectType(registry, NUMBER_TYPE);
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("loop", loop, null)
+        .addProperty("number", NUMBER_TYPE, null)
+        .addProperty("string", STRING_TYPE, null)
+        .build();
+    try{ assertEquals("{loop: number, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    loop.setReferencedType(record);
+    assertEquals("{loop: {...}, number: number, string: string}",
+        record.toString());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("{loop: ?, number: number, string: string}",
+        record.toAnnotationString());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    try{ Asserts.assertEquivalenceOperations(record, loop);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testRecursiveRecord$catena_2() {
+    ProxyObjectType loop = new ProxyObjectType(registry, NUMBER_TYPE);
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("loop", loop, null)
+        .addProperty("number", NUMBER_TYPE, null)
+        .addProperty("string", STRING_TYPE, null)
+        .build();
+    try{ assertEquals("{loop: number, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    loop.setReferencedType(record);
+    try{ assertEquals("{loop: {...}, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("{loop: ?, number: number, string: string}",
+        record.toAnnotationString());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+
+    try{ Asserts.assertEquivalenceOperations(record, loop);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testRecursiveRecord$catena_3() {
+    ProxyObjectType loop = new ProxyObjectType(registry, NUMBER_TYPE);
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("loop", loop, null)
+        .addProperty("number", NUMBER_TYPE, null)
+        .addProperty("string", STRING_TYPE, null)
+        .build();
+    try{ assertEquals("{loop: number, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    loop.setReferencedType(record);
+    try{ assertEquals("{loop: {...}, number: number, string: string}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("{loop: ?, number: number, string: string}",
+        record.toAnnotationString());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    Asserts.assertEquivalenceOperations(record, loop);                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 65 range 16 at test/com/google/javascript/rhino/jstype/RecordTypeTest.java
+to
+  public void testLongToString$catena_0() {
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("a1", NUMBER_TYPE, null)
+        .addProperty("a2", NUMBER_TYPE, null)
+        .addProperty("a3", NUMBER_TYPE, null)
+        .addProperty("a4", NUMBER_TYPE, null)
+        .addProperty("a5", NUMBER_TYPE, null)
+        .addProperty("a6", NUMBER_TYPE, null)
+        .build();
+    assertEquals("{a1: number, a2: number, a3: number, a4: number, ...}",
+        record.toString());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(
+        "{a1: number, a2: number, a3: number, a4: number," +
+        " a5: number, a6: number}",
+        record.toAnnotationString());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testLongToString$catena_1() {
+    JSType record = new RecordTypeBuilder(registry)
+        .addProperty("a1", NUMBER_TYPE, null)
+        .addProperty("a2", NUMBER_TYPE, null)
+        .addProperty("a3", NUMBER_TYPE, null)
+        .addProperty("a4", NUMBER_TYPE, null)
+        .addProperty("a5", NUMBER_TYPE, null)
+        .addProperty("a6", NUMBER_TYPE, null)
+        .build();
+    try{ assertEquals("{a1: number, a2: number, a3: number, a4: number, ...}",
+        record.toString());                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(
+        "{a1: number, a2: number, a3: number, a4: number," +
+        " a5: number, a6: number}",
+        record.toAnnotationString());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/rhino/jstype/RecordTypeTest.java
+new test num: 6
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 255.11 seconds
+Failing tests: 2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 394 with range 1 to
+      return forAnnotations ? "?" : "{...}";
+
+patches are written to file
+running tests...
+used time: Finished in 231.05 seconds
+Failing tests: 2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 383 with range 1 to
+        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {
+
+patches are written to file
+running tests...
+used time: Finished in 229.27 seconds
+Failing tests: 1
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+select new bug
+Pattern: 010
+new failing tests:
+com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1
+Save found bug
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 380 with range 1 to
+        sb.append(getPropertyType(property).toStringHelper(forAnnotations));
+
+patches are written to file
+running tests...
+used time: Finished in 229.93 seconds
+Failing tests: 2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+	com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 383 with range 1 to
+        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {
+
+try to fix hunk: 2
+replace from 394 with range 1 to
+      return forAnnotations ? "?" : "{...}";
+
+patches are written to file
+running tests...
+used time: Finished in 238.20 seconds
+Failing tests: 1
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 380 with range 1 to
+        sb.append(getPropertyType(property).toStringHelper(forAnnotations));
+
+try to fix hunk: 2
+replace from 394 with range 1 to
+      return forAnnotations ? "?" : "{...}";
+
+patches are written to file
+running tests...
+used time: Finished in 234.90 seconds
+Failing tests: 1
+	com.google.javascript.rhino.jstype.RecordTypeTest::testLongToString$catena_1
+Can independently fix ['com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2']
+select new bug
+Pattern: 101
+new failing tests:
+com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 380 with range 1 to
+        sb.append(getPropertyType(property).toStringHelper(forAnnotations));
+
+try to fix hunk: 1
+replace from 383 with range 1 to
+        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {
+
+patches are written to file
+running tests...
+used time: Finished in 232.76 seconds
+Failing tests: 1
+	com.google.javascript.rhino.jstype.RecordTypeTest::testRecursiveRecord$catena_2
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 380 with range 1 to
+        sb.append(getPropertyType(property).toStringHelper(forAnnotations));
+
+try to fix hunk: 1
+replace from 383 with range 1 to
+        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {
+
+try to fix hunk: 2
+replace from 394 with range 1 to
+      return forAnnotations ? "?" : "{...}";
+
+patches are written to file
+running tests...
+used time: Finished in 225.29 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 2 new bugs

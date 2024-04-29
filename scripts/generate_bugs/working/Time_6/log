@@ -1,0 +1,231 @@
+---
+Begin generate bug_id: Time_6
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Time_6
+Try to checkout Time_6
+build dir: ['./working/data/Time_6/target/classes', './working/data/Time_6/target/test-classes']
+init FileManager
+trace file: src/main/java/org/joda/time/chrono/GJChronology.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 5
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 60.90 seconds
+Failing tests: 5
+	org.joda.time.chrono.TestGJDate::test_cutoverPreZero
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 1001 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 39.46 seconds
+Failing tests: 5
+	org.joda.time.chrono.TestGJDate::test_cutoverPreZero
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 979 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 33.44 seconds
+Failing tests: 1
+	org.joda.time.chrono.TestGJDate::test_cutoverPreZero
+select new bug
+Pattern: 010
+new failing tests:
+org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
+Save found bug
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 196 with             LocalDate cutoverDate = new LocalDate(cutoverInstant.getMillis(), GregorianChronology.getInstance(zone));
+            if (cutoverDate.getYear() <= 0) {
+                throw new IllegalArgumentException("Cutover too early. Must be on or after 0001-01-01.");
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 38.12 seconds
+Failing tests: 4
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+select new bug
+Pattern: 100
+new failing tests:
+org.joda.time.chrono.TestGJDate::test_cutoverPreZero
+Save found bug
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 979 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+try to fix hunk: 2
+insert before 1001 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 33.75 seconds
+Failing tests: 1
+	org.joda.time.chrono.TestGJDate::test_cutoverPreZero
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 196 with             LocalDate cutoverDate = new LocalDate(cutoverInstant.getMillis(), GregorianChronology.getInstance(zone));
+            if (cutoverDate.getYear() <= 0) {
+                throw new IllegalArgumentException("Cutover too early. Must be on or after 0001-01-01.");
+            }
+
+try to fix hunk: 2
+insert before 1001 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 36.33 seconds
+Failing tests: 4
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover
+	org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 196 with             LocalDate cutoverDate = new LocalDate(cutoverInstant.getMillis(), GregorianChronology.getInstance(zone));
+            if (cutoverDate.getYear() <= 0) {
+                throw new IllegalArgumentException("Cutover too early. Must be on or after 0001-01-01.");
+            }
+
+try to fix hunk: 1
+insert before 979 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 41.23 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 196 with             LocalDate cutoverDate = new LocalDate(cutoverInstant.getMillis(), GregorianChronology.getInstance(zone));
+            if (cutoverDate.getYear() <= 0) {
+                throw new IllegalArgumentException("Cutover too early. Must be on or after 0001-01-01.");
+            }
+
+try to fix hunk: 1
+insert before 979 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+try to fix hunk: 2
+insert before 1001 with                         if (iConvertByWeekyear) {
+                            int wyear = iGregorianChronology.weekyear().get(instant);
+                            if (wyear <= 0) {
+                                instant = iGregorianChronology.weekyear().add(instant, -1);
+                            }
+                        } else {
+                            int year = iGregorianChronology.year().get(instant);
+                            if (year <= 0) {
+                                instant = iGregorianChronology.year().add(instant, -1);
+                            }
+                        }
+
+patches are written to file
+running tests...
+used time: Finished in 36.23 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 2 new bugs

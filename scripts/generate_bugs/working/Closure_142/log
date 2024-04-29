@@ -1,0 +1,153 @@
+---
+Begin generate bug_id: Closure_142
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Closure_142
+Try to checkout Closure_142
+build dir: ['./working/data/Closure_142/build/classes', './working/data/Closure_142/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/CoalesceVariableNames.java
+trace file: src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+trying to replace old failing tests
+edit: replace from 1073 range 8 at test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+to
+  public void testParseLicenseWithAnnotation$catena_0() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo \n * @author Charlie Brown */";
+    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(" Foo \n @author Charlie Brown ",
+        node.getJSDocInfo().getLicense());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testParseLicenseWithAnnotation$catena_1() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo \n * @author Charlie Brown */";
+    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(" Foo \n @author Charlie Brown ",
+        node.getJSDocInfo().getLicense());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+new test num: 2
+ori test num: 1
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 122.27 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.CoalesceVariableNamesTest::testParameter4
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 1183 with           }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 1168 with           if (!(option == WhitespaceOption.PRESERVE &&
+                token == JsDocToken.ANNOTATION)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 108 with     if (scope.getRootNode().getFirstChild().getNext().getChildCount() == 2) {
+      liveness.markAllParametersEscaped();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 111.59 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation$catena_1
+select new bug
+Pattern: 100
+new failing tests:
+com.google.javascript.jscomp.CoalesceVariableNamesTest::testParameter4
+Save found bug
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 1168 with           if (!(option == WhitespaceOption.PRESERVE &&
+                token == JsDocToken.ANNOTATION)) {
+
+try to fix hunk: 2
+insert before 1183 with           }
+
+patches are written to file
+running tests...
+used time: Finished in 105.15 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.CoalesceVariableNamesTest::testParameter4
+Can independently fix ['com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation$catena_1']
+select new bug
+Pattern: 011
+new failing tests:
+com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation$catena_1
+Save found bug
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 108 with     if (scope.getRootNode().getFirstChild().getNext().getChildCount() == 2) {
+      liveness.markAllParametersEscaped();
+    }
+
+try to fix hunk: 2
+insert before 1183 with           }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 108 with     if (scope.getRootNode().getFirstChild().getNext().getChildCount() == 2) {
+      liveness.markAllParametersEscaped();
+    }
+
+try to fix hunk: 1
+insert before 1168 with           if (!(option == WhitespaceOption.PRESERVE &&
+                token == JsDocToken.ANNOTATION)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 108 with     if (scope.getRootNode().getFirstChild().getNext().getChildCount() == 2) {
+      liveness.markAllParametersEscaped();
+    }
+
+try to fix hunk: 1
+insert before 1168 with           if (!(option == WhitespaceOption.PRESERVE &&
+                token == JsDocToken.ANNOTATION)) {
+
+try to fix hunk: 2
+insert before 1183 with           }
+
+patches are written to file
+running tests...
+used time: Finished in 109.13 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 2 new bugs

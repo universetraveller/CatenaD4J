@@ -1,1 +1,0 @@
-org.apache.commons.math3.optimization.direct.CMAESOptimizerTest::testFitAccuracyDependsOnBoundary$catena_1

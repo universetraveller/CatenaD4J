@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java",
+            "from_line_no": 22,
+            "to_line_no": 22,
+            "replaced_with": "import org.apache.commons.math.exception.NotStrictlyPositiveException;\n",
+            "replaced": "import org.apache.commons.math.MathRuntimeException;\n",
+            "patch_type": "replace",
+            "next_line_no": 23
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java",
+            "from_line_no": 94,
+            "to_line_no": 94,
+            "replaced_with": "            throw new NotStrictlyPositiveException(LocalizedFormats.MEAN, p);\n",
+            "replaced": "            throw MathRuntimeException.createIllegalArgumentException(LocalizedFormats.NOT_POSITIVE_POISSON_MEAN, p);\n",
+            "patch_type": "replace",
+            "next_line_no": 95
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.math.distribution.PoissonDistributionTest::testMean"
+        ],
+        "org.apache.commons.math.distribution.PoissonDistributionTest::testMean": {
+            "file_path": "src/test/java/org/apache/commons/math/distribution/PoissonDistributionTest.java",
+            "Instance": "Begin: Pos(137, 12)\nEnd: Pos(148, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Math_61/src/test/java//org/apache/commons/math/distribution/PoissonDistributionTest.java\nName: testMean\nChilds: [StatementAssertion<Begin: Pos(141, 13), End: Pos(141, 73)>,\nStatementAssertion<Begin: Pos(147, 9), End: Pos(147, 48)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Math_61/src/test/java//org/apache/commons/math/distribution/PoissonDistributionTest.java",
+            "name": "testMean",
+            "begin": "Pos(137, 12)",
+            "end": "Pos(148, 5)",
+            "begin_line_no": 137,
+            "end_line_no": 148,
+            "child": [
+                "Begin: Pos(141, 13)\nEnd: Pos(141, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(147, 9)\nEnd: Pos(147, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testMean$catena_0() {\n        PoissonDistribution dist;\n        try {\n            dist = new PoissonDistributionImpl(-1);\n            fail(\"negative mean: NotStrictlyPositiveException expected\");                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch(NotStrictlyPositiveException ex) {\n            // Expected.\n        }\n\n        dist = new PoissonDistributionImpl(10.0);\n        try{ assertEquals(10.0, dist.getMean(), 0.0);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMean$catena_1() {\n        PoissonDistribution dist;\n        try {\n            dist = new PoissonDistributionImpl(-1);\n            try{ fail(\"negative mean: NotStrictlyPositiveException expected\");                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch(NotStrictlyPositiveException ex) {\n            // Expected.\n        }\n\n        dist = new PoissonDistributionImpl(10.0);\n        assertEquals(10.0, dist.getMean(), 0.0);                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testMean$catena_0() {\n        PoissonDistribution dist;\n        try {\n            dist = new PoissonDistributionImpl(-1);\n            fail(\"negative mean: NotStrictlyPositiveException expected\");                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch(NotStrictlyPositiveException ex) {\n            // Expected.\n        }\n\n        dist = new PoissonDistributionImpl(10.0);\n        try{ assertEquals(10.0, dist.getMean(), 0.0);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testMean$catena_1() {\n        PoissonDistribution dist;\n        try {\n            dist = new PoissonDistributionImpl(-1);\n            try{ fail(\"negative mean: NotStrictlyPositiveException expected\");                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch(NotStrictlyPositiveException ex) {\n            // Expected.\n        }\n\n        dist = new PoissonDistributionImpl(10.0);\n        assertEquals(10.0, dist.getMean(), 0.0);                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_0",
+            "org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_1"
+        ]
+    }
+}

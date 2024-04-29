@@ -1,0 +1,1626 @@
+---
+Begin generate bug_id: Closure_105
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Closure_105
+Try to checkout Closure_105
+build dir: ['./working/data/Closure_105/build/classes', './working/data/Closure_105/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/FoldConstants.java
+trying to replace old failing tests
+edit: replace from 623 range 36 at test/com/google/javascript/jscomp/FoldConstantsTest.java
+to
+  public void testStringJoinAdd$catena_0() {
+    fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_1() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = [].join(',')", "x = \"\"");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_2() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a'].join(',')", "x = \"a\"");                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_3() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_4() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                      /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_5() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                          /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_6() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_7() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_8() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_9() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    fold("x = ['a=', false].join('')", "x = \"a=false\"");                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_10() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_11() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_12() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_13() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    foldSame("x = ['', foo].join(',')");                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_14() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    foldSame("x = ['', foo, ''].join(',')");                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_15() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                                /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_16() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_17() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    
+    try{ fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testStringJoinAdd$catena_18() {
+    try{ fold("x = ['a', 'b', 'c'].join('')", "x = \"abc\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [].join(',')", "x = \"\"");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a'].join(',')", "x = \"a\"");                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c'].join(',')", "x = \"a,b,c\"");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', foo, 'b', 'c'].join(',')", "x = [\"a\",foo,\"b,c\"].join(\",\")");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = [foo, 'a', 'b', 'c'].join(',')", "x = [foo,\"a,b,c\"].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', 'b', 'c', foo].join(',')", "x = [\"a,b,c\",foo].join(\",\")");                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works with numbers
+    try{ fold("x = ['a=', 5].join('')", "x = \"a=5\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(7)", "x = \"a75\"");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Works on boolean
+    try{ fold("x = ['a=', false].join('')", "x = \"a=false\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(true)", "x = \"atrue5\"");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['a', '5'].join(false)", "x = \"afalse5\"");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    // Only optimize if it's a size win.
+    try{ fold("x = ['a', '5', 'c'].join('a very very very long chain')",
+         "x = [\"a\",\"5\",\"c\"].join(\"a very very very long chain\")");                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    // TODO(user): Its possible to fold this better.
+    try{ foldSame("x = ['', foo].join(',')");                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("x = ['', foo, ''].join(',')");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, ''].join(',')", "x = [',', foo, ''].join(',')");                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("x = ['', '', foo, '', ''].join(',')",
+         "x = [',', foo, ','].join(',')");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    try{ fold("x = ['', '', foo, '', '', bar].join(',')",
+         "x = [',', foo, ',', bar].join(',')");                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    
+    fold("x = [1,2,3].join('abcdef')",
+         "x = '1abcdef2abcdef3'");                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/FoldConstantsTest.java
+new test num: 19
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 115.78 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 108.01 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 101.72 seconds
+Failing tests: 7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 107.35 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+Includes new failing tests, set to unusable
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+patches are written to file
+running tests...
+used time: Finished in 109.45 seconds
+Failing tests: 12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 97.11 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 106.80 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+Includes new failing tests, set to unusable
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 107.31 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 103.53 seconds
+Failing tests: 9
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 110.56 seconds
+Failing tests: 13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 104.62 seconds
+Failing tests: 14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 108.76 seconds
+Failing tests: 13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 113.93 seconds
+Failing tests: 19
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 109.51 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 108.85 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+patches are written to file
+running tests...
+used time: Finished in 105.09 seconds
+Failing tests: 9
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+Includes new failing tests, set to unusable
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 99.65 seconds
+Failing tests: 7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+Includes new failing tests, set to unusable
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 101.40 seconds
+Failing tests: 13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 86.27 seconds
+Failing tests: 13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 91.37 seconds
+Failing tests: 15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 89.75 seconds
+Failing tests: 19
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 92.19 seconds
+Failing tests: 19
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 81.41 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 100.73 seconds
+Failing tests: 8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 90.37 seconds
+Failing tests: 8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 98.22 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+Includes new failing tests, set to unusable
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 90.57 seconds
+Failing tests: 13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+Includes new failing tests, set to unusable
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 91.44 seconds
+Failing tests: 19
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_10
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_11
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_12
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_18
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_0
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_2
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_8
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_9
+Includes new failing tests, set to unusable
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 85.75 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_5
+Includes new failing tests, set to unusable
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 97.89 seconds
+Failing tests: 5
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_4
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+patches are written to file
+running tests...
+used time: Finished in 109.28 seconds
+Failing tests: 7
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd_b1992789
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_1
+	com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_6
+Includes new failing tests, set to unusable
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+replace from 1477 with range 1 to
+    StringBuilder sb = null;
+
+try to fix hunk: 1
+replace from 1483 with range 1 to
+        if (sb == null) {
+          sb = new StringBuilder();
+        } else {
+
+try to fix hunk: 2
+replace from 1488 with range 1 to
+        if (sb != null) {
+
+try to fix hunk: 3
+replace from 1492 with range 1 to
+          sb = null;
+
+try to fix hunk: 4
+replace from 1500 with range 1 to
+    if (sb != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 104.25 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16', 'com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17', 'com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13', 'com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15', 'com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14']
+select new bug
+Pattern: 11111
+new failing tests:
+com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_16
+com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_17
+com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_13
+com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_15
+com.google.javascript.jscomp.FoldConstantsTest::testStringJoinAdd$catena_14
+Save found bug
+processed: 11111
+Find 1 new bugs

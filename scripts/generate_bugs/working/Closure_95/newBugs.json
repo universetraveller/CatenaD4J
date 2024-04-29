@@ -1,0 +1,70 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/TypedScopeCreator.java",
+            "replaced_with": "      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n          isQnameRootedInGlobalScope(n)) {\n        Scope globalScope = scope.getGlobalScope();\n",
+            "patch_type": "insert",
+            "next_line_no": 899
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/TypedScopeCreator.java",
+            "replaced_with": "        if (!globalScope.isDeclared(variableName, false)) {\n          scopeToDeclareIn = scope.getGlobalScope();\n        }\n      }\n",
+            "patch_type": "insert",
+            "next_line_no": 902
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.TypeCheckTest::testQualifiedNameInference5",
+            "com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalQualifiedNameInLocalScope"
+        ],
+        "com.google.javascript.jscomp.TypeCheckTest::testQualifiedNameInference5": {
+            "file_path": "test/com/google/javascript/jscomp/TypeCheckTest.java",
+            "Instance": "Begin: Pos(4760, 10)\nEnd: Pos(4769, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_95/test//com/google/javascript/jscomp/TypeCheckTest.java\nName: testQualifiedNameInference5\nChilds: [StatementAssertion<Begin: Pos(4761, 5), End: Pos(4768, 28)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_95/test//com/google/javascript/jscomp/TypeCheckTest.java",
+            "name": "testQualifiedNameInference5",
+            "begin": "Pos(4760, 10)",
+            "end": "Pos(4769, 3)",
+            "begin_line_no": 4760,
+            "end_line_no": 4769,
+            "child": [
+                "Begin: Pos(4761, 5)\nEnd: Pos(4768, 28)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalQualifiedNameInLocalScope": {
+            "file_path": "test/com/google/javascript/jscomp/TypedScopeCreatorTest.java",
+            "Instance": "Begin: Pos(775, 10)\nEnd: Pos(785, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_95/test//com/google/javascript/jscomp/TypedScopeCreatorTest.java\nName: testGlobalQualifiedNameInLocalScope\nChilds: [StatementAssertion<Begin: Pos(776, 5), End: Pos(780, 42)>,\nStatementAssertion<Begin: Pos(781, 5), End: Pos(781, 48)>,\nStatementAssertion<Begin: Pos(782, 5), End: Pos(784, 59)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_95/test//com/google/javascript/jscomp/TypedScopeCreatorTest.java",
+            "name": "testGlobalQualifiedNameInLocalScope",
+            "begin": "Pos(775, 10)",
+            "end": "Pos(785, 3)",
+            "begin_line_no": 775,
+            "end_line_no": 785,
+            "child": [
+                "Begin: Pos(776, 5)\nEnd: Pos(780, 42)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(781, 5)\nEnd: Pos(781, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(782, 5)\nEnd: Pos(784, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testGlobalQualifiedNameInLocalScope$catena_0() {\n    testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testGlobalQualifiedNameInLocalScope$catena_1() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertNotNull(globalScope.getVar(\"ns.foo\"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testGlobalQualifiedNameInLocalScope$catena_2() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testGlobalQualifiedNameInLocalScope$catena_0() {\n    testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testGlobalQualifiedNameInLocalScope$catena_1() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertNotNull(globalScope.getVar(\"ns.foo\"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testGlobalQualifiedNameInLocalScope$catena_2() {\n    try{ testSame(\n        \"var ns = {}; \" +\n        \"(function() { \" +\n        \"    /** @param {number} x */ ns.foo = function(x) {}; })();\" +\n        \"(function() { ns.foo(3); })();\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertNotNull(globalScope.getVar(\"ns.foo\"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\n        \"function (number): undefined\",\n        globalScope.getVar(\"ns.foo\").getType().toString());                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalQualifiedNameInLocalScope$catena_1",
+            "com.google.javascript.jscomp.TypedScopeCreatorTest::testGlobalQualifiedNameInLocalScope$catena_2",
+            "com.google.javascript.jscomp.TypeCheckTest::testQualifiedNameInference5"
+        ]
+    }
+}

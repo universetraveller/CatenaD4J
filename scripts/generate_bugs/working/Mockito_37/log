@@ -1,0 +1,75 @@
+---
+Begin generate bug_id: Mockito_37
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Mockito_37
+Try to checkout Mockito_37
+build dir: ['./working/data/Mockito_37/target/classes', './working/data/Mockito_37/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/stubbing/answers/AnswersValidator.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 2
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 106.73 seconds
+Failing tests: 2
+	org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface
+	org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 30 with     private void validateMockingConcreteClass(CallsRealMethods answer, Invocation invocation) {
+        if (invocation.getMethod().getDeclaringClass().isInterface()) {
+            reporter.cannotCallRealMethodOnInterface();
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 107.41 seconds
+Failing tests: 2
+	org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface
+	org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 28 with         if (answer instanceof CallsRealMethods) {
+            validateMockingConcreteClass((CallsRealMethods) answer, invocation);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 28 with         if (answer instanceof CallsRealMethods) {
+            validateMockingConcreteClass((CallsRealMethods) answer, invocation);
+        }
+
+try to fix hunk: 1
+insert before 30 with     private void validateMockingConcreteClass(CallsRealMethods answer, Invocation invocation) {
+        if (invocation.getMethod().getDeclaringClass().isInterface()) {
+            reporter.cannotCallRealMethodOnInterface();
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 108.93 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface', 'org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface']
+select new bug
+Pattern: 11
+new failing tests:
+org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface
+org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface
+Save found bug
+processed: 11
+Find 1 new bugs

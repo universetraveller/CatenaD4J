@@ -1,0 +1,3 @@
+com.google.javascript.jscomp.JSCompilerSourceExcerptProviderTest::testExceptNoNewLine$catena_2
+com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError2$catena_3
+com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError1$catena_3

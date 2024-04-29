@@ -1,1 +1,0 @@
-org.mockito.internal.creation.instance.ConstructorInstantiatorTest::creates_instances_of_inner_classes$catena_1

@@ -1,0 +1,136 @@
+---
+Begin generate bug_id: Math_79
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_79
+Try to checkout Math_79
+build dir: ['./working/data/Math_79/target/classes', './working/data/Math_79/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/util/MathUtils.java
+trying to replace old failing tests
+edit: replace from 102 range 16 at src/test/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClustererTest.java
+to
+    @Test
+    public void testPerformClusterAnalysisDegenerate$catena_0() {
+        KMeansPlusPlusClusterer<EuclideanIntegerPoint> transformer = new KMeansPlusPlusClusterer<EuclideanIntegerPoint>(
+                new Random(1746432956321l));
+        EuclideanIntegerPoint[] points = new EuclideanIntegerPoint[] {
+                new EuclideanIntegerPoint(new int[] { 1959, 325100 }),
+                new EuclideanIntegerPoint(new int[] { 1960, 373200 }), };
+        List<Cluster<EuclideanIntegerPoint>> clusters = transformer.cluster(Arrays.asList(points), 1, 1);
+        assertEquals(1, clusters.size());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, (clusters.get(0).getPoints().size()));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        EuclideanIntegerPoint pt1 = new EuclideanIntegerPoint(new int[] { 1959, 325100 });
+        EuclideanIntegerPoint pt2 = new EuclideanIntegerPoint(new int[] { 1960, 373200 });
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt1));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt2));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }      @Test
+    public void testPerformClusterAnalysisDegenerate$catena_1() {
+        KMeansPlusPlusClusterer<EuclideanIntegerPoint> transformer = new KMeansPlusPlusClusterer<EuclideanIntegerPoint>(
+                new Random(1746432956321l));
+        EuclideanIntegerPoint[] points = new EuclideanIntegerPoint[] {
+                new EuclideanIntegerPoint(new int[] { 1959, 325100 }),
+                new EuclideanIntegerPoint(new int[] { 1960, 373200 }), };
+        List<Cluster<EuclideanIntegerPoint>> clusters = transformer.cluster(Arrays.asList(points), 1, 1);
+        try{ assertEquals(1, clusters.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, (clusters.get(0).getPoints().size()));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        EuclideanIntegerPoint pt1 = new EuclideanIntegerPoint(new int[] { 1959, 325100 });
+        EuclideanIntegerPoint pt2 = new EuclideanIntegerPoint(new int[] { 1960, 373200 });
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt1));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt2));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }      @Test
+    public void testPerformClusterAnalysisDegenerate$catena_2() {
+        KMeansPlusPlusClusterer<EuclideanIntegerPoint> transformer = new KMeansPlusPlusClusterer<EuclideanIntegerPoint>(
+                new Random(1746432956321l));
+        EuclideanIntegerPoint[] points = new EuclideanIntegerPoint[] {
+                new EuclideanIntegerPoint(new int[] { 1959, 325100 }),
+                new EuclideanIntegerPoint(new int[] { 1960, 373200 }), };
+        List<Cluster<EuclideanIntegerPoint>> clusters = transformer.cluster(Arrays.asList(points), 1, 1);
+        try{ assertEquals(1, clusters.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, (clusters.get(0).getPoints().size()));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        EuclideanIntegerPoint pt1 = new EuclideanIntegerPoint(new int[] { 1959, 325100 });
+        EuclideanIntegerPoint pt2 = new EuclideanIntegerPoint(new int[] { 1960, 373200 });
+        assertTrue(clusters.get(0).getPoints().contains(pt1));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt2));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }      @Test
+    public void testPerformClusterAnalysisDegenerate$catena_3() {
+        KMeansPlusPlusClusterer<EuclideanIntegerPoint> transformer = new KMeansPlusPlusClusterer<EuclideanIntegerPoint>(
+                new Random(1746432956321l));
+        EuclideanIntegerPoint[] points = new EuclideanIntegerPoint[] {
+                new EuclideanIntegerPoint(new int[] { 1959, 325100 }),
+                new EuclideanIntegerPoint(new int[] { 1960, 373200 }), };
+        List<Cluster<EuclideanIntegerPoint>> clusters = transformer.cluster(Arrays.asList(points), 1, 1);
+        try{ assertEquals(1, clusters.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, (clusters.get(0).getPoints().size()));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        EuclideanIntegerPoint pt1 = new EuclideanIntegerPoint(new int[] { 1959, 325100 });
+        EuclideanIntegerPoint pt2 = new EuclideanIntegerPoint(new int[] { 1960, 373200 });
+        try{ assertTrue(clusters.get(0).getPoints().contains(pt1));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(clusters.get(0).getPoints().contains(pt2));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+    } 
+trace file: src/test/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClustererTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 37.29 seconds
+Failing tests: 4
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_0
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_1
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_2
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 1626 with range 1 to
+          final double dp = p1[i] - p2[i];
+
+patches are written to file
+running tests...
+used time: Finished in 22.80 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_0
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_2
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_1
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_3
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 1624 with range 1 to
+      double sum = 0;
+
+patches are written to file
+running tests...
+used time: Finished in 24.49 seconds
+Failing tests: 4
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_0
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_1
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_2
+	org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest::testPerformClusterAnalysisDegenerate$catena_3
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 1624 with range 1 to
+      double sum = 0;
+
+try to fix hunk: 1
+replace from 1626 with range 1 to
+          final double dp = p1[i] - p2[i];
+
+patches are written to file
+running tests...
+used time: Finished in 22.13 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

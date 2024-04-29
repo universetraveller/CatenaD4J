@@ -1,0 +1,3 @@
+com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator
+com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign
+com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing

@@ -1,0 +1,1690 @@
+---
+Begin generate bug_id: Math_102
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Math_102
+Try to checkout Math_102
+build dir: ['./working/data/Math_102/target/classes', './working/data/Math_102/target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java
+trying to replace old failing tests
+NOTICE: skip org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic for cannot find node in method_base
+NOTICE: skip org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare for cannot find node in method_base
+edit: replace from 170 range 16 at src/test/org/apache/commons/math/stat/inference/ChiSquareTestTest.java
+to
+    public void testChiSquareLargeTestStatistic$catena_0() throws Exception {
+        double[] exp = new double[] {
+            3389119.5, 649136.6, 285745.4, 25357364.76, 11291189.78, 543628.0, 
+            232921.0, 437665.75
+        };
+
+        long[] obs = new long[] {
+            2372383, 584222, 257170, 17750155, 7903832, 489265, 209628, 393899
+        };
+        org.apache.commons.math.stat.inference.ChiSquareTestImpl csti =
+            new org.apache.commons.math.stat.inference.ChiSquareTestImpl(); 
+        double cst = csti.chiSquareTest(exp, obs); 
+        assertEquals("chi-square p-value", 0.0, cst, 1E-3);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "chi-square test statistic", 
+                114875.90421929007, testStatistic.chiSquare(exp, obs), 1E-9);                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testChiSquareLargeTestStatistic$catena_1() throws Exception {
+        double[] exp = new double[] {
+            3389119.5, 649136.6, 285745.4, 25357364.76, 11291189.78, 543628.0, 
+            232921.0, 437665.75
+        };
+
+        long[] obs = new long[] {
+            2372383, 584222, 257170, 17750155, 7903832, 489265, 209628, 393899
+        };
+        org.apache.commons.math.stat.inference.ChiSquareTestImpl csti =
+            new org.apache.commons.math.stat.inference.ChiSquareTestImpl(); 
+        double cst = csti.chiSquareTest(exp, obs); 
+        try{ assertEquals("chi-square p-value", 0.0, cst, 1E-3);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "chi-square test statistic", 
+                114875.90421929007, testStatistic.chiSquare(exp, obs), 1E-9);                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 46 range 65 at src/test/org/apache/commons/math/stat/inference/ChiSquareTestTest.java
+to
+    public void testChiSquare$catena_0() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_1() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);                  /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_2() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_3() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_4() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_5() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_6() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            fail("alpha out of range, IllegalArgumentException expected");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_7() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            fail("arguments too short, IllegalArgumentException expected");                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_8() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            fail("arrays have different lengths, IllegalArgumentException expected");                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_9() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            fail("bad expected count, IllegalArgumentException expected");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_10() throws Exception {
+ 
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  testStatistic.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, testStatistic.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, testStatistic.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, testStatistic.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", testStatistic.chiSquareTest(expected1, observed1, 0.08));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !testStatistic.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            testStatistic.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            testStatistic.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            testStatistic.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            testStatistic.chiSquareTest(expected, observed, .01);
+            fail("bad expected count, IllegalArgumentException expected");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }
+edit: replace from 168 range 16 at src/test/org/apache/commons/math/stat/inference/TestUtilsTest.java
+to
+    public void testChiSquareLargeTestStatistic$catena_0() throws Exception {
+        double[] exp = new double[] {
+                3389119.5, 649136.6, 285745.4, 25357364.76, 11291189.78, 543628.0, 
+                232921.0, 437665.75
+        };
+
+        long[] obs = new long[] {
+                2372383, 584222, 257170, 17750155, 7903832, 489265, 209628, 393899
+        };
+        org.apache.commons.math.stat.inference.ChiSquareTestImpl csti =
+            new org.apache.commons.math.stat.inference.ChiSquareTestImpl(); 
+        double cst = csti.chiSquareTest(exp, obs); 
+        assertEquals("chi-square p-value", 0.0, cst, 1E-3);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "chi-square test statistic", 
+                114875.90421929007, TestUtils.chiSquare(exp, obs), 1E-9);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testChiSquareLargeTestStatistic$catena_1() throws Exception {
+        double[] exp = new double[] {
+                3389119.5, 649136.6, 285745.4, 25357364.76, 11291189.78, 543628.0, 
+                232921.0, 437665.75
+        };
+
+        long[] obs = new long[] {
+                2372383, 584222, 257170, 17750155, 7903832, 489265, 209628, 393899
+        };
+        org.apache.commons.math.stat.inference.ChiSquareTestImpl csti =
+            new org.apache.commons.math.stat.inference.ChiSquareTestImpl(); 
+        double cst = csti.chiSquareTest(exp, obs); 
+        try{ assertEquals("chi-square p-value", 0.0, cst, 1E-3);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "chi-square test statistic", 
+                114875.90421929007, TestUtils.chiSquare(exp, obs), 1E-9);                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 44 range 65 at src/test/org/apache/commons/math/stat/inference/TestUtilsTest.java
+to
+    public void testChiSquare$catena_0() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_1() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);                  /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_2() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_3() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_4() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_5() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_6() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            fail("alpha out of range, IllegalArgumentException expected");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_7() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            fail("arguments too short, IllegalArgumentException expected");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_8() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            fail("arrays have different lengths, IllegalArgumentException expected");                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_9() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            fail("bad expected count, IllegalArgumentException expected");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }     public void testChiSquare$catena_10() throws Exception {
+        
+        // Target values computed using R version 1.8.1 
+        // Some assembly required ;-)  
+        //      Use sum((obs - exp)^2/exp) for the chi-square statistic and
+        //      1 - pchisq(sum((obs - exp)^2/exp), length(obs) - 1) for the p-value
+        
+        long[] observed = {10, 9, 11};
+        double[] expected = {10, 10, 10};
+        try{ assertEquals("chi-square statistic", 0.2,  TestUtils.chiSquare(expected, observed), 10E-12);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.904837418036, TestUtils.chiSquareTest(expected, observed), 1E-10);             }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        long[] observed1 = { 500, 623, 72, 70, 31 };
+        double[] expected1 = { 485, 541, 82, 61, 37 };
+        try{ assertEquals( "chi-square test statistic", 9.023307936427388, TestUtils.chiSquare(expected1, observed1), 1E-10);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("chi-square p-value", 0.06051952647453607, TestUtils.chiSquareTest(expected1, observed1), 1E-9);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test reject", TestUtils.chiSquareTest(expected1, observed1, 0.07));                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("chi-square test accept", !TestUtils.chiSquareTest(expected1, observed1, 0.05));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try {
+            TestUtils.chiSquareTest(expected1, observed1, 95);
+            try{ fail("alpha out of range, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }  
+        
+        long[] tooShortObs = { 0 };
+        double[] tooShortEx = { 1 };
+        try {
+            TestUtils.chiSquare(tooShortEx, tooShortObs);
+            try{ fail("arguments too short, IllegalArgumentException expected");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+
+        // unmatched arrays
+        long[] unMatchedObs = { 0, 1, 2, 3 };
+        double[] unMatchedEx = { 1, 1, 2 };
+        try {
+            TestUtils.chiSquare(unMatchedEx, unMatchedObs);
+            try{ fail("arrays have different lengths, IllegalArgumentException expected");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
+        
+        // 0 expected count
+        expected[0] = 0;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            try{ fail("bad expected count, IllegalArgumentException expected");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+        // negative observed count
+        expected[0] = 1;
+        observed[0] = -1;
+        try {
+            TestUtils.chiSquareTest(expected, observed, .01);
+            fail("bad expected count, IllegalArgumentException expected");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IllegalArgumentException ex) {
+            // expected
+        } 
+        
+    }
+trace file: src/test/org/apache/commons/math/stat/inference/TestUtilsTest.java
+trace file: src/test/org/apache/commons/math/stat/inference/ChiSquareTestTest.java
+new test num: 26
+ori test num: 2
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 34.25 seconds
+Failing tests: 12
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_5
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_5
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_5
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 79 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 77 with             if (rescale) {
+                dev = ((double) observed[i] - ratio * expected[i]);
+                sumSq += dev * dev / (ratio * expected[i]);
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 74 with         double sumExpected = 0d;
+        double sumObserved = 0d;
+        for (int i = 0; i < observed.length; i++) {
+            sumExpected += expected[i];
+            sumObserved += observed[i];
+        }
+        double ratio = 1.0d;
+        boolean rescale = false;
+        if (Math.abs(sumExpected - sumObserved) > 10E-6) {
+            ratio = sumObserved / sumExpected;
+            rescale = true;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.70 seconds
+Failing tests: 12
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_5
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_5
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquareLargeTestStatistic$catena_1
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_2
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_3
+	org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_5
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 77 with             if (rescale) {
+                dev = ((double) observed[i] - ratio * expected[i]);
+                sumSq += dev * dev / (ratio * expected[i]);
+            } else {
+
+try to fix hunk: 2
+insert before 79 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 74 with         double sumExpected = 0d;
+        double sumObserved = 0d;
+        for (int i = 0; i < observed.length; i++) {
+            sumExpected += expected[i];
+            sumObserved += observed[i];
+        }
+        double ratio = 1.0d;
+        boolean rescale = false;
+        if (Math.abs(sumExpected - sumObserved) > 10E-6) {
+            ratio = sumObserved / sumExpected;
+            rescale = true;
+        }
+
+try to fix hunk: 2
+insert before 79 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 74 with         double sumExpected = 0d;
+        double sumObserved = 0d;
+        for (int i = 0; i < observed.length; i++) {
+            sumExpected += expected[i];
+            sumObserved += observed[i];
+        }
+        double ratio = 1.0d;
+        boolean rescale = false;
+        if (Math.abs(sumExpected - sumObserved) > 10E-6) {
+            ratio = sumObserved / sumExpected;
+            rescale = true;
+        }
+
+try to fix hunk: 1
+insert before 77 with             if (rescale) {
+                dev = ((double) observed[i] - ratio * expected[i]);
+                sumSq += dev * dev / (ratio * expected[i]);
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 74 with         double sumExpected = 0d;
+        double sumObserved = 0d;
+        for (int i = 0; i < observed.length; i++) {
+            sumExpected += expected[i];
+            sumObserved += observed[i];
+        }
+        double ratio = 1.0d;
+        boolean rescale = false;
+        if (Math.abs(sumExpected - sumObserved) > 10E-6) {
+            ratio = sumObserved / sumExpected;
+            rescale = true;
+        }
+
+try to fix hunk: 1
+insert before 77 with             if (rescale) {
+                dev = ((double) observed[i] - ratio * expected[i]);
+                sumSq += dev * dev / (ratio * expected[i]);
+            } else {
+
+try to fix hunk: 2
+insert before 79 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 21.91 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_2', 'org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_3', 'org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_5', 'org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_2', 'org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_3', 'org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquareLargeTestStatistic$catena_1', 'org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquareLargeTestStatistic$catena_1', 'org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_2', 'org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_5', 'org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_5', 'org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic$catena_1', 'org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_3']
+select new bug
+Pattern: 111
+new failing tests:
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_3
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_3
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_3
+Save found bug
+processed: 111
+Find 1 new bugs

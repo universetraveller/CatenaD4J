@@ -1,0 +1,199 @@
+---
+Begin generate bug_id: Math_81
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Math_81
+Try to checkout Math_81
+build dir: ['./working/data/Math_81/target/classes', './working/data/Math_81/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+trying to replace old failing tests
+edit: replace from 112 range 32 at src/test/java/org/apache/commons/math/linear/EigenDecompositionImplTest.java
+to
+    public void testMath308$catena_0() {
+
+        double[] mainTridiagonal = {
+            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437
+        };
+        double[] secondaryTridiagonal = {
+            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225
+        };
+
+        // the reference values have been computed using routine DSTEMR
+        // from the fortran library LAPACK version 3.2.1
+        double[] refEigenValues = {
+            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099
+        };
+        RealVector[] refEigenVectors = {
+            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),
+            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),
+            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),
+            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),
+            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })
+        };
+
+        EigenDecomposition decomposition =
+            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);
+
+        double[] eigenValues = decomposition.getRealEigenvalues();
+        for (int i = 0; i < refEigenValues.length; ++i) {
+            assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+    }     public void testMath308$catena_1() {
+
+        double[] mainTridiagonal = {
+            22.330154644539597, 46.65485522478641, 17.393672330044705, 54.46687435351116, 80.17800767709437
+        };
+        double[] secondaryTridiagonal = {
+            13.04450406501361, -5.977590941539671, 2.9040909856707517, 7.1570352792841225
+        };
+
+        // the reference values have been computed using routine DSTEMR
+        // from the fortran library LAPACK version 3.2.1
+        double[] refEigenValues = {
+            82.044413207204002, 53.456697699894512, 52.536278520113882, 18.847969733754262, 14.138204224043099
+        };
+        RealVector[] refEigenVectors = {
+            new ArrayRealVector(new double[] { -0.000462690386766, -0.002118073109055,  0.011530080757413,  0.252322434584915,  0.967572088232592 }),
+            new ArrayRealVector(new double[] {  0.314647769490148,  0.750806415553905, -0.167700312025760, -0.537092972407375,  0.143854968127780 }),
+            new ArrayRealVector(new double[] {  0.222368839324646,  0.514921891363332, -0.021377019336614,  0.801196801016305, -0.207446991247740 }),
+            new ArrayRealVector(new double[] {  0.713933751051495, -0.190582113553930,  0.671410443368332, -0.056056055955050,  0.006541576993581 }),
+            new ArrayRealVector(new double[] {  0.584677060845929, -0.367177264979103, -0.721453187784497,  0.052971054621812, -0.005740715188257 })
+        };
+
+        EigenDecomposition decomposition =
+            new EigenDecompositionImpl(mainTridiagonal, secondaryTridiagonal, MathUtils.SAFE_MIN);
+
+        double[] eigenValues = decomposition.getRealEigenvalues();
+        for (int i = 0; i < refEigenValues.length; ++i) {
+            try{ assertEquals(refEigenValues[i], eigenValues[i], 1.0e-5);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(0, refEigenVectors[i].subtract(decomposition.getEigenvector(i)).getNorm(), 2.0e-7);         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+    }
+trace file: src/test/java/org/apache/commons/math/linear/EigenDecompositionImplTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 39.02 seconds
+Failing tests: 2
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_0
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 1543 with range 1 to
+                if (end - start > 3) {
+
+patches are written to file
+running tests...
+used time: Finished in 30.84 seconds
+Failing tests: 0
+select new bug
+Pattern: 001
+new failing tests:
+org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_1
+org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_0
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 905 with range 2 to
+                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {
+                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||
+
+patches are written to file
+running tests...
+used time: Finished in 27.06 seconds
+Failing tests: 2
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_0
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_1
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 603 with         upperSpectra = Math.max(upperSpectra, upper);
+
+patches are written to file
+running tests...
+used time: Finished in 23.76 seconds
+Failing tests: 2
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_0
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_1
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 905 with range 2 to
+                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {
+                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||
+
+try to fix hunk: 2
+replace from 1543 with range 1 to
+                if (end - start > 3) {
+
+patches are written to file
+running tests...
+used time: Finished in 28.27 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 603 with         upperSpectra = Math.max(upperSpectra, upper);
+
+try to fix hunk: 2
+replace from 1543 with range 1 to
+                if (end - start > 3) {
+
+patches are written to file
+running tests...
+used time: Finished in 24.25 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 603 with         upperSpectra = Math.max(upperSpectra, upper);
+
+try to fix hunk: 1
+replace from 905 with range 2 to
+                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {
+                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||
+
+patches are written to file
+running tests...
+used time: Finished in 22.60 seconds
+Failing tests: 2
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_0
+	org.apache.commons.math.linear.EigenDecompositionImplTest::testMath308$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 603 with         upperSpectra = Math.max(upperSpectra, upper);
+
+try to fix hunk: 1
+replace from 905 with range 2 to
+                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {
+                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||
+
+try to fix hunk: 2
+replace from 1543 with range 1 to
+                if (end - start > 3) {
+
+patches are written to file
+running tests...
+used time: Finished in 23.85 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

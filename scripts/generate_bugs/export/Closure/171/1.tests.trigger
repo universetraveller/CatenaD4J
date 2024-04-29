@@ -1,0 +1,3 @@
+com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertiesOnInterface2$catena_7
+com.google.javascript.jscomp.TypedScopeCreatorTest::testMethodBeforeFunction2$catena_5
+com.google.javascript.jscomp.TypeCheckTest::testIssue1023

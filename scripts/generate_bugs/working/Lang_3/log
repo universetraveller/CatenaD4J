@@ -1,0 +1,278 @@
+---
+Begin generate bug_id: Lang_3
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Lang_3
+Try to checkout Lang_3
+build dir: ['./working/data/Lang_3/target/classes', './working/data/Lang_3/target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+trying to replace old failing tests
+edit: replace from 122 range 10 at src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java
+to
+    @Test
+    public void testStringCreateNumberEnsureNoPrecisionLoss$catena_0(){
+        String shouldBeFloat = "1.23";
+        String shouldBeDouble = "3.40282354e+38";
+        String shouldBeBigDecimal = "1.797693134862315759e+308";
+        
+        assertTrue(NumberUtils.createNumber(shouldBeFloat) instanceof Float);                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(NumberUtils.createNumber(shouldBeDouble) instanceof Double);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(NumberUtils.createNumber(shouldBeBigDecimal) instanceof BigDecimal);                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testStringCreateNumberEnsureNoPrecisionLoss$catena_1(){
+        String shouldBeFloat = "1.23";
+        String shouldBeDouble = "3.40282354e+38";
+        String shouldBeBigDecimal = "1.797693134862315759e+308";
+        
+        try{ assertTrue(NumberUtils.createNumber(shouldBeFloat) instanceof Float);                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(NumberUtils.createNumber(shouldBeDouble) instanceof Double);                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(NumberUtils.createNumber(shouldBeBigDecimal) instanceof BigDecimal);                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testStringCreateNumberEnsureNoPrecisionLoss$catena_2(){
+        String shouldBeFloat = "1.23";
+        String shouldBeDouble = "3.40282354e+38";
+        String shouldBeBigDecimal = "1.797693134862315759e+308";
+        
+        try{ assertTrue(NumberUtils.createNumber(shouldBeFloat) instanceof Float);                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(NumberUtils.createNumber(shouldBeDouble) instanceof Double);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(NumberUtils.createNumber(shouldBeBigDecimal) instanceof BigDecimal);                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/lang3/math/NumberUtilsTest.java
+new test num: 3
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 41.32 seconds
+Failing tests: 2
+	org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_1
+	org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_2
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 597 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 33.89 seconds
+Failing tests: 1
+	org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_1
+Can independently fix ['org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_2']
+select new bug
+Pattern: 0011
+new failing tests:
+org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_2
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 1
+insert before 597 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 34.70 seconds
+Failing tests: 1
+	org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_2
+Can independently fix ['org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_1']
+select new bug
+Pattern: 1100
+new failing tests:
+org.apache.commons.lang3.math.NumberUtilsTest::testStringCreateNumberEnsureNoPrecisionLoss$catena_1
+Save found bug
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 593 with             if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+
+try to fix hunk: 1
+insert before 597 with             }
+
+try to fix hunk: 2
+insert before 601 with             if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+
+try to fix hunk: 3
+insert before 605 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 34.28 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 2 new bugs

@@ -1,0 +1,92 @@
+---
+Begin generate bug_id: Closure_9
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_9
+Try to checkout Closure_9
+build dir: ['./working/data/Closure_9/build/classes', './working/data/Closure_9/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/ProcessCommonJSModules.java
+trying to replace old failing tests
+edit: replace from 128 range 9 at test/com/google/javascript/jscomp/ProcessCommonJSModulesTest.java
+to
+  public void testGuessModuleName$catena_0() {
+    ProcessCommonJSModules pass = new ProcessCommonJSModules(null, "foo");
+    assertEquals("module$baz",
+        pass.guessCJSModuleName("foo/baz.js"));                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("module$baz",
+        pass.guessCJSModuleName("foo\\baz.js"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("module$bar$baz",
+        pass.guessCJSModuleName("foo\\bar\\baz.js"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testGuessModuleName$catena_1() {
+    ProcessCommonJSModules pass = new ProcessCommonJSModules(null, "foo");
+    try{ assertEquals("module$baz",
+        pass.guessCJSModuleName("foo/baz.js"));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("module$baz",
+        pass.guessCJSModuleName("foo\\baz.js"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("module$bar$baz",
+        pass.guessCJSModuleName("foo\\bar\\baz.js"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testGuessModuleName$catena_2() {
+    ProcessCommonJSModules pass = new ProcessCommonJSModules(null, "foo");
+    try{ assertEquals("module$baz",
+        pass.guessCJSModuleName("foo/baz.js"));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("module$baz",
+        pass.guessCJSModuleName("foo\\baz.js"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("module$bar$baz",
+        pass.guessCJSModuleName("foo\\bar\\baz.js"));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/ProcessCommonJSModulesTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 288.61 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_1
+	com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 183 with range 1 to
+      String moduleName = guessCJSModuleName(script.getSourceFileName());
+
+patches are written to file
+running tests...
+used time: Finished in 250.97 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_1
+	com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_2
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 119 with     filename = filename.replace("\\", "/");
+
+patches are written to file
+running tests...
+used time: Finished in 248.14 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_1
+com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_2
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 119 with     filename = filename.replace("\\", "/");
+
+try to fix hunk: 1
+replace from 183 with range 1 to
+      String moduleName = guessCJSModuleName(script.getSourceFileName());
+
+patches are written to file
+running tests...
+used time: Finished in 261.50 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

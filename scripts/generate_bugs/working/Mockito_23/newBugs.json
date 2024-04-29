@@ -1,0 +1,89 @@
+{
+    "original": {
+        "num_of_hunks": 8,
+        "0": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "from_line_no": 44,
+            "to_line_no": 45,
+            "replaced_with": "    private transient MockitoCore mockitoCore;\n    private transient ReturnsEmptyValues delegate;\n",
+            "replaced": "    private MockitoCore mockitoCore = new MockitoCore();\n    private ReturnsEmptyValues delegate = new ReturnsEmptyValues();\n",
+            "patch_type": "replace",
+            "next_line_no": 46
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "        instantiateMockitoCoreIfNeeded();\n        instantiateDelegateIfNeeded();\n",
+            "patch_type": "insert",
+            "next_line_no": 52
+        },
+        "2": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "    private synchronized void instantiateMockitoCoreIfNeeded() {\n        if (mockitoCore == null) {\n            mockitoCore = new MockitoCore();\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 59
+        },
+        "3": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "    private synchronized void instantiateDelegateIfNeeded() {\n        if (delegate == null) {\n            delegate = new ReturnsEmptyValues();\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 60
+        },
+        "4": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "\t\t        .serializable()\n",
+            "patch_type": "insert",
+            "next_line_no": 100
+        },
+        "5": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "from_line_no": 114,
+            "to_line_no": 114,
+            "replaced_with": "        container.addAnswer(new SerializableAnswer() {\n",
+            "replaced": "        container.addAnswer(new Answer<Object>() {\n",
+            "patch_type": "replace",
+            "next_line_no": 115
+        },
+        "6": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "\tabstract class SerializableAnswer implements Answer<Object>, Serializable {\n",
+            "patch_type": "insert",
+            "next_line_no": 123
+        },
+        "7": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java",
+            "replaced_with": "\t}\n",
+            "patch_type": "insert",
+            "next_line_no": 124
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockitousage.stubbing.DeepStubsSerializableTest::should_serialize_and_deserialize_mock_created_by_deep_stubs"
+        ],
+        "org.mockitousage.stubbing.DeepStubsSerializableTest::should_serialize_and_deserialize_mock_created_by_deep_stubs": {
+            "file_path": "test/org/mockitousage/stubbing/DeepStubsSerializableTest.java",
+            "Instance": "Begin: Pos(17, 5)\nEnd: Pos(32, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_23/test//org/mockitousage/stubbing/DeepStubsSerializableTest.java\nName: should_serialize_and_deserialize_mock_created_by_deep_stubs\nChilds: [StatementAssertion<Begin: Pos(28, 9), End: Pos(28, 54)>,\nStatementAssertion<Begin: Pos(30, 9), End: Pos(30, 92)>,\nStatementAssertion<Begin: Pos(31, 9), End: Pos(31, 96)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_23/test//org/mockitousage/stubbing/DeepStubsSerializableTest.java",
+            "name": "should_serialize_and_deserialize_mock_created_by_deep_stubs",
+            "begin": "Pos(17, 5)",
+            "end": "Pos(32, 5)",
+            "begin_line_no": 17,
+            "end_line_no": 32,
+            "child": [
+                "Begin: Pos(28, 9)\nEnd: Pos(28, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(30, 9)\nEnd: Pos(30, 92)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(31, 9)\nEnd: Pos(31, 96)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_0() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        assertThat(o).isInstanceOf(SampleClass.class);                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        SampleClass deserializedSample = (SampleClass) o;\n        try{ assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_1() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        try{ assertThat(o).isInstanceOf(SampleClass.class);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        SampleClass deserializedSample = (SampleClass) o;\n        assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_2() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        try{ assertThat(o).isInstanceOf(SampleClass.class);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        SampleClass deserializedSample = (SampleClass) o;\n        try{ assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_0() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        assertThat(o).isInstanceOf(SampleClass.class);                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        SampleClass deserializedSample = (SampleClass) o;\n        try{ assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_1() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        try{ assertThat(o).isInstanceOf(SampleClass.class);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        SampleClass deserializedSample = (SampleClass) o;\n        assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test\n    public void should_serialize_and_deserialize_mock_created_by_deep_stubs$catena_2() throws Exception {\n        // given\n        SampleClass sampleClass = mock(SampleClass.class, withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS).serializable());\n        when(sampleClass.getSample().isSth()).thenReturn(STUBBED_BOOLEAN_VALUE);\n        when(sampleClass.getSample().getNumber()).thenReturn(STUBBED_INTEGER_VALUE);\n\n        // when\n        Object o = SimpleSerializationUtil.serializeAndBack(sampleClass);\n\n        // then\n        try{ assertThat(o).isInstanceOf(SampleClass.class);                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        SampleClass deserializedSample = (SampleClass) o;\n        try{ assertThat(deserializedSample.getSample().isSth()).isEqualTo(STUBBED_BOOLEAN_VALUE);           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertThat(deserializedSample.getSample().getNumber()).isEqualTo(STUBBED_INTEGER_VALUE);            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    }
+}

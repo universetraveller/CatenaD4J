@@ -1,2 +1,0 @@
-com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_1
-com.google.javascript.jscomp.ProcessCommonJSModulesTest::testGuessModuleName$catena_2

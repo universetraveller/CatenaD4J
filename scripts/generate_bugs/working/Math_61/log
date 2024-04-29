@@ -1,0 +1,92 @@
+---
+Begin generate bug_id: Math_61
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_61
+Try to checkout Math_61
+build dir: ['./working/data/Math_61/target/classes', './working/data/Math_61/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java
+trying to replace old failing tests
+edit: replace from 137 range 12 at src/test/java/org/apache/commons/math/distribution/PoissonDistributionTest.java
+to
+    public void testMean$catena_0() {
+        PoissonDistribution dist;
+        try {
+            dist = new PoissonDistributionImpl(-1);
+            fail("negative mean: NotStrictlyPositiveException expected");                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch(NotStrictlyPositiveException ex) {
+            // Expected.
+        }
+
+        dist = new PoissonDistributionImpl(10.0);
+        try{ assertEquals(10.0, dist.getMean(), 0.0);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMean$catena_1() {
+        PoissonDistribution dist;
+        try {
+            dist = new PoissonDistributionImpl(-1);
+            try{ fail("negative mean: NotStrictlyPositiveException expected");                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch(NotStrictlyPositiveException ex) {
+            // Expected.
+        }
+
+        dist = new PoissonDistributionImpl(10.0);
+        assertEquals(10.0, dist.getMean(), 0.0);                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math/distribution/PoissonDistributionTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 156.11 seconds
+Failing tests: 2
+	org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_0
+	org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 94 with range 1 to
+            throw new NotStrictlyPositiveException(LocalizedFormats.MEAN, p);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 22 with range 1 to
+import org.apache.commons.math.exception.NotStrictlyPositiveException;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 22 with range 1 to
+import org.apache.commons.math.exception.NotStrictlyPositiveException;
+
+try to fix hunk: 1
+replace from 94 with range 1 to
+            throw new NotStrictlyPositiveException(LocalizedFormats.MEAN, p);
+
+patches are written to file
+running tests...
+used time: Finished in 151.48 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_0', 'org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_0
+org.apache.commons.math.distribution.PoissonDistributionTest::testMean$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

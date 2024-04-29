@@ -1,0 +1,51 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/CommandLineRunner.java",
+            "from_line_no": 433,
+            "to_line_no": 435,
+            "replaced": "    if (flags.process_closure_primitives) {\n      options.closurePass = true;\n    }\n",
+            "patch_type": "delete",
+            "next_line_no": 436
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/CommandLineRunner.java",
+            "replaced_with": "    options.closurePass = flags.process_closure_primitives;\n",
+            "patch_type": "insert",
+            "next_line_no": 437
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CommandLineRunnerTest::testProcessClosurePrimitives"
+        ],
+        "com.google.javascript.jscomp.CommandLineRunnerTest::testProcessClosurePrimitives": {
+            "file_path": "test/com/google/javascript/jscomp/CommandLineRunnerTest.java",
+            "Instance": "Begin: Pos(154, 10)\nEnd: Pos(159, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_101/test//com/google/javascript/jscomp/CommandLineRunnerTest.java\nName: testProcessClosurePrimitives\nChilds: [StatementAssertion<Begin: Pos(155, 5), End: Pos(156, 42)>,\nStatementAssertion<Begin: Pos(158, 5), End: Pos(158, 57)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_101/test//com/google/javascript/jscomp/CommandLineRunnerTest.java",
+            "name": "testProcessClosurePrimitives",
+            "begin": "Pos(154, 10)",
+            "end": "Pos(159, 3)",
+            "begin_line_no": 154,
+            "end_line_no": 159,
+            "child": [
+                "Begin: Pos(155, 5)\nEnd: Pos(156, 42)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(158, 5)\nEnd: Pos(158, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testProcessClosurePrimitives$catena_0() {\n    test(\"var goog = {}; goog.provide('goog.dom');\",\n         \"var goog = {}; goog.dom = {};\");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    args.add(\"--process_closure_primitives=false\");\n    try{ testSame(\"var goog = {}; goog.provide('goog.dom');\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testProcessClosurePrimitives$catena_1() {\n    try{ test(\"var goog = {}; goog.provide('goog.dom');\",\n         \"var goog = {}; goog.dom = {};\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    args.add(\"--process_closure_primitives=false\");\n    testSame(\"var goog = {}; goog.provide('goog.dom');\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testProcessClosurePrimitives$catena_0() {\n    test(\"var goog = {}; goog.provide('goog.dom');\",\n         \"var goog = {}; goog.dom = {};\");                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    args.add(\"--process_closure_primitives=false\");\n    try{ testSame(\"var goog = {}; goog.provide('goog.dom');\");                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testProcessClosurePrimitives$catena_1() {\n    try{ test(\"var goog = {}; goog.provide('goog.dom');\",\n         \"var goog = {}; goog.dom = {};\");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    args.add(\"--process_closure_primitives=false\");\n    testSame(\"var goog = {}; goog.provide('goog.dom');\");                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.CommandLineRunnerTest::testProcessClosurePrimitives$catena_1"
+        ]
+    }
+}

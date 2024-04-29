@@ -1,3 +1,0 @@
-org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyCollection$catena_1
-org.mockitousage.matchers.AnyXMatchersAcceptNullsTest::shouldNotAcceptNullInAnyXMatchers$catena_4
-org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyCollection$catena_2

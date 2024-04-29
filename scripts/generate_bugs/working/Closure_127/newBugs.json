@@ -1,0 +1,130 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "from_line_no": 170,
+            "to_line_no": 170,
+            "replaced_with": "            if (nextCfgNode == fallThrough && !inFinally(n.getParent(), n)) {\n",
+            "replaced": "            if (nextCfgNode == fallThrough) {\n",
+            "patch_type": "replace",
+            "next_line_no": 171
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/UnreachableCodeElimination.java",
+            "replaced_with": "    private boolean inFinally(Node parent, Node child) {\n      if (parent == null || parent.isFunction()) {\n        return false;\n      } else if (NodeUtil.isTryFinallyNode(parent, child)) {\n        return true;\n      } else {\n        return inFinally(parent.getParent(), parent);\n      }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 177
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_return",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinally",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_continue",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinallySwitch",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428a",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428c"
+        ],
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_return": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(361, 10)\nEnd: Pos(389, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testIssue4177428_return\nChilds: [StatementAssertion<Begin: Pos(362, 5), End: Pos(388, 10)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testIssue4177428_return",
+            "begin": "Pos(361, 10)",
+            "end": "Pos(389, 3)",
+            "begin_line_no": 361,
+            "end_line_no": 389,
+            "child": [
+                "Begin: Pos(362, 5)\nEnd: Pos(388, 10)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinally": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(416, 10)\nEnd: Pos(418, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testDontRemoveBreakInTryFinally\nChilds: [StatementAssertion<Begin: Pos(417, 5), End: Pos(417, 74)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testDontRemoveBreakInTryFinally",
+            "begin": "Pos(416, 10)",
+            "end": "Pos(418, 3)",
+            "begin_line_no": 416,
+            "end_line_no": 418,
+            "child": [
+                "Begin: Pos(417, 5)\nEnd: Pos(417, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_continue": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(344, 10)\nEnd: Pos(359, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testIssue4177428_continue\nChilds: [StatementAssertion<Begin: Pos(345, 5), End: Pos(358, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testIssue4177428_continue",
+            "begin": "Pos(344, 10)",
+            "end": "Pos(359, 3)",
+            "begin_line_no": 344,
+            "end_line_no": 359,
+            "child": [
+                "Begin: Pos(345, 5)\nEnd: Pos(358, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinallySwitch": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(420, 10)\nEnd: Pos(422, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testDontRemoveBreakInTryFinallySwitch\nChilds: [StatementAssertion<Begin: Pos(421, 5), End: Pos(421, 95)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testDontRemoveBreakInTryFinallySwitch",
+            "begin": "Pos(420, 10)",
+            "end": "Pos(422, 3)",
+            "begin_line_no": 420,
+            "end_line_no": 422,
+            "child": [
+                "Begin: Pos(421, 5)\nEnd: Pos(421, 95)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428a": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(287, 10)\nEnd: Pos(302, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testIssue4177428a\nChilds: [StatementAssertion<Begin: Pos(288, 5), End: Pos(301, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testIssue4177428a",
+            "begin": "Pos(287, 10)",
+            "end": "Pos(302, 3)",
+            "begin_line_no": 287,
+            "end_line_no": 302,
+            "child": [
+                "Begin: Pos(288, 5)\nEnd: Pos(301, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428c": {
+            "file_path": "test/com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "Instance": "Begin: Pos(324, 10)\nEnd: Pos(342, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java\nName: testIssue4177428c\nChilds: [StatementAssertion<Begin: Pos(325, 5), End: Pos(341, 14)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_127/test//com/google/javascript/jscomp/UnreachableCodeEliminationTest.java",
+            "name": "testIssue4177428c",
+            "begin": "Pos(324, 10)",
+            "end": "Pos(342, 3)",
+            "begin_line_no": 324,
+            "end_line_no": 342,
+            "child": [
+                "Begin: Pos(325, 5)\nEnd: Pos(341, 14)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_return",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428c",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_continue",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinally",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinallySwitch",
+            "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428a"
+        ]
+    }
+}

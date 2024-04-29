@@ -1,0 +1,213 @@
+---
+Begin generate bug_id: Closure_84
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Closure_84
+Try to checkout Closure_84
+build dir: ['./working/data/Closure_84/build/classes', './working/data/Closure_84/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/parsing/IRFactory.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 189.91 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.parsing.ParserTest::testDestructuringAssignForbidden4
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 806 with     private boolean validAssignmentTarget(Node target) {
+      switch (target.getType()) {
+        case Token.NAME:
+        case Token.GETPROP:
+        case Token.GETELEM:
+          return true;
+      }
+      return false;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 167.46 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.parsing.ParserTest::testDestructuringAssignForbidden4
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 797 with         if (type == Token.INC || type == Token.DEC) {
+          if (!validAssignmentTarget(operand)) {
+            String msg = (type == Token.INC)
+                ? "invalid increment target"
+                : "invalid decrement target";
+            errorReporter.error(
+              msg,
+              sourceName,
+              operand.getLineno(), "", 0);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 341 with       Node target = assign.getFirstChild();
+      if (!validAssignmentTarget(target)) {
+        errorReporter.error(
+          "invalid assignment target",
+          sourceName,
+          target.getLineno(), "", 0);
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 797 with         if (type == Token.INC || type == Token.DEC) {
+          if (!validAssignmentTarget(operand)) {
+            String msg = (type == Token.INC)
+                ? "invalid increment target"
+                : "invalid decrement target";
+            errorReporter.error(
+              msg,
+              sourceName,
+              operand.getLineno(), "", 0);
+          }
+        }
+
+try to fix hunk: 2
+insert before 806 with     private boolean validAssignmentTarget(Node target) {
+      switch (target.getType()) {
+        case Token.NAME:
+        case Token.GETPROP:
+        case Token.GETELEM:
+          return true;
+      }
+      return false;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 161.88 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.parsing.ParserTest::testDestructuringAssignForbidden4
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 341 with       Node target = assign.getFirstChild();
+      if (!validAssignmentTarget(target)) {
+        errorReporter.error(
+          "invalid assignment target",
+          sourceName,
+          target.getLineno(), "", 0);
+      }
+
+try to fix hunk: 2
+insert before 806 with     private boolean validAssignmentTarget(Node target) {
+      switch (target.getType()) {
+        case Token.NAME:
+        case Token.GETPROP:
+        case Token.GETELEM:
+          return true;
+      }
+      return false;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 161.50 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.parsing.ParserTest::testDestructuringAssignForbidden4']
+select new bug
+Pattern: 101
+new failing tests:
+com.google.javascript.jscomp.parsing.ParserTest::testDestructuringAssignForbidden4
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 341 with       Node target = assign.getFirstChild();
+      if (!validAssignmentTarget(target)) {
+        errorReporter.error(
+          "invalid assignment target",
+          sourceName,
+          target.getLineno(), "", 0);
+      }
+
+try to fix hunk: 1
+insert before 797 with         if (type == Token.INC || type == Token.DEC) {
+          if (!validAssignmentTarget(operand)) {
+            String msg = (type == Token.INC)
+                ? "invalid increment target"
+                : "invalid decrement target";
+            errorReporter.error(
+              msg,
+              sourceName,
+              operand.getLineno(), "", 0);
+          }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 341 with       Node target = assign.getFirstChild();
+      if (!validAssignmentTarget(target)) {
+        errorReporter.error(
+          "invalid assignment target",
+          sourceName,
+          target.getLineno(), "", 0);
+      }
+
+try to fix hunk: 1
+insert before 797 with         if (type == Token.INC || type == Token.DEC) {
+          if (!validAssignmentTarget(operand)) {
+            String msg = (type == Token.INC)
+                ? "invalid increment target"
+                : "invalid decrement target";
+            errorReporter.error(
+              msg,
+              sourceName,
+              operand.getLineno(), "", 0);
+          }
+        }
+
+try to fix hunk: 2
+insert before 806 with     private boolean validAssignmentTarget(Node target) {
+      switch (target.getType()) {
+        case Token.NAME:
+        case Token.GETPROP:
+        case Token.GETELEM:
+          return true;
+      }
+      return false;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 166.78 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

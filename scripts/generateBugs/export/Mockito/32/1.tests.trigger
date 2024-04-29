@@ -1,1 +1,0 @@
-org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1

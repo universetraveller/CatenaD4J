@@ -1,0 +1,57 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "source/org/jfree/data/xy/XYSeries.java",
+            "replaced_with": "        if (this.allowDuplicateXValues) {\n            add(x, y);\n            return null;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 544
+        },
+        "1": {
+            "file_name": "source/org/jfree/data/xy/XYSeries.java",
+            "from_line_no": 548,
+            "to_line_no": 548,
+            "replaced_with": "        if (index >= 0) {\n",
+            "replaced": "        if (index >= 0 && !this.allowDuplicateXValues) {\n",
+            "patch_type": "replace",
+            "next_line_no": 549
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jfree.data.xy.junit.XYSeriesTests::testBug1955483"
+        ],
+        "org.jfree.data.xy.junit.XYSeriesTests::testBug1955483": {
+            "file_path": "tests/org/jfree/data/xy/junit/XYSeriesTests.java",
+            "Instance": "Begin: Pos(476, 12)\nEnd: Pos(483, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Chart_5/tests//org/jfree/data/xy/junit/XYSeriesTests.java\nName: testBug1955483\nChilds: [StatementAssertion<Begin: Pos(480, 9), End: Pos(480, 54)>,\nStatementAssertion<Begin: Pos(481, 9), End: Pos(481, 54)>,\nStatementAssertion<Begin: Pos(482, 9), End: Pos(482, 47)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Chart_5/tests//org/jfree/data/xy/junit/XYSeriesTests.java",
+            "name": "testBug1955483",
+            "begin": "Pos(476, 12)",
+            "end": "Pos(483, 5)",
+            "begin_line_no": 476,
+            "end_line_no": 483,
+            "child": [
+                "Begin: Pos(480, 9)\nEnd: Pos(480, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(481, 9)\nEnd: Pos(481, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(482, 9)\nEnd: Pos(482, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testBug1955483$catena_0() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        assertEquals(new Double(1.0), series.getY(0));                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testBug1955483$catena_1() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Double(2.0), series.getY(1));                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testBug1955483$catena_2() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(2, series.getItemCount());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testBug1955483$catena_0() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        assertEquals(new Double(1.0), series.getY(0));                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testBug1955483$catena_1() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Double(2.0), series.getY(1));                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(2, series.getItemCount());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testBug1955483$catena_2() {\n        XYSeries series = new XYSeries(\"Series\", true, true);\n        series.addOrUpdate(1.0, 1.0);\n        series.addOrUpdate(1.0, 2.0);\n        try{ assertEquals(new Double(1.0), series.getY(0));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(new Double(2.0), series.getY(1));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(2, series.getItemCount());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "10": {
+        "failing_tests": [
+            "org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_1",
+            "org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_0",
+            "org.jfree.data.xy.junit.XYSeriesTests::testBug1955483$catena_2"
+        ]
+    }
+}

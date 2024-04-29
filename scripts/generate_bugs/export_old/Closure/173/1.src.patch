@@ -1,0 +1,13 @@
+{
+    "patch": [
+        {
+            "file_name": "src/com/google/javascript/jscomp/CodeGenerator.java",
+            "from_line_no": 130,
+            "to_line_no": 135,
+            "replaced_with": "      if (NodeUtil.isAssignmentOp(n) && NodeUtil.isAssignmentOp(last)) {\n",
+            "replaced": "      if (last.getType() == type &&\n          NodeUtil.isAssociative(type)) {\n        addExpr(first, p, context);\n        cc.addOp(opstr, true);\n        addExpr(last, p, rhsContext);\n      } else if (NodeUtil.isAssignmentOp(n) && NodeUtil.isAssignmentOp(last)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 136
+        }
+    ]
+}

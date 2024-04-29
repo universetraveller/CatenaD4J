@@ -1,0 +1,125 @@
+---
+Begin generate bug_id: Chart_7
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Chart_7
+Try to checkout Chart_7
+build dir: ['./working/data/Chart_7/build', './working/data/Chart_7/build-tests']
+init FileManager
+trace file: source/org/jfree/data/time/TimePeriodValues.java
+trying to replace old failing tests
+edit: replace from 367 range 12 at tests/org/jfree/data/time/junit/TimePeriodValuesTests.java
+to
+    public void testGetMaxMiddleIndex$catena_0() {
+        TimePeriodValues s = new TimePeriodValues("Test");
+        assertEquals(-1, s.getMaxMiddleIndex());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+        try{ assertEquals(0, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetMaxMiddleIndex$catena_1() {
+        TimePeriodValues s = new TimePeriodValues("Test");
+        try{ assertEquals(-1, s.getMaxMiddleIndex());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+        assertEquals(0, s.getMaxMiddleIndex());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetMaxMiddleIndex$catena_2() {
+        TimePeriodValues s = new TimePeriodValues("Test");
+        try{ assertEquals(-1, s.getMaxMiddleIndex());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+        try{ assertEquals(0, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+        assertEquals(1, s.getMaxMiddleIndex());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetMaxMiddleIndex$catena_3() {
+        TimePeriodValues s = new TimePeriodValues("Test");
+        try{ assertEquals(-1, s.getMaxMiddleIndex());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+        try{ assertEquals(0, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+        assertEquals(1, s.getMaxMiddleIndex());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetMaxMiddleIndex$catena_4() {
+        TimePeriodValues s = new TimePeriodValues("Test");
+        try{ assertEquals(-1, s.getMaxMiddleIndex());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(100L, 200L), 1.0);
+        try{ assertEquals(0, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(300L, 400L), 2.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(0L, 50L), 3.0);
+        try{ assertEquals(1, s.getMaxMiddleIndex());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        s.add(new SimpleTimePeriod(150L, 200L), 4.0);
+        assertEquals(1, s.getMaxMiddleIndex());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: tests/org/jfree/data/time/junit/TimePeriodValuesTests.java
+new test num: 5
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 47.05 seconds
+Failing tests: 1
+	org.jfree.data.time.junit.TimePeriodValuesTests::testGetMaxMiddleIndex$catena_4
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 302 with range 1 to
+            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()
+
+patches are written to file
+running tests...
+used time: Finished in 26.57 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+org.jfree.data.time.junit.TimePeriodValuesTests::testGetMaxMiddleIndex$catena_4
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 300 with range 1 to
+            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()
+
+patches are written to file
+running tests...
+used time: Finished in 28.19 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+org.jfree.data.time.junit.TimePeriodValuesTests::testGetMaxMiddleIndex$catena_4
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 300 with range 1 to
+            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()
+
+try to fix hunk: 1
+replace from 302 with range 1 to
+            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()
+
+patches are written to file
+running tests...
+used time: Finished in 26.30 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

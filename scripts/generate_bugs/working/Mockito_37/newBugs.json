@@ -1,0 +1,62 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/org/mockito/internal/stubbing/answers/AnswersValidator.java",
+            "replaced_with": "        if (answer instanceof CallsRealMethods) {\n            validateMockingConcreteClass((CallsRealMethods) answer, invocation);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 28
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/stubbing/answers/AnswersValidator.java",
+            "replaced_with": "    private void validateMockingConcreteClass(CallsRealMethods answer, Invocation invocation) {\n        if (invocation.getMethod().getDeclaringClass().isInterface()) {\n            reporter.cannotCallRealMethodOnInterface();\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 30
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface",
+            "org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface"
+        ],
+        "org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface": {
+            "file_path": "test/org/mockito/internal/stubbing/answers/AnswersValidatorTest.java",
+            "check": [
+                "StatementExpression is in safe: <validator.validate>"
+            ],
+            "Instance": "Begin: Pos(91, 5)\nEnd: Pos(101, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_37/test//org/mockito/internal/stubbing/answers/AnswersValidatorTest.java\nName: shouldFailWhenCallingRealMethodOnIterface\nChilds: [StatementAssertion<Begin: Pos(99, 13), End: Pos(99, 19)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_37/test//org/mockito/internal/stubbing/answers/AnswersValidatorTest.java",
+            "name": "shouldFailWhenCallingRealMethodOnIterface",
+            "begin": "Pos(91, 5)",
+            "end": "Pos(101, 5)",
+            "begin_line_no": 91,
+            "end_line_no": 101,
+            "child": [
+                "Begin: Pos(99, 13)\nEnd: Pos(99, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface": {
+            "file_path": "test/org/mockitousage/spies/SpyingOnInterfacesTest.java",
+            "Instance": "Begin: Pos(21, 5)\nEnd: Pos(30, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_37/test//org/mockitousage/spies/SpyingOnInterfacesTest.java\nName: shouldFailFastWhenCallingRealMethodOnInterface\nChilds: [StatementAssertion<Begin: Pos(28, 13), End: Pos(28, 19)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_37/test//org/mockitousage/spies/SpyingOnInterfacesTest.java",
+            "name": "shouldFailFastWhenCallingRealMethodOnInterface",
+            "begin": "Pos(21, 5)",
+            "end": "Pos(30, 5)",
+            "begin_line_no": 21,
+            "end_line_no": 30,
+            "child": [
+                "Begin: Pos(28, 13)\nEnd: Pos(28, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailFastWhenCallingRealMethodOnInterface",
+            "org.mockito.internal.stubbing.answers.AnswersValidatorTest::shouldFailWhenCallingRealMethodOnIterface"
+        ]
+    }
+}

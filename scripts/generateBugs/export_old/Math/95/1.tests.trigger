@@ -1,2 +1,0 @@
-org.apache.commons.math.distribution.FDistributionTest::testSmallDegreesOfFreedom$catena_1
-org.apache.commons.math.distribution.FDistributionTest::testSmallDegreesOfFreedom$catena_0

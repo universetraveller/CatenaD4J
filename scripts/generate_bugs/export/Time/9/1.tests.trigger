@@ -1,0 +1,2 @@
+org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_10
+org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_11

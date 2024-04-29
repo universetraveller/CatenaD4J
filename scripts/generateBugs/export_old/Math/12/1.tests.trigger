@@ -1,3 +1,0 @@
-org.apache.commons.math3.distribution.LogNormalDistributionTest::testDistributionClone
-org.apache.commons.math3.distribution.GammaDistributionTest::testDistributionClone
-org.apache.commons.math3.distribution.NormalDistributionTest::testDistributionClone

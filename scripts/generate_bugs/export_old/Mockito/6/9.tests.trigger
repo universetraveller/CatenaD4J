@@ -1,0 +1,2 @@
+org.mockitousage.matchers.AnyXMatchersAcceptNullsTest::shouldNotAcceptNullInAnyXMatchers$catena_1
+org.mockitousage.matchers.MatchersTest::anyStringMatcher$catena_2

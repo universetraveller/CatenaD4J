@@ -1,0 +1,179 @@
+---
+Begin generate bug_id: Closure_56
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_56
+Try to checkout Closure_56
+build dir: ['./working/data/Closure_56/build/classes', './working/data/Closure_56/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/SourceFile.java
+trying to replace old failing tests
+edit: replace from 64 range 6 at test/com/google/javascript/jscomp/JSCompilerSourceExcerptProviderTest.java
+to
+  public void testExceptNoNewLine$catena_0() throws Exception {
+    assertEquals("foo2:first line", provider.getSourceLine("foo2", 1));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("foo2:second line", provider.getSourceLine("foo2", 2));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("foo2:third line", provider.getSourceLine("foo2", 3));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals(null, provider.getSourceLine("foo2", 4));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testExceptNoNewLine$catena_1() throws Exception {
+    try{ assertEquals("foo2:first line", provider.getSourceLine("foo2", 1));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("foo2:second line", provider.getSourceLine("foo2", 2));                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("foo2:third line", provider.getSourceLine("foo2", 3));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals(null, provider.getSourceLine("foo2", 4));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testExceptNoNewLine$catena_2() throws Exception {
+    try{ assertEquals("foo2:first line", provider.getSourceLine("foo2", 1));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("foo2:second line", provider.getSourceLine("foo2", 2));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("foo2:third line", provider.getSourceLine("foo2", 3));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(null, provider.getSourceLine("foo2", 4));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testExceptNoNewLine$catena_3() throws Exception {
+    try{ assertEquals("foo2:first line", provider.getSourceLine("foo2", 1));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("foo2:second line", provider.getSourceLine("foo2", 2));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("foo2:third line", provider.getSourceLine("foo2", 3));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(null, provider.getSourceLine("foo2", 4));                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 54 range 11 at test/com/google/javascript/jscomp/JsMessageExtractorTest.java
+to
+  public void testSyntaxError1$catena_0() {
+    try {
+      extractMessage("if (true) {}}");
+      fail("Expected exception");                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:1: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError1$catena_1() {
+    try {
+      extractMessage("if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:1: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError1$catena_2() {
+    try {
+      extractMessage("if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertTrue(e.getMessage().contains(
+          "testcode:1: ERROR - Parse error. syntax error\n"));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError1$catena_3() {
+    try {
+      extractMessage("if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:1: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertTrue(e.getMessage().contains("if (true) {}}\n"));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+  }
+edit: replace from 66 range 11 at test/com/google/javascript/jscomp/JsMessageExtractorTest.java
+to
+  public void testSyntaxError2$catena_0() {
+    try {
+      extractMessage("", "if (true) {}}");
+      fail("Expected exception");                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:2: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError2$catena_1() {
+    try {
+      extractMessage("", "if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:2: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError2$catena_2() {
+    try {
+      extractMessage("", "if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertTrue(e.getMessage().contains(
+          "testcode:2: ERROR - Parse error. syntax error\n"));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+      try{ assertTrue(e.getMessage().contains("if (true) {}}\n"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testSyntaxError2$catena_3() {
+    try {
+      extractMessage("", "if (true) {}}");
+      try{ fail("Expected exception");                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (RuntimeException e) {
+      try{ assertTrue(e.getMessage().contains("JSCompiler errors\n"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+      try{ assertTrue(e.getMessage().contains(
+          "testcode:2: ERROR - Parse error. syntax error\n"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+      assertTrue(e.getMessage().contains("if (true) {}}\n"));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+  }
+trace file: test/com/google/javascript/jscomp/JSCompilerSourceExcerptProviderTest.java
+trace file: test/com/google/javascript/jscomp/JsMessageExtractorTest.java
+new test num: 12
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 217.71 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.JSCompilerSourceExcerptProviderTest::testExceptNoNewLine$catena_2
+	com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError2$catena_3
+	com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError1$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 243 with       } else {
+        return js.substring(pos, js.length());
+      }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 242 with       if (pos >= js.length()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 242 with       if (pos >= js.length()) {
+
+try to fix hunk: 1
+insert before 243 with       } else {
+        return js.substring(pos, js.length());
+      }
+
+patches are written to file
+running tests...
+used time: Finished in 206.67 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.JSCompilerSourceExcerptProviderTest::testExceptNoNewLine$catena_2', 'com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError2$catena_3', 'com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError1$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.javascript.jscomp.JSCompilerSourceExcerptProviderTest::testExceptNoNewLine$catena_2
+com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError2$catena_3
+com.google.javascript.jscomp.JsMessageExtractorTest::testSyntaxError1$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

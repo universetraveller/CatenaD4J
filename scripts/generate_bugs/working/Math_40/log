@@ -1,0 +1,124 @@
+---
+Begin generate bug_id: Math_40
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_40
+Try to checkout Math_40
+build dir: ['./working/data/Math_40/target/classes', './working/data/Math_40/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java
+trying to replace old failing tests
+edit: replace from 84 range 14 at src/test/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolverTest.java
+to
+    @Test
+    public void testIssue716$catena_0() {
+        BracketingNthOrderBrentSolver solver =
+                new BracketingNthOrderBrentSolver(1.0e-12, 1.0e-10, 1.0e-22, 5);
+        UnivariateFunction sharpTurn = new UnivariateFunction() {
+            public double value(double x) {
+                return (2 * x + 1) / (1.0e9 * (x + 1));
+            }
+        };
+        double result = solver.solve(100, sharpTurn, -0.9999999, 30, 15, AllowedSolution.RIGHT_SIDE);
+        Assert.assertEquals(0, sharpTurn.value(result), solver.getFunctionValueAccuracy());                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertTrue(sharpTurn.value(result) >= 0);                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals(-0.5, result, 1.0e-10);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testIssue716$catena_1() {
+        BracketingNthOrderBrentSolver solver =
+                new BracketingNthOrderBrentSolver(1.0e-12, 1.0e-10, 1.0e-22, 5);
+        UnivariateFunction sharpTurn = new UnivariateFunction() {
+            public double value(double x) {
+                return (2 * x + 1) / (1.0e9 * (x + 1));
+            }
+        };
+        double result = solver.solve(100, sharpTurn, -0.9999999, 30, 15, AllowedSolution.RIGHT_SIDE);
+        try{ Assert.assertEquals(0, sharpTurn.value(result), solver.getFunctionValueAccuracy());            }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertTrue(sharpTurn.value(result) >= 0);                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals(-0.5, result, 1.0e-10);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testIssue716$catena_2() {
+        BracketingNthOrderBrentSolver solver =
+                new BracketingNthOrderBrentSolver(1.0e-12, 1.0e-10, 1.0e-22, 5);
+        UnivariateFunction sharpTurn = new UnivariateFunction() {
+            public double value(double x) {
+                return (2 * x + 1) / (1.0e9 * (x + 1));
+            }
+        };
+        double result = solver.solve(100, sharpTurn, -0.9999999, 30, 15, AllowedSolution.RIGHT_SIDE);
+        try{ Assert.assertEquals(0, sharpTurn.value(result), solver.getFunctionValueAccuracy());            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertTrue(sharpTurn.value(result) >= 0);                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals(-0.5, result, 1.0e-10);                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolverTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 81.68 seconds
+Failing tests: 3
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_0
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_1
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 238 with range 1 to
+                final int p = agingB - MAXIMAL_AGING;
+                final double weightA = p + 1;
+                final double weightB = (1 << p) - 1;
+                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);
+
+patches are written to file
+running tests...
+used time: Finished in 70.38 seconds
+Failing tests: 3
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_0
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_1
+	org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_2
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 235 with range 1 to
+                final int p = agingA - MAXIMAL_AGING;
+                final double weightA = (1 << p) - 1;
+                final double weightB = p + 1;
+                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);
+
+patches are written to file
+running tests...
+used time: Finished in 70.55 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_0
+org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_2
+org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolverTest::testIssue716$catena_1
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 235 with range 1 to
+                final int p = agingA - MAXIMAL_AGING;
+                final double weightA = (1 << p) - 1;
+                final double weightB = p + 1;
+                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);
+
+try to fix hunk: 1
+replace from 238 with range 1 to
+                final int p = agingB - MAXIMAL_AGING;
+                final double weightA = p + 1;
+                final double weightB = (1 << p) - 1;
+                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);
+
+patches are written to file
+running tests...
+used time: Finished in 72.32 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

@@ -1,1 +1,0 @@
-org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey$catena_1

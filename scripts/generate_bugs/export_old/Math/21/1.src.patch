@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/math3/linear/RectangularCholeskyDecomposition.java",
+            "from_line_no": 79,
+            "to_line_no": 79,
+            "replaced_with": "            int swapR = r;\n",
+            "replaced": "            swap[r] = r;\n",
+            "patch_type": "replace",
+            "next_line_no": 80
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/math3/linear/RectangularCholeskyDecomposition.java",
+            "from_line_no": 82,
+            "to_line_no": 84,
+            "replaced_with": "                int isr = index[swapR];\n                if (c[ii][ii] > c[isr][isr]) {\n                    swapR = i;\n",
+            "replaced": "                int isi = index[swap[i]];\n                if (c[ii][ii] > c[isi][isi]) {\n                    swap[r] = i;\n",
+            "patch_type": "replace",
+            "next_line_no": 85
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/math3/linear/RectangularCholeskyDecomposition.java",
+            "from_line_no": 90,
+            "to_line_no": 93,
+            "replaced_with": "            if (swapR != r) {\n                final int tmpIndex    = index[r];\n                index[r]              = index[swapR];\n                index[swapR]          = tmpIndex;\n                final double[] tmpRow = b[r];\n                b[r]                  = b[swapR];\n                b[swapR]              = tmpRow;\n",
+            "replaced": "            if (swap[r] != r) {\n                int tmp = index[r];\n                index[r] = index[swap[r]];\n                index[swap[r]] = tmp;\n",
+            "patch_type": "replace",
+            "next_line_no": 94
+        }
+    ]
+}

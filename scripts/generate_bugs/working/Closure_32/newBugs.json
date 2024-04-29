@@ -1,0 +1,147 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "replaced_with": "    int lineStartChar = -1;\n",
+            "patch_type": "insert",
+            "next_line_no": 1358
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "replaced_with": "            lineStartChar = stream.getCharno() + 1;\n",
+            "patch_type": "insert",
+            "next_line_no": 1364
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "replaced_with": "          lineStartChar = 0;\n",
+            "patch_type": "insert",
+            "next_line_no": 1382
+        },
+        "3": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "replaced_with": "          boolean isEOC = token == JsDocToken.EOC;\n          if (!isEOC) {\n            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {\n              int numSpaces = stream.getCharno() - lineStartChar;\n              for (int i = 0; i < numSpaces; i++) {\n                builder.append(' ');\n              }\n              lineStartChar = -1;\n            } else if (builder.length() > 0) {\n",
+            "patch_type": "insert",
+            "next_line_no": 1389
+        },
+        "4": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "replaced_with": "              builder.append(' ');\n            }\n          }\n",
+            "patch_type": "insert",
+            "next_line_no": 1390
+        },
+        "5": {
+            "file_name": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+            "from_line_no": 1414,
+            "to_line_no": 1416,
+            "replaced": "          if (builder.length() > 0) {\n            builder.append(' ');\n          }\n",
+            "patch_type": "delete",
+            "next_line_no": 1417
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.IntegrationTest::testIssue701",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii"
+        ],
+        "com.google.javascript.jscomp.IntegrationTest::testIssue701": {
+            "file_path": "test/com/google/javascript/jscomp/IntegrationTest.java",
+            "Instance": "Begin: Pos(1660, 10)\nEnd: Pos(1675, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/IntegrationTest.java\nName: testIssue701\nChilds: [StatementAssertion<Begin: Pos(1673, 5), End: Pos(1673, 45)>,\nStatementAssertion<Begin: Pos(1674, 5), End: Pos(1674, 50)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/IntegrationTest.java",
+            "name": "testIssue701",
+            "begin": "Pos(1660, 10)",
+            "end": "Pos(1675, 3)",
+            "begin_line_no": 1660,
+            "end_line_no": 1675,
+            "child": [
+                "Begin: Pos(1673, 5)\nEnd: Pos(1673, 45)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1674, 5)\nEnd: Pos(1674, 50)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testIssue701$catena_0() {\n    // Check ASCII art in license comments.\n    String ascii = \"/**\\n\" +\n        \" * @preserve\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\";\n    String result = \"/*\\n\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\\n\";\n    testSame(createCompilerOptions(), ascii);                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(result, lastCompiler.toSource());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue701$catena_1() {\n    // Check ASCII art in license comments.\n    String ascii = \"/**\\n\" +\n        \" * @preserve\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\";\n    String result = \"/*\\n\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\\n\";\n    try{ testSame(createCompilerOptions(), ascii);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(result, lastCompiler.toSource());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testIssue701$catena_0() {\n    // Check ASCII art in license comments.\n    String ascii = \"/**\\n\" +\n        \" * @preserve\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\";\n    String result = \"/*\\n\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\\n\";\n    testSame(createCompilerOptions(), ascii);                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(result, lastCompiler.toSource());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testIssue701$catena_1() {\n    // Check ASCII art in license comments.\n    String ascii = \"/**\\n\" +\n        \" * @preserve\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\";\n    String result = \"/*\\n\\n\" +\n        \"   This\\n\" +\n        \"     is\\n\" +\n        \"       ASCII    ART\\n\" +\n        \"*/\\n\";\n    try{ testSame(createCompilerOptions(), ascii);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(result, lastCompiler.toSource());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense": {
+            "file_path": "test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "Instance": "Begin: Pos(1281, 10)\nEnd: Pos(1287, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java\nName: testParseLicense\nChilds: [StatementAssertion<Begin: Pos(1285, 5), End: Pos(1285, 19)>,\nStatementAssertion<Begin: Pos(1286, 5), End: Pos(1286, 71)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "name": "testParseLicense",
+            "begin": "Pos(1281, 10)",
+            "end": "Pos(1287, 3)",
+            "begin_line_no": 1281,
+            "end_line_no": 1287,
+            "child": [
+                "Begin: Pos(1285, 5)\nEnd: Pos(1285, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1286, 5)\nEnd: Pos(1286, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testParseLicense$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\nBar\\n\\nBaz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testParseLicense$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\nBar\\n\\nBaz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testParseLicense$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\nBar\\n\\nBaz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testParseLicense$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\nBar\\n\\nBaz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve": {
+            "file_path": "test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "Instance": "Begin: Pos(1273, 10)\nEnd: Pos(1279, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java\nName: testParsePreserve\nChilds: [StatementAssertion<Begin: Pos(1277, 5), End: Pos(1277, 19)>,\nStatementAssertion<Begin: Pos(1278, 5), End: Pos(1278, 71)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "name": "testParsePreserve",
+            "begin": "Pos(1273, 10)",
+            "end": "Pos(1279, 3)",
+            "begin_line_no": 1273,
+            "end_line_no": 1279,
+            "child": [
+                "Begin: Pos(1277, 5)\nEnd: Pos(1277, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1278, 5)\nEnd: Pos(1278, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testParsePreserve$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@preserve Foo\\nBar\\n\\nBaz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testParsePreserve$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@preserve Foo\\nBar\\n\\nBaz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testParsePreserve$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@preserve Foo\\nBar\\n\\nBaz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testParsePreserve$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@preserve Foo\\nBar\\n\\nBaz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\nBar\\n\\nBaz\", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii": {
+            "file_path": "test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "Instance": "Begin: Pos(1289, 10)\nEnd: Pos(1295, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java\nName: testParseLicenseAscii\nChilds: [StatementAssertion<Begin: Pos(1293, 5), End: Pos(1293, 19)>,\nStatementAssertion<Begin: Pos(1294, 5), End: Pos(1294, 76)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_32/test//com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java",
+            "name": "testParseLicenseAscii",
+            "begin": "Pos(1289, 10)",
+            "end": "Pos(1295, 3)",
+            "begin_line_no": 1289,
+            "end_line_no": 1295,
+            "child": [
+                "Begin: Pos(1293, 5)\nEnd: Pos(1293, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1294, 5)\nEnd: Pos(1294, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testParseLicenseAscii$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\n *   Bar\\n\\n  Baz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\n   Bar\\n\\n  Baz\", node.getJSDocInfo().getLicense());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testParseLicenseAscii$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\n *   Bar\\n\\n  Baz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\n   Bar\\n\\n  Baz\", node.getJSDocInfo().getLicense());                                /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testParseLicenseAscii$catena_0() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\n *   Bar\\n\\n  Baz*/\";\n    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\" Foo\\n   Bar\\n\\n  Baz\", node.getJSDocInfo().getLicense());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testParseLicenseAscii$catena_1() throws Exception {\n    Node node = new Node(1);\n    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();\n    String comment = \"@license Foo\\n *   Bar\\n\\n  Baz*/\";\n    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\" Foo\\n   Bar\\n\\n  Baz\", node.getJSDocInfo().getLicense());                                /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "111111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1",
+            "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1"
+        ]
+    }
+}

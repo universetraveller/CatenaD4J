@@ -1,0 +1,7 @@
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_1
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_7
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_0
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_6
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_8
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_5
+com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem$catena_2

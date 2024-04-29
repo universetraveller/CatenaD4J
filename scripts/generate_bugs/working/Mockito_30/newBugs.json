@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/org/mockito/exceptions/Reporter.java",
+            "from_line_no": 438,
+            "to_line_no": 438,
+            "replaced_with": "    public void smartNullPointerException(Object obj, Location location) {\n",
+            "replaced": "    public void smartNullPointerException(Location location) {\n",
+            "patch_type": "replace",
+            "next_line_no": 439
+        },
+        "1": {
+            "file_name": "src/org/mockito/exceptions/Reporter.java",
+            "replaced_with": "                obj,\n",
+            "patch_type": "insert",
+            "next_line_no": 442
+        },
+        "2": {
+            "file_name": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java",
+            "from_line_no": 56,
+            "to_line_no": 56,
+            "replaced_with": "            new Reporter().smartNullPointerException(obj, location);\n",
+            "replaced": "            new Reporter().smartNullPointerException(location);\n",
+            "patch_type": "replace",
+            "next_line_no": 57
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage"
+        ],
+        "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage": {
+            "file_path": "test/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNullsTest.java",
+            "Instance": "Begin: Pos(60, 5)\nEnd: Pos(74, 2)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_30/test//org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNullsTest.java\nName: shouldPrintTheParametersOnSmartNullPointerExceptionMessage\nChilds: [StatementAssertion<Begin: Pos(68, 13), End: Pos(68, 19)>,\nStatementAssertion<Begin: Pos(71, 10), End: Pos(72, 45)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_30/test//org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNullsTest.java",
+            "name": "shouldPrintTheParametersOnSmartNullPointerExceptionMessage",
+            "begin": "Pos(60, 5)",
+            "end": "Pos(74, 2)",
+            "begin_line_no": 60,
+            "end_line_no": 74,
+            "child": [
+                "Begin: Pos(68, 13)\nEnd: Pos(68, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(71, 10)\nEnd: Pos(72, 45)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n\tpublic void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_0() throws Throwable {\n    \tAnswer<Object> answer = new ReturnsSmartNulls();\n\n        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, \"withArgs\", \"oompa\", \"lumpa\"));\n\n        try {\n            smartNull.get();\n            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (SmartNullPointerException ex) {\n        \tString message = ex.getMessage();\n        \ttry{ assertTrue(\"Exception message should include oompa and lumpa, but was: \" + message,\n        \t\t\tmessage.contains(\"oompa, lumpa\"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n\t}",
+                "    @Test\n\tpublic void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1() throws Throwable {\n    \tAnswer<Object> answer = new ReturnsSmartNulls();\n\n        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, \"withArgs\", \"oompa\", \"lumpa\"));\n\n        try {\n            smartNull.get();\n            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (SmartNullPointerException ex) {\n        \tString message = ex.getMessage();\n        \tassertTrue(\"Exception message should include oompa and lumpa, but was: \" + message,\n        \t\t\tmessage.contains(\"oompa, lumpa\"));                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n\t}"
+            ],
+            "func": {
+                "0": "    @Test\n\tpublic void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_0() throws Throwable {\n    \tAnswer<Object> answer = new ReturnsSmartNulls();\n\n        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, \"withArgs\", \"oompa\", \"lumpa\"));\n\n        try {\n            smartNull.get();\n            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (SmartNullPointerException ex) {\n        \tString message = ex.getMessage();\n        \ttry{ assertTrue(\"Exception message should include oompa and lumpa, but was: \" + message,\n        \t\t\tmessage.contains(\"oompa, lumpa\"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n\t}",
+                "1": "    @Test\n\tpublic void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1() throws Throwable {\n    \tAnswer<Object> answer = new ReturnsSmartNulls();\n\n        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, \"withArgs\", \"oompa\", \"lumpa\"));\n\n        try {\n            smartNull.get();\n            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (SmartNullPointerException ex) {\n        \tString message = ex.getMessage();\n        \tassertTrue(\"Exception message should include oompa and lumpa, but was: \" + message,\n        \t\t\tmessage.contains(\"oompa, lumpa\"));                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n\t}"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1"
+        ]
+    }
+}

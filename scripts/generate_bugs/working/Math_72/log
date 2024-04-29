@@ -1,0 +1,141 @@
+---
+Begin generate bug_id: Math_72
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_72
+Try to checkout Math_72
+build dir: ['./working/data/Math_72/target/classes', './working/data/Math_72/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+trying to replace old failing tests
+edit: replace from 305 range 18 at src/test/java/org/apache/commons/math/analysis/solvers/BrentSolverTest.java
+to
+    public void testRootEndpoints$catena_0() throws Exception {
+        UnivariateRealFunction f = new SinFunction();
+        UnivariateRealSolver solver = new BrentSolver();
+
+        // endpoint is root
+        double result = solver.solve(f, Math.PI, 4);
+        assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        result = solver.solve(f, 3, Math.PI);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, Math.PI, 4, 3.5);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI, 3.07);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testRootEndpoints$catena_1() throws Exception {
+        UnivariateRealFunction f = new SinFunction();
+        UnivariateRealSolver solver = new BrentSolver();
+
+        // endpoint is root
+        double result = solver.solve(f, Math.PI, 4);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI);
+        assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        result = solver.solve(f, Math.PI, 4, 3.5);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI, 3.07);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testRootEndpoints$catena_2() throws Exception {
+        UnivariateRealFunction f = new SinFunction();
+        UnivariateRealSolver solver = new BrentSolver();
+
+        // endpoint is root
+        double result = solver.solve(f, Math.PI, 4);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, Math.PI, 4, 3.5);
+        assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        result = solver.solve(f, 3, Math.PI, 3.07);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testRootEndpoints$catena_3() throws Exception {
+        UnivariateRealFunction f = new SinFunction();
+        UnivariateRealSolver solver = new BrentSolver();
+
+        // endpoint is root
+        double result = solver.solve(f, Math.PI, 4);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, Math.PI, 4, 3.5);
+        try{ assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        result = solver.solve(f, 3, Math.PI, 3.07);
+        assertEquals(Math.PI, result, solver.getAbsoluteAccuracy());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/apache/commons/math/analysis/solvers/BrentSolverTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 44.23 seconds
+Failing tests: 2
+	org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_2
+	org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 127 with range 1 to
+            setResult(max, 0);
+
+patches are written to file
+running tests...
+used time: Finished in 29.59 seconds
+Failing tests: 1
+	org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_2
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_3
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 115 with range 1 to
+            setResult(min, 0);
+
+patches are written to file
+running tests...
+used time: Finished in 30.77 seconds
+Failing tests: 1
+	org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_3
+select new bug
+Pattern: 10
+new failing tests:
+org.apache.commons.math.analysis.solvers.BrentSolverTest::testRootEndpoints$catena_2
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 115 with range 1 to
+            setResult(min, 0);
+
+try to fix hunk: 1
+replace from 127 with range 1 to
+            setResult(max, 0);
+
+patches are written to file
+running tests...
+used time: Finished in 25.11 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

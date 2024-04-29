@@ -1,0 +1,132 @@
+---
+Begin generate bug_id: Closure_172
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_172
+Try to checkout Closure_172
+build dir: ['./working/data/Closure_172/build/classes', './working/data/Closure_172/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/TypedScopeCreator.java
+trying to replace old failing tests
+edit: replace from 11992 range 30 at test/com/google/javascript/jscomp/TypeCheckTest.java
+to
+  public void testIssue1024$catena_0() throws Exception {
+     testTypes(
+        "/** @param {Object} a */\n" +
+        "function f(a) {\n" +
+        "  a.prototype = '__proto'\n" +
+        "}\n" +
+        "/** @param {Object} b\n" +
+        " *  @return {!Object}\n" +
+        " */\n" +
+        "function g(b) {\n" +
+        "  return b.prototype\n" +
+        "}\n");                                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+     /* TODO(blickly): Make this warning go away.
+      * This is old behavior, but it doesn't make sense to warn about since
+      * both assignments are inferred.
+      */
+     try{ testTypes(
+        "/** @param {Object} a */\n" +
+        "function f(a) {\n" +
+        "  a.prototype = {foo:3};\n" +
+        "}\n" +
+        "/** @param {Object} b\n" +
+        " */\n" +
+        "function g(b) {\n" +
+        "  b.prototype = function(){};\n" +
+        "}\n",
+        "assignment to property prototype of Object\n" +
+        "found   : {foo: number}\n" +
+        "required: function (): undefined");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue1024$catena_1() throws Exception {
+     try{ testTypes(
+        "/** @param {Object} a */\n" +
+        "function f(a) {\n" +
+        "  a.prototype = '__proto'\n" +
+        "}\n" +
+        "/** @param {Object} b\n" +
+        " *  @return {!Object}\n" +
+        " */\n" +
+        "function g(b) {\n" +
+        "  return b.prototype\n" +
+        "}\n");                                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+     /* TODO(blickly): Make this warning go away.
+      * This is old behavior, but it doesn't make sense to warn about since
+      * both assignments are inferred.
+      */
+     testTypes(
+        "/** @param {Object} a */\n" +
+        "function f(a) {\n" +
+        "  a.prototype = {foo:3};\n" +
+        "}\n" +
+        "/** @param {Object} b\n" +
+        " */\n" +
+        "function g(b) {\n" +
+        "  b.prototype = function(){};\n" +
+        "}\n",
+        "assignment to property prototype of Object\n" +
+        "found   : {foo: number}\n" +
+        "required: function (): undefined");                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/TypeCheckTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 312.03 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_0
+	com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 1671 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 1670 with         String className = qName.substring(0, qName.lastIndexOf(".prototype"));
+        Var slot = scope.getSlot(className);
+        JSType classType = slot == null ? null : slot.getType();
+        if (classType != null
+            && (classType.isConstructor() || classType.isInterface())) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 1670 with         String className = qName.substring(0, qName.lastIndexOf(".prototype"));
+        Var slot = scope.getSlot(className);
+        JSType classType = slot == null ? null : slot.getType();
+        if (classType != null
+            && (classType.isConstructor() || classType.isInterface())) {
+
+try to fix hunk: 1
+insert before 1671 with         }
+
+patches are written to file
+running tests...
+used time: Finished in 296.50 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_0', 'com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_0
+com.google.javascript.jscomp.TypeCheckTest::testIssue1024$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

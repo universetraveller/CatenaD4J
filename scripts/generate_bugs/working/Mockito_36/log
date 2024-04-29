@@ -1,0 +1,67 @@
+---
+Begin generate bug_id: Mockito_36
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Mockito_36
+Try to checkout Mockito_36
+build dir: ['./working/data/Mockito_36/target/classes', './working/data/Mockito_36/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/invocation/Invocation.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 2
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 109.94 seconds
+Failing tests: 2
+	org.mockito.internal.invocation.InvocationTest::shouldScreamWhenCallingRealMethodOnInterface
+	org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailInRuntimeWhenCallingRealMethodOnInterface
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 202 with         if (this.getMethod().getDeclaringClass().isInterface()) {
+            new Reporter().cannotCallRealMethodOnInterface();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 11 with import org.mockito.exceptions.Reporter;
+
+patches are written to file
+running tests...
+used time: Finished in 92.03 seconds
+Failing tests: 2
+	org.mockito.internal.invocation.InvocationTest::shouldScreamWhenCallingRealMethodOnInterface
+	org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailInRuntimeWhenCallingRealMethodOnInterface
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 11 with import org.mockito.exceptions.Reporter;
+
+try to fix hunk: 1
+insert before 202 with         if (this.getMethod().getDeclaringClass().isInterface()) {
+            new Reporter().cannotCallRealMethodOnInterface();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 98.67 seconds
+Failing tests: 0
+Can independently fix ['org.mockito.internal.invocation.InvocationTest::shouldScreamWhenCallingRealMethodOnInterface', 'org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailInRuntimeWhenCallingRealMethodOnInterface']
+select new bug
+Pattern: 11
+new failing tests:
+org.mockito.internal.invocation.InvocationTest::shouldScreamWhenCallingRealMethodOnInterface
+org.mockitousage.spies.SpyingOnInterfacesTest::shouldFailInRuntimeWhenCallingRealMethodOnInterface
+Save found bug
+processed: 11
+Find 1 new bugs

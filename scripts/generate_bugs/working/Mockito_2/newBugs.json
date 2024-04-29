@@ -1,0 +1,103 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/org/mockito/internal/util/Timer.java",
+            "replaced_with": "import org.mockito.exceptions.Reporter;\n",
+            "patch_type": "insert",
+            "next_line_no": 3
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/util/Timer.java",
+            "replaced_with": "        validateInput(durationMillis);\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        "2": {
+            "file_name": "src/org/mockito/internal/util/Timer.java",
+            "replaced_with": "    private void validateInput(long durationMillis) {\n        if (durationMillis < 0) {\n            new Reporter().cannotCreateTimerWithNegativeDurationTime(durationMillis);\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 28
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative",
+            "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method",
+            "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method"
+        ],
+        "org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative": {
+            "file_path": "test/org/mockito/internal/util/TimerTest.java",
+            "Instance": "Begin: Pos(44, 5)\nEnd: Pos(52, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/internal/util/TimerTest.java\nName: should_throw_friendly_reminder_exception_when_duration_is_negative\nChilds: [StatementAssertion<Begin: Pos(48, 13), End: Pos(48, 100)>,\nStatementAssertion<Begin: Pos(50, 13), End: Pos(50, 36)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/internal/util/TimerTest.java",
+            "name": "should_throw_friendly_reminder_exception_when_duration_is_negative",
+            "begin": "Pos(44, 5)",
+            "end": "Pos(52, 5)",
+            "begin_line_no": 44,
+            "end_line_no": 52,
+            "child": [
+                "Begin: Pos(48, 13)\nEnd: Pos(48, 100)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(50, 13)\nEnd: Pos(50, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0() {\n        try {\n            new Timer(-1);\n            Assert.fail(\"It is forbidden to create timer with negative value of timer's duration.\");         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_1() {\n        try {\n            new Timer(-1);\n            try{ Assert.fail(\"It is forbidden to create timer with negative value of timer's duration.\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0() {\n        try {\n            new Timer(-1);\n            Assert.fail(\"It is forbidden to create timer with negative value of timer's duration.\");         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void should_throw_friendly_reminder_exception_when_duration_is_negative$catena_1() {\n        try {\n            new Timer(-1);\n            try{ Assert.fail(\"It is forbidden to create timer with negative value of timer's duration.\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        },
+        "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method": {
+            "file_path": "test/org/mockito/verification/NegativeDurationTest.java",
+            "Instance": "Begin: Pos(10, 5)\nEnd: Pos(18, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/verification/NegativeDurationTest.java\nName: should_throw_exception_when_duration_is_negative_for_timeout_method\nChilds: [StatementAssertion<Begin: Pos(14, 13), End: Pos(14, 92)>,\nStatementAssertion<Begin: Pos(16, 13), End: Pos(16, 36)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/verification/NegativeDurationTest.java",
+            "name": "should_throw_exception_when_duration_is_negative_for_timeout_method",
+            "begin": "Pos(10, 5)",
+            "end": "Pos(18, 5)",
+            "begin_line_no": 10,
+            "end_line_no": 18,
+            "child": [
+                "Begin: Pos(14, 13)\nEnd: Pos(14, 92)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(16, 13)\nEnd: Pos(16, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0() {\n        try {\n            Mockito.timeout(-1);\n            Assert.fail(\"It is forbidden to invoke Mockito.timeout() with negative value.\");                /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_1() {\n        try {\n            Mockito.timeout(-1);\n            try{ Assert.fail(\"It is forbidden to invoke Mockito.timeout() with negative value.\");           }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0() {\n        try {\n            Mockito.timeout(-1);\n            Assert.fail(\"It is forbidden to invoke Mockito.timeout() with negative value.\");                /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_timeout_method$catena_1() {\n        try {\n            Mockito.timeout(-1);\n            try{ Assert.fail(\"It is forbidden to invoke Mockito.timeout() with negative value.\");           }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        },
+        "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method": {
+            "file_path": "test/org/mockito/verification/NegativeDurationTest.java",
+            "Instance": "Begin: Pos(20, 5)\nEnd: Pos(28, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/verification/NegativeDurationTest.java\nName: should_throw_exception_when_duration_is_negative_for_after_method\nChilds: [StatementAssertion<Begin: Pos(24, 13), End: Pos(24, 90)>,\nStatementAssertion<Begin: Pos(26, 13), End: Pos(26, 36)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_2/test//org/mockito/verification/NegativeDurationTest.java",
+            "name": "should_throw_exception_when_duration_is_negative_for_after_method",
+            "begin": "Pos(20, 5)",
+            "end": "Pos(28, 5)",
+            "begin_line_no": 20,
+            "end_line_no": 28,
+            "child": [
+                "Begin: Pos(24, 13)\nEnd: Pos(24, 90)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(26, 13)\nEnd: Pos(26, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_0() {\n        try {\n            Mockito.after(-1);\n            Assert.fail(\"It is forbidden to invoke Mockito.after() with negative value.\");                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_1() {\n        try {\n            Mockito.after(-1);\n            try{ Assert.fail(\"It is forbidden to invoke Mockito.after() with negative value.\");             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_0() {\n        try {\n            Mockito.after(-1);\n            Assert.fail(\"It is forbidden to invoke Mockito.after() with negative value.\");                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (FriendlyReminderException e) {\n            try{ Assert.assertTrue(true);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void should_throw_exception_when_duration_is_negative_for_after_method$catena_1() {\n        try {\n            Mockito.after(-1);\n            try{ Assert.fail(\"It is forbidden to invoke Mockito.after() with negative value.\");             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (FriendlyReminderException e) {\n            Assert.assertTrue(true);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.mockito.internal.util.TimerTest::should_throw_friendly_reminder_exception_when_duration_is_negative$catena_0",
+            "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_timeout_method$catena_0",
+            "org.mockito.verification.NegativeDurationTest::should_throw_exception_when_duration_is_negative_for_after_method$catena_0"
+        ]
+    }
+}

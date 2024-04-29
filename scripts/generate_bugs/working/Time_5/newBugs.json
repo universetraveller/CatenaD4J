@@ -1,0 +1,106 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/joda/time/Period.java",
+            "from_line_no": 1628,
+            "to_line_no": 1631,
+            "replaced_with": "            long totalMonths = years * 12L + months;\n            if (type.isSupported(DurationFieldType.YEARS_TYPE)) {\n                int normalizedYears = FieldUtils.safeToInt(totalMonths / 12);\n                result = result.withYears(normalizedYears);\n                totalMonths = totalMonths - (normalizedYears * 12);\n",
+            "replaced": "            years = FieldUtils.safeAdd(years, months / 12);\n            months = months % 12;\n            if (years != 0) {\n                result = result.withYears(years);\n",
+            "patch_type": "replace",
+            "next_line_no": 1632
+        },
+        "1": {
+            "file_name": "src/main/java/org/joda/time/Period.java",
+            "from_line_no": 1633,
+            "to_line_no": 1634,
+            "replaced_with": "            if (type.isSupported(DurationFieldType.MONTHS_TYPE)) {\n                int normalizedMonths = FieldUtils.safeToInt(totalMonths);\n                result = result.withMonths(normalizedMonths);\n                totalMonths = totalMonths - normalizedMonths;\n            }\n            if (totalMonths != 0) {\n                throw new UnsupportedOperationException(\"Unable to normalize as PeriodType is missing either years or months but period has a month/year amount: \" + toString());\n",
+            "replaced": "            if (months != 0) {\n                result = result.withMonths(months);\n",
+            "patch_type": "replace",
+            "next_line_no": 1635
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks"
+        ],
+        "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1": {
+            "file_path": "src/test/java/org/joda/time/TestPeriod_Basics.java",
+            "Instance": "Begin: Pos(1520, 12)\nEnd: Pos(1525, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java\nName: testNormalizedStandard_periodType_months1\nChilds: [StatementAssertion<Begin: Pos(1523, 9), End: Pos(1523, 64)>,\nStatementAssertion<Begin: Pos(1524, 9), End: Pos(1524, 87)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java",
+            "name": "testNormalizedStandard_periodType_months1",
+            "begin": "Pos(1520, 12)",
+            "end": "Pos(1525, 5)",
+            "begin_line_no": 1520,
+            "end_line_no": 1525,
+            "child": [
+                "Begin: Pos(1523, 9)\nEnd: Pos(1523, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1524, 9)\nEnd: Pos(1524, 87)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNormalizedStandard_periodType_months1$catena_0() {\n        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNormalizedStandard_periodType_months1$catena_1() {\n        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        try{ assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testNormalizedStandard_periodType_months1$catena_0() {\n        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testNormalizedStandard_periodType_months1$catena_1() {\n        Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        try{ assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2": {
+            "file_path": "src/test/java/org/joda/time/TestPeriod_Basics.java",
+            "Instance": "Begin: Pos(1527, 12)\nEnd: Pos(1532, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java\nName: testNormalizedStandard_periodType_months2\nChilds: [StatementAssertion<Begin: Pos(1530, 9), End: Pos(1530, 65)>,\nStatementAssertion<Begin: Pos(1531, 9), End: Pos(1531, 87)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java",
+            "name": "testNormalizedStandard_periodType_months2",
+            "begin": "Pos(1527, 12)",
+            "end": "Pos(1532, 5)",
+            "begin_line_no": 1527,
+            "end_line_no": 1532,
+            "child": [
+                "Begin: Pos(1530, 9)\nEnd: Pos(1530, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1531, 9)\nEnd: Pos(1531, 87)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNormalizedStandard_periodType_months2$catena_0() {\n        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNormalizedStandard_periodType_months2$catena_1() {\n        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        try{ assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testNormalizedStandard_periodType_months2$catena_0() {\n        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testNormalizedStandard_periodType_months2$catena_1() {\n        Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(PeriodType.months());\n        try{ assertEquals(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks": {
+            "file_path": "src/test/java/org/joda/time/TestPeriod_Basics.java",
+            "Instance": "Begin: Pos(1551, 12)\nEnd: Pos(1560, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java\nName: testNormalizedStandard_periodType_monthsWeeks\nChilds: [StatementAssertion<Begin: Pos(1558, 9), End: Pos(1558, 63)>,\nStatementAssertion<Begin: Pos(1559, 9), End: Pos(1559, 72)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_5/src/test/java//org/joda/time/TestPeriod_Basics.java",
+            "name": "testNormalizedStandard_periodType_monthsWeeks",
+            "begin": "Pos(1551, 12)",
+            "end": "Pos(1560, 5)",
+            "begin_line_no": 1551,
+            "end_line_no": 1560,
+            "child": [
+                "Begin: Pos(1558, 9)\nEnd: Pos(1558, 63)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1559, 9)\nEnd: Pos(1559, 72)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNormalizedStandard_periodType_monthsWeeks$catena_0() {\n        PeriodType type = PeriodType.forFields(new DurationFieldType[]{\n                        DurationFieldType.months(),\n                        DurationFieldType.weeks(),\n                        DurationFieldType.days()});\n        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(type);\n        assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNormalizedStandard_periodType_monthsWeeks$catena_1() {\n        PeriodType type = PeriodType.forFields(new DurationFieldType[]{\n                        DurationFieldType.months(),\n                        DurationFieldType.weeks(),\n                        DurationFieldType.days()});\n        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(type);\n        try{ assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testNormalizedStandard_periodType_monthsWeeks$catena_0() {\n        PeriodType type = PeriodType.forFields(new DurationFieldType[]{\n                        DurationFieldType.months(),\n                        DurationFieldType.weeks(),\n                        DurationFieldType.days()});\n        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(type);\n        assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testNormalizedStandard_periodType_monthsWeeks$catena_1() {\n        PeriodType type = PeriodType.forFields(new DurationFieldType[]{\n                        DurationFieldType.months(),\n                        DurationFieldType.weeks(),\n                        DurationFieldType.days()});\n        Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);\n        Period result = test.normalizedStandard(type);\n        try{ assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_1",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_0",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_0",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months2$catena_0",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_monthsWeeks$catena_1",
+            "org.joda.time.TestPeriod_Basics::testNormalizedStandard_periodType_months1$catena_1"
+        ]
+    }
+}

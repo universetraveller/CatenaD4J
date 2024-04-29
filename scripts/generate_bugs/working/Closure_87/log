@@ -1,0 +1,381 @@
+---
+Begin generate bug_id: Closure_87
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Closure_87
+Try to checkout Closure_87
+build dir: ['./working/data/Closure_87/build/classes', './working/data/Closure_87/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java
+trying to replace old failing tests
+edit: replace from 566 range 7 at test/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java
+to
+  public void testIssue291$catena_0() {
+    fold("if (true) { f.onchange(); }", "if (1) f.onchange();");                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ foldSame("if (f) { f.onchange(); }");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.bar(); } else { f.onchange(); }");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("if (f) { f.bonchange(); }", "f && f.bonchange();");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f['x'](); }");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue291$catena_1() {
+    try{ fold("if (true) { f.onchange(); }", "if (1) f.onchange();");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    foldSame("if (f) { f.onchange(); }");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ foldSame("if (f) { f.bar(); } else { f.onchange(); }");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("if (f) { f.bonchange(); }", "f && f.bonchange();");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f['x'](); }");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue291$catena_2() {
+    try{ fold("if (true) { f.onchange(); }", "if (1) f.onchange();");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.onchange(); }");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    foldSame("if (f) { f.bar(); } else { f.onchange(); }");                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ fold("if (f) { f.bonchange(); }", "f && f.bonchange();");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f['x'](); }");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue291$catena_3() {
+    try{ fold("if (true) { f.onchange(); }", "if (1) f.onchange();");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.onchange(); }");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.bar(); } else { f.onchange(); }");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    fold("if (f) { f.bonchange(); }", "f && f.bonchange();");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ foldSame("if (f) { f['x'](); }");                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue291$catena_4() {
+    try{ fold("if (true) { f.onchange(); }", "if (1) f.onchange();");                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.onchange(); }");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ foldSame("if (f) { f.bar(); } else { f.onchange(); }");                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ fold("if (f) { f.bonchange(); }", "f && f.bonchange();");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    foldSame("if (f) { f['x'](); }");                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntaxTest.java
+new test num: 5
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 176.59 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+used time: Finished in 159.37 seconds
+Failing tests: 16
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers1a
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers1
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers2
+	com.google.javascript.jscomp.PeepholeIntegrationTest::testHookIfIntegration
+	com.google.javascript.jscomp.PeepholeIntegrationTest::testFoldOneChildBlocksIntegration
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldConditionalVarDeclaration
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldReturns
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldAssignments
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldReturnResult
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testRemoveDuplicateStatements
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testSubsituteReturn
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldOneChildBlocks
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testNotCond
+Includes new failing tests, set to unusable
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+patches are written to file
+running tests...
+used time: Finished in 155.47 seconds
+Failing tests: 6
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers1a
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers1
+	com.google.javascript.jscomp.CreateSyntheticBlocksTest::testFoldWithMarkers2
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldReturns
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testFoldReturnResult
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testSubsituteReturn
+Includes new failing tests, set to unusable
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+used time: Finished in 153.42 seconds
+Failing tests: 3
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2
+	com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4
+Can independently fix []
+Could not fix independently
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 523 with         if (maybeExpr.getType() == Token.EXPR_RESULT) {
+
+try to fix hunk: 1
+insert before 529 with           if (maybeExpr.getFirstChild().getType() == Token.CALL) {
+            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+
+try to fix hunk: 2
+insert before 532 with             if (calledFn.getType() == Token.GETELEM) {
+              return false;
+            } else if (calledFn.getType() == Token.GETPROP &&
+                       calledFn.getLastChild().getString().startsWith("on")) {
+              return false;
+            }
+          }
+
+try to fix hunk: 3
+replace from 533 with range 1 to
+          return true;
+        }
+        return false;
+
+patches are written to file
+running tests...
+used time: Finished in 157.37 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2', 'com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1', 'com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4']
+select new bug
+Pattern: 1111
+new failing tests:
+com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2
+com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1
+com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4
+Save found bug
+processed: 1111
+Find 1 new bugs

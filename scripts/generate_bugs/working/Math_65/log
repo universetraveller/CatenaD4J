@@ -1,0 +1,918 @@
+---
+Begin generate bug_id: Math_65
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_65
+Try to checkout Math_65
+build dir: ['./working/data/Math_65/target/classes', './working/data/Math_65/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java
+trying to replace old failing tests
+edit: replace from 398 range 48 at src/test/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizerTest.java
+to
+    public void testCircleFitting$catena_0() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        assertTrue(optimizer.getEvaluations() < 10);                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_1() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(optimizer.getJacobianEvaluations() < 10);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_2() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                         /***** ORIGINAL ASSERTION IS HERE *****/
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_3() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_4() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(96.07590211815305, center.x,      1.0e-10);                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_5() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(48.13516790438953, center.y,      1.0e-10);                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_6() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        assertEquals(1.839, cov[0][0], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_7() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0.731, cov[0][1], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_8() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_9() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0.786, cov[1][1], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_10() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        assertEquals(1.384, errors[0], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_11() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0.905, errors[1], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_12() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        assertEquals(0.0016, cov[0][0], 0.001);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_13() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_14() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_15() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0.0016, cov[1][1], 0.001);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_16() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        assertEquals(0.004, errors[0], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0.004, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     public void testCircleFitting$catena_17() throws FunctionEvaluationException, OptimizationException {
+        Circle circle = new Circle();
+        circle.addPoint( 30.0,  68.0);
+        circle.addPoint( 50.0,  -6.0);
+        circle.addPoint(110.0, -20.0);
+        circle.addPoint( 35.0,  15.0);
+        circle.addPoint( 45.0,  97.0);
+        LevenbergMarquardtOptimizer optimizer = new LevenbergMarquardtOptimizer();
+        VectorialPointValuePair optimum =
+            optimizer.optimize(circle, new double[] { 0, 0, 0, 0, 0 }, new double[] { 1, 1, 1, 1, 1 },
+                               new double[] { 98.680, 47.345 });
+        try{ assertTrue(optimizer.getEvaluations() < 10);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(optimizer.getJacobianEvaluations() < 10);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        double rms = optimizer.getRMS();
+        try{ assertEquals(1.768262623567235,  Math.sqrt(circle.getN()) * rms,  1.0e-10);                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point2D.Double center = new Point2D.Double(optimum.getPointRef()[0], optimum.getPointRef()[1]);
+        try{ assertEquals(69.96016176931406, circle.getRadius(center), 1.0e-10);                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(96.07590211815305, center.x,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(48.13516790438953, center.y,      1.0e-10);                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[][] cov = optimizer.getCovariances();
+        try{ assertEquals(1.839, cov[0][0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.731, cov[0][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.786, cov[1][1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        double[] errors = optimizer.guessParametersErrors();
+        try{ assertEquals(1.384, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.905, errors[1], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // add perfect measurements and check errors are reduced
+        double  r = circle.getRadius(center);
+        for (double d= 0; d < 2 * Math.PI; d += 0.01) {
+            circle.addPoint(center.x + r * Math.cos(d), center.y + r * Math.sin(d));
+        }
+        double[] target = new double[circle.getN()];
+        Arrays.fill(target, 0.0);
+        double[] weights = new double[circle.getN()];
+        Arrays.fill(weights, 2.0);
+        optimizer.optimize(circle, target, weights, new double[] { 98.680, 47.345 });
+        cov = optimizer.getCovariances();
+        try{ assertEquals(0.0016, cov[0][0], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3.2e-7, cov[0][1], 1.0e-9);                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cov[0][1], cov[1][0], 1.0e-14);                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0.0016, cov[1][1], 0.001);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        errors = optimizer.guessParametersErrors();
+        try{ assertEquals(0.004, errors[0], 0.001);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0.004, errors[1], 0.001);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizerTest.java
+new test num: 18
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 41.69 seconds
+Failing tests: 2
+	org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_16
+	org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_17
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 258 with range 1 to
+            chiSquare += residual * residual * residualsWeights[i];
+
+patches are written to file
+running tests...
+used time: Finished in 27.82 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_17
+org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_16
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 240 with range 6 to
+        return Math.sqrt(getChiSquare() / rows);
+
+patches are written to file
+running tests...
+used time: Finished in 28.35 seconds
+Failing tests: 4
+	org.apache.commons.math.optimization.general.GaussNewtonOptimizerTest::testCircleFittingBadInit
+	org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_16
+	org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_17
+	org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFittingBadInit
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 240 with range 6 to
+        return Math.sqrt(getChiSquare() / rows);
+
+try to fix hunk: 1
+replace from 258 with range 1 to
+            chiSquare += residual * residual * residualsWeights[i];
+
+patches are written to file
+running tests...
+used time: Finished in 31.82 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

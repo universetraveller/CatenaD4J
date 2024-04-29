@@ -1,3 +1,0 @@
-com.google.javascript.jscomp.CodePrinterTest::testDoLoopIECompatiblity$catena_7
-com.google.javascript.jscomp.CodePrinterTest::testDoLoopIECompatiblity$catena_6
-com.google.javascript.jscomp.CodePrinterTest::testFunctionSafariCompatiblity$catena_4

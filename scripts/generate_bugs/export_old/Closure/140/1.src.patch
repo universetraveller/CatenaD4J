@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "replaced_with": "    fillEmptyModules(modules);\n",
+            "patch_type": "insert",
+            "next_line_no": 264
+        },
+        {
+            "file_name": "src/com/google/javascript/jscomp/Compiler.java",
+            "replaced_with": "  private void fillEmptyModules(JSModule[] modules) {\n    for (int i = 1; i < modules.length; i ++) {\n      JSModule module = modules[i];\n      if (module.getInputs().isEmpty()) {\n        module.add(JSSourceFile.fromCode(\"[\" + module.getName() + \"]\", \"\"));\n      }\n    }\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 328
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+---
+Begin generate bug_id: Math_42
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Math_42
+Try to checkout Math_42
+build dir: ['./working/data/Math_42/target/classes', './working/data/Math_42/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+trying to replace old failing tests
+edit: replace from 32 range 13 at src/test/java/org/apache/commons/math/optimization/linear/SimplexSolverTest.java
+to
+    @Test
+    public void testMath713NegativeVariable$catena_0() {
+        LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] {1.0, 1.0}, 0.0d);
+        ArrayList<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+        constraints.add(new LinearConstraint(new double[] {1, 0}, Relationship.EQ, 1));
+
+        double epsilon = 1e-6;
+        SimplexSolver solver = new SimplexSolver();
+        RealPointValuePair solution = solver.optimize(f, constraints, GoalType.MINIMIZE, true);
+
+        Assert.assertTrue(Precision.compareTo(solution.getPoint()[0], 0.0d, epsilon) >= 0);                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertTrue(Precision.compareTo(solution.getPoint()[1], 0.0d, epsilon) >= 0);            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMath713NegativeVariable$catena_1() {
+        LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] {1.0, 1.0}, 0.0d);
+        ArrayList<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+        constraints.add(new LinearConstraint(new double[] {1, 0}, Relationship.EQ, 1));
+
+        double epsilon = 1e-6;
+        SimplexSolver solver = new SimplexSolver();
+        RealPointValuePair solution = solver.optimize(f, constraints, GoalType.MINIMIZE, true);
+
+        try{ Assert.assertTrue(Precision.compareTo(solution.getPoint()[0], 0.0d, epsilon) >= 0);            }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertTrue(Precision.compareTo(solution.getPoint()[1], 0.0d, epsilon) >= 0);                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/math/optimization/linear/SimplexSolverTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 77.83 seconds
+Failing tests: 1
+	org.apache.commons.math.optimization.linear.SimplexSolverTest::testMath713NegativeVariable$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 413 with range 1 to
+              coefficients[i] = 0;
+          } else if (basicRows.contains(basicRow)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 410 with           if (basicRow != null && basicRow == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 410 with           if (basicRow != null && basicRow == 0) {
+
+try to fix hunk: 1
+replace from 413 with range 1 to
+              coefficients[i] = 0;
+          } else if (basicRows.contains(basicRow)) {
+
+patches are written to file
+running tests...
+used time: Finished in 70.10 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.math.optimization.linear.SimplexSolverTest::testMath713NegativeVariable$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.math.optimization.linear.SimplexSolverTest::testMath713NegativeVariable$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,74 @@
+---
+Begin generate bug_id: Closure_53
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Closure_53
+Try to checkout Closure_53
+build dir: ['./working/data/Closure_53/build/classes', './working/data/Closure_53/build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/InlineObjectLiterals.java
+trying to replace old failing tests
+edit: replace from 359 range 4 at test/com/google/javascript/jscomp/InlineObjectLiteralsTest.java
+to
+  public void testBug545$catena_0() {
+    testLocal("var a = {}", "");                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ testLocal("var a; a = {}", "true");                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testBug545$catena_1() {
+    try{ testLocal("var a = {}", "");                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    testLocal("var a; a = {}", "true");                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/InlineObjectLiteralsTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 218.80 seconds
+Failing tests: 1
+	com.google.javascript.jscomp.InlineObjectLiteralsTest::testBug545$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 350 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 331 with       if (nodes.isEmpty()) {
+        replacement = new Node(Token.TRUE);
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 331 with       if (nodes.isEmpty()) {
+        replacement = new Node(Token.TRUE);
+      } else {
+
+try to fix hunk: 1
+insert before 350 with       }
+
+patches are written to file
+running tests...
+used time: Finished in 202.38 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.InlineObjectLiteralsTest::testBug545$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.javascript.jscomp.InlineObjectLiteralsTest::testBug545$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

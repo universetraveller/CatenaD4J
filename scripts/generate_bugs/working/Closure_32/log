@@ -1,0 +1,1682 @@
+---
+Begin generate bug_id: Closure_32
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/Closure_32
+clean up: ./working/data/Closure_32
+Try to checkout Closure_32
+build dir: ['build/classes', 'build/test']
+init FileManager
+trace file: src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+trying to replace old failing tests
+edit: replace from 1660 range 16 at test/com/google/javascript/jscomp/IntegrationTest.java
+to
+  public void testIssue701$catena_0() {
+    // Check ASCII art in license comments.
+    String ascii = "/**\n" +
+        " * @preserve\n" +
+        "   This\n" +
+        "     is\n" +
+        "       ASCII    ART\n" +
+        "*/";
+    String result = "/*\n\n" +
+        "   This\n" +
+        "     is\n" +
+        "       ASCII    ART\n" +
+        "*/\n";
+    testSame(createCompilerOptions(), ascii);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(result, lastCompiler.toSource());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue701$catena_1() {
+    // Check ASCII art in license comments.
+    String ascii = "/**\n" +
+        " * @preserve\n" +
+        "   This\n" +
+        "     is\n" +
+        "       ASCII    ART\n" +
+        "*/";
+    String result = "/*\n\n" +
+        "   This\n" +
+        "     is\n" +
+        "       ASCII    ART\n" +
+        "*/\n";
+    try{ testSame(createCompilerOptions(), ascii);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(result, lastCompiler.toSource());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 1281 range 7 at test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+to
+  public void testParseLicense$catena_0() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo\nBar\n\nBaz*/";
+    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(" Foo\nBar\n\nBaz", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testParseLicense$catena_1() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo\nBar\n\nBaz*/";
+    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(" Foo\nBar\n\nBaz", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 1273 range 7 at test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+to
+  public void testParsePreserve$catena_0() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@preserve Foo\nBar\n\nBaz*/";
+    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(" Foo\nBar\n\nBaz", node.getJSDocInfo().getLicense());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testParsePreserve$catena_1() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@preserve Foo\nBar\n\nBaz*/";
+    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(" Foo\nBar\n\nBaz", node.getJSDocInfo().getLicense());                                     /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 1289 range 7 at test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+to
+  public void testParseLicenseAscii$catena_0() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo\n *   Bar\n\n  Baz*/";
+    parse(comment);                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals(" Foo\n   Bar\n\n  Baz", node.getJSDocInfo().getLicense());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testParseLicenseAscii$catena_1() throws Exception {
+    Node node = new Node(1);
+    this.fileLevelJsDocBuilder = node.getJsDocBuilderForNode();
+    String comment = "@license Foo\n *   Bar\n\n  Baz*/";
+    try{ parse(comment);                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals(" Foo\n   Bar\n\n  Baz", node.getJSDocInfo().getLicense());                                /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: test/com/google/javascript/jscomp/parsing/JsDocInfoParserTest.java
+trace file: test/com/google/javascript/jscomp/IntegrationTest.java
+new test num: 8
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 154.51 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 144.56 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+patches are written to file
+running tests...
+used time: Finished in 144.76 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+No new failing tests but only 1 hunk
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 142.38 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+patches are written to file
+running tests...
+used time: Finished in 150.95 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+patches are written to file
+running tests...
+used time: Finished in 153.81 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+used time: Finished in 148.39 seconds
+Failing tests: 22
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 158.34 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 165.93 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+patches are written to file
+running tests...
+used time: Finished in 156.11 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 162.46 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+used time: Finished in 170.50 seconds
+Failing tests: 22
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+used time: Finished in 168.42 seconds
+Failing tests: 22
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 167.54 seconds
+Failing tests: 20
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 175.56 seconds
+Failing tests: 2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+Includes new failing tests, set to unusable
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 161.29 seconds
+Failing tests: 4
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+patches are written to file
+running tests...
+used time: Finished in 177.84 seconds
+Failing tests: 22
+	com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+	com.google.javascript.jscomp.JsMessageExtractorTest::testExtractNewStyleMessage2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc10
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc12
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc6
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc7
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc8
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseDesc9
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testFileOverviewMultiLine
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseMeaning3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testRegression15
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testMultilineDocumentationParameter
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testDocumentationMultipleParameter2
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers3
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers5
+	com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseWithMarkers6
+Includes new failing tests, set to unusable
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 1358 with     int lineStartChar = -1;
+
+try to fix hunk: 1
+insert before 1364 with             lineStartChar = stream.getCharno() + 1;
+
+try to fix hunk: 2
+insert before 1382 with           lineStartChar = 0;
+
+try to fix hunk: 3
+insert before 1389 with           boolean isEOC = token == JsDocToken.EOC;
+          if (!isEOC) {
+            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
+              int numSpaces = stream.getCharno() - lineStartChar;
+              for (int i = 0; i < numSpaces; i++) {
+                builder.append(' ');
+              }
+              lineStartChar = -1;
+            } else if (builder.length() > 0) {
+
+try to fix hunk: 4
+insert before 1390 with               builder.append(' ');
+            }
+          }
+
+try to fix hunk: 5
+delete from 1414 with range 3
+patches are written to file
+running tests...
+used time: Finished in 177.65 seconds
+Failing tests: 0
+Can independently fix ['com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1', 'com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1', 'com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1', 'com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1']
+select new bug
+Pattern: 111111
+new failing tests:
+com.google.javascript.jscomp.IntegrationTest::testIssue701$catena_1
+com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParsePreserve$catena_1
+com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicense$catena_1
+com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseAscii$catena_1
+Save found bug
+processed: 111111
+Find 1 new bugs

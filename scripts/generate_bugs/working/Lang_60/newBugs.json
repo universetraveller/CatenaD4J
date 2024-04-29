@@ -1,0 +1,60 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "from_line_no": 1673,
+            "to_line_no": 1673,
+            "replaced_with": "        for (int i = 0; i < this.size; i++) {\n",
+            "replaced": "        for (int i = 0; i < thisBuf.length; i++) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1674
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "from_line_no": 1730,
+            "to_line_no": 1730,
+            "replaced_with": "        for (int i = startIndex; i < size; i++) {\n",
+            "replaced": "        for (int i = startIndex; i < thisBuf.length; i++) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1731
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.lang.text.StrBuilderTest::testLang295"
+        ],
+        "org.apache.commons.lang.text.StrBuilderTest::testLang295": {
+            "file_path": "src/test/org/apache/commons/lang/text/StrBuilderTest.java",
+            "Instance": "Begin: Pos(1745, 12)\nEnd: Pos(1750, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Lang_60/src/test//org/apache/commons/lang/text/StrBuilderTest.java\nName: testLang295\nChilds: [StatementAssertion<Begin: Pos(1748, 9), End: Pos(1748, 108)>,\nStatementAssertion<Begin: Pos(1749, 9), End: Pos(1749, 111)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Lang_60/src/test//org/apache/commons/lang/text/StrBuilderTest.java",
+            "name": "testLang295",
+            "begin": "Pos(1745, 12)",
+            "end": "Pos(1750, 5)",
+            "begin_line_no": 1745,
+            "end_line_no": 1750,
+            "child": [
+                "Begin: Pos(1748, 9)\nEnd: Pos(1748, 108)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1749, 9)\nEnd: Pos(1749, 111)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testLang295$catena_0() {\n        StrBuilder sb = new StrBuilder(\"onetwothree\");\n        sb.deleteFirst(\"three\");\n        assertFalse( \"The contains(char) method is looking beyond the end of the string\", sb.contains('h'));            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals( \"The indexOf(char) method is looking beyond the end of the string\", -1, sb.indexOf('h'));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testLang295$catena_1() {\n        StrBuilder sb = new StrBuilder(\"onetwothree\");\n        sb.deleteFirst(\"three\");\n        try{ assertFalse( \"The contains(char) method is looking beyond the end of the string\", sb.contains('h'));       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals( \"The indexOf(char) method is looking beyond the end of the string\", -1, sb.indexOf('h'));         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testLang295$catena_0() {\n        StrBuilder sb = new StrBuilder(\"onetwothree\");\n        sb.deleteFirst(\"three\");\n        assertFalse( \"The contains(char) method is looking beyond the end of the string\", sb.contains('h'));            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals( \"The indexOf(char) method is looking beyond the end of the string\", -1, sb.indexOf('h'));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testLang295$catena_1() {\n        StrBuilder sb = new StrBuilder(\"onetwothree\");\n        sb.deleteFirst(\"three\");\n        try{ assertFalse( \"The contains(char) method is looking beyond the end of the string\", sb.contains('h'));       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals( \"The indexOf(char) method is looking beyond the end of the string\", -1, sb.indexOf('h'));         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "org.apache.commons.lang.text.StrBuilderTest::testLang295$catena_1"
+        ]
+    },
+    "10": {
+        "failing_tests": [
+            "org.apache.commons.lang.text.StrBuilderTest::testLang295$catena_0"
+        ]
+    }
+}

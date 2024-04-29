@@ -1,0 +1,709 @@
+---
+Begin generate bug_id: Lang_19
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Lang_19
+Try to checkout Lang_19
+build dir: ['./working/data/Lang_19/target/classes', './working/data/Lang_19/target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+trying to replace old failing tests
+edit: replace from 37 range 8 at src/test/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaperTest.java
+to
+    public void testOutOfBounds$catena_0() {
+        NumericEntityUnescaper neu = new NumericEntityUnescaper();
+
+        assertEquals("Failed to ignore when last character is &", "Test &", neu.translate("Test &"));             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#", neu.translate("Test &#"));      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#x", neu.translate("Test &#x"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#X", neu.translate("Test &#X"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testOutOfBounds$catena_1() {
+        NumericEntityUnescaper neu = new NumericEntityUnescaper();
+
+        try{ assertEquals("Failed to ignore when last character is &", "Test &", neu.translate("Test &"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Failed to ignore when last character is &", "Test &#", neu.translate("Test &#"));           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#x", neu.translate("Test &#x"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#X", neu.translate("Test &#X"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testOutOfBounds$catena_2() {
+        NumericEntityUnescaper neu = new NumericEntityUnescaper();
+
+        try{ assertEquals("Failed to ignore when last character is &", "Test &", neu.translate("Test &"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#", neu.translate("Test &#"));      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Failed to ignore when last character is &", "Test &#x", neu.translate("Test &#x"));         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#X", neu.translate("Test &#X"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testOutOfBounds$catena_3() {
+        NumericEntityUnescaper neu = new NumericEntityUnescaper();
+
+        try{ assertEquals("Failed to ignore when last character is &", "Test &", neu.translate("Test &"));        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#", neu.translate("Test &#"));      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Failed to ignore when last character is &", "Test &#x", neu.translate("Test &#x"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Failed to ignore when last character is &", "Test &#X", neu.translate("Test &#X"));         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaperTest.java
+new test num: 4
+ori test num: 1
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 27.89 seconds
+Failing tests: 4
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 20.25 seconds
+Failing tests: 4
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+No new failing tests but only 1 hunk
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+patches are written to file
+running tests...
+used time: Finished in 20.05 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+select new bug
+Pattern: 00100
+new failing tests:
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+Save found bug
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 18.87 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+select new bug
+Pattern: 01000
+new failing tests:
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+Save found bug
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+patches are written to file
+running tests...
+used time: Finished in 21.86 seconds
+Failing tests: 3
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+select new bug
+Pattern: 10000
+new failing tests:
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Save found bug
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 18.12 seconds
+Failing tests: 4
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+Can independently fix []
+Could not fix independently
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 20.82 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 19.51 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+patches are written to file
+running tests...
+used time: Finished in 19.92 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 17.01 seconds
+Failing tests: 3
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+Can independently fix []
+Could not fix independently
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+patches are written to file
+running tests...
+used time: Finished in 21.74 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 22.93 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 19.65 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix ['org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity']
+select new bug
+Pattern: 00111
+new failing tests:
+org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Save found bug
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 20.20 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 18.09 seconds
+Failing tests: 2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 21.26 seconds
+Failing tests: 3
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_2
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_3
+Can independently fix []
+Could not fix independently
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 19.64 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 20.17 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+patches are written to file
+running tests...
+used time: Finished in 20.52 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 19.26 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testOutOfBounds$catena_1
+Can independently fix []
+Could not fix independently
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 20.18 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 18.44 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+patches are written to file
+running tests...
+used time: Finished in 18.70 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.translate.NumericEntityUnescaperTest::testUnfinishedEntity
+Can independently fix []
+Could not fix independently
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+replace from 40 with range 1 to
+        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {
+
+try to fix hunk: 1
+insert before 50 with                 if(start == seqEnd) {
+                    return 0;
+                }
+
+try to fix hunk: 2
+replace from 54 with range 1 to
+            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||
+                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||
+                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )
+
+try to fix hunk: 3
+insert before 79 with             boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');
+
+try to fix hunk: 4
+replace from 80 with range 1 to
+            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);
+
+patches are written to file
+running tests...
+used time: Finished in 21.04 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11111
+Find 4 new bugs

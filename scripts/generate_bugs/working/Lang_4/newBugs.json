@@ -1,0 +1,74 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "from_line_no": 31,
+            "to_line_no": 31,
+            "replaced_with": "    private final HashMap<String, CharSequence> lookupMap;\n",
+            "replaced": "    private final HashMap<CharSequence, CharSequence> lookupMap;\n",
+            "patch_type": "replace",
+            "next_line_no": 32
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "from_line_no": 46,
+            "to_line_no": 46,
+            "replaced_with": "        lookupMap = new HashMap<String, CharSequence>();\n",
+            "replaced": "        lookupMap = new HashMap<CharSequence, CharSequence>();\n",
+            "patch_type": "replace",
+            "next_line_no": 47
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "from_line_no": 51,
+            "to_line_no": 51,
+            "replaced_with": "                this.lookupMap.put(seq[0].toString(), seq[1]);\n",
+            "replaced": "                this.lookupMap.put(seq[0], seq[1]);\n",
+            "patch_type": "replace",
+            "next_line_no": 52
+        },
+        "3": {
+            "file_name": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "from_line_no": 77,
+            "to_line_no": 77,
+            "replaced_with": "            final CharSequence result = lookupMap.get(subSeq.toString());\n",
+            "replaced": "            final CharSequence result = lookupMap.get(subSeq);\n",
+            "patch_type": "replace",
+            "next_line_no": 78
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882"
+        ],
+        "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882": {
+            "file_path": "src/test/java/org/apache/commons/lang3/text/translate/LookupTranslatorTest.java",
+            "Instance": "Begin: Pos(43, 5)\nEnd: Pos(50, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Lang_4/src/test/java//org/apache/commons/lang3/text/translate/LookupTranslatorTest.java\nName: testLang882\nChilds: [StatementAssertion<Begin: Pos(48, 9), End: Pos(48, 67)>,\nStatementAssertion<Begin: Pos(49, 9), End: Pos(49, 63)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Lang_4/src/test/java//org/apache/commons/lang3/text/translate/LookupTranslatorTest.java",
+            "name": "testLang882",
+            "begin": "Pos(43, 5)",
+            "end": "Pos(50, 5)",
+            "begin_line_no": 43,
+            "end_line_no": 50,
+            "child": [
+                "Begin: Pos(48, 9)\nEnd: Pos(48, 67)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(49, 9)\nEnd: Pos(49, 63)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testLang882$catena_0() throws IOException {\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\"one\"), new StringBuffer(\"two\") } });\n        final StringWriter out = new StringWriter();\n        final int result = lt.translate(new StringBuffer(\"one\"), 0, out);\n        assertEquals(\"Incorrect codepoint consumption\", 3, result);                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Incorrect value\", \"two\", out.toString());                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testLang882$catena_1() throws IOException {\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\"one\"), new StringBuffer(\"two\") } });\n        final StringWriter out = new StringWriter();\n        final int result = lt.translate(new StringBuffer(\"one\"), 0, out);\n        try{ assertEquals(\"Incorrect codepoint consumption\", 3, result);                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Incorrect value\", \"two\", out.toString());                                             /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testLang882$catena_0() throws IOException {\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\"one\"), new StringBuffer(\"two\") } });\n        final StringWriter out = new StringWriter();\n        final int result = lt.translate(new StringBuffer(\"one\"), 0, out);\n        assertEquals(\"Incorrect codepoint consumption\", 3, result);                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Incorrect value\", \"two\", out.toString());                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testLang882$catena_1() throws IOException {\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\"one\"), new StringBuffer(\"two\") } });\n        final StringWriter out = new StringWriter();\n        final int result = lt.translate(new StringBuffer(\"one\"), 0, out);\n        try{ assertEquals(\"Incorrect codepoint consumption\", 3, result);                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Incorrect value\", \"two\", out.toString());                                             /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "0010": {
+        "failing_tests": [
+            "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882$catena_0",
+            "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882$catena_1"
+        ]
+    }
+}

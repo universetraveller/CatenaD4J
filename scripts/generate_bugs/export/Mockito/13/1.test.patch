@@ -1,0 +1,11 @@
+{
+    "org.mockitousage.bugs.VerifyingWithAnExtraCallToADifferentMockTest::shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine": {
+        "begin_line_no": 21,
+        "end_line_no": 35,
+        "file_path": "test/org/mockitousage/bugs/VerifyingWithAnExtraCallToADifferentMockTest.java",
+        "to": [
+            "    @Test \n    public void shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_1() {\n        //given\n        when(mock.otherMethod()).thenReturn(\"foo\");\n        \n        //when\n        mockTwo.simpleMethod(\"foo\");\n        \n        //then\n        try{ verify(mockTwo).simpleMethod(mock.otherMethod());                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try {\n            verify(mockTwo, never()).simpleMethod(mock.otherMethod());\n            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (NeverWantedButInvoked e) {}\n    }",
+            "    @Test \n    public void shouldAllowVerifyingWhenOtherMockCallIsInTheSameLine$catena_0() {\n        //given\n        when(mock.otherMethod()).thenReturn(\"foo\");\n        \n        //when\n        mockTwo.simpleMethod(\"foo\");\n        \n        //then\n        verify(mockTwo).simpleMethod(mock.otherMethod());                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try {\n            verify(mockTwo, never()).simpleMethod(mock.otherMethod());\n            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (NeverWantedButInvoked e) {}\n    }"
+        ]
+    }
+}

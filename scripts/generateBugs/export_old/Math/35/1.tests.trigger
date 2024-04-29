@@ -1,2 +1,0 @@
-org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooLow
-org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooHigh

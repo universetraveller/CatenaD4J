@@ -1,0 +1,20 @@
+{
+    "org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldVerificationWorks": {
+        "begin_line_no": 43,
+        "end_line_no": 49,
+        "file_path": "test/org/mockitousage/bugs/InheritedGenericsPolimorphicCallTest.java",
+        "to": [
+            "    @Test\n    public void shouldVerificationWorks$catena_1() {\n        iterable.iterator();\n        \n        try{ verify(iterable).iterator();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        verify((Iterable) iterable).iterator();                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n    }",
+            "    @Test\n    public void shouldVerificationWorks$catena_0() {\n        iterable.iterator();\n        \n        verify(iterable).iterator();                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ verify((Iterable) iterable).iterator();                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }"
+        ]
+    },
+    "org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldStubbingWork": {
+        "begin_line_no": 36,
+        "end_line_no": 41,
+        "file_path": "test/org/mockitousage/bugs/InheritedGenericsPolimorphicCallTest.java",
+        "to": [
+            "    @Test\n    public void shouldStubbingWork$catena_0() {\n        Mockito.when(iterable.iterator()).thenReturn(myIterator);\n        Assert.assertNotNull(((Iterable) iterable).iterator());                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ Assert.assertNotNull(iterable.iterator());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+            "    @Test\n    public void shouldStubbingWork$catena_1() {\n        Mockito.when(iterable.iterator()).thenReturn(myIterator);\n        try{ Assert.assertNotNull(((Iterable) iterable).iterator());                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        Assert.assertNotNull(iterable.iterator());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+        ]
+    }
+}

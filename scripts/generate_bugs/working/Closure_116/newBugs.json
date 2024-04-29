@@ -1,0 +1,161 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/FunctionInjector.java",
+            "replaced_with": "    boolean hasSideEffects = false;  // empty function case\n    if (block.hasChildren()) {\n      Preconditions.checkState(block.hasOneChild());\n      Node stmt = block.getFirstChild();\n      if (stmt.isReturn()) {\n        hasSideEffects = NodeUtil.mayHaveSideEffects(\n            stmt.getFirstChild(), compiler);\n      }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 697
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/FunctionInjector.java",
+            "replaced_with": "          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n            return CanInlineResult.NO;\n          }\n",
+            "patch_type": "insert",
+            "next_line_no": 723
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a",
+            "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining2",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testIssue1101",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified8",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified9",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6"
+        ],
+        "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a": {
+            "file_path": "test/com/google/javascript/jscomp/FunctionInjectorTest.java",
+            "Instance": "Begin: Pos(1346, 10)\nEnd: Pos(1350, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/FunctionInjectorTest.java\nName: testIssue1101a\nChilds: [StatementAssertion<Begin: Pos(1347, 5), End: Pos(1349, 23)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/FunctionInjectorTest.java",
+            "name": "testIssue1101a",
+            "begin": "Pos(1346, 10)",
+            "end": "Pos(1350, 3)",
+            "begin_line_no": 1346,
+            "end_line_no": 1350,
+            "child": [
+                "Begin: Pos(1347, 5)\nEnd: Pos(1349, 23)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b": {
+            "file_path": "test/com/google/javascript/jscomp/FunctionInjectorTest.java",
+            "Instance": "Begin: Pos(1352, 10)\nEnd: Pos(1356, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/FunctionInjectorTest.java\nName: testIssue1101b\nChilds: [StatementAssertion<Begin: Pos(1353, 5), End: Pos(1355, 23)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/FunctionInjectorTest.java",
+            "name": "testIssue1101b",
+            "begin": "Pos(1352, 10)",
+            "end": "Pos(1356, 3)",
+            "begin_line_no": 1352,
+            "end_line_no": 1356,
+            "child": [
+                "Begin: Pos(1353, 5)\nEnd: Pos(1355, 23)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(2062, 10)\nEnd: Pos(2098, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testBug4944818\nChilds: [StatementAssertion<Begin: Pos(2063, 5), End: Pos(2097, 13)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testBug4944818",
+            "begin": "Pos(2062, 10)",
+            "end": "Pos(2098, 3)",
+            "begin_line_no": 2062,
+            "end_line_no": 2098,
+            "child": [
+                "Begin: Pos(2063, 5)\nEnd: Pos(2097, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining2": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(1108, 10)\nEnd: Pos(1113, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testDoubleInlining2\nChilds: [StatementAssertion<Begin: Pos(1109, 5), End: Pos(1112, 27)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testDoubleInlining2",
+            "begin": "Pos(1108, 10)",
+            "end": "Pos(1113, 3)",
+            "begin_line_no": 1108,
+            "end_line_no": 1113,
+            "child": [
+                "Begin: Pos(1109, 5)\nEnd: Pos(1112, 27)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testIssue1101": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(2370, 10)\nEnd: Pos(2379, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testIssue1101\nChilds: [StatementAssertion<Begin: Pos(2371, 5), End: Pos(2378, 13)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testIssue1101",
+            "begin": "Pos(2370, 10)",
+            "end": "Pos(2379, 3)",
+            "begin_line_no": 2370,
+            "end_line_no": 2379,
+            "child": [
+                "Begin: Pos(2371, 5)\nEnd: Pos(2378, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified8": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(599, 10)\nEnd: Pos(602, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testInlineIfParametersModified8\nChilds: [StatementAssertion<Begin: Pos(601, 5), End: Pos(601, 55)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testInlineIfParametersModified8",
+            "begin": "Pos(599, 10)",
+            "end": "Pos(602, 3)",
+            "begin_line_no": 599,
+            "end_line_no": 602,
+            "child": [
+                "Begin: Pos(601, 5)\nEnd: Pos(601, 55)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified9": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(604, 10)\nEnd: Pos(607, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testInlineIfParametersModified9\nChilds: [StatementAssertion<Begin: Pos(606, 5), End: Pos(606, 57)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testInlineIfParametersModified9",
+            "begin": "Pos(604, 10)",
+            "end": "Pos(607, 3)",
+            "begin_line_no": 604,
+            "end_line_no": 607,
+            "child": [
+                "Begin: Pos(606, 5)\nEnd: Pos(606, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6": {
+            "file_path": "test/com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "Instance": "Begin: Pos(155, 10)\nEnd: Pos(164, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java\nName: testInlineFunctions6\nChilds: [StatementAssertion<Begin: Pos(157, 5), End: Pos(163, 66)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_116/test//com/google/javascript/jscomp/InlineFunctionsTest.java",
+            "name": "testInlineFunctions6",
+            "begin": "Pos(155, 10)",
+            "end": "Pos(164, 3)",
+            "begin_line_no": 155,
+            "end_line_no": 164,
+            "child": [
+                "Begin: Pos(157, 5)\nEnd: Pos(163, 66)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified8",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining2",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testIssue1101",
+            "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a",
+            "com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified9",
+            "com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b"
+        ]
+    }
+}

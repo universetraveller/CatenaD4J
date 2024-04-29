@@ -1,0 +1,113 @@
+---
+Begin generate bug_id: Mockito_33
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Mockito_33
+Try to checkout Mockito_33
+build dir: ['./working/data/Mockito_33/target/classes', './working/data/Mockito_33/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/invocation/InvocationMatcher.java
+trying to replace old failing tests
+edit: replace from 36 range 6 at test/org/mockitousage/bugs/InheritedGenericsPolimorphicCallTest.java
+to
+    @Test
+    public void shouldStubbingWork$catena_0() {
+        Mockito.when(iterable.iterator()).thenReturn(myIterator);
+        Assert.assertNotNull(((Iterable) iterable).iterator());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertNotNull(iterable.iterator());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldStubbingWork$catena_1() {
+        Mockito.when(iterable.iterator()).thenReturn(myIterator);
+        try{ Assert.assertNotNull(((Iterable) iterable).iterator());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertNotNull(iterable.iterator());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 43 range 7 at test/org/mockitousage/bugs/InheritedGenericsPolimorphicCallTest.java
+to
+    @Test
+    public void shouldVerificationWorks$catena_0() {
+        iterable.iterator();
+        
+        verify(iterable).iterator();                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ verify((Iterable) iterable).iterator();                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldVerificationWorks$catena_1() {
+        iterable.iterator();
+        
+        try{ verify(iterable).iterator();                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        verify((Iterable) iterable).iterator();                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: test/org/mockitousage/bugs/InheritedGenericsPolimorphicCallTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 120.74 seconds
+Failing tests: 2
+	org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldVerificationWorks$catena_1
+	org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldStubbingWork$catena_0
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 99 with range 1 to
+        	Class[] params1 = m1.getParameterTypes();
+        	Class[] params2 = m2.getParameterTypes();
+        	if (params1.length == params2.length) {
+        	    for (int i = 0; i < params1.length; i++) {
+        		if (params1[i] != params2[i])
+        		    return false;
+        	    }
+        	    return true;
+        	}
+        }
+        return false;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 98 with         if (m1.getName() != null && m1.getName().equals(m2.getName())) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 98 with         if (m1.getName() != null && m1.getName().equals(m2.getName())) {
+
+try to fix hunk: 1
+replace from 99 with range 1 to
+        	Class[] params1 = m1.getParameterTypes();
+        	Class[] params2 = m2.getParameterTypes();
+        	if (params1.length == params2.length) {
+        	    for (int i = 0; i < params1.length; i++) {
+        		if (params1[i] != params2[i])
+        		    return false;
+        	    }
+        	    return true;
+        	}
+        }
+        return false;
+
+patches are written to file
+running tests...
+used time: Finished in 115.08 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldVerificationWorks$catena_1', 'org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldStubbingWork$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldVerificationWorks$catena_1
+org.mockitousage.bugs.InheritedGenericsPolimorphicCallTest::shouldStubbingWork$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

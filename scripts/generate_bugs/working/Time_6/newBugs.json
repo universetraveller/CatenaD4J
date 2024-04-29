@@ -1,0 +1,120 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/joda/time/chrono/GJChronology.java",
+            "replaced_with": "            LocalDate cutoverDate = new LocalDate(cutoverInstant.getMillis(), GregorianChronology.getInstance(zone));\n            if (cutoverDate.getYear() <= 0) {\n                throw new IllegalArgumentException(\"Cutover too early. Must be on or after 0001-01-01.\");\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 196
+        },
+        "1": {
+            "file_name": "src/main/java/org/joda/time/chrono/GJChronology.java",
+            "replaced_with": "                        if (iConvertByWeekyear) {\n                            int wyear = iGregorianChronology.weekyear().get(instant);\n                            if (wyear <= 0) {\n                                instant = iGregorianChronology.weekyear().add(instant, -1);\n                            }\n                        } else {\n                            int year = iGregorianChronology.year().get(instant);\n                            if (year <= 0) {\n                                instant = iGregorianChronology.year().add(instant, -1);\n                            }\n                        }\n",
+            "patch_type": "insert",
+            "next_line_no": 979
+        },
+        "2": {
+            "file_name": "src/main/java/org/joda/time/chrono/GJChronology.java",
+            "replaced_with": "                        if (iConvertByWeekyear) {\n                            int wyear = iGregorianChronology.weekyear().get(instant);\n                            if (wyear <= 0) {\n                                instant = iGregorianChronology.weekyear().add(instant, -1);\n                            }\n                        } else {\n                            int year = iGregorianChronology.year().get(instant);\n                            if (year <= 0) {\n                                instant = iGregorianChronology.year().add(instant, -1);\n                            }\n                        }\n",
+            "patch_type": "insert",
+            "next_line_no": 1001
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.joda.time.chrono.TestGJDate::test_cutoverPreZero",
+            "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover"
+        ],
+        "org.joda.time.chrono.TestGJDate::test_cutoverPreZero": {
+            "file_path": "src/test/java/org/joda/time/chrono/TestGJDate.java",
+            "Instance": "Begin: Pos(128, 12)\nEnd: Pos(136, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java\nName: test_cutoverPreZero\nChilds: [StatementAssertion<Begin: Pos(132, 13), End: Pos(132, 19)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java",
+            "name": "test_cutoverPreZero",
+            "begin": "Pos(128, 12)",
+            "end": "Pos(136, 5)",
+            "begin_line_no": 128,
+            "end_line_no": 136,
+            "child": [
+                "Begin: Pos(132, 13)\nEnd: Pos(132, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover": {
+            "file_path": "src/test/java/org/joda/time/chrono/TestGJDate.java",
+            "Instance": "Begin: Pos(121, 12)\nEnd: Pos(125, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java\nName: test_plusWeekyears_positiveToNegative_crossCutover\nChilds: [StatementAssertion<Begin: Pos(124, 9), End: Pos(124, 65)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java",
+            "name": "test_plusWeekyears_positiveToNegative_crossCutover",
+            "begin": "Pos(121, 12)",
+            "end": "Pos(125, 5)",
+            "begin_line_no": 121,
+            "end_line_no": 125,
+            "child": [
+                "Begin: Pos(124, 9)\nEnd: Pos(124, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover": {
+            "file_path": "src/test/java/org/joda/time/chrono/TestGJDate.java",
+            "Instance": "Begin: Pos(96, 12)\nEnd: Pos(100, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java\nName: test_plusYears_positiveToZero_crossCutover\nChilds: [StatementAssertion<Begin: Pos(99, 9), End: Pos(99, 54)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java",
+            "name": "test_plusYears_positiveToZero_crossCutover",
+            "begin": "Pos(96, 12)",
+            "end": "Pos(100, 5)",
+            "begin_line_no": 96,
+            "end_line_no": 100,
+            "child": [
+                "Begin: Pos(99, 9)\nEnd: Pos(99, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover": {
+            "file_path": "src/test/java/org/joda/time/chrono/TestGJDate.java",
+            "Instance": "Begin: Pos(102, 12)\nEnd: Pos(106, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java\nName: test_plusYears_positiveToNegative_crossCutover\nChilds: [StatementAssertion<Begin: Pos(105, 9), End: Pos(105, 54)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java",
+            "name": "test_plusYears_positiveToNegative_crossCutover",
+            "begin": "Pos(102, 12)",
+            "end": "Pos(106, 5)",
+            "begin_line_no": 102,
+            "end_line_no": 106,
+            "child": [
+                "Begin: Pos(105, 9)\nEnd: Pos(105, 54)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover": {
+            "file_path": "src/test/java/org/joda/time/chrono/TestGJDate.java",
+            "Instance": "Begin: Pos(115, 12)\nEnd: Pos(119, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java\nName: test_plusWeekyears_positiveToZero_crossCutover\nChilds: [StatementAssertion<Begin: Pos(118, 9), End: Pos(118, 65)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Time_6/src/test/java//org/joda/time/chrono/TestGJDate.java",
+            "name": "test_plusWeekyears_positiveToZero_crossCutover",
+            "begin": "Pos(115, 12)",
+            "end": "Pos(119, 5)",
+            "begin_line_no": 115,
+            "end_line_no": 119,
+            "child": [
+                "Begin: Pos(118, 9)\nEnd: Pos(118, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "010": {
+        "failing_tests": [
+            "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover",
+            "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover"
+        ]
+    },
+    "100": {
+        "failing_tests": [
+            "org.joda.time.chrono.TestGJDate::test_cutoverPreZero"
+        ]
+    }
+}

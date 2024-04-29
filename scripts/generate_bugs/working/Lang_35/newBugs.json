@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+            "from_line_no": 3295,
+            "to_line_no": 3295,
+            "replaced_with": "            throw new IllegalArgumentException(\"Arguments cannot both be null\");            \n",
+            "replaced": "            type = Object.class;\n",
+            "patch_type": "replace",
+            "next_line_no": 3296
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+            "from_line_no": 3574,
+            "to_line_no": 3574,
+            "replaced_with": "            throw new IllegalArgumentException(\"Array and element cannot both be null\");            \n",
+            "replaced": "            return (T[]) new Object[] { null };\n",
+            "patch_type": "replace",
+            "next_line_no": 3575
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571"
+        ],
+        "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571": {
+            "file_path": "src/test/java/org/apache/commons/lang3/ArrayUtilsAddTest.java",
+            "Instance": "Begin: Pos(227, 12)\nEnd: Pos(244, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Lang_35/src/test/java//org/apache/commons/lang3/ArrayUtilsAddTest.java\nName: testLANG571\nChilds: [StatementAssertion<Begin: Pos(233, 13), End: Pos(233, 64)>,\nStatementAssertion<Begin: Pos(240, 13), End: Pos(240, 64)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Lang_35/src/test/java//org/apache/commons/lang3/ArrayUtilsAddTest.java",
+            "name": "testLANG571",
+            "begin": "Pos(227, 12)",
+            "end": "Pos(244, 5)",
+            "begin_line_no": 227,
+            "end_line_no": 244,
+            "child": [
+                "Begin: Pos(233, 13)\nEnd: Pos(233, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(240, 13)\nEnd: Pos(240, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testLANG571$catena_0(){\n        String[] stringArray=null;\n        String aString=null;\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, aString);\n            fail(\"Should have caused IllegalArgumentException\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, 0, aString);\n            try{ fail(\"Should have caused IllegalArgumentException\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n    }",
+                "    public void testLANG571$catena_1(){\n        String[] stringArray=null;\n        String aString=null;\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, aString);\n            try{ fail(\"Should have caused IllegalArgumentException\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, 0, aString);\n            fail(\"Should have caused IllegalArgumentException\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testLANG571$catena_0(){\n        String[] stringArray=null;\n        String aString=null;\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, aString);\n            fail(\"Should have caused IllegalArgumentException\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, 0, aString);\n            try{ fail(\"Should have caused IllegalArgumentException\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n    }",
+                "1": "    public void testLANG571$catena_1(){\n        String[] stringArray=null;\n        String aString=null;\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, aString);\n            try{ fail(\"Should have caused IllegalArgumentException\");                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n        try {\n            @SuppressWarnings(\"unused\")\n            String[] sa = ArrayUtils.add(stringArray, 0, aString);\n            fail(\"Should have caused IllegalArgumentException\");                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IllegalArgumentException iae){\n            //expected\n        }\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_0",
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571$catena_1"
+        ]
+    }
+}

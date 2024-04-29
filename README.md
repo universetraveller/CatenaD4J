@@ -34,8 +34,29 @@ Each valid bug should have a entry in bugs-registry so that the dataset knows ho
   Check [JDK 8](https://openjdk.org/projects/jdk8/) for installation.
   
 ## Set up
+### Install from Dockerfile
+* Ensure you have docker installed on your computer  
+If you have no docker cli available, check [Install Docker Engine](https://docs.docker.com/engine/install/) for installation.  
+
+* Check if curl is available
+If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
+
+* Download the Dockerfile  
+`curl https://raw.githubusercontent.com/universetraveller/CatenaD4J/main/Dockerfile -o Dockerfile`  
+You can also use other approaches to download the Dockerfile.  
+
+* Build the docker image via Dockerfile
+`docker build -t catena4j:main -f ./Dockerfile .`
+
+* Create a container with CatenaD4J using the created image  
+`docker run -it catena4j:main /bin/bash`
+
+### Install step by step manually
 * Ensure the softwares in the **Requirements** section are all installed.  
   
+* Clone the repository
+`git clone https://github.com/universetraveller/CatenaD4J.git`  
+
 * Add executable script **catena4j** to environment variable **PATH**:  
 `export PATH=$PATH:<path to this repo>`  
 
@@ -111,14 +132,14 @@ Every loader should implement function `load`, `fix` and `get_attr` (Arguments c
 Catena4J use [DefaultPathLoader](internal/default_loader.py) as default loader. It loads bugs' infomation via specific formatted paths. By creating these specific files and adding a new entry into bugs-registry assigning loader to default, we can create a new active bug.
 ## Reproduce experiments  
 Folder `scripts` contains all experiment codes to construct this dataset.  
-1. [constructDataBase](scripts/constructDataBase) contains scripts to prepare required data for following steps.  
-2. [analyzeTests](scripts/analyzeTests) contains scripts to collect all possible identifiers of assertion statements for spliting tests.  
-3. [splitTests](scripts/splitTests) is to generate new failing tests code to make sure the failing tests contain only single assertion statement.  
-4. [parsePatches](scripts/parsePatches) is to identify hunks to fix automatically.  
-5. [generateBugs](scripts/generateBugs) contains an implementation of bug isolation algorithm to generate isolated bugs from existing bugs.  
+1. [construct\_database](scripts/construct_database) contains scripts to prepare required data for following steps.  
+2. [analyze\_tests](scripts/analyze_tests) contains scripts to collect all possible identifiers of assertion statements for spliting tests.  
+3. [split\_tests](scripts/split_tests) is to generate new failing tests code to make sure the failing tests contain only single assertion statement.  
+4. [parse\_patches](scripts/parse_patches) is to identify hunks to fix automatically.  
+5. [generate\_bugs](scripts/generate_bugs) contains an implementation of bug isolation algorithm to generate isolated bugs from existing bugs.  
 
 ## Statistics
-Check [here](scripts/generateBugs/statstics) for the statistics of current bugs
+Check [here](scripts/generate_bugs/statstics) for the statistics of current bugs
 
 ## Development Plan
 The current version is available. We will try to make this dataset more concrete and add some features in the future.   

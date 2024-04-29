@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/joda/time/chrono/GJChronology.java",
+            "replaced_with": "        try {\n",
+            "patch_type": "insert",
+            "next_line_no": 364
+        },
+        {
+            "file_name": "src/main/java/org/joda/time/chrono/GJChronology.java",
+            "replaced_with": "        } catch (IllegalFieldValueException ex) {\n            if (monthOfYear != 2 || dayOfMonth != 29) {\n                throw ex;\n            }\n            instant = iGregorianChronology.getDateTimeMillis\n                (year, monthOfYear, 28,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw ex;\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 367
+        }
+    ]
+}

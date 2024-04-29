@@ -1,0 +1,74 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+            "from_line_no": 613,
+            "to_line_no": 613,
+            "replaced_with": "        if (resultEqualsValue) {\n",
+            "replaced": "        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n",
+            "patch_type": "replace",
+            "next_line_no": 614
+        },
+        "1": {
+            "file_name": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+            "replaced_with": "          return ctorType.getGreatestSubtype(type);\n        } else {\n",
+            "patch_type": "insert",
+            "next_line_no": 615
+        },
+        "2": {
+            "file_name": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+            "replaced_with": "          return type.isSubtype(ctorType) ? null : type;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 616
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunction2",
+            "com.google.javascript.jscomp.SemanticReverseAbstractInterpreterTest::testTypeof3"
+        ],
+        "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunction2": {
+            "file_path": "test/com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "check": [
+                "Use pattern matching: .testClosureFunction"
+            ],
+            "Instance": "Begin: Pos(120, 10)\nEnd: Pos(125, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_7/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java\nName: testGoogIsFunction2\nChilds: [StatementAssertion<Begin: Pos(121, 5), End: Pos(124, 38)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_7/test//com/google/javascript/jscomp/ClosureReverseAbstractInterpreterTest.java",
+            "name": "testGoogIsFunction2",
+            "begin": "Pos(120, 10)",
+            "end": "Pos(125, 3)",
+            "begin_line_no": 120,
+            "end_line_no": 125,
+            "child": [
+                "Begin: Pos(121, 5)\nEnd: Pos(124, 38)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.google.javascript.jscomp.SemanticReverseAbstractInterpreterTest::testTypeof3": {
+            "file_path": "test/com/google/javascript/jscomp/SemanticReverseAbstractInterpreterTest.java",
+            "check": [
+                "Use pattern matching: .testBinop"
+            ],
+            "Instance": "Begin: Pos(462, 3)\nEnd: Pos(474, 3)\nSource: /root/workbench/exportInfo/d4j_buggy/Closure_7/test//com/google/javascript/jscomp/SemanticReverseAbstractInterpreterTest.java\nName: testTypeof3\nChilds: [StatementAssertion<Begin: Pos(465, 5), End: Pos(473, 63)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Closure_7/test//com/google/javascript/jscomp/SemanticReverseAbstractInterpreterTest.java",
+            "name": "testTypeof3",
+            "begin": "Pos(462, 3)",
+            "end": "Pos(474, 3)",
+            "begin_line_no": 462,
+            "end_line_no": 474,
+            "child": [
+                "Begin: Pos(465, 5)\nEnd: Pos(473, 63)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "com.google.javascript.jscomp.SemanticReverseAbstractInterpreterTest::testTypeof3",
+            "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunction2"
+        ]
+    }
+}

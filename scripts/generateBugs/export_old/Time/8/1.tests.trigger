@@ -1,1 +1,0 @@
-org.joda.time.TestDateTimeZone::testForOffsetHoursMinutes_int_int$catena_7

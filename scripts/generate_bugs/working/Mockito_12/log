@@ -1,0 +1,544 @@
+---
+Begin generate bug_id: Mockito_12
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Mockito_12
+Try to checkout Mockito_12
+build dir: ['./working/data/Mockito_12/target/classes', './working/data/Mockito_12/target/test-classes']
+init FileManager
+trace file: src/org/mockito/internal/util/reflection/GenericMaster.java
+trying to replace old failing tests
+edit: replace from 36 range 5 at test/org/mockito/internal/util/reflection/GenericMasterTest.java
+to
+    @Test
+    public void shouldDealWithNestedGenerics$catena_0() throws Exception {
+        assertEquals(Set.class, m.getGenericType(field("nested")));                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Set.class, m.getGenericType(field("multiNested")));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldDealWithNestedGenerics$catena_1() throws Exception {
+        try{ assertEquals(Set.class, m.getGenericType(field("nested")));                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Set.class, m.getGenericType(field("multiNested")));                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 64 range 10 at test/org/mockitousage/annotation/CaptorAnnotationBasicTest.java
+to
+    @Test
+    public void shouldUseAnnotatedCaptor$catena_0() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        verify(peopleRepository).save(captor.capture());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wes", captor.getValue().getName());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Williams", captor.getValue().getSurname());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldUseAnnotatedCaptor$catena_1() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        try{ verify(peopleRepository).save(captor.capture());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wes", captor.getValue().getName());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Williams", captor.getValue().getSurname());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldUseAnnotatedCaptor$catena_2() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        try{ verify(peopleRepository).save(captor.capture());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wes", captor.getValue().getName());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Williams", captor.getValue().getSurname());                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 50 range 11 at test/org/mockitousage/annotation/CaptorAnnotationBasicTest.java
+to
+    @Test
+    public void shouldUseCaptorInOrdinaryWay$catena_0() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        ArgumentCaptor<Person> captor = ArgumentCaptor.forClass(Person.class);
+        verify(peopleRepository).save(captor.capture());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wes", captor.getValue().getName());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Williams", captor.getValue().getSurname());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldUseCaptorInOrdinaryWay$catena_1() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        ArgumentCaptor<Person> captor = ArgumentCaptor.forClass(Person.class);
+        try{ verify(peopleRepository).save(captor.capture());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wes", captor.getValue().getName());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Williams", captor.getValue().getSurname());                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldUseCaptorInOrdinaryWay$catena_2() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        ArgumentCaptor<Person> captor = ArgumentCaptor.forClass(Person.class);
+        try{ verify(peopleRepository).save(captor.capture());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wes", captor.getValue().getName());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Williams", captor.getValue().getSurname());                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 91 range 12 at test/org/mockitousage/annotation/CaptorAnnotationBasicTest.java
+to
+    @Test
+    public void shouldCaptureGenericList$catena_0() {
+        //given
+        List<String> list = new LinkedList<String>();
+        mock.listArgMethod(list);
+                
+        //when
+        verify(mock).listArgMethod(genericListCaptor.capture());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        //then
+        try{ assertSame(list, genericListCaptor.getValue());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }      @Test
+    public void shouldCaptureGenericList$catena_1() {
+        //given
+        List<String> list = new LinkedList<String>();
+        mock.listArgMethod(list);
+                
+        //when
+        try{ verify(mock).listArgMethod(genericListCaptor.capture());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        //then
+        assertSame(list, genericListCaptor.getValue());                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    } 
+edit: replace from 77 range 10 at test/org/mockitousage/annotation/CaptorAnnotationBasicTest.java
+to
+    @Test
+    public void shouldUseGenericlessAnnotatedCaptor$catena_0() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        verify(peopleRepository).save((Person) genericLessCaptor.capture());                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wes", ((Person) genericLessCaptor.getValue()).getName());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Williams", ((Person) genericLessCaptor.getValue()).getSurname());                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }       @Test
+    public void shouldUseGenericlessAnnotatedCaptor$catena_1() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        try{ verify(peopleRepository).save((Person) genericLessCaptor.capture());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wes", ((Person) genericLessCaptor.getValue()).getName());                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Williams", ((Person) genericLessCaptor.getValue()).getSurname());                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }       @Test
+    public void shouldUseGenericlessAnnotatedCaptor$catena_2() {
+        //when
+        createPerson("Wes", "Williams");
+        
+        //then
+        try{ verify(peopleRepository).save((Person) genericLessCaptor.capture());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wes", ((Person) genericLessCaptor.getValue()).getName());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Williams", ((Person) genericLessCaptor.getValue()).getSurname());                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }  
+edit: replace from 49 range 23 at test/org/mockitousage/annotation/CaptorAnnotationTest.java
+to
+    @Test
+    public void testNormalUsage$catena_0() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        assertNotNull(finalCaptor);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_1() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(genericsCaptor);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_2() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(nonGenericCaptorIsAllowed);                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_3() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNull(notAMock);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_4() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                      /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_5() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_6() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals(argForFinalCaptor, finalCaptor.getValue());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test
+    public void testNormalUsage$catena_7() {
+
+        MockitoAnnotations.initMocks(this);
+
+        // check if assigned correctly
+        try{ assertNotNull(finalCaptor);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(genericsCaptor);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(nonGenericCaptorIsAllowed);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(notAMock);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // use captors in the field to be sure they are cool
+        String argForFinalCaptor = "Hello";
+        ArrayList<List<String>> argForGenericsCaptor = new ArrayList<List<String>>();
+
+        try{ mockInterface.testMe(argForFinalCaptor, argForGenericsCaptor);                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ Mockito.verify(mockInterface).testMe(finalCaptor.capture(), genericsCaptor.capture());         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(argForFinalCaptor, finalCaptor.getValue());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(argForGenericsCaptor, genericsCaptor.getValue());                                      /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+edit: replace from 92 range 10 at test/org/mockitousage/annotation/CaptorAnnotationTest.java
+to
+    @Test
+    public void shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_0() {
+        try {
+            MockitoAnnotations.initMocks(new ToManyAnnotations());
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (MockitoException e) {
+            try{ assertContains("missingGenericsField", e.getMessage());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertContains("multiple Mockito annotations", e.getMessage());                }catch(Throwable __SHOULD_BE_IGNORED){}            
+        }
+    }     @Test
+    public void shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_1() {
+        try {
+            MockitoAnnotations.initMocks(new ToManyAnnotations());
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            assertContains("missingGenericsField", e.getMessage());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertContains("multiple Mockito annotations", e.getMessage());                }catch(Throwable __SHOULD_BE_IGNORED){}            
+        }
+    }     @Test
+    public void shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_2() {
+        try {
+            MockitoAnnotations.initMocks(new ToManyAnnotations());
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MockitoException e) {
+            try{ assertContains("missingGenericsField", e.getMessage());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertContains("multiple Mockito annotations", e.getMessage());                     /***** ORIGINAL ASSERTION IS HERE *****/            
+        }
+    }
+edit: replace from 112 range 9 at test/org/mockitousage/annotation/CaptorAnnotationTest.java
+to
+    @Test
+    public void shouldLookForAnnotatedCaptorsInSuperClasses$catena_0() throws Exception {
+        Sub sub = new Sub();
+        MockitoAnnotations.initMocks(sub);
+
+        assertNotNull(sub.getCaptor());                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(sub.getBaseCaptor());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(sub.getSuperBaseCaptor());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldLookForAnnotatedCaptorsInSuperClasses$catena_1() throws Exception {
+        Sub sub = new Sub();
+        MockitoAnnotations.initMocks(sub);
+
+        try{ assertNotNull(sub.getCaptor());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(sub.getBaseCaptor());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(sub.getSuperBaseCaptor());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldLookForAnnotatedCaptorsInSuperClasses$catena_2() throws Exception {
+        Sub sub = new Sub();
+        MockitoAnnotations.initMocks(sub);
+
+        try{ assertNotNull(sub.getCaptor());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(sub.getBaseCaptor());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(sub.getSuperBaseCaptor());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: test/org/mockitousage/annotation/CaptorAnnotationTest.java
+trace file: test/org/mockitousage/annotation/CaptorAnnotationBasicTest.java
+trace file: test/org/mockito/internal/util/reflection/GenericMasterTest.java
+new test num: 27
+ori test num: 2
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 106.07 seconds
+Failing tests: 29
+	org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_0
+	org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_1
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_0
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_1
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_2
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_0
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_1
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_2
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_0
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_1
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_0
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_1
+	org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_2
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenWrongTypeForCaptor
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_0
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_1
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_2
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_3
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_4
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_5
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_6
+	org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_7
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_0
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_1
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_2
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenInitializingCaptorsForNullClass
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_0
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_1
+	org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_2
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 22 with                 return (Class) ((ParameterizedType) actual).getRawType();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 21 with             } else if (actual instanceof ParameterizedType) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 20 with             if (actual instanceof Class) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 21 with             } else if (actual instanceof ParameterizedType) {
+
+try to fix hunk: 2
+insert before 22 with                 return (Class) ((ParameterizedType) actual).getRawType();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 20 with             if (actual instanceof Class) {
+
+try to fix hunk: 2
+insert before 22 with                 return (Class) ((ParameterizedType) actual).getRawType();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 20 with             if (actual instanceof Class) {
+
+try to fix hunk: 1
+insert before 21 with             } else if (actual instanceof ParameterizedType) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 20 with             if (actual instanceof Class) {
+
+try to fix hunk: 1
+insert before 21 with             } else if (actual instanceof ParameterizedType) {
+
+try to fix hunk: 2
+insert before 22 with                 return (Class) ((ParameterizedType) actual).getRawType();
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 114.62 seconds
+Failing tests: 0
+Can independently fix ['org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_1', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenWrongTypeForCaptor', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_2', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_6', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_2', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_1', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_0', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_0', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_0', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_2', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_1', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_1', 'org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_1', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_2', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_5', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_1', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenInitializingCaptorsForNullClass', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_4', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_2', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_2', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_0', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_3', 'org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_0', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_1', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_0', 'org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_7', 'org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_1', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_0', 'org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_0']
+select new bug
+Pattern: 111
+new failing tests:
+org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_1
+org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenWrongTypeForCaptor
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_2
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_6
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_2
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_1
+org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_0
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_0
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_0
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_2
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_1
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_1
+org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_1
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_2
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_5
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseAnnotatedCaptor$catena_1
+org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenInitializingCaptorsForNullClass
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_4
+org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_2
+org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_2
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseGenericlessAnnotatedCaptor$catena_0
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_3
+org.mockito.internal.util.reflection.GenericMasterTest::shouldDealWithNestedGenerics$catena_0
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_1
+org.mockitousage.annotation.CaptorAnnotationTest::shouldLookForAnnotatedCaptorsInSuperClasses$catena_0
+org.mockitousage.annotation.CaptorAnnotationTest::testNormalUsage$catena_7
+org.mockitousage.annotation.CaptorAnnotationTest::shouldScreamWhenMoreThanOneMockitoAnnotaton$catena_1
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldUseCaptorInOrdinaryWay$catena_0
+org.mockitousage.annotation.CaptorAnnotationBasicTest::shouldCaptureGenericList$catena_0
+Save found bug
+processed: 111
+Find 1 new bugs

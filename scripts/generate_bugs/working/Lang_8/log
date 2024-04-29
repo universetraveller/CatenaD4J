@@ -1,0 +1,159 @@
+---
+Begin generate bug_id: Lang_8
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Lang_8
+Try to checkout Lang_8
+build dir: ['./working/data/Lang_8/target/classes', './working/data/Lang_8/target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java
+trying to replace old failing tests
+NOTICE: skip org.apache.commons.lang3.time.FastDateFormat_PrinterTest::testCalendarTimezoneRespected for cannot find node in method_base
+edit: replace from 265 range 23 at src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java
+to
+    @Test
+    public void testCalendarTimezoneRespected$catena_0() {
+        String[] availableZones = TimeZone.getAvailableIDs();
+        TimeZone currentZone = TimeZone.getDefault();
+        
+        TimeZone anotherZone = null;
+        for (String zone : availableZones) {
+            if (!zone.equals(currentZone.getID())) {
+                anotherZone = TimeZone.getTimeZone(zone);
+            }
+        }
+        
+        assertNotNull("Cannot find another timezone", anotherZone);                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        final String pattern = "h:mma z";
+        final Calendar cal = Calendar.getInstance(anotherZone);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        sdf.setTimeZone(anotherZone);
+        String expectedValue = sdf.format(cal.getTime());
+        String actualValue = FastDateFormat.getInstance(pattern).format(cal);
+        try{ assertEquals(expectedValue, actualValue);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testCalendarTimezoneRespected$catena_1() {
+        String[] availableZones = TimeZone.getAvailableIDs();
+        TimeZone currentZone = TimeZone.getDefault();
+        
+        TimeZone anotherZone = null;
+        for (String zone : availableZones) {
+            if (!zone.equals(currentZone.getID())) {
+                anotherZone = TimeZone.getTimeZone(zone);
+            }
+        }
+        
+        try{ assertNotNull("Cannot find another timezone", anotherZone);                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        final String pattern = "h:mma z";
+        final Calendar cal = Calendar.getInstance(anotherZone);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        sdf.setTimeZone(anotherZone);
+        String expectedValue = sdf.format(cal.getTime());
+        String actualValue = FastDateFormat.getInstance(pattern).format(cal);
+        assertEquals(expectedValue, actualValue);                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/lang3/time/FastDatePrinterTest.java
+new test num: 2
+ori test num: 1
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 42.09 seconds
+Failing tests: 2
+	org.apache.commons.lang3.time.FastDateFormat_PrinterTest::testCalendarTimezoneRespected$catena_1
+	org.apache.commons.lang3.time.FastDatePrinterTest::testCalendarTimezoneRespected$catena_1
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 1134 with             TimeZone zone = calendar.getTimeZone();
+
+patches are written to file
+running tests...
+used time: Finished in 34.07 seconds
+Failing tests: 0
+select new bug
+Pattern: 001
+new failing tests:
+org.apache.commons.lang3.time.FastDateFormat_PrinterTest::testCalendarTimezoneRespected$catena_1
+org.apache.commons.lang3.time.FastDatePrinterTest::testCalendarTimezoneRespected$catena_1
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+delete from 1112 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+delete from 1098 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+delete from 1112 with range 1
+try to fix hunk: 2
+insert before 1134 with             TimeZone zone = calendar.getTimeZone();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+delete from 1098 with range 1
+try to fix hunk: 2
+insert before 1134 with             TimeZone zone = calendar.getTimeZone();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+delete from 1098 with range 1
+try to fix hunk: 1
+delete from 1112 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+delete from 1098 with range 1
+try to fix hunk: 1
+delete from 1112 with range 1
+try to fix hunk: 2
+insert before 1134 with             TimeZone zone = calendar.getTimeZone();
+
+patches are written to file
+running tests...
+used time: Finished in 33.97 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

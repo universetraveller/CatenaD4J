@@ -1,0 +1,158 @@
+---
+Begin generate bug_id: Mockito_30
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Mockito_30
+Try to checkout Mockito_30
+build dir: ['./working/data/Mockito_30/target/classes', './working/data/Mockito_30/target/test-classes']
+init FileManager
+trace file: src/org/mockito/exceptions/Reporter.java
+trace file: src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java
+trying to replace old failing tests
+edit: replace from 60 range 15 at test/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNullsTest.java
+to
+    @Test
+	public void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_0() throws Throwable {
+    	Answer<Object> answer = new ReturnsSmartNulls();
+
+        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, "withArgs", "oompa", "lumpa"));
+
+        try {
+            smartNull.get();
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (SmartNullPointerException ex) {
+        	String message = ex.getMessage();
+        	try{ assertTrue("Exception message should include oompa and lumpa, but was: " + message,
+        			message.contains("oompa, lumpa"));                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+	}     @Test
+	public void shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1() throws Throwable {
+    	Answer<Object> answer = new ReturnsSmartNulls();
+
+        Foo smartNull = (Foo) answer.answer(invocationOf(Foo.class, "withArgs", "oompa", "lumpa"));
+
+        try {
+            smartNull.get();
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (SmartNullPointerException ex) {
+        	String message = ex.getMessage();
+        	assertTrue("Exception message should include oompa and lumpa, but was: " + message,
+        			message.contains("oompa, lumpa"));                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+	}
+trace file: test/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNullsTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 116.12 seconds
+Failing tests: 1
+	org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 56 with range 1 to
+            new Reporter().smartNullPointerException(obj, location);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 442 with                 obj,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 438 with range 1 to
+    public void smartNullPointerException(Object obj, Location location) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 442 with                 obj,
+
+try to fix hunk: 2
+replace from 56 with range 1 to
+            new Reporter().smartNullPointerException(obj, location);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 438 with range 1 to
+    public void smartNullPointerException(Object obj, Location location) {
+
+try to fix hunk: 2
+replace from 56 with range 1 to
+            new Reporter().smartNullPointerException(obj, location);
+
+patches are written to file
+running tests...
+used time: Finished in 124.02 seconds
+Failing tests: 1
+	org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 438 with range 1 to
+    public void smartNullPointerException(Object obj, Location location) {
+
+try to fix hunk: 1
+insert before 442 with                 obj,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 438 with range 1 to
+    public void smartNullPointerException(Object obj, Location location) {
+
+try to fix hunk: 1
+insert before 442 with                 obj,
+
+try to fix hunk: 2
+replace from 56 with range 1 to
+            new Reporter().smartNullPointerException(obj, location);
+
+patches are written to file
+running tests...
+used time: Finished in 119.42 seconds
+Failing tests: 0
+Can independently fix ['org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1']
+select new bug
+Pattern: 111
+new failing tests:
+org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNullsTest::shouldPrintTheParametersOnSmartNullPointerExceptionMessage$catena_1
+Save found bug
+processed: 111
+Find 1 new bugs

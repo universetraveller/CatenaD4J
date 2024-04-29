@@ -1,0 +1,169 @@
+---
+Begin generate bug_id: Time_2
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Time_2
+Try to checkout Time_2
+build dir: ['./working/data/Time_2/target/classes', './working/data/Time_2/target/test-classes']
+init FileManager
+trace file: src/main/java/org/joda/time/Partial.java
+trace file: src/main/java/org/joda/time/field/UnsupportedDurationField.java
+trying to replace old failing tests
+edit: replace from 467 range 7 at src/test/java/org/joda/time/TestPartial_Basics.java
+to
+    public void testWith_baseAndArgHaveNoRange$catena_0() {
+        Partial test = new Partial(DateTimeFieldType.year(), 1);
+        Partial result = test.with(DateTimeFieldType.era(), 1);
+        assertEquals(2, result.size());                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testWith_baseAndArgHaveNoRange$catena_1() {
+        Partial test = new Partial(DateTimeFieldType.year(), 1);
+        Partial result = test.with(DateTimeFieldType.era(), 1);
+        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testWith_baseAndArgHaveNoRange$catena_2() {
+        Partial test = new Partial(DateTimeFieldType.year(), 1);
+        Partial result = test.with(DateTimeFieldType.era(), 1);
+        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, result.indexOf(DateTimeFieldType.era()));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, result.indexOf(DateTimeFieldType.year()));                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/joda/time/TestPartial_Basics.java
+new test num: 3
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 47.87 seconds
+Failing tests: 3
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 227 with         if (durationField.isSupported()) {
+            return 1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 33.95 seconds
+Failing tests: 0
+select new bug
+Pattern: 001
+new failing tests:
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 449 with                             if (fieldType.getRangeDurationType() == null) {
+                                break;
+                            }
+
+patches are written to file
+running tests...
+used time: Finished in 36.46 seconds
+Failing tests: 3
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 218 with range 1 to
+                if (compare < 0) {
+
+patches are written to file
+running tests...
+used time: Finished in 33.40 seconds
+Failing tests: 3
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 449 with                             if (fieldType.getRangeDurationType() == null) {
+                                break;
+                            }
+
+try to fix hunk: 2
+insert before 227 with         if (durationField.isSupported()) {
+            return 1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 33.64 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 218 with range 1 to
+                if (compare < 0) {
+
+try to fix hunk: 2
+insert before 227 with         if (durationField.isSupported()) {
+            return 1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 34.76 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 218 with range 1 to
+                if (compare < 0) {
+
+try to fix hunk: 1
+insert before 449 with                             if (fieldType.getRangeDurationType() == null) {
+                                break;
+                            }
+
+patches are written to file
+running tests...
+used time: Finished in 35.05 seconds
+Failing tests: 3
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_0
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_1
+	org.joda.time.TestPartial_Basics::testWith_baseAndArgHaveNoRange$catena_2
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 218 with range 1 to
+                if (compare < 0) {
+
+try to fix hunk: 1
+insert before 449 with                             if (fieldType.getRangeDurationType() == null) {
+                                break;
+                            }
+
+try to fix hunk: 2
+insert before 227 with         if (durationField.isSupported()) {
+            return 1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 30.78 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

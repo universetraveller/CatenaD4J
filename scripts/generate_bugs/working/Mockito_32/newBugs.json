@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/org/mockito/internal/configuration/SpyAnnotationEngine.java",
+            "replaced_with": "import static org.mockito.Mockito.withSettings;\n",
+            "patch_type": "insert",
+            "next_line_no": 19
+        },
+        "1": {
+            "file_name": "src/org/mockito/internal/configuration/SpyAnnotationEngine.java",
+            "from_line_no": 49,
+            "to_line_no": 49,
+            "replaced_with": "                        field.set(testClass, Mockito.mock(instance.getClass(), withSettings()\n                                .spiedInstance(instance)\n                                .defaultAnswer(Mockito.CALLS_REAL_METHODS)\n                                .name(field.getName())));\n",
+            "replaced": "                        field.set(testClass, Mockito.spy(instance));\n",
+            "patch_type": "replace",
+            "next_line_no": 50
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName"
+        ],
+        "org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName": {
+            "file_path": "test/org/mockitousage/bugs/SpyShouldHaveNiceNameTest.java",
+            "check": [
+                "StatementExpression is in safe: <.verify>",
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(22, 5)\nEnd: Pos(33, 5)\nSource: /root/workbench/exportInfo/d4j_buggy/Mockito_32/test//org/mockitousage/bugs/SpyShouldHaveNiceNameTest.java\nName: shouldPrintNiceName\nChilds: [StatementAssertion<Begin: Pos(29, 13), End: Pos(29, 19)>,\nStatementAssertion<Begin: Pos(31, 13), End: Pos(31, 74)>,\n]",
+            "source": "/root/workbench/exportInfo/d4j_buggy/Mockito_32/test//org/mockitousage/bugs/SpyShouldHaveNiceNameTest.java",
+            "name": "shouldPrintNiceName",
+            "begin": "Pos(22, 5)",
+            "end": "Pos(33, 5)",
+            "begin_line_no": 22,
+            "end_line_no": 33,
+            "child": [
+                "Begin: Pos(29, 13)\nEnd: Pos(29, 19)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(31, 13)\nEnd: Pos(31, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shouldPrintNiceName$catena_0() {\n        //when\n        veryCoolSpy.add(1);\n\n        try {\n            verify(veryCoolSpy).add(2);\n            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch(AssertionError e) {\n            try{ Assertions.assertThat(e.getMessage()).contains(\"veryCoolSpy\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void shouldPrintNiceName$catena_1() {\n        //when\n        veryCoolSpy.add(1);\n\n        try {\n            verify(veryCoolSpy).add(2);\n            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch(AssertionError e) {\n            Assertions.assertThat(e.getMessage()).contains(\"veryCoolSpy\");                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shouldPrintNiceName$catena_0() {\n        //when\n        veryCoolSpy.add(1);\n\n        try {\n            verify(veryCoolSpy).add(2);\n            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch(AssertionError e) {\n            try{ Assertions.assertThat(e.getMessage()).contains(\"veryCoolSpy\");                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void shouldPrintNiceName$catena_1() {\n        //when\n        veryCoolSpy.add(1);\n\n        try {\n            verify(veryCoolSpy).add(2);\n            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch(AssertionError e) {\n            Assertions.assertThat(e.getMessage()).contains(\"veryCoolSpy\");                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.mockitousage.bugs.SpyShouldHaveNiceNameTest::shouldPrintNiceName$catena_1"
+        ]
+    }
+}

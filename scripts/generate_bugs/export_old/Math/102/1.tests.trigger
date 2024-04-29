@@ -1,0 +1,12 @@
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_3
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_3
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.TestUtilsTest::testChiSquare$catena_2
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquare$catena_5
+org.apache.commons.math.stat.inference.ChiSquareFactoryTest::testChiSquareLargeTestStatistic$catena_1
+org.apache.commons.math.stat.inference.ChiSquareTestTest::testChiSquare$catena_3

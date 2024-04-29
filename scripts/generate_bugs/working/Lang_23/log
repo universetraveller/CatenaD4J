@@ -1,0 +1,677 @@
+---
+Begin generate bug_id: Lang_23
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Lang_23
+Try to checkout Lang_23
+build dir: ['./working/data/Lang_23/target/classes', './working/data/Lang_23/target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/lang3/text/ExtendedMessageFormat.java
+trying to replace old failing tests
+edit: replace from 270 range 38 at src/test/java/org/apache/commons/lang3/text/ExtendedMessageFormatTest.java
+to
+    public void testEqualsHashcode$catena_0() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        assertTrue("same, equals()",   emf.equals(emf));                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_1() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_2() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        assertTrue("equal, equals()",   emf.equals(other));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_3() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                                /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_4() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        assertFalse("class, equals()",  emf.equals(other));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_5() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());               /***** ORIGINAL ASSERTION IS HERE *****/ // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_6() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        assertFalse("pattern, equals()",   emf.equals(other));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_7() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_8() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        assertFalse("registry, equals()",   emf.equals(other));                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_9() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_10() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        assertFalse("locale, equals()",  emf.equals(other));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());         }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+    }     public void testEqualsHashcode$catena_11() {
+        Map<String, ? extends FormatFactory> registry = Collections.singletonMap("testfmt", new LowerCaseFormatFactory());
+        Map<String, ? extends FormatFactory> otherRegitry = Collections.singletonMap("testfmt", new UpperCaseFormatFactory());
+
+        String pattern = "Pattern: {0,testfmt}";
+        ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, Locale.US, registry);
+
+        ExtendedMessageFormat other = null;
+
+        // Same object
+        try{ assertTrue("same, equals()",   emf.equals(emf));                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("same, hashcode()", emf.hashCode() == emf.hashCode());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Equal Object
+        other = new ExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertTrue("equal, equals()",   emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("equal, hashcode()", emf.hashCode() == other.hashCode());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Class
+        other = new OtherExtendedMessageFormat(pattern, Locale.US, registry);
+        try{ assertFalse("class, equals()",  emf.equals(other));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("class, hashcode()", emf.hashCode() == other.hashCode());          }catch(Throwable __SHOULD_BE_IGNORED){} // same hashcode
+        
+        // Different pattern
+        other = new ExtendedMessageFormat("X" + pattern, Locale.US, registry);
+        try{ assertFalse("pattern, equals()",   emf.equals(other));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("pattern, hashcode()", emf.hashCode() == other.hashCode());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different registry
+        other = new ExtendedMessageFormat(pattern, Locale.US, otherRegitry);
+        try{ assertFalse("registry, equals()",   emf.equals(other));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("registry, hashcode()", emf.hashCode() == other.hashCode());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Different Locale
+        other = new ExtendedMessageFormat(pattern, Locale.FRANCE, registry);
+        try{ assertFalse("locale, equals()",  emf.equals(other));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("locale, hashcode()", emf.hashCode() == other.hashCode());              /***** ORIGINAL ASSERTION IS HERE *****/ // same hashcode
+    }
+trace file: src/test/java/org/apache/commons/lang3/text/ExtendedMessageFormatTest.java
+new test num: 12
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 28.17 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 269 with     @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HASH_SEED * result + ObjectUtils.hashCode(registry);
+        result = HASH_SEED * result + ObjectUtils.hashCode(toPattern);
+        return result;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 263 with     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(getClass(), obj.getClass())) {
+          return false;
+        }
+        ExtendedMessageFormat rhs = (ExtendedMessageFormat)obj;
+        if (ObjectUtils.notEqual(toPattern, rhs.toPattern)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(registry, rhs.registry)) {
+            return false;
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 18.41 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 73 with     private static final int HASH_SEED = 31;
+
+patches are written to file
+running tests...
+used time: Finished in 19.85 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 263 with     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(getClass(), obj.getClass())) {
+          return false;
+        }
+        ExtendedMessageFormat rhs = (ExtendedMessageFormat)obj;
+        if (ObjectUtils.notEqual(toPattern, rhs.toPattern)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(registry, rhs.registry)) {
+            return false;
+        }
+        return true;
+    }
+
+try to fix hunk: 2
+insert before 269 with     @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HASH_SEED * result + ObjectUtils.hashCode(registry);
+        result = HASH_SEED * result + ObjectUtils.hashCode(toPattern);
+        return result;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 73 with     private static final int HASH_SEED = 31;
+
+try to fix hunk: 2
+insert before 269 with     @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HASH_SEED * result + ObjectUtils.hashCode(registry);
+        result = HASH_SEED * result + ObjectUtils.hashCode(toPattern);
+        return result;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 19.10 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9']
+select new bug
+Pattern: 101
+new failing tests:
+org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 73 with     private static final int HASH_SEED = 31;
+
+try to fix hunk: 1
+insert before 263 with     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(getClass(), obj.getClass())) {
+          return false;
+        }
+        ExtendedMessageFormat rhs = (ExtendedMessageFormat)obj;
+        if (ObjectUtils.notEqual(toPattern, rhs.toPattern)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(registry, rhs.registry)) {
+            return false;
+        }
+        return true;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 19.37 seconds
+Failing tests: 1
+	org.apache.commons.lang3.text.ExtendedMessageFormatTest::testEqualsHashcode$catena_9
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 73 with     private static final int HASH_SEED = 31;
+
+try to fix hunk: 1
+insert before 263 with     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(getClass(), obj.getClass())) {
+          return false;
+        }
+        ExtendedMessageFormat rhs = (ExtendedMessageFormat)obj;
+        if (ObjectUtils.notEqual(toPattern, rhs.toPattern)) {
+            return false;
+        }
+        if (ObjectUtils.notEqual(registry, rhs.registry)) {
+            return false;
+        }
+        return true;
+    }
+
+try to fix hunk: 2
+insert before 269 with     @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HASH_SEED * result + ObjectUtils.hashCode(registry);
+        result = HASH_SEED * result + ObjectUtils.hashCode(toPattern);
+        return result;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 18.49 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs
