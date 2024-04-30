@@ -1,2 +1,0 @@
-org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_17
-org.apache.commons.math.optimization.general.LevenbergMarquardtOptimizerTest::testCircleFitting$catena_16

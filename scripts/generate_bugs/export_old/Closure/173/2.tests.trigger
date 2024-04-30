@@ -1,1 +1,0 @@
-com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testAssocitivity$catena_0

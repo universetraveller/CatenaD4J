@@ -6,13 +6,13 @@ The scripts and files under this directory are to prepare data used in the later
 The file contains 281 multi-hunk bug ids used in the experiment. This file can be extracted from [parse\_patches](../parse_patches)  
 
 ### Check out projects
-The script `check_out_projects.py` is to check out all specific projects used in the experiments from defects4j's database.  
+The script [check\_out\_projects.py](./check_out_projects.py) is to check out all specific projects used in the experiments from defects4j's database.  
 
 ### Export the projects metadata
-The script `export_metadata.py` can save all properties of the bugs from defects4j's database.  
+The script [export\_metadata.py](./export_metadata.py) can save all properties of the bugs from defects4j's database.  
 
 ### Convert the absolute paths
-The script `convert_metadata.py` can convert specific absolute paths in the file `database.json` into placeholders to make the file available on other computers and operating systems.  
+The script [convert\_metadata.py](./convert_metadata.py) can convert specific absolute paths in the file `database.json` into placeholders to make the file available on other computers and operating systems.  
 
 ## Usage
 * Usage: `python3 <script> <path_to_bug_ids> <path_to_save_projects> [<path_to_defects4j>]`

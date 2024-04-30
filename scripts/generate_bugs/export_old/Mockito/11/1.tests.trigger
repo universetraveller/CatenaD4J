@@ -1,2 +1,0 @@
-org.mockito.internal.creation.DelegatingMethodTest::equals_should_return_true_when_equal
-org.mockito.internal.creation.DelegatingMethodTest::equals_should_return_true_when_self

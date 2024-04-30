@@ -1,2 +1,0 @@
-org.joda.time.TestPartial_Constructors::testConstructorEx7_TypeArray_intArray$catena_4
-org.joda.time.TestPartial_Constructors::testConstructorEx7_TypeArray_intArray$catena_6

@@ -2,7 +2,7 @@ import glob
 import json
 data = {}
 alert = print
-patches_ci = '../../parsePatches/patches_ci/'
+patches_ci = '../../parse_patches/patches_ci/'
 DEFINE_CI = 1
 def new_bugs_num(log_list):
     last_line = log_list[-1]

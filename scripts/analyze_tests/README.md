@@ -12,12 +12,12 @@ Script `extract_junit_asserts.py` can extract assertion related identifiers from
 The output is `./names/junit` (a text file in which every line is a assertion related identifier).  
 
 ### Analyze the trigger tests
-Script `analyze_ver_5.py` is the analysis process. Name ver\_5 indicates there are other versions before it is developed. Actually, the result we used in the later experiments is combined from results of whole versions. We select version 5 there because it is good in both precision and accuracy.  
+Script [analyze\_ver\_5.py](./analyze_ver_5.py) is the analysis process. Name ver\_5 indicates there are other versions before it is developed. Actually, the result we used in the later experiments is combined from results of whole versions. We select version 5 there because it is good in both precision and accuracy.  
 `python3 analyze_ver_5.py <path_to_metadata_json_file> <path_to_bug_ids> <path_to_bugs>`  
 
 For actual arguments please check the previous experiments and ensure they are done.  
 
-The paths of files/directories in arguments can be specify in the experiment `construct_database` (by default, they are `../construct_database/d4j_export/database.json`, `../construct_database/2toMore` and `/tmp/` respectively).  
+The paths of files/directories in arguments can be specify in the experiment `construct_database` (by default, they are `../construct_database/d4j_export/database.json`, `../construct_database/2toMore` and `/tmp` respectively).  
 
 The output is `./logs/log5` which contains the runtime log and the identifiers filtered by the script. However, the result (a identifier list used in the later experiments) should be manually checked and writena (the script only filters all suspicious identifiers and it may make mistakes).  
 
@@ -39,6 +39,6 @@ To generate the identifiers list, run script `./names/table.py` which generate a
 ## Reproduce the experiments
 The whole process takes about 30 seconds.  
 
-* Ensure you have finished the previous experiment `construct_database`  
+* Ensure you have finished the previous experiment [construct\_database](../construct_database)  
 
 * Run script `./run.sh` or refer to the usage section to execute scripts   

@@ -1,1 +1,0 @@
-org.joda.time.TestDateTimeZoneCutover::testBug3476684_adjustOffset$catena_3

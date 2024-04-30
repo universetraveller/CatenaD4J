@@ -4,7 +4,7 @@ The scripts convert patches (reversed diff patch) from d4j's database into a jso
 
 ## Usage  
 ### Validate patch files
-Script `validate.py` checks if the patch file is in `git diff` format and whether the encoding of the it is correct.  
+Script [validate.py](./validate.py) checks if the patch file is in `git diff` format and whether the encoding of the it is correct.  
 `python3 validate.py [<path_to_defects4j>]`  
 
 The expected output is as below:  
@@ -15,7 +15,7 @@ Decode error, utf-8, /root/defects4j/framework/projects/Lang/patches/25.src.patc
 ```
 
 ### Parser of the patches
-Script `parser_defects4j.py` is used to parse the patch files from defects4j. It finds every continuous diff block and converts the diff block into a file edit object which is called hunk in the experiments.  
+Script [parser\_defects4j.py](./parser_defects4j.py) is used to parse the patch files from defects4j. It finds every continuous diff block and converts the diff block into a file edit object which is called hunk in the experiments.  
 
 Usage can be found at the end of the script.  
 ```
@@ -26,7 +26,7 @@ print(parser.dump_d4j_patch())
 ```
 
 ### Parse patches from defectsj v2.0
-Script `parse_defects4j_v2_0.py` is used to generate hunks information for defects4j bug projects.  
+Script [parse\_defects4j\_v2\_0.py](./parse_defects4j_v2_0.py) is used to generate hunks information for defects4j bug projects.  
 `python3 parse_defects4j_v2_0.py [<path_to_defects4j>] [<project_name>]`  
 
 The output is a directory `./pacthes` which contains the generated hunks information.  

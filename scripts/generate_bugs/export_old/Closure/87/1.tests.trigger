@@ -1,3 +1,0 @@
-com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_2
-com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_1
-com.google.javascript.jscomp.PeepholeSubstituteAlternateSyntaxTest::testIssue291$catena_4

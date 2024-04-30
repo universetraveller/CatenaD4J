@@ -6,6 +6,7 @@ import json
 import joblib
 import tqdm
 import time
+import argparse
 def task(bug_id, info, method):
     if os.path.exists('./working/{}'.format(bug_id)):
         print('clean up: ./working/{}'.format(bug_id))
@@ -36,9 +37,18 @@ def task(bug_id, info, method):
         with open('./exceptions/EXCEPTION_{}'.format('_'.join(bug_id)), 'w') as f:
             f.write(traceback.format_exc())
     logger.end()
-def parallel(bug_ids, js1, js2):
-    joblib.Parallel(n_jobs=15)(joblib.delayed(task)(bug_id, js1, js2) for bug_id in tqdm.tqdm(bug_ids))
+
+def parallel(bug_ids, js1, js2, n_jobs):
+    joblib.Parallel(n_jobs=n_jobs)(joblib.delayed(task)(bug_id, js1, js2) for bug_id in tqdm.tqdm(bug_ids))
+
+def init_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-b', '--bug-id', required=False)
+    parser.add_argument('-n', '--n-jobs', type=int, default=15, required=False)
+    return parser.parse_args()
+
 def main():
+    args = init_args()
     with open('./database.json', 'r') as f:
         js1 = json.load(f)
     with open('./res5.json', 'r') as f:
@@ -47,25 +57,14 @@ def main():
         bug_ids = f.read().splitlines()
     if not os.path.exists('./exceptions/'):
         os.makedirs('./exceptions/')
-    _debug = False
-    if _debug:
-        #bug_ids = ['Lang_34', 'Math_44']
-        '''
-        for bug_id in bug_ids:
-            task(bug_id, js1, js2)
-        '''
-        '''
-        bug_ids =  ['Lang_10', 'Math_29', 'Math_22', 'Math_12', 'Lang_8', 'Math_102', 'Math_43']
-        parallel(bug_ids, js1, js2)
-        '''
-        bug_ids =  ['Lang_34']
-        parallel(bug_ids, js1, js2)
-    else:
-        parallel(bug_ids, js1, js2)
+    if args.bug_id is not None:
+        bug_ids =  [args.bug_id]
+    parallel(bug_ids, js1, js2, args.n_jobs)
 
 def run_time(runnable):
     start = time.time()
     runnable()
     return time.time() - start
+
 if __name__ == '__main__':
     print(f'Real time: {run_time(main)}s')

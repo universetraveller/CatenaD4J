@@ -1,2 +1,0 @@
-com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations3$catena_1
-com.google.javascript.jscomp.NormalizeTest::testRemoveDuplicateVarDeclarations3$catena_0
