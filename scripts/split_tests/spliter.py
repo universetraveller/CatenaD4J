@@ -373,7 +373,6 @@ def process_test_node(filename, name, _globals, tokens):
     test.fill_child(childs)
     return test, check
 def test_process():
-    #a, b = process_test_node_v2('./test_resource/code3.java', 'testTry')
     a, b = process_test_node_v2('./test_resource/code3.java', 'testTry')
     print(b)
     print(a)

@@ -1,8 +1,13 @@
 import parser_defects4j
 import glob
 import os
+import sys
 root = '/root/defects4j/framework/projects/'
 projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+if len(sys.argv) > 1:
+    root = f'{sys.argv[1]}/framework/projects/'
+if len(sys.argv) > 2:
+    projs = [sys.argv[2]]
 hunks_equals_1 = []
 hunks_more_than_1 = []
 hunks_more_than_5 = []

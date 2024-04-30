@@ -2,9 +2,18 @@ import glob
 import os
 import json
 import javalang
+import sys
 projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
 base_dir = './patches/'
-work_dir = '/root/workbench/exportInfo/d4j_buggy/'
+work_dir = '/tmp/'
+if len(sys.argv) > 1:
+    work_dir = os.path.abspath(sys.argv[1])
+    if not work_dir.endswith('/'):
+        work_dir += '/'
+if len(sys.argv) > 2:
+    projs = [sys.argv[2]]
+if len(sys.argv) > 3:
+    base_dir = sys.argv[2]
 def convert_patches_to_comments_ignored_ver():
     if not os.path.exists('./patches_ci/'):
         os.makedirs('./patches_ci/')

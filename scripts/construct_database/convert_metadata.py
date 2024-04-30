@@ -9,7 +9,9 @@ root = {}
 bench = os.path.abspath(sys.argv[2])
 if not bench.endswith('/'):
     bench += '/'
-d4j = os.path.abspath(sys.argv[3])
+d4j = '/root/defects4j'
+if len(sys.argv) > 3:
+    d4j = os.path.abspath(sys.argv[3])
 for i in waitlist:
     i = i.split(':')[0]
     _bench = bench + i

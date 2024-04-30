@@ -4,6 +4,7 @@ import tqdm
 import os
 import logging
 import traceback
+import sys
 class filelog:
     def __init__(self, filename):
         self.file = open(filename, 'a')
@@ -73,15 +74,19 @@ def run(waitlist):
         logger.log(i)
     return root
 if __name__ == '__main__':
-    _debug = 0
+    _debug = len(sys.argv) > 3
     with open('./2toMore', 'r') as f:
         waitlist = f.read().splitlines()
     path2d4j = '/root/defects4j'
-    path2buggy = '/root/workbench/exportInfo/d4j_buggy'
+    if len(sys.argv) > 1:
+        path2d4j = sys.argv[1]
+    path2buggy = '/tmp'
+    if len(sys.argv) > 2:
+        path2buggy = sys.argv[2]
     with open('./database.json', 'r') as f:
         database = json.load(f)
     if _debug:
-        run(['Lang_36'])
+        run([sys.argv[3]])
         exit()
     root = run(waitlist)
     with open('./running/res5.json', 'w') as f:

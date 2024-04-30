@@ -1,7 +1,9 @@
-import parser_defects4j
 import glob
 import os
+import sys
 root = '/root/defects4j/framework/projects/'
+if len(sys.argv) > 1:
+    root = f'{sys.argv[1]}/framework/projects/'
 projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
 def assertion(fn):
     s = True

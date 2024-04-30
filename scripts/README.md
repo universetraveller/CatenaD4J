@@ -2,6 +2,8 @@
 ## Requirements
 * pip install joblib
 * pip install tqdm
+* pip install unidiff
+* pip install javalang
 
 ## Dependencies
 There are dependencies to run the experiment, and you can install them using the following ways.  
@@ -19,6 +21,8 @@ You can run `./build.sh` to build the image directly, or build as the following 
 
 3. Run a new container using the new image  
 `docker run -it catena4j:experiments /bin/bash`  
+
+## Steps to reproduce the experiments
 
 ## Notice
 1. Bad code style and english 

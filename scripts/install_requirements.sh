@@ -5,3 +5,5 @@ then
 fi
 pip install joblib
 pip install tqdm
+pip install unidiff
+pip install javalang
