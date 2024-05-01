@@ -9,7 +9,7 @@ if CONFIG_GIT_TAG:
 CONFIG_PRE_FIX=0
 CONFIG_DEBUG=0
 pyver = sys.version
-version = '0.5.4'
+version = '1.0.0'
 validator_log_level=2
 p_head = 'CatenaD4j# '
 helper = '''usage: catana4j <command> [options]
