@@ -153,5 +153,30 @@ The plan of development is as below. However, because the task is time-comsuming
 4. Adding a fast and usable spectrum-based fault localization tool.
 5. Complete replacement of the defects4j backend by re-implementing all used commands.
 
+## Repository Structure  
+```
+--------------------------------------------------------------------------------------------------------
+File tree                         | Introdcution
+--------------------------------------------------------------------------------------------------------
+.                                 | Root path of the repo
+|-- Dockerfile                    | Script for docker to build an image contains this repo
+|-- LICENSE                       | Opensource license file
+|-- README.md                     | This file
+|-- catena4j                      | Executable script of the dataset
+|-- internal                      | Implementation of the dataset
+|-- projects                      | Bugs data of the dataset
+`-- scripts                       | Scripts for reproducing experiments in out FSE 2024 paper
+    |-- Dockerfile.experiments    | Script for docker to build an image used for reproducing experiments
+    |-- README.md                 | Steps and guides for reproducing experiments
+    |-- analyze_tests             | Extract assertion related identifiers from trigger tests 
+    |-- build.sh                  | Script to build the image for experiments in a single step
+    |-- construct_database        | Prepare bugs and metadata for the experiments
+    |-- generate_bugs             | Algorithm to detect and create indivisible bugs
+    |-- install_requirements.sh   | Script used to install dependencies of experiments
+    |-- parse_patches             | Extract hunks information of bugs
+    `-- split_tests               | Algorithm of tests minimization
+----------------------------------------------------------------------------------------------------------
+```
+
 ## Publications
 * Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Detecting, Creating, Evaluating, and Understanding Indivisible Bugs. FSE 2024.  
