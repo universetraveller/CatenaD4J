@@ -36,7 +36,7 @@ Furthermore, the script will analyze the process and generate a file `./analysis
 ### Generate hunks information without comments and blank lines
 If the patch is as the following block:  
 ```
-+ for(int a = Math.random();;) {
++ for(int a = (int)(-100 + Math.random() * 200);;) {
 +     if (a == 1) break;
       // comment
 +     else if (a > 1) a --;
