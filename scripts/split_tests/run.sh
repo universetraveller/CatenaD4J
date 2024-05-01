@@ -1,1 +1,1 @@
-python3 run.py /root/defects4j /tmp
+python3 run.py -d /root/defects4j -w /tmp

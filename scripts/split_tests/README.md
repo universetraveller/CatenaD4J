@@ -9,7 +9,7 @@ Script [spliter.py](./spliter.py) contains the core logic of tests minimization,
 
 Script [run.py](./run.py) is to invoke the test minimization, we can run  
 
-`python3 run.py [<path_to_defects4j>] [<path_to_bug_projects>] [<bug_id>]`  
+`python3 run.py [-d <path_to_defects4j>] [-w <path_to_bug_projects>] [-b <bug_id>] [-m <path_to_metadata_file>]`  
 
 to execute test minimization.  
 
@@ -17,7 +17,9 @@ The first two arguments are optional. If they are not set, it takes default valu
 
 The argument `<bug_id>` is optional. If it is set, the script only execute minimization process on the specified bug id, otherwise, the script execute minimization process on all bug ids in 2toMore.  
 
-Example to minimize a single bug: `python3 run.py /root/defects4j /tmp Chart_25`  
+The argument `<path_to_metadata_file>` is optional. If it is not set, it use `./database.json` as default value.  
+
+Example to minimize a single bug: `python3 run.py -d /root/defects4j -w /tmp -b Chart_25`  
 
 The output is a json file `./running/res5.json` which contains information of the original and minimized tests.  
 

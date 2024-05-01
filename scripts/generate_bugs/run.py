@@ -7,6 +7,7 @@ import joblib
 import tqdm
 import time
 import argparse
+PATCHES = None
 def task(bug_id, info, method):
     if os.path.exists('./working/{}'.format(bug_id)):
         print('clean up: ./working/{}'.format(bug_id))
@@ -21,7 +22,7 @@ def task(bug_id, info, method):
         info = info[bug_id]
         method = method[bug_id]
         bug_id = bug_id.split('_')
-        with open('./patches/{}/{}.json'.format(bug_id[0], bug_id[1]), 'r') as f:
+        with open('{}/{}/{}.json'.format(PATCHES, bug_id[0], bug_id[1]), 'r') as f:
             patch = json.load(f)
         generator = runner.Generator(bug_id[0], bug_id[1])
         generator.set_logger(logger)
@@ -44,21 +45,24 @@ def parallel(bug_ids, js1, js2, n_jobs):
 def init_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--bug-id', required=False)
+    parser.add_argument('-m', '--database', default='./database.json', required=False)
+    parser.add_argument('-t', '--tests', default='./res5.json', required=False)
+    parser.add_argument('-p', '--patches', default='./patches', required=False)
     parser.add_argument('-n', '--n-jobs', type=int, default=15, required=False)
     return parser.parse_args()
 
 def main():
     args = init_args()
-    with open('./database.json', 'r') as f:
+    with open(args.database, 'r') as f:
         js1 = json.load(f)
-    with open('./res5.json', 'r') as f:
+    with open(args.tests, 'r') as f:
         js2 = json.load(f)
     with open('./2toMore', 'r') as f:
-        bug_ids = f.read().splitlines()
+        bug_ids = [args.bug_id] if args.bug_id is not None else f.read().splitlines()
     if not os.path.exists('./exceptions/'):
         os.makedirs('./exceptions/')
-    if args.bug_id is not None:
-        bug_ids =  [args.bug_id]
+    global PATCHES
+    PATCHES = args.patches
     parallel(bug_ids, js1, js2, args.n_jobs)
 
 def run_time(runnable):

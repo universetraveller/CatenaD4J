@@ -4,7 +4,7 @@ import tqdm
 import os
 import logging
 import traceback
-import sys
+import argparse
 class filelog:
     def __init__(self, filename):
         self.file = open(filename, 'a')
@@ -74,20 +74,18 @@ def run(waitlist):
         logger.log(i)
     return root
 if __name__ == '__main__':
-    _debug = len(sys.argv) > 3
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-b', '--bug-ids', required=False)
+    parser.add_argument('-d', '--d4j-home', default='/root/defects4j', required=False)
+    parser.add_argument('-w', '--path-to-buggy', default='/tmp', required=False)
+    parser.add_argument('-m', '--database', default='./database.json', required=False)
+    args = parser.parse_args()
     with open('./2toMore', 'r') as f:
-        waitlist = f.read().splitlines()
-    path2d4j = '/root/defects4j'
-    if len(sys.argv) > 1:
-        path2d4j = sys.argv[1]
-    path2buggy = '/tmp'
-    if len(sys.argv) > 2:
-        path2buggy = sys.argv[2]
-    with open('./database.json', 'r') as f:
+        waitlist = [args.bug_ids] if args.bug_ids is not None else f.read().splitlines()
+    path2d4j = args.d4j_home
+    path2buggy = args.path_to_buggy
+    with open(args.database, 'r') as f:
         database = json.load(f)
-    if _debug:
-        run([sys.argv[3]])
-        exit()
     root = run(waitlist)
     with open('./running/res5.json', 'w') as f:
         f.write(json.dumps(root, indent=4))
