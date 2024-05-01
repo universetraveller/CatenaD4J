@@ -2,7 +2,7 @@
 CatenaD4J (c4j) is a dataset that can be used to evaluate existing techniques on repairing indivisible multi-hunk bugs. This repository also contains an implementation of tool for  detecting and creating indivisible bugs.  
 
 C4j works like a plugin of other datasets and now use Defects4J as default backend because c4j contains a lot of bugs generated from defects4j. But it is easy to switch its backend or expand its commands and bugs.  
-## Bugs of CatenaD4J  
+## Bugs  in the dataset  
 CatenaD4J now contains 6 projects and 367 bugs generated from Defects4J.  
 
 - The dataset consists of original bugs that is indivisible from d4j and isolated new bugs what original bugs of d4j are divided into.
@@ -167,7 +167,7 @@ File tree                         | Introdcution
 |-- catena4j                      | Executable script of the dataset
 |-- internal                      | Implementation of the dataset
 |-- projects                      | Bugs data of the dataset
-`-- scripts                       | Scripts for reproducing experiments in out FSE 2024 paper
+`-- scripts                       | Scripts for reproducing experiments in our FSE 2024 paper
     |-- Dockerfile.experiments    | Script for docker to build an image used for reproducing experiments
     |-- README.md                 | Steps and guides for reproducing experiments
     |-- analyze_tests             | Extract assertion related identifiers from trigger tests 
@@ -181,4 +181,4 @@ File tree                         | Introdcution
 ```
 
 ## Publications
-* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Detecting, Creating, Evaluating, and Understanding Indivisible Bugs. FSE 2024.  
+* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Detecting, Creating, Evaluating, and Understanding Indivisible Multi-Hunk Bugs. FSE 2024.  
