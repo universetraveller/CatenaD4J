@@ -1,5 +1,6 @@
 # CatenaD4J
-CatenaD4J (c4j) is a dataset aims to benchmark techniques' performance of repairing multi-hunk bugs.  
+This repo contains our tool CatenaD4J (c4j) for detecting and creating indivisible bugs. We provided a dataset that can be used to evaluate existing techniques on repairing 
+indivisible multi-hunk bugs.
 
 C4j works like a plugin of other datasets and now use Defects4J as default backend because c4j contains a lot of bugs generated from defects4j. But it is easy to switch its backend or expand its commands and bugs.  
 ## Bugs of CatenaD4J  
