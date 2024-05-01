@@ -31,7 +31,7 @@ Argument `<mode>` could be *all* or *skip_indivisible* (if the option set, origi
 The output is in the directory [export](./export) which can be copied as dataset's **projects** directory.  
 
 ### Validate the result
-Script [validate.py](./validate.py) can check exceptions occur in the algorithm, and the output is wriiten into `./validation` by which we can find if the result is expected.  
+Script [validate.py](./validate.py) can check exceptions occur in the algorithm, and the output is written into `./validation` by which we can find if the result is expected.  
 
 `python3 validate.py`  
 
@@ -86,7 +86,7 @@ Real time: 76.4700219631195s
 
 Run `./run.sh` to reproduce the whole experiment or run scripts as the usage section to reproduce partial experiment as you like.  
 
-## Run the algorithm buggy projects other than 281 bugs
+## Run the algorithm on buggy projects other than 281 bugs
 In theory, when **metadata**, **patch** and **minimized tests (optional)** is provided, the algorithm can be applied on the given bug project.  
 
 The current implementation is integrated with Defects4J, so we will try to apply the algorithm on other defects4j project below.  

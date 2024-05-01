@@ -1,6 +1,5 @@
 # CatenaD4J
-This repo contains our tool CatenaD4J (c4j) for detecting and creating indivisible bugs. We provided a dataset that can be used to evaluate existing techniques on repairing 
-indivisible multi-hunk bugs.
+CatenaD4J (c4j) is a dataset that can be used to evaluate existing techniques on repairing indivisible multi-hunk bugs. This repository also contains an implementation of tool for  detecting and creating indivisible bugs.  
 
 C4j works like a plugin of other datasets and now use Defects4J as default backend because c4j contains a lot of bugs generated from defects4j. But it is easy to switch its backend or expand its commands and bugs.  
 ## Bugs of CatenaD4J  
@@ -34,7 +33,7 @@ Each valid bug should have a entry in bugs-registry so that the dataset knows ho
   
   Check [JDK 8](https://openjdk.org/projects/jdk8/) for installation.
   
-## Set up
+## Installation
 ### Install from Dockerfile
 * Ensure you have docker installed on your computer  
 If you have no docker cli available, check [Install Docker Engine](https://docs.docker.com/engine/install/) for installation.  
@@ -42,14 +41,18 @@ If you have no docker cli available, check [Install Docker Engine](https://docs.
 * Check if curl is available
 If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
 
+Please check [the man page of curl](https://curl.se/docs/manpage.html) for usage and any problem.  
+
+
 * Download the Dockerfile  
 `curl https://raw.githubusercontent.com/universetraveller/CatenaD4J/main/Dockerfile -o Dockerfile`  
-You can also use other approaches to download the Dockerfile.  
+
+You can also use other approaches to download the Dockerfile (e.g. Download [it](Dockerfile) directly from this repo).  
 
 * Build the docker image via Dockerfile
 `docker build -t catena4j:main -f ./Dockerfile .`
 
-* Create a container with CatenaD4J using the created image  
+* Create a container with CatenaD4J using the built image  
 `docker run -it catena4j:main /bin/bash`
 
 ### Install step by step manually
@@ -132,12 +135,9 @@ Every loader should implement function `load`, `fix` and `get_attr` (Arguments c
 ### Default loader
 Catena4J use [DefaultPathLoader](internal/default_loader.py) as default loader. It loads bugs' infomation via specific formatted paths. By creating these specific files and adding a new entry into bugs-registry assigning loader to default, we can create a new active bug.
 ## Reproduce experiments  
-Folder `scripts` contains all experiment codes to construct this dataset.  
-1. [construct\_database](scripts/construct_database) contains scripts to prepare required data for following steps.  
-2. [analyze\_tests](scripts/analyze_tests) contains scripts to collect all possible identifiers of assertion statements for spliting tests.  
-3. [split\_tests](scripts/split_tests) is to generate new failing tests code to make sure the failing tests contain only single assertion statement.  
-4. [parse\_patches](scripts/parse_patches) is to identify hunks to fix automatically.  
-5. [generate\_bugs](scripts/generate_bugs) contains an implementation of bug isolation algorithm to generate isolated bugs from existing bugs.  
+Folder [scripts](scripts) contains all experiment codes to construct this dataset.  
+
+Please check [README of scripts](scripts/README.md) for information and guides about how to reproduce the experiments.  
 
 ## Statistics
 Check [here](scripts/generate_bugs/statstics) for the statistics of current bugs
@@ -154,4 +154,4 @@ The plan of development is as below. However, because the task is time-comsuming
 5. Complete replacement of the defects4j backend by re-implementing all used commands.
 
 ## Publications
-* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Towards Effective Multi-Hunk Bug Repair: Detecting, Creating, Evaluating, and Understanding Indivisible Bugs. FSE 2024.  
+* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Detecting, Creating, Evaluating, and Understanding Indivisible Bugs. FSE 2024.  
