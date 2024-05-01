@@ -1,7 +1,7 @@
 # Detecting and Creating Indivisible Bugs
 ## Overview
 Scripts under this folder are to detect and create indivisible bugs, convert them into patch files and generate summary for the bugs.  
-The required files are also prepared and provided as the Tests Minimization Experiment because the experiment is important. Most dependent files are copied from where they are generated, some files such as `ignored_bug_ids` is written manually, and file `res5.json` is modified (check [split\_tests](../split_tests/README.md) for reasons).  
+The required files are also prepared and provided as the Tests Minimization Experiment because the experiment is important. Most dependent files are copied from where they are generated, some files such as `ignored_bug_ids` and `indivisible_bug_ids` are written manually, and file `res5.json` is modified (check [split\_tests](../split_tests/README.md) for reasons).  
 
 ## Usage
 ### Run the algorithm  

@@ -41,13 +41,13 @@ If you have no docker cli available, check [Install Docker Engine](https://docs.
 * Check if curl is available
 If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
 
-Please check [the man page of curl](https://curl.se/docs/manpage.html) for usage and any problem.  
+	Please check [the man page of curl](https://curl.se/docs/manpage.html) for usage and any problem.  
 
 
 * Download the Dockerfile  
 `curl https://raw.githubusercontent.com/universetraveller/CatenaD4J/main/Dockerfile -o Dockerfile`  
 
-You can also use other approaches to download the Dockerfile (e.g. Download [it](Dockerfile) directly from this repo).  
+	You can also use other approaches to download the Dockerfile (e.g. Download [it](Dockerfile) directly from this repo).  
 
 * Build the docker image via Dockerfile
 `docker build -t catena4j:main -f ./Dockerfile .`
