@@ -36,10 +36,12 @@ Each valid bug should have a entry in bugs-registry so that the dataset knows ho
 ## Installation
 ### Install from Dockerfile
 * Ensure you have docker installed on your computer  
-If you have no docker cli available, check [Install Docker Engine](https://docs.docker.com/engine/install/) for installation.  
+
+	If you have no docker cli available, check [Install Docker Engine](https://docs.docker.com/engine/install/) for installation.  
 
 * Check if curl is available
-If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
+
+	If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
 
 	Please check [the man page of curl](https://curl.se/docs/manpage.html) for usage and any problem.  
 
