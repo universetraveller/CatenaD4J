@@ -36,13 +36,13 @@ Furthermore, the script will analyze the process and generate a file `./analysis
 ### Generate hunks information without comments and blank lines
 If the patch is as the following block:  
 ```
-+ Line 1
-+ Line 2
-// comment
-+ Line 3
++ for(int a = Math.random();;) {
++     if (a == 1) break;
+      // comment
++     else if (a > 1) a --;
 
-+ Line 4
-+ Line 5
++     else a ++;
++ }
 ```
 It will be considered as 3 hunks. However actually we know they are in a single hunk in logic, so we have script `convert_patches.py` to add the actual hunks number to the hunks information.  
 

@@ -51,7 +51,7 @@ If the environment is correctly configured, no exception occurs in the process. 
 
 If the configuration is correct, at the end of the expected output is:  
 ```
-root@container_id:~/scripts/generate_bugs# python3 run.py -b Lang_1
+root@container_id:~/CatenaD4J/scripts/generate_bugs# python3 run.py -b Lang_1
 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 318.14it/s]
 ---
 Begin generate bug_id: Lang_1
@@ -100,7 +100,7 @@ The following steps assuming you are in a same environment as image built from t
 1. At first, we should create database.json for it  
 
 * Go to experiment [construct\_database](../construct_database)  
-`cd ../construct_database``
+`cd ../construct_database`
 
 * Create a bug id file contains JxPath\_1
 * Run `./run.sh` with specified bug\_ids file
@@ -116,7 +116,7 @@ rm bug_id
 
 List the files in directory `./d4j_export`. The expected output is:  
 ```
-root@container_id:~/scripts/construct_database# ls d4j_export
+root@container_id:~/CatenaD4J/scripts/construct_database# ls d4j_export
 JxPath_1  database.json
 ```
 2. Create a patch in json format  
@@ -126,13 +126,13 @@ JxPath_1  database.json
 
 * Create patches for the project
 ```
-root@container_id:~/scripts/parse_patches# python3 parse_defects4j_v2_0.py /root/defects4j JxPath
+root@container_id:~/CatenaD4J/scripts/parse_patches# python3 parse_defects4j_v2_0.py /root/defects4j JxPath
 Unk type: \
 Line:  No newline at end of file
 ...
 Unk type: \
 Line:  No newline at end of file
-root@container_id:~/scripts/parse_patches# ls patches/JxPath/
+root@container_id:~/CatenaD4J/scripts/parse_patches# ls patches/JxPath/
 1.json   11.json  13.json  15.json  17.json  19.json  20.json  22.json  4.json  6.json  8.json
 10.json  12.json  14.json  16.json  18.json  2.json   21.json  3.json   5.json  7.json  9.json
 ```
@@ -144,11 +144,11 @@ root@container_id:~/scripts/parse_patches# ls patches/JxPath/
 
 * Run `./run.py` on the specified bug id  
 ```
-root@container_id:~/scripts/split_tests# rm running/res5.json
-root@container_id:~/scripts/split_tests# python3 run.py -b JxPath_1 -m ../construct_database/d4j_export/database.json -w /tmp -d /root
+root@container_id:~/CatenaD4J/scripts/split_tests# rm running/res5.json
+root@container_id:~/CatenaD4J/scripts/split_tests# python3 run.py -b JxPath_1 -m ../construct_database/d4j_export/database.json -w /tmp -d /root
 /defects4j
 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 17.11it/s]
-root@container_id:~/scripts/split_tests# ls running/res5.json
+root@container_id:~/CatenaD4J/scripts/split_tests# ls running/res5.json
 running/res5.json
 ```
 
@@ -159,8 +159,8 @@ running/res5.json
 
 * Run `run.py` with specified arguments
 ```
-root@container_id:~/scripts/generate_bugs# ./clean.sh
-root@container_id:~/scripts/generate_bugs# python3 run.py -b JxPath_1 -m ../construct_database/d4j_export/database.json -t ../split_tests/running/res5.json -p ../parse_patches/patches
+root@container_id:~/CatenaD4J/scripts/generate_bugs# ./clean.sh
+root@container_id:~/CatenaD4J/scripts/generate_bugs# python3 run.py -b JxPath_1 -m ../construct_database/d4j_export/database.json -t ../split_tests/running/res5.json -p ../parse_patches/patches
 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 466.40it/s]
 ---
 Begin generate bug_id: JxPath_1
@@ -187,7 +187,7 @@ Could not fix independently
 processed: 11
 Find 2 new bugs
 Real time: 11.183394432067871s
-root@container_id:~/scripts/generate_bugs# ls working/JxPath_1/
+root@container_id:~/CatenaD4J/scripts/generate_bugs# ls working/JxPath_1/
 log  newBugs.json
 ```
 
