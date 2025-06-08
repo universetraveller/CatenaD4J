@@ -5,9 +5,23 @@ import tqdm
 import subprocess
 import multiprocessing as mp
 import sys
-with open(sys.argv[1], 'r') as f:
-    waitlist = f.read().splitlines()
-def exportProp(path:str, prop:str):
+import d4j_all_bugs
+
+# checkout and compile: 42 min
+# export: 25 min
+
+def waitlist():
+    if os.path.isfile(sys.argv[1]):
+        with open(sys.argv[1]) as f:
+            tasks = list(map(lambda x:x.split('_'), f.read().splitlines()))
+    else:
+        tasks = []
+        all_bugs = d4j_all_bugs.all_bugs
+        for proj in all_bugs:
+            tasks.extend((proj, id) for id in all_bugs[proj])
+    return tasks
+
+def export_prop(path:str, prop:str):
     try:
         finished = subprocess.run(['defects4j', 'export',  '-p', prop, '-w', path], capture_output = True)
         finished.check_returncode()
@@ -22,21 +36,38 @@ def exportProp(path:str, prop:str):
                 f.write(finished.stderr.decode("utf-8"))
         except:
             print('Unhandled: {}'.format(path))
+
 _props = ['classes.modified', 'classes.relevant', 'cp.compile', 'cp.test', 'dir.bin.classes', 'dir.bin.tests',  'dir.src.classes', 'dir.src.tests', 'tests.all', 'tests.relevant', 'tests.trigger']
+
 def task(bugid, props, root):
-    bugid = bugid.split(':')[0]
-    if bugid == 'Time_21':
-        return
-    root[bugid] = {}
-    if not os.path.exists('./d4j_export/{}'.format(bugid)):
-        os.makedirs('./d4j_export/{}'.format(bugid))
+    _dir = './d4j_export/{}/{}'.format(bugid[0], bugid[1])
+    if not os.path.exists(_dir):
+        os.makedirs(_dir)
+    workdir = os.path.join(sys.argv[2], '_'.join(bugid))
     for prop in props:
-        res = exportProp('{}/{}'.format(sys.argv[2], bugid), prop)
-        with open('./d4j_export/{}/{}'.format(bugid, prop),  'w')  as f:
+        res = export_prop(workdir, prop)
+        if prop in ('cp.compile', 'cp.test'):
+            res = ':'.join(map(lambda cp : \
+                                cp.replace(d4j_all_bugs.d4j_home, '{d4j_home}', 1)
+                                    .replace(workdir, '{d4j_workdir}', 1),
+                    res.split(':')))
+        with open(os.path.join(_dir, prop),  'w')  as f:
             f.write(res)
         res  = res.splitlines()
-        root[bugid][prop] = res
-_root = mp.Manager().dict()
-joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props, _root) for i in tqdm.tqdm(waitlist))
-with open('./d4j_export/database.json', 'w') as f:
-    f.write(json.dumps(_root.copy(), indent=4))
+        root[bugid[0]][bugid[1]][prop] = res
+
+if __name__ == '__main__':
+    _manager = mp.Manager()
+    _root = _manager.dict()
+    for id in waitlist():
+        if not id[0] in _root:
+            _root[id[0]] = _manager.dict()
+        _root[id[0]][id[1]] = _manager.dict()
+    joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props, _root) for i in tqdm.tqdm(waitlist()))
+    root = {}
+    for a in _root:
+        root[a] = {}
+        for b in _root[a]:
+            root[a][b] = _root[a][b].copy()
+    with open('./d4j_export/database.json', 'w') as f:
+        f.write(json.dumps(root, indent=2))
