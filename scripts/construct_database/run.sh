@@ -4,3 +4,4 @@ if [ $1 ] ; then
 fi
 python3 check_out_projects.py $path_to_bug_ids /tmp/
 python3 export_metadata.py $path_to_bug_ids /tmp/
+python3 make_json.py ./d4j_export ./database.json

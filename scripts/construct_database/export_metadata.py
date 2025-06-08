@@ -37,7 +37,8 @@ def export_prop(path:str, prop:str):
         except:
             print('Unhandled: {}'.format(path))
 
-_props = ['classes.modified', 'classes.relevant', 'cp.compile', 'cp.test', 'dir.bin.classes', 'dir.bin.tests',  'dir.src.classes', 'dir.src.tests', 'tests.all', 'tests.relevant', 'tests.trigger']
+_props = d4j_all_bugs.d4j_props
+user_home = os.path.expanduser("~")
 
 def task(bugid, props, root):
     _dir = './d4j_export/{}/{}'.format(bugid[0], bugid[1])
@@ -49,7 +50,8 @@ def task(bugid, props, root):
         if prop in ('cp.compile', 'cp.test'):
             res = ':'.join(map(lambda cp : \
                                 cp.replace(d4j_all_bugs.d4j_home, '{d4j_home}', 1)
-                                    .replace(workdir, '{d4j_workdir}', 1),
+                                    .replace(workdir, '{d4j_workdir}', 1)
+                                    .replace(user_home, '{user_home}', 1),
                     res.split(':')))
         with open(os.path.join(_dir, prop),  'w')  as f:
             f.write(res)
