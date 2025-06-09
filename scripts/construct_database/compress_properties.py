@@ -74,6 +74,12 @@ def dump(indexes):
             f.write(gzip.compress(pickle.dumps(indexes)))
 
 if approach == 'index':
+    '''
+        Original Directory Size: 52M
+        Original Json File Size: 20M
+        Compressed File Size with Index: 204K
+        Compressed File Size with Index (removing classpath order): 180K
+    '''
     registry = compress.Registry()
     indexes = traverse(registry.get_id)
     if all_in_one:

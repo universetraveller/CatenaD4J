@@ -4,4 +4,11 @@ Some properties are static while others should be computed via .xml build files.
 
 This implementation creates simplified build files to accelerate this process and provide backward compatibility. It could be faster if we fully replace the ant backend (e.g. write a build file parser to mock the behaviour of ant to avoid start a jvm) but using simplified build file is fast enough and most cases could be covered by the properties cache.
 
+## Performance
+This implementation is perfromance oriented because I think the original defects4j is slow in execution in daily use
+
+### Performance of original defects4j
+* checkout and compile all bugs: 42 min
+* export all properties: 25 min
+
 ## Properties

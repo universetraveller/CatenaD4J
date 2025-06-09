@@ -7,9 +7,6 @@ import multiprocessing as mp
 import sys
 import d4j_all_bugs
 
-# checkout and compile: 42 min
-# export: 25 min
-
 def waitlist():
     if os.path.isfile(sys.argv[1]):
         with open(sys.argv[1]) as f:
@@ -66,10 +63,3 @@ if __name__ == '__main__':
             _root[id[0]] = _manager.dict()
         _root[id[0]][id[1]] = _manager.dict()
     joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props, _root) for i in tqdm.tqdm(waitlist()))
-    root = {}
-    for a in _root:
-        root[a] = {}
-        for b in _root[a]:
-            root[a][b] = _root[a][b].copy()
-    with open('./d4j_export/database.json', 'w') as f:
-        f.write(json.dumps(root, indent=2))
