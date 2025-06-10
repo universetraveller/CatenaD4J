@@ -1,4 +1,4 @@
-package io.github.universetraveller.ant;
+package io.github.universetraveller.d4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
+
+import io.github.universetraveller.util.ClassesCollector;
 
 /**
  * Static properties:

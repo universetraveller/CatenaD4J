@@ -1,5 +1,6 @@
 import sys
 root = sys.argv[0][:-9]
+root = __file__[:-15]
 d4j = 'defects4j'
 d4j_cmds = ['bids', 'checkout', 'compile', 'test', 'pids', 'coverage', 'env', 'export', 'monitor.test',  'mutation', 'query', 'info']
 CONFIG_RESET_IN_CHECKOUT=0

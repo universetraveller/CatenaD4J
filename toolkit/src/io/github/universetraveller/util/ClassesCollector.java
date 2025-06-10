@@ -1,4 +1,4 @@
-package io.github.universetraveller.ant;
+package io.github.universetraveller.util;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,0 +1,9 @@
+#! /usr/bin/python3
+import sys
+import os
+proj = sys.argv[1]
+id = sys.argv[2]
+basedir = f'/tmp/bugs_static/{proj}_{id}'
+proj_xml = f'/root/workbench/CatenaD4J/projects/{proj}/{proj}.export.xml'
+os.system(f'java -cp :/root/defects4j/major/lib/*:/root/workbench/CatenaD4J/toolkit/target/toolkit.jar -Dbasedir={basedir} -Dd4j.home=/root/defects4j -Dc4j.d4j.properties=/root/workbench/CatenaD4J/resources/defects4j.properties io.github.universetraveller.d4j.Defects4JExport {proj_xml} {sys.argv[3]}')
+print('')

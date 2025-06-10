@@ -1,4 +1,4 @@
-package io.github.universetraveller.ant;
+package io.github.universetraveller.d4j;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,6 +60,8 @@ public class Defects4JStartup {
         String d4jHome = project.getProperty("d4j.home");
         if(d4jHome == null) 
             throw new RuntimeException("Property d4j.home not set!");
+
+        d4jHome += "/";
 
         Taskdef taskdef = new Taskdef();
         taskdef.setProject(project);
