@@ -12,13 +12,12 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
+import org.apache.tools.ant.helper.ProjectHelper2;
 
 /**
- * Required as input values:
+ * Required as system properties:
  *   basedir
  *   d4j.home
- *   d4j.project.id
- * 	 c4j.dir.projects
  * 
  * Not included properties:
  * 	 d4j.bug.id
@@ -34,6 +33,7 @@ import org.apache.tools.ant.types.Path;
  *   dir.src.classes
  *   dir.src.tests
  *   tests.trigger
+ *   tests.relevant
  *
  * Dynamic properties:
  *   cp.compile
@@ -41,13 +41,12 @@ import org.apache.tools.ant.types.Path;
  *   dir.bin.classes
  *   dir.bin.tests
  *   tests.all
- *   tests.relevant
  **/
 public class Defects4JExport {
 
 	Project project;
 
-	private void initialize(String file) {
+	public Defects4JExport(String file) {
 		project = new Project();
 
 		project.init();
@@ -55,8 +54,16 @@ public class Defects4JExport {
 		ProjectHelper.configureProject(project, new File(file));
 	}
 
-	public Defects4JExport(String file) {
-		initialize(file);
+	public Defects4JExport(String[] files) {
+		project = new Project();
+
+		project.init();
+
+		ProjectHelper2 helper = new ProjectHelper2();
+		project.addReference("ant.projectHelper", helper);
+
+		for(String file : files)
+			helper.parse(project, new File(file));
 	}
 
 	public String getProperty(String property) {
@@ -82,7 +89,7 @@ public class Defects4JExport {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Defects4JExport export = new Defects4JExport(args[0]);
+		Defects4JExport export = new Defects4JExport(args[0].split(","));
 
 		String result = export.getProperty(args[1]);
 		if(result == null)
@@ -99,11 +106,15 @@ public class Defects4JExport {
 		out.close();
 	}
 
-	public String getCompileClasspath() {
-		String targets = project.getProperty("c4j.pre-get-cp");
+	private void beforeGetClasspath() {
+		String targets = project.getProperty("c4j.before-get-cp");
 
 		if(targets != null)
 			project.executeTargets(new Vector<String>(Arrays.asList(targets.split(","))));
+	}
+
+	public String getCompileClasspath() {
+		beforeGetClasspath();
 
 		Path cp = new Path(project);
 		cp.setPath(project.getProperty("classes.dir"));
@@ -113,6 +124,7 @@ public class Defects4JExport {
 	}
 
 	public String getTestClasspath() {
+		beforeGetClasspath();
 		return project.getReference("d4j.test.classpath").toString();
 	}
 
@@ -155,8 +167,12 @@ public class Defects4JExport {
 
 		Pattern suffix = Pattern.compile("\\.(?:java|class)$");
 
-		;
 		String[] files = paths.getDirectoryScanner().getIncludedFiles();
+
+		String process = project.getProperty("c4j.source-to-classes");
+		if(process != null) 
+		{}
+
 		for(int i = 0; i < files.length; ++ i)
 			files[i] = formatGetTestsAll(files[i], prefix, suffix);
 

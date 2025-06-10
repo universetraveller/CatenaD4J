@@ -1,1 +1,0 @@
-java -cp :/root/defects4j/major/lib/*:/root/workbench/CatenaD4J/internal/export/io.github.universetraveller.ant/target/Export.jar -Dbasedir=$1 -Dd4j.home=/root/defects4j -Dd4j.project.id=$2 -Dc4j.dir.projects=/root/workbench/CatenaD4J/internal/export/projects io.github.universetraveller.ant.Defects4JExport /root/workbench/CatenaD4J/internal/xml/catena4j.properties.xml $3

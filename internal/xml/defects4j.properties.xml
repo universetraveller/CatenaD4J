@@ -1,0 +1,27 @@
+<project name="D4J-project">
+
+	<property name="d4j.properties" value="defects4j.build.properties" />
+
+	<fail message="Directory ${d4j.workdir} is not a Defects4J working directory!">
+                <condition>
+                        <not> <available file="${d4j.workdir}/${d4j.properties}" /> </not>
+                </condition>
+        </fail>
+        <!-- Check whether d4j.home is set -->
+        <fail message="Property d4j.home not set!" unless="d4j.home" />
+
+
+        <!--
+        To specify:
+                d4j.project.id
+                c4j.dir.projects
+        -->
+        <!--
+        <import file="${c4j.dir.projects}/${d4j.project.id}.export.xml"/>
+        -->
+
+                <!-- Additional properties such as tests to exclude.
+                This property file is automatically generated. -->
+        <property file="${d4j.workdir}/${d4j.properties}"/>
+
+</project>

@@ -30,10 +30,9 @@ This implementation is perfromance oriented because I think the original defects
 ```
 
 It would call target `compile` that is not always requried for only getting a property.
-So it could be implemented using a special c4j.pre-get-cp property which could be customed in
+So it could be implemented using a special c4j.before-get-cp property which could be customed in
 the project's build file.
 
 ### tests.all
 Some projects required to search .class files because there may be embedded classes 
-but compilation seems to be not required. We can add a c4j.tests-filter 
-property to allow special search logic.
+but compilation seems to be not required. We can add a property to allow special search logic.
