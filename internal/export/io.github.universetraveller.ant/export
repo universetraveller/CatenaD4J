@@ -4,7 +4,7 @@ import os
 proj = sys.argv[1]
 id = sys.argv[2]
 basedir = f'/tmp/bugs_static/{proj}_{id}'
-proj_xml = f'/root/workbench/CatenaD4J/internal/export/projects/{proj}.export.xml'
-files = f'/root/workbench/CatenaD4J/internal/xml/defects4j.setting.xml,/root/workbench/CatenaD4J/internal/xml/defects4j.properties.xml,{proj_xml}'
-os.system(f'java -cp :/root/defects4j/major/lib/*:/root/workbench/CatenaD4J/internal/export/io.github.universetraveller.ant/target/Export.jar -Dbasedir={basedir} -Dd4j.home=/root/defects4j io.github.universetraveller.ant.Defects4JExport {files} {sys.argv[3]}')
+proj_xml = f'/root/workbench/CatenaD4J/projects/{proj}/{proj}.export.xml'
+files = f'/root/workbench/CatenaD4J/internal/defects4j/xml/defects4j.libraries.xml,/root/workbench/CatenaD4J/internal/defects4j/xml/defects4j.properties.xml,{proj_xml}'
+os.system(f'java -cp :/root/defects4j/major/lib/*:/root/workbench/CatenaD4J/internal/export/io.github.universetraveller.ant/target/Export.jar -Dbasedir={basedir} -Dd4j.home=/root/defects4j -Dc4j.d4j.properties=/root/workbench/CatenaD4J/internal/defects4j/defects4j.properties io.github.universetraveller.ant.Defects4JExport {proj_xml} {sys.argv[3]}')
 print('')

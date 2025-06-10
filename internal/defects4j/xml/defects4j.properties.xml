@@ -1,4 +1,11 @@
-<project name="D4J-project">
+<project name="D4J-project" basedir="${basedir}">
+        <!--
+        To specify:
+		basedir
+        -->
+
+	<!-- Ensure basedir is properly set -->
+	<property name="d4j.workdir" value="${basedir}" />
 
 	<property name="d4j.properties" value="defects4j.build.properties" />
 
@@ -7,8 +14,6 @@
                         <not> <available file="${d4j.workdir}/${d4j.properties}" /> </not>
                 </condition>
         </fail>
-        <!-- Check whether d4j.home is set -->
-        <fail message="Property d4j.home not set!" unless="d4j.home" />
 
 
         <!--

@@ -8,25 +8,10 @@ import java.util.Arrays;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
-import org.apache.tools.ant.helper.ProjectHelper2;
 
 /**
- * Required as system properties:
- *   basedir
- *   d4j.home
- * 
- * Not included properties:
- * 	 d4j.bug.id
- * 	 d4j.dir.src.classes
- * 	 d4j.dir.src.tests
- * 	 d4j.classes.modified
- * 	 d4j.classes.relevant
- * 	 d4j.tests.trigger
- *
  * Static properties:
  *   classes.modified
  *   classes.relevant
@@ -42,28 +27,21 @@ import org.apache.tools.ant.helper.ProjectHelper2;
  *   dir.bin.tests
  *   tests.all
  **/
-public class Defects4JExport {
+public class Defects4JExport extends Defects4JStartup {
 
-	Project project;
+	public Defects4JExport(String projectBuildFile) {
+		super();
 
-	public Defects4JExport(String file) {
-		project = new Project();
+		initializeProjectHelper2();
 
-		project.init();
+		initializeDefects4J(System.getProperty("c4j.d4j.properties"),
+							System.getProperty("basedir"));
 
-		ProjectHelper.configureProject(project, new File(file));
+		projectHelper.parse(project, new File(projectBuildFile));
 	}
 
 	public Defects4JExport(String[] files) {
-		project = new Project();
-
-		project.init();
-
-		ProjectHelper2 helper = new ProjectHelper2();
-		project.addReference("ant.projectHelper", helper);
-
-		for(String file : files)
-			helper.parse(project, new File(file));
+		super(files);
 	}
 
 	public String getProperty(String property) {
@@ -89,13 +67,11 @@ public class Defects4JExport {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Defects4JExport export = new Defects4JExport(args[0].split(","));
+		Defects4JExport export = new Defects4JExport(args[0]);
 
 		String result = export.getProperty(args[1]);
 		if(result == null)
-			throw new RuntimeException(String.format(
-											"Could not found property %s",
-											args[1]));
+			throw new RuntimeException("Could not found property " + args[1]);
 
 		PrintStream out = args.length > 2 ?
 							new PrintStream(args[2]) :
@@ -161,17 +137,21 @@ public class Defects4JExport {
 		// how about File.pathSeparator?
 		String sep = project.getProperty("file.separator");
 
-		Pattern prefix = Pattern.compile(String.format("^(?:%s|%s)",
-														Pattern.quote(srcPrefix + sep),
-														Pattern.quote(binPrefix + sep)));
+		Pattern prefix = Pattern.compile(new StringBuilder()
+												.append("^(?:")
+												.append(Pattern.quote(srcPrefix + sep))
+												.append("|")
+												.append(Pattern.quote(binPrefix + sep))
+												.append(")")
+												.toString());
 
 		Pattern suffix = Pattern.compile("\\.(?:java|class)$");
 
 		String[] files = paths.getDirectoryScanner().getIncludedFiles();
 
-		String process = project.getProperty("c4j.source-to-classes");
+		String process = project.getProperty("c4j.tests.getter.predict");
 		if(process != null) 
-		{}
+			return String.join(project.getProperty("line.separator"), ClassesCollector.getClasses(files, srcPrefix, Pattern.compile(process)));
 
 		for(int i = 0; i < files.length; ++ i)
 			files[i] = formatGetTestsAll(files[i], prefix, suffix);
