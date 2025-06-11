@@ -1,8 +1,8 @@
-from . import util
-from . import loaders
-from . import config
-from . import backend
-from . import reset
+from v1 import util
+from v1 import loaders
+from v1 import config
+from v1 import backend
+from v1 import reset
 class Task:
     def __init__(self):
         self.proj = None

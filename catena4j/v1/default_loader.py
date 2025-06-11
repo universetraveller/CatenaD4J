@@ -1,6 +1,6 @@
-from . import config
-from . import util
-from . import ProjectManager
+from v1 import config
+from v1 import util
+import ProjectManager
 import json
 
 class DefaultPathLoader:

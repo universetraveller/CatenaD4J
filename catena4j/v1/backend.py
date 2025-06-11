@@ -1,7 +1,7 @@
-from . import config
+from v1 import config
 import sys
-from . import util
-from . import entries
+from v1 import util
+from v1 import entries
 def print_help():
     util.printc(config.helper, 1, '')
 def is_help_spec(s):

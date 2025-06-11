@@ -1,5 +1,5 @@
-from .import util
-from .import config
+from . import util
+from . import config
 __INVALID = -1
 __VALID = 0
 __C4J_RESET = 1

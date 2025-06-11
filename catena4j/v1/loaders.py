@@ -1,4 +1,4 @@
-from . import default_loader
+from v1 import default_loader
 
 
 __loaders = {

@@ -1,5 +1,5 @@
-from . import init_internal
-from . import entries
+from v1 import init_internal
+from v1 import entries
 # init parser arguments
 parser = init_internal.init_parser()
 parser.add_argument('command', type=str, help='A specific CatenaD4j command')

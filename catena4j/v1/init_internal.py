@@ -1,8 +1,8 @@
-from . import argparse
-from .backend import print_help, is_help_cmd, d4j_backend, c4j_backend
-from . import config
-from . import util
-from . import entries
+import argparse
+from v1.backend import print_help, is_help_cmd, d4j_backend, c4j_backend
+from v1 import config
+from v1 import util
+from v1 import entries
 def do_nothing(*args, **kwargs):
     pass
 

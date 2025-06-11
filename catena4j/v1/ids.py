@@ -1,6 +1,5 @@
 from . import util
 from . import config
-import glob
 def PIDS(args):
     for proj in util.listdir(f'{config.root}/projects/'):
         if not proj.startswith('.'):
