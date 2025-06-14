@@ -1,10 +1,7 @@
 from loaders.loader import Loader
-import util
 
 _loaders = {
 }
-
-_default_loader = None
 
 class LoaderError(Exception):
     pass
@@ -50,12 +47,3 @@ def get_loader(name: str):
 
 def remove_loader(name: str):
     _loaders.pop(name, None)
-    
-def register_default_loader(loader: Loader):
-    global _default_loader
-    _default_loader = loader
-
-def get_default_loader():
-    if _default_loader is None:
-        register_default_loader(get_loader("default"))
-    return _default_loader

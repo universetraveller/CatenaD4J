@@ -5,6 +5,9 @@
 from argparse import Namespace
 from typing import Callable
 from util import get_constant_class
+from pathlib import Path
+
+_c4j_home = Path(__file__).parents[1]
 
 _config = None
 _config_mapping: dict = None

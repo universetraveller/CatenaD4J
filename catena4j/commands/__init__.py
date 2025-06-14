@@ -39,6 +39,7 @@ def register(command: str, entry: Callable, replace=False):
 '''
 def Command(name: str):
     '''
+        [Experimental API]
         Decorator function for the entry method
         to register command at its definition
     '''

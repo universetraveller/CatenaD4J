@@ -1,25 +1,74 @@
 '''
-    High level initialization methods including entry point
-    of the program
+    High level initialization methods including entry point of the program
+
+    Default implementations are provided but the code could be modified by
+    users on demand
 '''
 import cli.manager
 import env
 from env import register_env_constructor
 from dispatcher import CommandDispatcher
-import _bootstrap
+from _bootstrap import (
+    register_bootstrap_function,
+    register_entry_point,
+    register_initialization_order,
+    create_context
+)
+import os
+import util
+from pathlib import Path
 
 def _initialize_env():
-    return {}
+    '''
+        Default implementation of system env initialization
+    '''
+    c4j_home = env._c4j_home
+    _env = {
+        'c4j_home': str(c4j_home),
+        # when this function is called, the system config has been initialized
+        # this cache could speed up the startup time by about 100000 ns
+        'd4j_home': util.search_cache(c4j_home / env._config.rel_cache_dir / 'd4j_home',
+                                      lambda p : Path(p, 'framework', 'bin', 'defects4j').is_file(),
+                                      util.find_path,
+                                      ('defects4j', 2)),
+        'workdir': os.getcwd()
+    }
+    return _env
 
 register_env_constructor(_initialize_env)
 
 def initialize_commands():
-    pass
+    '''
+        Deafult implementation of commands initialization
+    '''
+    from commands import (
+        register,
+        _register,
+        export,
+    )
+    export.initialize()
+    _register('export', export.run)
+
+register_bootstrap_function(initialize_commands)
 
 def initialize_loaders():
-    pass
+    '''
+        Deafult implementation of loaders initialization
+    '''
+    from loaders import (
+        register_loader,
+        _register_loader,
+        register_loader_lazy,
+        project_loader
+    )
+    register_loader_lazy('default', 'loaders.project_loader', 'ProjectLoader')
+
+register_bootstrap_function(initialize_loaders)
 
 def start_cli():
+    '''
+        Deafult implementation of the entry point
+    '''
     args = cli.manager._root_parser.parse_args()
     target = getattr(args, env._config.command_dest)
     delattr(args, env._config.command_dest)
@@ -27,15 +76,18 @@ def start_cli():
     context = dispatcher.get_execution_context(args=args, cli=False)
     context.run(target=target)
 
-_bootstrap.register_bootstrap_function(initialize_commands)
-_bootstrap.register_bootstrap_function(initialize_loaders)
-_bootstrap.register_entry_point(start_cli)
+register_entry_point(start_cli)
 
-def ordered_init(Bootstrap):
-    Bootstrap.initialize_environment
-    Bootstrap.initialize_cli
-    Bootstrap.initialize_commands
-    Bootstrap.initialize_loaders
-    Bootstrap.initialize_user_setup
+def initialize_system(system):
+    '''
+        Default definition of initialization order for the system
+    '''
+    system.initialize_environment
+    system.initialize_cli
+    system.initialize_commands
+    system.initialize_loaders
+    system.initialize_user_setup
 
-Bootstrap = _bootstrap.build(ordered_init)
+register_initialization_order(initialize_system)
+
+system = create_context()
