@@ -26,6 +26,8 @@ def search_cache(cache: Path, check: Callable=None, fix: Tuple=None, args=(), kw
     if not fix:
         raise TypeError('Cache miss occured but no fix function is provided')
     content = fix(*args, **kwargs)
+    if not cache.parent.is_dir():
+        cache.parent.mkdir()
     with cache.open('w') as f:
         f.write(content)
     return content
@@ -34,12 +36,13 @@ def find_path(target, parent_level=None, mode=1, path=None):
     '''
         Find a file or the directory it is placed from path (default: PATH)
     '''
-    result = which(target, mode=mode, path=path)
+    # ensure it is not a symlink
+    result = Path(which(target, mode=mode, path=path)).resolve()
     if result is None:
         raise FileNotFoundError(f'Failed to find {target}')
     if parent_level:
-        result = str(Path(result).parents[parent_level])
-    return result
+        result = result.parents[parent_level]
+    return str(result)
 
 def get_constant_class(name='Constant', namespace={}, slots=(), bases=()):
     '''

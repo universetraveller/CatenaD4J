@@ -1,5 +1,5 @@
 from argparse import ArgumentParser, HelpFormatter
-from sys import stdout, stderr
+from sys import stderr
 
 class RootArgumentParser(ArgumentParser):
     '''

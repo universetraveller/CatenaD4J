@@ -1,4 +1,4 @@
-from loaders.loader import Loader
+from .loader import Loader
 
 _loaders = {
 }
@@ -22,13 +22,19 @@ def register_loader(name: str, loader: Loader):
     _register_loader(name=name, loader=loader)
 
 
-def register_loader_lazy(name, package, clazz):
+_globals = None
+def register_loader_lazy(name, package, clazz, level):
     '''
         Experimental lazy import implementation for loaders
     '''
+    global _globals
+    if _globals is None:
+        _globals = globals()
+
     def __new__(cls, *args, **kwargs):
         _loaders.pop(name)
-        m = __import__(package)
+        from importlib import __import__
+        m = __import__(package, globals=_globals, level=level)
         clz = getattr(m, clazz)
         _loaders[name] = clz
         return clz(*args, **kwargs)

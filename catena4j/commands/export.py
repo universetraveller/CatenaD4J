@@ -1,5 +1,5 @@
-from cli.manager import _create_command
-from dispatcher import ExecutionContext
+from ..cli.manager import _create_command
+from ..dispatcher import ExecutionContext
 from argparse import RawDescriptionHelpFormatter
 
 _desc = '''Properties:

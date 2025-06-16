@@ -4,10 +4,10 @@
 '''
 from argparse import Namespace
 from typing import Callable
-from util import get_constant_class
+from .util import get_constant_class
 from pathlib import Path
 
-_c4j_home = Path(__file__).parents[1]
+_c4j_home = Path(__file__).parent.parent.absolute()
 
 _config = None
 _config_mapping: dict = None
@@ -25,7 +25,7 @@ def _build_system_read_only_obj(name, env):
     return t()
 
 def initialize_config():
-    import config
+    from . import config
     global _config_mapping
     _config_mapping = config.__dict__.copy()
     for name in config.__dict__:

@@ -4,18 +4,18 @@
     Default implementations are provided but the code could be modified by
     users on demand
 '''
-import cli.manager
-import env
-from env import register_env_constructor
-from dispatcher import CommandDispatcher
-from _bootstrap import (
+from .cli import manager as cli_manager
+from . import env
+from .env import register_env_constructor
+from .dispatcher import CommandDispatcher
+from ._bootstrap import (
     register_bootstrap_function,
     register_entry_point,
     register_initialization_order,
     create_context
 )
 import os
-import util
+from . import util
 from pathlib import Path
 
 def _initialize_env():
@@ -41,7 +41,7 @@ def initialize_commands():
     '''
         Deafult implementation of commands initialization
     '''
-    from commands import (
+    from .commands import (
         register,
         _register,
         export,
@@ -55,13 +55,13 @@ def initialize_loaders():
     '''
         Deafult implementation of loaders initialization
     '''
-    from loaders import (
+    from .loaders import (
         register_loader,
         _register_loader,
         register_loader_lazy,
         project_loader
     )
-    register_loader_lazy('default', 'loaders.project_loader', 'ProjectLoader')
+    register_loader_lazy('default', 'project_loader', 'ProjectLoader', 1)
 
 register_bootstrap_function(initialize_loaders)
 
@@ -69,7 +69,7 @@ def start_cli():
     '''
         Deafult implementation of the entry point
     '''
-    args = cli.manager._root_parser.parse_args()
+    args = cli_manager._root_parser.parse_args()
     target = getattr(args, env._config.command_dest)
     delattr(args, env._config.command_dest)
     dispatcher = CommandDispatcher(env._context)
@@ -91,3 +91,15 @@ def initialize_system(system):
 register_initialization_order(initialize_system)
 
 system = create_context()
+'''
+    This object serves as the entry of the system.
+
+    To extend this package, change the entry point and/or the initialization process
+    using the related functions.
+
+    To use this package as a library, call related initialization functions before
+    accessing the components.
+
+    Before the start attribute is accessed, the order of initialization functions
+    to be called and the entry point could be changed.
+'''

@@ -1,4 +1,4 @@
-from loaders.loader import ContextAwareLoader
+from .loader import ContextAwareLoader
 
 class ProjectLoader(ContextAwareLoader):
     pass

@@ -1,30 +1,27 @@
 '''
     Low level system initialization APIs
 '''
-import env
-from env import (
+from . import env
+from .env import (
     initialize_config,
     initialize_env,
     initialize_system_context,
 )
-from cli.manager import init_root_parser, _init_subcommands
+from .cli.manager import init_root_parser, _init_subcommands
 class BootstrapError(Exception):
     pass
 
-_reserved_bootstrap_functions = {'start'}
 class _StartupContext:
     def __init__(self, **kwargs):
         for name in kwargs:
             setattr(self, name, kwargs[name])
-        for name in _reserved_bootstrap_functions:
-            kwargs[name] = None
         super().__setattr__('functions', kwargs)
 
     def __getattribute__(self, name: str):
         if name.startswith('__') and name.endswith('__'):
             return super().__getattribute__(name)
         if name not in super().__getattribute__('functions'):
-            raise BootstrapError(f'Could not found bootstrap function {name}')
+            raise BootstrapError(f'Could not find bootstrap function {name}')
         return super().__getattribute__(name)()
 
 
@@ -43,9 +40,12 @@ def initialize_environment():
     initialize_system_context()
 
 def initialize_user_setup():
-    import user_setup
+    from . import user_setup
 
-_bootstrap_functions = {}
+_reserved_bootstrap_functions = {
+    'start': None
+}
+_bootstrap_functions = _reserved_bootstrap_functions.copy()
 _start = None
 _initialize = None
 def register_bootstrap_function(f):
@@ -67,13 +67,9 @@ def create_context():
         Create a context object representing the abstract startup process,
         which has a entry to call in the startup script using context.start
 
-        _start, _initialize and _bootstrap_functions are hard coded in the
-        function code because in most cases this function would be called
+        Variables _start, _initialize and _bootstrap_functions are hard coded
+        in the function code because in most cases this function would be called
         only once.
-
-        Though they are not set as arguments, they can be chnaged using the
-        register_xxx functions, and this function would create a new context
-        based on the changed values.
     '''
     if _start is None:
         raise BootstrapError(f'Entry point of the program is not set')

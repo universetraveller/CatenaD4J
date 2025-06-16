@@ -1,4 +1,4 @@
-from cli.parser import RootArgumentParser, LeafArgumentParser, RootHelpFormatter
+from .parser import RootArgumentParser, LeafArgumentParser, RootHelpFormatter
 from argparse import _SubParsersAction
 
 _root_parser: RootArgumentParser = None
