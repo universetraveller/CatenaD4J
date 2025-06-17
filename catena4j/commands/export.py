@@ -15,11 +15,13 @@ _desc = '''Properties:
   tests.relevant    Relevant tests that touch at least one of the modified sources
   tests.trigger     Trigger tests that expose the bug'''
   
+_parser = None
 def initialize():
-    parser = _create_command('export', description=_desc, formatter_class=RawDescriptionHelpFormatter, help='export a version-specific property', add_help=False)
-    parser.add_argument('-p', required=True, metavar='property_name')
-    parser.add_argument('-o', metavar='output_file')
-    parser.add_argument('-w', metavar='work_dir')
+    global _parser
+    _parser = _create_command('export', description=_desc, formatter_class=RawDescriptionHelpFormatter, help='export a version-specific property', add_help=False)
+    _parser.add_argument('-p', required=True, metavar='property_name')
+    _parser.add_argument('-o', metavar='output_file')
+    _parser.add_argument('-w', metavar='work_dir')
 
 def run(context: ExecutionContext):
     pass

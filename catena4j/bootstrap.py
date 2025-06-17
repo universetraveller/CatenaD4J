@@ -12,7 +12,7 @@ from ._bootstrap import (
     register_bootstrap_function,
     register_entry_point,
     register_initialization_order,
-    create_context
+    StartupContext as system
 )
 import os
 from . import util
@@ -59,7 +59,6 @@ def initialize_loaders():
         register_loader,
         _register_loader,
         register_loader_lazy,
-        project_loader
     )
     register_loader_lazy('default', 'project_loader', 'ProjectLoader', 1)
 
@@ -70,8 +69,9 @@ def start_cli():
         Deafult implementation of the entry point
     '''
     args = cli_manager._root_parser.parse_args()
-    target = getattr(args, env._config.command_dest)
-    delattr(args, env._config.command_dest)
+    dest = env._config.cli_command_dest
+    target = getattr(args, dest)
+    delattr(args, dest)
     dispatcher = CommandDispatcher(env._context)
     context = dispatcher.get_execution_context(args=args, cli=False)
     context.run(target=target)
@@ -89,17 +89,3 @@ def initialize_system(system):
     system.initialize_user_setup
 
 register_initialization_order(initialize_system)
-
-system = create_context()
-'''
-    This object serves as the entry of the system.
-
-    To extend this package, change the entry point and/or the initialization process
-    using the related functions.
-
-    To use this package as a library, call related initialization functions before
-    accessing the components.
-
-    Before the start attribute is accessed, the order of initialization functions
-    to be called and the entry point could be changed.
-'''

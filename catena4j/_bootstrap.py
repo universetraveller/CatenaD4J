@@ -11,19 +11,64 @@ from .cli.manager import init_root_parser, _init_subcommands
 class BootstrapError(Exception):
     pass
 
-class _StartupContext:
-    def __init__(self, **kwargs):
-        for name in kwargs:
-            setattr(self, name, kwargs[name])
-        super().__setattr__('functions', kwargs)
+_start = None
+_initialize = None
 
-    def __getattribute__(self, name: str):
+def start():
+    if _start is None:
+        raise BootstrapError(f'Entry point of the program is not set')
+
+    if _initialize is None:
+        raise BootstrapError(f'Intialization order is not set')
+
+    _initialize(StartupContext)
+    _start()
+
+_reserved_bootstrap_functions = {
+    'start': start
+}
+_bootstrap_functions = _reserved_bootstrap_functions.copy()
+
+def register_bootstrap_function(f):
+    name = f.__name__
+    if name in _reserved_bootstrap_functions:
+        raise BootstrapError(f'Name {name} is reserved and could not be registered')
+    _bootstrap_functions[name] = f
+
+def register_entry_point(f):
+    global _start
+    _start = f
+
+def register_initialization_order(f):
+    global _initialize
+    _initialize = f
+
+class _StartupContext(type):
+    def __getattribute__(cls, name: str):
         if name.startswith('__') and name.endswith('__'):
             return super().__getattribute__(name)
-        if name not in super().__getattribute__('functions'):
+        if name not in _bootstrap_functions:
             raise BootstrapError(f'Could not find bootstrap function {name}')
-        return super().__getattribute__(name)()
+        return _bootstrap_functions[name]()
 
+class StartupContext(metaclass=_StartupContext):
+    '''
+        This class serves as the entry of the system.
+
+        To extend this package, change the entry point and/or the initialization process
+        using the related functions.
+
+        To use this package as a library, call related initialization functions before
+        accessing the components.
+
+        Before the start attribute is accessed, the order of initialization functions
+        to be called and the entry point could be changed.
+    '''
+    def __new__(cls):
+        '''
+            For setuptools's entry_points setting
+        '''
+        cls.start
 
 def initialize_cli():
     config = env._config
@@ -41,50 +86,6 @@ def initialize_environment():
 
 def initialize_user_setup():
     from . import user_setup
-
-_reserved_bootstrap_functions = {
-    'start': None
-}
-_bootstrap_functions = _reserved_bootstrap_functions.copy()
-_start = None
-_initialize = None
-def register_bootstrap_function(f):
-    name = f.__name__
-    if name in _reserved_bootstrap_functions:
-        raise BootstrapError(f'Name {name} is reserved and could not be registered')
-    _bootstrap_functions[name] = f
-
-def register_entry_point(f):
-    global _start
-    _start = f
-
-def register_initialization_order(f):
-    global _initialize
-    _initialize = f
-
-def create_context():
-    '''
-        Create a context object representing the abstract startup process,
-        which has a entry to call in the startup script using context.start
-
-        Variables _start, _initialize and _bootstrap_functions are hard coded
-        in the function code because in most cases this function would be called
-        only once.
-    '''
-    if _start is None:
-        raise BootstrapError(f'Entry point of the program is not set')
-
-    if _initialize is None:
-        raise BootstrapError(f'Intialization order is not set')
-
-    context = _StartupContext(**_bootstrap_functions)
-
-    def start():
-        _initialize(context)
-        _start()
-
-    context.start = start
-    return context
 
 register_bootstrap_function(initialize_environment)
 register_bootstrap_function(initialize_cli)

@@ -33,7 +33,6 @@ def register_loader_lazy(name, package, clazz, level):
 
     def __new__(cls, *args, **kwargs):
         _loaders.pop(name)
-        from importlib import __import__
         m = __import__(package, globals=_globals, level=level)
         clz = getattr(m, clazz)
         _loaders[name] = clz
