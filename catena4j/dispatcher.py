@@ -4,8 +4,21 @@ from argparse import Namespace
 
 class ExecutionContext(Context):
     CLI = 0
+    '''
+        Run as normal command line interface
+    '''
     API = 1
+    '''
+        Standard output and file output would be ignored
+        
+        Commands run in this mode would only do computation tasks and return
+        the result.
+    '''
     def __init__(self, args, mode, dispatcher):
+        '''
+            This function assumes users do not set general attribute names,
+            and would override attributes args, mode and dispatcher if exists
+        '''
         super().__init__(**dispatcher.context.as_dict())
         self.args: Namespace = args
         self.mode: int = mode

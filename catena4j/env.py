@@ -81,3 +81,6 @@ class Context(Namespace):
             Get a modifiable version of system context
         '''
         return Context(**_context_mapping)
+
+    def copy(self):
+        return Context(**self.as_dict())

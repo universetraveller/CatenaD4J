@@ -2,6 +2,24 @@ from argparse import Namespace
 from pathlib import Path
 from typing import Callable, Tuple
 from shutil import which
+from sys import stdout, stderr, getdefaultencoding
+from locale import getpreferredencoding
+import subprocess
+
+def write_file(file: Path, content: str):
+    if not file.parent.is_dir():
+        file.parent.mkdir(parents=True)
+    with file.open('w') as f:
+        f.write(content)
+
+def read_file(file: Path):
+    if file.is_file():
+        with file.open() as f:
+            return f.read()
+    return None
+
+def get_cache_path(context: Namespace, *parts):
+    return Path(context.c4j_home, context.rel_cache_dir, *parts)
 
 def search_cache(cache: Path, check: Callable=None, fix: Tuple=None, args=(), kwargs={}):
     '''
@@ -12,24 +30,23 @@ def search_cache(cache: Path, check: Callable=None, fix: Tuple=None, args=(), kw
 
         check: Function to check if the result should be updated
 
+        when check is None, the default behaviour is cache miss
+
         fix: Function to get a updated result
+
+        when fix is None, the default behaviour is raising error
 
         args and kwargs: arguments of the fix function
     '''
-    if cache.is_file():
-        with cache.open() as f:
-            content = f.read()
-
-        if check and check(content):
-            return content
+    content = read_file(cache)
+    if content and check and check(content):
+        return content
 
     if not fix:
         raise TypeError('Cache miss occured but no fix function is provided')
+
     content = fix(*args, **kwargs)
-    if not cache.parent.is_dir():
-        cache.parent.mkdir()
-    with cache.open('w') as f:
-        f.write(content)
+    write_file(cache, content)
     return content
 
 def find_path(target, parent_level=None, mode=1, path=None):
@@ -59,3 +76,53 @@ def build_args(**kwargs):
         Tool function to create args object
     '''
     return Namespace(**kwargs)
+
+def read_properties(*path_parts):
+    props = {}
+    content = read_file(Path(*path_parts))
+    if content is None:
+        return None
+    lines = content.splitlines()
+    for line in lines:
+        index = line.find('=')
+        props[line[:index]] = line[index + 1:]
+    return props
+
+def printc():
+    pass
+
+def print_result(result: str, out=None):
+    if out is None:
+        out = stdout
+    out.write(result)
+
+def get_console_encoding():
+    return stdout.encoding or getpreferredencoding() or getdefaultencoding() or stderr.encoding
+
+def get_toolkit_command(context: Namespace, *args, basedir=None):
+    if basedir is None:
+        basedir = context.cwd
+    d4j_home = context.d4j_home
+    c4j_home = context.c4j_home
+    ant_cp = str(Path(d4j_home, context.d4j_rel_ant_lib))
+    toolkit_cp = str(Path(c4j_home, context.c4j_rel_toolkit_lib))
+    d4j_props = str(Path(c4j_home, context.c4j_rel_d4j_properties))
+    cmd = ['java', '-cp', f':{ant_cp}:{toolkit_cp}', f'-Dbasedir={basedir}',
+           f'-Dd4j.home={d4j_home}', f'-Dc4j.d4j.properties={d4j_props}']
+    cmd.extend(args)
+    return cmd
+
+def run_command(cmd, cwd=None, timeout=None):
+    try:
+        finished = subprocess.run(cmd,
+                                  capture_output=True,
+                                  cwd=cwd,
+                                  timeout=timeout)
+        finished.check_returncode()
+        return True, finished.stdout, finished.stderr
+    except subprocess.CalledProcessError:
+        return False, finished.stdout, finished.stderr
+    except subprocess.TimeoutExpired:
+        return (False,
+                bytes('TIMEOUT', 'utf-8'),
+                bytes('Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout), 'utf-8'))

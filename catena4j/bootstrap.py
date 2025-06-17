@@ -31,7 +31,7 @@ def _initialize_env():
                                       lambda p : Path(p, 'framework', 'bin', 'defects4j').is_file(),
                                       util.find_path,
                                       ('defects4j', 2)),
-        'workdir': os.getcwd()
+        'cwd': os.getcwd()
     }
     return _env
 
@@ -73,7 +73,7 @@ def start_cli():
     target = getattr(args, dest)
     delattr(args, dest)
     dispatcher = CommandDispatcher(env._context)
-    context = dispatcher.get_execution_context(args=args, cli=False)
+    context = dispatcher.get_execution_context(args=args, cli=True)
     context.run(target=target)
 
 register_entry_point(start_cli)

@@ -7,7 +7,7 @@ def main():
     print('Generate the startup script')
     print('Add executable to PATH')
 
-register_entry_point(main)
+#register_entry_point(main)
 
 if __name__ == '__main__':
     from catena4j.bootstrap import system
