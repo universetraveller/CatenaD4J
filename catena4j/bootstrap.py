@@ -81,6 +81,27 @@ register_entry_point(start_cli)
 def initialize_system(system):
     '''
         Default definition of initialization order for the system
+
+        Example: Change the bootstrap process without modifying this module
+        
+        from bootstrap import (
+            register_bootstrap_function,
+            initialize_system,
+            register_initialization_order
+        )
+
+        def custom_initialization():
+            print('hello')
+
+        register_bootstrap_function(custom_initialization)
+
+        def updated_order(system):
+            initialize_system(system)
+            system.custom_initialization
+
+        register_initialization_order(updated_order)
+
+        The previous code should be executed before accessing system.start
     '''
     system.initialize_environment
     system.initialize_cli

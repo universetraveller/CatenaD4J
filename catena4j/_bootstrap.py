@@ -15,6 +15,14 @@ _start = None
 _initialize = None
 
 def start():
+    '''
+        The true entry point of the program
+
+        Using this function after bootstrap is imported is fine
+        but invoking it directly would cause BootstrapError raised
+        bacause the entry point and the initialization order are
+        both set using the high level initialization API.
+    '''
     if _start is None:
         raise BootstrapError(f'Entry point of the program is not set')
 
