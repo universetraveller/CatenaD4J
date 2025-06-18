@@ -31,7 +31,8 @@ def _initialize_env():
                                       lambda p : Path(p, 'framework', 'bin', 'defects4j').is_file(),
                                       util.find_path,
                                       ('defects4j', 2)),
-        'cwd': os.getcwd()
+        'cwd': os.getcwd(),
+        '__d4j_cache__': {}
     }
     return _env
 

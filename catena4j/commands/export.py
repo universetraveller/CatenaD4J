@@ -13,6 +13,7 @@ from ..util import (
 from argparse import RawDescriptionHelpFormatter
 from os import linesep
 from pathlib import Path
+from .. import d4jutil
 
 d4j_static = {
     'classes.relevant' : 'Classes loaded by the triggering tests',
@@ -60,18 +61,18 @@ def read_property_from(prop, path):
         _parser.error(f'Could not find property {prop} from {str(path)}')
     return result.strip()
 
-def query_c4j(prop, proj, bid, cid, wd, context=None):
+def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
     '''
         If cid is None, it would be ignored
     '''
     if cid is None:
-        return query_d4j_static(prop=prop, proj=proj, bid=bid, wd=wd, context=context)
+        return query_d4j_static(prop=prop, proj=proj, bid=bid, wd=wd, context=context, vtag=vtag)
 
     path = Path(context.c4j_home, context.c4j_rel_projects, proj, bid, f'{cid}.{prop}')
 
     return read_property_from(prop, path)
 
-def query_d4j_static(prop, proj, bid, wd, context=None):
+def query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
     '''
         For all properties that could compute using files in defects4j's repository,
         including properties belong to c4j_props
@@ -86,9 +87,9 @@ def query_d4j_static(prop, proj, bid, wd, context=None):
             return result
         return linesep.join(result.split(','))
 
-    return _query_d4j_static(prop=prop, proj=proj, bid=bid, context=context)
+    return _query_d4j_static(prop=prop, proj=proj, bid=bid, wd=wd, context=context, vtag=vtag)
 
-def _query_d4j_static(prop, proj, bid, context=None):
+def _query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
     '''
         Version without reading cache file
 
@@ -96,26 +97,23 @@ def _query_d4j_static(prop, proj, bid, context=None):
 
         See: defects4j/framework/core/Project.pm line 465 and line 1261
     '''
-    path = None
     if prop == 'classes.modified':
-        path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'modified_classes', f'{bid}.src')
+        return d4jutil.get_classes_modified(proj, bid, context)
     elif prop == 'classes.relevant':
-        path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'loaded_classes', f'{bid}.src')
+        return d4jutil.get_classes_relevant(proj, bid, context)
     elif prop == 'tests.relevant':
-        path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'relevant_tests', bid)
-    
-    if path is not None:
-        return read_property_from(prop, path)
+        return d4jutil.get_tests_relevant(proj, bid, context)
+    elif prop == 'tests.trigger':
+        return d4jutil.get_tests_trigger(proj, bid, context)
 
-    if prop == 'tests.trigger':
-        path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'trigger_tests', bid)
-        to_parse = read_property_from(prop, path)
-        # TODO
+    is_buggy = True
+    if vtag == 'FIXED':
+        is_buggy = False
 
     if prop == 'dir.src.classes':
-        pass
+        return d4jutil.get_dir_src_classes(proj, bid, wd, is_buggy, context)
     elif prop == 'dir.src.tests':
-        pass
+        return d4jutil.get_dir_src_tests(proj, bid, wd, is_buggy, context)
 
 def query_d4j_dynamic(prop, proj, wd, context=None):
     '''
@@ -164,8 +162,8 @@ def handle_cache(prop, version_info, context, args, cache, content):
                       content)
 
 def parse_d4j_vid(vid):
-    tag = 'BUGGY' if vid[-1] == 'b' else 'f'
-    return vid[:-1], tag
+    bid, tag = d4jutil.parse_vid(vid)
+    return bid, 'BUGGY' if tag == 'b' else 'FIXED'
 
 def run(context: ExecutionContext):
     '''
@@ -214,14 +212,16 @@ def run(context: ExecutionContext):
                                     version_info['vid'],
                                     version_info['cid'],
                                     wd,
-                                    context)
+                                    context,
+                                    version_info['tag'])
     elif prop in d4j_static:
         # Trap to re-implmented version of defects4j
         result = cache or query_d4j_static(prop,
                                            version_info['pid'],
                                            version_info['vid'],
                                            wd,
-                                           context)
+                                           context,
+                                           version_info['tag'])
     elif prop in d4j_dynamic:
         # Call java toolkit
         result = cache or query_d4j_dynamic(prop,
