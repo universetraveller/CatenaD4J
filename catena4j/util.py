@@ -84,8 +84,12 @@ def read_properties(*path_parts):
         return None
     lines = content.splitlines()
     for line in lines:
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
         index = line.find('=')
-        props[line[:index]] = line[index + 1:]
+        if index != -1:
+            props[line[:index].rstrip()] = line[index + 1:].lstrip()
     return props
 
 def printc():

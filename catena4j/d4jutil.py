@@ -1,5 +1,6 @@
 from util import read_file
 from pathlib import Path
+from loaders import get_project_loader
 import re
 
 class Defects4JError(Exception):
@@ -10,7 +11,7 @@ def _get_from_project(proj, bid, context, folder, suffix):
     path = Path(context.d4j_home, context.d4j_rel_projects, proj, folder, file_name)
     content = read_file(path)
     if content is None:
-        raise FileNotFoundError(f'Failed to read {str(path)}')
+        raise FileNotFoundError(f'Failed to read {path}')
     return content.strip()
 
 def get_classes_modified(proj, bid, context):
@@ -114,7 +115,7 @@ def read_active_bugs(context, proj):
     path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'active-bugs.csv')
     content = read_file(path)
     if content is None:
-        raise Defects4JError(f'Cannot open active bugs file {str(path)}')
+        raise Defects4JError(f'Cannot open active bugs file {path}')
     
     lines = content.splitlines()
 
@@ -153,6 +154,7 @@ def parse_vid(vid):
     bid, tag = vid[:-1], vid[-1]
     if bid.isnumeric() and tag in {'b', 'f'}:
         return bid, tag
+
     raise Defects4JError(f'Wrong version_id: {vid} -- expected \\d+[bf]!')
 
 def _get_rev_id(proj, bid, is_buggy, context):
@@ -163,7 +165,7 @@ def read_dir_layout(context, proj):
     path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'dir-layout.csv')
     content = read_file(path)
     if content is None:
-        raise Defects4JError(f'Cannot open {str(path)}')
+        raise Defects4JError(f'Cannot open {path}')
     
     lines = content.splitlines()
 
@@ -185,10 +187,20 @@ def get_dir_src_cache(proj, bid, is_buggy, context):
 
 def get_dir_src_classes(proj, bid, wd, is_buggy, context):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
+
     if dir_src is not None:
         return dir_src[0]
 
+    loader = get_project_loader(proj)(context)
+
+    return loader.src_layout
+
 def get_dir_src_tests(proj, bid, wd, is_buggy, context):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
+
     if dir_src is not None:
         return dir_src[1]
+
+    loader = get_project_loader(proj)(context)
+
+    return loader.test_layout

@@ -61,7 +61,27 @@ def initialize_loaders():
         _register_loader,
         register_loader_lazy,
     )
+    def register_project_loader(proj: str):
+        register_loader_lazy(proj, proj, f'{proj}Loader', 1)
+
     register_loader_lazy('default', 'project_loader', 'ProjectLoader', 1)
+    register_project_loader('Chart')
+    register_project_loader('Cli')
+    register_project_loader('Closure')
+    register_project_loader('Codec')
+    register_project_loader('Collections')
+    register_project_loader('Compress')
+    register_project_loader('Csv')
+    register_project_loader('Gson')
+    register_project_loader('JacksonCore')
+    register_project_loader('JacksonDatabind')
+    register_project_loader('JacksonXml')
+    register_project_loader('Jsoup')
+    register_project_loader('JxPath')
+    register_project_loader('Lang')
+    register_project_loader('Math')
+    register_project_loader('Mockito')
+    register_project_loader('Time')
 
 register_bootstrap_function(initialize_loaders)
 

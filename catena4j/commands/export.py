@@ -58,7 +58,7 @@ def initialize():
 def read_property_from(prop, path):
     result = read_file(path)
     if result is None:
-        _parser.error(f'Could not find property {prop} from {str(path)}')
+        _parser.error(f'Could not find property {prop} from {path}')
     return result.strip()
 
 def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
@@ -122,7 +122,7 @@ def query_d4j_dynamic(prop, proj, wd, context=None):
     enc = get_console_encoding()
     xml = Path(context.c4j_home, context.c4j_rel_project_export_xml.format(project=proj))
     main = context.c4j_toolkit_export_main
-    cmd = get_toolkit_command(context, main, str(xml), prop, basedir=wd)
+    cmd = get_toolkit_command(context, main, xml, prop, basedir=wd)
     ret, out, err = run_command(cmd=cmd, cwd=wd)
     if not ret:
         message = 'Failed to run command: {}\n\n{}\n\n{}'

@@ -3,6 +3,9 @@ from .loader import Loader
 _loaders = {
 }
 
+_loader_mapping = {
+}
+
 class LoaderError(Exception):
     pass
 
@@ -52,3 +55,29 @@ def get_loader(name: str):
 
 def remove_loader(name: str):
     _loaders.pop(name, None)
+
+def set_project_loader(proj: str, loader: str):
+    '''
+        Set the name of loader used to load a project
+    '''
+    _loader_mapping[proj] = loader
+
+def get_project_loader(proj: str):
+    '''
+        Get the loader used to load a project
+
+        Search list: registered name, project's name and default
+    '''
+    # use a registered name or the project's name
+    loader_name = _loader_mapping.get(proj, proj)
+
+    if loader_name in _loaders:
+        return _loaders.get(loader_name)
+
+    # fallback to default loader
+    if 'default' in _loaders:
+        return _loaders.get('default')
+
+    raise LoaderError(f'No loader found for project {proj}')
+        
+

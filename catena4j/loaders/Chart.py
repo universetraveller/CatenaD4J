@@ -1,4 +1,8 @@
 from .project_loader import ProjectLoader
 
 class ChartLoader(ProjectLoader):
-    pass
+    def determine_layout(self):
+        return {
+            'src': 'source',
+            'test': 'tests'
+        }
