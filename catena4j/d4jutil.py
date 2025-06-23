@@ -12,6 +12,8 @@ def _get_from_project(proj, bid, context, folder, suffix):
     content = read_file(path)
     if content is None:
         raise FileNotFoundError(f'Failed to read {path}')
+    # performance overhead introduced here if this function is used for export command
+    # but this overhead is minimal
     return content.strip().splitlines()
 
 def get_classes_modified(proj, bid, context):

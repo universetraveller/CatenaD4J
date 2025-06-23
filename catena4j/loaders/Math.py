@@ -2,6 +2,7 @@ from .project_loader import ProjectLoader
 from . import LoaderError
 from ..util import read_file
 import re
+from pathlib import Path
 
 # with lazy import the overhead of compilation could be minimal
 _layout_pattern_1 = {
@@ -23,9 +24,9 @@ class MathLoader(ProjectLoader):
             file = 'project.xml'
             layout_pattern = _layout_pattern_2
         else:
-            raise LoaderError(f'Unknown layout for working directory: {cwd}')
+            raise LoaderError(f'Unknown layout for working directory: {self.context.cwd}')
 
-        props = read_file(self.context.cwd, file)
+        props = read_file(Path(self.context.cwd, file))
 
         if props is None:
             return None
@@ -45,7 +46,7 @@ class MathLoader(ProjectLoader):
 
             test = test_layout_pattern.match(line)
             if test:
-                layout['test'] = src.group(1).strip()
+                layout['test'] = test.group(1).strip()
                 continue
 
         if 'src' in layout and 'test' in layout:
@@ -57,6 +58,6 @@ class MathLoader(ProjectLoader):
         layout = self._search_layout(1) or self._search_layout(2)
 
         if layout is None:
-            raise LoaderError(f'Unknown layout for working directory: {cwd}')
+            raise LoaderError(f'Unknown layout for working directory: {self.context.cwd}')
         
         return layout
