@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
 
@@ -106,25 +109,37 @@ public class Defects4JExport extends Defects4JStartup {
 		return project.getReference("d4j.test.classpath").toString();
 	}
 
-	public String getRelDirBin(String property) {
-		return project.getBaseDir()
-						.toPath()
-						.relativize(
-							Paths.get(project.getProperty(property))
-						).toString();
+	public String getRelativePath(String path) {
+		java.nio.file.Path absOrRel = Paths.get(path).normalize();
+
+		if(absOrRel.isAbsolute())
+			return project.getBaseDir()
+						  .toPath()
+						  .relativize(absOrRel)
+						  .toString();
+
+		return absOrRel.toString();
 	}
 
 	public String getDirBinClasses() {
-		return getRelDirBin("classes.dir");
+		return getRelativePath(project.getProperty("classes.dir"));
 	}
 
 	public String getDirBinTests() {
-		return getRelDirBin("test.classes.dir");
+		return getRelativePath(project.getProperty("test.classes.dir"));
 	}
 
 	private static String formatGetTestsAll(String path, Pattern prefix, Pattern suffix) {
 		path = prefix.matcher(path).replaceFirst("");
 		return suffix.matcher(path).replaceFirst("");
+	}
+
+	private void addExtraFiles(String ref, List<File> files) {
+		FileSet paths = (FileSet) project.getReference(ref);
+		DirectoryScanner scanner = paths.getDirectoryScanner();
+		File base = scanner.getBasedir();
+		for(String file : scanner.getIncludedFiles())
+			files.add(new File(base, file));
 	}
 
 	public String getTestsAll() {
@@ -133,6 +148,26 @@ public class Defects4JExport extends Defects4JStartup {
 		String srcPrefix = Paths.get(project.getBaseDir().getAbsolutePath(),
 										project.getProperty("d4j.dir.src.tests"))
 								.toString();
+
+		String[] files = paths.getDirectoryScanner().getIncludedFiles();
+
+		String process = project.getProperty("c4j.tests.getter.predict");
+		if(process != null) {
+			List<File> fileInstances = new ArrayList<>();
+
+			for(String file : files)
+				fileInstances.add(new File(srcPrefix, file));
+
+			Pattern testPattern = Pattern.compile(process);
+
+			process = project.getProperty("c4j.tests.getter.predict.extra_files");
+			if(process != null)
+				for(String ref : process.split(","))
+					addExtraFiles(ref, fileInstances);
+
+			return String.join(project.getProperty("line.separator"),
+							   ClassesCollector.getClasses(fileInstances, testPattern));
+		} 
 
 		String binPrefix = project.getProperty("test.home");
 
@@ -148,12 +183,6 @@ public class Defects4JExport extends Defects4JStartup {
 												.toString());
 
 		Pattern suffix = Pattern.compile("\\.(?:java|class)$");
-
-		String[] files = paths.getDirectoryScanner().getIncludedFiles();
-
-		String process = project.getProperty("c4j.tests.getter.predict");
-		if(process != null) 
-			return String.join(project.getProperty("line.separator"), ClassesCollector.getClasses(files, srcPrefix, Pattern.compile(process)));
 
 		for(int i = 0; i < files.length; ++ i)
 			files[i] = formatGetTestsAll(files[i], prefix, suffix);

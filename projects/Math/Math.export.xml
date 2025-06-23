@@ -68,6 +68,26 @@ of the checked-out project version.
     <hastarget targetname="compile-tests" newtargetname="compile.tests" setproperty="oldLayout" />
     -->
 
+    <taskdef name="checktargetexists" classname="io.github.universetraveller.ant.CheckTargetExists"/>
+
+    <checktargetexists target="compile-tests" setProperty="oldLayout" />
+
+    <!--
+    <scriptdef name="hastarget" language="javascript">
+      <attribute name="targetname" />
+      <attribute name="setproperty" />
+        <![CDATA[
+          var targetname = attributes.get("targetname");
+          var setproperty = attributes.get("setproperty");
+          if(project.getTargets().containsKey(targetname)) {
+            project.setProperty(setproperty, "yes");
+          }
+        ]]>
+    </scriptdef>
+
+    <hastarget targetname="compile-tests" setproperty="oldLayout" />
+    -->
+
     <if> <isset property="oldLayout" /> <then>
         <!-- Override build.classpath (used in the build file in the working
              directory) to make sure this compile-time dependency (for the sources)

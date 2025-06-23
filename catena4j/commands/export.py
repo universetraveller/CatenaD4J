@@ -79,7 +79,7 @@ def query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
     '''
 
     # in a defects4j working directory which may contain these properties
-    cached = read_properties(Path(wd, context.c4j_version_co_props))
+    cached = read_properties(Path(wd, context.d4j_version_co_props))
     d4j_prop = f'd4j.{prop}'
     if cached is not None and d4j_prop in cached:
         result = cached[d4j_prop]
@@ -98,13 +98,13 @@ def _query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
         See: defects4j/framework/core/Project.pm line 465 and line 1261
     '''
     if prop == 'classes.modified':
-        return d4jutil.get_classes_modified(proj, bid, context)
+        return linesep.join(d4jutil.get_classes_modified(proj, bid, context))
     elif prop == 'classes.relevant':
-        return d4jutil.get_classes_relevant(proj, bid, context)
+        return linesep.join(d4jutil.get_classes_relevant(proj, bid, context))
     elif prop == 'tests.relevant':
-        return d4jutil.get_tests_relevant(proj, bid, context)
+        return linesep.join(d4jutil.get_tests_relevant(proj, bid, context))
     elif prop == 'tests.trigger':
-        return d4jutil.get_tests_trigger(proj, bid, context)
+        return linesep.join(d4jutil.get_tests_trigger(proj, bid, context))
 
     is_buggy = True
     if vtag == 'FIXED':
@@ -122,7 +122,7 @@ def query_d4j_dynamic(prop, proj, wd, context=None):
     enc = get_console_encoding()
     xml = Path(context.c4j_home, context.c4j_rel_project_export_xml.format(project=proj))
     main = context.c4j_toolkit_export_main
-    cmd = get_toolkit_command(context, main, xml, prop, basedir=wd)
+    cmd = get_toolkit_command(context, main, str(xml), prop, basedir=wd)
     ret, out, err = run_command(cmd=cmd, cwd=wd)
     if not ret:
         message = 'Failed to run command: {}\n\n{}\n\n{}'
@@ -178,7 +178,11 @@ def run(context: ExecutionContext):
     '''
     args = context.args
     prop = args.p
-    wd = args.w or context.cwd
+
+    if args.w:
+        context.cwd = args.w
+
+    wd = context.cwd
 
     result = None
 

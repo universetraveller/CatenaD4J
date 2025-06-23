@@ -19,17 +19,14 @@ import com.sun.source.util.JavacTask;
 import com.sun.source.util.TreeScanner;
 
 public class ClassesCollector {
-    public static List<String> getClasses(String[] sourceFiles, String srcPrefix, Pattern pattern) {
+
+    public static List<String> getClasses(List<File> fileInstances, Pattern pattern) {
         List<String> results = new ArrayList<>();
 
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
 
-        List<File> fileIntances = new ArrayList<>();
-        for(String file : sourceFiles)
-            fileIntances.add(new File(srcPrefix, file));
-
-        Iterable<? extends JavaFileObject> files = fileManager.getJavaFileObjectsFromFiles(fileIntances);
+        Iterable<? extends JavaFileObject> files = fileManager.getJavaFileObjectsFromFiles(fileInstances);
         JavacTask task = (JavacTask) compiler.getTask(null, fileManager, null, null, null, files);
 
         try{

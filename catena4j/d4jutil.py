@@ -1,6 +1,6 @@
-from util import read_file
+from .util import read_file
 from pathlib import Path
-from loaders import get_project_loader
+from .loaders import get_project_loader
 import re
 
 class Defects4JError(Exception):
@@ -12,7 +12,7 @@ def _get_from_project(proj, bid, context, folder, suffix):
     content = read_file(path)
     if content is None:
         raise FileNotFoundError(f'Failed to read {path}')
-    return content.strip()
+    return content.strip().splitlines()
 
 def get_classes_modified(proj, bid, context):
     return _get_from_project(proj, bid, context, 'modified_classes', '.src')
@@ -36,7 +36,7 @@ def _parse_failing_tests(lines, full=False):
     methods = []
     asserts = {}
 
-    _max = len(lines)
+    _max = len(lines) - 1
     while idx < _max:
         idx += 1
         line = lines[idx]
@@ -53,7 +53,7 @@ def _parse_failing_tests(lines, full=False):
             failing_test = f'{clazz}::{method}'
             methods.append(failing_test)
 
-            if not full or idx + 1 >= _max:
+            if not full or idx >= _max:
                 continue
 
             reason = lines[idx + 1]
@@ -90,9 +90,9 @@ def _parse_failing_tests(lines, full=False):
 def get_tests_trigger(proj, bid, context):
     content = _get_from_project(proj, bid, context, 'trigger_tests', None)
     a, b, c = _parse_failing_tests(content.splitlines())
-    return ','.join(a + b)
+    return a + b
 
-def get_project_cache(context, proj, name, fallback, args, kwargs):
+def get_project_cache(context, proj, name, fallback, args=(), kwargs={}):
     cache = context.__d4j_cache__
 
     if proj not in cache:

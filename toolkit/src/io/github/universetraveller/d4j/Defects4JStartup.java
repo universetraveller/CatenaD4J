@@ -76,6 +76,8 @@ public class Defects4JStartup {
         project.setProperty("junit.jar", d4jHome + props.getProperty("rel.junit.jar"));
         project.setProperty("cobertura.jar", d4jHome + props.getProperty("rel.cobertura.jar"));
         project.setProperty("cobertura.lib", d4jHome + props.getProperty("rel.cobertura.lib"));
+
+        project.setProperty("d4j.dir.projects", d4jHome + props.getProperty("rel.d4j.dir.projects"));
     }
 
     public void initializeProperties(String basedir) {
