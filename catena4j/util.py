@@ -1,6 +1,6 @@
 from argparse import Namespace
 from pathlib import Path
-from typing import Callable, Tuple
+from typing import Callable, Iterable, Tuple
 from shutil import which
 from sys import stdout, stderr, getdefaultencoding
 from locale import getpreferredencoding
@@ -130,3 +130,24 @@ def run_command(cmd, cwd=None, timeout=None):
         return (False,
                 bytes('TIMEOUT', 'utf-8'),
                 bytes('Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout), 'utf-8'))
+
+def get_project_cache(cache, proj, name, fallback, args=(), kwargs={}):
+    if proj not in cache:
+        cache[proj] = {}
+
+    if name not in cache[proj]:
+        cache[proj][name] = fallback(*args, **kwargs)
+
+    return cache[proj][name]
+
+def close_project_cache(cache, proj, name):
+    if name:
+        cache[proj].pop(name)
+    else:
+        cache.pop(proj)
+
+def read_simple_csv(path, sep=',', remove_header=True):
+    f = read_file(path)
+    if f is None:
+        return None
+    return list(map(lambda l : l.split(sep), f.splitlines()[1 if remove_header else 0:]))

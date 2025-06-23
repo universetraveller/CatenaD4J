@@ -1,4 +1,4 @@
-from .util import read_file
+from .util import read_file, get_project_cache
 from pathlib import Path
 from .loaders import get_project_loader
 import re
@@ -94,25 +94,6 @@ def get_tests_trigger(proj, bid, context):
     a, b, c = _parse_failing_tests(content.splitlines())
     return a + b
 
-def get_project_cache(context, proj, name, fallback, args=(), kwargs={}):
-    cache = context.__d4j_cache__
-
-    if proj not in cache:
-        cache[proj] = {}
-
-    if name not in cache[proj]:
-        cache[proj][name] = fallback(*args, **kwargs)
-
-    return cache[proj][name]
-
-
-def close_project_cache(context, proj, name):
-    cache = context.__d4j_cache__
-    if name:
-        cache[proj].pop(name)
-    else:
-        cache.pop(proj)
-
 def read_active_bugs(context, proj):
     path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'active-bugs.csv')
     content = read_file(path)
@@ -160,7 +141,11 @@ def parse_vid(vid):
     raise Defects4JError(f'Wrong version_id: {vid} -- expected \\d+[bf]!')
 
 def _get_rev_id(proj, bid, is_buggy, context):
-    active_bugs = get_project_cache(context, proj, 'active-bugs', read_active_bugs, (context, proj))
+    active_bugs = get_project_cache(context.__d4j_cache__,
+                                    proj,
+                                    'active-bugs',
+                                    read_active_bugs,
+                                    (context, proj))
     return lookup_revision_id(active_bugs, bid, is_buggy)
 
 def read_dir_layout(context, proj):
@@ -180,7 +165,11 @@ def read_dir_layout(context, proj):
     return dir_layout
 
 def get_dir_layout(context, proj):
-    return get_project_cache(context, proj, 'dir-layout', read_dir_layout, (context, proj))
+    return get_project_cache(context.__d4j_cache__,
+                             proj,
+                             'dir-layout',
+                             read_dir_layout,
+                             (context, proj))
 
 def get_dir_src_cache(proj, bid, is_buggy, context):
     rev = _get_rev_id(proj, bid, is_buggy, context)

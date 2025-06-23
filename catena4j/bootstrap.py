@@ -32,7 +32,9 @@ def _initialize_env():
                                       util.find_path,
                                       ('defects4j', 2)),
         'cwd': os.getcwd(),
-        '__d4j_cache__': {}
+        # cache for each run
+        '__d4j_cache__': {},
+        '__c4j_cache__': {}
     }
     return _env
 
@@ -46,9 +48,14 @@ def initialize_commands():
         register,
         _register,
         export,
+        xids,
     )
     export.initialize()
     _register('export', export.run)
+    xids.initialize()
+    _register('pids', xids.run_pids)
+    _register('bids', xids.run_bids)
+    _register('cids', xids.run_cids)
 
 register_bootstrap_function(initialize_commands)
 
