@@ -24,7 +24,7 @@ def initialize():
     _clean.add_argument('-w', metavar='work_dir')
 
 def execute_compile(target, proj, wd, context, parser):
-    xml = Path(context.c4j_home, context.c4j_rel_project_execute_xml.format(project=proj))
+    xml = Path(context.c4j_home, context.c4j_rel_project_compile_xml.format(project=proj))
     toolkit_execute(context.c4j_toolkit_execute_main,
                     wd,
                     context,

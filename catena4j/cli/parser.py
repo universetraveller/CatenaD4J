@@ -1,5 +1,11 @@
-from argparse import ArgumentParser, HelpFormatter
+from argparse import ArgumentParser, HelpFormatter, _SubParsersAction
 from sys import stderr
+
+try:
+    from gettext import gettext as _
+except ImportError:
+    def _(message):
+        return message
 
 class RootArgumentParser(ArgumentParser):
     '''
@@ -10,11 +16,35 @@ class RootArgumentParser(ArgumentParser):
         self.print_help(stderr)
         self.exit(2)
 
+    def _get_current_subparser(self, args):
+        if self._subparsers is None:
+            return self
+
+        for action in self._subparsers._group_actions:
+            if not isinstance(action, _SubParsersAction):
+                continue
+
+            parsed = getattr(args, action.dest, None)
+            if parsed:
+                return action.choices.get(parsed, self)
+        
+        return self
+
+    def parse_args(self, args=None, namespace=None):
+        args, argv = self.parse_known_args(args, namespace)
+
+        if argv:
+            parser = self._get_current_subparser(args)
+            msg = _('unrecognized arguments: %s')
+            parser.error(msg % ' '.join(argv))
+
+        return args
+
 class RootHelpFormatter(HelpFormatter):
     def add_usage(self, usage, actions, groups, prefix=None):
         if actions:
             # get cleaner output for case that lots of subcommands exist
-            usage = '%(prog)s <command> [option]'
+            usage = _('%(prog)s <command> [option]')
 
         args = usage, actions, groups, prefix
         self._add_item(self._format_usage, args)
