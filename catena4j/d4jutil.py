@@ -2,16 +2,14 @@ from .util import read_file, get_project_cache
 from pathlib import Path
 from .loaders import get_project_loader
 import re
-
-class Defects4JError(Exception):
-    pass
+from .exceptions import Defects4JError
 
 def _get_from_project(proj, bid, context, folder, suffix):
     file_name = bid if suffix is None else f'{bid}{suffix}'
     path = Path(context.d4j_home, context.d4j_rel_projects, proj, folder, file_name)
     content = read_file(path)
     if content is None:
-        raise FileNotFoundError(f'Failed to read {path}')
+        raise Defects4JError(f'Failed to read {path}')
     # performance overhead induced here if this function is used for export command
     # but this overhead is minimal
     return content.strip().splitlines()

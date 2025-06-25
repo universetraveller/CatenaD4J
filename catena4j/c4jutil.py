@@ -1,13 +1,14 @@
 from pathlib import Path
 from .util import read_properties
 from . import d4jutil
+from .exceptions import Catena4JError
 
 D4J = 1
 C4J = 2
 def check_d4j_working_directory(wd: Path, context, parser):
     d4j = wd / context.d4j_version_props
     if not d4j.is_file():
-        parser.error(f'{str(wd)}  is not a valid working directory!')
+        raise Catena4JError(f'{str(wd)}  is not a valid working directory!')
 
 def check_working_directory(wd: Path, context, parser):
 
@@ -21,10 +22,10 @@ def parse_d4j_vid(vid):
     bid, tag = d4jutil.parse_vid(vid)
     return bid, 'BUGGY' if tag == 'b' else 'FIXED'
 
-def read_version_info(wd, context, parser):
+def read_version_info(wd, context):
     version_info = read_properties(wd, context.d4j_version_props)
     if version_info is None:
-        parser.error('Could not find version info. '
+        raise Catena4JError('Could not find version info. '
                       'Please check if current directory '
                       'is a project from defects4j or catena4j.')
 

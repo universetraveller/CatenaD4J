@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, HelpFormatter, _SubParsersAction
 from sys import stderr
+from os import linesep
 
 try:
     from gettext import gettext as _
@@ -12,7 +13,7 @@ class RootArgumentParser(ArgumentParser):
         Override some default behaviours for better experience
     '''
     def error(self, message: str):
-        self._print_message(f'{message}\n', stderr)
+        self._print_message(message + linesep, stderr)
         self.print_help(stderr)
         self.exit(2)
 

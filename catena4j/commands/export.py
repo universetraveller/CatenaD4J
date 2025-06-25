@@ -13,7 +13,7 @@ from os import linesep
 from os.path import abspath
 from pathlib import Path
 from .. import d4jutil
-from ..c4jutil import read_version_info
+from ..c4jutil import read_version_info, Catena4JError
 
 d4j_static = {
     'classes.relevant' : 'Classes loaded by the triggering tests',
@@ -58,7 +58,7 @@ def initialize():
 def read_property_from(prop, path):
     result = read_file(path)
     if result is None:
-        _parser.error(f'Could not find property {prop} from {path}')
+        raise Catena4JError(f'Could not find property {prop} from {path}')
     return result.strip()
 
 def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
@@ -123,7 +123,6 @@ def query_d4j_dynamic(prop, proj, wd, context=None):
     return toolkit_execute(context.c4j_toolkit_export_main,
                            wd,
                            context,
-                           parser=_parser,
                            args=(str(xml), prop))
 
 def get_export_cache(prop, pid, vid, cid, context):
@@ -207,7 +206,7 @@ def run(context: ExecutionContext):
                                             wd,
                                             context)
     else:
-        _parser.error(f'Unknown property {prop}')
+        raise Catena4JError(f'Unknown property {prop}')
     
     handle_cache(prop, version_info, context, args, cache, result)
 

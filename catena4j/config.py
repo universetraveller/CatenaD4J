@@ -33,3 +33,4 @@ d4j_version_props = '.defects4j.config'
 d4j_version_co_props = 'defects4j.build.properties'
 d4j_rel_projects = 'framework/projects'
 d4j_rel_repositories = 'project_repos'
+rich_output = True

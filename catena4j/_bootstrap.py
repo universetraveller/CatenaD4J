@@ -8,6 +8,8 @@ from .env import (
     initialize_system_context,
 )
 from .cli.manager import init_root_parser, _init_subcommands
+from .util import printc_encoding, TaskPrinter
+
 class BootstrapError(Exception):
     pass
 
@@ -80,12 +82,29 @@ class StartupContext(metaclass=_StartupContext):
 
 def initialize_cli():
     config = env._config
+
     init_root_parser(name=config.cli_program,
                      usage=config.cli_usage,
                      description=config.cli_description)
+
     _init_subcommands(title='Commands',
                       dest=config.cli_command_dest,
                       required=True)
+
+    if config.rich_output:
+        PRINT_START = '\033[1;34mRUNNING\033[0m'
+        PRINT_DONE = '\033[1;32mDONE\033[0m'
+        PRINT_FAIL = '\033[1;31mFAILED\033[0m'
+        if 'utf' in printc_encoding():
+            PRINT_START = '⏳ ' + PRINT_START
+            PRINT_DONE = '✅ ' + PRINT_DONE
+            PRINT_FAIL = '❌ ' + PRINT_FAIL
+    else:
+        PRINT_START = 'RUNNING'
+        PRINT_DONE = 'DONE'
+        PRINT_FAIL = 'FAILED'
+
+    TaskPrinter.configurate(start=PRINT_START, done=PRINT_DONE, fail=PRINT_FAIL)
 
 def initialize_environment():
     initialize_config()

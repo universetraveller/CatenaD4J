@@ -5,6 +5,8 @@ from shutil import which
 from sys import stdout, stderr, getdefaultencoding
 from locale import getpreferredencoding
 import subprocess
+from .exceptions import Catena4JError
+from os import linesep
 
 def write_file(file: Path, content: str):
     if not file.parent.is_dir():
@@ -43,7 +45,7 @@ def search_cache(cache: Path, check: Callable=None, fix: Tuple=None, args=(), kw
         return content
 
     if not fix:
-        raise TypeError('Cache miss occured but no fix function is provided')
+        raise Catena4JError('Cache miss occured but no fix function is provided')
 
     content = fix(*args, **kwargs)
     write_file(cache, content)
@@ -56,7 +58,7 @@ def find_path(target, parent_level=None, mode=1, path=None):
     # ensure it is not a symlink
     result = Path(which(target, mode=mode, path=path)).resolve()
     if result is None:
-        raise FileNotFoundError(f'Failed to find {target}')
+        raise Catena4JError(f'Failed to find {target}')
     if parent_level:
         result = result.parents[parent_level]
     return str(result)
@@ -92,8 +94,14 @@ def read_properties(*path_parts):
             props[line[:index].rstrip()] = line[index + 1:].lstrip()
     return props
 
-def printc():
-    pass
+def printc_flush():
+    stderr.flush()
+
+def printc_encoding():
+    return stderr.encoding.lower()
+
+def printc(content):
+    stderr.write(content)
 
 def print_result(result: str, out=None):
     if out is None:
@@ -131,14 +139,20 @@ def run_command(cmd, cwd=None, timeout=None):
                 bytes('TIMEOUT', 'utf-8'),
                 bytes('Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout), 'utf-8'))
 
-_META_EXEC_ERR_MSG = 'Failed to run command: {command}\n\n{stdout}\n\n{stderr}'
+_META_EXEC_ERR_MSG = ''.join(('Failed to run command: {command}',
+                      linesep, linesep,
+                      '{stdout}',
+                      linesep, linesep,
+                      '{stderr}',
+                      linesep))
 def toolkit_execute(main,
                     wd,
                     context,
+                    *,
                     meta_message=_META_EXEC_ERR_MSG,
-                    parser=None,
                     java_options=(),
-                    args=()):
+                    args=(),
+                    task_printer=None):
     enc = get_console_encoding()
 
     cmd = get_toolkit_command(context,
@@ -147,19 +161,27 @@ def toolkit_execute(main,
                               *args,
                               basedir=wd)
 
+    if task_printer is not None:
+        msg = ['Run command: ' + ' '.join(cmd)] if task_printer.verbose else []
+        task_printer.start(*msg)
+
     ret, out, err = run_command(cmd=cmd, cwd=wd)
 
+    out = out.decode(enc)
+
     if not ret:
+        if task_printer is not None:
+            task_printer.fail()
 
-        if parser is None:
-            from .cli.manager import get_root_parser
-            parser = get_root_parser()
+        raise Catena4JError(meta_message.format(command=' '.join(cmd),
+                                                stdout=out,
+                                                stderr=err.decode(enc)))
 
-        parser.error(meta_message.format(command=' '.join(cmd),
-                                         stdout=out.decode(enc),
-                                         stderr=err.decode(enc)))
+    if task_printer is not None:
+        msg = [out, err.decode(enc)] if task_printer.verbose else []
+        task_printer.done(*msg)
 
-    return out.decode(enc).strip()
+    return out.strip()
 
 def get_project_cache(cache, proj, name, fallback, args=(), kwargs={}):
     if proj not in cache:
@@ -181,3 +203,68 @@ def read_simple_csv(path, sep=',', remove_header=True):
     if f is None:
         return None
     return list(map(lambda l : l.split(sep), f.splitlines()[1 if remove_header else 0:]))
+    
+class TaskPrinter:
+    START = None
+    DONE = None
+    FAIL = None
+
+    @classmethod
+    def configurate(cls, start='RUNNING', done='DONE', fail='FAILED'):
+        cls.START = start
+        lstart = len(start)
+        cls.DONE = done + ' ' * (lstart - len(done))
+        cls.FAIL = fail + ' ' * (lstart - len(fail))
+
+    @staticmethod
+    def print_messages(messages):
+        for i in messages:
+            printc(i + linesep)
+
+    @classmethod
+    def _start(cls, msg):
+        printc(msg + cls.START)
+        printc_flush()
+
+    @classmethod
+    def _done(cls, msg):
+        printc(f'\r{msg}{TaskPrinter.DONE}{linesep}')
+
+    @classmethod
+    def _fail(cls, msg):
+        printc(f'\r{msg}{TaskPrinter.FAIL}{linesep}')
+
+    def __init__(self, title, anchor=75):
+        self.msg = title + '.' * max(1, anchor - len(title)) + ' '
+        self.verbose = False
+
+    def start(self, *msg):
+        TaskPrinter.print_messages(msg)
+        TaskPrinter._start(self.msg)
+
+    def done(self, *msg):
+        TaskPrinter._done(self.msg)
+        TaskPrinter.print_messages(msg)
+    
+    def fail(self, *msg):
+        TaskPrinter._fail(self.msg)
+        TaskPrinter.print_messages(msg)
+
+def auto_task_print(title, f, args=(), kwargs={}, reraise=True, **printer_args):
+    printer = TaskPrinter(title, **printer_args)
+    try:
+        printer.start()
+        result = f(*args, **kwargs)
+    except:
+        printer.fail()
+        if reraise:
+            raise
+        return None
+    printer.done()
+    return result
+    
+def cli_run(context, target):
+    try:
+        context.run(target=target)
+    except Catena4JError as e:
+        printc(str(e) + linesep)

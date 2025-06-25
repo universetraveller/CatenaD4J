@@ -3,6 +3,7 @@ from ..dispatcher import ExecutionContext
 from pathlib import Path
 from ..util import print_result, get_project_cache, read_simple_csv, close_project_cache
 from os import linesep
+from ..c4jutil import Catena4JError
 
 _pids = None
 _bids = None
@@ -56,7 +57,7 @@ def _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name, par
     bugs = get_project_cache(cache, project, file_name, read_simple_csv, (path,))
     if bugs is None:
         close_project_cache(cache, project, file_name)
-        parser.error(f'Failed to read {file_name} from project {project}')
+        raise Catena4JError(f'Failed to read {file_name} from project {project}')
     return bugs
 
 def _query_bids(project, context, cache_attr, home_attr, rel_attr, file_name):
