@@ -1,6 +1,6 @@
 from argparse import Namespace
 from pathlib import Path
-from typing import Callable, Iterable, Tuple
+from typing import Callable, Tuple
 from shutil import which
 from sys import stdout, stderr, getdefaultencoding
 from locale import getpreferredencoding
@@ -130,6 +130,36 @@ def run_command(cmd, cwd=None, timeout=None):
         return (False,
                 bytes('TIMEOUT', 'utf-8'),
                 bytes('Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout), 'utf-8'))
+
+_META_EXEC_ERR_MSG = 'Failed to run command: {command}\n\n{stdout}\n\n{stderr}'
+def toolkit_execute(main,
+                    wd,
+                    context,
+                    meta_message=_META_EXEC_ERR_MSG,
+                    parser=None,
+                    java_options=(),
+                    args=()):
+    enc = get_console_encoding()
+
+    cmd = get_toolkit_command(context,
+                              *java_options,
+                              main,
+                              *args,
+                              basedir=wd)
+
+    ret, out, err = run_command(cmd=cmd, cwd=wd)
+
+    if not ret:
+
+        if parser is None:
+            from .cli.manager import get_root_parser
+            parser = get_root_parser()
+
+        parser.error(meta_message.format(command=' '.join(cmd),
+                                         stdout=out.decode(enc),
+                                         stderr=err.decode(enc)))
+
+    return out.decode(enc).strip()
 
 def get_project_cache(cache, proj, name, fallback, args=(), kwargs={}):
     if proj not in cache:

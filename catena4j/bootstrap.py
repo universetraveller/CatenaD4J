@@ -49,6 +49,7 @@ def initialize_commands():
         _register,
         export,
         xids,
+        compile as c4j_compile
     )
     export.initialize()
     _register('export', export.run)
@@ -56,6 +57,9 @@ def initialize_commands():
     _register('pids', xids.run_pids)
     _register('bids', xids.run_bids)
     _register('cids', xids.run_cids)
+    c4j_compile.initialize()
+    _register('compile', c4j_compile.run)
+    _register('clean', c4j_compile.clean)
 
 register_bootstrap_function(initialize_commands)
 

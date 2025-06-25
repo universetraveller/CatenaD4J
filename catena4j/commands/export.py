@@ -3,17 +3,17 @@ from ..dispatcher import ExecutionContext
 from ..util import (
     read_properties,
     print_result,
-    get_console_encoding,
-    run_command,
-    get_toolkit_command,
     get_cache_path,
     read_file,
-    write_file
+    write_file,
+    toolkit_execute
 )
 from argparse import RawDescriptionHelpFormatter
 from os import linesep
+from os.path import abspath
 from pathlib import Path
 from .. import d4jutil
+from ..c4jutil import read_version_info
 
 d4j_static = {
     'classes.relevant' : 'Classes loaded by the triggering tests',
@@ -119,15 +119,12 @@ def query_d4j_dynamic(prop, proj, wd, context=None):
     '''
         For properties require information from the checked out files 
     '''
-    enc = get_console_encoding()
     xml = Path(context.c4j_home, context.c4j_rel_project_export_xml.format(project=proj))
-    main = context.c4j_toolkit_export_main
-    cmd = get_toolkit_command(context, main, str(xml), prop, basedir=wd)
-    ret, out, err = run_command(cmd=cmd, cwd=wd)
-    if not ret:
-        message = 'Failed to run command: {}\n\n{}\n\n{}'
-        _parser.error(message.format(' '.join(cmd), out.decode(enc), err.decode(enc)))
-    return out.decode(enc).strip()
+    return toolkit_execute(context.c4j_toolkit_export_main,
+                           wd,
+                           context,
+                           parser=_parser,
+                           args=(str(xml), prop))
 
 def get_export_cache(prop, pid, vid, cid, context):
     parts = ['export', pid, vid]
@@ -161,10 +158,6 @@ def handle_cache(prop, version_info, context, args, cache, content):
                       context,
                       content)
 
-def parse_d4j_vid(vid):
-    bid, tag = d4jutil.parse_vid(vid)
-    return bid, 'BUGGY' if tag == 'b' else 'FIXED'
-
 def run(context: ExecutionContext):
     '''
         If option --from-cache is set would try to read property from cache file.
@@ -180,32 +173,13 @@ def run(context: ExecutionContext):
     prop = args.p
 
     if args.w:
-        context.cwd = args.w
+        context.cwd = abspath(args.w)
 
     wd = context.cwd
 
     result = None
 
-    version_info = read_properties(wd, context.d4j_version_props)
-    if version_info is None:
-        _parser.error('Could not find version info. '
-                      'Please check if current directory '
-                      'is a project from defects4j or catena4j.')
-
-    vid, tag = parse_d4j_vid(version_info['vid'])
-    version_info['vid'] = vid
-    version_info['tag'] = tag 
-
-    # check if the project is a catena4j project
-    # TODO update the format of old c4j version properties file
-    c4j_version_info = read_properties(wd, context.c4j_version_props)
-    if c4j_version_info is None:
-        version_info['cid'] = None
-    else:
-        version_info['pid'] = c4j_version_info['project']
-        version_info['vid'] = c4j_version_info['bugid']
-        version_info['cid'] = c4j_version_info['cid']
-        version_info['tag'] = c4j_version_info['vtag']
+    version_info = read_version_info(wd, context, _parser)
 
     cache = try_cache(prop, version_info, context, args)
 
