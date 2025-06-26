@@ -59,14 +59,17 @@ of the checked-out project version.
 
     <property name="build.home" value="${classes.dir}/.." />
 
+    <!--
     <taskdef name="appendproperty" classname="io.github.universetraveller.ant.AppendProperty"/>
     <taskdef name="filterpath" classname="io.github.universetraveller.ant.FilterPath"/>
+    -->
     <macrodef name="get">
         <attribute name="src"/>
         <attribute name="dest"/>
         <attribute name="usetimestamp"/>
         <attribute name="ignoreerrors"/>
         <sequential>
+            <!-- 10 times slower than the string version but fast enough -->
             <touch file="@{dest}"/>
             <!--
             <appendproperty propertyName="get.dests" value="@{dest}" sep=":"/>

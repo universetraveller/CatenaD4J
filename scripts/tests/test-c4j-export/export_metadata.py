@@ -16,7 +16,8 @@ def waitlist():
         tasks = []
         all_bugs = d4j_all_bugs.all_bugs
         for proj in all_bugs:
-            if not proj in ('Closure', 'JxPath', 'Cli'):
+            #if not proj in ('Closure', 'JxPath', 'Cli'):
+            if not proj in ('Closure',):
                 continue
             tasks.extend((proj, id) for id in all_bugs[proj])
     return tasks
