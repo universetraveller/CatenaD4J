@@ -21,20 +21,34 @@ def waitlist():
 
 def export_prop(path:str, prop:str):
     try:
+        finished = subprocess.run(['c4j', 'clean', '-w', path], capture_output = True)
+        finished.check_returncode()
         finished = subprocess.run(['c4j', 'export',  '-p', prop, '-w', path], capture_output = True)
         finished.check_returncode()
         return finished.stdout.decode('utf-8')
-    except:
-        print('--------------')
-        print(prop)
-        print('---')
-        print(path)
-        print('---')
-        print(finished.stdout.decode('utf-8'))
-        print('---')
-        print(finished.stderr.decode('utf-8'))
-        print('--------------')
-        raise
+    except Exception as e:
+        bid = path[path.find('/')+1:]
+        with open(f'./exceptions/{bid}.{prop}', 'w') as f:
+            f.write(e)
+            f.write('\n')
+            f.write('--------------')
+            f.write('\n')
+            f.write(prop)
+            f.write('\n')
+            f.write('---')
+            f.write('\n')
+            f.write(path)
+            f.write('\n')
+            f.write('---')
+            f.write('\n')
+            f.write(finished.stdout.decode('utf-8'))
+            f.write('\n')
+            f.write('---')
+            f.write('\n')
+            f.write(finished.stderr.decode('utf-8'))
+            f.write('\n')
+            f.write('--------------')
+            f.write('\n')
 
 _props = d4j_all_bugs.d4j_props
 user_home = os.path.expanduser("~")
