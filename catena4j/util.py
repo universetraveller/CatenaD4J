@@ -2,7 +2,7 @@ from argparse import Namespace
 from pathlib import Path
 from typing import Callable, Tuple
 from shutil import which
-from sys import stdout, stderr, getdefaultencoding
+from sys import stdout, stderr, getdefaultencoding, exit as sys_exit
 from locale import getpreferredencoding
 import subprocess
 from .exceptions import Catena4JError
@@ -263,8 +263,10 @@ def auto_task_print(title, f, args=(), kwargs={}, reraise=True, **printer_args):
     printer.done()
     return result
     
-def cli_run(context, target):
+def noreturn(f, *args, **kwargs):
     try:
-        context.run(target=target)
+        f(*args, **kwargs)
+        sys_exit(0)
     except Catena4JError as e:
         printc(str(e) + linesep)
+        sys_exit(1)

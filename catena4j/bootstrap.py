@@ -109,7 +109,7 @@ def start_cli():
     delattr(args, dest)
     dispatcher = CommandDispatcher(env._context)
     context = dispatcher.get_execution_context(args=args, cli=True)
-    util.cli_run(context, target)
+    util.noreturn(context.run, target)
 
 register_entry_point(start_cli)
 
