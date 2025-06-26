@@ -53,6 +53,35 @@ of the checked-out project version.
     <property name="d4j.test.dir"     value="${test.home}"/>
     <property name="dir.src.tests"    value="${test.home}"/>
 
+    <taskdef name="appendproperty" classname="io.github.universetraveller.ant.AppendProperty"/>
+    <taskdef name="filterpath" classname="io.github.universetraveller.ant.FilterPath"/>
+    <macrodef name="get">
+        <attribute name="src"/>
+        <attribute name="dest"/>
+        <attribute name="usetimestamp"/>
+        <attribute name="ignoreerrors"/>
+        <sequential>
+            <!--
+            <touch file="@{dest}"/>
+            -->
+            <appendproperty propertyName="get.dests" value="@{dest}" sep=":"/>
+        </sequential>
+    </macrodef>
+
+    <target name="get-filter">
+        <filterpath include="${d4j.workdir}/target/lib/.*\.jar"
+                    exclude="${d4j.workdir}/target/lib/ant-.*\.jar"
+                    pathString="${get.dests}"
+                    targetPath="filtered.dests"/>
+        <path id="compile.classpath">
+            <pathelement location="${d4j.workdir}/src/java"/>
+            <path refid="filtered.dests"/>
+        </path>
+    </target>
+
+    <!-- Performance overhead induced here: file system io -->
+    <property name="c4j.before-get-cp" value="get-deps,get-filter" />
+
     <!-- Classpath to run developer-written tests -->
     <path id="d4j.test.classpath">
         <path refid="test.classpath"/>

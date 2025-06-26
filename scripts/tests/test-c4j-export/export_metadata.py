@@ -16,6 +16,8 @@ def waitlist():
         tasks = []
         all_bugs = d4j_all_bugs.all_bugs
         for proj in all_bugs:
+            if not proj in ('Closure', 'JxPath', 'Cli'):
+                continue
             tasks.extend((proj, id) for id in all_bugs[proj])
     return tasks
 
@@ -27,9 +29,9 @@ def export_prop(path:str, prop:str):
         finished.check_returncode()
         return finished.stdout.decode('utf-8')
     except Exception as e:
-        bid = path[path.find('/')+1:]
+        bid = path[path.rfind('/')+1:]
         with open(f'./exceptions/{bid}.{prop}', 'w') as f:
-            f.write(e)
+            f.write(str(e))
             f.write('\n')
             f.write('--------------')
             f.write('\n')

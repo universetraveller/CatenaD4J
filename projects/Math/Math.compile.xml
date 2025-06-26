@@ -40,9 +40,9 @@ of the checked-out project version.
     <property name="classes.dir" value="${build.home}/classes" />
     <property name="test.classes.dir" value="${build.home}/test-classes" />
 
-    <taskdef name="checktargetexists" classname="io.github.universetraveller.ant.CheckTargetExists"/>
+    <taskdef name="checkandrename" classname="io.github.universetraveller.ant.CheckAndRename"/>
 
-    <checktargetexists target="compile-tests" setProperty="oldLayout" />
+    <checkandrename target="compile-tests" newName="compile.tests" setProperty="oldLayout" />
 
     <if> <isset property="oldLayout" /> <then>
         <!-- Override build.classpath (used in the build file in the working
@@ -67,7 +67,6 @@ of the checked-out project version.
             <pathelement path="${junit.jar}" />
         </path>
 
-        <target name="compile.tests" depends="compile-tests" />
     </then> </if>
     <!-- end of fixing ant script -->
 

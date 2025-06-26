@@ -59,6 +59,41 @@ of the checked-out project version.
 
     <property name="build.home" value="${classes.dir}/.." />
 
+    <taskdef name="appendproperty" classname="io.github.universetraveller.ant.AppendProperty"/>
+    <taskdef name="filterpath" classname="io.github.universetraveller.ant.FilterPath"/>
+    <macrodef name="get">
+        <attribute name="src"/>
+        <attribute name="dest"/>
+        <attribute name="usetimestamp"/>
+        <attribute name="ignoreerrors"/>
+        <sequential>
+            <touch file="@{dest}"/>
+            <!--
+            <appendproperty propertyName="get.dests" value="@{dest}" sep=":"/>
+            -->
+        </sequential>
+    </macrodef>
+
+    <!-- This filter works, however, some versions define a specific sequence of 
+         path which makes the path order different from one produced here -->
+            <!--
+    <target name="get-filter">
+        <filterpath include=".*\.jar"
+                    exclude=""
+                    pathString="${get.dests}"
+                    targetPath="filtered.dests"/>
+        <path id="compile.classpath">
+            <path refid="filtered.dests"/>
+        </path>
+    </target>
+            -->
+
+    <!-- Performance overhead induced here: file system io -->
+    <property name="c4j.before-get-cp" value="get-deps" />
+            <!--
+    <property name="c4j.before-get-cp" value="get-deps,get-filter" />
+            -->
+
     <!-- Classpath to run developer-written tests -->
     <if> <isset property="ant.refid:build.test.classpath" />
       <then>

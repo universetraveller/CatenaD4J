@@ -3,10 +3,17 @@ package io.github.universetraveller.ant;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.Target;
 
-public class CheckTargetExists extends Task {
+public class CheckAndRename extends Task {
+    
     private String targetName;
     private String setProperty;
+    private String newName;
+
+    public void setNewName(String newName) {
+        this.newName = newName;
+    }
 
     public void setTarget(String targetName) {
         this.targetName = targetName;
@@ -18,12 +25,16 @@ public class CheckTargetExists extends Task {
 
     @Override
     public void execute() throws BuildException {
-        if (targetName == null || setProperty == null) {
-            throw new BuildException("Both 'target' and 'setProperty' attributes are required.");
+        if (targetName == null || setProperty == null || newName == null) {
+            throw new BuildException("All 'target', 'newName' and 'setProperty' attributes are required.");
         }
 
         Project project = getProject();
         if (project.getTargets().containsKey(targetName)) {
+            Target newTarget = new Target();
+            newTarget.addDependency(targetName);
+            newTarget.setName(newName);
+            project.addTarget(newTarget);
             project.setNewProperty(setProperty, "true");
         }
     }
