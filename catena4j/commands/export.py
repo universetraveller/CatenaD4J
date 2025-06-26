@@ -13,7 +13,7 @@ from os import linesep
 from os.path import abspath
 from pathlib import Path
 from .. import d4jutil
-from ..c4jutil import read_version_info, Catena4JError
+from ..c4jutil import read_version_info, Catena4JError, BUGGY, FIXED
 
 d4j_static = {
     'classes.relevant' : 'Classes loaded by the triggering tests',
@@ -107,7 +107,7 @@ def _query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
         return linesep.join(d4jutil.get_tests_trigger(proj, bid, context))
 
     is_buggy = True
-    if vtag == 'FIXED':
+    if vtag == FIXED:
         is_buggy = False
 
     if prop == 'dir.src.classes':
@@ -178,7 +178,7 @@ def run(context: ExecutionContext):
 
     result = None
 
-    version_info = read_version_info(wd, context, _parser)
+    version_info = read_version_info(wd, context)
 
     cache = try_cache(prop, version_info, context, args)
 

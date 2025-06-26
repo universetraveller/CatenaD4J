@@ -120,6 +120,7 @@ def lookup_revision_id(bugs, bid, is_buggy):
 
     return bugs[bid]['buggy'] if is_buggy else bugs[bid]['fixed']
 
+vid_parser = re.compile(r'^([1-9][0-9]+)([bf])$')
 def parse_vid(vid):
     '''
         Original regex version are slower than version using isnumeric
@@ -130,13 +131,19 @@ def parse_vid(vid):
 
         vid_parser = re.compile(r'^(\d+)([bf])$')
 
-        isnumberic: 4-5s
-    '''
-    bid, tag = vid[:-1], vid[-1]
-    if bid.isnumeric() and tag in {'b', 'f'}:
-        return bid, tag
+        isnumeric: 4-5s
 
-    raise Defects4JError(f'Wrong version_id: {vid} -- expected \\d+[bf]!')
+        bid, tag = vid[:-1], vid[-1]
+        if bid.isnumeric() and tag in {'b', 'f'}:
+            return bid, tag
+
+        to ensure precision, use new regex version here
+    '''
+    m = vid_parser.match(vid)
+    if m:
+        return m.groups()
+
+    raise Defects4JError(f'Wrong version_id: {vid} -- expected {vid_parser.pattern}!')
 
 def _get_rev_id(proj, bid, is_buggy, context):
     active_bugs = get_project_cache(context.__d4j_cache__,
