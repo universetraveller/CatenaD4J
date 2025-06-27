@@ -69,7 +69,7 @@ def get_project_loader(proj: str):
         Search list: registered name, project's name and default
     '''
     # use a registered name or the project's name
-    loader_name = _loader_mapping.get(proj, proj)
+    loader_name = resolve_loader_name(proj)
 
     if loader_name in _loaders:
         return _loaders.get(loader_name)
@@ -80,4 +80,24 @@ def get_project_loader(proj: str):
 
     raise LoaderError(f'No loader found for project {proj}')
         
+def resolve_loader_name(name: str):
+    '''
+        Resolve the final mapping of a provided name
+        and avoid circular reference
+    '''
+    # optimization here because most time there is no mapping chain
+    if name in _loader_mapping:
+        visited = set([name])
+        name = _loader_mapping.get(name)
+        while name in _loader_mapping:
+            if name in visited:
+                raise LoaderError(f'Circular loader mapping detected from {name}')
+            visited.add(name)
+            name = _loader_mapping.get(name)
+    return name
 
+def is_valid_loader_name(project: str):
+    '''
+        Check if a loader could be retrieved using the provided name
+    '''
+    return resolve_loader_name(project) in _loaders

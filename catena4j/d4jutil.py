@@ -3,6 +3,7 @@ from pathlib import Path
 from .loaders import get_project_loader
 import re
 from .exceptions import Defects4JError
+from .loaders import is_valid_loader_name
 
 def _get_from_project(proj, bid, context, folder, suffix):
     file_name = bid if suffix is None else f'{bid}{suffix}'
@@ -145,12 +146,15 @@ def parse_vid(vid):
 
     raise Defects4JError(f'Wrong version_id: {vid} -- expected {vid_parser.pattern}!')
 
-def _get_rev_id(proj, bid, is_buggy, context):
-    active_bugs = get_project_cache(context.__d4j_cache__,
-                                    proj,
-                                    'active-bugs',
-                                    read_active_bugs,
-                                    (context, proj))
+def get_active_bugs(project, context):
+    return get_project_cache(context.__d4j_cache__,
+                             project,
+                             'active-bugs',
+                             read_active_bugs,
+                             (context, project))
+
+def get_revision_id(proj, bid, is_buggy, context):
+    active_bugs = get_active_bugs(proj, context)
     return lookup_revision_id(active_bugs, bid, is_buggy)
 
 def read_dir_layout(context, proj):
@@ -177,26 +181,41 @@ def get_dir_layout(context, proj):
                              (context, proj))
 
 def get_dir_src_cache(proj, bid, is_buggy, context):
-    rev = _get_rev_id(proj, bid, is_buggy, context)
+    rev = get_revision_id(proj, bid, is_buggy, context)
     dir_layout = get_dir_layout(context, proj)
     return dir_layout[rev] if rev in dir_layout else None
 
-def get_dir_src_classes(proj, bid, wd, is_buggy, context):
+def get_dir_src_classes(proj, bid, wd, is_buggy, context, loader=None):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
 
     if dir_src is not None:
         return dir_src[0]
 
-    loader = get_project_loader(proj)(context)
+    project_loader = loader or get_project_loader(proj)(context)
 
-    return loader.src_layout
+    return project_loader.src_layout
 
-def get_dir_src_tests(proj, bid, wd, is_buggy, context):
+def get_dir_src_tests(proj, bid, wd, is_buggy, context, loader=None):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
 
     if dir_src is not None:
         return dir_src[1]
 
-    loader = get_project_loader(proj)(context)
+    project_loader = loader or get_project_loader(proj)(context)
 
-    return loader.test_layout
+    return project_loader.test_layout
+
+def check_d4j_vid(project: str, id: str, context):
+    # instead of checking file system, check if there is a loader for the project
+    if not is_valid_loader_name(project):
+        path = Path(context.d4j_home, context.d4j_rel_projects)
+        raise Defects4JError(f'Error: {project} is not a valid project name; '
+                             f'full list could be found at {str(path)} directory')
+
+    if not id in get_active_bugs(project, context):
+        path = Path(context.d4j_home,
+                    context.d4j_rel_projects,
+                    project,
+                    'active-bugs.csv')
+        raise Defects4JError(f'Error: {project}-{id} is not a active bug id; '
+                             f'full list could be found at {str(path)}')

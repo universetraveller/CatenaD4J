@@ -78,7 +78,6 @@ def initialize_loaders():
     def register_project_loader(proj: str):
         register_loader_lazy(proj, proj, f'{proj}Loader', 1)
 
-    register_loader_lazy('default', 'project_loader', 'ProjectLoader', 1)
     register_project_loader('Chart')
     register_project_loader('Cli')
     register_project_loader('Closure')

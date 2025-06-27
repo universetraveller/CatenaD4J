@@ -1,9 +1,22 @@
 from .loader import ContextAwareLoader
 
 class ProjectLoader(ContextAwareLoader):
+    version_control_system_class = None
+
     def __init__(self, context):
         super().__init__(context=context)
         self._layout = None
+        if self.version_control_system_class is None:
+            raise NotImplementedError("Subclasses must set a version control system class")
+
+    @property
+    def version_control_system(self):
+        if not hasattr(self, '_version_control_system'):
+            self._version_control_system = self.version_control_system_class(self)
+        return self._version_control_system
+
+    def checkout_revision(self, revision_id: str, wd: str):
+        return self.version_control_system.checkout_revision(revision_id, wd)
 
     @property
     def src_layout(self):

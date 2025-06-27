@@ -6,18 +6,22 @@ import re
 
 D4J = 1
 C4J = 2
-def check_d4j_working_directory(wd: Path, context):
+ERR = 3
+def check_d4j_working_directory(wd: Path, context, strict=False):
     d4j = wd / context.d4j_version_props
     if not d4j.is_file():
-        raise Catena4JError(f'{str(wd)}  is not a valid working directory!')
+        if strict:
+            raise Catena4JError(f'{str(wd)}  is not a valid working directory!')
+        return ERR
+    return D4J
 
-def check_working_directory(wd: Path, context):
+def check_working_directory(wd: Path, context, strict=False):
 
-    check_d4j_working_directory(wd, context)
+    d4j_or_err = check_d4j_working_directory(wd, context, strict)
 
     c4j = wd / context.c4j_version_props
 
-    return C4J if c4j.is_file() else D4J
+    return C4J if c4j.is_file() else d4j_or_err
 
 BUGGY = 'BUGGY'
 FIXED = 'FIXED'

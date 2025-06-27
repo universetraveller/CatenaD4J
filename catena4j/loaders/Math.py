@@ -1,6 +1,6 @@
 from .project_loader import ProjectLoader
 from . import LoaderError
-from ..util import read_file
+from ..util import read_file, Git
 import re
 from pathlib import Path
 
@@ -16,6 +16,7 @@ _layout_pattern_2 = {
 }
 
 class MathLoader(ProjectLoader):
+    version_control_system_class = Git
     def _search_layout(self, version):
         if version == 1:
             file = 'build.xml'

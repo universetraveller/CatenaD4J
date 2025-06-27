@@ -1,8 +1,9 @@
 from .project_loader import ProjectLoader
 from . import LoaderError
-from ..util import read_properties
+from ..util import read_properties, Git
 
 class LangLoader(ProjectLoader):
+    version_control_system_class = Git
     def _search_layout(self, cwd, file, src_prop, test_prop):
         # this function will scan all lines but this overhead is minimal
         props = read_properties(cwd, file)

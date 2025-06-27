@@ -6,7 +6,8 @@ from sys import stdout, stderr, getdefaultencoding, exit as sys_exit
 from locale import getpreferredencoding
 import subprocess
 from .exceptions import Catena4JError
-from os import linesep
+from os import linesep, environ as os_env
+from platform import system as get_system_name
 
 def write_file(file: Path, content: str):
     if not file.parent.is_dir():
@@ -270,3 +271,42 @@ def noreturn(f, *args, **kwargs):
     except Catena4JError as e:
         printc(str(e) + linesep)
         sys_exit(1)
+
+protected_directories = None
+def build_protected_directories():
+    global protected_directories
+    protected_directories = set()
+    
+    protected_directories.add(str(Path.home()))
+    if get_system_name() == 'Windows':
+        keys = ("SystemDrive", "WINDIR", "ProgramFiles", "ProgramFiles(x86)",
+                "APPDATA", "LOCALAPPDATA", "USERPROFILE")
+        protected_directories.add('C:/')
+        protected_directories.add('C:/Users')
+        for key in keys:
+            if key in os_env:
+                protected_directories.add(str(Path(os_env.get(key)).resolve()))
+    else:
+        protected_directories.update(
+            ("/", "/home", "/usr", "/etc", "/bin", "/sbin", "/lib", "/opt", "/var")
+        )
+
+def is_protected_directory(name: str):
+    if protected_directories is None:
+        build_protected_directories()
+    return name in protected_directories
+
+class Vcs:
+    def __init__(self, loader):
+        self.loader = loader
+
+    def checkout_revision(self, revision_id, wd):
+        raise NotImplementedError(f'Subclasses should implement this method')
+
+class Git(Vcs):
+    def checkout_revision(self, revision_id, wd):
+        return super().checkout_revision(revision_id, wd)
+
+class Svn(Vcs):
+    def checkout_revision(self, revision_id, wd):
+        return super().checkout_revision(revision_id, wd)

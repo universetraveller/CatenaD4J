@@ -1,8 +1,10 @@
 from .project_loader import ProjectLoader
 from . import LoaderError
 from pathlib import Path
+from ..util import Git
 
 class CsvLoader(ProjectLoader):
+    version_control_system_class = Git
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main').is_dir():
