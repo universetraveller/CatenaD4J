@@ -290,6 +290,60 @@ def get_java_regex():
         java_regex = JavaRegex()
     return java_regex
 
+def _get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
+    files = []
+
+    base = Path(context.d4j_home,
+                context.d4j_d4j_rel_projects,
+                project)
+
+    revision_id = revision_id or get_revision_id(project, bid, is_buggy, context)
+    failing_tests = base / 'failing_tests' / revision_id
+    files.append(failing_tests)
+
+    dependent_tests = base / 'dependent_tests'
+    files.append(dependent_tests)
+
+    random_tests = base / 'random_tests'
+    files.append(random_tests)
+
+    return files
+
+def get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
+    return get_project_cache(context.__d4j_cache__,
+                             project,
+                             'flaky_test_files',
+                             _get_flaky_test_files,
+                             (project, bid, is_buggy, context, revision_id))
+
+def get_flaky_tests(project,
+                    bid,
+                    is_buggy,
+                    context,
+                    *,
+                    revision_id=None,
+                    full=False):
+    files = get_flaky_test_files(project, bid, is_buggy, context, revision_id)
+    classes = []
+    methods = []
+    assertions = []
+    for file in files:
+        # defects4j processes one line each iteration which induced extra checking
+        # overhead that could avoid
+        if not file.is_file():
+            continue
+        # defects4j calls rm_broken_tests.pl here which is very slow
+        # why defects4j doesn't just reuse code to parse failing tests here?
+        with file.open() as f:
+            lines = f.read().splitlines()
+
+        a, b, c = parse_failing_tests(lines, full)
+        classes.extend(a)
+        methods.extend(b)
+        assertions.extend(c)
+
+    return classes, methods, assertions
+
 class FixTests:
     @classmethod
     def find_keyword(cls, keyword: str, content: str):
@@ -460,45 +514,17 @@ class FixTests:
             Defects4J only considers test classes whose name matches the directory
             while there are some exceptions in the real world.
         '''
-        files = []
-
-        base = Path(context.d4j_home,
-                    context.d4j_d4j_rel_projects,
-                    project)
-
-        revision_id = revision_id or get_revision_id(project, bid, is_buggy, context)
-        failing_tests = base / 'failing_tests' / revision_id
-        files.append(failing_tests)
-
-        dependent_tests = base / 'dependent_tests'
-        files.append(dependent_tests)
-
-        random_tests = base / 'random_tests'
-        files.append(random_tests)
-
         # RM_ASSERTS environment variable in the original script
         # when it is called for checkout command it is not set forever
         # simply skip its implementation
         full = False
 
-        classes = []
-        methods = []
-        assertions = []
-        for file in files:
-            # defects4j processes one line each iteration which induced extra checking
-            # overhead that could avoid
-            if not file.is_file():
-                continue
-            # defects4j calls rm_broken_tests.pl here which is very slow
-            # why defects4j doesn't just reuse code to parse failing tests here?
-            with file.open() as f:
-                lines = f.read().splitlines()
-
-            a, b, c = parse_failing_tests(lines, full)
-            classes.extend(a)
-            methods.extend(b)
-            assertions.extend(c)
-
+        classes, methods, assertions = get_flaky_tests(project,
+                                                       bid,
+                                                       is_buggy,
+                                                       context,
+                                                       revision_id=revision_id,
+                                                       full=full)
         if not methods:
             # defects4j does not implement this function
             self.exclude_test_classes(classes)
