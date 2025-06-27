@@ -470,11 +470,57 @@ def dict_to_properties(mapping: dict):
 def write_properties(file: Path, mapping: dict):
     write_file(file, dict_to_properties(mapping))
 
-def detect_apply_layout(file):
-    pass
-
-def apply_patch(file: Path, wd: str, context=None):
-    # defects4j checks N = (1, 0, 2) for git apply -p<N> patch
+def detect_apply_layout(file: Path, wd: str, tries: int):
+    # defects4j checks n = (1, 0, 2) for git apply -p<n> patch
     # we can combine check, cache and file existence checking
     # to accelerate this process
-    pass
+    # compare with cache, detect the layout directly would add
+    # extra file existence checking processes, and if check not
+    # pass, more file system accesses are there, but no matter
+    # whether there is a cache for patch files, at least one file
+    # reading and check process is required
+    # that is being said, the improvement of using a cache may be
+    # minimal
+    with file.open() as f:
+        while True:
+            line = f.readline()
+            if line.startswith('--- '):
+                line = line[4:]
+                line = line[:line.find(' ')].rstrip()
+                break
+            if not line:
+                break
+
+    patch = str(file)
+
+    # traditional git patch
+    # n = 1
+    if line.startswith('a/'):
+        _line = line[2:]
+        if Path(wd, _line).is_file(): 
+            if Git.apply_check(patch, 1, wd)[0] == 0:
+                return 1
+            printc(f'Warning: unexpected apply_check failed when applying {patch} (n=1)')
+
+    # n = 0
+    if Path(wd, line).is_file():
+        if Git.apply_check(patch, 0, wd)[0] == 0:
+            return 0
+        printc(f'Warning: unexpected apply_check failed when applying {patch} (n=0)')
+
+    index = 0
+    for i in range(tries):
+        index = line.find('/', index + 1)
+        if index == -1:
+            raise Catena4JError(f'Failed to apply patch {patch}')
+        _line = line[index + 1:]
+        if Path(wd, _line).is_file() and Git.apply_check(patch, i + 1, wd)[0] == 0:
+            return i + 1
+
+def apply_patch(file: Path, wd: str, context=None):
+    # context is a placeholder because we may add a cache for the
+    # layout in future
+    auto_task_print('Apply patch',
+                    Git.apply,
+                    (str(file), detect_apply_layout(file, wd, 2), wd))
+    

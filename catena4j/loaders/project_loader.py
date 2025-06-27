@@ -66,4 +66,8 @@ class ProjectLoader(ContextAwareLoader):
                     self.rel_to_repo)
     
     def d4j_checkout_hook(self, project: str, revision_id: str, wd: str):
+        '''
+            Project specific works, return a boolean indicating if there
+            are file changes
+        '''
         return False

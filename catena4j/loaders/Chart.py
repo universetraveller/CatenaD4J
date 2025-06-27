@@ -21,6 +21,7 @@ class ChartLoader(ProjectLoader):
 
         revision_id = int(revision_id)
 
+        changes = False
         for file in compile_errors.iterdir():
             _min, _max = map(int, file.name[:-5].rsplit('-', 2)[-2:])
             if revision_id < _min:
@@ -30,3 +31,8 @@ class ChartLoader(ProjectLoader):
                 continue
 
             apply_patch(file, wd, context)
+
+            # reaching here means there are file changes
+            changes = True
+        
+        return changes
