@@ -5,6 +5,7 @@ from ..util import Git
 
 class CollectionsLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'commons-collections'
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main').is_dir():

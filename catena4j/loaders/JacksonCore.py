@@ -3,6 +3,7 @@ from ..util import Git
 
 class JacksonCoreLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'jackson-core'
     def determine_layout(self):
         return {
             'src': 'src/main/java',

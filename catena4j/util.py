@@ -9,11 +9,17 @@ from .exceptions import Catena4JError
 from os import linesep, environ as os_env
 from platform import system as get_system_name
 
-def write_file(file: Path, content: str):
+def open_and_write(file: Path, content: str, mode: str):
     if not file.parent.is_dir():
         file.parent.mkdir(parents=True)
-    with file.open('w') as f:
+    with file.open(mode) as f:
         f.write(content)
+
+def write_file(file: Path, content: str):
+    open_and_write(file, content, 'w')
+
+def append_file(file: Path, content: str):
+    open_and_write(file, content, 'a')
 
 def read_file(file: Path):
     if file.is_file():
@@ -110,7 +116,10 @@ def print_result(result: str, out=None):
     out.write(result)
 
 def get_console_encoding():
-    return stdout.encoding or getpreferredencoding() or getdefaultencoding() or stderr.encoding
+    return stdout.encoding or \
+           getpreferredencoding() or \
+           getdefaultencoding() or \
+           stderr.encoding
 
 def get_toolkit_command(context: Namespace, *args, basedir=None):
     if basedir is None:
@@ -136,9 +145,14 @@ def run_command(cmd, cwd=None, timeout=None):
     except subprocess.CalledProcessError:
         return False, finished.stdout, finished.stderr
     except subprocess.TimeoutExpired:
-        return (False,
+        return (
+                False,
                 bytes('TIMEOUT', 'utf-8'),
-                bytes('Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout), 'utf-8'))
+                bytes(
+                'Command <{}> timeout after {} seconds.'.format(' '.join(cmd), timeout),
+                'utf-8'
+                    )
+                )
 
 _META_EXEC_ERR_MSG = ''.join(('Failed to run command: {command}',
                       linesep, linesep,
@@ -146,21 +160,12 @@ _META_EXEC_ERR_MSG = ''.join(('Failed to run command: {command}',
                       linesep, linesep,
                       '{stderr}',
                       linesep))
-def toolkit_execute(main,
-                    wd,
-                    context,
-                    *,
-                    meta_message=_META_EXEC_ERR_MSG,
-                    java_options=(),
-                    args=(),
-                    task_printer=None):
+def run_command_task(cmd,
+                     wd,
+                     *,
+                     meta_message=_META_EXEC_ERR_MSG,
+                     task_printer=None):
     enc = get_console_encoding()
-
-    cmd = get_toolkit_command(context,
-                              *java_options,
-                              main,
-                              *args,
-                              basedir=wd)
 
     if task_printer is not None:
         msg = ['Run command: ' + ' '.join(cmd)] if task_printer.verbose else []
@@ -184,6 +189,29 @@ def toolkit_execute(main,
 
     return out.strip()
 
+def toolkit_execute(main,
+                    wd,
+                    context,
+                    *,
+                    meta_message=_META_EXEC_ERR_MSG,
+                    java_options=(),
+                    args=(),
+                    task_printer=None):
+    cmd = get_toolkit_command(context,
+                              *java_options,
+                              main,
+                              *args,
+                              basedir=wd)
+
+    if task_printer is not None:
+        msg = ['Run command: ' + ' '.join(cmd)] if task_printer.verbose else []
+        task_printer.start(*msg)
+
+    return run_command_task(cmd,
+                            wd,
+                            meta_message=meta_message,
+                            task_printer=task_printer)
+
 def get_project_cache(cache, proj, name, fallback, args=(), kwargs={}):
     if proj not in cache:
         cache[proj] = {}
@@ -205,17 +233,30 @@ def read_simple_csv(path, sep=',', remove_header=True):
         return None
     return list(map(lambda l : l.split(sep), f.splitlines()[1 if remove_header else 0:]))
     
+def do_nothing(*args, **kwargs):
+    pass
+
+
 class TaskPrinter:
     START = None
     DONE = None
     FAIL = None
+    ANCHOR = None
+    PADDING = None
 
     @classmethod
-    def configurate(cls, start='RUNNING', done='DONE', fail='FAILED'):
+    def configurate(cls,
+                    start='RUNNING',
+                    done='DONE',
+                    fail='FAILED',
+                    anchor=75,
+                    padding='.'):
         cls.START = start
         lstart = len(start)
         cls.DONE = done + ' ' * (lstart - len(done))
         cls.FAIL = fail + ' ' * (lstart - len(fail))
+        cls.ANCHOR = anchor
+        cls.PADDING = padding
 
     @staticmethod
     def print_messages(messages):
@@ -235,8 +276,12 @@ class TaskPrinter:
     def _fail(cls, msg):
         printc(f'\r{msg}{TaskPrinter.FAIL}{linesep}')
 
-    def __init__(self, title, anchor=75):
-        self.msg = title + '.' * max(1, anchor - len(title)) + ' '
+    def __init__(self, title, anchor=-1):
+        if anchor < 0:
+            anchor = TaskPrinter.ANCHOR
+        length = len(title)
+        self.msg = (title[:anchor] if length >= anchor else \
+                    title + TaskPrinter.PADDING * (anchor - length)) + ' '
         self.verbose = False
 
     def start(self, *msg):
@@ -250,6 +295,47 @@ class TaskPrinter:
     def fail(self, *msg):
         TaskPrinter._fail(self.msg)
         TaskPrinter.print_messages(msg)
+
+    def adapt_no_done(self):
+        self._ori_done = self.done
+        self.done = do_nothing
+        return self
+
+    def adapt_no_start(self):
+        self._ori_start = self.start
+        self.start = do_nothing
+        return self
+
+    def adapt_done(self):
+        self.done = self._ori_done
+        return self
+
+    def adapt_start(self):
+        self.start = self._ori_start
+        return self
+    
+    def adaptor(self):
+        '''
+            Adapt to allow one printer be used across multiple tasks
+
+            There are four modes of the adapted printer
+
+            the first access will adapt the printer to skip the done method
+            coule be used for task at the beginning of the tasks chain
+
+            the second access will adapt the printer to skip the start method
+            coule be used for tasks at the middle of the tasks chain
+
+            the third access will adapt the printer to resume the end method
+            coule be used for tasks at the end of the tasks chain
+
+            the final access will adapt the printer to resume the start method
+            used to fully restore the printer
+        '''
+        yield self.adapt_no_done()
+        yield self.adapt_no_start()
+        yield self.adapt_done()
+        yield self.adapt_start()
 
 def auto_task_print(title, f, args=(), kwargs={}, reraise=True, **printer_args):
     printer = TaskPrinter(title, **printer_args)
@@ -300,13 +386,95 @@ class Vcs:
     def __init__(self, loader):
         self.loader = loader
 
-    def checkout_revision(self, revision_id, wd):
+    @classmethod
+    def format_name(cls, name):
+        raise NotImplementedError(f'Subclasses should implement this method')
+
+    def checkout_revision(self, revision_id, wd, *, printer=None):
         raise NotImplementedError(f'Subclasses should implement this method')
 
 class Git(Vcs):
-    def checkout_revision(self, revision_id, wd):
-        return super().checkout_revision(revision_id, wd)
+    @classmethod
+    def format_name(cls, name):
+        return f'{name}.git'
+
+    @classmethod
+    def clone(cls, src, dest, *, printer=None):
+        return run_command_task(['git', 'clone', src, dest], task_printer=printer)
+
+    @classmethod
+    def init(cls, wd):
+        return cls.run('init', wd=wd)
+
+    @classmethod
+    def run(cls, *args, wd):
+        return run_command(['git', *args], wd)
+
+    @classmethod
+    def apply(cls, patch, n, wd):
+        return cls.run('apply', f'-p{n}', patch, wd=wd)
+
+    @classmethod
+    def apply_check(cls, patch, n, wd):
+        return cls.run('apply', '--check', f'-p{n}', patch, wd=wd)
+
+    @classmethod
+    def config(cls, name, value, wd):
+        return cls.run('config', name, value, wd=wd)
+
+    @classmethod
+    def checkout(cls, commit, wd, *, printer=None):
+        return run_command_task(['git', 'checkout', commit], wd, task_printer=printer)
+
+    @classmethod
+    def add_all(cls, wd):
+        return cls.run('add', '-A', wd=wd)
+
+    @classmethod
+    def commit_all(cls, message, wd):
+        return cls.run('commit', '-a', '-m', message, wd=wd)
+
+    @classmethod
+    def tag(cls, name, wd):
+        return cls.run('tag', name, wd=wd)
+
+    def checkout_revision_with_printer(self, revision_id, wd, printer):
+        adaptor = printer.adaptor()
+        path = self.loader.repo_path
+        self.clone(str(path), wd, printer=next(adaptor))
+        next(adaptor)
+        self.checkout(revision_id, wd, printer=next(adaptor))
+        next(adaptor)
+
+    def checkout_revision(self, revision_id, wd, *, printer=None):
+        path = self.loader.repo_path
+        self.clone(str(path), wd)
+        self.checkout(revision_id, wd)
 
 class Svn(Vcs):
-    def checkout_revision(self, revision_id, wd):
-        return super().checkout_revision(revision_id, wd)
+    @classmethod
+    def format_name(cls, name):
+        return f'{name}/trunk'
+
+    def get_checkout_command(self, revision_id, wd):
+        path = self.loader.repo_path
+        return ['svn', '-r', revision_id, 'co', path.as_uri(), wd]
+
+    def checkout_revision(self, revision_id, wd, *, printer=None):
+        run_command_task(self.get_checkout_command(revision_id, wd),
+                         task_printer=printer)
+
+def dict_to_properties(mapping: dict):
+    return linesep.join([f'{item[0]}={item[1]}' for item in mapping.items()])
+
+def write_properties(file: Path, mapping: dict):
+    write_file(file, dict_to_properties(mapping))
+
+def detect_apply_layout(file):
+    pass
+
+def apply_patch(file: Path, wd: str, context=None):
+    # defects4j checks N = (1, 0, 2) for git apply -p<N> patch
+    # we can combine check, cache and file existence checking
+    # to accelerate this process
+    pass

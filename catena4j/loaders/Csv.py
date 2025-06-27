@@ -5,6 +5,7 @@ from ..util import Git
 
 class CsvLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'commons-csv'
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main').is_dir():

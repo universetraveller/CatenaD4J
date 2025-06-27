@@ -3,6 +3,7 @@ from ..util import Git
 
 class GsonLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'gson'
     def determine_layout(self):
         return {
             'src': 'gson/src/main/java',

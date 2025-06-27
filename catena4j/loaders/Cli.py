@@ -5,6 +5,7 @@ from ..util import Git
 
 class CliLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'commons-cli'
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main').is_dir():

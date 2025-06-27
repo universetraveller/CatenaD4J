@@ -17,6 +17,7 @@ _layout_pattern_2 = {
 
 class MathLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'commons-math'
     def _search_layout(self, version):
         if version == 1:
             file = 'build.xml'

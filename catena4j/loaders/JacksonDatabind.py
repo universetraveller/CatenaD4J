@@ -3,6 +3,7 @@ from ..util import Git
 
 class JacksonDatabindLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'jackson-databind'
     def determine_layout(self):
         return {
             'src': 'src/main/java',

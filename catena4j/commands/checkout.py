@@ -1,9 +1,23 @@
 from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
-from ..util import toolkit_execute, TaskPrinter, is_protected_directory
+from ..util import (
+    is_protected_directory,
+    auto_task_print,
+    write_properties,
+    append_file,
+    Git
+)
 from pathlib import Path
+from os import linesep
 from os.path import abspath
-from ..c4jutil import read_version_info, parse_vid, check_working_directory, ERR
+from ..c4jutil import (
+    read_version_info,
+    parse_vid,
+    check_working_directory,
+    ERR,
+    init_git_repository,
+    create_post_fix_commit
+)
 from ..exceptions import Catena4JError
 from shutil import rmtree
 from ..loaders import get_project_loader
@@ -64,7 +78,48 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
     revision_id = get_revision_id(project, bid, tag == 'b', context)
 
-    project_loader.checkout_revision(revision_id, wd)
+    auto_task_print(f'Checking out {revision_id[:8]} to {wd}',
+                    project_loader.checkout_revision,
+                    (revision_id, wd))
+
+    # why defects4j has a redundant write_config_file here?
+    #write_properties(
+    #    wdp / context.d4j_version_props,
+    #    {
+    #        'pid': project,
+    #        'vid': bid + tag
+    #    }
+    #)
+
+    auto_task_print('Init local repository',
+                    init_git_repository,
+                    (wd,))
+
+    write_properties(
+        wdp / context.d4j_version_props,
+        {
+            'pid': project,
+            'vid': bid + 'f'
+        }
+    )
+
+    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='POST_FIX_REVISION')
+
+    append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
+
+    auto_task_print('Tag post-fix revision',
+                    create_post_fix_commit,
+                    (d4j_tag, wd))
+
+    # defects4j uses git status to detect changes
+    # if there is change, commit and tag a post-fix-compilable version
+    if project_loader.d4j_checkout_hook(project, revision_id, wd):
+        _tag = context.d4j_tag.format(project=project,
+                                      bid=bid,
+                                      suffix='POST_FIX_COMPILABLE')
+        auto_task_print('Run post-checkout hook',
+                        create_post_fix_commit,
+                        (_tag, wd))
 
     return project_loader
 
@@ -87,6 +142,11 @@ def run(context: ExecutionContext):
     bid, tag, cid = parse_vid(args.v)
 
     check_d4j_vid(project, bid, context)
+
+    wdp = Path(wd)
+    if (wdp / context.d4j_version_props).is_file():
+        # TODO
+        pass
 
     loader = get_project_loader(project)(context)
 

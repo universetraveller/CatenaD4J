@@ -5,6 +5,7 @@ from ..util import Git
 
 class MockitoLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'mockito'
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main' / 'java').is_dir():

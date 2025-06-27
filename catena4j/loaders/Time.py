@@ -5,6 +5,7 @@ from ..util import Git
 
 class TimeLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'joda-time'
     def determine_layout(self):
         cwd = Path(self.context.cwd)
         if (cwd / 'src' / 'main' / 'java').is_dir():

@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties
+from .util import read_properties, Git
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -61,3 +61,14 @@ def parse_vid(vid: str):
         return m.groups()
 
     raise Catena4JError(f'Wrong version_id: {vid} -- expected {vid_parser.pattern}')
+
+def init_git_repository(wd):
+    Git.init(wd)
+    Git.config('user.name', 'catena4j', wd)
+    Git.config('user.email', 'catena4j@localhost', wd)
+    Git.config('core.autocrlf', 'false', wd)
+
+def create_post_fix_commit(tag_name, wd):
+    Git.add_all(wd)
+    Git.commit_all(tag_name)
+    Git.tag(tag_name)

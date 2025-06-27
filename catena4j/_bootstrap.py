@@ -104,7 +104,11 @@ def initialize_cli():
         PRINT_DONE = 'DONE'
         PRINT_FAIL = 'FAILED'
 
-    TaskPrinter.configurate(start=PRINT_START, done=PRINT_DONE, fail=PRINT_FAIL)
+    TaskPrinter.configurate(start=PRINT_START,
+                            done=PRINT_DONE,
+                            fail=PRINT_FAIL,
+                            anchor=config.printer_message_length,
+                            padding=config.printer_padding_character)
 
 def initialize_environment():
     initialize_config()

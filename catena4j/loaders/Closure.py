@@ -3,6 +3,7 @@ from ..util import Git
 
 class ClosureLoader(ProjectLoader):
     version_control_system_class = Git
+    project_name = 'closure-compiler'
     def determine_layout(self):
         return {
             'src': 'src',
