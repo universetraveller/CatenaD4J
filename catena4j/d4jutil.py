@@ -1,9 +1,10 @@
-from .util import read_file, get_project_cache
+from .util import read_file, get_project_cache, printc
 from pathlib import Path
 from .loaders import get_project_loader
 import re
 from .exceptions import Defects4JError
 from .loaders import is_valid_loader_name
+from shutil import move as move_file
 
 def _get_from_project(proj, bid, context, folder, suffix):
     file_name = bid if suffix is None else f'{bid}{suffix}'
@@ -25,7 +26,7 @@ def get_tests_relevant(proj, bid, context):
     return _get_from_project(proj, bid, context, 'relevant_tests', None)
 
 _failing_test_parser = re.compile(r'--- ([^:]+)(?:::([^:]+))?')
-def _parse_failing_tests(lines, full=False):
+def parse_failing_tests(lines, full=False):
     '''
         From defects4j/framework/core/Utils.pm get_failing_tests
     '''
@@ -33,6 +34,9 @@ def _parse_failing_tests(lines, full=False):
         classname_matcher = re.compile(r'(?:.*\.)?([^.]+)')
 
     idx = -1
+    
+    # why do not use set here? 
+    # though the failing tests seem to be naturally not duplicated
     classes = []
     methods = []
     asserts = {}
@@ -90,7 +94,7 @@ def _parse_failing_tests(lines, full=False):
 
 def get_tests_trigger(proj, bid, context):
     content = _get_from_project(proj, bid, context, 'trigger_tests', None)
-    a, b, c = _parse_failing_tests(content.splitlines())
+    a, b, c = parse_failing_tests(content.splitlines())
     return a + b
 
 def read_active_bugs(context, proj):
@@ -219,3 +223,137 @@ def check_d4j_vid(project: str, id: str, context):
                     'active-bugs.csv')
         raise Defects4JError(f'Error: {project}-{id} is not a active bug id; '
                              f'full list could be found at {str(path)}')
+
+class FixTests:
+    def exclude_test_classes(self, classes):
+        pass
+
+    def remove_assertions(self, methods, assertions):
+        raise NotImplementedError(f'Should not reach here')
+
+    def write_files(self):
+        for file in self.files:
+            # moved backup logic here 
+            # optimize to copy-on-write
+            bak = file.with_name(file.name + '.bak')
+            if not bak.is_file():
+                # directly remove the original file to avoid write behavior
+                # if the process is broken the original file
+                # would not exist, but usually we should checkout
+                # again even we use copy2 here
+                move_file(file, bak)
+
+            with file.open('w') as f:
+                f.write(self.files[file])
+
+    def read_file(self, file: Path):
+        if file in self.files:
+            return True
+
+        content = read_file(file)
+        if content is None:
+            return False
+
+        self.files[file] = content
+        # TODO detect junit4
+        return True
+
+
+    def remove_test_method(self, file: Path, clz: str, met: str):
+        # TODO
+        pass
+
+    def __init__(self,
+                 project,
+                 bid,
+                 wd,
+                 is_buggy,
+                 context,
+                 *,
+                 loader=None,
+                 revision_id=None,
+                 _except=set(),
+                 verbose=False):
+        '''
+            Implementation of fix_tests function in defects4j/framework/core/Project.pm
+
+            Defects4J only considers test classes whose name matches the directory
+            while there are some exceptions in the real world.
+        '''
+        files = []
+
+        base = Path(context.d4j_home,
+                    context.d4j_d4j_rel_projects,
+                    project)
+
+        revision_id = revision_id or get_revision_id(project, bid, is_buggy, context)
+        failing_tests = base / 'failing_tests' / revision_id
+        files.append(failing_tests)
+
+        dependent_tests = base / 'dependent_tests'
+        files.append(dependent_tests)
+
+        random_tests = base / 'random_tests'
+        files.append(random_tests)
+
+        # RM_ASSERTS environment variable in the original script
+        # when it is called for checkout command it is not set forever
+        # simply skip its implementation
+        full = False
+
+        classes = []
+        methods = []
+        assertions = []
+        for file in files:
+            # defects4j processes one line each iteration which induced extra checking
+            # overhead that could avoid
+            if not file.is_file():
+                continue
+            # defects4j calls rm_broken_tests.pl here which is very slow
+            # why defects4j doesn't just reuse code to parse failing tests here?
+            file: Path
+            with file.open() as f:
+                lines = f.read().splitlines()
+
+            a, b, c = parse_failing_tests(lines, full)
+            classes.extend(a)
+            methods.extend(b)
+            assertions.extend(c)
+
+        if not methods:
+            # defects4j does not implement this function
+            self.exclude_test_classes(classes)
+
+        if _except:
+            # never reach here when called for checkout command
+            methods = list(set(methods) - _except)
+            
+        if full:
+            # never reach here when called for checkout command
+            # defects4j record the full line and parse again which induced overhead
+            # perl is not readable...
+            # why expressions like $_ with bad readability are allowed?
+            # unless ($RM_ASSERTS && _remove_assertion($class, $method)) {
+            #     push(@method_list, $_);
+            # }
+            methods = self.remove_assertions(methods, assertions)
+        
+        self.files = {}
+        self.junit4 = {}
+        test_dir = get_dir_src_tests(project, bid, wd, is_buggy, context, loader)
+        base_dir = Path(wd, test_dir)
+        for method in methods:
+            clz, _, met = method.partition('::')
+            f = base_dir / (clz.replace('.', '/') + '.java')
+            if not self.read_file(f):
+                if verbose:
+                    # use unix line separator directly
+                    # because the code here are not expected to reach
+                    printc(f'fix_tests: {str(f)} does not exist -> SKIP ({method})\n')
+                continue
+                
+            self.remove_test_method(f, clz, met)
+        
+        self.write_files()
+
+fix_tests = FixTests
