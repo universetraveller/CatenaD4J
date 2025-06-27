@@ -294,7 +294,7 @@ def _get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
     files = []
 
     base = Path(context.d4j_home,
-                context.d4j_d4j_rel_projects,
+                context.d4j_rel_projects,
                 project)
 
     revision_id = revision_id or get_revision_id(project, bid, is_buggy, context)
