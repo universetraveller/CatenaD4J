@@ -224,7 +224,102 @@ def check_d4j_vid(project: str, id: str, context):
         raise Defects4JError(f'Error: {project}-{id} is not a active bug id; '
                              f'full list could be found at {str(path)}')
 
+class JavaRegex:
+    def __init__(self):
+        self.HexDigit = r'[0-9a-fA-F]'
+        self.EscapeSequence = fr'\\(?:(?:u005c)?(?:[btnfr"i\'\\]|(?:[0-3]?[0-7])?[0-7])|u{self.HexDigit}{{4}})'
+        self.COMMENT = r'/\*.*?\*/'
+        self.LINE_COMMENT = r'//[^\r\n]*'
+        self.CHAR_LITERAL = fr"'(?:[^'\\\r\n]|{self.EscapeSequence})'"
+        self.STRING_LITERAL = fr'"(?:[^"\\\r\n]|{self.EscapeSequence})*"'
+        self.LINE_COMMENT_PATTERN_STRING = f'({self.LINE_COMMENT})|({self.STRING_LITERAL})'
+        self.COMMENT_PATTERN_STRING = f'({self.COMMENT})|{self.LINE_COMMENT_PATTERN_STRING}'
+        self.STRING_LIKE_STRING = f'{self.COMMENT_PATTERN_STRING}|({self.CHAR_LITERAL})'
+        self.NON_LINEBREAK = re.compile(r'[^\r\n]')
+    
+    def replace_non_linebreak_characters(self, s, replacement):
+        return self.NON_LINEBREAK.sub(replacement, s)
+
+    def _replacement_for_comments(self, m):
+        # using \n seems to be ok
+        # not required to change to linesep
+        s = m.group(1)
+        if s:
+            # block comment
+            return '/*' + self.replace_non_linebreak_characters(s[2:-2], ';') + '*/'
+        s = m.group(3)
+        if s:
+            # string literal
+            return s
+        s = m.group(0)
+        # line comment
+        return '//' + ';' * (len(s) - 2)
+
+    def _replacement_for_string_like(self, m):
+        s = m.group(1)
+        if s:
+            # block comment
+            return '/*' + self.replace_non_linebreak_characters(s[2:-2], ';') + '*/'
+        s = m.group(3)
+        if s:
+            # string literal
+            return '"' + ';' * (len(s) - 2) + '"'
+        s = m.group(4)
+        if s:
+            # character literal
+            return '\'' + ';' * (len(s) - 2) + '\''
+        s = m.group(0)
+        # line comment
+        return '//' + ';' * (len(s) - 2)
+
+    def remove_comments(self, s):
+        if not hasattr(self, 'COMMENT_PATTERN'):
+            self.COMMENT_PATTERN = re.compile(self.COMMENT_PATTERN_STRING, re.S)
+        return self.COMMENT_PATTERN.sub(self._replacement_for_comments, s)
+    
+    def remove_string_like(self, s):
+        if not hasattr(self, 'STRING_LIKE_PATTERN'):
+            self.STRING_LIKE_PATTERN = re.compile(self.STRING_LIKE_STRING, re.S)
+        return self.STRING_LIKE_PATTERN.sub(self._replacement_for_string_like, s)
+
+
+java_regex: JavaRegex = None
+def get_java_regex():
+    global java_regex
+    if java_regex is None:
+        java_regex = JavaRegex()
+    return java_regex
+
 class FixTests:
+    @classmethod
+    def find_keyword(cls, keyword: str, content: str):
+        index = 0
+
+        kw_len = len(keyword)
+        content_len = len(content)
+
+        while True:
+            index = content.find(keyword, index)
+            if index == -1:
+                return -1
+
+            if index > 0:
+                # check previous character
+                # ensure the keyword is not in a identifier
+                pch: str = content[index - 1]
+                if pch.isalnum() or pch in ('_', '$'):
+                    index += 1
+                    continue
+            
+            after = index + kw_len
+            if after < content_len:
+                nch = content[after]
+                if nch.isalnum() or nch in ('_', '$'):
+                    index += 1
+                    continue
+            
+            return index
+
     def exclude_test_classes(self, classes):
         pass
 
@@ -255,13 +350,98 @@ class FixTests:
             return False
 
         self.files[file] = content
-        # TODO detect junit4
+        # TODO could try to use a simple parser and check its performance
+        noc = self.regex.remove_string_like(content)
+        self.noc_files[file] = noc
+
         return True
 
 
     def remove_test_method(self, file: Path, clz: str, met: str):
-        # TODO
-        pass
+        # defects4j uses regex to catch the method rather than ast
+        # and symbol resolver, which will cause inaccurate results,
+        # for example, inherited methods could not be found using this
+        # approach
+        # further, this way could not handle situation where code is in
+        # block comments
+
+        noc = self.noc_files[file]
+        # TODO replace regex matching with simple parser
+        # and check its performance
+        # another option: com.sun.source, which is used for javac
+        # .+ used by defects4j would encounter probolem
+        # if the method is overridden in the same file
+        _method = fr'(@Test.+?)?\bpublic\b.+?\b{re.escape(met)}\(\s*\)'
+        method_matcher = re.compile(_method, re.S)
+        m = method_matcher.search(noc)
+        if m:
+            # found a test method
+            end = m.end()
+
+            index = noc.find('{', end + 1)
+            if index == -1:
+                raise Defects4JError(f'Could not extract method body for {clz}::{met}')
+
+            # next to {
+            length = len(noc)
+            balance = -1
+            while True:
+                index += 1
+                if index >= length:
+                    raise Defects4JError(f'Could not extract method body for {clz}::{met}')
+                ch = noc[index]
+                if ch == '}':
+                    balance += 1
+                if ch == '{':
+                    balance -= 1
+                if balance == 0:
+                    break
+                
+            # now index is at the closing }
+            start = m.start()
+            dummy = ['@Test\n'] if m.group(1) else ['']
+            dummy.append(f'public void {met}() {{}}\n// Defects4J: flaky method\n')
+            linebreak = noc.find('\n', start)
+            dummy.append('//' + noc[start:linebreak])
+
+            while True:
+                pre = linebreak + 1
+                linebreak = noc.find('\n', pre)
+                if linebreak == -1:
+                    break
+                dummy.append(noc[pre:linebreak])
+                if linebreak > index:
+                    break
+
+            dummy = '\n'.join(dummy)
+            self.noc_files[file] = noc[:start] + dummy + noc[index + 1:]
+            ori = self.files[file]
+            self.files[file] = ori[:start] + dummy + ori[index + 1:]
+            return
+        # test method not found
+
+        # self.junit4 only used here, why defects4j computes it when reading file?
+        if file not in self.junit4:
+            stop = self.find_keyword('class', noc)
+
+            # what if there are org.junit.TestXXX?
+            # or org.junit has proved that it is junit 4?
+            self.junit4[file] = 'import org.junit.Test' in noc[:stop]
+
+        override = '    \@Test\n' if self.junit4[file] else ''
+        override += f'    public void {met}() {{}} // Fails in super class\n'
+
+        index = 0
+        for ch in noc[::-1]:
+            index += 1
+            if ch == '}':
+                # so } is at -index
+                break
+        
+        self.noc_files[file] = noc[:-index] + override + noc[index:]
+        ori = self.files[file]
+        self.files[file] = ori[:-index] + override + ori[index:]
+        return
 
     def __init__(self,
                  project,
@@ -311,7 +491,6 @@ class FixTests:
                 continue
             # defects4j calls rm_broken_tests.pl here which is very slow
             # why defects4j doesn't just reuse code to parse failing tests here?
-            file: Path
             with file.open() as f:
                 lines = f.read().splitlines()
 
@@ -340,9 +519,14 @@ class FixTests:
         
         self.files = {}
         self.junit4 = {}
+        self.noc_files = {}
+        self.regex = get_java_regex()
         test_dir = get_dir_src_tests(project, bid, wd, is_buggy, context, loader)
         base_dir = Path(wd, test_dir)
         for method in methods:
+            # defects4j directly convert class name to file path
+            # that would be not precise, for example, for embedded
+            # classes there is no source file available
             clz, _, met = method.partition('::')
             f = base_dir / (clz.replace('.', '/') + '.java')
             if not self.read_file(f):
