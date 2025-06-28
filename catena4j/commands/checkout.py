@@ -1,11 +1,12 @@
 from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
 from ..util import (
+    apply_patch,
     is_protected_directory,
     auto_task_print,
+    read_properties,
     write_properties,
-    append_file,
-    Git
+    append_file
 )
 from pathlib import Path
 from os import linesep
@@ -16,12 +17,18 @@ from ..c4jutil import (
     check_working_directory,
     ERR,
     init_git_repository,
-    create_post_fix_commit
+    create_commit_and_tag
 )
 from ..exceptions import Catena4JError
 from shutil import rmtree
 from ..loaders import get_project_loader
-from ..d4jutil import get_revision_id, check_d4j_vid
+from ..d4jutil import (
+    get_revision_id,
+    check_d4j_vid,
+    fix_tests,
+    fill_properties,
+    get_src_patch_dir
+)
 
 _parser = None
 def initialize():
@@ -108,18 +115,60 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
 
     auto_task_print('Tag post-fix revision',
-                    create_post_fix_commit,
+                    create_commit_and_tag,
                     (d4j_tag, wd))
 
     # defects4j uses git status to detect changes
     # if there is change, commit and tag a post-fix-compilable version
     if project_loader.d4j_checkout_hook(project, revision_id, wd):
-        _tag = context.d4j_tag.format(project=project,
-                                      bid=bid,
-                                      suffix='POST_FIX_COMPILABLE')
+        d4j_tag = context.d4j_tag.format(project=project,
+                                         bid=bid,
+                                         suffix='POST_FIX_COMPILABLE')
         auto_task_print('Run post-checkout hook',
-                        create_post_fix_commit,
-                        (_tag, wd))
+                        create_commit_and_tag,
+                        (d4j_tag, wd))
+
+    config = fix_tests(project,
+                       bid,
+                       wd,
+                       False,
+                       context,
+                       loader=project_loader,
+                       revision_id=revision_id)
+
+
+    path2props = wdp / context.d4j_version_co_props
+
+    if path2props.is_file():
+        config.update(read_properties(path2props))
+
+    fill_properties(config, project, bid, False, context, project_loader)
+
+    write_properties(path2props, config)
+
+    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='FIXED_VERSION')
+    auto_task_print('Initialize fixed program version',
+                    create_commit_and_tag,
+                    (d4j_tag, wd))
+    
+    # apply patch to obtain buggy version
+    patch = get_src_patch_dir(project, bid, context)
+    if apply_patch(patch, wd, context)[0]:
+        return -1
+
+    write_properties(
+        wdp / context.d4j_version_props,
+        {
+            'pid': project,
+            'vid': bid + 'b'
+        }
+    )
+
+    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='BUGGY_VERSION')
+    auto_task_print('Initialize buggy program version',
+                    create_commit_and_tag,
+                    (d4j_tag, wd))
+    # TODO
 
     return project_loader
 

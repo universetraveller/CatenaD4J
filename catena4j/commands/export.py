@@ -87,9 +87,9 @@ def query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
             return result
         return linesep.join(result.split(','))
 
-    return _query_d4j_static(prop=prop, proj=proj, bid=bid, wd=wd, context=context, vtag=vtag)
+    return _query_d4j_static(prop=prop, proj=proj, bid=bid, context=context, vtag=vtag)
 
-def _query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
+def _query_d4j_static(prop, proj, bid, context=None, vtag=None):
     '''
         Version without reading cache file
 
@@ -111,9 +111,9 @@ def _query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
         is_buggy = False
 
     if prop == 'dir.src.classes':
-        return d4jutil.get_dir_src_classes(proj, bid, wd, is_buggy, context)
+        return d4jutil.get_dir_src_classes(proj, bid, is_buggy, context)
     elif prop == 'dir.src.tests':
-        return d4jutil.get_dir_src_tests(proj, bid, wd, is_buggy, context)
+        return d4jutil.get_dir_src_tests(proj, bid, is_buggy, context)
 
 def query_d4j_dynamic(prop, proj, wd, context=None):
     '''

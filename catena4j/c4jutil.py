@@ -68,7 +68,7 @@ def init_git_repository(wd):
     Git.config('user.email', 'catena4j@localhost', wd)
     Git.config('core.autocrlf', 'false', wd)
 
-def create_post_fix_commit(tag_name, wd):
+def create_commit_and_tag(tag_name, wd):
     Git.add_all(wd)
     Git.commit_all(tag_name)
     Git.tag(tag_name)

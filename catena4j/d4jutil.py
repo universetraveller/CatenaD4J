@@ -6,24 +6,46 @@ from .exceptions import Defects4JError
 from .loaders import is_valid_loader_name
 from shutil import move as move_file
 
-def _get_from_project(proj, bid, context, folder, suffix):
+def get_project_dir(project, bid, context, folder, suffix):
     file_name = bid if suffix is None else f'{bid}{suffix}'
-    path = Path(context.d4j_home, context.d4j_rel_projects, proj, folder, file_name)
+    return Path(context.d4j_home,
+                context.d4j_rel_projects,
+                project,
+                folder,
+                file_name)
+
+def _get_from_project(proj, bid, context, folder, suffix):
+    path = get_project_dir(proj, bid, context, folder, suffix)
     content = read_file(path)
     if content is None:
         raise Defects4JError(f'Failed to read {path}')
     # performance overhead induced here if this function is used for export command
     # but this overhead is minimal
-    return content.strip().splitlines()
+    return content.strip()
 
 def get_classes_modified(proj, bid, context):
-    return _get_from_project(proj, bid, context, 'modified_classes', '.src')
+    return _get_from_project(proj, bid, context, 'modified_classes', '.src').splitlines()
 
 def get_classes_relevant(proj, bid, context):
-    return _get_from_project(proj, bid, context, 'loaded_classes', '.src')
+    return _get_from_project(proj, bid, context, 'loaded_classes', '.src').splitlines()
 
 def get_tests_relevant(proj, bid, context):
-    return _get_from_project(proj, bid, context, 'relevant_tests', None)
+    return _get_from_project(proj, bid, context, 'relevant_tests', None).splitlines()
+
+def get_patch_dir(project, bid, context, patch_type):
+    return get_project_dir(project, bid, context, 'patches', f'.{patch_type}.patch')
+
+def get_src_patch_dir(project, bid, context):
+    return get_patch_dir(project, bid, context, 'src')
+    
+def get_test_patch_dir(project, bid, context):
+    return get_patch_dir(project, bid, context, 'test')
+
+def get_src_patch(project, bid, context):
+    return _get_from_project(project, bid, context, 'patches', '.src.patch')
+
+def get_test_patch(project, bid, context):
+    return _get_from_project(project, bid, context, 'patches', '.test.patch')
 
 _failing_test_parser = re.compile(r'--- ([^:]+)(?:::([^:]+))?')
 def parse_failing_tests(lines, full=False):
@@ -189,7 +211,7 @@ def get_dir_src_cache(proj, bid, is_buggy, context):
     dir_layout = get_dir_layout(context, proj)
     return dir_layout[rev] if rev in dir_layout else None
 
-def get_dir_src_classes(proj, bid, wd, is_buggy, context, loader=None):
+def get_dir_src_classes(proj, bid, is_buggy, context, loader=None):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
 
     if dir_src is not None:
@@ -199,7 +221,7 @@ def get_dir_src_classes(proj, bid, wd, is_buggy, context, loader=None):
 
     return project_loader.src_layout
 
-def get_dir_src_tests(proj, bid, wd, is_buggy, context, loader=None):
+def get_dir_src_tests(proj, bid, is_buggy, context, loader=None):
     dir_src = get_dir_src_cache(proj, bid, is_buggy, context)
 
     if dir_src is not None:
@@ -351,8 +373,16 @@ class FixTests:
         Defects4J only considers test classes whose name matches the directory
         while there are some exceptions in the real world.
 
+        Defects4J's version will add redundant comments in some cases while this
+        implementation will not
         Performance analysis:
-        TODO
+            average elapsed time of 100 runs
+            Chart: 4.80 ms
+            Lang: 6.46 ms
+            Math: 6.38 ms
+            Time: 15.08 ms
+            Mockito: 9.40 ms
+            Closure: 7.43 ms
     '''
     @classmethod
     def find_keyword(cls, keyword: str, content: str):
@@ -609,4 +639,66 @@ class FixTests:
         
         self.write_files()
 
+        # defects4j write properties file to record the excluded tests
+        # but their code is odd, each time exclude_tests_in_file is called it will try
+        # to write d4j.tests.exclude property which contains classes parsed from the
+        # argument file (not methods, odd again), and this write behavior will overwrite
+        # the original property value with a same name
+        # in fix_tests exclude_tests_in_file is called three times, and finally
+        # only the last call could keep the property, which means the first two calls
+        # would not have their excluded classes in the properties file 
+        # though classes are mostly empty so the code is not reached, why they design
+        # this behavior? or it is just a bug?
+
+        # avoid writing the file again and again
+        config = {}
+        if classes:
+            excluded = ','.join(map(lambda x : x.replace('.', '/') + '.*', classes))
+            config['d4j.tests.exclude'] = excluded
+        return config
+
 fix_tests = FixTests
+
+def fill_properties(properties: dict,
+                    project: str,
+                    bid: str,
+                    is_buggy,
+                    context,
+                    loader=None):
+    loader = loader or get_project_loader(project)(context)
+
+    # skip the check of is_bugmine
+    # not planned to implement defects4j's bug mining
+
+    properties['d4j.project.id'] = project
+    properties['d4j.bug.id'] = bid
+
+    # why defects4j add this property two times?
+    properties['d4j.dir.src.classes'] = get_dir_src_classes(project,
+                                                            bid,
+                                                            is_buggy,
+                                                            context,
+                                                            loader)
+    #properties['d4j.dir.src.classes'] = get_dir_src_classes(project,
+    #                                                        bid,
+    #                                                        is_buggy,
+    #                                                        context,
+    #                                                        loader)
+
+    properties['d4j.dir.src.tests'] = get_dir_src_tests(project,
+                                                        bid,
+                                                        is_buggy,
+                                                        context,
+                                                        loader)
+
+    properties['d4j.classes.modified'] = ','.join(get_classes_modified(project,
+                                                                       bid,
+                                                                       context))
+
+    properties['d4j.classes.relevant'] = ','.join(get_classes_relevant(project,
+                                                                       bid,
+                                                                       context))
+
+    properties['d4j.tests.trigger'] = ','.join(get_tests_trigger(project,
+                                                                 bid,
+                                                                 context))

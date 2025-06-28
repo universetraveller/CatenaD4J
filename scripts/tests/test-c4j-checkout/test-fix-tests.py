@@ -3,8 +3,7 @@ import shutil
 import sys
 import os
 import difflib
-
-import javalang.ast
+import time
 
 sys.path.append(f'{str(Path(__file__).parent)}/../../..')
 
@@ -57,7 +56,9 @@ def test(project, bid):
             shutil.copy2(f, g)
             d4j.append(h)
             c4j.append(g)
+    start = time.perf_counter_ns()
     fix_tests(project, bid, cwd, True, context)
+    end = time.perf_counter_ns()
     for i, j in zip(d4j, c4j):
         with i.open() as f:
             a = f.readlines()
@@ -89,9 +90,51 @@ def test(project, bid):
                 print('b - a', bset - aset)
         except ImportError:
             pass
+    
+    print('Time executing fix_tests:', (end - start) * 10**-6, 'ms')
+    return end - start
+
+def test1(project, bid):
+    cwd = f'{str(Path(__file__).parent)}/{project}_{bid}'
+    cwd = os.path.abspath(cwd)
+    context = get_system_context()
+    a, b, c = get_flaky_tests(project, bid, False, context)
+    test_dir = get_dir_src_tests(project, bid, cwd, False, context)
+    base_dir = Path(cwd, test_dir)
+    ff = set()
+    for method in b:
+        # defects4j directly convert class name to file path
+        # that would be not precise, for example, for embedded
+        # classes there is no source file available
+        clz, _, met = method.partition('::')
+        f: Path = base_dir / (clz.replace('.', '/') + '.java.bak')
+        if f not in ff and f.is_file():
+            ff.add(f)
+            g = f.with_suffix('')
+            h = f.with_suffix('.bak1')
+            shutil.copy2(g, h)
+            shutil.copy2(f, g)
+    start = time.perf_counter_ns()
+    fix_tests(project, bid, cwd, True, context)
+    end = time.perf_counter_ns()
+    for f in ff:
+        g = f.with_suffix('')
+        h = f.with_suffix('.bak1')
+        shutil.copy2(h, g)
+    return end - start
+
+def test_average(project, id, n):
+    cwd = f'{str(Path(__file__).parent)}/{project}_{id}'
+    cwd = os.path.abspath(cwd)
+    os.system(f'cp -r {bugs}/{project}_{id} {cwd}')
+    _t = 0
+    for i in range(n):
+        _t += test1(project, id)
+    print(f'average:', _t * 10**-6 / n, 'ms')
+    os.system(f'rm -r {cwd}')
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         test(sys.argv[1], sys.argv[2])
     else:
-        test('Mockito', '1')
+        test('Chart', '1')
