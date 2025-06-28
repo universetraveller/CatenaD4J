@@ -6,7 +6,8 @@ from ..util import (
     auto_task_print,
     read_properties,
     write_properties,
-    append_file
+    append_file,
+    Git
 )
 from pathlib import Path
 from os import linesep
@@ -83,7 +84,7 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     
     project_loader = loader or get_project_loader(project)(context)
 
-    revision_id = get_revision_id(project, bid, tag == 'b', context)
+    revision_id = get_revision_id(project, bid, False, context)
 
     auto_task_print(f'Checking out {revision_id[:8]} to {wd}',
                     project_loader.checkout_revision,
@@ -110,13 +111,13 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         }
     )
 
-    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='POST_FIX_REVISION')
+    tag_pf = context.d4j_tag.format(project=project, bid=bid, suffix='POST_FIX_REVISION')
 
     append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
 
     auto_task_print('Tag post-fix revision',
                     create_commit_and_tag,
-                    (d4j_tag, wd))
+                    (tag_pf, wd))
 
     # defects4j uses git status to detect changes
     # if there is change, commit and tag a post-fix-compilable version
@@ -168,7 +169,10 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     auto_task_print('Initialize buggy program version',
                     create_commit_and_tag,
                     (d4j_tag, wd))
-    # TODO
+    Git.checkout(tag_pf, wd) 
+    buggy_rev = get_revision_id(project, bid, True, context)
+    diff = wdp / '.defects4j.diff'
+    # TODO export diff
 
     return project_loader
 
