@@ -426,6 +426,7 @@ class FixTests:
         # .+ used by defects4j would encounter probolem
         # if the method is overridden in the same file
         _method = fr'(@Test.+?)?\bpublic\b.+?\b{re.escape(met)}\(\s*\)'
+        # TODO span lines cause problem
         method_matcher = re.compile(_method, re.S)
         m = method_matcher.search(noc)
         if m:
@@ -453,23 +454,23 @@ class FixTests:
                 
             # now index is at the closing }
             start = m.start()
+            ori = self.files[file]
             dummy = ['@Test\n'] if m.group(1) else ['']
             dummy.append(f'public void {met}() {{}}\n// Defects4J: flaky method\n')
             linebreak = noc.find('\n', start)
-            dummy.append('//' + noc[start:linebreak])
+            dummy.append('//' + ori[start:linebreak])
 
             while True:
                 pre = linebreak + 1
                 linebreak = noc.find('\n', pre)
                 if linebreak == -1:
                     break
-                dummy.append(noc[pre:linebreak])
+                dummy.append(ori[pre:linebreak])
                 if linebreak > index:
                     break
 
             dummy = '\n'.join(dummy)
             self.noc_files[file] = noc[:start] + dummy + noc[index + 1:]
-            ori = self.files[file]
             self.files[file] = ori[:start] + dummy + ori[index + 1:]
             return
         # test method not found

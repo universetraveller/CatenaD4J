@@ -4,7 +4,7 @@ import sys
 import os
 import difflib
 
-sys.path.append('../../..')
+sys.path.append(f'{str(Path(__file__).parent)}/../../..')
 
 from catena4j.bootstrap import initialize_system, system
 from catena4j.d4jutil import fix_tests, get_flaky_tests, get_dir_src_tests
@@ -30,10 +30,9 @@ def test(project, bid):
         f: Path = base_dir / (clz.replace('.', '/') + '.java.bak')
         if f.is_file():
             g = f.with_suffix('')
-            h = g.with_suffix('.bak1')
+            h = f.with_suffix('.bak1')
             shutil.copy2(g, h)
             shutil.copy2(f, g)
-            print('add', str(f))
             d4j.append(h)
             c4j.append(g)
     fix_tests(project, bid, cwd, True, context)
@@ -42,11 +41,8 @@ def test(project, bid):
             a = f.readlines()
         with j.open() as f:
             b = f.readlines()
-        print('---')
-        print(str(i))
-        print(''.join(list(difflib.unified_diff(a, b))))
-        print('---')
+        print(''.join(list(difflib.unified_diff(a, b, str(i), str(j)))))
 
 if __name__ == '__main__':
-    test('Chart', '15')
+    test('Chart', '14')
     #test(sys.argv[1], sys.argv[2])
