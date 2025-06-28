@@ -324,9 +324,9 @@ def get_flaky_tests(project,
                     revision_id=None,
                     full=False):
     files = get_flaky_test_files(project, bid, is_buggy, context, revision_id)
-    classes = []
-    methods = []
-    assertions = []
+    classes = set()
+    methods = set()
+    assertions = set()
     for file in files:
         # defects4j processes one line each iteration which induced extra checking
         # overhead that could avoid
@@ -338,13 +338,22 @@ def get_flaky_tests(project,
             lines = f.read().splitlines()
 
         a, b, c = parse_failing_tests(lines, full)
-        classes.extend(a)
-        methods.extend(b)
-        assertions.extend(c)
+        classes.update(a)
+        methods.update(b)
+        assertions.update(c)
 
     return classes, methods, assertions
 
 class FixTests:
+    '''
+        Implementation of fix_tests function in defects4j/framework/core/Project.pm
+
+        Defects4J only considers test classes whose name matches the directory
+        while there are some exceptions in the real world.
+
+        Performance analysis:
+        TODO
+    '''
     @classmethod
     def find_keyword(cls, keyword: str, content: str):
         index = 0
@@ -425,15 +434,20 @@ class FixTests:
         # another option: com.sun.source, which is used for javac
         # .+ used by defects4j would encounter probolem
         # if the method is overridden in the same file
-        _method = fr'(@Test.+?)?\bpublic\b.+?\b{re.escape(met)}\(\s*\)'
-        # TODO span lines cause problem
+        # defects4j's implementation also could not handle annotations
+        # with arguments or multiple lines code snippets
+        # this regex is not suitable for parsing junit 5 tests
+        _method = fr'\bpublic[\s\n]+void[\s\n]+{re.escape(met)}\(\s*\)'
         method_matcher = re.compile(_method, re.S)
         m = method_matcher.search(noc)
         if m:
             # found a test method
+            # end is the next character to the match
+            # cause bug in Mockito that no space between method header
+            # and method body
             end = m.end()
 
-            index = noc.find('{', end + 1)
+            index = noc.find('{', end)
             if index == -1:
                 raise Defects4JError(f'Could not extract method body for {clz}::{met}')
 
@@ -454,25 +468,63 @@ class FixTests:
                 
             # now index is at the closing }
             start = m.start()
+
+            dummy = []
+
+            # points to \n
+            line_start = noc.rfind('\n', 0, start)
+
+            # points to the first character of line
+            pre_line_start = noc.rfind('\n', 0, line_start) + 1
+
+            # not a good solution but to keep the same format
+            # with defects4j's implementation
+            pre_line = noc[pre_line_start:line_start]
+            annotated = '@Test' in pre_line
+
+            # points to the first character of line
+            line_start += 1
+            dummy_start = line_start
+
+            spaces = ' ' * (start - line_start)
+            if annotated:
+                dummy_start = pre_line_start
+                dummy.append(f'{spaces}@Test')
             ori = self.files[file]
-            dummy = ['@Test\n'] if m.group(1) else ['']
-            dummy.append(f'public void {met}() {{}}\n// Defects4J: flaky method\n')
+            dummy.append(f'{spaces}public void {met}() {{}}\n// Defects4J: flaky method')
+
             linebreak = noc.find('\n', start)
-            dummy.append('//' + ori[start:linebreak])
+
+            # it is not good to directly comment the whole line
+            # because there may be code before the method declaration
+            # however, to keep the same format with defects4j
+            # just follow their bad practice
+            if annotated:
+                dummy.append('// ' + pre_line)
+            dummy.append('// ' + ori[line_start:linebreak])
 
             while True:
                 pre = linebreak + 1
                 linebreak = noc.find('\n', pre)
                 if linebreak == -1:
                     break
-                dummy.append(ori[pre:linebreak])
+                dummy.append('// ' + ori[pre:linebreak])
                 if linebreak > index:
                     break
 
+            dummy_end = linebreak
             dummy = '\n'.join(dummy)
-            self.noc_files[file] = noc[:start] + dummy + noc[index + 1:]
-            self.files[file] = ori[:start] + dummy + ori[index + 1:]
+            #print('==========')
+            #print('dummy:')
+            #print(dummy)
+            #print('----------')
+            #print('dummy origin:')
+            #print(ori[dummy_start:dummy_end])
+            #print('==========')
+            self.noc_files[file] = noc[:dummy_start] + dummy + noc[dummy_end:]
+            self.files[file] = ori[:dummy_start] + dummy + ori[dummy_end:]
             return
+
         # test method not found
 
         # self.junit4 only used here, why defects4j computes it when reading file?
@@ -483,19 +535,15 @@ class FixTests:
             # or org.junit has proved that it is junit 4?
             self.junit4[file] = 'import org.junit.Test' in noc[:stop]
 
-        override = '    \@Test\n' if self.junit4[file] else ''
+        # to keep the same format with defects4j
+        override = '\n    @Test\n' if self.junit4[file] else '\n'
         override += f'    public void {met}() {{}} // Fails in super class\n'
 
-        index = 0
-        for ch in noc[::-1]:
-            index += 1
-            if ch == '}':
-                # so } is at -index
-                break
+        index = noc.rfind('}')
         
-        self.noc_files[file] = noc[:-index] + override + noc[index:]
+        self.noc_files[file] = noc[:index] + override + noc[index:]
         ori = self.files[file]
-        self.files[file] = ori[:-index] + override + ori[index:]
+        self.files[file] = ori[:index] + override + ori[index:]
         return
 
     def __init__(self,
@@ -509,12 +557,6 @@ class FixTests:
                  revision_id=None,
                  _except=set(),
                  verbose=False):
-        '''
-            Implementation of fix_tests function in defects4j/framework/core/Project.pm
-
-            Defects4J only considers test classes whose name matches the directory
-            while there are some exceptions in the real world.
-        '''
         # RM_ASSERTS environment variable in the original script
         # when it is called for checkout command it is not set forever
         # simply skip its implementation
@@ -532,7 +574,7 @@ class FixTests:
 
         if _except:
             # never reach here when called for checkout command
-            methods = list(set(methods) - _except)
+            methods -= _except
             
         if full:
             # never reach here when called for checkout command
