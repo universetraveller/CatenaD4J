@@ -515,7 +515,7 @@ class Svn(Vcs):
         out = self.run('diff', f'-r{a}:{b}', path.as_uri(), wd=None)
         if output is not None:
             with output.open('w') as f:
-                f.write(out)
+                f.write(out + '\n')
         return out
 
 def dict_to_properties(mapping: dict):

@@ -20,7 +20,8 @@ from ..c4jutil import (
     ERR,
     init_git_repository,
     create_commit_and_tag,
-    get_tag_name_from_ver
+    get_tag_name_from_ver,
+    normalize_tag
 )
 from ..exceptions import Catena4JError
 from shutil import rmtree
@@ -123,10 +124,11 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
     append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
 
+    d4j_tag = context.d4j_tag
     if not context.minimal_checkout:
-        post_fix_tag = context.d4j_tag.format(project=project,
-                                        bid=bid,
-                                        suffix='POST_FIX_REVISION')
+        post_fix_tag = d4j_tag.format(project=project,
+                                      bid=bid,
+                                      suffix='POST_FIX_REVISION')
 
         # skip commits that users usually do not use 
         auto_task_print('Tag post-fix revision',
@@ -137,12 +139,12 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     # if there is change, commit and tag a post-fix-compilable version
     if project_loader.d4j_checkout_hook(project, revision_id, wd) \
         and not context.minimal_checkout:
-        d4j_tag = context.d4j_tag.format(project=project,
-                                         bid=bid,
-                                         suffix='POST_FIX_COMPILABLE')
+        post_fix_compilable_tag = d4j_tag.format(project=project,
+                                                 bid=bid,
+                                                 suffix='POST_FIX_COMPILABLE')
         auto_task_print('Run post-checkout hook',
                         create_commit_and_tag,
-                        (d4j_tag, wd))
+                        (post_fix_compilable_tag, wd))
 
     config = fix_tests(project,
                        bid,
@@ -162,7 +164,7 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
     write_properties(path2props, config)
 
-    fixed_tag = context.d4j_tag.format(project=project, bid=bid, suffix='FIXED_VERSION')
+    fixed_tag = d4j_tag.format(project=project, bid=bid, suffix='FIXED_VERSION')
     auto_task_print('Initialize fixed program version',
                     create_commit_and_tag,
                     (fixed_tag, wd))
@@ -180,7 +182,7 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         }
     )
 
-    buggy_tag = context.d4j_tag.format(project=project, bid=bid, suffix='BUGGY_VERSION')
+    buggy_tag = d4j_tag.format(project=project, bid=bid, suffix='BUGGY_VERSION')
     auto_task_print('Initialize buggy program version',
                     create_commit_and_tag,
                     (buggy_tag, wd))
@@ -199,6 +201,11 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
         run_apply_patch_task(diff, wd, context)
         diff.unlink()
+
+        pre_fix_tag = d4j_tag.format(project=project, bid=bid, suffix='PRE_FIX_REVISION')
+        auto_task_print('Tag pre-fix revision',
+                        create_commit_and_tag,
+                        (pre_fix_tag, wd))
 
         # why defects4j does not reuse the tag name here?
         final_tag = buggy_tag if tag == 'b' else fixed_tag
@@ -234,7 +241,7 @@ def run_reset(context):
 
     reset(wd, context)
 
-def try_to_reuse_working_directory(project: str, bid: str, cid: str, wd: str, context):
+def try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
     '''
         defects4j only checks if it is the same project with a same bid
 
@@ -256,6 +263,8 @@ def try_to_reuse_working_directory(project: str, bid: str, cid: str, wd: str, co
 
     if version_info['cid'] != cid:
         return False
+
+    version_info['tag'] = normalize_tag(tag)
 
     # cid is either None (defects4j project) or an actual value (catena4j project)
     tag_name = get_tag_name_from_ver(version_info, context)
@@ -312,7 +321,7 @@ def run(context: ExecutionContext):
 
     loader = get_project_loader(project)(context)
 
-    if not try_to_reuse_working_directory(project, bid, cid, wd, context):
+    if not try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
         d4j_checkout_vid(project, bid, tag, wd, context, loader)
 
     # TODO catena4j checkout

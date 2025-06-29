@@ -25,9 +25,12 @@ def check_working_directory(wd: Path, context, strict=False):
 
 BUGGY = 'BUGGY'
 FIXED = 'FIXED'
+def normalize_tag(tag: str):
+    return BUGGY if tag == 'b' else FIXED
+
 def parse_d4j_vid(vid: str):
     bid, tag = d4jutil.parse_vid(vid)
-    return bid, BUGGY if tag == 'b' else FIXED
+    return bid, normalize_tag(tag)
 
 def read_version_info(wd, context):
     version_info = read_properties(wd, context.d4j_version_props)
@@ -77,11 +80,11 @@ def get_tag_name_from_ver(version_info, context):
     project = version_info['pid']
     bid = version_info['bid']
     cid = version_info['cid']
+    tag = version_info['tag']
     if cid is None:
         # is a defects4j directory
-        _tag = 'BUGGY_VERSION' if _tag == BUGGY else 'FIXED_VERSION'
-        return context.d4j_tag.format(project=project, bid=bid, suffix=_tag)
+        tag = 'BUGGY_VERSION' if tag == BUGGY else 'FIXED_VERSION'
+        return context.d4j_tag.format(project=project, bid=bid, suffix=tag)
     else:
         # is a catena4j directory
-        _tag = version_info['tag']
-        return context.c4j_tag.format(project=project, bid=bid, cid=cid, suffix=_tag)
+        return context.c4j_tag.format(project=project, bid=bid, cid=cid, suffix=tag)
