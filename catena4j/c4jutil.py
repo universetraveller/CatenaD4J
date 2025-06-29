@@ -33,11 +33,11 @@ def read_version_info(wd, context):
     version_info = read_properties(wd, context.d4j_version_props)
     if version_info is None:
         raise Catena4JError('Could not find version info. '
-                      'Please check if current directory '
-                      'is a project from defects4j or catena4j.')
+                            'Please check if current directory '
+                            'is a project from defects4j or catena4j.')
 
-    vid, tag = parse_d4j_vid(version_info['vid'])
-    version_info['vid'] = vid
+    bid, tag = parse_d4j_vid(version_info['vid'])
+    version_info['bid'] = bid
     version_info['tag'] = tag 
 
     # check if the project is a catena4j project
@@ -47,7 +47,7 @@ def read_version_info(wd, context):
         version_info['cid'] = None
     else:
         version_info['pid'] = c4j_version_info['project']
-        version_info['vid'] = c4j_version_info['bugid']
+        version_info['bid'] = c4j_version_info['bugid']
         version_info['cid'] = c4j_version_info['cid']
         version_info['tag'] = c4j_version_info['vtag']
     
@@ -72,3 +72,16 @@ def create_commit_and_tag(tag_name, wd):
     Git.add_all(wd)
     Git.commit_all(tag_name)
     Git.tag(tag_name)
+
+def get_tag_name_from_ver(version_info, context):
+    project = version_info['pid']
+    bid = version_info['bid']
+    cid = version_info['cid']
+    if cid is None:
+        # is a defects4j directory
+        _tag = 'BUGGY_VERSION' if _tag == BUGGY else 'FIXED_VERSION'
+        return context.d4j_tag.format(project=project, bid=bid, suffix=_tag)
+    else:
+        # is a catena4j directory
+        _tag = version_info['tag']
+        return context.c4j_tag.format(project=project, bid=bid, cid=cid, suffix=_tag)

@@ -21,7 +21,21 @@ class ProjectLoader(ContextAwareLoader):
         return self._version_control_system
 
     def checkout_revision(self, revision_id: str, wd: str):
+        '''
+            Delegate the checkout tasks to a specific version control system
+        '''
         return self.version_control_system.checkout_revision(revision_id, wd)
+    
+    def export_diff(self, a: str, b: str, output: Path=None):
+        '''
+            Delegate the diff tasks to a specific version control system
+
+            a and b are both commit id
+
+            output is an optional path, if it is not None, the diff result will be
+            written to it 
+        '''
+        return self.version_control_system.export_diff(a, b, output)
 
     @property
     def src_layout(self):

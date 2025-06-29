@@ -141,7 +141,7 @@ def try_cache(prop, version_info, context, args):
         return None
     return _try_cache(prop,
                       version_info['pid'],
-                      version_info['vid'],
+                      version_info['bid'],
                       version_info['cid'],
                       context)
 
@@ -152,7 +152,7 @@ def handle_cache(prop, version_info, context, args, cache, content):
     if args.update_cache or (args.from_cache and cache is None):
         _handle_cache(prop,
                       version_info['pid'],
-                      version_info['vid'],
+                      version_info['bid'],
                       version_info['cid'],
                       context,
                       content)
@@ -186,7 +186,7 @@ def run(context: ExecutionContext):
         # Trap to catena4j
         result = cache or query_c4j(prop,
                                     version_info['pid'],
-                                    version_info['vid'],
+                                    version_info['bid'],
                                     version_info['cid'],
                                     wd,
                                     context,
@@ -195,7 +195,7 @@ def run(context: ExecutionContext):
         # Trap to re-implmented version of defects4j
         result = cache or query_d4j_static(prop,
                                            version_info['pid'],
-                                           version_info['vid'],
+                                           version_info['bid'],
                                            wd,
                                            context,
                                            version_info['tag'])

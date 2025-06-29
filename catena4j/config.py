@@ -29,6 +29,7 @@ c4j_rel_project_export_xml = 'projects/{project}/{project}.export.xml'
 c4j_rel_project_compile_xml = 'projects/{project}/{project}.compile.xml'
 c4j_version_props = '.catena4j.info'
 c4j_version_co_props = 'catena4j.build.properties'
+c4j_tag = 'C4J_{project}_{bid}_{cid}_{suffix}'
 d4j_version_props = '.defects4j.config'
 d4j_version_co_props = 'defects4j.build.properties'
 d4j_rel_projects = 'framework/projects'
@@ -37,3 +38,5 @@ d4j_tag = 'D4J_{project}_{bid}_{suffix}'
 rich_output = True
 printer_message_length = 75
 printer_padding_character = '.'
+# skip commit processes that are not neccessary
+minimal_checkout = True

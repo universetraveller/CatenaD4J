@@ -1,6 +1,6 @@
 from pathlib import Path
 from .project_loader import ProjectLoader
-from ..util import Svn, apply_patch
+from ..util import Svn, run_apply_patch_task
 
 class ChartLoader(ProjectLoader):
     version_control_system_class = Svn
@@ -30,7 +30,7 @@ class ChartLoader(ProjectLoader):
             if revision_id > _max:
                 continue
 
-            apply_patch(file, wd, context)
+            run_apply_patch_task(file, wd, context)
 
             # reaching here means there are file changes
             changes = True

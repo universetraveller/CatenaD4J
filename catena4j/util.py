@@ -355,7 +355,23 @@ def noreturn(f, *args, **kwargs):
         f(*args, **kwargs)
         sys_exit(0)
     except Catena4JError as e:
-        printc(str(e) + linesep)
+        tb = e.__traceback__
+        while tb.tb_next:
+            tb = tb.tb_next
+        
+        frame = tb.tb_frame
+        _globals = frame.f_globals
+        code = frame.f_code
+        if '__name__' in _globals:
+            fullname = _globals.get('__name__') + '.' + code.co_name
+        else:
+            fullname = code.co_filename
+
+        lineno = tb.tb_lineno
+        message = str(e)
+
+        printc(f'{message}{linesep}  at {fullname}:{lineno}{linesep}')
+
         sys_exit(1)
 
 protected_directories = None
@@ -383,32 +399,40 @@ def is_protected_directory(name: str):
     return name in protected_directories
 
 class Vcs:
+    command = None
     def __init__(self, loader):
+        if self.vcs_name is None:
+            raise NotImplementedError('Subclasses must set a command')
         self.loader = loader
 
     @classmethod
     def format_name(cls, name):
         raise NotImplementedError(f'Subclasses should implement this method')
 
-    def checkout_revision(self, revision_id, wd, *, printer=None):
+    @classmethod
+    def run(cls, *args, wd, printer=None):
+        return run_command_task([cls.command, *args], wd, printer=printer)
+
+    def checkout_revision(self, revision_id, wd):
         raise NotImplementedError(f'Subclasses should implement this method')
 
+    def export_diff(self, a, b, output: Path=None):
+        raise NotImplementedError(f'Subclasses should implement this method')
+
+
 class Git(Vcs):
+    command = 'git'
     @classmethod
     def format_name(cls, name):
         return f'{name}.git'
 
     @classmethod
-    def clone(cls, src, dest, *, printer=None):
-        return run_command_task(['git', 'clone', src, dest], task_printer=printer)
+    def clone(cls, src, dest):
+        return cls.run('clone', src, dest, wd=None)
 
     @classmethod
     def init(cls, wd):
         return cls.run('init', wd=wd)
-
-    @classmethod
-    def run(cls, *args, wd):
-        return run_command(['git', *args], wd)
 
     @classmethod
     def apply(cls, patch, n, wd):
@@ -423,8 +447,12 @@ class Git(Vcs):
         return cls.run('config', name, value, wd=wd)
 
     @classmethod
-    def checkout(cls, commit, wd, *, printer=None):
-        return run_command_task(['git', 'checkout', commit], wd, task_printer=printer)
+    def clean(cls, wd):
+        return cls.run('clean', '-xdf', wd=wd)
+
+    @classmethod
+    def checkout(cls, commit, wd):
+        return cls.run('checkout', commit, wd=wd)
 
     @classmethod
     def add_all(cls, wd):
@@ -438,31 +466,55 @@ class Git(Vcs):
     def tag(cls, name, wd):
         return cls.run('tag', name, wd=wd)
 
+    def export_diff(self, a, b, output: Path=None):
+        # git supports --output to write the patch to a file
+        # why defects4j do not use that?
+        cmd = [f'--git-dir={str(self.loader.repo_path)}',
+               'diff',
+               '--no-ext-diff',
+               '--binary']
+        if output is not None:
+            cmd.append('--output')
+            cmd.append(str(output))
+        out = self.run(*cmd, a, b)
+        return out
+
     def checkout_revision_with_printer(self, revision_id, wd, printer):
         adaptor = printer.adaptor()
         path = self.loader.repo_path
-        self.clone(str(path), wd, printer=next(adaptor))
+        self.run('clone', str(path), wd,
+                 wd=None,
+                 printer=next(adaptor))
         next(adaptor)
-        self.checkout(revision_id, wd, printer=next(adaptor))
+        self.run('checkout', revision_id,
+                 wd=wd,
+                 task_printer=next(adaptor))
         next(adaptor)
 
-    def checkout_revision(self, revision_id, wd, *, printer=None):
+    def checkout_revision(self, revision_id, wd):
         path = self.loader.repo_path
         self.clone(str(path), wd)
         self.checkout(revision_id, wd)
 
 class Svn(Vcs):
+    command = 'svn'
     @classmethod
     def format_name(cls, name):
         return f'{name}/trunk'
 
-    def get_checkout_command(self, revision_id, wd):
+    def checkout_revision(self, revision_id, dest):
         path = self.loader.repo_path
-        return ['svn', '-r', revision_id, 'co', path.as_uri(), wd]
+        return self.run('-r', revision_id, 'co', path.as_uri(), dest, wd=None)
 
-    def checkout_revision(self, revision_id, wd, *, printer=None):
-        run_command_task(self.get_checkout_command(revision_id, wd),
-                         task_printer=printer)
+    def export_diff(self, a, b, output: Path=None):
+        # svn supports --git option to output git style patches
+        # why defects4j do not use that?
+        path = self.loader.repo_path
+        out = self.run('diff', f'-r{a}:{b}', path.as_uri(), wd=None)
+        if output is not None:
+            with output.open('w') as f:
+                f.write(out)
+        return out
 
 def dict_to_properties(mapping: dict):
     return linesep.join([f'{item[0]}={item[1]}' for item in mapping.items()])
@@ -487,8 +539,12 @@ def detect_apply_layout(file: Path, wd: str, tries: int):
             if line.startswith('--- '):
                 line = line[4:]
                 line = line[:line.find(' ')].rstrip()
+                while line.isspace():
+                    printc(f'Warning: unexpected string detection when applying {patch}')
+                    line = line[:line.find(' ')].rstrip()
                 break
             if not line:
+                printc(f'Warning: unexpectedly ran out lines when applying {patch}')
                 break
 
     patch = str(file)
@@ -508,19 +564,27 @@ def detect_apply_layout(file: Path, wd: str, tries: int):
             return 0
         printc(f'Warning: unexpected apply_check failed when applying {patch} (n=0)')
 
+    printc(f'Warning: failed to automatically detect the layout of {patch}')
     index = 0
     for i in range(tries):
         index = line.find('/', index + 1)
         if index == -1:
-            raise Catena4JError(f'Failed to apply patch {patch}')
+            break
         _line = line[index + 1:]
         if Path(wd, _line).is_file() and Git.apply_check(patch, i + 1, wd)[0] == 0:
             return i + 1
 
+    raise Catena4JError(f'Failed to detect the layout of {patch} (n={i})')
+
 def apply_patch(file: Path, wd: str, context=None):
     # context is a placeholder because we may add a cache for the
     # layout in future
+    return Git.apply(str(file), detect_apply_layout(file, wd, 2), wd)
+
+def run_apply_patch_task(file: Path, wd: str, context=None):
+    # a function in util module can print something, that is odd...
+    # just transfer the core logic to another function
     auto_task_print('Apply patch',
-                    Git.apply,
-                    (str(file), detect_apply_layout(file, wd, 2), wd))
+                    apply_patch,
+                    (file, wd, context))
     

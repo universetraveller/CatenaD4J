@@ -1,12 +1,13 @@
 from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
 from ..util import (
-    apply_patch,
+    run_apply_patch_task,
     is_protected_directory,
     auto_task_print,
     read_properties,
     write_properties,
     append_file,
+    do_nothing,
     Git
 )
 from pathlib import Path
@@ -18,7 +19,8 @@ from ..c4jutil import (
     check_working_directory,
     ERR,
     init_git_repository,
-    create_commit_and_tag
+    create_commit_and_tag,
+    get_tag_name_from_ver
 )
 from ..exceptions import Catena4JError
 from shutil import rmtree
@@ -41,6 +43,7 @@ def initialize():
     _parser.add_argument('-p', required=True, metavar='project_id')
     _parser.add_argument('-v', required=True, metavar='version_id')
     _parser.add_argument('-w', required=True, metavar='work_dir')
+    _parser.add_argument('--full-history', action='store_true')
 
 def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=None):
     '''
@@ -56,6 +59,12 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         would be created and returned
 
         type: ProjectLoader
+
+        This function will not check if the current directory is a previous used one,
+        and treat it as a non-project directory
+
+        The checking process is done by another function to handle both defects4j and
+        catena4j working directories (see try_to_reuse_working_directory)
     '''
     wdp = Path(wd)
 
@@ -111,17 +120,23 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         }
     )
 
-    tag_pf = context.d4j_tag.format(project=project, bid=bid, suffix='POST_FIX_REVISION')
 
     append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
 
-    auto_task_print('Tag post-fix revision',
-                    create_commit_and_tag,
-                    (tag_pf, wd))
+    if not context.minimal_checkout:
+        post_fix_tag = context.d4j_tag.format(project=project,
+                                        bid=bid,
+                                        suffix='POST_FIX_REVISION')
+
+        # skip commits that users usually do not use 
+        auto_task_print('Tag post-fix revision',
+                        create_commit_and_tag,
+                        (post_fix_tag, wd))
 
     # defects4j uses git status to detect changes
     # if there is change, commit and tag a post-fix-compilable version
-    if project_loader.d4j_checkout_hook(project, revision_id, wd):
+    if project_loader.d4j_checkout_hook(project, revision_id, wd) \
+        and not context.minimal_checkout:
         d4j_tag = context.d4j_tag.format(project=project,
                                          bid=bid,
                                          suffix='POST_FIX_COMPILABLE')
@@ -147,15 +162,15 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
     write_properties(path2props, config)
 
-    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='FIXED_VERSION')
+    fixed_tag = context.d4j_tag.format(project=project, bid=bid, suffix='FIXED_VERSION')
     auto_task_print('Initialize fixed program version',
                     create_commit_and_tag,
-                    (d4j_tag, wd))
+                    (fixed_tag, wd))
     
     # apply patch to obtain buggy version
     patch = get_src_patch_dir(project, bid, context)
-    if apply_patch(patch, wd, context)[0]:
-        return -1
+
+    run_apply_patch_task(patch, wd, context)
 
     write_properties(
         wdp / context.d4j_version_props,
@@ -165,19 +180,117 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         }
     )
 
-    d4j_tag = context.d4j_tag.format(project=project, bid=bid, suffix='BUGGY_VERSION')
+    buggy_tag = context.d4j_tag.format(project=project, bid=bid, suffix='BUGGY_VERSION')
     auto_task_print('Initialize buggy program version',
                     create_commit_and_tag,
-                    (d4j_tag, wd))
-    Git.checkout(tag_pf, wd) 
-    buggy_rev = get_revision_id(project, bid, True, context)
-    diff = wdp / '.defects4j.diff'
-    # TODO export diff
+                    (buggy_tag, wd))
+
+    # no untracked files, skip the clean step
+    final_checkout = Git.checkout
+    if not context.minimal_checkout:
+        Git.checkout(post_fix_tag, wd) 
+
+        buggy_rev = get_revision_id(project, bid, True, context)
+        diff = wdp / '.defects4j.diff'
+        auto_task_print(f'Diff {revision_id[:8]}:{buggy_rev[:8]}',
+                        loader.export_diff,
+                        (revision_id, buggy_rev, diff))
+
+        run_apply_patch_task(diff, wd, context)
+        diff.unlink()
+
+        # why defects4j does not reuse the tag name here?
+        final_tag = buggy_tag if tag == 'b' else fixed_tag
+    elif tag == 'b':
+        # if it is minimal mode and the tag is b
+        # the final checkout could be skipped
+        final_checkout = do_nothing
+    else:
+        final_tag = fixed_tag
+
+    auto_task_print(f'Check out program version: {project}-{bid}{tag}',
+                    final_checkout,
+                    (final_tag, wd))
 
     return project_loader
 
 
+def checkout_to(tag_or_commit, wd):
+    Git.checkout(tag_or_commit, wd)
+    Git.clean(wd)
+
+def reset(wd, context):
+    version_info = read_version_info(wd, context)
+    tag_name = get_tag_name_from_ver(version_info, context)
+    auto_task_print('Reset the working directory',
+                    checkout_to,
+                    (tag_name, wd))
+
+def run_reset(context):
+    args = context.args
+    if args.w:
+        context.cwd = abspath(args.w)
+
+    wd = context.cwd
+
+    reset(wd, context)
+
+def try_to_reuse_working_directory(project: str, bid: str, cid: str, wd: str, context):
+    '''
+        defects4j only checks if it is the same project with a same bid
+
+        could we optimize that to further check the previous commit ids
+        so that we can make it possible to avoid the clone process if the
+        current directory is a working directory but do not match the pid and bid?
+    '''
+    try:
+        version_info = read_version_info(wd, context)
+    except Catena4JError:
+        # no version file exists
+        return False
+    
+    if version_info['pid'] != project:
+        return False
+    
+    if version_info['bid'] != bid:
+        return False
+
+    if version_info['cid'] != cid:
+        return False
+
+    # cid is either None (defects4j project) or an actual value (catena4j project)
+    tag_name = get_tag_name_from_ver(version_info, context)
+
+    auto_task_print(f'Check out program version: {tag_name}',
+                    checkout_to,
+                    (tag_name, wd))
+
+    return True
+
+
 def run(context: ExecutionContext):
+    '''
+        This function implements the checkout command for catena4j and defects4j
+
+        Option --full-history indicates whether to add intermediate commits to make
+        the project structure cleaner
+
+        These commits may be useful for changes analysis but usually users only use
+        the buggy and fixed version
+
+        If --full-history is not set, the minimal_checkout configuration (in config.py)
+        would be used, --full-history will overwrite this configuration to False if set
+
+        When minimal_checkout is True, extra commits are skipped, only basic buggy and
+        fixed commits are created, which could make the command faster
+
+        However, commits before the revision used to create the project are not removed,
+        because git's local clone doesn't support --depth option and be faster than use
+        the file:// prefix (which supports --depth)
+
+        Difference: Using file:// as the source link would be treated as a remote link,
+        which causes git to index the whole project again
+    '''
     args = context.args
 
     if args.w:
@@ -191,16 +304,17 @@ def run(context: ExecutionContext):
         raise Catena4JError(f'Access restricted: could not select a protected directory '
                             'as working directory')
 
+    if args.full_history:
+        context.minimal_checkout = False
 
     bid, tag, cid = parse_vid(args.v)
 
     check_d4j_vid(project, bid, context)
 
-    wdp = Path(wd)
-    if (wdp / context.d4j_version_props).is_file():
-        # TODO
-        pass
-
     loader = get_project_loader(project)(context)
 
-    d4j_checkout_vid(project, bid, tag, wd, context, loader)
+    if not try_to_reuse_working_directory(project, bid, cid, wd, context):
+        d4j_checkout_vid(project, bid, tag, wd, context, loader)
+
+    # TODO catena4j checkout
+    # delegate checkout tasks to loaders to support custom checkout behavior
