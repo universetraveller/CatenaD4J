@@ -1,4 +1,4 @@
-from .util import read_file, get_project_cache, printc
+from .util import read_file, get_project_cache, printc, write_file
 from pathlib import Path
 from .loaders import get_project_loader
 import re
@@ -356,8 +356,7 @@ def get_flaky_tests(project,
             continue
         # defects4j calls rm_broken_tests.pl here which is very slow
         # why defects4j doesn't just reuse code to parse failing tests here?
-        with file.open() as f:
-            lines = f.read().splitlines()
+        lines = read_file(file).splitlines()
 
         a, b, c = parse_failing_tests(lines, full)
         classes.update(a)
@@ -431,8 +430,7 @@ class FixTests:
                 # again even we use copy2 here
                 move_file(file, bak)
 
-            with file.open('w') as f:
-                f.write(self.files[file])
+            write_file(file, self.files[file])
 
     def read_file(self, file: Path):
         if file in self.files:

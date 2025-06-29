@@ -509,8 +509,7 @@ class Svn(Vcs):
         path = self.loader.repo_path
         out = self.run('diff', f'-r{a}:{b}', path.as_uri(), wd=None)
         if output is not None:
-            with output.open('w') as f:
-                f.write(out + '\n')
+            write_file(output, out + '\n')
         return out
 
 def dict_to_properties(mapping: dict):
@@ -548,3 +547,15 @@ def run_apply_patch_task(file: Path, wd: str, context=None):
                     apply_patch,
                     (file, wd, context))
     
+class FileSlice:
+    '''
+        Support operators << and >>
+    '''
+    pass
+
+class File:
+    '''
+        File abstraction that supports insert, replace and delete operations
+    '''
+    def __init__(self, path: Path, encoding='latin-1'):
+        pass
