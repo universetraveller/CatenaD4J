@@ -37,7 +37,7 @@ def test(project, bid):
     os.system(f'cp -r {bugs}/{project}_{bid} {cwd}')
     context = get_system_context()
     a, b, c = get_flaky_tests(project, bid, False, context)
-    test_dir = get_dir_src_tests(project, bid, cwd, False, context)
+    test_dir = get_dir_src_tests(project, bid, False, context)
     base_dir = Path(cwd, test_dir)
     d4j = []
     c4j = []

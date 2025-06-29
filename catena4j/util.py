@@ -401,7 +401,7 @@ def is_protected_directory(name: str):
 class Vcs:
     command = None
     def __init__(self, loader):
-        if self.vcs_name is None:
+        if self.command is None:
             raise NotImplementedError('Subclasses must set a command')
         self.loader = loader
 

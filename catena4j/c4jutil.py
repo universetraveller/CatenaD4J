@@ -70,8 +70,8 @@ def init_git_repository(wd):
 
 def create_commit_and_tag(tag_name, wd):
     Git.add_all(wd)
-    Git.commit_all(tag_name)
-    Git.tag(tag_name)
+    Git.commit_all(tag_name, wd)
+    Git.tag(tag_name, wd)
 
 def get_tag_name_from_ver(version_info, context):
     project = version_info['pid']

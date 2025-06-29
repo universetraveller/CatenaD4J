@@ -187,6 +187,7 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
 
     # no untracked files, skip the clean step
     final_checkout = Git.checkout
+    final_tag = fixed_tag
     if not context.minimal_checkout:
         Git.checkout(post_fix_tag, wd) 
 
@@ -205,8 +206,6 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         # if it is minimal mode and the tag is b
         # the final checkout could be skipped
         final_checkout = do_nothing
-    else:
-        final_tag = fixed_tag
 
     auto_task_print(f'Check out program version: {project}-{bid}{tag}',
                     final_checkout,

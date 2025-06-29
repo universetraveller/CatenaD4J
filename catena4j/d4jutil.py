@@ -576,7 +576,7 @@ class FixTests:
         self.files[file] = ori[:index] + override + ori[index:]
         return
 
-    def __init__(self,
+    def __call__(self,
                  project,
                  bid,
                  wd,
@@ -620,7 +620,7 @@ class FixTests:
         self.junit4 = {}
         self.noc_files = {}
         self.regex = get_java_regex()
-        test_dir = get_dir_src_tests(project, bid, wd, is_buggy, context, loader)
+        test_dir = get_dir_src_tests(project, bid, is_buggy, context, loader)
         base_dir = Path(wd, test_dir)
         for method in methods:
             # defects4j directly convert class name to file path
@@ -657,7 +657,7 @@ class FixTests:
             config['d4j.tests.exclude'] = excluded
         return config
 
-fix_tests = FixTests
+fix_tests = FixTests()
 
 def fill_properties(properties: dict,
                     project: str,
