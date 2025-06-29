@@ -11,7 +11,6 @@ from ..util import (
     Git
 )
 from pathlib import Path
-from os import linesep
 from os.path import abspath
 from ..c4jutil import (
     read_version_info,
@@ -122,7 +121,7 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     )
 
 
-    append_file(wdp / '.gitignore', linesep + '.svn' + linesep)
+    append_file(wdp / '.gitignore', '\n.svn\n')
 
     d4j_tag = context.d4j_tag
     if not context.minimal_checkout:
@@ -326,3 +325,4 @@ def run(context: ExecutionContext):
 
     # TODO catena4j checkout
     # delegate checkout tasks to loaders to support custom checkout behavior
+    loader.load_buggy_version()

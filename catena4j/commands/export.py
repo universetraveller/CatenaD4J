@@ -9,11 +9,11 @@ from ..util import (
     toolkit_execute
 )
 from argparse import RawDescriptionHelpFormatter
-from os import linesep
 from os.path import abspath
 from pathlib import Path
 from .. import d4jutil
 from ..c4jutil import read_version_info, Catena4JError, BUGGY, FIXED
+from ..loaders import get_project_loader
 
 d4j_static = {
     'classes.relevant' : 'Classes loaded by the triggering tests',
@@ -36,16 +36,16 @@ d4j_dynamic = {
 }
 
 def get_desc(_props):
-    return linesep.join([f'  {prop:<16}  {_props[prop]}' for prop in _props])
+    return '\n'.join([f'  {prop:<16}  {_props[prop]}' for prop in _props])
 
 def get_desc_all():
-    return linesep.join([get_desc(_props) for _props in (c4j_props, d4j_static, d4j_dynamic)])
+    return '\n'.join([get_desc(_props) for _props in (c4j_props, d4j_static, d4j_dynamic)])
 
 _parser = None
 def initialize():
     global _parser
     _parser = _create_command('export',
-                              description=f'Properties:{linesep}{get_desc_all()}',
+                              description=f'Properties:\n{get_desc_all()}',
                               formatter_class=RawDescriptionHelpFormatter,
                               help='export a version-specific property',
                               add_help=False)
@@ -55,12 +55,6 @@ def initialize():
     _parser.add_argument('--from-cache', action='store_true')
     _parser.add_argument('--update-cache', action='store_true')
 
-def read_property_from(prop, path):
-    result = read_file(path)
-    if result is None:
-        raise Catena4JError(f'Could not find property {prop} from {path}')
-    return result.strip()
-
 def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
     '''
         If cid is None, it would be ignored
@@ -68,9 +62,8 @@ def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
     if cid is None:
         return query_d4j_static(prop=prop, proj=proj, bid=bid, wd=wd, context=context, vtag=vtag)
 
-    path = Path(context.c4j_home, context.c4j_rel_projects, proj, bid, f'{cid}.{prop}')
-
-    return read_property_from(prop, path)
+    loader = get_project_loader(proj)(context)
+    return loader.get_property(prop, proj, bid, cid)
 
 def query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
     '''
@@ -85,7 +78,7 @@ def query_d4j_static(prop, proj, bid, wd, context=None, vtag=None):
         result = cached[d4j_prop]
         if prop.startswith('dir'):
             return result
-        return linesep.join(result.split(','))
+        return '\n'.join(result.split(','))
 
     return _query_d4j_static(prop=prop, proj=proj, bid=bid, context=context, vtag=vtag)
 
@@ -98,13 +91,13 @@ def _query_d4j_static(prop, proj, bid, context=None, vtag=None):
         See: defects4j/framework/core/Project.pm line 465 and line 1261
     '''
     if prop == 'classes.modified':
-        return linesep.join(d4jutil.get_classes_modified(proj, bid, context))
+        return '\n'.join(d4jutil.get_classes_modified(proj, bid, context))
     elif prop == 'classes.relevant':
-        return linesep.join(d4jutil.get_classes_relevant(proj, bid, context))
+        return '\n'.join(d4jutil.get_classes_relevant(proj, bid, context))
     elif prop == 'tests.relevant':
-        return linesep.join(d4jutil.get_tests_relevant(proj, bid, context))
+        return '\n'.join(d4jutil.get_tests_relevant(proj, bid, context))
     elif prop == 'tests.trigger':
-        return linesep.join(d4jutil.get_tests_trigger(proj, bid, context))
+        return '\n'.join(d4jutil.get_tests_trigger(proj, bid, context))
 
     is_buggy = True
     if vtag == FIXED:
@@ -213,7 +206,7 @@ def run(context: ExecutionContext):
     if context.mode == ExecutionContext.CLI:
         # output to stdout or file
         output = None if args.o is None else open(args.o, 'w')
-        print_result(result + linesep, output)
+        print_result(result + '\n', output)
         if output is not None:
             output.close()
 

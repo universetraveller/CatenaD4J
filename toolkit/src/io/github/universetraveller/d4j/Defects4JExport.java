@@ -165,7 +165,9 @@ public class Defects4JExport extends Defects4JStartup {
 				for(String ref : process.split(","))
 					addExtraFiles(ref, fileInstances);
 
-			return String.join(project.getProperty("line.separator"),
+			// change from line.separator to \n because the result is expected
+			// to catch by the caller
+			return String.join("\n",
 							   ClassesCollector.getClasses(fileInstances, testPattern));
 		} 
 
@@ -187,8 +189,8 @@ public class Defects4JExport extends Defects4JStartup {
 		for(int i = 0; i < files.length; ++ i)
 			files[i] = formatGetTestsAll(files[i], prefix, suffix);
 
-		// how about System.lineSeparator()?
-		return String.join(project.getProperty("line.separator"), files)
-						.replaceAll(sep, ".");
+		// change from line.separator to \n because the result is expected
+		// to catch by the caller
+		return String.join("\n", files).replaceAll(sep, ".");
 	}
 }

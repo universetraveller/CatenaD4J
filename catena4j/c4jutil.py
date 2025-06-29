@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties, Git
+from .util import read_properties, Git, read_file
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -88,3 +88,12 @@ def get_tag_name_from_ver(version_info, context):
     else:
         # is a catena4j directory
         return context.c4j_tag.format(project=project, bid=bid, cid=cid, suffix=tag)
+
+def get_property(name, project, bid, cid, context):
+    path = Path(context.c4j_home, context.c4j_rel_projects, project, bid, f'{cid}.{name}')
+
+    value = read_file(path)
+    if value is None:
+        raise Catena4JError(f'Could not find property {name} from {path}')
+    
+    return value.strip()

@@ -2,7 +2,6 @@ from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
 from pathlib import Path
 from ..util import print_result, get_project_cache, read_simple_csv, close_project_cache
-from os import linesep
 from ..c4jutil import Catena4JError
 
 _pids = None
@@ -44,7 +43,7 @@ def run_pids(context: ExecutionContext):
     result = query_pids(context)
 
     if context.mode == ExecutionContext.CLI:
-        print_result(linesep.join(result) + linesep if result else '')
+        print_result('\n'.join(result) + '\n' if result else '')
 
     return result
 
@@ -107,7 +106,7 @@ def run_bids(context: ExecutionContext):
     result = sorted(list(result), key=lambda x:int(x))
 
     if context.mode == ExecutionContext.CLI:
-        print_result(linesep.join(result) + linesep if result else '')
+        print_result('\n'.join(result) + '\n' if result else '')
 
     return result
 
@@ -129,6 +128,6 @@ def run_cids(context: ExecutionContext):
     result = sorted(query_cids(project, bid, context), key=lambda x:int(x))
 
     if context.mode == ExecutionContext.CLI:
-        print_result(linesep.join(result) + linesep if result else '')
+        print_result('\n'.join(result) + '\n' if result else '')
 
     return result

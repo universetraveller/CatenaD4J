@@ -1,5 +1,7 @@
+from ..exceptions import Catena4JError
 from .loader import ContextAwareLoader
 from pathlib import Path
+from ..c4jutil import get_property
 
 class ProjectLoader(ContextAwareLoader):
     version_control_system_class = None
@@ -85,3 +87,8 @@ class ProjectLoader(ContextAwareLoader):
             are file changes
         '''
         return False
+    
+    def get_property(self, name, project, bid, cid):
+        return get_property(name, project, bid, cid, self.context)
+    
+    def 

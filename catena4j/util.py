@@ -6,7 +6,7 @@ from sys import stdout, stderr, getdefaultencoding, exit as sys_exit
 from locale import getpreferredencoding
 import subprocess
 from .exceptions import Catena4JError
-from os import linesep, environ as os_env
+from os import environ as os_env
 from platform import system as get_system_name
 
 def open_and_write(file: Path, content: str, mode: str):
@@ -154,12 +154,7 @@ def run_command(cmd, cwd=None, timeout=None):
                     )
                 )
 
-_META_EXEC_ERR_MSG = ''.join(('Failed to run command: {command}',
-                      linesep, linesep,
-                      '{stdout}',
-                      linesep, linesep,
-                      '{stderr}',
-                      linesep))
+_META_EXEC_ERR_MSG = 'Failed to run command: {command}\n\n{stdout}\n\n{stderr}\n',
 def run_command_task(cmd,
                      wd,
                      *,
@@ -261,7 +256,7 @@ class TaskPrinter:
     @staticmethod
     def print_messages(messages):
         for i in messages:
-            printc(i + linesep)
+            printc(i + '\n')
 
     @classmethod
     def _start(cls, msg):
@@ -270,11 +265,11 @@ class TaskPrinter:
 
     @classmethod
     def _done(cls, msg):
-        printc(f'\r{msg}{TaskPrinter.DONE}{linesep}')
+        printc(f'\r{msg}{TaskPrinter.DONE}\n')
 
     @classmethod
     def _fail(cls, msg):
-        printc(f'\r{msg}{TaskPrinter.FAIL}{linesep}')
+        printc(f'\r{msg}{TaskPrinter.FAIL}\n')
 
     def __init__(self, title, anchor=-1):
         if anchor < 0:
@@ -370,7 +365,7 @@ def noreturn(f, *args, **kwargs):
         lineno = tb.tb_lineno
         message = str(e)
 
-        printc(f'{message}{linesep}  at {fullname}:{lineno}{linesep}')
+        printc(f'{message}\n  at {fullname}:{lineno}\n')
 
         sys_exit(1)
 
@@ -519,7 +514,7 @@ class Svn(Vcs):
         return out
 
 def dict_to_properties(mapping: dict):
-    return linesep.join([f'{item[0]}={item[1]}' for item in mapping.items()])
+    return '\n'.join([f'{item[0]}={item[1]}' for item in mapping.items()])
 
 def write_properties(file: Path, mapping: dict):
     write_file(file, dict_to_properties(mapping))
