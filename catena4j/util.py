@@ -411,7 +411,7 @@ class Vcs:
 
     @classmethod
     def run(cls, *args, wd, printer=None):
-        return run_command_task([cls.command, *args], wd, printer=printer)
+        return run_command_task([cls.command, *args], wd, task_printer=printer)
 
     def checkout_revision(self, revision_id, wd):
         raise NotImplementedError(f'Subclasses should implement this method')
@@ -440,7 +440,9 @@ class Git(Vcs):
 
     @classmethod
     def apply_check(cls, patch, n, wd):
-        return cls.run('apply', '--check', f'-p{n}', patch, wd=wd)
+        # do not use cls.run here because it will raise
+        # exceptions when the check not passes
+        return run_command(['git', 'apply', '--check', f'-p{n}', patch], cwd=wd)
 
     @classmethod
     def config(cls, name, value, wd):
@@ -522,64 +524,27 @@ def dict_to_properties(mapping: dict):
 def write_properties(file: Path, mapping: dict):
     write_file(file, dict_to_properties(mapping))
 
-def detect_apply_layout(file: Path, wd: str, tries: int):
+def detect_apply_layout(file: Path, wd: str):
     # defects4j checks n = (1, 0, 2) for git apply -p<n> patch
-    # we can combine check, cache and file existence checking
-    # to accelerate this process
-    # compare with cache, detect the layout directly would add
-    # extra file existence checking processes, and if check not
-    # pass, more file system accesses are there, but no matter
-    # whether there is a cache for patch files, at least one file
-    # reading and check process is required
-    # that is being said, the improvement of using a cache may be
-    # minimal
-    with file.open() as f:
-        while True:
-            line = f.readline()
-            if line.startswith('--- '):
-                line = line[4:]
-                line = line[:line.find(' ')].rstrip()
-                while line.isspace():
-                    printc(f'Warning: unexpected string detection when applying {patch}')
-                    line = line[:line.find(' ')].rstrip()
-                break
-            if not line:
-                printc(f'Warning: unexpectedly ran out lines when applying {patch}')
-                break
+    
+    #pattern = r'(?m)^diff --git a/(\S+)|^Index: (\S+)|^---\s(?!/dev/null)(\S+)'
+
+    # near all patches could be applied using n=1 so it is not necessary to optimize
+    # but if multiple types of patches are roughly the same number we can try to check
+    # the existence of file to apply and the type of patch through part of the content
 
     patch = str(file)
 
-    # traditional git patch
-    # n = 1
-    if line.startswith('a/'):
-        _line = line[2:]
-        if Path(wd, _line).is_file(): 
-            if Git.apply_check(patch, 1, wd)[0] == 0:
-                return 1
-            printc(f'Warning: unexpected apply_check failed when applying {patch} (n=1)')
+    for i in (1, 0, 2):
+        if Git.apply_check(patch, i, wd)[0]:
+            return i
 
-    # n = 0
-    if Path(wd, line).is_file():
-        if Git.apply_check(patch, 0, wd)[0] == 0:
-            return 0
-        printc(f'Warning: unexpected apply_check failed when applying {patch} (n=0)')
-
-    printc(f'Warning: failed to automatically detect the layout of {patch}')
-    index = 0
-    for i in range(tries):
-        index = line.find('/', index + 1)
-        if index == -1:
-            break
-        _line = line[index + 1:]
-        if Path(wd, _line).is_file() and Git.apply_check(patch, i + 1, wd)[0] == 0:
-            return i + 1
-
-    raise Catena4JError(f'Failed to detect the layout of {patch} (n={i})')
+    raise Catena4JError(f'Failed to apply {patch} (n={i})')
 
 def apply_patch(file: Path, wd: str, context=None):
     # context is a placeholder because we may add a cache for the
     # layout in future
-    return Git.apply(str(file), detect_apply_layout(file, wd, 2), wd)
+    return Git.apply(str(file), detect_apply_layout(file, wd), wd)
 
 def run_apply_patch_task(file: Path, wd: str, context=None):
     # a function in util module can print something, that is odd...
