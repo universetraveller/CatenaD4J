@@ -243,7 +243,7 @@ def check_d4j_vid(project: str, id: str, context):
                     context.d4j_rel_projects,
                     project,
                     'active-bugs.csv')
-        raise Defects4JError(f'Error: {project}-{id} is not a active bug id; '
+        raise Defects4JError(f'Error: {project}-{id} is not an active bug id; '
                              f'full list could be found at {str(path)}')
 
 class JavaRegex:

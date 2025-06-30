@@ -220,9 +220,16 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     return project_loader
 
 
-def c4j_checkout(project: str, bid: str, cid: str, tag: str, wd, context, loader=None):
+def _checkout(project: str, bid: str, cid: str, tag: str, wd, context, loader=None):
     if cid is None:
-        return
+        pass
+
+    # TODO modify tag if applicable
+    d4j_checkout_vid(project, bid, tag, wd, context, loader)
+
+    if tag == 'f':
+        # now at defects4j's fixed version
+        pass
 
     # delegate checkout tasks to loaders to support custom checkout behavior
     loader.load_buggy_version()
@@ -231,7 +238,7 @@ def checkout_to(tag_or_commit, wd):
     Git.checkout(tag_or_commit, wd)
     Git.clean(wd)
 
-def _reset(wd, context):
+def reset_working_directory(wd, context):
     version_info = read_version_info(wd, context)
     tag_name = get_tag_name_from_ver(version_info, context)
     auto_task_print('Reset the working directory',
@@ -245,7 +252,7 @@ def reset(context):
 
     wd = context.cwd
 
-    _reset(wd, context)
+    reset_working_directory(wd, context)
 
 def try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
     '''
@@ -327,9 +334,13 @@ def run(context: ExecutionContext):
 
     loader = get_project_loader(project)(context)
 
+    if context.mode != ExecutionContext.CLI:
+        # TODO
+        # trap auto_task_print function
+        pass
+
     if try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
         return
 
-    d4j_checkout_vid(project, bid, tag, wd, context, loader)
-
-    c4j_checkout(project, bid, cid, tag, wd, context, loader)
+    # TODO rename
+    _checkout(project, bid, cid, tag, wd, context, loader)
