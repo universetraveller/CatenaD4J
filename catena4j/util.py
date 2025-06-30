@@ -709,3 +709,20 @@ class File:
     
     def reindex(self):
         self.initialize(self.to_s())
+
+class Files:
+    def __init__(self, base):
+        self.base = Path(base).absolute()
+        self.files = {}
+
+    def get_file(self, path):
+        files = self.files
+        path = self.base / path
+        if not path in files:
+            files[path] = File(path)
+        return files[path]
+    
+    def write_back(self):
+        files = self.files
+        for path in files:
+            write_file(path, str(files[path]))

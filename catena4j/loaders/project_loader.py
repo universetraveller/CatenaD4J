@@ -2,6 +2,8 @@ from ..exceptions import Catena4JError
 from .loader import ContextAwareLoader
 from pathlib import Path
 from ..c4jutil import get_property, apply_json_patch
+from ..util import Files
+import json
 
 class ProjectLoader(ContextAwareLoader):
     version_control_system_class = None
@@ -92,11 +94,17 @@ class ProjectLoader(ContextAwareLoader):
         return get_property(name, project, bid, cid, self.context)
     
     def load_buggy_version(self, project, bid, cid, wd):
-        test_patch = self.get_property('test.patch', project, bid, cid)
+        files = Files(wd)
+        test_patch = json.loads(self.get_property('test.patch', project, bid, cid))
         for hunk in test_patch:
-            apply_json_patch(test_patch[hunk], wd)
+            apply_json_patch(test_patch[hunk], files)
+        
+        files.write_back()
 
     def load_fixed_version(self, project, bid, cid, wd):
-        src_patch = self.get_property('src.patch', project, bid, cid)['patch']
+        files = Files(wd)
+        src_patch = json.loads(self.get_property('src.patch', project, bid, cid))['patch']
         for hunk in src_patch:
-            apply_json_patch(hunk, wd)
+            apply_json_patch(hunk, files)
+        
+        files.write_back()

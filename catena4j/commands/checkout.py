@@ -251,6 +251,11 @@ def load_version(project: str, bid: str, cid: str, tag: str, wd, context):
                         'pid': project,
                         'bid': bid,
                         'cid': cid,
+                        'tag': normalize_tag('b'),
+                        # TODO expected to replace the old format
+                        'project': project,
+                        'bugid': bid,
+                        'cid': cid,
                         'vtag': normalize_tag('b')
                     }
     write_properties(wdp / context.c4j_version_props, version_info)
@@ -266,6 +271,7 @@ def load_version(project: str, bid: str, cid: str, tag: str, wd, context):
                     (project, bid, cid, wd))
 
     version_info['vtag'] = normalize_tag('f')
+    version_info['tag'] = normalize_tag('f')
     write_properties(wdp / context.c4j_version_props, version_info)
 
     fixed_tag = get_tag_name_from_ver(version_info, context)

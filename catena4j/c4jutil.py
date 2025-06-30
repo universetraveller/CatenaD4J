@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties, read_file, write_file, Git, File
+from .util import read_properties, read_file, Git, File, Files
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -98,35 +98,36 @@ def get_property(name, project, bid, cid, context):
     
     return value.strip()
 
-def apply_json_patch(patch: dict, wd: str):
+def apply_json_patch(patch: dict, files: Files=None):
     '''
         adapt and apply catena4j's src and test patches
     '''
-    file_name = patch.get('file_name') if 'file_name' in patch else patch.get('file_path')
+    file_name = patch['file_name'] if 'file_name' in patch else patch['file_path']
 
-    content = '\n'.join(patch.get('to')) + '\n' if 'to' in patch else \
-              patch.get('replaced_with')
+    content = '\n'.join(patch['to']) + '\n' if 'to' in patch else patch['replaced_with']
 
-    # 1-based line number
-    start = (
-                patch.get('begin_line_no') if 'begin_line_no' in patch else \
-                patch.get('from_line_no')
-             ) - 1
 
-    stop = patch.get('end_line_no') if 'end_line_no' in patch else patch.get('to_line_no')
-
-    path = Path(wd, file_name)
-
-    file = File(path)
+    file = files.get_file(file_name)
 
     _edit_type = patch.get('patch_type', 'replace')
-    if _edit_type == 'replace':
-        file[start:stop] = content
-    elif _edit_type == 'insert':
-        file[start:stop] << content
-    elif _edit_type == 'delete':
-        del file[start:stop]
+    if _edit_type == 'insert':
+        # 1-based line number
+        pos = patch['next_line_no'] - 1
+        content >> file[pos]
     else:
-        raise Catena4JError(f'Unknown patch type {_edit_type}')
+        # 1-based line number
+        start = (
+                    patch['begin_line_no'] if 'begin_line_no' in patch else \
+                    patch['from_line_no']
+                ) - 1
+
+        stop = patch['end_line_no'] if 'end_line_no' in patch else patch['to_line_no']
+
+        if _edit_type == 'replace':
+            file[start:stop] = content
+        elif _edit_type == 'delete':
+            del file[start:stop]
+        else:
+            raise Catena4JError(f'Unknown patch type {_edit_type}')
     
-    write_file(path, str(file))
+    return file
