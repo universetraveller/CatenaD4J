@@ -1,6 +1,6 @@
 from argparse import Namespace
 from pathlib import Path
-from typing import Callable, Tuple
+from typing import Callable, Iterable, Tuple
 from shutil import which
 from sys import stdout, stderr, getdefaultencoding, exit as sys_exit
 from locale import getpreferredencoding
@@ -551,11 +551,148 @@ class FileSlice:
     '''
         Support operators << and >>
     '''
-    pass
+    def __init__(self, file: 'File', start, stop):
+        self.file = file
+        self.start = 0 if start is None else start
+        self.stop = self.file.max_line if stop is None else stop
+
+    def __lshift__(self, value):
+        if isinstance(value, str):
+            self.file.insert(value, self.stop - 1, False)
+        elif isinstance(value, Iterable):
+            self.file.insert_all(value, self.stop - 1, False)
+        else:
+            super().__lshift__(value)
+
+    def __rrshift__(self, value):
+        if isinstance(value, str):
+            self.file.insert(value, self.start)
+        elif isinstance(value, Iterable):
+            self.file.insert_all(value, self.start)
+        else:
+            super().__lshift__(value)
+
+    def __repr__(self):
+        return ''.join([self.file.format_line(line) \
+                        for line in self.file.content[self.start:self.stop]])
 
 class File:
     '''
         File abstraction that supports insert, replace and delete operations
+
+        Operators supported: =, del, << and >>
+
+        f = File(path)
+
+        # insert before
+        f.insert(...)
+        f.insert_all(..., False)
+        str | Iterable >> f[...]
+
+        # insert after
+        f.insert(..., False)
+        f.insert_all(..., False)
+        f[...] << str | Iterable
+
+        # replace
+        f.replace(...)
+        f[...] = str | Iterable
+
+        # delete
+        f.delete(...)
+        del f[...]
     '''
-    def __init__(self, path: Path, encoding='latin-1'):
-        pass
+    def __init__(self, path: Path):
+        content = read_file(path)
+        if content is None:
+            raise Catena4JError(f'File {path} does not exist')
+        
+        self.initialize(content)
+        
+
+    def initialize(self, s: str):
+        self._original = s.splitlines(True)
+        self.content = [[[], line, []] for line in self._original]
+        self.max_line = len(self.content)
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            return self.get(key.start, key.stop)
+        elif isinstance(key, int):
+            return self.get(key, key + 1)
+        return super().__getitem__(key)
+
+    def __setitem__(self, key, value):
+        if isinstance(key, slice):
+            self.replace(key.start, key.stop, value)
+        elif isinstance(key, int):
+            self.replace(key, key + 1, value)
+        else:
+            super().__setitem__(key, value)
+    
+    def __delitem__(self, key):
+        if isinstance(key, slice):
+            self.delete(key.start, key.stop)
+        elif isinstance(key, int):
+            self.delete(key, key + 1)
+        else:
+            super().__delitem__(key)
+
+    def __repr__(self):
+        return self.to_s()
+
+    def to_s_fixed_lineno(self):
+        return '\n'.join([self.format_line(line).replace('\n', ' ') \
+                          for line in self.content])
+
+    def format_line(self, line):
+        return ''.join(reversed(line[0])) + line[1] + ''.join(line[2])
+
+    def to_s(self):
+        return ''.join([self.format_line(line) for line in self.content])
+
+    def insert_all(self, content, at_index, front=True):
+        i = 0 if front else 2
+        self.content[at_index][i].extend(content)
+
+    def insert(self, content, at_index, front=True):
+        i = 0 if front else 2
+        self.content[at_index][i].append(content)
+
+    def delete_line(self, index):
+        self.delete(from_index=index, to_index=index + 1)
+
+    def delete(self, from_index, to_index):
+        while from_index < to_index:
+            self.content[from_index][1] = ""
+            from_index += 1
+
+    def replace_line(self, index, with_content):
+        self.replace(from_index=index, to_index=index + 1, with_content=with_content)
+
+    def replace(self, from_index, to_index, with_content):
+        if isinstance(with_content, str):
+            self.content[from_index][1] = with_content
+            self.delete(from_index + 1, to_index)
+        elif isinstance(with_content, Iterable):
+            length = len(with_content)
+            to_index = min(from_index + length, to_index)
+            i = 0
+            while from_index < to_index:
+                self.content[from_index][1] = with_content[i]
+                from_index += 1
+                i += 1
+            if i < length:
+                self.insert_all(with_content[i:], to_index - 1, False)
+        else:
+            raise TypeError('Argument with_content should be either str or Iterable '
+                            f'(got {type(with_content)})')
+
+    def get_line(self, index):
+        return self.get(from_index=index, to_index=index + 1)
+
+    def get(self, from_index, to_index):
+        return FileSlice(self, from_index, to_index) 
+    
+    def reindex(self):
+        self.initialize(self.to_s())

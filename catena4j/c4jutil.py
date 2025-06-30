@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties, Git, read_file
+from .util import read_properties, read_file, Git, File
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -97,3 +97,9 @@ def get_property(name, project, bid, cid, context):
         raise Catena4JError(f'Could not find property {name} from {path}')
     
     return value.strip()
+
+def apply_json_patch(json_file: Path, wd: Path):
+    pass
+
+def apply_json_patch_to_file(f: File, patch: dict):
+    pass

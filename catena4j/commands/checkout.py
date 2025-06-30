@@ -220,25 +220,32 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     return project_loader
 
 
+def c4j_checkout(project: str, bid: str, cid: str, tag: str, wd, context, loader=None):
+    if cid is None:
+        return
+
+    # delegate checkout tasks to loaders to support custom checkout behavior
+    loader.load_buggy_version()
+
 def checkout_to(tag_or_commit, wd):
     Git.checkout(tag_or_commit, wd)
     Git.clean(wd)
 
-def reset(wd, context):
+def _reset(wd, context):
     version_info = read_version_info(wd, context)
     tag_name = get_tag_name_from_ver(version_info, context)
     auto_task_print('Reset the working directory',
                     checkout_to,
                     (tag_name, wd))
 
-def run_reset(context):
+def reset(context):
     args = context.args
     if args.w:
         context.cwd = abspath(args.w)
 
     wd = context.cwd
 
-    reset(wd, context)
+    _reset(wd, context)
 
 def try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
     '''
@@ -320,9 +327,9 @@ def run(context: ExecutionContext):
 
     loader = get_project_loader(project)(context)
 
-    if not try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
-        d4j_checkout_vid(project, bid, tag, wd, context, loader)
+    if try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
+        return
 
-    # TODO catena4j checkout
-    # delegate checkout tasks to loaders to support custom checkout behavior
-    loader.load_buggy_version()
+    d4j_checkout_vid(project, bid, tag, wd, context, loader)
+
+    c4j_checkout(project, bid, cid, tag, wd, context, loader)

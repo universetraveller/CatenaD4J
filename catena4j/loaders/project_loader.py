@@ -91,4 +91,8 @@ class ProjectLoader(ContextAwareLoader):
     def get_property(self, name, project, bid, cid):
         return get_property(name, project, bid, cid, self.context)
     
-    def 
+    def load_buggy_version(self, project, bid, cid, wd, context):
+        pass
+
+    def load_fixed_version(self, project, bid, cid, wd, context):
+        pass

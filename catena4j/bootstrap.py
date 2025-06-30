@@ -63,6 +63,7 @@ def initialize_commands():
     _register('clean', c4j_compile.clean)
     checkout.initialize()
     _register('checkout', checkout.run)
+    _register('reset', checkout.reset)
 
 register_bootstrap_function(initialize_commands)
 
