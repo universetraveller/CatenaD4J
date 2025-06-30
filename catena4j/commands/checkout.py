@@ -3,7 +3,7 @@ from ..dispatcher import ExecutionContext
 from ..util import (
     run_apply_patch_task,
     is_protected_directory,
-    auto_task_print,
+    get_auto_task_printer,
     read_properties,
     write_properties,
     append_file,
@@ -45,6 +45,11 @@ def initialize():
     _parser.add_argument('-w', required=True, metavar='work_dir')
     _parser.add_argument('--full-history', action='store_true')
 
+    _reset = _create_command('reset',
+                              help='reset a working directory',
+                              add_help=False)
+    _reset.add_argument('-w', required=False, metavar='work_dir')
+
 def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=None):
     '''
         This function implements the main logic of defects4j's checkout command
@@ -66,6 +71,8 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
         The checking process is done by another function to handle both defects4j and
         catena4j working directories (see try_to_reuse_working_directory)
     '''
+    auto_task_print = get_auto_task_printer(context)
+
     wdp = Path(wd)
 
     if wdp.is_file():
@@ -220,25 +227,70 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
     return project_loader
 
 
-def _checkout(project: str, bid: str, cid: str, tag: str, wd, context, loader=None):
+def load_version(project: str, bid: str, cid: str, tag: str, wd, context):
+    auto_task_print = get_auto_task_printer(context)
+
+    wdp = Path(wd)
+
+    loader = get_project_loader(project)(context)
+
     if cid is None:
-        pass
+        # fallback to defects4j checkout
+        d4j_checkout_vid(project, bid, tag, wd, context, loader)
+        return
 
-    # TODO modify tag if applicable
-    d4j_checkout_vid(project, bid, tag, wd, context, loader)
-
-    if tag == 'f':
-        # now at defects4j's fixed version
-        pass
+    # the following tasks are based on the buggy version
+    d4j_checkout_vid(project, bid, 'b', wd, context, loader)
 
     # delegate checkout tasks to loaders to support custom checkout behavior
-    loader.load_buggy_version()
+    auto_task_print(f'Load buggy version for {project}-{bid}-{cid}',
+                    loader.load_buggy_version,
+                    (project, bid, cid, wd))
+
+    version_info = {
+                        'pid': project,
+                        'bid': bid,
+                        'cid': cid,
+                        'vtag': normalize_tag('b')
+                    }
+    write_properties(wdp / context.c4j_version_props, version_info)
+
+    buggy_tag = get_tag_name_from_ver(version_info, context)
+
+    auto_task_print(f'Commit buggy version {buggy_tag}',
+                    create_commit_and_tag,
+                    (buggy_tag, wd))
+    
+    auto_task_print(f'Load fixed version for {project}-{bid}-{cid}',
+                    loader.load_fixed_version,
+                    (project, bid, cid, wd))
+
+    version_info['vtag'] = normalize_tag('f')
+    write_properties(wdp / context.c4j_version_props, version_info)
+
+    fixed_tag = get_tag_name_from_ver(version_info, context)
+
+    auto_task_print(f'Commit fixed version {fixed_tag}',
+                    create_commit_and_tag,
+                    (fixed_tag, wd))
+    
+    final_checkout = Git.checkout
+    final_tag = buggy_tag
+    if tag == 'f':
+        final_checkout = do_nothing
+    
+    auto_task_print(f'Check out program version: {project}-{bid}{tag}{cid}',
+                    final_checkout,
+                    (final_tag, wd))
+    
+    return loader
 
 def checkout_to(tag_or_commit, wd):
     Git.checkout(tag_or_commit, wd)
     Git.clean(wd)
 
 def reset_working_directory(wd, context):
+    auto_task_print = get_auto_task_printer(context)
     version_info = read_version_info(wd, context)
     tag_name = get_tag_name_from_ver(version_info, context)
     auto_task_print('Reset the working directory',
@@ -262,6 +314,8 @@ def try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
         so that we can make it possible to avoid the clone process if the
         current directory is a working directory but do not match the pid and bid?
     '''
+    auto_task_print = get_auto_task_printer(context)
+    
     try:
         version_info = read_version_info(wd, context)
     except Catena4JError:
@@ -332,15 +386,7 @@ def run(context: ExecutionContext):
 
     check_d4j_vid(project, bid, context)
 
-    loader = get_project_loader(project)(context)
-
-    if context.mode != ExecutionContext.CLI:
-        # TODO
-        # trap auto_task_print function
-        pass
-
     if try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
         return
 
-    # TODO rename
-    _checkout(project, bid, cid, tag, wd, context, loader)
+    load_version(project, bid, cid, tag, wd, context)

@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties, read_file, Git, File
+from .util import read_properties, read_file, write_file, Git, File
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -98,8 +98,35 @@ def get_property(name, project, bid, cid, context):
     
     return value.strip()
 
-def apply_json_patch(json_file: Path, wd: Path):
-    pass
+def apply_json_patch(patch: dict, wd: str):
+    '''
+        adapt and apply catena4j's src and test patches
+    '''
+    file_name = patch.get('file_name') if 'file_name' in patch else patch.get('file_path')
 
-def apply_json_patch_to_file(f: File, patch: dict):
-    pass
+    content = '\n'.join(patch.get('to')) + '\n' if 'to' in patch else \
+              patch.get('replaced_with')
+
+    # 1-based line number
+    start = (
+                patch.get('begin_line_no') if 'begin_line_no' in patch else \
+                patch.get('from_line_no')
+             ) - 1
+
+    stop = patch.get('end_line_no') if 'end_line_no' in patch else patch.get('to_line_no')
+
+    path = Path(wd, file_name)
+
+    file = File(path)
+
+    _edit_type = patch.get('patch_type', 'replace')
+    if _edit_type == 'replace':
+        file[start:stop] = content
+    elif _edit_type == 'insert':
+        file[start:stop] << content
+    elif _edit_type == 'delete':
+        del file[start:stop]
+    else:
+        raise Catena4JError(f'Unknown patch type {_edit_type}')
+    
+    write_file(path, str(file))

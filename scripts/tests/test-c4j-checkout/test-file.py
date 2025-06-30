@@ -1,6 +1,5 @@
 from pathlib import Path
 import sys
-import time
 
 sys.path.append(f'{str(Path(__file__).parent)}/../../..')
 

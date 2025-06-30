@@ -1,9 +1,8 @@
 from .util import read_file, get_project_cache, printc, write_file
 from pathlib import Path
-from .loaders import get_project_loader
+from .loaders import get_project_loader, is_valid_loader_name
 import re
 from .exceptions import Defects4JError
-from .loaders import is_valid_loader_name
 from shutil import move as move_file
 
 def get_project_dir(project, bid, context, folder, suffix):

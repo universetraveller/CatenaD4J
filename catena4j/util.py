@@ -231,7 +231,6 @@ def read_simple_csv(path, sep=',', remove_header=True):
 def do_nothing(*args, **kwargs):
     pass
 
-
 class TaskPrinter:
     START = None
     DONE = None
@@ -345,6 +344,20 @@ def auto_task_print(title, f, args=(), kwargs={}, reraise=True, **printer_args):
     printer.done()
     return result
     
+def auto_task_no_print(a, f, args=(), kwargs={}, b=None, **c):
+    return f(*args, **kwargs)
+
+def get_auto_task_printer(context):
+    '''
+        get suitable printer function for different contexts
+
+        this is a workaround and expected to address in another way
+    '''
+    # use context.CLI to avoid circular import
+    if context.mode == context.CLI:
+        return auto_task_print
+    return auto_task_no_print
+
 def noreturn(f, *args, **kwargs):
     try:
         f(*args, **kwargs)
