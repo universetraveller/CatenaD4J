@@ -28,7 +28,6 @@ from ..loaders import get_project_loader
 from ..d4jutil import (
     get_revision_id,
     check_d4j_vid,
-    fix_tests,
     fill_properties,
     get_src_patch_dir
 )
@@ -152,13 +151,11 @@ def d4j_checkout_vid(project: str, bid: str, tag: str, wd: str, context, loader=
                         create_commit_and_tag,
                         (post_fix_compilable_tag, wd))
 
-    config = fix_tests(project,
-                       bid,
-                       wd,
-                       False,
-                       context,
-                       loader=project_loader,
-                       revision_id=revision_id)
+    config = project_loader.fix_tests(project,
+                                      bid,
+                                      wd,
+                                      False,
+                                      revision_id=revision_id)
 
 
     path2props = wdp / context.d4j_version_co_props

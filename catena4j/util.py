@@ -6,25 +6,44 @@ from sys import stdout, stderr, getdefaultencoding, exit as sys_exit
 from locale import getpreferredencoding
 import subprocess
 from .exceptions import Catena4JError
-from os import environ as os_env
+import os
 from platform import system as get_system_name
 
-def open_and_write(file: Path, content: str, mode: str):
+ENCODINGS = ('utf-8', 'latin-1')
+def set_encodings(encodings):
+    global ENCODINGS
+    ENCODINGS = encodings
+
+def open_and_write(file: Path, content: str, mode: str, encoding=None):
     if not file.parent.is_dir():
         file.parent.mkdir(parents=True)
-    with file.open(mode) as f:
-        f.write(content)
+    for enc in ENCODINGS if encoding is None else (encoding,):
+        try:
+            with file.open(mode, encoding=enc) as f:
+                f.write(content)
+        except UnicodeEncodeError:
+            continue
 
-def write_file(file: Path, content: str):
-    open_and_write(file, content, 'w')
+def write_file(file: Path, content: str, encoding=None):
+    '''
+        Unified API used to write a file for better encoding control
+    '''
+    open_and_write(file, content, 'w', encoding)
 
-def append_file(file: Path, content: str):
-    open_and_write(file, content, 'a')
+def append_file(file: Path, content: str, encoding=None):
+    open_and_write(file, content, 'a', encoding)
 
-def read_file(file: Path):
+def read_file(file: Path, encoding=None):
+    '''
+        Unified API used to read a file for better encoding control
+    '''
     if file.is_file():
-        with file.open() as f:
-            return f.read()
+        for enc in ENCODINGS if encoding is None else (encoding,):
+            try:
+                with file.open(encoding=enc) as f:
+                    return f.read()
+            except UnicodeDecodeError:
+                continue
     return None
 
 def get_cache_path(context: Namespace, *parts):
@@ -387,6 +406,8 @@ def build_protected_directories():
     global protected_directories
     protected_directories = set()
     
+    os_env = os.environ
+
     protected_directories.add(str(Path.home()))
     if get_system_name() == 'Windows':
         keys = ("SystemDrive", "WINDIR", "ProgramFiles", "ProgramFiles(x86)",
@@ -556,6 +577,7 @@ def apply_patch(file: Path, wd: str, context=None):
 def run_apply_patch_task(file: Path, wd: str, context=None):
     # a function in util module can print something, that is odd...
     # just transfer the core logic to another function
+    auto_task_print = get_auto_task_printer(context)
     auto_task_print('Apply patch',
                     apply_patch,
                     (file, wd, context))

@@ -5,7 +5,7 @@ import re
 from .exceptions import Defects4JError
 from shutil import move as move_file
 
-def get_project_dir(project, bid, context, folder, suffix):
+def get_project_dir(project, bid, context, folder='', suffix=None):
     file_name = bid if suffix is None else f'{bid}{suffix}'
     return Path(context.d4j_home,
                 context.d4j_rel_projects,
@@ -119,7 +119,7 @@ def get_tests_trigger(proj, bid, context):
     return a + b
 
 def read_active_bugs(context, proj):
-    path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'active-bugs.csv')
+    path = get_project_dir(proj, 'active-bugs.csv', context)
     content = read_file(path)
     if content is None:
         raise Defects4JError(f'Cannot open active bugs file {path}')
@@ -182,8 +182,23 @@ def get_revision_id(proj, bid, is_buggy, context):
     active_bugs = get_active_bugs(proj, context)
     return lookup_revision_id(active_bugs, bid, is_buggy)
 
+def lookup_vid(active_bugs, revision_id):
+    # is there faster way to find vid for a revision_id
+    for bid in active_bugs:
+        line = active_bugs[bid]
+        if line['buggy'] == revision_id:
+            return bid, True
+        elif line['fixed'] == revision_id:
+            return bid, False
+
+    raise Defects4JError(f'Version id does not exist for revision id {revision_id}')
+    
+def get_vid(project, revision_id, context):
+    active_bugs = get_active_bugs(project, context)
+    return lookup_vid(active_bugs, revision_id)
+
 def read_dir_layout(context, proj):
-    path = Path(context.d4j_home, context.d4j_rel_projects, proj, 'dir-layout.csv')
+    path = get_project_dir(proj, 'dir-layout.csv', context)
     content = read_file(path)
     if content is None:
         raise Defects4JError(f'Cannot open {path}')
@@ -233,15 +248,12 @@ def get_dir_src_tests(proj, bid, is_buggy, context, loader=None):
 def check_d4j_vid(project: str, id: str, context):
     # instead of checking file system, check if there is a loader for the project
     if not is_valid_loader_name(project):
-        path = Path(context.d4j_home, context.d4j_rel_projects)
+        path = get_project_dir(project, '', context)
         raise Defects4JError(f'Error: {project} is not a valid project name; '
                              f'full list could be found at {str(path)} directory')
 
     if not id in get_active_bugs(project, context):
-        path = Path(context.d4j_home,
-                    context.d4j_rel_projects,
-                    project,
-                    'active-bugs.csv')
+        path = get_project_dir(project, 'active-bugs.csv', context)
         raise Defects4JError(f'Error: {project}-{id} is not an active bug id; '
                              f'full list could be found at {str(path)}')
 
@@ -314,9 +326,7 @@ def get_java_regex():
 def _get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
     files = []
 
-    base = Path(context.d4j_home,
-                context.d4j_rel_projects,
-                project)
+    base = get_project_dir(project, '', context)
 
     revision_id = revision_id or get_revision_id(project, bid, is_buggy, context)
     failing_tests = base / 'failing_tests' / revision_id
@@ -573,52 +583,7 @@ class FixTests:
         self.files[file] = ori[:index] + override + ori[index:]
         return
 
-    def __call__(self,
-                 project,
-                 bid,
-                 wd,
-                 is_buggy,
-                 context,
-                 *,
-                 loader=None,
-                 revision_id=None,
-                 _except=set(),
-                 verbose=False):
-        # RM_ASSERTS environment variable in the original script
-        # when it is called for checkout command it is not set forever
-        # simply skip its implementation
-        full = False
-
-        classes, methods, assertions = get_flaky_tests(project,
-                                                       bid,
-                                                       is_buggy,
-                                                       context,
-                                                       revision_id=revision_id,
-                                                       full=full)
-        if not methods:
-            # defects4j does not implement this function
-            self.exclude_test_classes(classes)
-
-        if _except:
-            # never reach here when called for checkout command
-            methods -= _except
-            
-        if full:
-            # never reach here when called for checkout command
-            # defects4j record the full line and parse again which induced overhead
-            # perl is not readable...
-            # why expressions like $_ with bad readability are allowed?
-            # unless ($RM_ASSERTS && _remove_assertion($class, $method)) {
-            #     push(@method_list, $_);
-            # }
-            methods = self.remove_assertions(methods, assertions)
-        
-        self.files = {}
-        self.junit4 = {}
-        self.noc_files = {}
-        self.regex = get_java_regex()
-        test_dir = get_dir_src_tests(project, bid, is_buggy, context, loader)
-        base_dir = Path(wd, test_dir)
+    def remove_test_methods(self, methods: list, base_dir: Path, verbose=False):
         for method in methods:
             # defects4j directly convert class name to file path
             # that would be not precise, for example, for embedded
@@ -633,28 +598,80 @@ class FixTests:
                 continue
                 
             self.remove_test_method(f, clz, met)
+
+    def __init__(self):
+        self.files = {}
+        self.junit4 = {}
+        self.noc_files = {}
+        self.regex = get_java_regex()
+
+def fix_tests(project,
+              bid,
+              wd,
+              is_buggy,
+              context,
+              *,
+              loader=None,
+              revision_id=None,
+              _except=set(),
+              verbose=False):
+    # RM_ASSERTS environment variable in the original script
+    # when it is called for checkout command it is always not set
+    # simply skip its implementation
+    full = False
+
+    classes, methods, assertions = get_flaky_tests(project,
+                                                   bid,
+                                                   is_buggy,
+                                                   context,
+                                                   revision_id=revision_id,
+                                                   full=full)
+
+    fixer = FixTests()
+
+    if not methods:
+        # defects4j does not implement this function
+        fixer.exclude_test_classes(classes)
+
+    if _except:
+        # never reach here when called for checkout command
+        methods -= _except
         
-        self.write_files()
+    if full:
+        # never reach here when called for checkout command
+        # defects4j record the full line and parse again which induced overhead
+        # perl is not readable...
+        # why expressions like $_ with bad readability are allowed?
+        # unless ($RM_ASSERTS && _remove_assertion($class, $method)) {
+        #     push(@method_list, $_);
+        # }
+        methods = fixer.remove_assertions(methods, assertions)
+    
+    test_dir = get_dir_src_tests(project, bid, is_buggy, context, loader)
+    base_dir = Path(wd, test_dir)
 
-        # defects4j write properties file to record the excluded tests
-        # but their code is odd, each time exclude_tests_in_file is called it will try
-        # to write d4j.tests.exclude property which contains classes parsed from the
-        # argument file (not methods, odd again), and this write behavior will overwrite
-        # the original property value with a same name
-        # in fix_tests exclude_tests_in_file is called three times, and finally
-        # only the last call could keep the property, which means the first two calls
-        # would not have their excluded classes in the properties file 
-        # though classes are mostly empty so the code is not reached, why they design
-        # this behavior? or it is just a bug?
+    fixer.remove_test_methods(methods, base_dir, verbose)
+    
+    fixer.write_files()
 
-        # avoid writing the file again and again
-        config = {}
-        if classes:
-            excluded = ','.join(map(lambda x : x.replace('.', '/') + '.*', classes))
-            config['d4j.tests.exclude'] = excluded
-        return config
+    # defects4j write properties file to record the excluded tests
+    # but their code is odd, each time exclude_tests_in_file is called it will try
+    # to write d4j.tests.exclude property which contains classes parsed from the
+    # argument file (not methods, odd again), and this write behavior will overwrite
+    # the original property value with a same name
+    # in fix_tests exclude_tests_in_file is called three times, and finally
+    # only the last call could keep the property, which means the first two calls
+    # would not have their excluded classes in the properties file 
+    # though classes are mostly empty so the code is not reached, why they design
+    # this behavior? or it is just a bug?
 
-fix_tests = FixTests()
+    # avoid writing the file again and again
+    config = {}
+    if classes:
+        excluded = ','.join(map(lambda x : x.replace('.', '/') + '.*', classes))
+        config['d4j.tests.exclude'] = excluded
+
+    return config
 
 def fill_properties(properties: dict,
                     project: str,

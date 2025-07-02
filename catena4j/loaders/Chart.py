@@ -1,6 +1,7 @@
 from pathlib import Path
 from .project_loader import ProjectLoader
-from ..util import Svn, run_apply_patch_task
+from ..util import Svn
+from .post_checkout_util import fix_compilation_errors
 
 class ChartLoader(ProjectLoader):
     version_control_system_class = Svn
@@ -11,28 +12,5 @@ class ChartLoader(ProjectLoader):
             'test': 'tests'
         }
 
-    def d4j_checkout_hook(self, project, revision_id, wd):
-        context = self.context
-
-        compile_errors = Path(context.d4j_home,
-                              context.d4j_rel_projects,
-                              project,
-                              'compile-errors')
-
-        revision_id = int(revision_id)
-
-        changes = False
-        for file in compile_errors.iterdir():
-            _min, _max = map(int, file.name[:-5].rsplit('-', 2)[-2:])
-            if revision_id < _min:
-                continue
-
-            if revision_id > _max:
-                continue
-
-            run_apply_patch_task(file, wd, context)
-
-            # reaching here means there are file changes
-            changes = True
-        
-        return changes
+    def d4j_checkout_hook(self, project: str, revision_id: str, wd: str):
+        return fix_compilation_errors(self.context, project, revision_id, wd)

@@ -3,6 +3,7 @@ from ..dispatcher import ExecutionContext
 from pathlib import Path
 from ..util import print_result, get_project_cache, read_simple_csv, close_project_cache
 from ..c4jutil import Catena4JError
+from ..d4jutil import get_active_bugs as d4j_get_active_bugs
 
 _pids = None
 _bids = None
@@ -47,7 +48,7 @@ def run_pids(context: ExecutionContext):
 
     return result
 
-def _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name, parser):
+def _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name):
     cache = getattr(context, cache_attr)
     path = Path(getattr(context, home_attr),
                 getattr(context, rel_attr),
@@ -60,7 +61,7 @@ def _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name, par
     return bugs
 
 def _query_bids(project, context, cache_attr, home_attr, rel_attr, file_name):
-    bugs = _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name, _bids)
+    bugs = _query_csv(project, context, cache_attr, home_attr, rel_attr, file_name)
     return set(map(lambda b : b[0], bugs))
 
 def query_bids_with_cids(project, context):
@@ -80,12 +81,9 @@ def query_deprecated_bids(project, context):
                        'deprecated-bugs.csv')
 
 def query_active_bids(project, context):
-    return _query_bids(project,
-                       context,
-                       '__d4j_cache__',
-                       'd4j_home',
-                       'd4j_rel_projects',
-                       'active-bugs.csv')
+    # slightly slower than using read_simple_csv but fast enough
+    bugs = d4j_get_active_bugs(project, context)
+    return set(bugs.keys())
 
 def run_bids(context: ExecutionContext):
     args = context.args
@@ -116,8 +114,7 @@ def query_cids(project, id, context):
                        '__c4j_cache__',
                        'c4j_home',
                        'c4j_rel_projects',
-                       'bugs-registry.csv',
-                       _cids)
+                       'bugs-registry.csv')
     return [line[1] for line in bugs if line[0] == id]
 
 def run_cids(context: ExecutionContext):

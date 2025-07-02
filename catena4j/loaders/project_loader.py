@@ -1,8 +1,8 @@
-from ..exceptions import Catena4JError
 from .loader import ContextAwareLoader
 from pathlib import Path
 from ..c4jutil import get_property, apply_json_patch
-from ..util import Files
+from ..util import read_file, toolkit_execute, Files, write_file
+from ..d4jutil import fix_tests
 import json
 
 class ProjectLoader(ContextAwareLoader):
@@ -90,10 +90,10 @@ class ProjectLoader(ContextAwareLoader):
         '''
         return False
     
-    def get_property(self, name, project, bid, cid):
+    def get_property(self, name: str, project: str, bid: str, cid: str):
         return get_property(name, project, bid, cid, self.context)
     
-    def load_buggy_version(self, project, bid, cid, wd):
+    def load_buggy_version(self, project: str, bid: str, cid: str, wd: str):
         files = Files(wd)
         test_patch = json.loads(self.get_property('test.patch', project, bid, cid))
         for hunk in test_patch:
@@ -101,10 +101,49 @@ class ProjectLoader(ContextAwareLoader):
         
         files.write_back()
 
-    def load_fixed_version(self, project, bid, cid, wd):
+    def load_fixed_version(self, project: str, bid: str, cid: str, wd: str):
         files = Files(wd)
         src_patch = json.loads(self.get_property('src.patch', project, bid, cid))['patch']
         for hunk in src_patch:
             apply_json_patch(hunk, files)
         
         files.write_back()
+    
+    def toolkit_execute(self,
+                        target: str,
+                        project: str,
+                        wd: str,
+                        *,
+                        task_printer=None,
+                        xml_attr: str='c4j_rel_project_compile_xml',
+                        main_attr: str='c4j_toolkit_execute_main'):
+        context = self.context
+        xml = Path(context.c4j_home,
+                   getattr(context, xml_attr).format(project=project))
+        return toolkit_execute(getattr(context, main_attr),
+                               wd,
+                               context,
+                               args=(str(xml), target),
+                               task_printer=task_printer)
+    
+    def fix_tests(self,
+                  project,
+                  bid,
+                  wd,
+                  is_buggy,
+                  *,
+                  revision_id=None,
+                  _except=set(),
+                  verbose=False):
+        '''
+            Projects like Math need specific fix_tests method
+        '''
+        return fix_tests(project,
+                         bid,
+                         wd,
+                         is_buggy,
+                         self.context,
+                         loader=self,
+                         revision_id=revision_id,
+                         _except=_except,
+                         verbose=verbose)

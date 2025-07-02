@@ -23,6 +23,7 @@ def _initialize_env():
         Default implementation of system env initialization
     '''
     c4j_home = env._c4j_home
+    os_env = os.environ
     _env = {
         'c4j_home': str(c4j_home),
         # when this function is called, the system config has been initialized
@@ -34,8 +35,15 @@ def _initialize_env():
         'cwd': os.getcwd(),
         # cache for each run
         '__d4j_cache__': {},
-        '__c4j_cache__': {}
+        '__c4j_cache__': {},
+        'GRADLE_LOCAL_HOME_DIR': os_env['GRADLE_LOCAL_HOME_DIR'] \
+                                    if 'GRADLE_LOCAL_HOME_DIR' in os_env else \
+                                        '.gradle_local_home',
     }
+    _env['BUILD_SYSTEMS_LIB_DIR'] = os_env['BUILD_SYSTEMS_LIB_DIR'] \
+                                        if 'BUILD_SYSTEMS_LIB_DIR' in os_env else \
+                                            os.path.join(_env['d4j_home'], 'framework', 'lib', 'build_systems')
+
     return _env
 
 register_env_constructor(_initialize_env)

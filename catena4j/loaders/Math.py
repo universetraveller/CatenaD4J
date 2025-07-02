@@ -3,6 +3,12 @@ from . import LoaderError
 from ..util import read_file, Git
 import re
 from pathlib import Path
+from ..d4jutil import (
+    get_dir_src_tests,
+    get_project_dir as d4j_get_project_dir,
+    parse_failing_tests,
+    FixTests
+)
 
 # with lazy import the overhead of compilation could be minimal
 _layout_pattern_1 = {
@@ -63,3 +69,41 @@ class MathLoader(ProjectLoader):
             raise LoaderError(f'Unknown layout for working directory: {self.context.cwd}')
         
         return layout
+
+    def fix_tests(self,
+                  project,
+                  bid,
+                  wd,
+                  is_buggy,
+                  *,
+                  revision_id=None,
+                  _except=set(),
+                  verbose=False):
+        config = super().fix_tests(project,
+                                   bid,
+                                   wd,
+                                   is_buggy,
+                                   revision_id=revision_id,
+                                   _except=_except,
+                                   verbose=verbose)
+        
+        broken_tests = d4j_get_project_dir(project, 'broken_tests', self.context)
+
+        if broken_tests.is_file():
+
+            classes, methods, _ = parse_failing_tests(read_file(broken_tests).splitlines())
+
+            fixer = FixTests()
+
+            test_dir = get_dir_src_tests(project, bid, is_buggy, self.context, self)
+            base_dir = Path(wd, test_dir)
+            fixer.remove_test_methods(methods, base_dir)
+
+            fixer.write_files()
+
+            if classes:
+                excluded = ','.join(map(lambda x : x.replace('.', '/') + '.*', classes))
+                existing = config['d4j.tests.exclude'] + ',' if 'd4j.tests.exclude' in config else ''
+                config['d4j.tests.exclude'] = existing + excluded
+        
+        return config

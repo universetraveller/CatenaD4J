@@ -112,11 +112,10 @@ def query_d4j_dynamic(prop, proj, wd, context=None):
     '''
         For properties require information from the checked out files 
     '''
-    xml = Path(context.c4j_home, context.c4j_rel_project_export_xml.format(project=proj))
-    return toolkit_execute(context.c4j_toolkit_export_main,
-                           wd,
-                           context,
-                           args=(str(xml), prop))
+    loader = get_project_loader(proj)(context)
+    xml_attr = 'c4j_rel_project_export_xml'
+    main_attr = 'c4j_toolkit_export_main'
+    return loader.toolkit_execute(prop, proj, wd, xml_attr=xml_attr, main_attr=main_attr)
 
 def get_export_cache(prop, pid, vid, cid, context):
     parts = ['export', pid, vid]

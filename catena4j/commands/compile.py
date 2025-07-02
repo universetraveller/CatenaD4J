@@ -1,10 +1,11 @@
 from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
-from ..util import toolkit_execute, TaskPrinter
+from ..util import TaskPrinter
 from pathlib import Path
 from os.path import abspath
 from ..c4jutil import read_version_info
 from ..exceptions import Catena4JError
+from ..loaders import get_project_loader
 
 _parser = None
 _clean = None
@@ -27,12 +28,8 @@ def initialize():
     _clean.add_argument('--verbose', action='store_true')
 
 def execute_compile(target, proj, wd, context, task_printer=None):
-    xml = Path(context.c4j_home, context.c4j_rel_project_compile_xml.format(project=proj))
-    toolkit_execute(context.c4j_toolkit_execute_main,
-                    wd,
-                    context,
-                    args=(str(xml), target),
-                    task_printer=task_printer)
+    loader = get_project_loader(proj)(context)
+    loader.toolkit_execute(target, proj, wd, task_printer=task_printer)
 
 def run(context: ExecutionContext):
     args = context.args
