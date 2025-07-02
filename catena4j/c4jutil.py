@@ -1,5 +1,5 @@
 from pathlib import Path
-from .util import read_properties, read_file, Git, File, Files
+from .util import get_project_cache, read_properties, read_file, Git, Files
 from . import d4jutil
 from .exceptions import Catena4JError
 import re
@@ -131,3 +131,39 @@ def apply_json_patch(patch: dict, files: Files=None):
             raise Catena4JError(f'Unknown patch type {_edit_type}')
     
     return file
+
+def read_bugs_registry(project, context):
+    path = Path(context.c4j_home, context.c4j_rel_projects, project, 'bugs-registry.csv')
+    content = read_file(path)
+    if content is None:
+        raise Catena4JError(f'Failed to read bugs registry from {path}')
+
+    bugs = {}
+    for line in content.splitlines()[1:]:
+        line = line.split(',')
+        if line[0] not in bugs:
+            bugs[line[0]] = set()
+        
+        bugs[line[0]].add(line[1])
+    
+    return bugs
+
+def get_bugs_registry(project, context):
+    return get_project_cache(context.__c4j_cache__,
+                             project,
+                             'bugs-registry',
+                             read_bugs_registry,
+                             (project, context))
+
+def check_vid(project, bid, cid, context):
+    d4jutil.check_d4j_vid(project, bid, context)
+    if cid is None:
+        return
+
+    bugs = get_bugs_registry(project, context)
+    if bid in bugs and cid in bugs[bid]:
+        return
+
+    path = Path(context.c4j_home, 'projects', 'bugs-registry.csv')
+    raise Catena4JError(f'Error: {project}-{bid}-{cid} is not an active bug id; '
+                        f'full list could be found at {path}')

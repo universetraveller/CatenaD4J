@@ -42,9 +42,9 @@ def fix_missing_build_file(context, project: str, revision_id:str, wd: str):
                 if f.is_file():
                     copy2(f, wdp)
                 else:
-                    # defects4j includes an extra directory for one of the 
+                    # defects4j includes an extra directory for two of the 
                     # revision ids in project Cli, that seems to be a bug
-                    copytree(f, wdp)
+                    copytree(f, wdp / f.name)
             modified = True
     
     return project_dir, wdp, modified, build_file

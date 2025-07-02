@@ -173,7 +173,7 @@ def run_command(cmd, cwd=None, timeout=None):
                     )
                 )
 
-_META_EXEC_ERR_MSG = 'Failed to run command: {command}\n\n{stdout}\n\n{stderr}\n',
+_META_EXEC_ERR_MSG = 'Failed to run command: {command}\n\n{stdout}\n\n{stderr}\n'
 def run_command_task(cmd,
                      wd,
                      *,

@@ -20,14 +20,14 @@ from ..c4jutil import (
     init_git_repository,
     create_commit_and_tag,
     get_tag_name_from_ver,
-    normalize_tag
+    normalize_tag,
+    check_vid
 )
 from ..exceptions import Catena4JError
 from shutil import rmtree
 from ..loaders import get_project_loader
 from ..d4jutil import (
     get_revision_id,
-    check_d4j_vid,
     fill_properties,
     get_src_patch_dir
 )
@@ -387,7 +387,7 @@ def run(context: ExecutionContext):
 
     bid, tag, cid = parse_vid(args.v)
 
-    check_d4j_vid(project, bid, context)
+    check_vid(project, bid, cid, context)
 
     if try_to_reuse_working_directory(project, bid, tag, cid, wd, context):
         return

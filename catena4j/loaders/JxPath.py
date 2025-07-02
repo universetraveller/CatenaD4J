@@ -78,14 +78,14 @@ class JxPathLoader(ProjectLoader):
 
     def build_file_replace(self, project_dir):
         if not hasattr(self, '_build_file_replace'):
-            replacements = self._build_file_replacements(project_dir)
+            replacements = self.build_file_replacements(project_dir)
             self._build_file_replace = replace_factory(replacements)
 
         return self._build_file_replace
     
     def maven_build_file_replace(self, project_dir):
         if not hasattr(self, '_maven_build_file_replace'):
-            replacements = self._build_file_replacements(project_dir)
+            replacements = self.build_file_replacements(project_dir)
             self._maven_build_file_replace = replace_factory(replacements)
 
         return self._maven_build_file_replace

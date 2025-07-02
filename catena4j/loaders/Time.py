@@ -32,7 +32,7 @@ class TimeLoader(ProjectLoader):
         jtd = wdp / 'JodaTime'
         if jtd.is_dir():
             for p in jtd.iterdir():
-                move(p, wdp)
+                move(str(p), wd)
             modified = True
         
         project_dir, wdp, m1, build_file = fix_missing_build_file(self.context,
