@@ -34,7 +34,7 @@ class CliLoader(ProjectLoader):
                 'compile-tests': 'compile.tests',
                 'build.classpath': 'compile.classpath',
                 'classesdir': 'classes.dir',
-                'testclasses.dir': 'test.classes.dir',
+                'testclassesdir': 'test.classes.dir',
                 'http://repo1.maven.org/maven/commons-lang/jars/commons-lang-2.1.jar':
                 f'file://{project_dir}/lib/commons-lang/commons-lang/2.1/commons-lang-2.1.jar',
                 'http://www.ibiblio.org/maven/commons-lang/jars/commons-lang-2.1.jar':

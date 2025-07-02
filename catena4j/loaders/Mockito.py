@@ -59,7 +59,7 @@ class MockitoLoader(ProjectLoader):
 
         text = read_file(props)
         if text is None:
-            raise Catena4JError(f'Could not open properties file {props}')
+            return modified
 
         to_write = []
         for line in text.splitlines():

@@ -22,7 +22,7 @@ log = open('./c4j_time', 'w')
 def task(bugid):
     try:
         start = time.perf_counter_ns()
-        finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'checkout', '-p', bugid[0], '-v', '{}b'.format(bugid[1]), '-w', '{}/{}_{}'.format(sys.argv[2], bugid[0], bugid[1])], capture_output=True)
+        finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'checkout', '-p', bugid[0], '-v', '{}b'.format(bugid[1]), '-w', '{}/{}_{} --full-history'.format(sys.argv[2], bugid[0], bugid[1])], capture_output=True)
         finished.check_returncode()
         end = time.perf_counter_ns()
         log.write('_'.join(bugid))
