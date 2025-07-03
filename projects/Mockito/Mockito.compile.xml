@@ -153,11 +153,19 @@
              this build file depend on it -->
         <mkdir dir="${basedir}/compileLib"/>
         <!-- Copy the correct version of libraries for compilation and testing -->
-        <exec executable="/bin/bash" failonerror="true">
-            <arg value="${d4j.home}/framework/projects/${d4j.project.id}/chooseDepedencyVersion.sh"/>
-            <arg value="${basedir}"/>
-            <arg value="${d4j.home}"/>
-        </exec>
+        <loadfile property="gradle.line" srcFile="${basedir}/build.gradle"/>
+        <propertyregex
+            input="${gradle.line}"
+            property="bytebuddy.version"
+            regexp="byte-buddy:([0-9]+\.[0-9]+\.[0-9]+)"
+            select="\1"/>
+        <if>
+            <available file="${d4j.home}/framework/projects/Mockito/byte-buddy/byte-buddy-${bytebuddy.version}.jar"/>
+            <then>
+                <copy file="${d4j.home}/framework/projects/Mockito/byte-buddy/byte-buddy-${bytebuddy.version}.jar"
+                    todir="${basedir}/compileLib"/>
+            </then>
+        </if>
     </target>
 
     <!-- target used for compiling test cases.-->

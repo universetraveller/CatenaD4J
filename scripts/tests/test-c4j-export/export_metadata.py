@@ -20,40 +20,39 @@ def waitlist():
             tasks.extend((proj, id) for id in all_bugs[proj])
     return tasks
 
+a = open('./time_consumed', 'w')
 def export_prop(path:str, prop:str):
     try:
-        #finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'reset', '-w', path], capture_output = True)
         start = time.perf_counter_ns()
         finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'export',  '-p', prop, '-w', path], capture_output = True)
         end = time.perf_counter_ns()
         bid = path[path.rfind('/')+1:]
-        with open(f'./times/{bid}.{prop}', 'w') as f:
-            f.write(str(end - start))
+        a.write(','.join([bid, prop, str(end - start)]))
+        a.write('\n')
         finished.check_returncode()
         return finished.stdout.decode('utf-8')
     except Exception as e:
         bid = path[path.rfind('/')+1:]
-        with open(f'./exceptions/{bid}.{prop}', 'w') as f:
-            f.write(str(e))
-            f.write('\n')
-            f.write('--------------')
-            f.write('\n')
-            f.write(prop)
-            f.write('\n')
-            f.write('---')
-            f.write('\n')
-            f.write(path)
-            f.write('\n')
-            f.write('---')
-            f.write('\n')
-            f.write(finished.stdout.decode('utf-8'))
-            f.write('\n')
-            f.write('---')
-            f.write('\n')
-            f.write(finished.stderr.decode('utf-8'))
-            f.write('\n')
-            f.write('--------------')
-            f.write('\n')
+        print(str(e))
+        print('\n')
+        print('--------------')
+        print('\n')
+        print(prop)
+        print('\n')
+        print('---')
+        print('\n')
+        print(path)
+        print('\n')
+        print('---')
+        print('\n')
+        print(finished.stdout.decode('utf-8'))
+        print('\n')
+        print('---')
+        print('\n')
+        print(finished.stderr.decode('utf-8'))
+        print('\n')
+        print('--------------')
+        print('\n')
         print(bid, prop, str(e))
         return ''
 
@@ -76,6 +75,7 @@ def task(bugid, props):
         with open(os.path.join(_dir, prop),  'w')  as f:
             f.write(res)
 
-if __name__ == '__main__':
-    _manager = mp.Manager()
-    joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props) for i in tqdm.tqdm(waitlist()))
+for i in tqdm.tqdm(waitlist()):
+    task(i, _props)
+
+a.close()
