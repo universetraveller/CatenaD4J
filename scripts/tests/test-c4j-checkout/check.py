@@ -69,6 +69,7 @@ for line in f:
                 ps1 = p1.open(encoding='latin-1').read()
                 ps = p.open(encoding='latin-1').read()
                 if ps.strip() == ps1.strip():
+                    # no actual required change so they are skipped by catena4j
                     ignored.append(line)
                     continue
             critical.append(line)
@@ -78,6 +79,7 @@ for line in f:
         a1 = Path(a).open(encoding='latin-1').read().strip()
         b1 = Path(b).open(encoding='latin-1').read().strip()
         if a1 == b1:
+            # differences are caused by something like eof
             ignored.append(line)
             continue
         a = Path(a).open(encoding='latin-1').readlines()
@@ -103,6 +105,7 @@ for line in f:
                     should_add = True
                     break
         if should_add:
+            # differences other than comments
             critical.append(line)
         else:
             ignored.append(line)

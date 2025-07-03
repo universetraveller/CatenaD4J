@@ -21,6 +21,7 @@ def open_and_write(file: Path, content: str, mode: str, encoding=None):
         try:
             with file.open(mode, encoding=enc) as f:
                 f.write(content)
+            return
         except UnicodeEncodeError:
             continue
 
