@@ -4,6 +4,7 @@ import os
 import tqdm
 import subprocess
 import multiprocessing as mp
+import time
 import sys
 sys.path.append('../../construct_database')
 import d4j_all_bugs
@@ -16,17 +17,18 @@ def waitlist():
         tasks = []
         all_bugs = d4j_all_bugs.all_bugs
         for proj in all_bugs:
-            #if not proj in ('Closure', 'JxPath', 'Cli'):
-            if not proj in ('Closure',):
-                continue
             tasks.extend((proj, id) for id in all_bugs[proj])
     return tasks
 
 def export_prop(path:str, prop:str):
     try:
-        finished = subprocess.run(['c4j', 'clean', '-w', path], capture_output = True)
-        finished.check_returncode()
-        finished = subprocess.run(['c4j', 'export',  '-p', prop, '-w', path], capture_output = True)
+        #finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'reset', '-w', path], capture_output = True)
+        start = time.perf_counter_ns()
+        finished = subprocess.run(['/root/workbench/CatenaD4J/c4j', 'export',  '-p', prop, '-w', path], capture_output = True)
+        end = time.perf_counter_ns()
+        bid = path[path.rfind('/')+1:]
+        with open(f'./times/{bid}.{prop}', 'w') as f:
+            f.write(str(end - start))
         finished.check_returncode()
         return finished.stdout.decode('utf-8')
     except Exception as e:
@@ -52,11 +54,13 @@ def export_prop(path:str, prop:str):
             f.write('\n')
             f.write('--------------')
             f.write('\n')
+        print(bid, prop, str(e))
+        return ''
 
 _props = d4j_all_bugs.d4j_props
 user_home = os.path.expanduser("~")
 
-def task(bugid, props, root):
+def task(bugid, props):
     _dir = './c4j_export/{}/{}'.format(bugid[0], bugid[1])
     if not os.path.exists(_dir):
         os.makedirs(_dir)
@@ -71,14 +75,7 @@ def task(bugid, props, root):
                     res.split(':')))
         with open(os.path.join(_dir, prop),  'w')  as f:
             f.write(res)
-        res  = res.splitlines()
-        root[bugid[0]][bugid[1]][prop] = res
 
 if __name__ == '__main__':
     _manager = mp.Manager()
-    _root = _manager.dict()
-    for id in waitlist():
-        if not id[0] in _root:
-            _root[id[0]] = _manager.dict()
-        _root[id[0]][id[1]] = _manager.dict()
-    joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props, _root) for i in tqdm.tqdm(waitlist()))
+    joblib.Parallel(n_jobs=14)(joblib.delayed(task)(i, _props) for i in tqdm.tqdm(waitlist()))

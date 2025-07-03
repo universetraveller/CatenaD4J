@@ -21,6 +21,9 @@ def open_and_write(file: Path, content: str, mode: str, encoding=None):
         try:
             with file.open(mode, encoding=enc) as f:
                 f.write(content)
+            # encounters bugs when writing files to Jsoup if no return is here
+            # the second file writing raises error which makes no content written
+            # while making the original file being empty
             return
         except UnicodeEncodeError:
             continue

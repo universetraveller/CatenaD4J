@@ -58,6 +58,33 @@
         </fileset>
     </path>
 
+    <target name="get-deps">
+        <mkdir dir="${basedir}/compileLib"/>
+        <!--
+        too slow! it took 432 ms
+        <exec executable="/bin/bash" failonerror="true" outputproperty="bytebuddy.version">
+            <arg value="-c"/>
+            <arg value="grep 'byte-buddy' ${basedir}/build.gradle | grep -oE ':[0-9]+\.[0-9]+\.[0-9]+' | head -1 | cut -c2-"/>
+        </exec>
+        -->
+        <loadfile property="gradle.line" srcFile="${basedir}/build.gradle"/>
+        <propertyregex
+            input="${gradle.line}"
+            property="bytebuddy.version"
+            regexp="byte-buddy:([0-9]+\.[0-9]+\.[0-9]+)"
+            select="\1"/>
+        <echo message="${bytebuddy.version}" file="${basedir}/gradle.line"/>
+        <if>
+            <available file="${d4j.home}/framework/projects/Mockito/byte-buddy/byte-buddy-${bytebuddy.version}.jar"/>
+            <then>
+                <copy file="${d4j.home}/framework/projects/Mockito/byte-buddy/byte-buddy-${bytebuddy.version}.jar"
+                    todir="${basedir}/compileLib"/>
+            </then>
+        </if>
+    </target>
+
+    <property name="c4j.before-get-cp" value="get-deps" />
+
     <property name="c4j.tests.getter.predict" value=".*Test$" />
 
     <!-- List of all developer-written tests that reliably pass on the fixed version -->
