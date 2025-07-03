@@ -64,7 +64,7 @@ for line in f:
             continue
         else:
             p = Path(line[0], line[1].strip())
-            if str(p).endswith('.bak'):
+            if str(p).endswith('java.bak'):
                 p1 = p.with_suffix('') 
                 ps1 = p1.open(encoding='latin-1').read()
                 ps = p.open(encoding='latin-1').read()
@@ -75,16 +75,37 @@ for line in f:
     elif line.startswith('Files '):
         a = line.split()[1]
         b = line.split()[3]
-        a = a.open().readlines()
-        b = b.open().readlines()
+        a1 = Path(a).open(encoding='latin-1').read().strip()
+        b1 = Path(b).open(encoding='latin-1').read().strip()
+        if a1 == b1:
+            ignored.append(line)
+            continue
+        a = Path(a).open(encoding='latin-1').readlines()
+        b = Path(b).open(encoding='latin-1').readlines()
         matcher = difflib.SequenceMatcher(None, a, b)
+        should_add = False
         for tag, i1, i2, j1, j2 in matcher.get_opcodes():
             if tag == 'equal':
                 continue
             ac = a[i1:i2]
             bc = b[j1:j2]
-
-        critical.append(line)
+            for i in ac:
+                i = i.strip()
+                if not i or i.startswith('//'):
+                    continue
+                should_add = True
+                break
+            if not should_add:
+                for i in bc:
+                    i = i.strip()
+                    if not i or i.startswith('//'):
+                        continue
+                    should_add = True
+                    break
+        if should_add:
+            critical.append(line)
+        else:
+            ignored.append(line)
     else:
         print('unknown line', line)
 

@@ -66,7 +66,7 @@ class MockitoLoader(ProjectLoader):
             if 'distributionUrl=' in line:
                 left, _, right = line.partition('=')
                 gradle = 'gradle-2.2.1-all.zip' if 'gradle-2' in right else 'gradle-1.12-bin.zip'
-                line = f'{left}=file:\\:{str(lib_dir)}/{gradle}'
+                line = f'{left}=file\\:{str(lib_dir)}/{gradle}'
 
             to_write.append(line)
 
@@ -82,7 +82,7 @@ class MockitoLoader(ProjectLoader):
             modified = True
         
         replacement = (f'maven {{ url "{build_system_lib_dir}/deps" }}\n'
-                       'maven { url "https://jcenter.bintray.com/" }\n')
+                       ' maven { url "https://jcenter.bintray.com/" }\n')
         for root, _, files in os.walk(wd):
             for f in files:
                 if f != 'build.gradle':

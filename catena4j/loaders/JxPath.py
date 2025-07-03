@@ -33,7 +33,7 @@ class JxPathLoader(ProjectLoader):
             self._build_file_replacements = {
                 'compile-tests': 'compile.tests',
                 'classesdir': 'classes.dir',
-                'testclasses.dir': 'test.classes.dir',
+                'testclassesdir': 'test.classes.dir',
                 'http://www.ibiblio.org/maven2/com/mockrunner/mockrunner-jdk1.3-j2ee1.3/0.4/mockrunner-jdk1.3-j2ee1.3-0.4.jar':
                 f'file://{project_dir}/lib/mockrunner-0.4.1.jar',
                 'http://www.ibiblio.org/maven/servletapi/jars/servletapi-2.4.jar':

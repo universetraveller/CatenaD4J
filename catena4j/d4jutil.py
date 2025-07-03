@@ -480,8 +480,8 @@ class FixTests:
         if m:
             # found a test method
             # end is the next character to the match
-            # cause bug in Mockito that no space between method header
-            # and method body
+            # using end + 1 will cause bug in Mockito that no space is between
+            # method header and method body
             end = m.end()
 
             index = noc.find('{', end)
@@ -523,12 +523,19 @@ class FixTests:
             line_start += 1
             dummy_start = line_start
 
-            spaces = ' ' * (start - line_start)
-            if annotated:
-                dummy_start = pre_line_start
-                dummy.append(f'{spaces}@Test')
+            # what called space in defects4j's code is not always empty string
+            # because there may be annotations or even other code
+            # and defects4j's implementation failed to catch them and directly adds
+            # it before the inserted @Test annotation
             ori = self.files[file]
-            dummy.append(f'{spaces}public void {met}() {{}}\n// Defects4J: flaky method')
+            space = ori[line_start:start]
+            if annotated:
+                # defects4j directly adds @Test
+                # it may be used to avoid checking via annotation parameters
+                dummy_start = pre_line_start
+                # is it better to use ' ' * (start - line_start)?
+                dummy.append(f'{space}@Test')
+            dummy.append(f'{space}public void {met}() {{}}\n// Defects4J: flaky method')
 
             linebreak = noc.find('\n', start)
 
