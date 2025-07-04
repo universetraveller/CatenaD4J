@@ -149,21 +149,15 @@ def lookup_revision_id(bugs, bid, is_buggy):
 vid_parser = re.compile(r'^([1-9][0-9]*)([bf])$')
 def parse_vid(vid):
     '''
-        Original regex version are slower than version using isnumeric
+        The original regex version is slower than version using isnumeric
 
         Performance testing: 1000 times for 30000 items checking
 
         regex: 7s
 
-        vid_parser = re.compile(r'^(\d+)([bf])$')
-
         isnumeric: 4-5s
 
-        bid, tag = vid[:-1], vid[-1]
-        if bid.isnumeric() and tag in {'b', 'f'}:
-            return bid, tag
-
-        to ensure precision, use new regex version here
+        to ensure the precision, use new regex pattern here
     '''
     m = vid_parser.match(vid)
     if m:
