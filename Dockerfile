@@ -27,5 +27,9 @@ RUN git clone https://github.com/rjust/defects4j.git defects4j && \
 WORKDIR /root
 RUN git clone https://github.com/universetraveller/CatenaD4J.git
 
+RUN cd /root/CatenaD4J/toolkit && \
+	bash compile.sh && \
+	cd /root
+
 # Configure the environment variable PATH
 ENV PATH="/root/defects4j/framework/bin:${PATH}:/root/CatenaD4J"
