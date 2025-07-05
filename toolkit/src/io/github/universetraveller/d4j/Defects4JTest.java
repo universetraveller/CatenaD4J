@@ -121,6 +121,7 @@ public class Defects4JTest extends Defects4JExport {
         
         try {
             runner.run();
+            System.exit(0);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new IOException(e);
         }
