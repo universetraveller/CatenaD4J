@@ -51,8 +51,9 @@ def initialize():
     _parser.add_argument('-p', required=True, metavar='property_name')
     _parser.add_argument('-o', metavar='output_file')
     _parser.add_argument('-w', metavar='work_dir')
-    _parser.add_argument('--from-cache', action='store_true')
-    _parser.add_argument('--update-cache', action='store_true')
+    _parser.add_argument('--from-cache', action='store_true', help='Try to read the result directly from cache instead of computing it at runtime.')
+    _parser.add_argument('--update-cache', action='store_true', help='Expire the current cache and update it.')
+    _parser.__add_arguments_help__ = True
 
 def query_c4j(prop, proj, bid, cid, wd, context=None, vtag=None):
     '''

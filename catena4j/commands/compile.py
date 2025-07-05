@@ -19,7 +19,12 @@ def initialize():
     _parser.add_argument('--target',
                          metavar='compilation_target',
                          required=False,
-                         default='compile.tests')
+                         default='compile.tests',
+                         help=('Run a specific compilation target. '
+                               'Valid target should start with \'compile\' (compile, compile.tests, compile.experimental etc.) '
+                               'or be \'clean\'. Default value: \'compile.tests\'. ')
+                            )
+    _parser.__add_arguments_help__ = True
 
     _clean = _create_command('clean',
                              help='clean the output directory',

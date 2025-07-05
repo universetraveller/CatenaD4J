@@ -1,10 +1,8 @@
 from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
-from ..util import TaskPrinter, get_auto_task_printer, print_result
-from pathlib import Path
+from ..util import TaskPrinter, print_result
 from os.path import abspath
 from ..c4jutil import read_version_info
-from ..exceptions import Catena4JError
 from ..loaders import get_project_loader
 from .compile import execute_compile
 from .export import query_d4j_static
@@ -15,14 +13,15 @@ def initialize():
     _parser = _create_command('test',
                               help='run tests on a checked-out project version',
                               add_help=False)
-    _parser.add_argument('-w', metavar='work_dir')
-    _parser.add_argument('-a', action='store_true')
-    _parser.add_argument('-l', '--list', action='store_true', dest='l')
-    _parser.add_argument('-c', '--compile', action='store_true', dest='c')
+    _parser.add_argument('-w', metavar='work_dir', help='The working directory to run the tests. Default is the current directory.')
+    _parser.add_argument('-a', action='store_true', help='Collect all failed assertions without breaking the process (not implemented now).')
+    _parser.add_argument('-l', '--list', action='store_true', dest='l', help='List all tests to run but do not actually execute them (written to <work_dir>/all_tests).')
+    _parser.add_argument('-c', '--compile', action='store_true', dest='c', help='Run compilation tasks before running tests')
     group = _parser.add_mutually_exclusive_group(required=False)
-    group.add_argument('-t', metavar='test', action='append')
-    group.add_argument('-r', action='store_true')
-    group.add_argument('--trigger', action='store_true')
+    group.add_argument('-t', metavar='test', action='append', help='Specify a test class or method to run. This option could be duplicate. Format: <class name>#<method name>')
+    group.add_argument('-r', action='store_true', help='Only run relevant tests')
+    group.add_argument('--trigger', action='store_true', help='Only run trigger tests')
+    _parser.__add_arguments_help__ = True
 
 def run_tests(tests, project, wd, context, list_only=False, assertions=False, *, test_name=None):
     printer = TaskPrinter(f'Run tests' if test_name is None else f'Run tests ({test_name})') \
@@ -96,6 +95,9 @@ def run(context: ExecutionContext):
                                   version_info['tag'])
         
         tests = _tests.split('\n')
+        # workaround to convert defects4j test format to junit test format
+        if attr == 'tests.trigger':
+            tests = list(map(lambda x:x.replace('::', '#', 1), tests))
     else:
         attr = 'tests.input' if tests else 'tests.all'
     

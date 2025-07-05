@@ -19,10 +19,11 @@ def initialize():
                             help='print all active bug IDs for a specific project',
                             add_help=False)
     _bids.add_argument('-p', required=True, metavar='project_id')
-    _bids.add_argument('--with-cids', action='store_true')
+    _bids.add_argument('--with-cids', action='store_true', help='Print bug ids with at least one cid.')
     group = _bids.add_mutually_exclusive_group(required=False)
-    group.add_argument('-D', action='store_true')
-    group.add_argument('-A', action='store_true')
+    group.add_argument('-D', action='store_true', help='Print the deprecated bug ids.')
+    group.add_argument('-A', action='store_true', help='Print all bug ids (active and deprecated).')
+    _bids.__add_arguments_help__ = True
 
     _cids = _create_command('cids',
                             help='print available catena ids for a bug id',

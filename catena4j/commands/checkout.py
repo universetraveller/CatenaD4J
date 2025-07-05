@@ -40,9 +40,10 @@ def initialize():
                               help='checkout a particular project version',
                               add_help=False)
     _parser.add_argument('-p', required=True, metavar='project_id')
-    _parser.add_argument('-v', required=True, metavar='version_id')
+    _parser.add_argument('-v', required=True, metavar='version_id', help='Specify a version id to check out, format: <bid: int><tag: \'b\' or \'f\'>[<cid: int>].')
     _parser.add_argument('-w', required=True, metavar='work_dir')
-    _parser.add_argument('--full-history', action='store_true')
+    _parser.add_argument('--full-history', action='store_true', help='Generate more commits, for example, the post-fix, post-fix-compilable, pre-fix revisions.')
+    _parser.__add_arguments_help__ = True
 
     _reset = _create_command('reset',
                               help='reset a working directory',

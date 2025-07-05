@@ -80,8 +80,6 @@ public class JUnit4Helper {
 
         List<Failure> failures = result.getFailures();
 
-        Description desc;
-
         builder.append("Failing Tests: " + String.valueOf(failures.size()));
         for (Failure f : failures) {
             builder.append("\n");
