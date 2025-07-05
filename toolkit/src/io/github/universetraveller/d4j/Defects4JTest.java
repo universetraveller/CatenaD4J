@@ -2,6 +2,7 @@ package io.github.universetraveller.d4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.github.universetraveller.util.DevNullPrintStream;
 
 /*
  * The target is to create a minimal test runner
@@ -60,8 +63,21 @@ public class Defects4JTest extends Defects4JExport {
 
         Class<?> resultClass = classLoader.loadClass("org.junit.runner.Result");
 
+        PrintStream stdout = System.out;
+        PrintStream stderr = System.err;
+        PrintStream nullStream = new DevNullPrintStream();
+
         Method builder = helper.getMethod("run", Map.class);
-        Object result = builder.invoke(null, methods);
+        Object result;
+
+        try{
+            System.setOut(new PrintStream(nullStream));
+            System.setErr(new PrintStream(nullStream));
+            result = builder.invoke(null, methods);
+        } finally {
+            System.setOut(stdout);
+            System.setErr(stderr);
+        }
 
         Method getSummary = helper.getMethod("getFailingTestsSummary", resultClass);
         String summary = (String) getSummary.invoke(null, result);
