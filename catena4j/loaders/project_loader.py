@@ -116,14 +116,17 @@ class ProjectLoader(ContextAwareLoader):
                         *,
                         task_printer=None,
                         xml_attr: str='c4j_rel_project_compile_xml',
-                        main_attr: str='c4j_toolkit_execute_main'):
+                        main_attr: str='c4j_toolkit_execute_main',
+                        java_options=()):
         context = self.context
         xml = Path(context.c4j_home,
                    getattr(context, xml_attr).format(project=project))
+        args = (str(xml), target) if isinstance(target, str) else (str(xml), *target)
         return toolkit_execute(getattr(context, main_attr),
                                wd,
                                context,
-                               args=(str(xml), target),
+                               java_options=java_options,
+                               args=args,
                                task_printer=task_printer)
     
     def fix_tests(self,

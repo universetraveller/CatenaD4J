@@ -52,6 +52,17 @@ public class Defects4JTest extends Defects4JExport {
             }
         } 
         Class<?> helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+        String listTests = System.getProperty("c4j.tests.printer.out");
+        if(listTests != null) {
+            Method builder = helper.getMethod("listTests", Map.class);
+            Path path = Paths.get(listTests).toAbsolutePath();
+            List<String> lines = new ArrayList<>();
+            for(Object item : (List<?>) builder.invoke(null, methods))
+                lines.add((String) item);
+            Files.write(path, lines);
+            return;
+        }
+
         Class<?> resultClass = classLoader.loadClass("org.junit.runner.Result");
 
         Method builder = helper.getMethod("run", Map.class);

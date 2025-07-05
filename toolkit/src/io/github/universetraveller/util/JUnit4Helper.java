@@ -25,6 +25,23 @@ public class JUnit4Helper {
         //" more",
     };
 
+    private static void collectDescriptions(Description description, List<String> result) {
+        if (description.isTest()) {
+            result.add(description.getDisplayName());
+        } else {
+            for (Description child : description.getChildren()) {
+                collectDescriptions(child, result);
+            }
+        }
+    }
+
+    public static List<String> listTests(Map<String, List<String>> methods) throws ClassNotFoundException {
+        List<String> result = new ArrayList<>();
+        Request request = buildRequest(methods);
+        collectDescriptions(request.getRunner().getDescription(), result);
+        return result;
+    }
+
     public static Result run(Map<String, List<String>> methods) throws ClassNotFoundException {
         Result result = new Result();
         RunNotifier notifier = new RunNotifier();
