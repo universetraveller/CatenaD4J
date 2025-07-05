@@ -58,7 +58,8 @@ def initialize_commands():
         export,
         xids,
         compile as c4j_compile,
-        checkout
+        checkout,
+        test as c4j_test
     )
     export.initialize()
     _register('export', export.run)
@@ -72,6 +73,8 @@ def initialize_commands():
     checkout.initialize()
     _register('checkout', checkout.run)
     _register('reset', checkout.reset)
+    c4j_test.initialize()
+    _register('test', c4j_test.run)
 
 register_bootstrap_function(initialize_commands)
 

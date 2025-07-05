@@ -21,6 +21,7 @@ public class JUnit4Helper {
         "org.junit.",
         "java.lang.reflect.Method.invoke(",
         "sun.reflect.",
+        "io.github.universetraveller",
         //"org.apache.tools.ant.",
         //" more",
     };
@@ -70,15 +71,22 @@ public class JUnit4Helper {
                              result.wasSuccessful() ? "PASS" : "FAIL");
     }
 
+    public static String formatDescription(Description description) {
+        return description.getClassName() + "#" + description.getMethodName();
+    }
+
     public static String getFailingTestsSummary(Result result) {
         StringBuilder builder = new StringBuilder();
 
         List<Failure> failures = result.getFailures();
 
+        Description desc;
+
         builder.append("Failing Tests: " + String.valueOf(failures.size()));
         for (Failure f : failures) {
             builder.append("\n");
-            builder.append(f.getDescription().getDisplayName());
+            builder.append("    ");
+            builder.append(formatDescription(f.getDescription()));
         }
 
         return builder.toString();
@@ -97,13 +105,18 @@ public class JUnit4Helper {
         List<String> lines = new ArrayList<>();
 
         String line;
+        Throwable t;
         for (Failure f : result.getFailures()) {
             lines.add("---");
-            lines.add(f.getDescription().toString());
-            line = f.getTrace();
-            if(shouldRemoveTraceLine(line))
-                continue;
-            lines.add(f.getTrace());
+            lines.add(formatDescription(f.getDescription()));
+            t = f.getException();
+            lines.add(t.toString());
+            for(StackTraceElement e : t.getStackTrace()) {
+                line = e.toString();
+                if(shouldRemoveTraceLine(line))
+                    continue;
+                lines.add("    " + line);
+            }
         }
 
         return lines;

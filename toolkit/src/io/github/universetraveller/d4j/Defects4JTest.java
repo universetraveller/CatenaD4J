@@ -43,22 +43,17 @@ public class Defects4JTest extends Defects4JExport {
         classLoader = new URLClassLoader(urls, null);
     }
 
-    public void run() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
-        if(methods.isEmpty()) {
-            // relevant tests are not handled by the super class
-            // input them using args
-            for(String clz : getTestsAll().split("\n")) {
-                addTest(clz);
-            }
-        } 
+    public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
         Class<?> helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
         String listTests = System.getProperty("c4j.tests.printer.out");
         if(listTests != null) {
             Method builder = helper.getMethod("listTests", Map.class);
             Path path = Paths.get(listTests).toAbsolutePath();
             List<String> lines = new ArrayList<>();
+
             for(Object item : (List<?>) builder.invoke(null, methods))
                 lines.add((String) item);
+
             Files.write(path, lines);
             return;
         }
@@ -77,9 +72,31 @@ public class Defects4JTest extends Defects4JExport {
         if(output != null) {
             Path path = Paths.get(output).toAbsolutePath();
             List<String> lines = new ArrayList<>();
+
             for(Object item : (List<?>) getFailingTests.invoke(null, result))
                 lines.add((String) item);
-            Files.write(path, lines);
+
+            if(!lines.isEmpty())
+                Files.write(path, lines);
+        }
+    }
+
+    public void run() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
+        if(methods.isEmpty()) {
+            // relevant tests are not handled by the super class
+            // input them using args
+            for(String clz : getTestsAll().split("\n")) {
+                addTest(clz);
+            }
+        } 
+
+        Thread t = Thread.currentThread();
+        ClassLoader originalClassLoader = t.getContextClassLoader();
+        try{
+            t.setContextClassLoader(classLoader);
+            runTests();
+        } finally {
+            t.setContextClassLoader(originalClassLoader);
         }
     }
 

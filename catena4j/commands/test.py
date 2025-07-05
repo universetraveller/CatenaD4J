@@ -52,7 +52,10 @@ def run_tests(tests, project, wd, context, list_only=False, assertions=False, *,
                                     java_options=java_options)
 
     if context.mode == ExecutionContext.CLI:
-        print_result(result + '\n')
+        result = result.strip()
+        print_result(result + '\n' if result else '')
+    
+    return result
 
 def run(context: ExecutionContext):
     args = context.args

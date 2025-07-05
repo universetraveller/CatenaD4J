@@ -221,10 +221,6 @@ def toolkit_execute(main,
                               *args,
                               basedir=wd)
 
-    if task_printer is not None:
-        msg = ['Run command: ' + ' '.join(cmd)] if task_printer.verbose else []
-        task_printer.start(*msg)
-
     return run_command_task(cmd,
                             wd,
                             meta_message=meta_message,
