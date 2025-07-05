@@ -6,7 +6,6 @@ from ..util import (
     get_cache_path,
     read_file,
     write_file,
-    toolkit_execute
 )
 from argparse import RawDescriptionHelpFormatter
 from os.path import abspath
