@@ -21,7 +21,7 @@ def initialize():
                          required=False,
                          default='compile.tests',
                          help=('Run a specific compilation target. '
-                               'Valid target should start with \'compile\' (compile, compile.tests, compile.experimental etc.) '
+                               'Valid target should contain \'compile\' (compile, compile.tests, gradle.compile etc.) '
                                'or be \'clean\'. Default value: \'compile.tests\'. ')
                             )
     _parser.__add_arguments_help__ = True
@@ -41,9 +41,9 @@ def run(context: ExecutionContext):
 
     target = args.target
     
-    if not target.startswith('compile') and target != 'clean':
+    if 'compile' not in target and target != 'clean':
         raise Catena4JError('Access restricted: you may only run the \'clean\' target '
-                            'or targets starting with \'compile\' using this command.')
+                            'or targets contain \'compile\' using this command.')
 
     if args.w:
         context.cwd = abspath(args.w)

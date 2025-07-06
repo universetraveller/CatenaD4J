@@ -157,12 +157,13 @@ def get_toolkit_command(context: Namespace, *args, basedir=None):
     cmd.extend(args)
     return cmd
 
-def run_command(cmd, cwd=None, timeout=None):
+def run_command(cmd, cwd=None, *, timeout=None, env=None):
     try:
         finished = subprocess.run(cmd,
                                   capture_output=True,
                                   cwd=cwd,
-                                  timeout=timeout)
+                                  timeout=timeout,
+                                  env=env)
         finished.check_returncode()
         return True, finished.stdout, finished.stderr
     except subprocess.CalledProcessError:
@@ -182,14 +183,15 @@ def run_command_task(cmd,
                      wd,
                      *,
                      meta_message=_META_EXEC_ERR_MSG,
-                     task_printer=None):
+                     task_printer=None,
+                     env=None):
     enc = get_console_encoding()
 
     if task_printer is not None:
         msg = ['Run command: ' + ' '.join(cmd)] if task_printer.verbose else []
         task_printer.start(*msg)
 
-    ret, out, err = run_command(cmd=cmd, cwd=wd)
+    ret, out, err = run_command(cmd=cmd, cwd=wd, env=env)
 
     out = out.decode(enc)
 
@@ -224,7 +226,8 @@ def toolkit_execute(main,
     return run_command_task(cmd,
                             wd,
                             meta_message=meta_message,
-                            task_printer=task_printer)
+                            task_printer=task_printer,
+                            env=context.os_env)
 
 def get_project_cache(cache, proj, name, fallback, args=(), kwargs={}):
     if proj not in cache:

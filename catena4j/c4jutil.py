@@ -149,7 +149,7 @@ def read_bugs_registry(project, context):
     return bugs
 
 def get_bugs_registry(project, context):
-    return get_project_cache(context.__c4j_cache__,
+    return get_project_cache(context.c4j_cache,
                              project,
                              'bugs-registry',
                              read_bugs_registry,

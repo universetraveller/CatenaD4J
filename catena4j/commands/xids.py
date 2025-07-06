@@ -32,7 +32,7 @@ def initialize():
     _cids.add_argument('-b', required=True, metavar='bug_id')
 
 def query_pids(context):
-    cache = context.__c4j_cache__
+    cache = context.c4j_cache
 
     if 'pids' not in cache:
         path_to_projects = Path(context.c4j_home, context.c4j_rel_projects)
@@ -73,7 +73,7 @@ def query_bids_with_cids(project, context):
 def query_deprecated_bids(project, context):
     return _query_bids(project,
                        context,
-                       '__d4j_cache__',
+                       'd4j_cache',
                        'd4j_home',
                        'd4j_rel_projects',
                        'deprecated-bugs.csv')

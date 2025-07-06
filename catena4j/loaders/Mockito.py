@@ -4,7 +4,6 @@ from . import LoaderError
 from pathlib import Path
 from ..util import Git, read_file, run_apply_patch_task, write_file
 from ..d4jutil import get_vid as d4j_get_vid, get_project_dir as d4j_get_project_dir
-from ..exceptions import Catena4JError
 
 class MockitoLoader(ProjectLoader):
     version_control_system_class = Git
@@ -34,7 +33,7 @@ class MockitoLoader(ProjectLoader):
                         xml_attr: str='c4j_rel_project_compile_xml',
                         main_attr: str='c4j_toolkit_execute_main',
                         java_options=()):
-        os.environ['GRADLE_USER_HOME'] = os.path.join(wd, self.context.GRADLE_LOCAL_HOME_DIR)
+        self.context.os_env['GRADLE_USER_HOME'] = os.path.join(wd, self.context.GRADLE_LOCAL_HOME_DIR)
         return super().toolkit_execute(target,
                                        project,
                                        wd,

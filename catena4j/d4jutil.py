@@ -166,7 +166,7 @@ def parse_vid(vid):
     raise Defects4JError(f'Wrong version_id: {vid} -- expected {vid_parser.pattern}!')
 
 def get_active_bugs(project, context):
-    return get_project_cache(context.__d4j_cache__,
+    return get_project_cache(context.d4j_cache,
                              project,
                              'active-bugs',
                              read_active_bugs,
@@ -208,7 +208,7 @@ def read_dir_layout(context, proj):
     return dir_layout
 
 def get_dir_layout(context, proj):
-    return get_project_cache(context.__d4j_cache__,
+    return get_project_cache(context.d4j_cache,
                              proj,
                              'dir-layout',
                              read_dir_layout,
@@ -335,7 +335,7 @@ def _get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
     return files
 
 def get_flaky_test_files(project, bid, is_buggy, context, revision_id=None):
-    return get_project_cache(context.__d4j_cache__,
+    return get_project_cache(context.d4j_cache,
                              project,
                              'flaky_test_files',
                              _get_flaky_test_files,

@@ -23,26 +23,29 @@ def _initialize_env():
         Default implementation of system env initialization
     '''
     c4j_home = env._c4j_home
-    os_env = os.environ
+
+    # when this function is called, the system config has been initialized
+    # this cache could speed up the startup time by about 100000 ns
+    d4j_home = util.search_cache(c4j_home / env._config.rel_cache_dir / 'd4j_home',
+                                 lambda p : Path(p, 'framework', 'bin', 'defects4j').is_file(),
+                                 util.find_path,
+                                 ('defects4j', 2))
+
+    os_env = os.environ.copy()
+    os_env['TZ'] = 'America/Los_Angeles'
+    os_env['PATH'] = os_env.get('PATH', '') + os.pathsep + os.path.join(d4j_home, env._config.d4j_rel_ant_path)
+
     _env = {
         'c4j_home': str(c4j_home),
-        # when this function is called, the system config has been initialized
-        # this cache could speed up the startup time by about 100000 ns
-        'd4j_home': util.search_cache(c4j_home / env._config.rel_cache_dir / 'd4j_home',
-                                      lambda p : Path(p, 'framework', 'bin', 'defects4j').is_file(),
-                                      util.find_path,
-                                      ('defects4j', 2)),
+        'd4j_home': d4j_home,
         'cwd': os.getcwd(),
         # cache for each run
-        '__d4j_cache__': {},
-        '__c4j_cache__': {},
-        'GRADLE_LOCAL_HOME_DIR': os_env['GRADLE_LOCAL_HOME_DIR'] \
-                                    if 'GRADLE_LOCAL_HOME_DIR' in os_env else \
-                                        '.gradle_local_home',
+        'd4j_cache': {},
+        'c4j_cache': {},
+        'GRADLE_LOCAL_HOME_DIR': '.gradle_local_home',
+        'BUILD_SYSTEMS_LIB_DIR': os.path.join(d4j_home, env._config.d4j_rel_build_systems_path),
+        'os_env': os_env
     }
-    _env['BUILD_SYSTEMS_LIB_DIR'] = os_env['BUILD_SYSTEMS_LIB_DIR'] \
-                                        if 'BUILD_SYSTEMS_LIB_DIR' in os_env else \
-                                            os.path.join(_env['d4j_home'], 'framework', 'lib', 'build_systems')
 
     return _env
 
