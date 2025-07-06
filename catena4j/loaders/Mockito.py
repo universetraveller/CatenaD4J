@@ -32,14 +32,16 @@ class MockitoLoader(ProjectLoader):
                         *,
                         task_printer=None,
                         xml_attr: str='c4j_rel_project_compile_xml',
-                        main_attr: str='c4j_toolkit_execute_main'):
+                        main_attr: str='c4j_toolkit_execute_main',
+                        java_options=()):
         os.environ['GRADLE_USER_HOME'] = os.path.join(wd, self.context.GRADLE_LOCAL_HOME_DIR)
         return super().toolkit_execute(target,
                                        project,
                                        wd,
                                        task_printer=task_printer,
                                        xml_attr=xml_attr,
-                                       main_attr=main_attr)
+                                       main_attr=main_attr,
+                                       java_options=java_options)
 
     def d4j_checkout_hook(self, project: str, revision_id: str, wd: str):
         context = self.context

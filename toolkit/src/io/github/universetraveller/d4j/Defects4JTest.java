@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.MalformedInputException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,6 +48,14 @@ public class Defects4JTest extends Defects4JExport {
         classLoader = new URLClassLoader(urls, null);
     }
 
+    public static void writeToFile(Path path, Iterable<? extends CharSequence> lines) throws IOException {
+        try{
+            Files.write(path, lines, StandardCharsets.UTF_8);
+        } catch (MalformedInputException e) {
+            Files.write(path, lines, StandardCharsets.ISO_8859_1);
+        }
+    }
+
     public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
         Class<?> helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
         String listTests = System.getProperty("c4j.tests.printer.out");
@@ -57,7 +67,7 @@ public class Defects4JTest extends Defects4JExport {
             for(Object item : (List<?>) builder.invoke(null, methods))
                 lines.add((String) item);
 
-            Files.write(path, lines);
+            writeToFile(path, lines);
             return;
         }
 
@@ -93,7 +103,7 @@ public class Defects4JTest extends Defects4JExport {
                 lines.add((String) item);
 
             if(!lines.isEmpty())
-                Files.write(path, lines);
+                writeToFile(path, lines);
         }
     }
 
@@ -117,7 +127,7 @@ public class Defects4JTest extends Defects4JExport {
     }
 
     public void addTest(String classOrTest) {
-        int idx = classOrTest.indexOf("#");
+        int idx = classOrTest.indexOf('#');
         String className = idx < 0 ? classOrTest : classOrTest.substring(0, idx);
         methods.putIfAbsent(className, null);
         if(idx > 0) {

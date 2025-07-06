@@ -72,7 +72,15 @@ public class JUnit4Helper {
     }
 
     public static String formatDescription(Description description) {
-        return description.getClassName() + "#" + description.getMethodName();
+        // should use general APIs for compatibility
+        // if the junit version used by bugs is too low
+        // it will raise java.lang.NoSuchMethodError for getClassName()Ljava/lang/String;
+        String name = description.getDisplayName();
+        int idx = name.indexOf('(');
+        if (idx < 0) {
+            return name;
+        }
+        return name.substring(idx + 1, name.length() - 1) + "#" + name.substring(0, idx);
     }
 
     public static String getFailingTestsSummary(Result result) {
