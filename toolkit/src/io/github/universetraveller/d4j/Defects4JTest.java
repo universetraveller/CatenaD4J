@@ -8,8 +8,6 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.MalformedInputException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,14 +46,6 @@ public class Defects4JTest extends Defects4JExport {
         classLoader = new URLClassLoader(urls, null);
     }
 
-    public static void writeToFile(Path path, Iterable<? extends CharSequence> lines) throws IOException {
-        try{
-            Files.write(path, lines, StandardCharsets.UTF_8);
-        } catch (MalformedInputException e) {
-            Files.write(path, lines, StandardCharsets.ISO_8859_1);
-        }
-    }
-
     public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
         Class<?> helper;
         Class<?> resultClass;
@@ -71,12 +61,8 @@ public class Defects4JTest extends Defects4JExport {
         if(listTests != null) {
             Method builder = helper.getMethod("listTests", Map.class);
             Path path = Paths.get(listTests).toAbsolutePath();
-            List<String> lines = new ArrayList<>();
-
-            for(Object item : (List<?>) builder.invoke(null, methods))
-                lines.add((String) item);
-
-            writeToFile(path, lines);
+            String tests = (String) builder.invoke(null, methods);
+            Files.write(path, tests.getBytes());
             return;
         }
 
@@ -104,13 +90,8 @@ public class Defects4JTest extends Defects4JExport {
         String output = System.getProperty("OUTFILE");
         if(output != null) {
             Path path = Paths.get(output).toAbsolutePath();
-            List<String> lines = new ArrayList<>();
-
-            for(Object item : (List<?>) getFailingTests.invoke(null, result))
-                lines.add((String) item);
-
-            if(!lines.isEmpty())
-                writeToFile(path, lines);
+            summary = (String) getFailingTests.invoke(null, result);
+            Files.write(path, summary.getBytes());
         }
     }
 

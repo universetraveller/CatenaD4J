@@ -47,11 +47,11 @@ public class JUnit3Helper {
         }
     }
 
-    public static List<String> listTests(Map<String, List<String>> methods) throws ClassNotFoundException {
+    public static String listTests(Map<String, List<String>> methods) throws ClassNotFoundException {
         List<String> result = new ArrayList<>();
         TestSuite suite = buildTestSuite(methods);
         listTestMethods(suite, result);
-        return result;
+        return String.join("\n", result);
     }
 
     public static TestResult run(Map<String, List<String>> methods) throws ClassNotFoundException {
@@ -95,8 +95,8 @@ public class JUnit3Helper {
         return false;
     }
 
-    public static List<String> getFailingTests(TestResult result) {
-        List<String> lines = new ArrayList<>();
+    public static String getFailingTests(TestResult result) {
+        StringBuilder builder = new StringBuilder();
 
         String line;
         Throwable t;
@@ -113,19 +113,19 @@ public class JUnit3Helper {
                 continue;
             }
             f = (TestFailure) e.nextElement();
-            lines.add("---");
-            lines.add(formatTest(f.failedTest()));
+            builder.append("---").append("\n");
+            builder.append(formatTest(f.failedTest())).append("\n");
             t = f.thrownException();
-            lines.add(t.toString());
+            builder.append(t.toString()).append("\n");
             for(StackTraceElement element : t.getStackTrace()) {
                 line = element.toString();
                 if(shouldRemoveTraceLine(line))
                     continue;
-                lines.add("    " + line);
+                builder.append("    " + line).append("\n");
             }
         }
 
-        return lines;
+        return builder.toString();
     }
 
     public static TestSuite buildTestSuite(Map<String, List<String>> methods) throws ClassNotFoundException {

@@ -36,11 +36,11 @@ public class JUnit4Helper {
         }
     }
 
-    public static List<String> listTests(Map<String, List<String>> methods) throws ClassNotFoundException {
+    public static String listTests(Map<String, List<String>> methods) throws ClassNotFoundException {
         List<String> result = new ArrayList<>();
         Request request = buildRequest(methods);
         collectDescriptions(request.getRunner().getDescription(), result);
-        return result;
+        return String.join("\n", result);
     }
 
     public static Result run(Map<String, List<String>> methods) throws ClassNotFoundException {
@@ -107,25 +107,25 @@ public class JUnit4Helper {
         return false;
     }
     
-    public static List<String> getFailingTests(Result result) {
-        List<String> lines = new ArrayList<>();
+    public static String getFailingTests(Result result) {
+        StringBuilder builder = new StringBuilder();
 
         String line;
         Throwable t;
         for (Failure f : result.getFailures()) {
-            lines.add("---");
-            lines.add(formatDescription(f.getDescription()));
+            builder.append("---").append("\n");
+            builder.append(formatDescription(f.getDescription())).append("\n");
             t = f.getException();
-            lines.add(t.toString());
+            builder.append(t.toString()).append("\n");
             for(StackTraceElement e : t.getStackTrace()) {
                 line = e.toString();
                 if(shouldRemoveTraceLine(line))
                     continue;
-                lines.add("    " + line);
+                builder.append("    " + line).append("\n");
             }
         }
 
-        return lines;
+        return builder.toString();
     }
 
     public static Request buildRequest(Map<String, List<String>> methods) throws ClassNotFoundException {
