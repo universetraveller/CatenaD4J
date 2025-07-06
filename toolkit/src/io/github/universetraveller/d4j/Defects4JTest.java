@@ -57,7 +57,16 @@ public class Defects4JTest extends Defects4JExport {
     }
 
     public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
-        Class<?> helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+        Class<?> helper;
+        Class<?> resultClass;
+        try{
+            resultClass = classLoader.loadClass("org.junit.runner.Result");
+            helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+        } catch (ClassNotFoundException e) {
+            resultClass = classLoader.loadClass("junit.framework.TestResult");
+            helper = classLoader.loadClass("io.github.universetraveller.util.JUnit3Helper");
+        }
+
         String listTests = System.getProperty("c4j.tests.printer.out");
         if(listTests != null) {
             Method builder = helper.getMethod("listTests", Map.class);
@@ -71,19 +80,17 @@ public class Defects4JTest extends Defects4JExport {
             return;
         }
 
-        Class<?> resultClass = classLoader.loadClass("org.junit.runner.Result");
-
         PrintStream stdout = System.out;
         PrintStream stderr = System.err;
         PrintStream nullStream = new DevNullPrintStream();
 
-        Method builder = helper.getMethod("run", Map.class);
+        Method run = helper.getMethod("run", Map.class);
         Object result;
 
         try{
             System.setOut(new PrintStream(nullStream));
             System.setErr(new PrintStream(nullStream));
-            result = builder.invoke(null, methods);
+            result = run.invoke(null, methods);
         } finally {
             System.setOut(stdout);
             System.setErr(stderr);
