@@ -58,6 +58,7 @@ def run(cmd, log, name):
 def task(bugid):
     log.write('VERSION START\n')
     log.write('_'.join(bugid))
+    log.write('\n')
     wd = '{}/{}_{}'.format(sys.argv[2], bugid[0], bugid[1])
     if run(['/root/workbench/CatenaD4J/c4j', 'checkout', '-p', bugid[0], '-v', '{}b'.format(bugid[1]), '-w', wd], log, 'checkout') == 0:
         if run(['/root/workbench/CatenaD4J/c4j', 'compile', '-w', wd], log, 'compile') == 0:
