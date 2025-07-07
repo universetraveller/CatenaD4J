@@ -57,8 +57,9 @@ public class Defects4JTest extends Defects4JExport {
         classLoader.addSystemPackageRoot("junit.");
         classLoader.addSystemPackageRoot("org.junit.");
 
-        // and because all JUnitClassRunner classses have implemented Filterable
-        // using JUnit4Helper here is ok
+        // using JUnit4Helper here is ok, because all JUnitClassRunner classses have
+        // implemented Filterable in junit version defects4j's ant uses
+        // we can use listTests to validate that
         helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
 
         //try{

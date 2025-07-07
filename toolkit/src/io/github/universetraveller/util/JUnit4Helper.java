@@ -161,7 +161,7 @@ public class JUnit4Helper {
         Request request = Request.classes(classes);
 
         if(ft != null) {
-            request.filterWith(ft);
+            request = request.filterWith(ft);
         }
 
         return request;

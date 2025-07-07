@@ -44,6 +44,10 @@ public class IsolatedClassLoader extends URLClassLoader {
         return systemPackages.stream().anyMatch(name::startsWith);
     }
 
+    public boolean isInThisLoader(String name) {
+        return findResource(name.replace(".", "/") + ".class") != null;
+    }
+
     @Override
     public Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         // Delegate system packages to parent immediately
