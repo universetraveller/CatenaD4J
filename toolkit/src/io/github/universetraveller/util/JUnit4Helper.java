@@ -75,6 +75,8 @@ public class JUnit4Helper {
         // should use general APIs for compatibility
         // if the junit version used by bugs is too low
         // it will raise java.lang.NoSuchMethodError for getClassName()Ljava/lang/String;
+        // though we can use the getClassName version when using unified junit version
+        // this version may be faster because the displayName is in a simple format
         String name = description.getDisplayName();
         int idx = name.indexOf('(');
         if (idx < 0) {

@@ -7,7 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.github.universetraveller.util.DevNullPrintStream;
+import io.github.universetraveller.util.IsolatedClassLoader;
 
 /*
  * The target is to create a minimal test runner
@@ -26,7 +26,7 @@ import io.github.universetraveller.util.DevNullPrintStream;
 public class Defects4JTest extends Defects4JExport {
 
     Map<String, List<String>> methods;
-    URLClassLoader classLoader;
+    IsolatedClassLoader classLoader;
     boolean allAreClasses;
 
     public Defects4JTest(String projectBuildFile) throws MalformedURLException {
@@ -43,19 +43,31 @@ public class Defects4JTest extends Defects4JExport {
         }
         urls[pathElements.length] = getClass().getProtectionDomain().getCodeSource().getLocation();
 
-        classLoader = new URLClassLoader(urls, null);
+        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader());
+        classLoader.addJREPackages();
+        // using null will skip even bootstrap class loader
+        //classLoader = new URLClassLoader(urls, null);
     }
 
     public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
         Class<?> helper;
         Class<?> resultClass;
-        try{
-            resultClass = classLoader.loadClass("org.junit.runner.Result");
-            helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
-        } catch (ClassNotFoundException e) {
-            resultClass = classLoader.loadClass("junit.framework.TestResult");
-            helper = classLoader.loadClass("io.github.universetraveller.util.JUnit3Helper");
-        }
+
+        // using unified junit package as what ant's junit task does
+        classLoader.addSystemPackageRoot("junit.");
+        classLoader.addSystemPackageRoot("org.junit.");
+
+        // and because all JUnitClassRunner classses have implemented Filterable
+        // using JUnit4Helper here is ok
+        helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+
+        //try{
+        //    resultClass = classLoader.loadClass("org.junit.runner.Result");
+        //    helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+        //} catch (ClassNotFoundException e) {
+        //    resultClass = classLoader.loadClass("junit.framework.TestResult");
+        //    helper = classLoader.loadClass("io.github.universetraveller.util.JUnit3Helper");
+        //}
 
         String listTests = System.getProperty("c4j.tests.printer.out");
         if(listTests != null) {
@@ -65,6 +77,9 @@ public class Defects4JTest extends Defects4JExport {
             Files.write(path, tests.getBytes());
             return;
         }
+
+        // when using unified junit version
+        resultClass = classLoader.loadClass("org.junit.runner.Result");
 
         PrintStream stdout = System.out;
         PrintStream stderr = System.err;
