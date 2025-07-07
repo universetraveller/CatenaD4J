@@ -99,3 +99,16 @@ for bug in bugs:
             print(f'{name} missing tt in c4j')
         if c4j_tt - d4j_tt:
             print(f'{name} extra tt in c4j')
+
+n = 10
+
+checkout_tasks.sort(reverse=True)
+compile_tasks.sort(reverse=True)
+test_tasks.sort(reverse=True)
+
+for task in (('Checkout Tasks:', checkout_tasks),
+             ('Compilation Tasks:', compile_tasks),
+             ('Test Tasks:', test_tasks)):
+    print(task[0])
+    for i in task[1][-n:]:
+        print(i[1], i[0])
