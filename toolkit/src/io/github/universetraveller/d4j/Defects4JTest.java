@@ -27,15 +27,8 @@ public class Defects4JTest extends Defects4JExport {
 
     Map<String, List<String>> methods;
     IsolatedClassLoader classLoader;
-    boolean allAreClasses;
 
-    public Defects4JTest(String projectBuildFile) throws MalformedURLException {
-        super(projectBuildFile);
-
-        methods = new HashMap<>();
-        allAreClasses = true;
-
-        String[] pathElements = getTestClasspath().split(":");
+    public void initializeClassLoader(String[] pathElements) throws MalformedURLException {
         URL[] urls = new URL[pathElements.length + 1];
 
         for(int i = 0; i < pathElements.length; ++ i) {
@@ -45,21 +38,59 @@ public class Defects4JTest extends Defects4JExport {
 
         classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader());
         classLoader.addJREPackages();
-        // using null will skip even bootstrap class loader
+
+        // using unified junit package as what ant's junit task does,
+        // another approach is adding junit package to the beginning
+        // of project's class path
+        classLoader.addSystemPackageRoot("junit.");
+        classLoader.addSystemPackageRoot("org.junit.");
+        // in defects4j's ant version hamcrest should also be added
+        // but in newer ant versions, junit related packages are loaded 
+        // by SplitClassLoader so it is not required
+        // junit 4 only depends on hamcrest and hamcrest doesn't depend on
+        // other package, if it is not added, hamcrest will be loaded
+        // by both System ClassLoader and IsolatedClassLoader which throws
+        // an exception
+        classLoader.addSystemPackageRoot("org.hamcrest.");
+
+        // using null will skip all class loaders including the bootstrap class loader
         //classLoader = new URLClassLoader(urls, null);
+    }
+
+    public void initializeClassLoader1(String[] pathElements) throws MalformedURLException {
+        // another implementation that also works
+        URL[] urls = new URL[pathElements.length + 2];
+
+        urls[0] = new File(project.getProperty("junit.jar")).toURI().toURL();
+
+        int i = 1;
+        for(String pathElement : pathElements) {
+            urls[i++] = new File(pathElement).toURI().toURL(); 
+        }
+
+        urls[i] = getClass().getProtectionDomain().getCodeSource().getLocation();
+
+        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader());
+        classLoader.addJREPackages();
+    }
+
+    public Defects4JTest(String projectBuildFile) throws MalformedURLException {
+        super(projectBuildFile);
+
+        methods = new HashMap<>();
+
+        String[] pathElements = getTestClasspath().split(":");
+
+        initializeClassLoader(pathElements);
     }
 
     public void runTests() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
         Class<?> helper;
         Class<?> resultClass;
 
-        // using unified junit package as what ant's junit task does
-        classLoader.addSystemPackageRoot("junit.");
-        classLoader.addSystemPackageRoot("org.junit.");
-
         // using JUnit4Helper here is ok, because all JUnitClassRunner classses have
-        // implemented Filterable in junit version defects4j's ant uses
-        // we can use listTests to validate that
+        // implemented Filterable in junit version that defects4j's ant uses
+        // the class OldTestClassRunner is deprecated so we do not need to handle it
         helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
 
         //try{
@@ -135,7 +166,6 @@ public class Defects4JTest extends Defects4JExport {
         String className = idx < 0 ? classOrTest : classOrTest.substring(0, idx);
         methods.putIfAbsent(className, null);
         if(idx > 0) {
-            allAreClasses = false;
             if(methods.get(className) == null) {
                 methods.put(className, new ArrayList<>());
             }
