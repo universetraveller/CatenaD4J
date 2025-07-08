@@ -96,4 +96,10 @@ public class IsolatedClassLoader extends URLClassLoader {
             return c;
         }
     }
+
+    public IsolatedClassLoader copy() {
+        IsolatedClassLoader loader = new IsolatedClassLoader(getURLs(), getParent(), fallBackToParent, allowChildToFindSystemClass);
+        loader.systemPackages = this.systemPackages;
+        return loader;
+    }
 }
