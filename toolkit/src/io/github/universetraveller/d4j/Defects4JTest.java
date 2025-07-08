@@ -36,7 +36,7 @@ public class Defects4JTest extends Defects4JExport {
         }
         urls[pathElements.length] = getClass().getProtectionDomain().getCodeSource().getLocation();
 
-        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader());
+        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader(), true, false);
         classLoader.addJREPackages();
 
         // using unified junit package as what ant's junit task does,
@@ -70,7 +70,7 @@ public class Defects4JTest extends Defects4JExport {
 
         urls[i] = getClass().getProtectionDomain().getCodeSource().getLocation();
 
-        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader());
+        classLoader = new IsolatedClassLoader(urls, getClass().getClassLoader(), true, false);
         classLoader.addJREPackages();
     }
 
