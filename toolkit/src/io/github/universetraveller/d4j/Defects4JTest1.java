@@ -51,6 +51,7 @@ public class Defects4JTest1 extends Defects4JExport {
         } 
         
         org.apache.tools.ant.types.Path path = new org.apache.tools.ant.types.Path(project);
+        beforeGetClasspath();
         path.add((org.apache.tools.ant.types.Path) project.getReference("d4j.test.classpath"));
 
         JUnitTask junit = new JUnitTask();

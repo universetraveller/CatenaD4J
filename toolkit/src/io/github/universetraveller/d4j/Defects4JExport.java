@@ -87,7 +87,7 @@ public class Defects4JExport extends Defects4JStartup {
 		out.close();
 	}
 
-	private void beforeGetClasspath() {
+	public void beforeGetClasspath() {
 		String targets = project.getProperty("c4j.before-get-cp");
 
 		if(targets != null)
