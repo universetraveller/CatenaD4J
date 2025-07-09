@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,8 +77,8 @@ public class Defects4JTest extends Defects4JExport {
     public Defects4JTest(String projectBuildFile) throws MalformedURLException {
         super(projectBuildFile);
 
-        // the order of tests matters in some projects like Time
-        methods = new LinkedHashMap<>();
+        // both LinkedHashMap and HashMap could cause some extra failing tests
+        methods = new HashMap<>();
 
         String[] pathElements = getTestClasspath().split(":");
 
