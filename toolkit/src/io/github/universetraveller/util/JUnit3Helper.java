@@ -31,7 +31,10 @@ public class JUnit3Helper {
             TestCase testCase = (TestCase) test;
             return testCase.getClass().getName() + "#" + testCase.getName();
         }
-        return test.toString();
+        String fullName = test.toString();
+        int idx = fullName.indexOf('(');
+        if(idx < 0) return fullName;
+        return fullName.substring(idx + 1, fullName.length() - 1) + "#" + fullName.substring(0, idx);
     }
 
     public static void listTestMethods(Test test, List<String> result) {
