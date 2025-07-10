@@ -68,8 +68,10 @@ if data_path.is_file():
     data = json.load(open(data_path))
 for bug in bugs:
     name = bug.bug
-    checkout_tasks.append((bug.checkout.time_ns, bug.bug))
-    compile_tasks.append((bug.compile.time_ns, bug.bug))
+    if hasattr(bug, 'checkout'):
+        checkout_tasks.append((bug.checkout.time_ns, bug.bug))
+    if hasattr(bug, 'compile'):
+        compile_tasks.append((bug.compile.time_ns, bug.bug))
     test_tasks.append((bug.test.time_ns, bug.bug))
     failing_tests = bug.test.stdout
     ftn = int(failing_tests[0].split(':')[1])
