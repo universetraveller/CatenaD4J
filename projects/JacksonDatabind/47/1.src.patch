@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/AnnotationIntrospector.java",
+            "replaced_with": "                Class<?> currRaw = type.getRawClass();\n",
+            "patch_type": "insert",
+            "next_line_no": 816
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/AnnotationIntrospector.java",
+            "replaced_with": "                    if (serClass.isAssignableFrom(currRaw)) { // common case\n",
+            "patch_type": "insert",
+            "next_line_no": 819
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/AnnotationIntrospector.java",
+            "replaced_with": "                    } else if (currRaw.isAssignableFrom(serClass)) { // specialization, ok as well\n                        type = tf.constructSpecializedType(type, serClass);\n                    } else {\n                        throw new JsonMappingException(null,\n                                String.format(\"Can not refine serialization type %s into %s; types not related\",\n                                        type, serClass.getName()));\n                    }\n",
+            "patch_type": "insert",
+            "next_line_no": 820
+        }
+    ]
+}

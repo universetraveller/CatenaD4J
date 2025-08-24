@@ -1,5 +1,5 @@
 
-
+import os
 from .constants import EMPTY_ALIAS, BEGIN_POINTER
 from .Commit import Commit
 class NameConflictError(Exception):
@@ -26,6 +26,10 @@ def validate_encoding(filename):
         try:
             with open(filename, 'r', encoding=enc) as f:
                 f = f.read()
+            return enc
+        except FileNotFoundError:
+            with open(filename, 'w', encoding=enc) as f:
+                pass
             return enc
         except:
             continue
@@ -133,8 +137,9 @@ class FileManager(BaseFileManager):
     def write_to_file(self):
         for name in self.files:
             fileInst = self.getFile(name)
-            with open('{}/{}'.format(self.base_dir, name), 'w') as f:
-                f.write(fileInst.toString())
+            if os.path.exists(fileInst.filepath):
+                with open('{}/{}'.format(self.base_dir, name), 'w') as f:
+                    f.write(fileInst.toString())
         return True
     def _findRootPath(self, commit_id):
         if commit_id == BEGIN_POINTER:

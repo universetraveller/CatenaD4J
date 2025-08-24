@@ -1,0 +1,3 @@
+org.apache.commons.compress.archivers.sevenz.SevenZOutputFileTest::testSixEmptyFiles
+org.apache.commons.compress.archivers.sevenz.SevenZOutputFileTest::testEightFilesSomeNotEmpty
+org.apache.commons.compress.archivers.sevenz.SevenZOutputFileTest::testSixFilesSomeNotEmpty

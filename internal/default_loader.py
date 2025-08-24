@@ -18,7 +18,13 @@ class DefaultPathLoader:
         __edits = []
         for __primitive_test_name in block:
             __child_block = block[__primitive_test_name]
+            _delete_file = __child_block.get('delete_file')
             __path_name = __child_block['file_path']
+            if _delete_file:
+                __paths.add(__path_name)
+                _file_edit = ProjectManager.EditTypes.FileEdit()
+                __edits.append(ProjectManager.FileManager.FileEdit(__path_name, _file_edit))
+                continue
             _begin_line_no = __child_block['begin_line_no']
             _range_to_replace = __child_block['end_line_no'] - _begin_line_no + 1
             _code_to_replace = '\n'.join(__child_block['to'])

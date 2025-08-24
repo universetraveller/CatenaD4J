@@ -1,0 +1,2 @@
+org.jsoup.safety.CleanerTest::handlesControlCharactersAfterTagName
+org.jsoup.parser.HtmlParserTest::handlesControlCodeInAttributeName

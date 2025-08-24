@@ -1,0 +1,1 @@
+com.fasterxml.jackson.core.filter.BasicParserFilteringTest::testIndexMatchWithPath2$catena_3

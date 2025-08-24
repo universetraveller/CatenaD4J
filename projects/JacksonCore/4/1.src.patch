@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java",
+            "replaced_with": "        int newLen = len + (len >> 1);\n",
+            "patch_type": "insert",
+            "next_line_no": 585
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java",
+            "from_line_no": 586,
+            "to_line_no": 586,
+            "replaced_with": "        if (newLen > MAX_SEGMENT_LEN) {\n            newLen = len + (len >> 2);\n        }\n",
+            "replaced": "        int newLen = (len == MAX_SEGMENT_LEN) ? (MAX_SEGMENT_LEN+1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n",
+            "patch_type": "replace",
+            "next_line_no": 587
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "from_line_no": 760,
+            "to_line_no": 760,
+            "replaced_with": "        _appendValue(JsonToken.VALUE_NUMBER_INT, Integer.valueOf(i));\n",
+            "replaced": "        _append(JsonToken.VALUE_NUMBER_INT, Integer.valueOf(i));\n",
+            "patch_type": "replace",
+            "next_line_no": 761
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "    protected final void _appendValue(JsonToken type, Object value)\n    {\n        _writeContext.writeValue();\n        Segment next = _hasNativeId\n                ? _last.append(_appendAt, type, value, _objectId, _typeId)\n                : _last.append(_appendAt, type, value);\n        if (next == null) {\n            ++_appendAt;\n        } else {\n            _last = next;\n            _appendAt = 1;\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 1098
+        }
+    ]
+}

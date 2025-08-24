@@ -1,0 +1,2 @@
+org.jsoup.parser.HtmlParserTest::retainsAttributesOfDifferentCaseIfSensitive
+org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes$catena_0

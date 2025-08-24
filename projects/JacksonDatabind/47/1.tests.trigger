@@ -1,0 +1,2 @@
+com.fasterxml.jackson.databind.ser.TestJsonSerialize::testBrokenAnnotation
+com.fasterxml.jackson.databind.ser.TestJsonSerializeAs::testSpecializedAsIntermediate

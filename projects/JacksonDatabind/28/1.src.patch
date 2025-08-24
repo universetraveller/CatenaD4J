@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/JsonNodeDeserializer.java",
+            "from_line_no": 97,
+            "to_line_no": 98,
+            "replaced_with": "            if (p.isExpectedStartObjectToken() || p.hasToken(JsonToken.FIELD_NAME)) {\n",
+            "replaced": "            if (p.getCurrentToken() == JsonToken.START_OBJECT) {\n                p.nextToken();\n",
+            "patch_type": "replace",
+            "next_line_no": 99
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/JsonNodeDeserializer.java",
+            "from_line_no": 103,
+            "to_line_no": 104,
+            "replaced_with": "            if (p.hasToken(JsonToken.END_OBJECT)) {\n                return ctxt.getNodeFactory().objectNode();\n",
+            "replaced": "            if (p.getCurrentToken() == JsonToken.FIELD_NAME) {\n                return deserializeObject(p, ctxt, ctxt.getNodeFactory());\n",
+            "patch_type": "replace",
+            "next_line_no": 105
+        }
+    ]
+}

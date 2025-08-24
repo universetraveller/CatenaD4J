@@ -1,0 +1,49 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java",
+            "from_line_no": 579,
+            "to_line_no": 580,
+            "replaced_with": "        if (ref == null) {\n            return objectIdInfo;\n",
+            "replaced": "        if (ref != null) {\n            objectIdInfo = objectIdInfo.withAlwaysAsId(ref.alwaysAsId());\n",
+            "patch_type": "replace",
+            "next_line_no": 581
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java",
+            "from_line_no": 582,
+            "to_line_no": 582,
+            "replaced_with": "        if (objectIdInfo == null) {\n            objectIdInfo = ObjectIdInfo.empty();\n        }\n        return objectIdInfo.withAlwaysAsId(ref.alwaysAsId());\n",
+            "replaced": "        return objectIdInfo;\n",
+            "patch_type": "replace",
+            "next_line_no": 583
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java",
+            "replaced_with": "    private final static ObjectIdInfo EMPTY = new ObjectIdInfo(PropertyName.NO_NAME, Object.class, null, false, null);\n",
+            "patch_type": "insert",
+            "next_line_no": 25
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java",
+            "replaced_with": "    public static ObjectIdInfo empty() {\n        return EMPTY;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 63
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java",
+            "from_line_no": 432,
+            "to_line_no": 433,
+            "replaced_with": "                    objectIdInfo = intr.findObjectReferenceInfo(accessor, null);\n                    if (objectIdInfo != null) {\n",
+            "replaced": "                    objectIdInfo = intr.findObjectReferenceInfo(accessor,\n                            new ObjectIdInfo(NAME_FOR_OBJECT_REF, null, null, null));\n",
+            "patch_type": "replace",
+            "next_line_no": 434
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java",
+            "replaced_with": "                    }\n",
+            "patch_type": "insert",
+            "next_line_no": 435
+        }
+    ]
+}

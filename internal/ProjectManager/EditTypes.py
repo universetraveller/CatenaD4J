@@ -57,6 +57,9 @@ class LineEdit:
                 pass
         else:
             raise NotImplementedError('This transformation is not implemented')
+class FileEdit:
+    def __init__(self):
+        self._type = DELETE_FILE
 def createLineInsert(line, code, back=False, offset=None):
     if not back:
         return LineEdit(INSERT_BEFORE, line, offset, code)

@@ -1,0 +1,11 @@
+{
+    "org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode": {
+        "begin_line_no": 412,
+        "end_line_no": 428,
+        "file_path": "src/test/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java",
+        "to": [
+            "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_1() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        try{ assertEquals(n, e.getName());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(e.isDirectory());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        tin.close();\n    }",
+            "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_0() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        assertEquals(n, e.getName());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(e.isDirectory());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        tin.close();\n    }"
+        ]
+    }
+}

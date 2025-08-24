@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \tif(!_allowMultipleMatches && _currToken != null && _exposedContext == null){\n",
+            "patch_type": "insert",
+            "next_line_no": 227
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \t\tif((_currToken.isStructEnd()  && _headContext.isStartHandled()) ){\n    \t\t\treturn (_currToken = null);\n    \t\t}\n",
+            "patch_type": "insert",
+            "next_line_no": 228
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \t\telse if(_currToken.isScalarValue() && !_headContext.isStartHandled() && !_includePath \n    \t\t\t\t&& _itemFilter == TokenFilter.INCLUDE_ALL) {\n    \t\t\treturn (_currToken = null);\n    \t\t}\n    \t}\n",
+            "patch_type": "insert",
+            "next_line_no": 230
+        }
+    ]
+}

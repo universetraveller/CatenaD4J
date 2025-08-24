@@ -1,0 +1,28 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/ParserBase.java",
+            "from_line_no": 887,
+            "to_line_no": 887,
+            "replaced_with": "                reportOverflowInt(getText(), currentToken());\n",
+            "replaced": "                _reportError(\"Numeric value (\"+getText()+\") out of range of int\");\n",
+            "patch_type": "replace",
+            "next_line_no": 888
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/ParserMinimalBase.java",
+            "from_line_no": 565,
+            "to_line_no": 566,
+            "replaced_with": "        reportOverflowInt(numDesc, JsonToken.VALUE_NUMBER_INT);\n",
+            "replaced": "        _reportError(String.format(\"Numeric value (%s) out of range of int (%d - %s)\",\n                _longIntegerDesc(numDesc), Integer.MIN_VALUE, Integer.MAX_VALUE));\n",
+            "patch_type": "replace",
+            "next_line_no": 567
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/ParserMinimalBase.java",
+            "replaced_with": "    protected void reportOverflowInt(String numDesc, JsonToken inputType) throws IOException {\n        _reportInputCoercion(String.format(\"Numeric value (%s) out of range of int (%d - %s)\",\n                _longIntegerDesc(numDesc), Integer.MIN_VALUE, Integer.MAX_VALUE),\n                inputType, Integer.TYPE);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 570
+        }
+    ]
+}

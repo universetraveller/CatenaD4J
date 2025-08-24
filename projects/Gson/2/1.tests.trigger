@@ -1,0 +1,2 @@
+com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_1
+com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_0

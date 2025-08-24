@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/cli/GnuParser.java",
+            "from_line_no": 81,
+            "to_line_no": 81,
+            "replaced_with": "                    if (opt.indexOf('=') != -1 && options.hasOption(opt.substring(0, opt.indexOf('='))))\n",
+            "replaced": "                    if (options.hasOption(arg.substring(0, 2)))\n",
+            "patch_type": "replace",
+            "next_line_no": 82
+        },
+        {
+            "file_name": "src/java/org/apache/commons/cli/GnuParser.java",
+            "replaced_with": "                        tokens.add(arg.substring(0, arg.indexOf('='))); // --foo\n                        tokens.add(arg.substring(arg.indexOf('=') + 1)); // value\n                    }\n                    else if (options.hasOption(arg.substring(0, 2)))\n                    {\n",
+            "patch_type": "insert",
+            "next_line_no": 84
+        }
+    ]
+}
