@@ -80,7 +80,7 @@ for p in tests:
                 fs[f] = 0
             fs[f] += bugs[bug][f]
     for f in fs:
-        print(f'{f} {fs[f] / len(bugs)}s')
+        print(f'{f} {fs[f] / len(bugs):.3f}s')
     print('---')
 
 def check(base, error):
@@ -94,6 +94,6 @@ def check(base, error):
                 c = bugs[bug][f]
                 d = (c - b) / b
                 if abs(d) > error:
-                    print(f'[{p}_{bug}] {f} performance loss: {d*100}%')
+                    print(f'[{p}_{bug}] {f} performance loss: {d*100:.3f}%')
 
 check('HashMap', 0.05)
