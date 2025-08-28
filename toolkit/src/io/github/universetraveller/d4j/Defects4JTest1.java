@@ -1,6 +1,5 @@
 package io.github.universetraveller.d4j;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -9,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.tools.ant.taskdefs.optional.junit.FormatterElement;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask;
@@ -20,13 +18,9 @@ import io.github.universetraveller.util.DevNullPrintStream;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.SummaryAttribute;
 
 /*
- * The target is to create a minimal test runner
- * some useful features like orderer, abort on failure, verify patches
- * that are not very important to a dataset are not added currently
+ * 
  */
-public class Defects4JTest1 extends Defects4JExport {
-
-    Map<String, List<String>> methods;
+public class Defects4JTest1 extends AbstractDefects4JTest {
 
     public Defects4JTest1(String projectBuildFile) throws MalformedURLException {
         super(projectBuildFile);
@@ -113,31 +107,5 @@ public class Defects4JTest1 extends Defects4JExport {
         System.out.println("Failing Tests: " + String.valueOf(failingTests.size()));
         for(String f : failingTests)
             System.out.println("    " + f);
-    }
-
-    public void addTest(String classOrTest) {
-        int idx = classOrTest.indexOf('#');
-        String className = idx < 0 ? classOrTest : classOrTest.substring(0, idx);
-        methods.putIfAbsent(className, null);
-        if(idx > 0) {
-            if(methods.get(className) == null) {
-                methods.put(className, new ArrayList<>());
-            }
-            methods.get(className).add(classOrTest.substring(idx + 1));
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Defects4JTest1 runner = new Defects4JTest1(args[0]);
-
-        for(int i = 1; i < args.length; ++ i)
-            runner.addTest(args[i]);
-        
-        try {
-            runner.run();
-            System.exit(0);
-        } catch (Exception e) {
-            throw new IOException(e);
-        }
     }
 }

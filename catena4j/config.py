@@ -27,6 +27,7 @@ c4j_rel_d4j_properties = 'resources/defects4j.properties'
 c4j_toolkit_export_main = 'io.github.universetraveller.d4j.Defects4JExport'
 c4j_toolkit_execute_main = 'io.github.universetraveller.d4j.Defects4JExecute'
 c4j_toolkit_test_main = 'io.github.universetraveller.d4j.Defects4JTest'
+c4j_test_isolation_level=1
 c4j_rel_projects = 'projects'
 c4j_rel_project_export_xml = 'projects/{project}/{project}.export.xml'
 c4j_rel_project_compile_xml = 'projects/{project}/{project}.compile.xml'

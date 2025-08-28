@@ -10,9 +10,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.github.universetraveller.util.DevNullPrintStream;
@@ -23,9 +21,8 @@ import io.github.universetraveller.util.IsolatedClassLoader;
  * some useful features like orderer, abort on failure, verify patches
  * that are not very important to a dataset are not added currently
  */
-public class Defects4JTest extends Defects4JExport {
+public class Defects4JTest extends AbstractDefects4JTest {
 
-    Map<String, List<String>> methods;
     IsolatedClassLoader classLoader;
 
     public void initializeClassLoader(String[] pathElements) throws MalformedURLException {
@@ -92,7 +89,7 @@ public class Defects4JTest extends Defects4JExport {
         // using JUnit4Helper here is ok, because all JUnitClassRunner classses have
         // implemented Filterable in junit version that defects4j's ant uses
         // the class OldTestClassRunner is deprecated so we do not need to handle it
-        helper = classLoader.loadClass("io.github.universetraveller.util.JUnit4Helper");
+        helper = classLoader.loadClass(System.getProperty("c4j.test.helper"));
 
         //try{
         //    resultClass = classLoader.loadClass("org.junit.runner.Result");
@@ -143,7 +140,7 @@ public class Defects4JTest extends Defects4JExport {
         }
     }
 
-    public void run() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
+    public void run() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, Exception {
         if(methods.isEmpty()) {
             // relevant tests are not handled by the super class
             // input them using args
@@ -162,29 +159,4 @@ public class Defects4JTest extends Defects4JExport {
         }
     }
 
-    public void addTest(String classOrTest) {
-        int idx = classOrTest.indexOf('#');
-        String className = idx < 0 ? classOrTest : classOrTest.substring(0, idx);
-        methods.putIfAbsent(className, null);
-        if(idx > 0) {
-            if(methods.get(className) == null) {
-                methods.put(className, new ArrayList<>());
-            }
-            methods.get(className).add(classOrTest.substring(idx + 1));
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        Defects4JTest runner = new Defects4JTest(args[0]);
-
-        for(int i = 1; i < args.length; ++ i)
-            runner.addTest(args[i]);
-        
-        try {
-            runner.run();
-            System.exit(0);
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new IOException(e);
-        }
-    }
 }

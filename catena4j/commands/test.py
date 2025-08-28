@@ -2,7 +2,7 @@ from ..cli.manager import _create_command
 from ..dispatcher import ExecutionContext
 from ..util import TaskPrinter, print_result
 from os.path import abspath
-from ..c4jutil import read_version_info
+from ..c4jutil import read_version_info, Catena4JError
 from ..loaders import get_project_loader
 from .compile import execute_compile
 from .export import query_d4j_static
@@ -17,13 +17,14 @@ def initialize():
     _parser.add_argument('-a', action='store_true', help='Collect all failed assertions without breaking the process (not implemented now).')
     _parser.add_argument('-l', '--list', action='store_true', dest='l', help='List all tests to run but do not actually execute them (written to <work_dir>/all_tests).')
     _parser.add_argument('-c', '--compile', action='store_true', dest='c', help='Run compilation tasks before running tests')
+    _parser.add_argument('-i', '--isolation', type=int, dest='i', required=False, help='Specify the isolation level of testcases. Options: 1 (reused isolated classloader), 2 (isolated classloader for each test class), 3 (use ant\'s junit task) Default: config.c4j_test_isolation_level')
     group = _parser.add_mutually_exclusive_group(required=False)
     group.add_argument('-t', metavar='test', action='append', help='Specify a test class or method to run. This option could be duplicate. Format: <class name>#<method name>')
     group.add_argument('-r', action='store_true', help='Only run relevant tests')
     group.add_argument('--trigger', action='store_true', help='Only run trigger tests')
     _parser.__add_arguments_help__ = True
 
-def run_tests(tests, project, wd, context, list_only=False, assertions=False, *, test_name=None):
+def run_tests(tests, project, wd, context, list_only=False, assertions=False, isolation=1, *, test_name=None):
     printer = TaskPrinter(f'Run tests' if test_name is None else f'Run tests ({test_name})') \
                 if context.mode == ExecutionContext.CLI else None
 
@@ -41,6 +42,15 @@ def run_tests(tests, project, wd, context, list_only=False, assertions=False, *,
         java_options.append(f'-Dc4j.tests.printer.out={wd}/all_tests')
     else:
         java_options.append(f'-DOUTFILE={wd}/failing_tests')
+
+    if isolation == 1:
+        java_options.append(f'-Dc4j.test.helper=io.github.universetraveller.util.JUnit4Helper')
+    elif isolation == 2:
+        java_options.append(f'-Dc4j.test.helper=io.github.universetraveller.util.JUnit4Helper1')
+    elif isolation == 3:
+        java_options.append(f'-Dc4j.test.runner=ant')
+    else:
+        raise Catena4JError(f'Unknown isolation level: {isolation}')
 
     result = loader.toolkit_execute(tests,
                                     project,
@@ -107,4 +117,5 @@ def run(context: ExecutionContext):
               context=context,
               list_only=args.l,
               assertions=args.a,
+              isolation=args.i or context.c4j_test_isolation_level,
               test_name=attr)
