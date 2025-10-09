@@ -115,10 +115,6 @@ class EditCacheFile:
         self.edited = True
         if EditInst._type == DELETE_FILE:
             os.remove(self.filepath)
-            #!
-            print(f'debug:{self.filepath}')
-            print(f'exist? {os.path.exists(self.filepath)}')
-            #!
             return
         edits = []
         if EditInst._type == INSERT_BEFORE_AFTER:
@@ -147,9 +143,6 @@ class EditCacheFile:
                 self.uncommitted.append(lineInst.copy())
                 lineInst.apply_edit(idx_edit.inst)
     def commit(self):
-        #!
-        print(f'commit')
-        #!
         if not self.edited:
             raise ValueError('Nothing to commit')
         self.edited = False
@@ -167,9 +160,6 @@ class EditCacheFile:
             after.append(lineInst.copy())
         return CacheDiff(self.filepath, [origin, after])
     def abortEdits(self):
-        #!
-        print(f'abortEdits')
-        #!
         if not self.edited:
             return False
         self.edited = False
