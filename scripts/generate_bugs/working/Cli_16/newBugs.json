@@ -1,0 +1,146 @@
+{
+    "original": {
+        "num_of_hunks": 7,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli2/Option.java",
+            "replaced_with": "    Option getParent();\n",
+            "patch_type": "insert",
+            "next_line_no": 206
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli2/Option.java",
+            "replaced_with": "    void setParent(Option parent);\n",
+            "patch_type": "insert",
+            "next_line_no": 216
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java",
+            "replaced_with": "        Option parent = option.getParent();\n        while (parent != null && !options.contains(parent)) {\n            options.add(parent);\n            parent = parent.getParent();\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 74
+        },
+        "3": {
+            "file_name": "src/java/org/apache/commons/cli2/option/GroupImpl.java",
+            "replaced_with": "            option.setParent(this);\n",
+            "patch_type": "insert",
+            "next_line_no": 92
+        },
+        "4": {
+            "file_name": "src/java/org/apache/commons/cli2/option/OptionImpl.java",
+            "replaced_with": "    private Option parent;\n",
+            "patch_type": "insert",
+            "next_line_no": 36
+        },
+        "5": {
+            "file_name": "src/java/org/apache/commons/cli2/option/OptionImpl.java",
+            "replaced_with": "    public Option getParent() {\n        return parent;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 128
+        },
+        "6": {
+            "file_name": "src/java/org/apache/commons/cli2/option/OptionImpl.java",
+            "replaced_with": "    public void setParent(Option parent) {\n        this.parent = parent;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 129
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption",
+            "org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order"
+        ],
+        "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions": {
+            "file_path": "src/test/org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "Instance": "Begin: Pos(91, 12)\nEnd: Pos(101, 5)\nSource: /tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java\nName: testMultipleChildOptions\nChilds: [StatementAssertion<Begin: Pos(94, 9), End: Pos(94, 73)>,\nStatementAssertion<Begin: Pos(95, 9), End: Pos(96, 41)>,\nStatementAssertion<Begin: Pos(97, 9), End: Pos(97, 71)>,\nStatementAssertion<Begin: Pos(98, 9), End: Pos(99, 41)>,\nStatementAssertion<Begin: Pos(100, 9), End: Pos(100, 70)>,\n]",
+            "source": "/tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "name": "testMultipleChildOptions",
+            "begin": "Pos(91, 12)",
+            "end": "Pos(101, 5)",
+            "begin_line_no": 91,
+            "end_line_no": 101,
+            "child": [
+                "Begin: Pos(94, 9)\nEnd: Pos(94, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(95, 9)\nEnd: Pos(96, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(97, 9)\nEnd: Pos(97, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(98, 9)\nEnd: Pos(99, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(100, 9)\nEnd: Pos(100, 70)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testMultipleChildOptions$catena_0() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        assertTrue(\"Child option not found\", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMultipleChildOptions$catena_1() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMultipleChildOptions$catena_2() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMultipleChildOptions$catena_3() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMultipleChildOptions$catena_4() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testMultipleChildOptions$catena_0() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        assertTrue(\"Child option not found\", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testMultipleChildOptions$catena_1() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testMultipleChildOptions$catena_2() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    public void testMultipleChildOptions$catena_3() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "4": "    public void testMultipleChildOptions$catena_4() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\",\n                \"--sub\", \"anotherTest\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Sub option not found\", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for sub option\", \"anotherTest\", cl\n                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption": {
+            "file_path": "src/test/org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "Instance": "Begin: Pos(117, 12)\nEnd: Pos(125, 5)\nSource: /tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java\nName: testParentOptionAndChildOption\nChilds: [StatementAssertion<Begin: Pos(121, 13), End: Pos(121, 65)>,\n]",
+            "source": "/tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "name": "testParentOptionAndChildOption",
+            "begin": "Pos(117, 12)",
+            "end": "Pos(125, 5)",
+            "begin_line_no": 117,
+            "end_line_no": 125,
+            "child": [
+                "Begin: Pos(121, 13)\nEnd: Pos(121, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption": {
+            "file_path": "src/test/org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "Instance": "Begin: Pos(80, 12)\nEnd: Pos(86, 5)\nSource: /tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java\nName: testSingleChildOption\nChilds: [StatementAssertion<Begin: Pos(82, 9), End: Pos(82, 73)>,\nStatementAssertion<Begin: Pos(83, 9), End: Pos(84, 41)>,\nStatementAssertion<Begin: Pos(85, 9), End: Pos(85, 70)>,\n]",
+            "source": "/tmp/c4j/Cli_16/src/test//org/apache/commons/cli2/bug/BugCLI123Test.java",
+            "name": "testSingleChildOption",
+            "begin": "Pos(80, 12)",
+            "end": "Pos(86, 5)",
+            "begin_line_no": 80,
+            "end_line_no": 86,
+            "child": [
+                "Begin: Pos(82, 9)\nEnd: Pos(82, 73)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(83, 9)\nEnd: Pos(84, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(85, 9)\nEnd: Pos(85, 70)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testSingleChildOption$catena_0() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        assertTrue(\"Child option not found\", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testSingleChildOption$catena_1() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testSingleChildOption$catena_2() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testSingleChildOption$catena_0() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        assertTrue(\"Child option not found\", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testSingleChildOption$catena_1() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testSingleChildOption$catena_2() throws OptionException {\n        CommandLine cl = parser.parse(new String[] { \"--child\", \"test\" });\n        try{ assertTrue(\"Child option not found\", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Wrong value for option\", \"test\", cl\n                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Child group not found\", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "1111111": {
+        "failing_tests": [
+            "org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1",
+            "org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0",
+            "org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2",
+            "org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption"
+        ]
+    }
+}

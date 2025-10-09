@@ -1,0 +1,79 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/StdKeyDeserializer.java",
+            "from_line_no": 128,
+            "to_line_no": 128,
+            "replaced_with": "            return ctxt.handleWeirdKey(_keyClass, key, \"not a valid representation, problem: (%s) %s\",\n                    re.getClass().getName(), re.getMessage());\n",
+            "replaced": "            return ctxt.handleWeirdKey(_keyClass, key, \"not a valid representation, problem: %s\", re.getMessage());\n",
+            "patch_type": "replace",
+            "next_line_no": 129
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/BasicBeanDescription.java",
+            "from_line_no": 525,
+            "to_line_no": 525,
+            "replaced_with": "            if (isFactoryMethod(am) && am.getParameterCount() == 1) {\n",
+            "replaced": "            if (isFactoryMethod(am)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 526
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/BasicBeanDescription.java",
+            "replaced_with": "            if (am.getParameterCount() == 1) {\n",
+            "patch_type": "insert",
+            "next_line_no": 558
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/introspect/BasicBeanDescription.java",
+            "replaced_with": "            }\n",
+            "patch_type": "insert",
+            "next_line_no": 559
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory"
+        ],
+        "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/KeyDeser1429Test.java",
+            "Instance": "Begin: Pos(37, 12)\nEnd: Pos(47, 5)\nSource: /tmp/c4j/JacksonDatabind_65/src/test/java//com/fasterxml/jackson/databind/deser/KeyDeser1429Test.java\nName: testDeserializeKeyViaFactory\nChilds: [StatementAssertion<Begin: Pos(44, 9), End: Pos(44, 46)>,\nStatementAssertion<Begin: Pos(45, 9), End: Pos(45, 44)>,\nStatementAssertion<Begin: Pos(46, 9), End: Pos(46, 60)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_65/src/test/java//com/fasterxml/jackson/databind/deser/KeyDeser1429Test.java",
+            "name": "testDeserializeKeyViaFactory",
+            "begin": "Pos(37, 12)",
+            "end": "Pos(47, 5)",
+            "begin_line_no": 37,
+            "end_line_no": 47,
+            "child": [
+                "Begin: Pos(44, 9)\nEnd: Pos(44, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(45, 9)\nEnd: Pos(45, 44)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(46, 9)\nEnd: Pos(46, 60)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testDeserializeKeyViaFactory$catena_0() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        assertEquals(key._firstname, \"first\");                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(key._lastname, \"last\");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testDeserializeKeyViaFactory$catena_1() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        try{ assertEquals(key._firstname, \"first\");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(key._lastname, \"last\");                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testDeserializeKeyViaFactory$catena_2() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        try{ assertEquals(key._firstname, \"first\");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(key._lastname, \"last\");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(entry.getValue().doubleValue(), 42, 0);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testDeserializeKeyViaFactory$catena_0() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        assertEquals(key._firstname, \"first\");                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(key._lastname, \"last\");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testDeserializeKeyViaFactory$catena_1() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        try{ assertEquals(key._firstname, \"first\");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(key._lastname, \"last\");                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testDeserializeKeyViaFactory$catena_2() throws Exception\n    {\n        Map<FullName, Double> map =\n            new ObjectMapper().readValue(\"{\\\"first.last\\\": 42}\",\n                    new TypeReference<Map<FullName, Double>>() { });\n        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();\n        FullName key = entry.getKey();\n        try{ assertEquals(key._firstname, \"first\");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(key._lastname, \"last\");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(entry.getValue().doubleValue(), 42, 0);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "0100": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1",
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2",
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0"
+        ]
+    },
+    "0011": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1",
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2",
+            "com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0"
+        ]
+    }
+}

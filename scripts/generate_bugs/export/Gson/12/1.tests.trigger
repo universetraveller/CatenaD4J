@@ -1,0 +1,2 @@
+com.google.gson.internal.bind.JsonTreeReaderTest::testSkipValue_emptyJsonObject
+com.google.gson.internal.bind.JsonTreeReaderTest::testSkipValue_filledJsonObject

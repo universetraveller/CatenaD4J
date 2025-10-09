@@ -1,0 +1,82 @@
+---
+Begin generate bug_id: Compress_11
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_11
+Try to checkout Compress_11
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/ArchiveStreamFactory.java
+trying to replace old failing tests
+edit: replace from 31 range 10 at src/test/java/org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java
+to
+    @Test
+    public void shortTextFilesAreNoTARs$catena_0() throws Exception {
+        try {
+            new ArchiveStreamFactory()
+                .createArchiveInputStream(new ByteArrayInputStream("This certainly is not a tar archive, really, no kidding".getBytes()));
+            fail("created an input stream for a non-archive");                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (ArchiveException ae) {
+            try{ assertTrue(ae.getMessage().startsWith("No Archiver found"));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void shortTextFilesAreNoTARs$catena_1() throws Exception {
+        try {
+            new ArchiveStreamFactory()
+                .createArchiveInputStream(new ByteArrayInputStream("This certainly is not a tar archive, really, no kidding".getBytes()));
+            try{ fail("created an input stream for a non-archive");                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ArchiveException ae) {
+            assertTrue(ae.getMessage().startsWith("No Archiver found"));                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 15.19 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs$catena_0
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 249 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 240 with             if (signatureLength >= 512) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 240 with             if (signatureLength >= 512) {
+
+try to fix hunk: 1
+insert before 249 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 13.36 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,70 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli2/WriteableCommandLine.java",
+            "replaced_with": "    List getUndefaultedValues(final Option option);\n",
+            "patch_type": "insert",
+            "next_line_no": 47
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java",
+            "replaced_with": "    public List getUndefaultedValues(Option option) {\n",
+            "patch_type": "insert",
+            "next_line_no": 132
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java",
+            "replaced_with": "      List valueList = (List) values.get(option);\n",
+            "patch_type": "insert",
+            "next_line_no": 133
+        },
+        "3": {
+            "file_name": "src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java",
+            "replaced_with": "      if (valueList == null) {\n        valueList = Collections.EMPTY_LIST;\n      }\n\n      return valueList;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 135
+        },
+        "4": {
+            "file_name": "src/java/org/apache/commons/cli2/option/ArgumentImpl.java",
+            "from_line_no": 144,
+            "to_line_no": 144,
+            "replaced_with": "        int argumentCount = commandLine.getUndefaultedValues(option).size();\n",
+            "replaced": "        int argumentCount = 0;\n",
+            "patch_type": "replace",
+            "next_line_no": 145
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli2.bug.BugLoopingOptionLookAlikeTest::testLoopingOptionLookAlike2"
+        ],
+        "org.apache.commons.cli2.bug.BugLoopingOptionLookAlikeTest::testLoopingOptionLookAlike2": {
+            "file_path": "src/test/org/apache/commons/cli2/bug/BugLoopingOptionLookAlikeTest.java",
+            "Instance": "Begin: Pos(63, 12)\nEnd: Pos(78, 5)\nSource: /tmp/c4j/Cli_13/src/test//org/apache/commons/cli2/bug/BugLoopingOptionLookAlikeTest.java\nName: testLoopingOptionLookAlike2\nChilds: [StatementAssertion<Begin: Pos(74, 13), End: Pos(74, 36)>,\nStatementAssertion<Begin: Pos(76, 13), End: Pos(76, 86)>,\n]",
+            "source": "/tmp/c4j/Cli_13/src/test//org/apache/commons/cli2/bug/BugLoopingOptionLookAlikeTest.java",
+            "name": "testLoopingOptionLookAlike2",
+            "begin": "Pos(63, 12)",
+            "end": "Pos(78, 5)",
+            "begin_line_no": 63,
+            "end_line_no": 78,
+            "child": [
+                "Begin: Pos(74, 13)\nEnd: Pos(74, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(76, 13)\nEnd: Pos(76, 86)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testLoopingOptionLookAlike2$catena_0() {\n        final ArgumentBuilder abuilder = new ArgumentBuilder();\n        final GroupBuilder gbuilder = new GroupBuilder();\n        final Argument inputfile_opt = abuilder.withName(\"input\").withMinimum(1).withMaximum(1).create();\n        final Argument outputfile_opt = abuilder.withName(\"output\").withMinimum(1).withMaximum(1).create();\n        final Argument targets = new SourceDestArgument(inputfile_opt, outputfile_opt);\n        final Group options = gbuilder.withOption(targets).create();\n        final Parser parser = new Parser();\n        parser.setGroup(options);\n        try {\n            parser.parse(new String[] { \"testfile.txt\", \"testfile.txt\", \"testfile.txt\", \"testfile.txt\" });\n            fail(\"OptionException\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (OptionException e) {\n            try{ assertEquals(\"Unexpected testfile.txt while processing \", e.getMessage());                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }    ",
+                "    public void testLoopingOptionLookAlike2$catena_1() {\n        final ArgumentBuilder abuilder = new ArgumentBuilder();\n        final GroupBuilder gbuilder = new GroupBuilder();\n        final Argument inputfile_opt = abuilder.withName(\"input\").withMinimum(1).withMaximum(1).create();\n        final Argument outputfile_opt = abuilder.withName(\"output\").withMinimum(1).withMaximum(1).create();\n        final Argument targets = new SourceDestArgument(inputfile_opt, outputfile_opt);\n        final Group options = gbuilder.withOption(targets).create();\n        final Parser parser = new Parser();\n        parser.setGroup(options);\n        try {\n            parser.parse(new String[] { \"testfile.txt\", \"testfile.txt\", \"testfile.txt\", \"testfile.txt\" });\n            try{ fail(\"OptionException\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (OptionException e) {\n            assertEquals(\"Unexpected testfile.txt while processing \", e.getMessage());                      /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }    "
+            ],
+            "func": {
+                "0": "    public void testLoopingOptionLookAlike2$catena_0() {\n        final ArgumentBuilder abuilder = new ArgumentBuilder();\n        final GroupBuilder gbuilder = new GroupBuilder();\n        final Argument inputfile_opt = abuilder.withName(\"input\").withMinimum(1).withMaximum(1).create();\n        final Argument outputfile_opt = abuilder.withName(\"output\").withMinimum(1).withMaximum(1).create();\n        final Argument targets = new SourceDestArgument(inputfile_opt, outputfile_opt);\n        final Group options = gbuilder.withOption(targets).create();\n        final Parser parser = new Parser();\n        parser.setGroup(options);\n        try {\n            parser.parse(new String[] { \"testfile.txt\", \"testfile.txt\", \"testfile.txt\", \"testfile.txt\" });\n            fail(\"OptionException\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (OptionException e) {\n            try{ assertEquals(\"Unexpected testfile.txt while processing \", e.getMessage());                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }    ",
+                "1": "    public void testLoopingOptionLookAlike2$catena_1() {\n        final ArgumentBuilder abuilder = new ArgumentBuilder();\n        final GroupBuilder gbuilder = new GroupBuilder();\n        final Argument inputfile_opt = abuilder.withName(\"input\").withMinimum(1).withMaximum(1).create();\n        final Argument outputfile_opt = abuilder.withName(\"output\").withMinimum(1).withMaximum(1).create();\n        final Argument targets = new SourceDestArgument(inputfile_opt, outputfile_opt);\n        final Group options = gbuilder.withOption(targets).create();\n        final Parser parser = new Parser();\n        parser.setGroup(options);\n        try {\n            parser.parse(new String[] { \"testfile.txt\", \"testfile.txt\", \"testfile.txt\", \"testfile.txt\" });\n            try{ fail(\"OptionException\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (OptionException e) {\n            assertEquals(\"Unexpected testfile.txt while processing \", e.getMessage());                      /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }    "
+            }
+        }
+    },
+    "11111": {
+        "failing_tests": [
+            "org.apache.commons.cli2.bug.BugLoopingOptionLookAlikeTest::testLoopingOptionLookAlike2$catena_1"
+        ]
+    }
+}

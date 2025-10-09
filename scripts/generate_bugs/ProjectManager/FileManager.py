@@ -27,6 +27,10 @@ def validate_encoding(filename):
             with open(filename, 'r', encoding=enc) as f:
                 f = f.read()
             return enc
+        except FileNotFoundError:
+            with open(filename, 'w', encoding=enc) as f:
+                pass
+            return enc
         except:
             continue
     return backup_encoding[0]

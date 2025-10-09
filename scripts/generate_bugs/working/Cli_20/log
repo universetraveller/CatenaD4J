@@ -1,0 +1,191 @@
+---
+Begin generate bug_id: Cli_20
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Cli_20
+Try to checkout Cli_20
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli/PosixParser.java
+trying to replace old failing tests
+edit: replace from 159 range 12 at src/test/org/apache/commons/cli/PosixParserTest.java
+to
+    public void testStop3$catena_0() throws Exception
+    {
+        String[] args = new String[]{"--zop==1",
+                                     "-abtoast",
+                                     "--b=bar"};
+
+        CommandLine cl = parser.parse(options, args, true);
+
+        assertFalse("Confirm -a is not set", cl.hasOption("a"));                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse("Confirm -b is not set", cl.hasOption("b"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Confirm  3 extra args: " + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testStop3$catena_1() throws Exception
+    {
+        String[] args = new String[]{"--zop==1",
+                                     "-abtoast",
+                                     "--b=bar"};
+
+        CommandLine cl = parser.parse(options, args, true);
+
+        try{ assertFalse("Confirm -a is not set", cl.hasOption("a"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse("Confirm -b is not set", cl.hasOption("b"));                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("Confirm  3 extra args: " + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testStop3$catena_2() throws Exception
+    {
+        String[] args = new String[]{"--zop==1",
+                                     "-abtoast",
+                                     "--b=bar"};
+
+        CommandLine cl = parser.parse(options, args, true);
+
+        try{ assertFalse("Confirm -a is not set", cl.hasOption("a"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse("Confirm -b is not set", cl.hasOption("b"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("Confirm  3 extra args: " + cl.getArgList().size(), cl.getArgList().size() == 3);         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/cli/PosixParserTest.java
+new test num: 3
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 6.18 seconds
+Failing tests: 1
+	org.apache.commons.cli.PosixParserTest::testStop3$catena_2
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 121 with range 1 to
+                    tokens.add(opt);
+                    if (pos != -1) {
+                        tokens.add(token.substring(pos + 1));
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 116 with range 2 to
+                    process(token);
+
+patches are written to file
+running tests...
+used time: Finished in 5.82 seconds
+Failing tests: 1
+	org.apache.commons.cli.ApplicationTest::testLs
+Includes new failing tests, set to unusable
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 114 with range 1 to
+                int pos = token.indexOf('=');
+                String opt = pos == -1 ? token : token.substring(0, pos); // --foo
+
+                if (!options.hasOption(opt) && stopAtNonOption)
+
+patches are written to file
+running tests...
+used time: Finished in 4.88 seconds
+Failing tests: 2
+	org.apache.commons.cli.ApplicationTest::testLs
+	org.apache.commons.cli.PosixParserTest::testStop3$catena_2
+Includes new failing tests, set to unusable
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 116 with range 2 to
+                    process(token);
+
+try to fix hunk: 2
+replace from 121 with range 1 to
+                    tokens.add(opt);
+                    if (pos != -1) {
+                        tokens.add(token.substring(pos + 1));
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 114 with range 1 to
+                int pos = token.indexOf('=');
+                String opt = pos == -1 ? token : token.substring(0, pos); // --foo
+
+                if (!options.hasOption(opt) && stopAtNonOption)
+
+try to fix hunk: 2
+replace from 121 with range 1 to
+                    tokens.add(opt);
+                    if (pos != -1) {
+                        tokens.add(token.substring(pos + 1));
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 5.15 seconds
+Failing tests: 1
+	org.apache.commons.cli.PosixParserTest::testStop3$catena_2
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 114 with range 1 to
+                int pos = token.indexOf('=');
+                String opt = pos == -1 ? token : token.substring(0, pos); // --foo
+
+                if (!options.hasOption(opt) && stopAtNonOption)
+
+try to fix hunk: 1
+replace from 116 with range 2 to
+                    process(token);
+
+patches are written to file
+running tests...
+used time: Finished in 6.03 seconds
+Failing tests: 1
+	org.apache.commons.cli.ApplicationTest::testLs
+Includes new failing tests, set to unusable
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 114 with range 1 to
+                int pos = token.indexOf('=');
+                String opt = pos == -1 ? token : token.substring(0, pos); // --foo
+
+                if (!options.hasOption(opt) && stopAtNonOption)
+
+try to fix hunk: 1
+replace from 116 with range 2 to
+                    process(token);
+
+try to fix hunk: 2
+replace from 121 with range 1 to
+                    tokens.add(opt);
+                    if (pos != -1) {
+                        tokens.add(token.substring(pos + 1));
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 5.68 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.PosixParserTest::testStop3$catena_2']
+select new bug
+Pattern: 111
+new failing tests:
+org.apache.commons.cli.PosixParserTest::testStop3$catena_2
+Save found bug
+processed: 111
+Find 1 new bugs

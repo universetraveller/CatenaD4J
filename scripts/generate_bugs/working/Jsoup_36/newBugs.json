@@ -1,0 +1,192 @@
+{
+    "original": {
+        "num_of_hunks": 7,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "import java.nio.charset.IllegalCharsetNameException;\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "from_line_no": 19,
+            "to_line_no": 19,
+            "replaced_with": "    private static final Pattern charsetPattern = Pattern.compile(\"(?i)\\\\bcharset=\\\\s*(?:\\\"|')?([^\\\\s,;\\\"']*)\");\n",
+            "replaced": "    private static final Pattern charsetPattern = Pattern.compile(\"(?i)\\\\bcharset=\\\\s*\\\"?([^\\\\s;\\\"]*)\");\n",
+            "patch_type": "replace",
+            "next_line_no": 20
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "                    if (foundCharset == null && meta.hasAttr(\"charset\")) {\n                        try {\n                            if (Charset.isSupported(meta.attr(\"charset\"))) {\n                                foundCharset = meta.attr(\"charset\");\n                            }\n                        } catch (IllegalCharsetNameException e) {\n                            foundCharset = null;\n                        }\n                    }\n",
+            "patch_type": "insert",
+            "next_line_no": 87
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "                    foundCharset = foundCharset.trim().replaceAll(\"[\\\"']\", \"\");\n",
+            "patch_type": "insert",
+            "next_line_no": 92
+        },
+        "4": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "            charset = charset.replace(\"charset=\", \"\");\n            if (charset.isEmpty()) return null;\n            try {\n",
+            "patch_type": "insert",
+            "next_line_no": 161
+        },
+        "5": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "            } catch (IllegalCharsetNameException e) {\n",
+            "patch_type": "insert",
+            "next_line_no": 164
+        },
+        "6": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "                return null;\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 165
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.helper.DataUtilTest::shouldCorrectCharsetForDuplicateCharsetString",
+            "org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset",
+            "org.jsoup.helper.DataUtilTest::testQuotedCharset",
+            "org.jsoup.helper.DataUtilTest::shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags",
+            "org.jsoup.helper.DataUtilTest::shouldReturnNullForIllegalCharsetNames",
+            "org.jsoup.integration.ParseTest::testBrokenHtml5CharsetWithASingleDoubleQuote"
+        ],
+        "org.jsoup.helper.DataUtilTest::shouldCorrectCharsetForDuplicateCharsetString": {
+            "file_path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+            "Instance": "Begin: Pos(49, 5)\nEnd: Pos(52, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java\nName: shouldCorrectCharsetForDuplicateCharsetString\nChilds: [StatementAssertion<Begin: Pos(51, 9), End: Pos(51, 112)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java",
+            "name": "shouldCorrectCharsetForDuplicateCharsetString",
+            "begin": "Pos(49, 5)",
+            "end": "Pos(52, 5)",
+            "begin_line_no": 49,
+            "end_line_no": 52,
+            "child": [
+                "Begin: Pos(51, 9)\nEnd: Pos(51, 112)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset": {
+            "file_path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+            "Instance": "Begin: Pos(38, 5)\nEnd: Pos(42, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java\nName: shouldNotThrowExceptionOnEmptyCharset\nChilds: [StatementAssertion<Begin: Pos(40, 9), End: Pos(40, 86)>,\nStatementAssertion<Begin: Pos(41, 9), End: Pos(41, 87)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java",
+            "name": "shouldNotThrowExceptionOnEmptyCharset",
+            "begin": "Pos(38, 5)",
+            "end": "Pos(42, 5)",
+            "begin_line_no": 38,
+            "end_line_no": 42,
+            "child": [
+                "Begin: Pos(40, 9)\nEnd: Pos(40, 86)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(41, 9)\nEnd: Pos(41, 87)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shouldNotThrowExceptionOnEmptyCharset$catena_0() {\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\"));                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=;\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void shouldNotThrowExceptionOnEmptyCharset$catena_1() {\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\"));                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=;\"));                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shouldNotThrowExceptionOnEmptyCharset$catena_0() {\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\"));                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=;\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void shouldNotThrowExceptionOnEmptyCharset$catena_1() {\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\"));                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=;\"));                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.helper.DataUtilTest::testQuotedCharset": {
+            "file_path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+            "Instance": "Begin: Pos(23, 5)\nEnd: Pos(29, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java\nName: testQuotedCharset\nChilds: [StatementAssertion<Begin: Pos(24, 9), End: Pos(24, 98)>,\nStatementAssertion<Begin: Pos(25, 9), End: Pos(25, 97)>,\nStatementAssertion<Begin: Pos(26, 9), End: Pos(26, 108)>,\nStatementAssertion<Begin: Pos(27, 9), End: Pos(27, 101)>,\nStatementAssertion<Begin: Pos(28, 9), End: Pos(28, 96)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java",
+            "name": "testQuotedCharset",
+            "begin": "Pos(23, 5)",
+            "end": "Pos(29, 5)",
+            "begin_line_no": 23,
+            "end_line_no": 29,
+            "child": [
+                "Begin: Pos(24, 9)\nEnd: Pos(24, 98)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(25, 9)\nEnd: Pos(25, 97)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(26, 9)\nEnd: Pos(26, 108)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(27, 9)\nEnd: Pos(27, 101)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(28, 9)\nEnd: Pos(28, 96)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void testQuotedCharset$catena_0() {\n        assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void testQuotedCharset$catena_1() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void testQuotedCharset$catena_2() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void testQuotedCharset$catena_3() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void testQuotedCharset$catena_4() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void testQuotedCharset$catena_0() {\n        assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void testQuotedCharset$catena_1() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));                    /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void testQuotedCharset$catena_2() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    @Test public void testQuotedCharset$catena_3() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "4": "    @Test public void testQuotedCharset$catena_4() {\n        try{ assertEquals(\"utf-8\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"utf-8\\\"\"));              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html;charset=\\\"UTF-8\\\"\"));               }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"ISO-8859-1\", DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"ISO-8859-1\\\"\"));    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, DataUtil.getCharsetFromContentType(\"text/html; charset=\\\"Unsupported\\\"\"));           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"UTF-8\", DataUtil.getCharsetFromContentType(\"text/html; charset='UTF-8'\"));                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.helper.DataUtilTest::shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags": {
+            "file_path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+            "Instance": "Begin: Pos(44, 5)\nEnd: Pos(47, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java\nName: shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags\nChilds: [StatementAssertion<Begin: Pos(46, 9), End: Pos(46, 118)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java",
+            "name": "shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags",
+            "begin": "Pos(44, 5)",
+            "end": "Pos(47, 5)",
+            "begin_line_no": 44,
+            "end_line_no": 47,
+            "child": [
+                "Begin: Pos(46, 9)\nEnd: Pos(46, 118)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.helper.DataUtilTest::shouldReturnNullForIllegalCharsetNames": {
+            "file_path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+            "Instance": "Begin: Pos(54, 5)\nEnd: Pos(57, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java\nName: shouldReturnNullForIllegalCharsetNames\nChilds: [StatementAssertion<Begin: Pos(56, 9), End: Pos(56, 96)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/helper/DataUtilTest.java",
+            "name": "shouldReturnNullForIllegalCharsetNames",
+            "begin": "Pos(54, 5)",
+            "end": "Pos(57, 5)",
+            "begin_line_no": 54,
+            "end_line_no": 57,
+            "child": [
+                "Begin: Pos(56, 9)\nEnd: Pos(56, 96)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.integration.ParseTest::testBrokenHtml5CharsetWithASingleDoubleQuote": {
+            "file_path": "src/test/java/org/jsoup/integration/ParseTest.java",
+            "Instance": "Begin: Pos(143, 5)\nEnd: Pos(151, 5)\nSource: /tmp/c4j/Jsoup_36/src/test/java//org/jsoup/integration/ParseTest.java\nName: testBrokenHtml5CharsetWithASingleDoubleQuote\nChilds: [StatementAssertion<Begin: Pos(150, 9), End: Pos(150, 76)>,\n]",
+            "source": "/tmp/c4j/Jsoup_36/src/test/java//org/jsoup/integration/ParseTest.java",
+            "name": "testBrokenHtml5CharsetWithASingleDoubleQuote",
+            "begin": "Pos(143, 5)",
+            "end": "Pos(151, 5)",
+            "begin_line_no": 143,
+            "end_line_no": 151,
+            "child": [
+                "Begin: Pos(150, 9)\nEnd: Pos(150, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "0001000": {
+        "failing_tests": [
+            "org.jsoup.integration.ParseTest::testBrokenHtml5CharsetWithASingleDoubleQuote"
+        ]
+    },
+    "0100000": {
+        "failing_tests": [
+            "org.jsoup.helper.DataUtilTest::shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags",
+            "org.jsoup.helper.DataUtilTest::testQuotedCharset$catena_4"
+        ]
+    },
+    "1000111": {
+        "failing_tests": [
+            "org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset$catena_0",
+            "org.jsoup.helper.DataUtilTest::shouldReturnNullForIllegalCharsetNames",
+            "org.jsoup.helper.DataUtilTest::shouldCorrectCharsetForDuplicateCharsetString",
+            "org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset$catena_1"
+        ]
+    }
+}

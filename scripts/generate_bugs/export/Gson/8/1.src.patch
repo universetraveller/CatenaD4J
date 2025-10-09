@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "import java.lang.reflect.Modifier;\n",
+            "patch_type": "insert",
+            "next_line_no": 23
+        },
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "          assertInstantiable(c);\n",
+            "patch_type": "insert",
+            "next_line_no": 48
+        },
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "  private static void assertInstantiable(Class<?> c) {\n    int modifiers = c.getModifiers();\n    if (Modifier.isInterface(modifiers)) {\n      throw new UnsupportedOperationException(\"Interface can't be instantiated! Interface name: \" + c.getName());\n    }\n    if (Modifier.isAbstract(modifiers)) {\n      throw new UnsupportedOperationException(\"Abstract class can't be instantiated! Class name: \" + c.getName());\n    }\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 110
+        }
+    ]
+}

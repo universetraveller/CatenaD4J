@@ -1,5 +1,5 @@
 {
-    "num_of_hunks": 32,
+    "num_of_hunks": 33,
     "0": {
         "file_name": "src/com/google/javascript/rhino/jstype/ArrowType.java",
         "from_line_no": 177,
@@ -46,6 +46,12 @@
         "next_line_no": 210
     },
     "5": {
+        "file_name": "src/com/google/javascript/rhino/jstype/EquivalenceMethod.java",
+        "replaced_with": "/*\n *\n * ***** BEGIN LICENSE BLOCK *****\n * Version: MPL 1.1/GPL 2.0\n *\n * The contents of this file are subject to the Mozilla Public License Version\n * 1.1 (the \"License\"); you may not use this file except in compliance with\n * the License. You may obtain a copy of the License at\n * http://www.mozilla.org/MPL/\n *\n * Software distributed under the License is distributed on an \"AS IS\" basis,\n * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License\n * for the specific language governing rights and limitations under the\n * License.\n *\n * The Original Code is Rhino code, released\n * May 6, 1999.\n *\n * The Initial Developer of the Original Code is\n * Netscape Communications Corporation.\n * Portions created by the Initial Developer are Copyright (C) 1997-1999\n * the Initial Developer. All Rights Reserved.\n *\n * Contributor(s):\n *   Nick Santos\n *   Google Inc.\n *\n * Alternatively, the contents of this file may be used under the terms of\n * the GNU General Public License Version 2 or later (the \"GPL\"), in which\n * case the provisions of the GPL are applicable instead of those above. If\n * you wish to allow use of your version of this file only under the terms of\n * the GPL and not to allow others to use your version of this file under the\n * MPL, indicate your decision by deleting the provisions above and replacing\n * them with the notice and other provisions required by the GPL. If you do\n * not delete the provisions above, a recipient may use your version of this\n * file under either the MPL or the GPL.\n *\n * ***** END LICENSE BLOCK ***** */\n\npackage com.google.javascript.rhino.jstype;\n\n/**\n * Represents different ways for comparing equality among types.\n * @author nicksantos@google.com (Nick Santos)\n */\nenum EquivalenceMethod {\n  /**\n   * Indicates that the two types should behave exactly the same under\n   * all type operations.\n   *\n   * Thus, {string} != {?} and {Unresolved} != {?}\n   */\n  IDENTITY,\n\n  /**\n   * Indicates that the two types are almost exactly the same, and that a\n   * data flow analysis algorithm comparing them should consider them equal.\n   *\n   * In traditional type inference, the types form a finite lattice, and this\n   * ensures that type inference will terminate.\n   *\n   * In our type system, the unknown types do not obey the lattice rules. So\n   * if we continue to perform inference over the unknown types, we may\n   * never terminate.\n   *\n   * By treating all unknown types as equivalent for the purposes of data\n   * flow analysis, we ensure that the algorithm will terminate.\n   *\n   * Thus, {string} != {?} and {Unresolved} ~= {?}\n   */\n  DATA_FLOW,\n\n  /**\n   * Indicates that two types are invariant.\n   *\n   * In a type system without unknown types, this would be the same\n   * as IDENTITY. But we always want to consider type A invariant with type B\n   * if B is unknown.\n   *\n   * Thus, {string} ~= {?} and {Unresolved} ~= {?}\n   */\n  INVARIANT\n}\n",
+        "patch_type": "insert",
+        "next_line_no": 1
+    },
+    "6": {
         "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
         "from_line_no": 792,
         "to_line_no": 792,
@@ -54,7 +60,7 @@
         "patch_type": "replace",
         "next_line_no": 793
     },
-    "6": {
+    "7": {
         "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
         "from_line_no": 890,
         "to_line_no": 890,
@@ -63,7 +69,7 @@
         "patch_type": "replace",
         "next_line_no": 891
     },
-    "7": {
+    "8": {
         "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
         "from_line_no": 908,
         "to_line_no": 909,
@@ -72,7 +78,7 @@
         "patch_type": "replace",
         "next_line_no": 910
     },
-    "8": {
+    "9": {
         "file_name": "src/com/google/javascript/rhino/jstype/FunctionType.java",
         "from_line_no": 918,
         "to_line_no": 918,
@@ -81,7 +87,7 @@
         "patch_type": "replace",
         "next_line_no": 919
     },
-    "9": {
+    "10": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 492,
         "to_line_no": 492,
@@ -90,7 +96,7 @@
         "patch_type": "replace",
         "next_line_no": 493
     },
-    "10": {
+    "11": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 500,
         "to_line_no": 500,
@@ -99,7 +105,7 @@
         "patch_type": "replace",
         "next_line_no": 501
     },
-    "11": {
+    "12": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 514,
         "to_line_no": 514,
@@ -108,7 +114,7 @@
         "patch_type": "replace",
         "next_line_no": 515
     },
-    "12": {
+    "13": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 520,
         "to_line_no": 520,
@@ -117,7 +123,7 @@
         "patch_type": "replace",
         "next_line_no": 521
     },
-    "13": {
+    "14": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 528,
         "to_line_no": 528,
@@ -126,13 +132,13 @@
         "patch_type": "replace",
         "next_line_no": 529
     },
-    "14": {
+    "15": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "replaced_with": "        return true;\n      } else if (eqMethod == EquivalenceMethod.DATA_FLOW) {\n",
         "patch_type": "insert",
         "next_line_no": 531
     },
-    "15": {
+    "16": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 545,
         "to_line_no": 545,
@@ -141,7 +147,7 @@
         "patch_type": "replace",
         "next_line_no": 546
     },
-    "16": {
+    "17": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 550,
         "to_line_no": 550,
@@ -150,7 +156,7 @@
         "patch_type": "replace",
         "next_line_no": 551
     },
-    "17": {
+    "18": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 555,
         "to_line_no": 555,
@@ -159,7 +165,7 @@
         "patch_type": "replace",
         "next_line_no": 556
     },
-    "18": {
+    "19": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 565,
         "to_line_no": 566,
@@ -168,7 +174,7 @@
         "patch_type": "replace",
         "next_line_no": 567
     },
-    "19": {
+    "20": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 571,
         "to_line_no": 572,
@@ -176,7 +182,7 @@
         "patch_type": "delete",
         "next_line_no": 573
     },
-    "20": {
+    "21": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 580,
         "to_line_no": 580,
@@ -185,7 +191,7 @@
         "patch_type": "replace",
         "next_line_no": 581
     },
-    "21": {
+    "22": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 592,
         "to_line_no": 592,
@@ -194,7 +200,7 @@
         "patch_type": "replace",
         "next_line_no": 593
     },
-    "22": {
+    "23": {
         "file_name": "src/com/google/javascript/rhino/jstype/JSType.java",
         "from_line_no": 598,
         "to_line_no": 598,
@@ -203,7 +209,7 @@
         "patch_type": "replace",
         "next_line_no": 599
     },
-    "23": {
+    "24": {
         "file_name": "src/com/google/javascript/rhino/jstype/RecordType.java",
         "from_line_no": 118,
         "to_line_no": 118,
@@ -212,7 +218,7 @@
         "patch_type": "replace",
         "next_line_no": 119
     },
-    "24": {
+    "25": {
         "file_name": "src/com/google/javascript/rhino/jstype/RecordType.java",
         "from_line_no": 126,
         "to_line_no": 126,
@@ -221,7 +227,7 @@
         "patch_type": "replace",
         "next_line_no": 127
     },
-    "25": {
+    "26": {
         "file_name": "src/com/google/javascript/rhino/jstype/RecordType.java",
         "from_line_no": 204,
         "to_line_no": 205,
@@ -230,7 +236,7 @@
         "patch_type": "replace",
         "next_line_no": 206
     },
-    "26": {
+    "27": {
         "file_name": "src/com/google/javascript/rhino/jstype/RecordType.java",
         "from_line_no": 268,
         "to_line_no": 268,
@@ -238,7 +244,7 @@
         "patch_type": "delete",
         "next_line_no": 269
     },
-    "27": {
+    "28": {
         "file_name": "src/com/google/javascript/rhino/jstype/RecordType.java",
         "from_line_no": 280,
         "to_line_no": 280,
@@ -246,7 +252,7 @@
         "patch_type": "delete",
         "next_line_no": 281
     },
-    "28": {
+    "29": {
         "file_name": "src/com/google/javascript/rhino/jstype/UnionType.java",
         "from_line_no": 334,
         "to_line_no": 335,
@@ -255,7 +261,7 @@
         "patch_type": "replace",
         "next_line_no": 336
     },
-    "29": {
+    "30": {
         "file_name": "src/com/google/javascript/rhino/jstype/UnionType.java",
         "from_line_no": 340,
         "to_line_no": 340,
@@ -264,7 +270,7 @@
         "patch_type": "replace",
         "next_line_no": 341
     },
-    "30": {
+    "31": {
         "file_name": "src/com/google/javascript/rhino/jstype/UnionType.java",
         "from_line_no": 347,
         "to_line_no": 347,
@@ -273,7 +279,7 @@
         "patch_type": "replace",
         "next_line_no": 348
     },
-    "31": {
+    "32": {
         "file_name": "src/com/google/javascript/rhino/jstype/UnionType.java",
         "from_line_no": 349,
         "to_line_no": 349,

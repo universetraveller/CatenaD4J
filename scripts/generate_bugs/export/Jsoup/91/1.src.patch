@@ -1,0 +1,40 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/UncheckedIOException.java",
+            "replaced_with": "    public UncheckedIOException(String message) {\n        super(new IOException(message));\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        if (isBinary()) {\n            throw new UncheckedIOException(\"Input is binary and unsupported\");\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 37
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "    private static final int numNullsConsideredBinary = 10; // conservative\n",
+            "patch_type": "insert",
+            "next_line_no": 452
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "    boolean isBinary() {\n        int nullsSeen = 0;\n",
+            "patch_type": "insert",
+            "next_line_no": 457
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        for (int i = bufPos; i < bufLength; i++) {\n            if (charBuf[i] == '\\0')\n                nullsSeen++;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 458
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        return nullsSeen >= numNullsConsideredBinary;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 459
+        }
+    ]
+}

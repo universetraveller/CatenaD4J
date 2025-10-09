@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+            "replaced_with": "            Object defaultBean;\n",
+            "patch_type": "insert",
+            "next_line_no": 152
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+            "from_line_no": 157,
+            "to_line_no": 157,
+            "replaced_with": "            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {\n",
+            "replaced": "            if (_useRealPropertyDefaults) {\n",
+            "patch_type": "replace",
+            "next_line_no": 158
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+            "from_line_no": 162,
+            "to_line_no": 162,
+            "replaced_with": "                try {\n                    valueToSuppress = am.getValue(defaultBean);\n                } catch (Exception e) {\n                    _throwWrapped(e, propDef.getName(), defaultBean);\n                }\n",
+            "replaced": "                valueToSuppress = getPropertyDefaultValue(propDef.getName(), am, actualType);\n",
+            "patch_type": "replace",
+            "next_line_no": 163
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351"
+        ],
+        "com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/filter/JsonIncludeTest.java",
+            "Instance": "Begin: Pos(313, 12)\nEnd: Pos(322, 5)\nSource: /tmp/c4j/JacksonDatabind_64/src/test/java//com/fasterxml/jackson/databind/filter/JsonIncludeTest.java\nName: testIssue1351\nChilds: [StatementAssertion<Begin: Pos(317, 9), End: Pos(318, 80)>,\nStatementAssertion<Begin: Pos(320, 9), End: Pos(321, 68)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_64/src/test/java//com/fasterxml/jackson/databind/filter/JsonIncludeTest.java",
+            "name": "testIssue1351",
+            "begin": "Pos(313, 12)",
+            "end": "Pos(322, 5)",
+            "begin_line_no": 313,
+            "end_line_no": 322,
+            "child": [
+                "Begin: Pos(317, 9)\nEnd: Pos(318, 80)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(320, 9)\nEnd: Pos(321, 68)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testIssue1351$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);\n        assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            /***** ORIGINAL ASSERTION IS HERE *****/\n        // [databind#1417]\n        try{ assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIssue1351$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);\n        try{ assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        // [databind#1417]\n        assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testIssue1351$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);\n        assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            /***** ORIGINAL ASSERTION IS HERE *****/\n        // [databind#1417]\n        try{ assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testIssue1351$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);\n        try{ assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        // [databind#1417]\n        assertEquals(aposToQuotes(\"{}\"),\n                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "110": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351$catena_1"
+        ]
+    }
+}

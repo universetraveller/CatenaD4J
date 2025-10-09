@@ -1,0 +1,67 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 114,
+            "to_line_no": 114,
+            "replaced_with": "                int pos = token.indexOf('=');\n                String opt = pos == -1 ? token : token.substring(0, pos); // --foo\n\n                if (!options.hasOption(opt) && stopAtNonOption)\n",
+            "replaced": "                if (token.indexOf('=') != -1)\n",
+            "patch_type": "replace",
+            "next_line_no": 115
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 116,
+            "to_line_no": 117,
+            "replaced_with": "                    process(token);\n",
+            "replaced": "                    tokens.add(token.substring(0, token.indexOf('=')));\n                    tokens.add(token.substring(token.indexOf('=') + 1, token.length()));\n",
+            "patch_type": "replace",
+            "next_line_no": 118
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 121,
+            "to_line_no": 121,
+            "replaced_with": "                    tokens.add(opt);\n                    if (pos != -1) {\n                        tokens.add(token.substring(pos + 1));\n                    }\n",
+            "replaced": "                    tokens.add(token);\n",
+            "patch_type": "replace",
+            "next_line_no": 122
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli.PosixParserTest::testStop3"
+        ],
+        "org.apache.commons.cli.PosixParserTest::testStop3": {
+            "file_path": "src/test/org/apache/commons/cli/PosixParserTest.java",
+            "Instance": "Begin: Pos(159, 12)\nEnd: Pos(170, 5)\nSource: /tmp/c4j/Cli_20/src/test//org/apache/commons/cli/PosixParserTest.java\nName: testStop3\nChilds: [StatementAssertion<Begin: Pos(167, 9), End: Pos(167, 64)>,\nStatementAssertion<Begin: Pos(168, 9), End: Pos(168, 64)>,\nStatementAssertion<Begin: Pos(169, 9), End: Pos(169, 100)>,\n]",
+            "source": "/tmp/c4j/Cli_20/src/test//org/apache/commons/cli/PosixParserTest.java",
+            "name": "testStop3",
+            "begin": "Pos(159, 12)",
+            "end": "Pos(170, 5)",
+            "begin_line_no": 159,
+            "end_line_no": 170,
+            "child": [
+                "Begin: Pos(167, 9)\nEnd: Pos(167, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(168, 9)\nEnd: Pos(168, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(169, 9)\nEnd: Pos(169, 100)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testStop3$catena_0() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testStop3$catena_1() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testStop3$catena_2() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testStop3$catena_0() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testStop3$catena_1() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testStop3$catena_2() throws Exception\n    {\n        String[] args = new String[]{\"--zop==1\",\n                                     \"-abtoast\",\n                                     \"--b=bar\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertFalse(\"Confirm -b is not set\", cl.hasOption(\"b\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.apache.commons.cli.PosixParserTest::testStop3$catena_2"
+        ]
+    }
+}

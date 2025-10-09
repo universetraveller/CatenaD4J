@@ -1,0 +1,136 @@
+{
+    "num_of_hunks": 18,
+    "0": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static final byte CR = 13;\n",
+        "patch_type": "insert",
+        "next_line_no": 70
+    },
+    "1": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static final byte LF = 10;\n",
+        "patch_type": "insert",
+        "next_line_no": 71,
+        "is_extra_hunk": true
+    },
+    "2": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static final int SAFE_LENGTH = 73;\n",
+        "patch_type": "insert",
+        "next_line_no": 73,
+        "is_extra_hunk": true
+    },
+    "3": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "from_line_no": 114,
+        "to_line_no": 114,
+        "replaced_with": "    private static final int encodeQuotedPrintable(int b, ByteArrayOutputStream buffer) {\n",
+        "replaced": "    private static final void encodeQuotedPrintable(int b, ByteArrayOutputStream buffer) {\n",
+        "patch_type": "replace",
+        "next_line_no": 115
+    },
+    "4": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "        return 3;\n",
+        "patch_type": "insert",
+        "next_line_no": 120
+    },
+    "5": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static int getUnsignedOctet(final int index, final byte[] bytes) {\n        int b = bytes[index];\n        if (b < 0) {\n            b = 256 + b;\n        }\n        return b;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 132
+    },
+    "6": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static int encodeByte(final int b, final boolean encode,\n                                  final ByteArrayOutputStream buffer) {\n        if (encode) {\n            return encodeQuotedPrintable(b, buffer);\n        } else {\n            buffer.write(b);\n            return 1;\n        }\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 144,
+        "is_extra_hunk": true
+    },
+    "7": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "    private static boolean isWhitespace(final int b) {\n        return b == SPACE || b == TAB;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 152,
+        "is_extra_hunk": true
+    },
+    "8": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "        int pos = 1;\n",
+        "patch_type": "insert",
+        "next_line_no": 175
+    },
+    "9": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "        for (int i = 0; i < bytes.length - 3; i++) {\n            int b = getUnsignedOctet(i, bytes);\n            if (pos < SAFE_LENGTH) {\n",
+        "patch_type": "insert",
+        "next_line_no": 177,
+        "is_extra_hunk": true
+    },
+    "10": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "from_line_no": 178,
+        "to_line_no": 184,
+        "replaced_with": "                pos += encodeByte(b, !printable.get(b), buffer);\n",
+        "replaced": "        for (byte c : bytes) {\n            int b = c;\n            if (b < 0) {\n                b = 256 + b;\n            }\n            if (printable.get(b)) {\n                buffer.write(b);\n",
+        "patch_type": "replace",
+        "next_line_no": 185,
+        "is_extra_hunk": true
+    },
+    "11": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "                encodeByte(b, !printable.get(b) || isWhitespace(b), buffer);\n",
+        "patch_type": "insert",
+        "next_line_no": 187
+    },
+    "12": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "from_line_no": 189,
+        "to_line_no": 189,
+        "replaced_with": "                buffer.write(ESCAPE_CHAR);\n                buffer.write(CR);\n                buffer.write(LF);\n                pos = 1;\n",
+        "replaced": "                encodeQuotedPrintable(b, buffer);\n",
+        "patch_type": "replace",
+        "next_line_no": 190,
+        "is_extra_hunk": true
+    },
+    "13": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "        int b = getUnsignedOctet(bytes.length - 3, bytes);\n        boolean encode = !printable.get(b) || (isWhitespace(b) && pos > SAFE_LENGTH - 5);\n        pos += encodeByte(b, encode, buffer);\n",
+        "patch_type": "insert",
+        "next_line_no": 195
+    },
+    "14": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "        if (pos > SAFE_LENGTH - 2) {\n            buffer.write(ESCAPE_CHAR);\n            buffer.write(CR);\n            buffer.write(LF);\n        }\n        for (int i = bytes.length - 2; i < bytes.length; i++) {\n            b = getUnsignedOctet(i, bytes);\n",
+        "patch_type": "insert",
+        "next_line_no": 199,
+        "is_extra_hunk": true
+    },
+    "15": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "replaced_with": "            encode = !printable.get(b) || (i > bytes.length - 2 && isWhitespace(b));\n            encodeByte(b, encode, buffer);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 200,
+        "is_extra_hunk": true
+    },
+    "16": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "from_line_no": 229,
+        "to_line_no": 229,
+        "replaced_with": "                    if (bytes[++i] == CR) {\n                        continue;\n                    }\n                    int u = Utils.digit16(bytes[i]);\n",
+        "replaced": "                    int u = Utils.digit16(bytes[++i]);\n",
+        "patch_type": "replace",
+        "next_line_no": 230
+    },
+    "17": {
+        "file_name": "src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+        "from_line_no": 235,
+        "to_line_no": 235,
+        "replaced_with": "            } else if (b != CR && b != LF) {\n",
+        "replaced": "            } else {\n",
+        "patch_type": "replace",
+        "next_line_no": 236
+    },
+    "num_of_hunks_ci": 9
+}

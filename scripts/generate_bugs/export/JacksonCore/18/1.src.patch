@@ -1,0 +1,40 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java",
+            "replaced_with": "    protected final static int MAX_BIG_DECIMAL_SCALE = 9999;\n",
+            "patch_type": "insert",
+            "next_line_no": 53
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java",
+            "replaced_with": "        if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {\n",
+            "patch_type": "insert",
+            "next_line_no": 434
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java",
+            "replaced_with": "            int scale = value.scale();\n            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {\n                _reportError(String.format(\n\"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]\",\nscale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));\n            }\n            return value.toPlainString();\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 435
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "from_line_no": 910,
+            "to_line_no": 913,
+            "replaced_with": "            _writeQuotedRaw(_asString(value));\n",
+            "replaced": "            String raw = Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features) ? value.toPlainString() : value.toString();\n            _writeQuotedRaw(raw);\n        } else if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {\n            writeRaw(value.toPlainString());\n",
+            "patch_type": "replace",
+            "next_line_no": 914
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java",
+            "from_line_no": 687,
+            "to_line_no": 690,
+            "replaced_with": "            _writeQuotedRaw(_asString(value));\n",
+            "replaced": "            String raw = isEnabled(Feature.WRITE_BIGDECIMAL_AS_PLAIN) ? value.toPlainString() : value.toString();\n            _writeQuotedRaw(raw);\n        } else if (isEnabled(Feature.WRITE_BIGDECIMAL_AS_PLAIN)) {\n            writeRaw(value.toPlainString());\n",
+            "patch_type": "replace",
+            "next_line_no": 691
+        }
+    ]
+}

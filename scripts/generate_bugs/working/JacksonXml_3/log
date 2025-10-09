@@ -1,0 +1,307 @@
+---
+Begin generate bug_id: JacksonXml_3
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonXml_3
+Try to checkout JacksonXml_3
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/dataformat/xml/deser/FromXmlParser.java
+trying to replace old failing tests
+edit: replace from 30 range 25 at src/test/java/com/fasterxml/jackson/dataformat/xml/stream/XmlParserNextXxxTest.java
+to
+    public void testXmlAttributesWithNextTextValue$catena_0() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        assertToken(JsonToken.START_OBJECT, xp.nextToken());                                      /***** ORIGINAL ASSERTION IS HERE *****/ // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_1() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                         /***** ORIGINAL ASSERTION IS HERE *****/ // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_2() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        assertEquals("max", xp.getCurrentName());                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_3() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals("7", xp.nextTextValue());                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_4() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                      /***** ORIGINAL ASSERTION IS HERE *****/ // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_5() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        assertEquals("offset", xp.getCurrentName());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_6() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals("offset", xp.getText());                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_7() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals("9", xp.nextTextValue());                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_8() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals("9", xp.getText());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.END_OBJECT, xp.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){} // </data>
+        xp.close();
+    }     public void testXmlAttributesWithNextTextValue$catena_9() throws Exception
+    {
+        final String XML = "<data max=\"7\" offset=\"9\"/>";
+
+        FromXmlParser xp = (FromXmlParser) _xmlFactory.createParser(new StringReader(XML));
+
+        // First: verify handling without forcing array handling:
+        try{ assertToken(JsonToken.START_OBJECT, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <data>
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){} // <max>
+        try{ assertEquals("max", xp.getCurrentName());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("7", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, xp.nextToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){} // <offset>
+        try{ assertEquals("offset", xp.getCurrentName());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("offset", xp.getText());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.nextTextValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("9", xp.getText());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.END_OBJECT, xp.nextToken());                                       /***** ORIGINAL ASSERTION IS HERE *****/ // </data>
+        xp.close();
+    }
+trace file: src/test/java/com/fasterxml/jackson/dataformat/xml/stream/XmlParserNextXxxTest.java
+new test num: 10
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 45.32 seconds
+Failing tests: 2
+	com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_3
+	com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_7
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 671 with range 1 to
+            return (_currText = _xmlTokens.getText());
+
+patches are written to file
+running tests...
+used time: Finished in 39.14 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_7
+com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_3
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+delete from 669 with range 1
+patches are written to file
+running tests...
+used time: Finished in 35.90 seconds
+Failing tests: 3
+	com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_3
+	com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_7
+	com.fasterxml.jackson.dataformat.xml.stream.XmlParserNextXxxTest::testXmlAttributesWithNextTextValue$catena_8
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+delete from 669 with range 1
+try to fix hunk: 1
+replace from 671 with range 1 to
+            return (_currText = _xmlTokens.getText());
+
+patches are written to file
+running tests...
+used time: Finished in 32.65 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,356 @@
+---
+Begin generate bug_id: JacksonDatabind_100
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_100
+Try to checkout JacksonDatabind_100
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java
+trying to replace old failing tests
+edit: replace from 155 range 42 at src/test/java/com/fasterxml/jackson/databind/node/TestConversions.java
+to
+    public void testBase64Text$catena_0() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());             /***** ORIGINAL ASSERTION IS HERE *****/
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_1() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                assertNotNull(data);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_2() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                assertArrayEquals(data, input);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_3() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_4() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());             /***** ORIGINAL ASSERTION IS HERE *****/
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_5() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                assertNotNull(data);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+                p.close();
+            }
+        }
+    }     public void testBase64Text$catena_6() throws Exception
+    {
+        // let's actually iterate over sets of encoding modes, lengths
+        
+        final int[] LENS = { 1, 2, 3, 4, 7, 9, 32, 33, 34, 35 };
+        final Base64Variant[] VARIANTS = {
+                Base64Variants.MIME,
+                Base64Variants.MIME_NO_LINEFEEDS,
+                Base64Variants.MODIFIED_FOR_URL,
+                Base64Variants.PEM
+        };
+
+        for (int len : LENS) {
+            byte[] input = new byte[len];
+            for (int i = 0; i < input.length; ++i) {
+                input[i] = (byte) i;
+            }
+            for (Base64Variant variant : VARIANTS) {
+                TextNode n = new TextNode(variant.encode(input));
+                byte[] data = null;
+                try {
+                    data = n.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try{ assertArrayEquals(data, input);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+                // 15-Aug-2018, tatu: [databind#2096] requires another test
+                JsonParser p = new TreeTraversingParser(n);
+                try{ assertEquals(JsonToken.VALUE_STRING, p.nextToken());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                try {
+                    data = p.getBinaryValue(variant);
+                } catch (Exception e) {
+                    try{ fail("Failed (variant "+variant+", data length "+len+"): "+e.getMessage());        }catch(Throwable __SHOULD_BE_IGNORED){}
+                }
+                try{ assertNotNull(data);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+                assertArrayEquals(data, input);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+                p.close();
+            }
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/node/TestConversions.java
+new test num: 7
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 277.36 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testBase64Text$catena_4
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 373 with             return n.binaryValue();
+
+patches are written to file
+running tests...
+used time: Finished in 275.84 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testBase64Text$catena_4
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 363 with range 9 to
+            if (n instanceof TextNode) {
+                return ((TextNode) n).getBinaryValue(b64variant);
+
+patches are written to file
+running tests...
+used time: Finished in 298.88 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testBinaryNode
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testBinaryPojo
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 363 with range 9 to
+            if (n instanceof TextNode) {
+                return ((TextNode) n).getBinaryValue(b64variant);
+
+try to fix hunk: 1
+insert before 373 with             return n.binaryValue();
+
+patches are written to file
+running tests...
+used time: Finished in 262.93 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.node.TestConversions::testBase64Text$catena_4']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.node.TestConversions::testBase64Text$catena_4
+Save found bug
+processed: 11
+Find 1 new bugs

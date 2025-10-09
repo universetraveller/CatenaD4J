@@ -1,0 +1,563 @@
+---
+Begin generate bug_id: JacksonDatabind_36
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_36
+Try to checkout JacksonDatabind_36
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java
+trying to replace old failing tests
+edit: replace from 19 range 39 at src/test/java/com/fasterxml/jackson/databind/TestStdDateFormat.java
+to
+    public void testLenient$catena_0() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        assertTrue(f.isLenient());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_1() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        assertTrue(f2.isLenient());                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_2() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        assertFalse(f2.isLenient());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_3() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        assertTrue(f2.isLenient());                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_4() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        assertFalse(f2.isLenient());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_5() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        assertFalse(f3.isLenient());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_6() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        assertNotNull(dt);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_7() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_8() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            verifyException(e, "can not parse date");                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLenient$catena_9() throws Exception
+    {
+        StdDateFormat f = StdDateFormat.instance;
+
+        // default should be lenient
+        try{ assertTrue(f.isLenient());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        StdDateFormat f2 = f.clone();
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        f2.setLenient(true);
+        try{ assertTrue(f2.isLenient());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and for testing, finally, leave as non-lenient
+        f2.setLenient(false);
+        try{ assertFalse(f2.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        StdDateFormat f3 = f2.clone();
+        try{ assertFalse(f3.isLenient());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // first, legal dates are... legal
+        Date dt = f3.parse("2015-11-30");
+        try{ assertNotNull(dt);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but as importantly, when not lenient, do not allow
+        try {
+            f3.parse("2015-11-32");
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ParseException e) {
+            try{ verifyException(e, "can not parse date");                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // ... yet, with lenient, do allow
+        f3.setLenient(true);
+        dt = f3.parse("2015-11-32");
+        assertNotNull(dt);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/TestStdDateFormat.java
+new test num: 10
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 158.15 seconds
+Failing tests: 10
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_0
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_1
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_2
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_3
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_4
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_5
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_6
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_7
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_8
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_9
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 557 with         if (lenient != null) {
+            df.setLenient(lenient.booleanValue());
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 190.81 seconds
+Failing tests: 10
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_0
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_1
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_2
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_3
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_4
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_5
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_6
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_7
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_8
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_9
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 251 with             _clearFormats();
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 250 with     @Override // since 2.7
+    public void setLenient(boolean enabled) {
+        Boolean newValue = enabled;
+        if (_lenient != newValue) {
+            _lenient = newValue;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 251 with             _clearFormats();
+        }
+    }
+
+try to fix hunk: 2
+insert before 557 with         if (lenient != null) {
+            df.setLenient(lenient.booleanValue());
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 250 with     @Override // since 2.7
+    public void setLenient(boolean enabled) {
+        Boolean newValue = enabled;
+        if (_lenient != newValue) {
+            _lenient = newValue;
+
+try to fix hunk: 2
+insert before 557 with         if (lenient != null) {
+            df.setLenient(lenient.booleanValue());
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 250 with     @Override // since 2.7
+    public void setLenient(boolean enabled) {
+        Boolean newValue = enabled;
+        if (_lenient != newValue) {
+            _lenient = newValue;
+
+try to fix hunk: 1
+insert before 251 with             _clearFormats();
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 169.07 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_7
+Can independently fix ['com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_3', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_5', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_2', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_1', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_8', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_0', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_6', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_4', 'com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_9']
+select new bug
+Pattern: 110
+new failing tests:
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_3
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_5
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_2
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_1
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_8
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_0
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_6
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_4
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_9
+Save found bug
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 250 with     @Override // since 2.7
+    public void setLenient(boolean enabled) {
+        Boolean newValue = enabled;
+        if (_lenient != newValue) {
+            _lenient = newValue;
+
+try to fix hunk: 1
+insert before 251 with             _clearFormats();
+        }
+    }
+
+try to fix hunk: 2
+insert before 557 with         if (lenient != null) {
+            df.setLenient(lenient.booleanValue());
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 184.55 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_7']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.TestStdDateFormat::testLenient$catena_7
+Save found bug
+processed: 111
+Find 2 new bugs

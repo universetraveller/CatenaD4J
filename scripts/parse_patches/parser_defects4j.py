@@ -1,5 +1,6 @@
 import unidiff
 import json
+from types import SimpleNamespace
 
 HEAD_OF_FILENAME = 2
 INSERT = 0
@@ -94,6 +95,38 @@ class Parser:
                 print('Line: {}'.format(line.value))
                 continue
             temp[idx].append(line)
+
+        # if the revision extends to the end of the file
+        ori = temp[0]
+        edit = temp[1]
+        should_add_edition = False
+        line_no_bias = 0
+        if ori or edit:
+            # judge whether to add the edition
+            if not ori or not edit:
+                should_add_edition = True
+            else:
+                ori_last_line = ori[-1].value
+                edit_last_line = edit[-1].value
+                
+                # if the revision is not like the following format (exactly three lines), then add the revision:
+                # -}
+                # \ No newline at end of file
+                # +}
+                if not (ori_last_line == edit_last_line and len(ori) == len(edit) == 1):
+                    should_add_edition = True
+                    # remove meaningless edition (suppose it only happens at the end of the file)
+                    if ori_last_line == edit_last_line:
+                        line_no_bias = -1
+                        temp[0].pop()
+                        temp[1].pop()
+
+            if should_add_edition:
+                src_line_no = max(hunk.source_start + hunk.source_length + line_no_bias, 1)
+                tgt_line_no = max(hunk.target_start + hunk.target_length + line_no_bias, 1)
+                dummy_lines = SimpleNamespace(source_line_no=src_line_no, target_line_no=tgt_line_no)
+                edits.append(process_now(temp, dummy_lines))
+        
         return edits
     def dump_d4j_patch(self):
         self.d4j_patch_to_map()

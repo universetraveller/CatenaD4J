@@ -1,0 +1,27 @@
+{
+    "num_of_hunks": 3,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+        "replaced_with": "            Object defaultBean;\n",
+        "patch_type": "insert",
+        "next_line_no": 152
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+        "from_line_no": 157,
+        "to_line_no": 157,
+        "replaced_with": "            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {\n",
+        "replaced": "            if (_useRealPropertyDefaults) {\n",
+        "patch_type": "replace",
+        "next_line_no": 158
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java",
+        "from_line_no": 162,
+        "to_line_no": 162,
+        "replaced_with": "                try {\n                    valueToSuppress = am.getValue(defaultBean);\n                } catch (Exception e) {\n                    _throwWrapped(e, propDef.getName(), defaultBean);\n                }\n",
+        "replaced": "                valueToSuppress = getPropertyDefaultValue(propDef.getName(), am, actualType);\n",
+        "patch_type": "replace",
+        "next_line_no": 163
+    }
+}

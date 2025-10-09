@@ -1,0 +1,11 @@
+{
+    "com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling": {
+        "begin_line_no": 236,
+        "end_line_no": 249,
+        "file_path": "src/test/java/com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java",
+        "to": [
+            "    public void testWeirdStringHandling$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        try{ assertEquals(SingleValuedEnum.A, result);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        assertNull(result2);                                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }",
+            "    public void testWeirdStringHandling$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        assertEquals(SingleValuedEnum.A, result);                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        try{ assertNull(result2);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }"
+        ]
+    }
+}

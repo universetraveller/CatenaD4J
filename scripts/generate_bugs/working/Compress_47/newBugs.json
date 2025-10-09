@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java",
+            "from_line_no": 415,
+            "to_line_no": 415,
+            "replaced_with": "                && supportsDataDescriptorFor(ze)\n                && supportsCompressedSizeFor(ze);\n",
+            "replaced": "                && supportsDataDescriptorFor(ze);\n",
+            "patch_type": "replace",
+            "next_line_no": 416
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java",
+            "replaced_with": "        if (!supportsCompressedSizeFor(current.entry)) {\n            throw new UnsupportedZipFeatureException(UnsupportedZipFeatureException.Feature.UNKNOWN_COMPRESSED_SIZE,\n                    current.entry);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 440
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java",
+            "replaced_with": "    private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {\n        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN\n            || entry.getMethod() == ZipEntry.DEFLATED\n            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()\n            || (entry.getGeneralPurposeBit().usesDataDescriptor()\n                && allowStoredEntriesWithDataDescriptor\n                && entry.getMethod() == ZipEntry.STORED);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 809
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown"
+        ],
+        "org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java",
+            "Instance": "Begin: Pos(329, 5)\nEnd: Pos(341, 5)\nSource: /tmp/c4j/Compress_47/src/test/java//org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java\nName: properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown\nChilds: [StatementAssertion<Begin: Pos(335, 13), End: Pos(335, 48)>,\nStatementAssertion<Begin: Pos(337, 13), End: Pos(337, 48)>,\nStatementAssertion<Begin: Pos(339, 13), End: Pos(339, 49)>,\n]",
+            "source": "/tmp/c4j/Compress_47/src/test/java//org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java",
+            "name": "properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown",
+            "begin": "Pos(329, 5)",
+            "end": "Pos(341, 5)",
+            "begin_line_no": 329,
+            "end_line_no": 341,
+            "child": [
+                "Begin: Pos(335, 13)\nEnd: Pos(335, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(337, 13)\nEnd: Pos(337, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(339, 13)\nEnd: Pos(339, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_0() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_1() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            assertFalse(zis.canReadEntryData(e));                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_0() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_1() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "2": "    @Test\n    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2() throws Exception {\n        // we never read any data\n        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {\n            ZipArchiveEntry e = new ZipArchiveEntry(\"test\");\n            e.setMethod(ZipMethod.DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());\n            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n            e.setMethod(ZipMethod.BZIP2.getCode());\n            assertFalse(zis.canReadEntryData(e));                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "101": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2"
+        ]
+    }
+}

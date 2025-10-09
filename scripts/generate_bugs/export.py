@@ -3,12 +3,29 @@ import os
 import json
 import log_parser
 import sys
+import re
+import argparse
+ex_bugs = ['Cli_6','Collections_20','Collections_24','Collections_1', \
+           'Collections_21','Collections_2','Collections_5','Collections_10', \
+           'Collections_6','Collections_15','Collections_7','Collections_17', \
+           'Collections_22','Collections_8','Collections_18', 'Collections_19', \
+           'Collections_4', 'Time_21', 'Cli_7', 'Cli_13', \
+           'Cli_14', 'Cli_15', 'Cli_16', 'Cli_21', \
+           'Jsoup_73', 'JacksonDatabind_67']
+assert len(ex_bugs) == 26
 def get_all_works():
     works = []
     paths = glob.glob('./working/*')
     for p in paths:
         name = p.replace('./working/', '')
-        works.append((name, p))
+        if name not in ex_bugs:
+            works.append((name, p))
+    return works
+def get_one_work(bug_id):
+    works = []
+    path = './working/{}'.format(bug_id)
+    assert os.path.exists(path)
+    works.append((bug_id, path))
     return works
 def check_log(p):
     with open(p+'/log', 'r') as f:
@@ -24,7 +41,8 @@ def moreCheck(name, l):
     c = 0
     s = ''
     for i in l:
-        if name+'()' in i:
+        reg_name = name.replace('$',r'\$')
+        if re.search(rf'{reg_name}\(\s*\)', i):
             s = i
             c+=1
     assert c == 1
@@ -37,7 +55,7 @@ _db = json.load(open('./database.json', 'r'))
 def getClz(fn, proj, bid):
     _dir = _db[f'{proj}_{bid}']['dir.src.classes']
     return fn.replace(f'{_dir}/', '').replace('.java', '').replace('/', '.')
-arg_prefix = '-'
+'''arg_prefix = '-'
 _args_alias  = {
         'm' : 'mode'
         }
@@ -73,7 +91,12 @@ def parse_args(args):
             if name == 'mode':
                 return value
             name = None
-            value = None
+            value = None'''
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', required=True)
+    parser.add_argument('-s', '--single', required=False)
+    return parser.parse_args()
 def test_mode():
     print(parse_args(sys.argv[1:]))
 def _skip_0(col, mode):
@@ -86,11 +109,16 @@ def _skip_0(col, mode):
         return True
     return False
 def main():
-    mode = parse_args(sys.argv[1:])
+    args = parse_args(sys.argv[1:])
+    mode = args.m
     print(mode)
+    single_bug_id = args.single
     if not os.path.exists('./export'):
         os.makedirs('./export')
-    tasks = get_all_works()
+    if single_bug_id is None:
+        tasks = get_all_works()
+    else:
+        tasks = get_one_work(single_bug_id)
     for t in tasks:
         name = t[0]
         if name == 'data':
@@ -191,11 +219,16 @@ def main():
                             for check_test in first_failing:
                                 if not check_test.startswith(orit):
                                     continue
-                                if check_test.split('::')[1]+'()' in one_new_test:
+                                if re.search(rf"{re.escape(check_test.split('::')[1])}\(\s*\)", one_new_test):
                                     add = False
                                     break
                                 elif check_test.split('::')[1] in one_new_test:
-                                    __inside_trunk_pos = one_new_test.find("(")
+                                    search_pos = 0
+                                    m = re.search(r'^\s*(@\s*\w+(\(.*\))?\s*)', one_new_test)
+                                    while m:
+                                        search_pos = m.end(0) + search_pos
+                                        m = re.search(r'^\s*(@\s*\w+(\(.*\))?\s*)', one_new_test[search_pos:])
+                                    __inside_trunk_pos = one_new_test.find("(", search_pos)
                                     __inside_trunk_check_pre = one_new_test[one_new_test.find(check_test.split('::')[1]):__inside_trunk_pos]
                                     assert __inside_trunk_check_pre.startswith(check_test.split('::')[1])
                                     __inside_trunk_check = __inside_trunk_check_pre.replace(check_test.split("::")[1], '')

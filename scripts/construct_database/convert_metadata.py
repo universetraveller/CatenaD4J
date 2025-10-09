@@ -2,6 +2,11 @@ import json
 import os
 import tqdm
 import sys
+ex_bugs = ['Cli_6','Collections_20','Collections_24','Collections_1', \
+           'Collections_21','Collections_2','Collections_5','Collections_10', \
+           'Collections_6','Collections_15','Collections_7','Collections_17', \
+           'Collections_22','Collections_8','Collections_18', 'Collections_19', \
+           'Collections_4', 'Time_21']
 with open(sys.argv[1], 'r') as f:
     waitlist = f.read().splitlines()
 props = ['classes.modified', 'classes.relevant', 'cp.compile', 'cp.test', 'dir.bin.classes', 'dir.bin.tests',  'dir.src.classes', 'dir.src.tests', 'tests.all', 'tests.relevant', 'tests.trigger']
@@ -15,7 +20,7 @@ if len(sys.argv) > 3:
 for i in waitlist:
     i = i.split(':')[0]
     _bench = bench + i
-    if i == 'Time_21':
+    if any(bug == i for bug in ex_bugs):
         continue
     root[i] = {}
     path = './d4j_export/{}/'.format(i)

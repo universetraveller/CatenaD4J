@@ -1,0 +1,261 @@
+---
+Begin generate bug_id: JacksonDatabind_52
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_52
+Try to checkout JacksonDatabind_52
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java
+trying to replace old failing tests
+edit: replace from 40 range 15 at src/test/java/com/fasterxml/jackson/databind/jsontype/ext/ExternalTypeId999Test.java
+to
+    public void testExternalTypeId$catena_0() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        assertNotNull(msg);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeId$catena_1() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(msg.payload);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeId$catena_2() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("foo", msg.type);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeId$catena_3() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        assertNotNull(msg);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeId$catena_4() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(msg.payload);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeId$catena_5() throws Exception
+    {
+        TypeReference<?> type = new TypeReference<Message<FooPayload>>() { };
+
+        Message<?> msg = MAPPER.readValue(aposToQuotes("{ 'type':'foo', 'payload': {} }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("foo", msg.type);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then with different order
+        msg = MAPPER.readValue(aposToQuotes("{'payload': {}, 'type':'foo' }"), type);
+        try{ assertNotNull(msg);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(msg.payload);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("foo", msg.type);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/ext/ExternalTypeId999Test.java
+new test num: 6
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 166.24 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_2
+	com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_5
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 311 with             final int len = _properties.size();
+            ExtTypedProperty[] extProps = new ExtTypedProperty[len];
+            for (int i = 0; i < len; ++i) {
+                ExtTypedProperty extProp = _properties.get(i);
+                String typePropId = extProp.getTypePropertyName();
+                SettableBeanProperty typeProp = otherProps.find(typePropId);
+                if (typeProp != null) {
+                    extProp.linkTypeProperty(typeProp);
+                }
+                extProps[i] = extProp;
+            }
+            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 310 with         public ExternalTypeHandler build(BeanPropertyMap otherProps) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 612 with range 1 to
+            _externalTypeIdHandler = extTypes.build(_beanProperties);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 310 with         public ExternalTypeHandler build(BeanPropertyMap otherProps) {
+
+try to fix hunk: 2
+insert before 311 with             final int len = _properties.size();
+            ExtTypedProperty[] extProps = new ExtTypedProperty[len];
+            for (int i = 0; i < len; ++i) {
+                ExtTypedProperty extProp = _properties.get(i);
+                String typePropId = extProp.getTypePropertyName();
+                SettableBeanProperty typeProp = otherProps.find(typePropId);
+                if (typeProp != null) {
+                    extProp.linkTypeProperty(typeProp);
+                }
+                extProps[i] = extProp;
+            }
+            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 191.31 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_2
+	com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_5
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 612 with range 1 to
+            _externalTypeIdHandler = extTypes.build(_beanProperties);
+
+try to fix hunk: 2
+insert before 311 with             final int len = _properties.size();
+            ExtTypedProperty[] extProps = new ExtTypedProperty[len];
+            for (int i = 0; i < len; ++i) {
+                ExtTypedProperty extProp = _properties.get(i);
+                String typePropId = extProp.getTypePropertyName();
+                SettableBeanProperty typeProp = otherProps.find(typePropId);
+                if (typeProp != null) {
+                    extProp.linkTypeProperty(typeProp);
+                }
+                extProps[i] = extProp;
+            }
+            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 612 with range 1 to
+            _externalTypeIdHandler = extTypes.build(_beanProperties);
+
+try to fix hunk: 1
+insert before 310 with         public ExternalTypeHandler build(BeanPropertyMap otherProps) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 612 with range 1 to
+            _externalTypeIdHandler = extTypes.build(_beanProperties);
+
+try to fix hunk: 1
+insert before 310 with         public ExternalTypeHandler build(BeanPropertyMap otherProps) {
+
+try to fix hunk: 2
+insert before 311 with             final int len = _properties.size();
+            ExtTypedProperty[] extProps = new ExtTypedProperty[len];
+            for (int i = 0; i < len; ++i) {
+                ExtTypedProperty extProp = _properties.get(i);
+                String typePropId = extProp.getTypePropertyName();
+                SettableBeanProperty typeProp = otherProps.find(typePropId);
+                if (typeProp != null) {
+                    extProp.linkTypeProperty(typeProp);
+                }
+                extProps[i] = extProp;
+            }
+            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 213.52 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_2', 'com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_5']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_2
+com.fasterxml.jackson.databind.jsontype.ext.ExternalTypeId999Test::testExternalTypeId$catena_5
+Save found bug
+processed: 111
+Find 1 new bugs

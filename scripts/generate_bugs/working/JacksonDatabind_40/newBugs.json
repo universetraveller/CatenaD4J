@@ -1,0 +1,58 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/NumberDeserializers.java",
+            "replaced_with": "        @Override\n        public T getEmptyValue(DeserializationContext ctxt) throws JsonMappingException {\n",
+            "patch_type": "insert",
+            "next_line_no": 148
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/NumberDeserializers.java",
+            "replaced_with": "            if (_primitive && ctxt.isEnabled(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)) {\n                throw ctxt.mappingException(\n                        \"Can not map Empty String as null into type %s (set DeserializationConfig.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES to 'false' to allow)\",\n                        handledType().toString());\n            }\n            return _nullValue;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 150
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives"
+        ],
+        "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/TestSimpleTypes.java",
+            "Instance": "Begin: Pos(262, 12)\nEnd: Pos(267, 5)\nSource: /tmp/c4j/JacksonDatabind_40/src/test/java//com/fasterxml/jackson/databind/deser/TestSimpleTypes.java\nName: testEmptyToNullCoercionForPrimitives\nChilds: [StatementAssertion<Begin: Pos(263, 9), End: Pos(263, 64)>,\nStatementAssertion<Begin: Pos(264, 9), End: Pos(264, 62)>,\nStatementAssertion<Begin: Pos(265, 9), End: Pos(265, 68)>,\nStatementAssertion<Begin: Pos(266, 9), End: Pos(266, 67)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_40/src/test/java//com/fasterxml/jackson/databind/deser/TestSimpleTypes.java",
+            "name": "testEmptyToNullCoercionForPrimitives",
+            "begin": "Pos(262, 12)",
+            "end": "Pos(267, 5)",
+            "begin_line_no": 262,
+            "end_line_no": 267,
+            "child": [
+                "Begin: Pos(263, 9)\nEnd: Pos(263, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(264, 9)\nEnd: Pos(264, 62)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(265, 9)\nEnd: Pos(265, 68)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(266, 9)\nEnd: Pos(266, 67)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testEmptyToNullCoercionForPrimitives$catena_0() throws Exception {\n        _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testEmptyToNullCoercionForPrimitives$catena_1() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testEmptyToNullCoercionForPrimitives$catena_2() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testEmptyToNullCoercionForPrimitives$catena_3() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testEmptyToNullCoercionForPrimitives$catena_0() throws Exception {\n        _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testEmptyToNullCoercionForPrimitives$catena_1() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testEmptyToNullCoercionForPrimitives$catena_2() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    public void testEmptyToNullCoercionForPrimitives$catena_3() throws Exception {\n        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_2",
+            "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_1",
+            "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_0",
+            "com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_3"
+        ]
+    }
+}

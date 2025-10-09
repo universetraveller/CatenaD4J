@@ -1,0 +1,4 @@
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0

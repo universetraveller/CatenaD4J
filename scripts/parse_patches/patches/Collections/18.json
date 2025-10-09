@@ -1,0 +1,39 @@
+{
+    "num_of_hunks": 4,
+    "0": {
+        "file_name": "src/main/java/org/apache/commons/collections/set/ListOrderedSet.java",
+        "from_line_no": 229,
+        "to_line_no": 230,
+        "replaced_with": "        Set<Object> collectionRetainAll = new HashSet<Object>();\n        for (Iterator<?> it = coll.iterator(); it.hasNext();) {\n            Object next = it.next();\n            if (collection.contains(next)) {\n                collectionRetainAll.add(next);\n            }\n        }\n        if (collectionRetainAll.size() == collection.size()) {\n",
+        "replaced": "        boolean result = collection.retainAll(coll);\n        if (result == false) {\n",
+        "patch_type": "replace",
+        "next_line_no": 231
+    },
+    "1": {
+        "file_name": "src/main/java/org/apache/commons/collections/set/ListOrderedSet.java",
+        "from_line_no": 233,
+        "to_line_no": 234,
+        "replaced_with": "        if (collectionRetainAll.size() == 0) {\n            clear();\n",
+        "replaced": "        if (collection.size() == 0) {\n            setOrder.clear();\n",
+        "patch_type": "replace",
+        "next_line_no": 235
+    },
+    "2": {
+        "file_name": "src/main/java/org/apache/commons/collections/set/ListOrderedSet.java",
+        "from_line_no": 236,
+        "to_line_no": 237,
+        "replaced_with": "            for (Iterator<E> it = iterator(); it.hasNext();) {\n                if (!collectionRetainAll.contains(it.next())) {\n",
+        "replaced": "            for (Iterator<E> it = setOrder.iterator(); it.hasNext();) {\n                if (!collection.contains(it.next())) {\n",
+        "patch_type": "replace",
+        "next_line_no": 238
+    },
+    "3": {
+        "file_name": "src/main/java/org/apache/commons/collections/set/ListOrderedSet.java",
+        "from_line_no": 242,
+        "to_line_no": 242,
+        "replaced_with": "        return true;\n",
+        "replaced": "        return result;\n",
+        "patch_type": "replace",
+        "next_line_no": 243
+    }
+}

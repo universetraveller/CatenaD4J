@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java",
+            "from_line_no": 415,
+            "to_line_no": 415,
+            "replaced_with": "                && supportsDataDescriptorFor(ze)\n                && supportsCompressedSizeFor(ze);\n",
+            "replaced": "                && supportsDataDescriptorFor(ze);\n",
+            "patch_type": "replace",
+            "next_line_no": 416
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java",
+            "replaced_with": "    private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {\n        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN\n            || entry.getMethod() == ZipEntry.DEFLATED\n            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()\n            || (entry.getGeneralPurposeBit().usesDataDescriptor()\n                && allowStoredEntriesWithDataDescriptor\n                && entry.getMethod() == ZipEntry.STORED);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 809
+        }
+    ]
+}

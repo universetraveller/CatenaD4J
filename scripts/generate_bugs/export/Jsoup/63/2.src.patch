@@ -1,0 +1,21 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+            "from_line_no": 227,
+            "to_line_no": 227,
+            "replaced_with": "                if (!tag.isEmpty())\n                    tokeniser.error(\"Tag cannot be self closing; not a void tag\");\n",
+            "replaced": "                if (tag.isSelfClosing()) tokeniser.acknowledgeSelfClosingFlag();\n",
+            "patch_type": "replace",
+            "next_line_no": 228
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 44,
+            "to_line_no": 47,
+            "replaced": "        if (!selfClosingFlagAcknowledged) {\n            error(\"Self closing flag not acknowledged\");\n            selfClosingFlagAcknowledged = true;\n        }\n",
+            "patch_type": "delete",
+            "next_line_no": 48
+        }
+    ]
+}

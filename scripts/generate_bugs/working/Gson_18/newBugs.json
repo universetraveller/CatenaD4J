@@ -1,0 +1,50 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/$Gson$Types.java",
+            "replaced_with": "    if (context instanceof WildcardType) {\n",
+            "patch_type": "insert",
+            "next_line_no": 278
+        },
+        "1": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/$Gson$Types.java",
+            "replaced_with": "      context = ((WildcardType)context).getUpperBounds()[0];\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 279
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.gson.functional.CollectionTest::testIssue1107"
+        ],
+        "com.google.gson.functional.CollectionTest::testIssue1107": {
+            "file_path": "gson/src/test/java/com/google/gson/functional/CollectionTest.java",
+            "Instance": "Begin: Pos(401, 10)\nEnd: Pos(413, 3)\nSource: /tmp/c4j/Gson_18/gson/src/test/java//com/google/gson/functional/CollectionTest.java\nName: testIssue1107\nChilds: [StatementAssertion<Begin: Pos(411, 5), End: Pos(411, 25)>,\nStatementAssertion<Begin: Pos(412, 5), End: Pos(412, 41)>,\n]",
+            "source": "/tmp/c4j/Gson_18/gson/src/test/java//com/google/gson/functional/CollectionTest.java",
+            "name": "testIssue1107",
+            "begin": "Pos(401, 10)",
+            "end": "Pos(413, 3)",
+            "begin_line_no": 401,
+            "end_line_no": 413,
+            "child": [
+                "Begin: Pos(411, 5)\nEnd: Pos(411, 25)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(412, 5)\nEnd: Pos(412, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testIssue1107$catena_0() {\n    String json = \"{\\n\" +\n            \"  \\\"inBig\\\": {\\n\" +\n            \"    \\\"key\\\": [\\n\" +\n            \"      { \\\"inSmall\\\": \\\"hello\\\" }\\n\" +\n            \"    ]\\n\" +\n            \"  }\\n\" +\n            \"}\";\n    BigClass bigClass = new Gson().fromJson(json, BigClass.class);\n    SmallClass small = bigClass.inBig.get(\"key\").get(0);\n    assertNotNull(small);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"hello\", small.inSmall);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testIssue1107$catena_1() {\n    String json = \"{\\n\" +\n            \"  \\\"inBig\\\": {\\n\" +\n            \"    \\\"key\\\": [\\n\" +\n            \"      { \\\"inSmall\\\": \\\"hello\\\" }\\n\" +\n            \"    ]\\n\" +\n            \"  }\\n\" +\n            \"}\";\n    BigClass bigClass = new Gson().fromJson(json, BigClass.class);\n    SmallClass small = bigClass.inBig.get(\"key\").get(0);\n    try{ assertNotNull(small);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"hello\", small.inSmall);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testIssue1107$catena_0() {\n    String json = \"{\\n\" +\n            \"  \\\"inBig\\\": {\\n\" +\n            \"    \\\"key\\\": [\\n\" +\n            \"      { \\\"inSmall\\\": \\\"hello\\\" }\\n\" +\n            \"    ]\\n\" +\n            \"  }\\n\" +\n            \"}\";\n    BigClass bigClass = new Gson().fromJson(json, BigClass.class);\n    SmallClass small = bigClass.inBig.get(\"key\").get(0);\n    assertNotNull(small);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"hello\", small.inSmall);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testIssue1107$catena_1() {\n    String json = \"{\\n\" +\n            \"  \\\"inBig\\\": {\\n\" +\n            \"    \\\"key\\\": [\\n\" +\n            \"      { \\\"inSmall\\\": \\\"hello\\\" }\\n\" +\n            \"    ]\\n\" +\n            \"  }\\n\" +\n            \"}\";\n    BigClass bigClass = new Gson().fromJson(json, BigClass.class);\n    SmallClass small = bigClass.inBig.get(\"key\").get(0);\n    try{ assertNotNull(small);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"hello\", small.inSmall);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.google.gson.functional.CollectionTest::testIssue1107$catena_1",
+            "com.google.gson.functional.CollectionTest::testIssue1107$catena_0"
+        ]
+    }
+}

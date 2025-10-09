@@ -1,0 +1,72 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/JavaType.java",
+            "replaced_with": "    public JavaType withHandlersFrom(JavaType src) {\n        JavaType type = this;\n        Object h = src.getTypeHandler();\n        if (h != _typeHandler) {\n            type = type.withTypeHandler(h);\n        }\n        h = src.getValueHandler();\n        if (h != _valueHandler) {\n            type = type.withValueHandler(h);\n        }\n        return type;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 140
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java",
+            "replaced_with": "    @Override\n    public JavaType withHandlersFrom(JavaType src) {\n        JavaType type = super.withHandlersFrom(src);\n        JavaType srcCt = src.getContentType();\n        if (srcCt != null) {\n            JavaType ct = _elementType.withHandlersFrom(srcCt);\n            if (ct != _elementType) {\n                type = type.withContentType(ct);\n            }\n        }\n        return type;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 136
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java",
+            "replaced_with": "    @Override\n    public JavaType withHandlersFrom(JavaType src) {\n        JavaType type = super.withHandlersFrom(src);\n        JavaType srcKeyType = src.getKeyType();\n",
+            "patch_type": "insert",
+            "next_line_no": 148
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java",
+            "replaced_with": "        if (type instanceof MapLikeType) {\n            if (srcKeyType != null) {\n                JavaType ct = _keyType.withHandlersFrom(srcKeyType);\n                if (ct != _keyType) {\n                    type = ((MapLikeType) type).withKeyType(ct);\n                }\n            }\n        }\n        JavaType srcCt = src.getContentType();\n        if (srcCt != null) {\n            JavaType ct = _valueType.withHandlersFrom(srcCt);\n            if (ct != _valueType) {\n                type = type.withContentType(ct);\n            }\n        }\n        return type;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 149
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+            "replaced_with": "        newType = newType.withHandlersFrom(baseType);\n",
+            "patch_type": "insert",
+            "next_line_no": 428
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384"
+        ],
+        "com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/jsontype/TypeRefinementForMapTest.java",
+            "Instance": "Begin: Pos(119, 12)\nEnd: Pos(131, 5)\nSource: /tmp/c4j/JacksonDatabind_59/src/test/java//com/fasterxml/jackson/databind/jsontype/TypeRefinementForMapTest.java\nName: testMapKeyRefinement1384\nChilds: [StatementAssertion<Begin: Pos(126, 9), End: Pos(126, 57)>,\nStatementAssertion<Begin: Pos(128, 9), End: Pos(128, 56)>,\nStatementAssertion<Begin: Pos(130, 9), End: Pos(130, 71)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_59/src/test/java//com/fasterxml/jackson/databind/jsontype/TypeRefinementForMapTest.java",
+            "name": "testMapKeyRefinement1384",
+            "begin": "Pos(119, 12)",
+            "end": "Pos(131, 5)",
+            "begin_line_no": 119,
+            "end_line_no": 131,
+            "child": [
+                "Begin: Pos(126, 9)\nEnd: Pos(126, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(128, 9)\nEnd: Pos(128, 56)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(130, 9)\nEnd: Pos(130, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testMapKeyRefinement1384$catena_0() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        assertEquals(1, testInstance.mapProperty.size());                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMapKeyRefinement1384$catena_1() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        assertEquals(CompoundKey.class, key.getClass());                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testMapKeyRefinement1384$catena_2() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testMapKeyRefinement1384$catena_0() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        assertEquals(1, testInstance.mapProperty.size());                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testMapKeyRefinement1384$catena_1() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        assertEquals(CompoundKey.class, key.getClass());                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testMapKeyRefinement1384$catena_2() throws Exception\n    {\n        final String TEST_INSTANCE_SERIALIZED =\n                \"{\\\"mapProperty\\\":[\\\"java.util.HashMap\\\",{\\\"Compound|Key\\\":\\\"Value\\\"}]}\";\n        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);\n\n        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);\n        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        Object key = testInstance.mapProperty.keySet().iterator().next();\n        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        String testInstanceSerialized = mapper.writeValueAsString(testInstance);\n        assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "10111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1",
+            "com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0",
+            "com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2"
+        ]
+    }
+}

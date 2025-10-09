@@ -1,0 +1,27 @@
+{
+    "org.jsoup.parser.AttributeParseTest::strictAttributeUnescapes": {
+        "begin_line_no": 57,
+        "end_line_no": 62,
+        "file_path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+        "to": [
+            "    @Test public void strictAttributeUnescapes$catena_0() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+            "    @Test public void strictAttributeUnescapes$catena_1() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        try{ assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+        ]
+    },
+    "org.jsoup.nodes.EntitiesTest::unescape": {
+        "begin_line_no": 25,
+        "end_line_no": 30,
+        "file_path": "src/test/java/org/jsoup/nodes/EntitiesTest.java",
+        "to": [
+            "    @Test public void unescape$catena_1() {\n        String text = \"Hello &amp;&LT&gt; &reg &angst; &angst &#960; &#960 &#x65B0; there &! &frac34; &copy; &COPY;\";\n        try{ assertEquals(\"Hello &<> \u00ae \u00c5 &angst \u03c0 \u03c0 \u65b0 there &! \u00be \u00a9 \u00a9\", Entities.unescape(text));            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(\"&0987654321; &unknown\", Entities.unescape(\"&0987654321; &unknown\"));                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+        ]
+    },
+    "org.jsoup.nodes.EntitiesTest::noSpuriousDecodes": {
+        "begin_line_no": 63,
+        "end_line_no": 66,
+        "file_path": "src/test/java/org/jsoup/nodes/EntitiesTest.java",
+        "to": [
+            ""
+        ]
+    }
+}

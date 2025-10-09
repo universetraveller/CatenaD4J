@@ -28,12 +28,18 @@ Script [export.py](./export.py) can extract bugs data from [working](./working).
 
 Argument `<mode>` could be *all* or *skip_indivisible* (if the option set, originally indivisible bugs will be excluded from the generated bugs)  
 
-The output is in the directory [export](./export) which can be copied as dataset's **projects** directory.  
+The output is in the directory [export](./export) which can be copied as dataset's **projects** directory. Each generated bug has an ID in the format `<project>_<bug_id>_<cid>`, where `<project>_<bug_id>` is the original Defects4J bug which the generated bug derives from. The data for each generated bug can be found in the files prefixed with `<cid>` under the directory `./export/<project>/<bug_id>`.   
 
 ### Validate the result
 Script [validate.py](./validate.py) can check exceptions occur in the algorithm, and the output is written into `./validation` by which we can find if the result is expected.  
 
 `python3 validate.py`  
+
+The output corresponds to the contents of file [validation](./validation). Based on the output and additional manual verification, we excluded bugs in [ignored_bug_ids](./ignored_bug_ids) from the candidates for CatenaD4J bugs. In addition, we manually excluded a generated bug with the CatenaD4J bug id `Closure_148_2` for its unstable test results after applying the patch. We also manually modified some generated bug's data for two reasons.  
+
+First, some test methods are not properly handled because of limitation of single file AST analysis and we have to exclude them manually. The corresponding modified CatenaD4J bugs include `Math_22_1`, `Math_22_2`, `Math_29_1`, `Math_29_2`, `Codec_1_1`, `Codec_1_2`, `Codec_1_3`, `Cli_30_1`, `Cli_30_2`, `JxPath_11_1`, `JxPath_11_2`, `JxPath_16_1`, `JxPath_16_2`, `JxPath_17_1` and `JxPath_17_2`.  
+
+Second, certain test classes no longer contained any test methods after adjusting them to create indivisible bugs. Running those test classes with the Defects4J backend would result in test failures, so we removed those classes. The corresponding modified CatenaD4J bugs include `Mockito_4_1`, `Mockito_4_2` and `JacksonDatabind_11_2`.  
 
 ### Generate the summary
 Script [statstics.py](./statstics/statstics.py) can generate summary for execution of the algorithm, the result is written in `./statstics/statstics2(_<project_name>).csv` in which we can find the category, hunks number etc. of the original and created bugs.  

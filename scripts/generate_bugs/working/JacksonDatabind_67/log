@@ -1,0 +1,237 @@
+---
+Begin generate bug_id: JacksonDatabind_67
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_67
+Try to checkout JacksonDatabind_67
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java
+trying to replace old failing tests
+edit: replace from 229 range 52 at src/test/java/com/fasterxml/jackson/databind/module/TestCustomEnumKeyDeserializer.java
+to
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void testCustomEnumValueAndKeyViaModifier$catena_0() throws IOException
+    {
+        SimpleModule module = new SimpleModule();
+        module.setDeserializerModifier(new BeanDeserializerModifier() {        
+            @Override
+            public JsonDeserializer<Enum> modifyEnumDeserializer(DeserializationConfig config,
+                    final JavaType type, BeanDescription beanDesc,
+                    final JsonDeserializer<?> deserializer) {
+                return new JsonDeserializer<Enum>() {
+                    @Override
+                    public Enum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        final String str = p.getValueAsString().toLowerCase();
+                        return KeyEnum.valueOf(rawClass, str);
+                    }
+                };
+            }
+
+            @Override
+            public KeyDeserializer modifyKeyDeserializer(DeserializationConfig config,
+                    final JavaType type, KeyDeserializer deserializer)
+            {
+                if (!type.isEnumType()) {
+                    return deserializer;
+                }
+                return new KeyDeserializer() {
+                    @Override
+                    public Object deserializeKey(String key, DeserializationContext ctxt)
+                            throws IOException
+                    {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        return Enum.valueOf(rawClass, key.toLowerCase());
+                    }
+                };
+            }
+        });
+        ObjectMapper mapper = new ObjectMapper()
+                .registerModule(module);
+
+        // First, enum value as is
+        KeyEnum key = mapper.readValue(quote(KeyEnum.replacements.name().toUpperCase()),
+                KeyEnum.class);
+        assertSame(KeyEnum.replacements, key);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and then as key
+        EnumMap<KeyEnum,String> map = mapper.readValue(
+                aposToQuotes("{'REPlaceMENTS':'foobar'}"),
+                new TypeReference<EnumMap<KeyEnum,String>>() { });
+        try{ assertEquals(1, map.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertSame(KeyEnum.replacements, map.keySet().iterator().next());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void testCustomEnumValueAndKeyViaModifier$catena_1() throws IOException
+    {
+        SimpleModule module = new SimpleModule();
+        module.setDeserializerModifier(new BeanDeserializerModifier() {        
+            @Override
+            public JsonDeserializer<Enum> modifyEnumDeserializer(DeserializationConfig config,
+                    final JavaType type, BeanDescription beanDesc,
+                    final JsonDeserializer<?> deserializer) {
+                return new JsonDeserializer<Enum>() {
+                    @Override
+                    public Enum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        final String str = p.getValueAsString().toLowerCase();
+                        return KeyEnum.valueOf(rawClass, str);
+                    }
+                };
+            }
+
+            @Override
+            public KeyDeserializer modifyKeyDeserializer(DeserializationConfig config,
+                    final JavaType type, KeyDeserializer deserializer)
+            {
+                if (!type.isEnumType()) {
+                    return deserializer;
+                }
+                return new KeyDeserializer() {
+                    @Override
+                    public Object deserializeKey(String key, DeserializationContext ctxt)
+                            throws IOException
+                    {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        return Enum.valueOf(rawClass, key.toLowerCase());
+                    }
+                };
+            }
+        });
+        ObjectMapper mapper = new ObjectMapper()
+                .registerModule(module);
+
+        // First, enum value as is
+        KeyEnum key = mapper.readValue(quote(KeyEnum.replacements.name().toUpperCase()),
+                KeyEnum.class);
+        try{ assertSame(KeyEnum.replacements, key);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then as key
+        EnumMap<KeyEnum,String> map = mapper.readValue(
+                aposToQuotes("{'REPlaceMENTS':'foobar'}"),
+                new TypeReference<EnumMap<KeyEnum,String>>() { });
+        assertEquals(1, map.size());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertSame(KeyEnum.replacements, map.keySet().iterator().next());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void testCustomEnumValueAndKeyViaModifier$catena_2() throws IOException
+    {
+        SimpleModule module = new SimpleModule();
+        module.setDeserializerModifier(new BeanDeserializerModifier() {        
+            @Override
+            public JsonDeserializer<Enum> modifyEnumDeserializer(DeserializationConfig config,
+                    final JavaType type, BeanDescription beanDesc,
+                    final JsonDeserializer<?> deserializer) {
+                return new JsonDeserializer<Enum>() {
+                    @Override
+                    public Enum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        final String str = p.getValueAsString().toLowerCase();
+                        return KeyEnum.valueOf(rawClass, str);
+                    }
+                };
+            }
+
+            @Override
+            public KeyDeserializer modifyKeyDeserializer(DeserializationConfig config,
+                    final JavaType type, KeyDeserializer deserializer)
+            {
+                if (!type.isEnumType()) {
+                    return deserializer;
+                }
+                return new KeyDeserializer() {
+                    @Override
+                    public Object deserializeKey(String key, DeserializationContext ctxt)
+                            throws IOException
+                    {
+                        Class<? extends Enum> rawClass = (Class<Enum<?>>) type.getRawClass();
+                        return Enum.valueOf(rawClass, key.toLowerCase());
+                    }
+                };
+            }
+        });
+        ObjectMapper mapper = new ObjectMapper()
+                .registerModule(module);
+
+        // First, enum value as is
+        KeyEnum key = mapper.readValue(quote(KeyEnum.replacements.name().toUpperCase()),
+                KeyEnum.class);
+        try{ assertSame(KeyEnum.replacements, key);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then as key
+        EnumMap<KeyEnum,String> map = mapper.readValue(
+                aposToQuotes("{'REPlaceMENTS':'foobar'}"),
+                new TypeReference<EnumMap<KeyEnum,String>>() { });
+        try{ assertEquals(1, map.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertSame(KeyEnum.replacements, map.keySet().iterator().next());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/module/TestCustomEnumKeyDeserializer.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 260.13 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_0
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_1
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+delete from 1405 with range 1
+patches are written to file
+running tests...
+used time: Finished in 229.36 seconds
+Failing tests: 9
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory
+	com.fasterxml.jackson.databind.deser.TestGenericMapDeser::testKeyViaFactory
+	com.fasterxml.jackson.databind.deser.TestGenericMapDeser::testKeyViaCtor
+	com.fasterxml.jackson.databind.deser.TestGenericMapDeser::testAnnotatedMap
+	com.fasterxml.jackson.databind.deser.TestMapDeserialization::testKeyWithCreator
+	com.fasterxml.jackson.databind.deser.TestValueAnnotations::testOverrideKeyClassValid
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_0
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_1
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_2
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 1403 with range 1 to
+                deser = _createEnumKeyDeserializer(ctxt, type);
+            } else {
+                deser = StdKeyDeserializers.findStringBasedKeyDeserializer(config, type);
+
+patches are written to file
+running tests...
+used time: Finished in 180.36 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.deser.EnumDeserializationTest::testEnumsWithJsonValue
+	com.fasterxml.jackson.databind.deser.EnumDeserializationTest::testToStringEnumMaps
+	com.fasterxml.jackson.databind.deser.EnumDeserializationTest::testExceptionFromCustomEnumKeyDeserializer
+	com.fasterxml.jackson.databind.deser.EnumDeserializationTest::testAllowUnknownEnumValuesAsMapKeysReadAsNull
+	com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testWithEnumKeys
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 1403 with range 1 to
+                deser = _createEnumKeyDeserializer(ctxt, type);
+            } else {
+                deser = StdKeyDeserializers.findStringBasedKeyDeserializer(config, type);
+
+try to fix hunk: 1
+delete from 1405 with range 1
+patches are written to file
+running tests...
+used time: Finished in 178.73 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_1', 'com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_0', 'com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_1
+com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_0
+com.fasterxml.jackson.databind.module.TestCustomEnumKeyDeserializer::testCustomEnumValueAndKeyViaModifier$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

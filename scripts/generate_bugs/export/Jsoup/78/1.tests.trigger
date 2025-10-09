@@ -1,0 +1,2 @@
+org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_1
+org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_0

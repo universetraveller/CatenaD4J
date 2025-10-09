@@ -1,0 +1,100 @@
+---
+Begin generate bug_id: Compress_18
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_18
+Try to checkout Compress_18
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java
+trying to replace old failing tests
+edit: replace from 412 range 17 at src/test/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java
+to
+    public void testWriteNonAsciiDirectoryNamePosixMode$catena_0() throws Exception {
+        String n = "f\u00f6\u00f6/";
+        TarArchiveEntry t = new TarArchiveEntry(n);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);
+        tos.setAddPaxHeadersForNonAsciiNames(true);
+        tos.putArchiveEntry(t);
+        tos.closeArchiveEntry();
+        tos.close();
+        byte[] data = bos.toByteArray();
+        TarArchiveInputStream tin =
+            new TarArchiveInputStream(new ByteArrayInputStream(data));
+        TarArchiveEntry e = tin.getNextTarEntry();
+        assertEquals(n, e.getName());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(e.isDirectory());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        tin.close();
+    }     public void testWriteNonAsciiDirectoryNamePosixMode$catena_1() throws Exception {
+        String n = "f\u00f6\u00f6/";
+        TarArchiveEntry t = new TarArchiveEntry(n);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);
+        tos.setAddPaxHeadersForNonAsciiNames(true);
+        tos.putArchiveEntry(t);
+        tos.closeArchiveEntry();
+        tos.close();
+        byte[] data = bos.toByteArray();
+        TarArchiveInputStream tin =
+            new TarArchiveInputStream(new ByteArrayInputStream(data));
+        TarArchiveEntry e = tin.getNextTarEntry();
+        try{ assertEquals(n, e.getName());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(e.isDirectory());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        tin.close();
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 14.11 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_0
+	org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 459 with             name = name.substring(0, name.length() - 1);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 457 with         while (name.endsWith("/")) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 457 with         while (name.endsWith("/")) {
+
+try to fix hunk: 1
+insert before 459 with             name = name.substring(0, name.length() - 1);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 18.20 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_1', 'org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_1
+org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

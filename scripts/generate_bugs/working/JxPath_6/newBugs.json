@@ -1,0 +1,59 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationCompare.java",
+            "from_line_no": 57,
+            "to_line_no": 57,
+            "replaced_with": "        if (l instanceof InitialContext) {\n            ((EvalContext) l).reset();\n        }\n\n        if (l instanceof SelfContext) {\n",
+            "replaced": "        if (l instanceof InitialContext || l instanceof SelfContext) {\n",
+            "patch_type": "replace",
+            "next_line_no": 58
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationCompare.java",
+            "from_line_no": 61,
+            "to_line_no": 61,
+            "replaced_with": "        if (r instanceof InitialContext) {\n            ((EvalContext) r).reset();\n        }\n\n        if (r instanceof SelfContext) {\n",
+            "replaced": "        if (r instanceof InitialContext || r instanceof SelfContext) {\n",
+            "patch_type": "replace",
+            "next_line_no": 62
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable"
+        ],
+        "org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable": {
+            "file_path": "src/test/org/apache/commons/jxpath/ri/compiler/VariableTest.java",
+            "Instance": "Begin: Pos(276, 12)\nEnd: Pos(280, 5)\nSource: /tmp/c4j/JxPath_6/src/test//org/apache/commons/jxpath/ri/compiler/VariableTest.java\nName: testIterateVariable\nChilds: [StatementAssertion<Begin: Pos(277, 9), End: Pos(277, 64)>,\nStatementAssertion<Begin: Pos(278, 9), End: Pos(278, 60)>,\nStatementAssertion<Begin: Pos(279, 9), End: Pos(279, 60)>,\n]",
+            "source": "/tmp/c4j/JxPath_6/src/test//org/apache/commons/jxpath/ri/compiler/VariableTest.java",
+            "name": "testIterateVariable",
+            "begin": "Pos(276, 12)",
+            "end": "Pos(280, 5)",
+            "begin_line_no": 276,
+            "end_line_no": 280,
+            "child": [
+                "Begin: Pos(277, 9)\nEnd: Pos(277, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(278, 9)\nEnd: Pos(278, 60)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(279, 9)\nEnd: Pos(279, 60)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testIterateVariable$catena_0() throws Exception {\n        assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIterateVariable$catena_1() throws Exception {\n        try{ assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIterateVariable$catena_2() throws Exception {\n        try{ assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testIterateVariable$catena_0() throws Exception {\n        assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testIterateVariable$catena_1() throws Exception {\n        try{ assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testIterateVariable$catena_2() throws Exception {\n        try{ assertXPathValueIterator(context, \"$d\", list(\"a\", \"b\"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertXPathValue(context, \"$d = 'a'\", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertXPathValue(context, \"$d = 'b'\", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "10": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_1",
+            "org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_2"
+        ]
+    }
+}

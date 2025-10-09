@@ -1,0 +1,115 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/PseudoTextElement.java",
+            "replaced_with": "package org.jsoup.nodes;\n\nimport org.jsoup.parser.Tag;\n\nimport java.io.IOException;\n\n/**\n * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with\n * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.\n */\npublic class PseudoTextElement extends Element {\n\n    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {\n        super(tag, baseUri, attributes);\n    }\n\n    @Override\n    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {\n    }\n\n    @Override\n    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {\n    }\n}\n",
+            "patch_type": "insert",
+            "next_line_no": 1
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "import org.jsoup.nodes.PseudoTextElement;\nimport org.jsoup.nodes.TextNode;\n",
+            "patch_type": "insert",
+            "next_line_no": 9
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "    public static final class MatchText extends Evaluator {\n",
+            "patch_type": "insert",
+            "next_line_no": 754
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "        @Override\n        public boolean matches(Element root, Element element) {\n            if (element instanceof PseudoTextElement)\n                return true;\n\n            List<TextNode> textNodes = element.textNodes();\n            for (TextNode textNode : textNodes) {\n                PseudoTextElement pel = new PseudoTextElement(\n                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());\n                textNode.replaceWith(pel);\n                pel.appendChild(textNode);\n            }\n            return false;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 755
+        },
+        "4": {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "        @Override\n        public String toString() {\n            return \":matchText\";\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 756
+        },
+        "5": {
+            "file_name": "src/main/java/org/jsoup/select/QueryParser.java",
+            "replaced_with": "        else if (tq.matchChomp(\":matchText\"))\n            evals.add(new Evaluator.MatchText());\n",
+            "patch_type": "insert",
+            "next_line_no": 203
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.select.SelectorTest::splitOnBr",
+            "org.jsoup.select.SelectorTest::textAsElements"
+        ],
+        "org.jsoup.select.SelectorTest::splitOnBr": {
+            "file_path": "src/test/java/org/jsoup/select/SelectorTest.java",
+            "Instance": "Begin: Pos(786, 5)\nEnd: Pos(795, 5)\nSource: /tmp/c4j/Jsoup_71/src/test/java//org/jsoup/select/SelectorTest.java\nName: splitOnBr\nChilds: [StatementAssertion<Begin: Pos(791, 9), End: Pos(791, 36)>,\nStatementAssertion<Begin: Pos(792, 9), End: Pos(792, 47)>,\nStatementAssertion<Begin: Pos(793, 9), End: Pos(793, 47)>,\nStatementAssertion<Begin: Pos(794, 9), End: Pos(794, 53)>,\n]",
+            "source": "/tmp/c4j/Jsoup_71/src/test/java//org/jsoup/select/SelectorTest.java",
+            "name": "splitOnBr",
+            "begin": "Pos(786, 5)",
+            "end": "Pos(795, 5)",
+            "begin_line_no": 786,
+            "end_line_no": 795,
+            "child": [
+                "Begin: Pos(791, 9)\nEnd: Pos(791, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(792, 9)\nEnd: Pos(792, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(793, 9)\nEnd: Pos(793, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(794, 9)\nEnd: Pos(794, 53)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void splitOnBr$catena_0() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        assertEquals(3, els.size());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void splitOnBr$catena_1() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"One\", els.get(0).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void splitOnBr$catena_2() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Two\", els.get(1).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void splitOnBr$catena_3() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Three\", els.get(2).toString());                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void splitOnBr$catena_0() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        assertEquals(3, els.size());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void splitOnBr$catena_1() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"One\", els.get(0).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void splitOnBr$catena_2() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Two\", els.get(1).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Three\", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    @Test public void splitOnBr$catena_3() {\n        String html = \"<div><p>One<br>Two<br>Three</p></div>\";\n        Document doc = Jsoup.parse(html);\n\n        Elements els = doc.select(\"p:matchText\");\n        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Two\", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Three\", els.get(2).toString());                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.select.SelectorTest::textAsElements": {
+            "file_path": "src/test/java/org/jsoup/select/SelectorTest.java",
+            "Instance": "Begin: Pos(770, 5)\nEnd: Pos(784, 5)\nSource: /tmp/c4j/Jsoup_71/src/test/java//org/jsoup/select/SelectorTest.java\nName: textAsElements\nChilds: [StatementAssertion<Begin: Pos(776, 9), End: Pos(776, 48)>,\nStatementAssertion<Begin: Pos(779, 9), End: Pos(779, 48)>,\nStatementAssertion<Begin: Pos(781, 9), End: Pos(781, 43)>,\nStatementAssertion<Begin: Pos(783, 9), End: Pos(783, 71)>,\n]",
+            "source": "/tmp/c4j/Jsoup_71/src/test/java//org/jsoup/select/SelectorTest.java",
+            "name": "textAsElements",
+            "begin": "Pos(770, 5)",
+            "end": "Pos(784, 5)",
+            "begin_line_no": 770,
+            "end_line_no": 784,
+            "child": [
+                "Begin: Pos(776, 9)\nEnd: Pos(776, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(779, 9)\nEnd: Pos(779, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(781, 9)\nEnd: Pos(781, 43)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(783, 9)\nEnd: Pos(783, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void textAsElements$catena_0() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        assertEquals(\"One\", one.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void textAsElements$catena_1() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        assertEquals(\"Two\", two.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void textAsElements$catena_2() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(origHtml, doc.html());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void textAsElements$catena_3() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void textAsElements$catena_0() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        assertEquals(\"One\", one.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void textAsElements$catena_1() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        assertEquals(\"Two\", two.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void textAsElements$catena_2() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(origHtml, doc.html());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    @Test public void textAsElements$catena_3() {\n        String html = \"<p>One<br>Two</p>\";\n        Document doc = Jsoup.parse(html);\n        String origHtml = doc.html();\n\n        Elements one = doc.select(\"p:matchText:first-child\");\n        try{ assertEquals(\"One\", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Elements two = doc.select(\"p:matchText:last-child\");\n        try{ assertEquals(\"Two\", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(\"Two\", doc.select(\"p:matchText + br + *\").text());                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111111": {
+        "failing_tests": [
+            "org.jsoup.select.SelectorTest::splitOnBr$catena_2",
+            "org.jsoup.select.SelectorTest::splitOnBr$catena_3",
+            "org.jsoup.select.SelectorTest::splitOnBr$catena_0",
+            "org.jsoup.select.SelectorTest::textAsElements$catena_0",
+            "org.jsoup.select.SelectorTest::textAsElements$catena_3",
+            "org.jsoup.select.SelectorTest::textAsElements$catena_2",
+            "org.jsoup.select.SelectorTest::splitOnBr$catena_1",
+            "org.jsoup.select.SelectorTest::textAsElements$catena_1"
+        ]
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/BitInputStream.java",
+            "from_line_no": 85,
+            "to_line_no": 85,
+            "replaced_with": "        while (bitsCachedSize < count && bitsCachedSize < 57) {\n",
+            "replaced": "        while (bitsCachedSize < count) {\n",
+            "patch_type": "replace",
+            "next_line_no": 86
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/BitInputStream.java",
+            "replaced_with": "        int overflowBits = 0;\n        long overflow = 0l;\n        if (bitsCachedSize < count) {\n",
+            "patch_type": "insert",
+            "next_line_no": 98
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/BitInputStream.java",
+            "replaced_with": "            int bitsToAddCount = count - bitsCachedSize;\n            overflowBits = 8 - bitsToAddCount;\n            final long nextByte = in.read();\n            if (nextByte < 0) {\n                return nextByte;\n            }\n            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {\n                long bitsToAdd = nextByte & MASKS[bitsToAddCount];\n                bitsCached |= (bitsToAdd << bitsCachedSize);\n                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];\n            } else {\n                bitsCached <<= bitsToAddCount;\n                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];\n                bitsCached |= bitsToAdd;\n                overflow = nextByte & MASKS[overflowBits];\n            }\n            bitsCachedSize = count;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 99
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/BitInputStream.java",
+            "replaced_with": "        if (overflowBits == 0) {\n",
+            "patch_type": "insert",
+            "next_line_no": 101
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/BitInputStream.java",
+            "replaced_with": "        } else {\n            bitsOut = bitsCached & MASKS[count];\n            bitsCached = overflow;\n            bitsCachedSize = overflowBits;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 108
+        }
+    ]
+}

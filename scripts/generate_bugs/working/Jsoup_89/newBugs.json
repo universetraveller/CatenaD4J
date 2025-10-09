@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attribute.java",
+            "from_line_no": 88,
+            "to_line_no": 88,
+            "replaced_with": "        String oldVal = this.val;\n",
+            "replaced": "        String oldVal = parent.get(this.key);\n",
+            "patch_type": "replace",
+            "next_line_no": 89
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attribute.java",
+            "replaced_with": "            oldVal = parent.get(this.key); // trust the container more\n",
+            "patch_type": "insert",
+            "next_line_no": 90
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute"
+        ],
+        "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute": {
+            "file_path": "src/test/java/org/jsoup/nodes/AttributeTest.java",
+            "Instance": "Begin: Pos(41, 5)\nEnd: Pos(49, 5)\nSource: /tmp/c4j/Jsoup_89/src/test/java//org/jsoup/nodes/AttributeTest.java\nName: settersOnOrphanAttribute\nChilds: [StatementAssertion<Begin: Pos(45, 9), End: Pos(45, 36)>,\nStatementAssertion<Begin: Pos(46, 9), End: Pos(46, 45)>,\nStatementAssertion<Begin: Pos(47, 9), End: Pos(47, 46)>,\nStatementAssertion<Begin: Pos(48, 9), End: Pos(48, 40)>,\n]",
+            "source": "/tmp/c4j/Jsoup_89/src/test/java//org/jsoup/nodes/AttributeTest.java",
+            "name": "settersOnOrphanAttribute",
+            "begin": "Pos(41, 5)",
+            "end": "Pos(49, 5)",
+            "begin_line_no": 41,
+            "end_line_no": 49,
+            "child": [
+                "Begin: Pos(45, 9)\nEnd: Pos(45, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(46, 9)\nEnd: Pos(46, 45)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(47, 9)\nEnd: Pos(47, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(48, 9)\nEnd: Pos(48, 40)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void settersOnOrphanAttribute$catena_0() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        assertEquals(\"two\", oldVal);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void settersOnOrphanAttribute$catena_1() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"three\", attr.getKey());                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void settersOnOrphanAttribute$catena_2() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"four\", attr.getValue());                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void settersOnOrphanAttribute$catena_3() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, attr.parent);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void settersOnOrphanAttribute$catena_0() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        assertEquals(\"two\", oldVal);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void settersOnOrphanAttribute$catena_1() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"three\", attr.getKey());                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void settersOnOrphanAttribute$catena_2() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"four\", attr.getValue());                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    @Test public void settersOnOrphanAttribute$catena_3() {\n        Attribute attr = new Attribute(\"one\", \"two\");\n        attr.setKey(\"three\");\n        String oldVal = attr.setValue(\"four\");\n        try{ assertEquals(\"two\", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"three\", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"four\", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(null, attr.parent);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "10": {
+        "failing_tests": [
+            "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_2",
+            "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_1",
+            "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_0",
+            "org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_3"
+        ]
+    }
+}

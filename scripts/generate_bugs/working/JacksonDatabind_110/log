@@ -1,0 +1,152 @@
+---
+Begin generate bug_id: JacksonDatabind_110
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_110
+Try to checkout JacksonDatabind_110
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/impl/JavaUtilCollectionsDeserializers.java
+trying to replace old failing tests
+edit: replace from 64 range 13 at src/test/java/com/fasterxml/jackson/databind/deser/jdk/UtilCollectionsTypesTest.java
+to
+   public void testUnmodifiableListFromLinkedList$catena_0() throws Exception {
+       final List<String> input = new LinkedList<>();
+       input.add("first");
+       input.add("second");
+
+       // Can't use simple "_verifyCollection" as type may change; instead use
+       // bit more flexible check:
+       Collection<?> act = _writeReadCollection(Collections.unmodifiableList(input));
+       assertEquals(input, act);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+       // and this check may be bit fragile (may need to revisit), but is good enough for now:
+       try{ assertEquals(Collections.unmodifiableList(new ArrayList<>(input)).getClass(), act.getClass());    }catch(Throwable __SHOULD_BE_IGNORED){}
+   }    public void testUnmodifiableListFromLinkedList$catena_1() throws Exception {
+       final List<String> input = new LinkedList<>();
+       input.add("first");
+       input.add("second");
+
+       // Can't use simple "_verifyCollection" as type may change; instead use
+       // bit more flexible check:
+       Collection<?> act = _writeReadCollection(Collections.unmodifiableList(input));
+       try{ assertEquals(input, act);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+       // and this check may be bit fragile (may need to revisit), but is good enough for now:
+       assertEquals(Collections.unmodifiableList(new ArrayList<>(input)).getClass(), act.getClass());         /***** ORIGINAL ASSERTION IS HERE *****/
+   }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/jdk/UtilCollectionsTypesTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 265.99 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_0
+	com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 78 with range 1 to
+        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.hasRawClass(CLASS_UNMODIFIABLE_LIST_ALIAS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 58 with         CLASS_UNMODIFIABLE_LIST_ALIAS = Collections.unmodifiableList(new LinkedList<Object>()).getClass();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 47 with     private final static Class<?> CLASS_UNMODIFIABLE_LIST_ALIAS;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 58 with         CLASS_UNMODIFIABLE_LIST_ALIAS = Collections.unmodifiableList(new LinkedList<Object>()).getClass();
+
+try to fix hunk: 2
+replace from 78 with range 1 to
+        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.hasRawClass(CLASS_UNMODIFIABLE_LIST_ALIAS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 47 with     private final static Class<?> CLASS_UNMODIFIABLE_LIST_ALIAS;
+
+try to fix hunk: 2
+replace from 78 with range 1 to
+        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.hasRawClass(CLASS_UNMODIFIABLE_LIST_ALIAS)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 47 with     private final static Class<?> CLASS_UNMODIFIABLE_LIST_ALIAS;
+
+try to fix hunk: 1
+insert before 58 with         CLASS_UNMODIFIABLE_LIST_ALIAS = Collections.unmodifiableList(new LinkedList<Object>()).getClass();
+
+patches are written to file
+running tests...
+used time: Finished in 245.47 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_0
+	com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 47 with     private final static Class<?> CLASS_UNMODIFIABLE_LIST_ALIAS;
+
+try to fix hunk: 1
+insert before 58 with         CLASS_UNMODIFIABLE_LIST_ALIAS = Collections.unmodifiableList(new LinkedList<Object>()).getClass();
+
+try to fix hunk: 2
+replace from 78 with range 1 to
+        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.hasRawClass(CLASS_UNMODIFIABLE_LIST_ALIAS)) {
+
+patches are written to file
+running tests...
+used time: Finished in 260.80 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_1', 'com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_0']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_1
+com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList$catena_0
+Save found bug
+processed: 111
+Find 1 new bugs

@@ -4,6 +4,14 @@ data = {}
 alert = print
 patches_ci = '../../parse_patches/patches_ci/'
 DEFINE_CI = 1
+ex_bugs = ['Cli_6','Collections_20','Collections_24','Collections_1', \
+           'Collections_21','Collections_2','Collections_5','Collections_10', \
+           'Collections_6','Collections_15','Collections_7','Collections_17', \
+           'Collections_22','Collections_8','Collections_18', 'Collections_19', \
+           'Collections_4', 'Time_21', 'Cli_7', 'Cli_13', \
+           'Cli_14', 'Cli_15', 'Cli_16', 'Cli_21', \
+           'Jsoup_73', 'JacksonDatabind_67']
+assert len(ex_bugs) == 26
 def new_bugs_num(log_list):
     last_line = log_list[-1]
     if not last_line.startswith('Find'):
@@ -31,7 +39,7 @@ def get_data():
     paths = glob.glob('../working/*/log')
     for i in paths:
         name = i.replace('../working/', '').replace('/log', '')
-        if name == 'Time_21':
+        if name in ex_bugs:
             continue
         with open(i, 'r') as f:
             f = f.read().splitlines()
@@ -223,7 +231,9 @@ def parse_all_statstic2_name(pname):
     return 0
 def parse_all_statstic2_all_proj():
     assert not get_data()
-    projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+    projs = ['Cli', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson', \
+         'JacksonCore', 'JacksonDatabind', 'JacksonXml', 'Jsoup', 'JxPath', \
+         'Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
     for i in projs:
         assert not parse_all_statstic2_name(i)
 def print_short_logs(num_of_line, spec=''):

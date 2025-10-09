@@ -1,0 +1,171 @@
+---
+Begin generate bug_id: JacksonDatabind_11
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_11
+Try to checkout JacksonDatabind_11
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+trying to replace old failing tests
+edit: replace from 31 range 20 at src/test/java/com/fasterxml/jackson/databind/type/TestJavaType.java
+to
+    public void testLocalType728$catena_0() throws Exception
+    {
+        TypeFactory tf = TypeFactory.defaultInstance();
+        Method m = Issue728.class.getMethod("method", CharSequence.class);
+        assertNotNull(m);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Start with return type
+        // first type-erased
+        JavaType t = tf.constructType(m.getReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // then generic
+        t = tf.constructType(m.getGenericReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then parameter type
+        t = tf.constructType(m.getParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        t = tf.constructType(m.getGenericParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocalType728$catena_1() throws Exception
+    {
+        TypeFactory tf = TypeFactory.defaultInstance();
+        Method m = Issue728.class.getMethod("method", CharSequence.class);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Start with return type
+        // first type-erased
+        JavaType t = tf.constructType(m.getReturnType());
+        assertEquals(CharSequence.class, t.getRawClass());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        // then generic
+        t = tf.constructType(m.getGenericReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then parameter type
+        t = tf.constructType(m.getParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        t = tf.constructType(m.getGenericParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocalType728$catena_2() throws Exception
+    {
+        TypeFactory tf = TypeFactory.defaultInstance();
+        Method m = Issue728.class.getMethod("method", CharSequence.class);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Start with return type
+        // first type-erased
+        JavaType t = tf.constructType(m.getReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // then generic
+        t = tf.constructType(m.getGenericReturnType());
+        assertEquals(CharSequence.class, t.getRawClass());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // then parameter type
+        t = tf.constructType(m.getParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        t = tf.constructType(m.getGenericParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocalType728$catena_3() throws Exception
+    {
+        TypeFactory tf = TypeFactory.defaultInstance();
+        Method m = Issue728.class.getMethod("method", CharSequence.class);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Start with return type
+        // first type-erased
+        JavaType t = tf.constructType(m.getReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // then generic
+        t = tf.constructType(m.getGenericReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then parameter type
+        t = tf.constructType(m.getParameterTypes()[0]);
+        assertEquals(CharSequence.class, t.getRawClass());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        t = tf.constructType(m.getGenericParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocalType728$catena_4() throws Exception
+    {
+        TypeFactory tf = TypeFactory.defaultInstance();
+        Method m = Issue728.class.getMethod("method", CharSequence.class);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Start with return type
+        // first type-erased
+        JavaType t = tf.constructType(m.getReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // then generic
+        t = tf.constructType(m.getGenericReturnType());
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then parameter type
+        t = tf.constructType(m.getParameterTypes()[0]);
+        try{ assertEquals(CharSequence.class, t.getRawClass());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        t = tf.constructType(m.getGenericParameterTypes()[0]);
+        assertEquals(CharSequence.class, t.getRawClass());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/type/TestJavaType.java
+new test num: 5
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 159.20 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_2
+	com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_4
+	com.fasterxml.jackson.databind.type.TestLocalType609::testLocalPartialType609
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 902 with range 1 to
+            JavaType actualType = context.findType(name, false);
+
+patches are written to file
+running tests...
+used time: Finished in 135.24 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_2
+	com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_4
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.databind.type.TestLocalType609::testLocalPartialType609
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 895 with range 1 to
+            context = new TypeBindings(this, (Class<?>) null);
+
+patches are written to file
+running tests...
+used time: Finished in 138.00 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.type.TestLocalType609::testLocalPartialType609
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_2
+com.fasterxml.jackson.databind.type.TestJavaType::testLocalType728$catena_4
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 895 with range 1 to
+            context = new TypeBindings(this, (Class<?>) null);
+
+try to fix hunk: 1
+replace from 902 with range 1 to
+            JavaType actualType = context.findType(name, false);
+
+patches are written to file
+running tests...
+used time: Finished in 140.57 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

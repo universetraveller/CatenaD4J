@@ -1,0 +1,110 @@
+{
+    "num_of_hunks": 14,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/JavaType.java",
+        "replaced_with": "    public final boolean isJavaLangObject() { return _class == Object.class; }\n",
+        "patch_type": "insert",
+        "next_line_no": 302
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java",
+        "from_line_no": 163,
+        "to_line_no": 163,
+        "replaced_with": "        if (ser == null && !delegateType.isJavaLangObject()) {\n",
+        "replaced": "        if (ser == null) {\n",
+        "patch_type": "replace",
+        "next_line_no": 164
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java",
+        "from_line_no": 370,
+        "to_line_no": 370,
+        "replaced_with": "                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null\n                            : provider.findValueSerializer(delegateType, prop);\n",
+        "replaced": "                    JsonSerializer<?> ser = provider.findValueSerializer(delegateType, prop);\n",
+        "patch_type": "replace",
+        "next_line_no": 371
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "            if (!delegateType.isJavaLangObject()) {\n",
+        "patch_type": "insert",
+        "next_line_no": 121
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "            }\n",
+        "patch_type": "insert",
+        "next_line_no": 122
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "from_line_no": 126,
+        "to_line_no": 127,
+        "replaced_with": "        if (delSer == _delegateSerializer && delegateType == _delegateType) {\n            return this;\n        }\n        return withDelegate(_converter, delegateType, delSer);\n",
+        "replaced": "        return (delSer == _delegateSerializer) ? this\n                : withDelegate(_converter, delegateType, delSer);\n",
+        "patch_type": "replace",
+        "next_line_no": 128
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "from_line_no": 161,
+        "to_line_no": 161,
+        "replaced_with": "        JsonSerializer<Object> ser = _delegateSerializer;\n        if (ser == null) {\n            ser = _findSerializer(delegateValue, provider);\n        }\n        ser.serialize(delegateValue, gen, provider);\n",
+        "replaced": "        _delegateSerializer.serialize(delegateValue, gen, provider);\n",
+        "patch_type": "replace",
+        "next_line_no": 162
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "from_line_no": 172,
+        "to_line_no": 172,
+        "replaced_with": "        JsonSerializer<Object> ser = _delegateSerializer;\n        if (ser == null) {\n            ser = _findSerializer(value, provider);\n        }\n        ser.serializeWithType(delegateValue, gen, provider, typeSer);\n",
+        "replaced": "        _delegateSerializer.serializeWithType(delegateValue, gen, provider, typeSer);\n",
+        "patch_type": "replace",
+        "next_line_no": 173
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "        if (_delegateSerializer == null) { // best we can do for now, too costly to look up\n            return (value == null);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 180
+    },
+    "9": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "        if (_delegateSerializer == null) { // best we can do for now, too costly to look up\n            return (value == null);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 187
+    },
+    "10": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "from_line_no": 224,
+        "to_line_no": 224,
+        "replaced_with": "        if (_delegateSerializer != null) {\n            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);\n        }\n",
+        "replaced": "        _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);\n",
+        "patch_type": "replace",
+        "next_line_no": 225
+    },
+    "11": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "    protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)\n        throws JsonMappingException\n    {\n",
+        "patch_type": "insert",
+        "next_line_no": 256
+    },
+    "12": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java",
+        "replaced_with": "        return serializers.findValueSerializer(value.getClass());\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 257,
+        "is_extra_hunk": true
+    },
+    "13": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdSerializer.java",
+        "from_line_no": 262,
+        "to_line_no": 262,
+        "replaced_with": "                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {\n",
+        "replaced": "                    if (existingSerializer == null) {\n",
+        "patch_type": "replace",
+        "next_line_no": 263
+    },
+    "num_of_hunks_ci": 13
+}

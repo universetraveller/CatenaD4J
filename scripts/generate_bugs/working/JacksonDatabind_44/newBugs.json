@@ -1,0 +1,80 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        if (!_class.isAssignableFrom(subclass)) {\n",
+            "patch_type": "insert",
+            "next_line_no": 132
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 138
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        Class<?> next = subclass.getSuperclass();\n        if (next == _class) { // straight up parent class? Great.\n            return new SimpleType(subclass, _bindings, this,\n                    _superInterfaces, _valueHandler, _typeHandler, _asStatic);\n        }\n        if ((next != null) && _class.isAssignableFrom(next)) {\n            JavaType superb = _narrow(next);\n            return new SimpleType(subclass, _bindings, superb,\n                    null, _valueHandler, _typeHandler, _asStatic);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 139
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        Class<?>[] nextI = subclass.getInterfaces();\n        for (Class<?> iface : nextI) {\n            if (iface == _class) { // directly implemented\n                return new SimpleType(subclass, _bindings, null,\n                        new JavaType[] { this }, _valueHandler, _typeHandler, _asStatic);\n            }\n            if (_class.isAssignableFrom(iface)) { // indirect, so recurse\n                JavaType superb = _narrow(iface);\n                return new SimpleType(subclass, _bindings, null,\n                        new JavaType[] { superb }, _valueHandler, _typeHandler, _asStatic);\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 140
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        throw new IllegalArgumentException(\"Internal error: Can not resolve sub-type for Class \"+subclass.getName()+\" to \"\n                +_class.getName());\n",
+            "patch_type": "insert",
+            "next_line_no": 141
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault"
+        ],
+        "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/jsontype/TestSubtypes.java",
+            "Instance": "Begin: Pos(317, 12)\nEnd: Pos(327, 5)\nSource: /tmp/c4j/JacksonDatabind_44/src/test/java//com/fasterxml/jackson/databind/jsontype/TestSubtypes.java\nName: testIssue1125WithDefault\nChilds: [StatementAssertion<Begin: Pos(321, 9), End: Pos(321, 36)>,\nStatementAssertion<Begin: Pos(322, 9), End: Pos(322, 65)>,\nStatementAssertion<Begin: Pos(324, 9), End: Pos(324, 32)>,\nStatementAssertion<Begin: Pos(325, 9), End: Pos(325, 32)>,\nStatementAssertion<Begin: Pos(326, 9), End: Pos(326, 34)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_44/src/test/java//com/fasterxml/jackson/databind/jsontype/TestSubtypes.java",
+            "name": "testIssue1125WithDefault",
+            "begin": "Pos(317, 12)",
+            "end": "Pos(327, 5)",
+            "begin_line_no": 317,
+            "end_line_no": 327,
+            "child": [
+                "Begin: Pos(321, 9)\nEnd: Pos(321, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(322, 9)\nEnd: Pos(322, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(324, 9)\nEnd: Pos(324, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(325, 9)\nEnd: Pos(325, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(326, 9)\nEnd: Pos(326, 34)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testIssue1125WithDefault$catena_0() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        assertNotNull(result.value);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIssue1125WithDefault$catena_1() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(Default1125.class, result.value.getClass());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIssue1125WithDefault$catena_2() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        assertEquals(3, impl.a);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIssue1125WithDefault$catena_3() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(5, impl.b);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testIssue1125WithDefault$catena_4() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(9, impl.def);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testIssue1125WithDefault$catena_0() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        assertNotNull(result.value);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testIssue1125WithDefault$catena_1() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(Default1125.class, result.value.getClass());                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testIssue1125WithDefault$catena_2() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        assertEquals(3, impl.a);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    public void testIssue1125WithDefault$catena_3() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(5, impl.b);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(9, impl.def);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "4": "    public void testIssue1125WithDefault$catena_4() throws Exception\n    {\n        Issue1125Wrapper result = MAPPER.readValue(aposToQuotes(\"{'value':{'a':3,'def':9,'b':5}}\"),\n        \t\tIssue1125Wrapper.class);\n        try{ assertNotNull(result.value);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(Default1125.class, result.value.getClass());                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        Default1125 impl = (Default1125) result.value;\n        try{ assertEquals(3, impl.a);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(5, impl.b);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(9, impl.def);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault$catena_1",
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault$catena_0",
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault$catena_2",
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault$catena_3",
+            "com.fasterxml.jackson.databind.jsontype.TestSubtypes::testIssue1125WithDefault$catena_4"
+        ]
+    }
+}

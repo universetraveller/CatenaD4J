@@ -1,0 +1,56 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java",
+            "from_line_no": 808,
+            "to_line_no": 809,
+            "replaced_with": "        Map<ZipArchiveEntry, OffsetEntry> origMap =\n            new LinkedHashMap<ZipArchiveEntry, OffsetEntry>(entries);\n        entries.clear();\n        for (ZipArchiveEntry ze : origMap.keySet()) {\n            OffsetEntry offsetEntry = origMap.get(ze);\n",
+            "replaced": "        for (ZipArchiveEntry ze : entries.keySet()) {\n            OffsetEntry offsetEntry = entries.get(ze);\n",
+            "patch_type": "replace",
+            "next_line_no": 810
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java",
+            "replaced_with": "            entries.put(ze, offsetEntry);\n",
+            "patch_type": "insert",
+            "next_line_no": 842
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive"
+        ],
+        "org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/zip/UTF8ZipFilesTest.java",
+            "Instance": "Begin: Pos(126, 12)\nEnd: Pos(138, 5)\nSource: /tmp/c4j/Compress_10/src/test/java//org/apache/commons/compress/archivers/zip/UTF8ZipFilesTest.java\nName: testReadWinZipArchive\nChilds: [StatementAssertion<Begin: Pos(132, 13), End: Pos(132, 41)>,\nStatementAssertion<Begin: Pos(133, 13), End: Pos(133, 51)>,\nStatementAssertion<Begin: Pos(134, 13), End: Pos(134, 46)>,\n]",
+            "source": "/tmp/c4j/Compress_10/src/test/java//org/apache/commons/compress/archivers/zip/UTF8ZipFilesTest.java",
+            "name": "testReadWinZipArchive",
+            "begin": "Pos(126, 12)",
+            "end": "Pos(138, 5)",
+            "begin_line_no": 126,
+            "end_line_no": 138,
+            "child": [
+                "Begin: Pos(132, 13)\nEnd: Pos(132, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(133, 13)\nEnd: Pos(133, 51)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(134, 13)\nEnd: Pos(134, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testReadWinZipArchive$catena_0() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            assertCanRead(zf, ASCII_TXT);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }",
+                "    public void testReadWinZipArchive$catena_1() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }",
+                "    public void testReadWinZipArchive$catena_2() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertCanRead(zf, OIL_BARREL_TXT);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testReadWinZipArchive$catena_0() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            assertCanRead(zf, ASCII_TXT);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }",
+                "1": "    public void testReadWinZipArchive$catena_1() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }",
+                "2": "    public void testReadWinZipArchive$catena_2() throws IOException, URISyntaxException {\n        URL zip = getClass().getResource(\"/utf8-winzip-test.zip\");\n        File archive = new File(new URI(zip.toString()));\n        ZipFile zf = null;\n        try {\n            zf = new ZipFile(archive, null, true);\n            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n            assertCanRead(zf, OIL_BARREL_TXT);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        } finally {\n            ZipFile.closeQuietly(zf);\n        }\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1",
+            "org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2"
+        ]
+    }
+}

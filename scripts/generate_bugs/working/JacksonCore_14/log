@@ -1,0 +1,1382 @@
+---
+Begin generate bug_id: JacksonCore_14
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_14
+Try to checkout JacksonCore_14
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+trying to replace old failing tests
+edit: replace from 9 range 83 at src/test/java/com/fasterxml/jackson/core/io/TestIOContext.java
+to
+    public void testAllocations$catena_0() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        assertNotNull(ctxt.allocReadIOBuffer());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_1() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            verifyException(e, "second time");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_2() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            verifyException(e, "smaller than original");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_3() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        assertNotNull(ctxt.allocWriteEncodingBuffer());                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_4() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            verifyException(e, "second time");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_5() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            verifyException(e, "smaller than original");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_6() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        assertNotNull(ctxt.allocTokenBuffer());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_7() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            verifyException(e, "second time");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_8() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            verifyException(e, "smaller than original");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_9() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        assertNotNull(ctxt.allocConcatBuffer());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_10() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            verifyException(e, "second time");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_11() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            verifyException(e, "smaller than original");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_12() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        assertNotNull(ctxt.allocNameCopyBuffer(100));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_13() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            verifyException(e, "second time");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }     public void testAllocations$catena_14() throws Exception
+    {
+        IOContext ctxt = new IOContext(new BufferRecycler(), "N/A", true);
+
+        /* I/O Read buffer */
+
+        // First succeeds:
+        try{ assertNotNull(ctxt.allocReadIOBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        // second fails
+        try {
+            ctxt.allocReadIOBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // Also: can't succeed with different buffer
+        try {
+            ctxt.releaseReadIOBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        // but call with null is a NOP for convenience
+        ctxt.releaseReadIOBuffer(null);
+
+        /* I/O Write buffer */
+
+        try{ assertNotNull(ctxt.allocWriteEncodingBuffer());                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocWriteEncodingBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseWriteEncodingBuffer(new byte[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseWriteEncodingBuffer(null);
+
+        /* Token (read) buffer */
+
+        try{ assertNotNull(ctxt.allocTokenBuffer());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocTokenBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseTokenBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseTokenBuffer(null);
+
+        /* Concat (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocConcatBuffer());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocConcatBuffer();
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseConcatBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            try{ verifyException(e, "smaller than original");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        ctxt.releaseConcatBuffer(null);
+
+        /* NameCopy (write?) buffer */
+
+        try{ assertNotNull(ctxt.allocNameCopyBuffer(100));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try {
+            ctxt.allocNameCopyBuffer(100);
+        } catch (IllegalStateException e) {
+            try{ verifyException(e, "second time");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        try {
+            ctxt.releaseNameCopyBuffer(new char[1]);
+        } catch (IllegalArgumentException e) {
+            verifyException(e, "smaller than original");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        ctxt.releaseNameCopyBuffer(null);
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/io/TestIOContext.java
+new test num: 15
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 23.77 seconds
+Failing tests: 5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_11
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_14
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_2
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_8
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 284 with range 1 to
+        return new IllegalArgumentException("Trying to release buffer smaller than original");
+
+patches are written to file
+running tests...
+used time: Finished in 29.83 seconds
+Failing tests: 0
+select new bug
+Pattern: 001
+new failing tests:
+com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_5
+com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_11
+com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_8
+com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_2
+com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_14
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 279 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+patches are written to file
+running tests...
+used time: Finished in 30.61 seconds
+Failing tests: 5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_11
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_14
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_2
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_8
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 274 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+patches are written to file
+running tests...
+used time: Finished in 26.49 seconds
+Failing tests: 5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_11
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_14
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_2
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_8
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 279 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+try to fix hunk: 2
+replace from 284 with range 1 to
+        return new IllegalArgumentException("Trying to release buffer smaller than original");
+
+patches are written to file
+running tests...
+used time: Finished in 23.54 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 274 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+try to fix hunk: 2
+replace from 284 with range 1 to
+        return new IllegalArgumentException("Trying to release buffer smaller than original");
+
+patches are written to file
+running tests...
+used time: Finished in 24.19 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 274 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+try to fix hunk: 1
+replace from 279 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+patches are written to file
+running tests...
+used time: Finished in 21.92 seconds
+Failing tests: 5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_11
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_14
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_2
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_5
+	com.fasterxml.jackson.core.io.TestIOContext::testAllocations$catena_8
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 274 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+try to fix hunk: 1
+replace from 279 with range 1 to
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+
+try to fix hunk: 2
+replace from 284 with range 1 to
+        return new IllegalArgumentException("Trying to release buffer smaller than original");
+
+patches are written to file
+running tests...
+used time: Finished in 20.88 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

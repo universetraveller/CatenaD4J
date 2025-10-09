@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Entities.java",
+            "replaced_with": "    public static boolean isBaseNamedEntity(String name) {\n        return base.containsKey(name);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 61
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 139,
+            "to_line_no": 147,
+            "replaced_with": "            boolean found = (Entities.isBaseNamedEntity(nameRef) || (Entities.isNamedEntity(nameRef) && looksLegit));\n",
+            "replaced": "            boolean found = false;\n            while (nameRef.length() > 0 && !found) {\n                if (Entities.isNamedEntity(nameRef))\n                    found = true;\n                else {\n                    nameRef = nameRef.substring(0, nameRef.length()-1);\n                    reader.unconsume();\n                }\n            }\n",
+            "patch_type": "replace",
+            "next_line_no": 148
+        }
+    ]
+}

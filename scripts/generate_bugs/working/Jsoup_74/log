@@ -1,0 +1,215 @@
+---
+Begin generate bug_id: Jsoup_74
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_74
+Try to checkout Jsoup_74
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/helper/StringUtil.java
+trying to replace old failing tests
+edit: replace from 1204 range 17 at src/test/java/org/jsoup/nodes/ElementTest.java
+to
+    @Test public void testNormalizesInvisiblesInText$catena_0() {
+        // return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        String escaped = "This&shy;is&#x200b;one&#x200c;long&#x200d;word";
+        String decoded = "This\u00ADis\u200Bone\u200Clong\u200Dword"; // browser would not display those soft hyphens / other chars, so we don't want them in the text
+
+        Document doc = Jsoup.parse("<p>" + escaped);
+        Element p = doc.select("p").first();
+        doc.outputSettings().charset("ascii"); // so that the outer html is easier to see with escaped invisibles
+        assertEquals("Thisisonelongword", p.text());                                  /***** ORIGINAL ASSERTION IS HERE *****/ // text is normalized
+        try{ assertEquals("<p>" + escaped + "</p>", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // html / whole text keeps &shy etc;
+        try{ assertEquals(decoded, p.textNodes().get(0).getWholeText());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element matched = doc.select("p:contains(Thisisonelongword)").first(); // really just oneloneword, no invisibles
+        try{ assertEquals("p", matched.nodeName());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(matched.is(":containsOwn(Thisisonelongword)"));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test public void testNormalizesInvisiblesInText$catena_1() {
+        // return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        String escaped = "This&shy;is&#x200b;one&#x200c;long&#x200d;word";
+        String decoded = "This\u00ADis\u200Bone\u200Clong\u200Dword"; // browser would not display those soft hyphens / other chars, so we don't want them in the text
+
+        Document doc = Jsoup.parse("<p>" + escaped);
+        Element p = doc.select("p").first();
+        doc.outputSettings().charset("ascii"); // so that the outer html is easier to see with escaped invisibles
+        try{ assertEquals("Thisisonelongword", p.text());                             }catch(Throwable __SHOULD_BE_IGNORED){} // text is normalized
+        assertEquals("<p>" + escaped + "</p>", p.outerHtml());         /***** ORIGINAL ASSERTION IS HERE *****/ // html / whole text keeps &shy etc;
+        try{ assertEquals(decoded, p.textNodes().get(0).getWholeText());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element matched = doc.select("p:contains(Thisisonelongword)").first(); // really just oneloneword, no invisibles
+        try{ assertEquals("p", matched.nodeName());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(matched.is(":containsOwn(Thisisonelongword)"));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test public void testNormalizesInvisiblesInText$catena_2() {
+        // return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        String escaped = "This&shy;is&#x200b;one&#x200c;long&#x200d;word";
+        String decoded = "This\u00ADis\u200Bone\u200Clong\u200Dword"; // browser would not display those soft hyphens / other chars, so we don't want them in the text
+
+        Document doc = Jsoup.parse("<p>" + escaped);
+        Element p = doc.select("p").first();
+        doc.outputSettings().charset("ascii"); // so that the outer html is easier to see with escaped invisibles
+        try{ assertEquals("Thisisonelongword", p.text());                             }catch(Throwable __SHOULD_BE_IGNORED){} // text is normalized
+        try{ assertEquals("<p>" + escaped + "</p>", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // html / whole text keeps &shy etc;
+        assertEquals(decoded, p.textNodes().get(0).getWholeText());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        Element matched = doc.select("p:contains(Thisisonelongword)").first(); // really just oneloneword, no invisibles
+        try{ assertEquals("p", matched.nodeName());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(matched.is(":containsOwn(Thisisonelongword)"));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test public void testNormalizesInvisiblesInText$catena_3() {
+        // return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        String escaped = "This&shy;is&#x200b;one&#x200c;long&#x200d;word";
+        String decoded = "This\u00ADis\u200Bone\u200Clong\u200Dword"; // browser would not display those soft hyphens / other chars, so we don't want them in the text
+
+        Document doc = Jsoup.parse("<p>" + escaped);
+        Element p = doc.select("p").first();
+        doc.outputSettings().charset("ascii"); // so that the outer html is easier to see with escaped invisibles
+        try{ assertEquals("Thisisonelongword", p.text());                             }catch(Throwable __SHOULD_BE_IGNORED){} // text is normalized
+        try{ assertEquals("<p>" + escaped + "</p>", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // html / whole text keeps &shy etc;
+        try{ assertEquals(decoded, p.textNodes().get(0).getWholeText());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element matched = doc.select("p:contains(Thisisonelongword)").first(); // really just oneloneword, no invisibles
+        assertEquals("p", matched.nodeName());                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(matched.is(":containsOwn(Thisisonelongword)"));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+    }     @Test public void testNormalizesInvisiblesInText$catena_4() {
+        // return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        String escaped = "This&shy;is&#x200b;one&#x200c;long&#x200d;word";
+        String decoded = "This\u00ADis\u200Bone\u200Clong\u200Dword"; // browser would not display those soft hyphens / other chars, so we don't want them in the text
+
+        Document doc = Jsoup.parse("<p>" + escaped);
+        Element p = doc.select("p").first();
+        doc.outputSettings().charset("ascii"); // so that the outer html is easier to see with escaped invisibles
+        try{ assertEquals("Thisisonelongword", p.text());                             }catch(Throwable __SHOULD_BE_IGNORED){} // text is normalized
+        try{ assertEquals("<p>" + escaped + "</p>", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // html / whole text keeps &shy etc;
+        try{ assertEquals(decoded, p.textNodes().get(0).getWholeText());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element matched = doc.select("p:contains(Thisisonelongword)").first(); // really just oneloneword, no invisibles
+        try{ assertEquals("p", matched.nodeName());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(matched.is(":containsOwn(Thisisonelongword)"));                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+    }
+trace file: src/test/java/org/jsoup/nodes/ElementTest.java
+new test num: 5
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 24.02 seconds
+Failing tests: 3
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_0
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_3
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_4
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 165 with range 1 to
+            else if (!isInvisibleChar(c)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 132 with     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 131 with     public static boolean isInvisibleChar(int c) {
+        return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 132 with     }
+
+try to fix hunk: 2
+replace from 165 with range 1 to
+            else if (!isInvisibleChar(c)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 131 with     public static boolean isInvisibleChar(int c) {
+        return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+
+try to fix hunk: 2
+replace from 165 with range 1 to
+            else if (!isInvisibleChar(c)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 131 with     public static boolean isInvisibleChar(int c) {
+        return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+
+try to fix hunk: 1
+insert before 132 with     }
+
+patches are written to file
+running tests...
+used time: Finished in 21.54 seconds
+Failing tests: 3
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_0
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_3
+	org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_4
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 131 with     public static boolean isInvisibleChar(int c) {
+        return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+
+try to fix hunk: 1
+insert before 132 with     }
+
+try to fix hunk: 2
+replace from 165 with range 1 to
+            else if (!isInvisibleChar(c)) {
+
+patches are written to file
+running tests...
+used time: Finished in 25.28 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_3', 'org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_4', 'org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_0']
+select new bug
+Pattern: 111
+new failing tests:
+org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_3
+org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_4
+org.jsoup.nodes.ElementTest::testNormalizesInvisiblesInText$catena_0
+Save found bug
+processed: 111
+Find 1 new bugs

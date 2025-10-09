@@ -1,0 +1,173 @@
+---
+Begin generate bug_id: Cli_7
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Cli_7
+Try to checkout Cli_7
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli2/builder/PatternBuilder.java
+trying to replace old failing tests
+edit: replace from 29 range 12 at src/test/org/apache/commons/cli2/bug/Bug27575Test.java
+to
+	public void testRequiredOptions$catena_0(){
+		PatternBuilder builder = new PatternBuilder();
+		builder.withPattern("hc!<");
+		Option option = builder.create();
+		assertTrue(option instanceof GroupImpl);                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+		
+		GroupImpl group = (GroupImpl)option;
+		Iterator i = group.getOptions().iterator();
+		try{ assertEquals("[-h]",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+		try{ assertEquals("-c <arg>",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+		try{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+	} 	public void testRequiredOptions$catena_1(){
+		PatternBuilder builder = new PatternBuilder();
+		builder.withPattern("hc!<");
+		Option option = builder.create();
+		try{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+		
+		GroupImpl group = (GroupImpl)option;
+		Iterator i = group.getOptions().iterator();
+		assertEquals("[-h]",i.next().toString());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+		try{ assertEquals("-c <arg>",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+		try{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+	} 	public void testRequiredOptions$catena_2(){
+		PatternBuilder builder = new PatternBuilder();
+		builder.withPattern("hc!<");
+		Option option = builder.create();
+		try{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+		
+		GroupImpl group = (GroupImpl)option;
+		Iterator i = group.getOptions().iterator();
+		try{ assertEquals("[-h]",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+		assertEquals("-c <arg>",i.next().toString());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+		try{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+	} 	public void testRequiredOptions$catena_3(){
+		PatternBuilder builder = new PatternBuilder();
+		builder.withPattern("hc!<");
+		Option option = builder.create();
+		try{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+		
+		GroupImpl group = (GroupImpl)option;
+		Iterator i = group.getOptions().iterator();
+		try{ assertEquals("[-h]",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+		try{ assertEquals("-c <arg>",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+		assertFalse(i.hasNext());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+	}
+trace file: src/test/org/apache/commons/cli2/bug/Bug27575Test.java
+new test num: 4
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 8.07 seconds
+Failing tests: 3
+	org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_1
+	org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_2
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 67 with range 1 to
+    private final Set options = new LinkedHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 21 with import java.util.LinkedHashSet;
+
+patches are written to file
+running tests...
+used time: Finished in 9.55 seconds
+Failing tests: 3
+	org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_1
+	org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_2
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+delete from 19 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 21 with import java.util.LinkedHashSet;
+
+try to fix hunk: 2
+replace from 67 with range 1 to
+    private final Set options = new LinkedHashSet();
+
+patches are written to file
+running tests...
+used time: Finished in 8.58 seconds
+Failing tests: 1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix ['org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_2', 'org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_1']
+select new bug
+Pattern: 011
+new failing tests:
+org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_2
+org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_1
+Save found bug
+processed: 011
+pattern: 101
+try to fix hunk: 0
+delete from 19 with range 1
+try to fix hunk: 2
+replace from 67 with range 1 to
+    private final Set options = new LinkedHashSet();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+delete from 19 with range 1
+try to fix hunk: 1
+insert before 21 with import java.util.LinkedHashSet;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+delete from 19 with range 1
+try to fix hunk: 1
+insert before 21 with import java.util.LinkedHashSet;
+
+try to fix hunk: 2
+replace from 67 with range 1 to
+    private final Set options = new LinkedHashSet();
+
+patches are written to file
+running tests...
+used time: Finished in 9.11 seconds
+Failing tests: 1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Could not pass after all fixed, should check
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

@@ -1,0 +1,172 @@
+---
+Begin generate bug_id: Cli_14
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Cli_14
+Try to checkout Cli_14
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli2/option/GroupImpl.java
+trying to replace old failing tests
+edit: replace from 44 range 22 at src/test/org/apache/commons/cli2/bug/BugCLI144Test.java
+to
+	public void testFileValidator$catena_0() {
+		final DefaultOptionBuilder obuilder = new DefaultOptionBuilder();
+        final ArgumentBuilder abuilder = new ArgumentBuilder();
+        final GroupBuilder gbuilder = new GroupBuilder();
+        DefaultOption fileNameOption = obuilder.withShortName("f")
+                .withLongName("file-name").withRequired(true).withDescription(
+                        "name of an existing file").withArgument(
+                        abuilder.withName("file-name").withValidator(
+                                FileValidator.getExistingFileInstance())
+                                .create()).create();
+        Group options = gbuilder.withName("options").withOption(fileNameOption)
+                .create();
+        Parser parser = new Parser();
+        parser.setHelpTrigger("--help");
+        parser.setGroup(options);
+
+        final String fileName = "src/test/org/apache/commons/cli2/bug/BugCLI144Test.java";
+        CommandLine cl = parser
+                .parseAndHelp(new String[] { "--file-name", fileName });
+        assertNotNull(cl);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wrong file", new File(fileName), cl.getValue(fileNameOption));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+	} 	public void testFileValidator$catena_1() {
+		final DefaultOptionBuilder obuilder = new DefaultOptionBuilder();
+        final ArgumentBuilder abuilder = new ArgumentBuilder();
+        final GroupBuilder gbuilder = new GroupBuilder();
+        DefaultOption fileNameOption = obuilder.withShortName("f")
+                .withLongName("file-name").withRequired(true).withDescription(
+                        "name of an existing file").withArgument(
+                        abuilder.withName("file-name").withValidator(
+                                FileValidator.getExistingFileInstance())
+                                .create()).create();
+        Group options = gbuilder.withName("options").withOption(fileNameOption)
+                .create();
+        Parser parser = new Parser();
+        parser.setHelpTrigger("--help");
+        parser.setGroup(options);
+
+        final String fileName = "src/test/org/apache/commons/cli2/bug/BugCLI144Test.java";
+        CommandLine cl = parser
+                .parseAndHelp(new String[] { "--file-name", fileName });
+        try{ assertNotNull(cl);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wrong file", new File(fileName), cl.getValue(fileNameOption));                        /***** ORIGINAL ASSERTION IS HERE *****/
+	}
+trace file: src/test/org/apache/commons/cli2/bug/BugCLI144Test.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 8.28 seconds
+Failing tests: 3
+	org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_0
+	org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 262 with             if (validate) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 261 with                 validate = true;
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+delete from 250 with range 3
+patches are written to file
+running tests...
+used time: Finished in 8.60 seconds
+Failing tests: 2
+	org.apache.commons.cli2.option.GroupTest::testValidate_RequiredChild
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Includes new failing tests, set to unusable
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 261 with                 validate = true;
+            }
+
+try to fix hunk: 2
+insert before 262 with             if (validate) {
+
+patches are written to file
+running tests...
+used time: Finished in 10.51 seconds
+Failing tests: 3
+	org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_0
+	org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+delete from 250 with range 3
+try to fix hunk: 2
+insert before 262 with             if (validate) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+delete from 250 with range 3
+try to fix hunk: 1
+insert before 261 with                 validate = true;
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+delete from 250 with range 3
+try to fix hunk: 1
+insert before 261 with                 validate = true;
+            }
+
+try to fix hunk: 2
+insert before 262 with             if (validate) {
+
+patches are written to file
+running tests...
+used time: Finished in 8.60 seconds
+Failing tests: 1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Could not pass after all fixed, should check
+Can independently fix ['org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_0', 'org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_1']
+select new bug
+Pattern: 111
+new failing tests:
+org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_0
+org.apache.commons.cli2.bug.BugCLI144Test::testFileValidator$catena_1
+Save found bug
+processed: 111
+Find 1 new bugs

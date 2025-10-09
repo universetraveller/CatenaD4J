@@ -1,28 +1,591 @@
+Cli_13 hunk 2 code       // First grab the command line values
+--------------------------------------------------
+Cli_13 hunk 3 code 
+      // Finally use an empty list
+--------------------------------------------------
+Cli_38 hunk 1 code         // check for several concatenated short options
+--------------------------------------------------
+Cli_1 hunk 3 code 
+    /** Map of unique options for ease to get complete list of options */
+//    private Set allOptions = new HashSet();
+--------------------------------------------------
+Cli_1 hunk 8 code 
+--------------------------------------------------
+Cli_1 hunk 12 code 
+--------------------------------------------------
+Cli_21 hunk 1 code 
+    /**
+     * Sets the current option. This method is called by concrete option
+     * implementations during command line processing. It enables the command
+     * line to keep track about the option that is currently processed.
+     *
+     * @param currentOption the new current option
+     */
+--------------------------------------------------
+Cli_21 hunk 5 code 
+--------------------------------------------------
+Cli_21 hunk 7 code             // this is a reentrant call
+--------------------------------------------------
+Cli_21 hunk 8 code 
+--------------------------------------------------
+Cli_37 hunk 1 code 
+        // remove leading "-" and "=value"
+--------------------------------------------------
+Cli_26 hunk 1 code             // create the option
+--------------------------------------------------
+Cli_30 hunk 2 code             
+            // if the option is part of a group, check if another option of the group has been selected
+--------------------------------------------------
+Cli_30 hunk 3 code             
+--------------------------------------------------
+Cli_30 hunk 6 code             
+            // if the option is part of a group, check if another option of the group has been selected
+--------------------------------------------------
+Cli_30 hunk 7 code             
+--------------------------------------------------
+Cli_14 hunk 2 code 
+--------------------------------------------------
+Cli_15 hunk 2 code                 // if there are more default values as specified, add them to
+                // the list.
+--------------------------------------------------
+Cli_15 hunk 3 code                     // copy the list first
+--------------------------------------------------
+Cli_33 hunk 2 code             // cannot happen
+--------------------------------------------------
+Cli_33 hunk 3 code 
+--------------------------------------------------
+Cli_16 hunk 1 code 
+    /**
+     * Sets the parent of this option. This method is called when the option is
+     * added to a group. Storing the parent of an option makes it possible to
+     * keep track of hierarchical relations between options. For instance, if an
+     * option is identified while parsing a command line, the group this option
+     * belongs to can also be added to the command line.
+     *
+     * @param parent the parent option
+     */
+--------------------------------------------------
+Cli_16 hunk 6 code 
+--------------------------------------------------
+Codec_11 hunk 1 code 
+--------------------------------------------------
+Codec_11 hunk 2 code 
+    /** Safe line length for quoted printable encoded text. */
+--------------------------------------------------
+Codec_11 hunk 6 code 
+    /**
+     * Write a byte to the buffer.
+     *
+     * @param b
+     *                  byte to write
+     * @param encode
+     *                  indicates whether the octet shall be encoded
+     * @param buffer
+     *                  the buffer to write to
+     * @return the number of bytes that have been written to the buffer
+     */
+--------------------------------------------------
+Codec_11 hunk 7 code 
+    /**
+     * Checks whether the given byte is whitespace.
+     *
+     * @param b
+     *                  byte to be checked
+     * @return <code>true</code> if the byte is either a space or tab character
+     */
+--------------------------------------------------
+Codec_11 hunk 9 code         // encode up to buffer.length - 3, the last three octets will be treated
+        // separately for simplification of note #3
+--------------------------------------------------
+Codec_11 hunk 10 code                 // up to this length it is safe to add any byte, encoded or not
+--------------------------------------------------
+Codec_11 hunk 12 code 
+                // rule #5: soft line break
+--------------------------------------------------
+Codec_11 hunk 14 code 
+        // note #3: '=' *must not* be the ultimate or penultimate character
+        // simplification: if < 6 bytes left, do a soft line break as we may need
+        //                 exactly 6 bytes space for the last 2 bytes
+--------------------------------------------------
+Codec_11 hunk 15 code             // rule #3: trailing whitespace shall be encoded
+--------------------------------------------------
+Codec_12 hunk 1 code 
+        // skip in chunks of 512 bytes
+--------------------------------------------------
+Codec_12 hunk 2 code 
+--------------------------------------------------
+Codec_12 hunk 3 code 
+    /**
+     * {@inheritDoc}
+     *
+     * @return <code>0</code> if the {@link InputStream} has reached <code>EOF</code>,
+     * <code>1</code> otherwise
+     */
+--------------------------------------------------
+Codec_12 hunk 4 code         // Note: the logic is similar to the InflaterInputStream:
+        //       as long as we have not reached EOF, indicate that there is more
+        //       data available. As we do not know for sure how much data is left,
+        //       just return 1 as a safe guess.
+
+        // use the EOF flag of the underlying codec instance
+--------------------------------------------------
+Codec_6 hunk 1 code             /*
+             Rationale for while-loop on (readLen == 0):
+             -----
+             Base64.readResults() usually returns > 0 or EOF (-1).  In the
+             rare case where it returns 0, we just keep trying.
+
+             This is essentially an undocumented contract for InputStream
+             implementors that want their code to work properly with
+             java.io.InputStreamReader, since the latter hates it when
+             InputStream.read(byte[]) returns a zero.  Unfortunately our
+             readResults() call must return 0 if a large amount of the data
+             being decoded was non-base64, so this while-loop enables proper
+             interop with InputStreamReader for that scenario.
+             -----
+             This is a fix for CODEC-101
+            */
+--------------------------------------------------
+Compress_9 hunk 1 code 
+--------------------------------------------------
+Compress_2 hunk 1 code     /*
+     * The offset where the current entry started. -1 if no entry has been
+     * called
+     */
+--------------------------------------------------
+Compress_2 hunk 3 code                     // hit EOF before previous entry was complete
+                    // TODO: throw an exception instead?
+--------------------------------------------------
+Compress_2 hunk 5 code                 // hit eof
+--------------------------------------------------
+Compress_8 hunk 4 code 
+        // Skip leading spaces
+--------------------------------------------------
+Compress_8 hunk 7 code 
+        // Must have trailing NUL or space
+--------------------------------------------------
+Compress_8 hunk 8 code         // May have additional NUL or space
+--------------------------------------------------
+Compress_8 hunk 9 code 
+--------------------------------------------------
+Compress_40 hunk 2 code             // bitsCachedSize >= 57 and left-shifting it 8 bits would cause an overflow
+--------------------------------------------------
+Compress_44 hunk 1 code 
+--------------------------------------------------
+Compress_18 hunk 1 code             // TarEntry's constructor would think this is a directory
+            // and not allow any data to be written
+--------------------------------------------------
+Csv_3 hunk 2 code             // indicate unexpected char - available from in.getLastChar()
+--------------------------------------------------
+Gson_1 hunk 1 code 
+--------------------------------------------------
+Gson_1 hunk 2 code 
+--------------------------------------------------
+Gson_1 hunk 4 code 
+--------------------------------------------------
+Gson_1 hunk 5 code       // Evaluate type on this type
+--------------------------------------------------
+Gson_1 hunk 6 code 
+--------------------------------------------------
+Gson_1 hunk 7 code 
+--------------------------------------------------
+Gson_2 hunk 1 code 
+--------------------------------------------------
+Gson_18 hunk 1 code       // wildcards are useless for resolving supertypes. As the upper bound has the same raw type, use it instead
+--------------------------------------------------
+Gson_16 hunk 1 code           // cannot reduce due to infinite recursion
+--------------------------------------------------
+JacksonCore_3 hunk 1 code         // If we have offset, need to omit that from byte offset, so:
+--------------------------------------------------
+JacksonCore_2 hunk 3 code         // caller had pushed it back, before calling; reset
+--------------------------------------------------
+JacksonCore_2 hunk 8 code         // caller had pushed it back, before calling; reset
+--------------------------------------------------
+JacksonCore_2 hunk 9 code         // TODO? Handle UTF-8 char decoding for error reporting
+--------------------------------------------------
+JacksonCore_4 hunk 1 code         // but above intended maximum, slow to increase by 25%
+--------------------------------------------------
+JacksonCore_17 hunk 1 code 
+        // If not, need segmented approach. For speed, let's also use input buffer
+        // size that is guaranteed to fit in output buffer; each char can expand to
+        // at most 3 bytes, so at most 1/3 of buffer size.
+--------------------------------------------------
+JacksonCore_17 hunk 4 code             // If this is NOT the last segment and if the last character looks like
+            // split surrogate second half, drop it
+--------------------------------------------------
+JacksonCore_15 hunk 1 code     		//if not scalar and ended successfully, then return null
+--------------------------------------------------
+JacksonCore_15 hunk 2 code     		//else if scalar, and scalar not present in obj/array and !includePath and INCLUDE_ALL matched once
+    		// then return null 
+--------------------------------------------------
+JacksonCore_18 hunk 2 code             // 24-Aug-2016, tatu: [core#315] prevent possible DoS vector
+--------------------------------------------------
+JacksonDatabind_36 hunk 1 code             // and since leniency settings may have been used:
+--------------------------------------------------
+JacksonDatabind_60 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 5 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 6 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 7 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 8 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 9 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 10 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 11 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 12 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 13 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 14 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 15 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 16 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 17 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 18 code         
+--------------------------------------------------
+JacksonDatabind_60 hunk 19 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 20 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 21 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 22 code 
+--------------------------------------------------
+JacksonDatabind_60 hunk 23 code 
+--------------------------------------------------
+JacksonDatabind_53 hunk 1 code         // safe to pass _types array without copy since it is not exposed via
+        // any access, nor modified by this class
+--------------------------------------------------
+JacksonDatabind_53 hunk 3 code 
+--------------------------------------------------
+JacksonDatabind_53 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_53 hunk 11 code         // But otherwise gets bit tricky, as we need to partially resolve the type hierarchy
+        // (hopefully passing null Class for root is ok)
+--------------------------------------------------
+JacksonDatabind_53 hunk 12 code         // Otherwise, two choices: match N first, or empty. Do latter, for now
+--------------------------------------------------
+JacksonDatabind_38 hunk 4 code         // !!! TODO: Wrong, does have supertypes
+--------------------------------------------------
+JacksonDatabind_104 hunk 1 code                 // 22-Nov-2018, tatu: Handling beyond 4-digits is not well specified wrt ISO-8601, but
+                //   it seems that plus prefix IS mandated. Padding is an open question, but since agreeement
+                //   for max length would be needed, we ewould need to limit to arbitrary length
+                //   like five digits (erroring out if beyond or padding to that as minimum).
+                //   Instead, let's just print number out as is and let decoder try to make sense of it.
+--------------------------------------------------
+JacksonDatabind_104 hunk 4 code         // Ok. First of all, BCE 1 output (given as value `1` in era BCE) needs to become
+        // "+0000", but rest (from `2` up, in that era) need minus sign.
+--------------------------------------------------
+JacksonDatabind_104 hunk 5 code         // as with CE, 4 digit variant needs padding; beyond that not (although that part is
+        // open to debate, needs agreement with receiver)
+        // But `pad4()` deals with "big" numbers now so:
+--------------------------------------------------
+JacksonDatabind_94 hunk 2 code                 // [databind#1737]; more 3rd party
+                // s.add("com.mchange.v2.c3p0.JndiRefForwardingDataSource");
+                // s.add("com.mchange.v2.c3p0.WrapperConnectionPoolDataSource");
+                // [databind#1931]; more 3rd party
+                // com.mchange.v2.c3p0.ComboPooledDataSource
+                // com.mchange.v2.c3p0.debug.AfterCloseLoggingComboPooledDataSource 
+--------------------------------------------------
+JacksonDatabind_21 hunk 2 code         // 11-Jun-2015, tatu: As per [databind#677], need to allow explicit naming.
+        //   Unfortunately can not quite use standard AnnotatedClass here (due to various
+        //   reasons, including odd representation JVM uses); has to do for now
+--------------------------------------------------
+JacksonDatabind_21 hunk 3 code             // We know that values are actually static fields with matching name so:
+--------------------------------------------------
+JacksonDatabind_21 hunk 4 code             // no such field, or access; neither which we can do much about
+--------------------------------------------------
+JacksonDatabind_43 hunk 2 code         /* 02-Apr-2015, tatu: Actually, as per [databind#742], let it be;
+         *  missing or null id is needed for some cases, such as cases where id
+         *  will be generated externally, at a later point, and is not available
+         *  quite yet. Typical use case is with DB inserts.
+         */
+        // note: no null checks (unlike usually); deserializer should fail if one found
+--------------------------------------------------
+JacksonDatabind_64 hunk 1 code 
+            // 16-Oct-2016, tatu: Note: if we can not for some reason create "default instance",
+            //    revert logic to the case of general/per-property handling, so both
+            //    type-default AND null are to be excluded.
+            //    (as per [databind#1417]
+--------------------------------------------------
+JacksonDatabind_55 hunk 3 code 
+--------------------------------------------------
+JacksonDatabind_55 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_55 hunk 5 code         
+--------------------------------------------------
+JacksonDatabind_50 hunk 4 code                     // 14-Jun-2016, tatu: As per [databind#1261], looks like we need additional
+                    //    handling of forward references here. Not exactly sure why existing
+                    //    facilities did not cover, but this does appear to solve the problem
+--------------------------------------------------
+JacksonDatabind_50 hunk 8 code 
+--------------------------------------------------
+JacksonDatabind_50 hunk 9 code 
+--------------------------------------------------
+JacksonDatabind_50 hunk 10 code 
+--------------------------------------------------
+JacksonDatabind_91 hunk 1 code             // Second: map(-like) types may have value handler for key (but not type; keys are untyped)
+--------------------------------------------------
+JacksonDatabind_9 hunk 1 code         
+--------------------------------------------------
+JacksonDatabind_2 hunk 2 code             /* 28-May-2014, tatu: Tricky choice here; if no codec, should we
+             *   err out, or just embed? For now, do latter.
+             */
+//          throw new JsonMappingException("No ObjectCodec configured for TokenBuffer, writeObject() called");
+--------------------------------------------------
+JacksonDatabind_2 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_81 hunk 1 code                         // 27-Apr-2017, tatu: [databind#1592] ignore primitive<->wrapper refinements
+--------------------------------------------------
+JacksonDatabind_81 hunk 3 code                             // 27-Apr-2017, tatu: [databind#1592] ignore primitive<->wrapper refinements
+--------------------------------------------------
+JacksonDatabind_81 hunk 5 code                            // 27-Apr-2017, tatu: [databind#1592] ignore primitive<->wrapper refinements
+--------------------------------------------------
+JacksonDatabind_81 hunk 10 code 
+--------------------------------------------------
+JacksonDatabind_8 hunk 2 code                 // otherwise only verify if neither explicitly annotated.
+--------------------------------------------------
+JacksonDatabind_8 hunk 4 code                 // [databind#667]: avoid one particular class of bogus problems
+--------------------------------------------------
+JacksonDatabind_8 hunk 5 code 
+--------------------------------------------------
+JacksonDatabind_8 hunk 7 code                 // otherwise, which one to choose?
+--------------------------------------------------
+JacksonDatabind_8 hunk 8 code                     // new type more generic, use old
+--------------------------------------------------
+JacksonDatabind_40 hunk 1 code             // [databind#1095]: Should not allow coercion from into null from Empty String
+            // either, if `null` not allowed
+--------------------------------------------------
+JacksonDatabind_4 hunk 2 code             // note: pass String.class, not String[].class, as we need element type for error info
+--------------------------------------------------
+JacksonDatabind_4 hunk 5 code             // note: pass String.class, not String[].class, as we need element type for error info
+--------------------------------------------------
+JacksonDatabind_78 hunk 1 code         // Courtesy of [https://github.com/kantega/notsoserial]:
+        // (and wrt [databind#1599]
+--------------------------------------------------
+JacksonDatabind_78 hunk 2 code 
+    /**
+     * Set of class names of types that are never to be deserialized.
+     *
+     * @since 2.8.9
+     */
+--------------------------------------------------
+JacksonDatabind_78 hunk 5 code         // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+--------------------------------------------------
+JacksonDatabind_78 hunk 6 code 
+--------------------------------------------------
+JacksonDatabind_30 hunk 6 code                 /* 10-Oct-2015, tatu: Ideally we would first determine whether underlying
+                 *   number is already decoded into a number (in which case might as well
+                 *   access as number); or is still retained as text (in which case we
+                 *   should further defer decoding that may not need BigDecimal):
+                 */
+--------------------------------------------------
+JacksonDatabind_92 hunk 1 code         // [databind#1737]; 3rd party
+--------------------------------------------------
+JacksonDatabind_89 hunk 1 code         // [databind#1737]; 3rd party
+--------------------------------------------------
+JacksonDatabind_14 hunk 2 code             // Nope: need to ask provider to resolve it
+--------------------------------------------------
+JacksonDatabind_85 hunk 3 code 
+--------------------------------------------------
+JacksonDatabind_85 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_85 hunk 5 code         // Jackson's own `StdDateFormat` is quite easy to deal with...
+--------------------------------------------------
+JacksonDatabind_85 hunk 6 code 
+        // 08-Jun-2017, tatu: Unfortunately there's no generally usable
+        //    mechanism for changing `DateFormat` instances (or even clone()ing)
+        //    So: require it be `SimpleDateFormat`; can't config other types
+--------------------------------------------------
+JacksonDatabind_85 hunk 7 code //            serializers.reportBadDefinition(handledType(), String.format(
+--------------------------------------------------
+JacksonDatabind_85 hunk 8 code             // Ugh. No way to change `Locale`, create copy; must re-crete completely:
+--------------------------------------------------
+JacksonDatabind_52 hunk 2 code             // 21-Jun-2016, tatu: as per [databind#999], may need to link type id property also
+--------------------------------------------------
+JacksonDatabind_77 hunk 2 code         // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+--------------------------------------------------
+JacksonDatabind_7 hunk 2 code         /* 28-Oct-2014, tatu: As per #592, need to support a special case of starting from
+         *    FIELD_NAME, which is taken to mean that we are missing START_OBJECT, but need
+         *    to assume one did exist.
+         */
+--------------------------------------------------
+JacksonDatabind_10 hunk 8 code                 // TODO: support '@JsonIgnoreProperties' with any setter?
+--------------------------------------------------
+JacksonDatabind_31 hunk 19 code 
+    /**
+     * Similar to {@link #_append(JsonToken,Object)} but also updates context with
+     * knowledge that a scalar value was written
+     *
+     * @since 2.6.4
+     */
+--------------------------------------------------
+JacksonDatabind_15 hunk 12 code         // NOTE: will NOT call contextualization
+--------------------------------------------------
+JacksonDatabind_59 hunk 3 code         // "withKeyType()" not part of JavaType, hence must verify:
+--------------------------------------------------
+JacksonDatabind_109 hunk 3 code     
+--------------------------------------------------
+JacksonDatabind_109 hunk 4 code 
+--------------------------------------------------
+JacksonDatabind_109 hunk 5 code 
+--------------------------------------------------
+JacksonDatabind_109 hunk 6 code                 // 24-Aug-2016, tatu: [core#315] prevent possible DoS vector, so we need this
+--------------------------------------------------
+JacksonDatabind_109 hunk 7 code                     // ... but wouldn't it be nice to trigger error via generator? Alas,
+                    // no method to do that. So we'll do...
+--------------------------------------------------
+JacksonDatabind_109 hunk 8 code 
+--------------------------------------------------
+JacksonDatabind_109 hunk 9 code             // should never be called
+--------------------------------------------------
+JacksonDatabind_109 hunk 10 code 
+        // 24-Aug-2016, tatu: [core#315] prevent possible DoS vector, so we need this
+--------------------------------------------------
+JacksonDatabind_32 hunk 2 code                 // 28-Oct-2015, tatu: [databind#989] We may also be given END_OBJECT (similar to FIELD_NAME),
+                //    if caller has advanced to the first token of Object, but for empty Object
+--------------------------------------------------
+JacksonDatabind_88 hunk 1 code                 // Probably cleaner to have a method in `TypeFactory` but can't add in patch
+--------------------------------------------------
+JacksonDatabind_44 hunk 2 code         // Otherwise, stitch together the hierarchy. First, super-class
+--------------------------------------------------
+JacksonDatabind_44 hunk 3 code         // if not found, try a super-interface
+--------------------------------------------------
+JacksonDatabind_44 hunk 4 code         // should not get here but...
+--------------------------------------------------
+JacksonDatabind_18 hunk 1 code     
+    /**
+     * State in which value read failed
+     */
+--------------------------------------------------
+JacksonDatabind_18 hunk 2 code     
+    /**
+     * State in which no recovery is needed, but "hasNextValue()" needs
+     * to be called first
+     */
+--------------------------------------------------
+JacksonDatabind_18 hunk 3 code 
+    /**
+     * State in which "hasNextValue()" has been succesfully called
+     * and deserializer can be called to fetch value
+     */
+--------------------------------------------------
+JacksonDatabind_18 hunk 5 code 
+    /**
+     * Context to resynchronize to, in case an exception is encountered
+     * but caller wants to try to read more elements.
+     */
+--------------------------------------------------
+JacksonDatabind_18 hunk 9 code                 // regardless, recovery context should be whatever context we have now,
+                // with sole exception of pointing to a start marker, in which case it's
+                // the parent
+--------------------------------------------------
+JacksonDatabind_18 hunk 14 code             // fall-through
+--------------------------------------------------
+JacksonDatabind_18 hunk 21 code 
+--------------------------------------------------
+JacksonDatabind_18 hunk 25 code         // First, a quick check to see if we might have been lucky and no re-sync needed
+--------------------------------------------------
+JacksonDatabind_18 hunk 26 code 
+--------------------------------------------------
+JacksonXml_1 hunk 1 code                     // 06-Jan-2015, tatu: as per [dataformat-xml#180], need to
+                    //    expose as empty Object, not null
+--------------------------------------------------
+JacksonXml_2 hunk 2 code             // If we have no/all-whitespace text followed by START_ELEMENT, ignore text
+--------------------------------------------------
+JacksonXml_6 hunk 1 code                 // Stax2 API only has 'full buffer' write method:
+--------------------------------------------------
+JacksonXml_6 hunk 2 code               // should we consider pretty-printing or not?
+--------------------------------------------------
+JacksonXml_6 hunk 3 code 
+--------------------------------------------------
+JacksonXml_6 hunk 4 code 
+--------------------------------------------------
+JacksonXml_6 hunk 5 code 
+--------------------------------------------------
+JacksonXml_6 hunk 6 code         // base64 encodes up to 3 bytes into a 4 bytes string
+--------------------------------------------------
+JacksonXml_6 hunk 7 code 
+        // we still have < 3 bytes in the buffer
+--------------------------------------------------
+JacksonXml_6 hunk 9 code 
+--------------------------------------------------
+Jsoup_11 hunk 3 code 
+--------------------------------------------------
+Jsoup_36 hunk 6 code                 // if our advanced charset matching fails.... we just take the default
+--------------------------------------------------
+Jsoup_3 hunk 12 code 
+--------------------------------------------------
+Jsoup_74 hunk 1 code         // zero width sp, zw non join, zw join, soft hyphen
+--------------------------------------------------
+Jsoup_91 hunk 3 code 
+    /**
+     *  Heuristic to determine if the current buffer looks like binary content. Reader will already hopefully be
+     *  decoded correctly, so a bunch of NULLs indicates a binary file
+     */
+--------------------------------------------------
+Jsoup_91 hunk 4 code 
+--------------------------------------------------
+Jsoup_91 hunk 5 code 
+--------------------------------------------------
+Jsoup_82 hunk 1 code                 // some charsets can read but not encode; switch to an encodable charset and update the meta el
+--------------------------------------------------
+Jsoup_78 hunk 3 code                 // io exception when parsing (not seen before because reading the stream as we go)
+--------------------------------------------------
+Jsoup_23 hunk 1 code 
+--------------------------------------------------
+Jsoup_30 hunk 2 code 
+--------------------------------------------------
+Jsoup_30 hunk 7 code 
+--------------------------------------------------
+Jsoup_30 hunk 8 code 
+--------------------------------------------------
+Jsoup_22 hunk 1 code 
+--------------------------------------------------
+Jsoup_22 hunk 5 code 
+--------------------------------------------------
+Jsoup_14 hunk 2 code                 // diverge from spec: got a start tag, but there's no appropriate end tag (</title>), so rather than
+                // consuming to EOF; break out here
+--------------------------------------------------
+Jsoup_56 hunk 3 code 
+--------------------------------------------------
+Jsoup_7 hunk 3 code         // ensure parented by <html>
+--------------------------------------------------
+Jsoup_71 hunk 3 code 
+--------------------------------------------------
+Jsoup_71 hunk 4 code 
+--------------------------------------------------
+JxPath_13 hunk 2 code 
+    /**
+     * Given a prefix, returns an externally registered namespace URI.
+     * 
+     * @param prefix The namespace prefix to look up
+     * @return namespace URI or null if the prefix is undefined.
+     * @since JXPath 1.3
+     */
+--------------------------------------------------
+JxPath_13 hunk 5 code 
+    /**
+     * Get the nearest prefix found that matches an externally-registered namespace. 
+     * @param namespaceURI
+     * @return String prefix if found.
+     * @since JXPath 1.3
+     */
+--------------------------------------------------
 Chart_22 hunk 3 code         
 --------------------------------------------------
 Chart_22 hunk 4 code         
---------------------------------------------------
-Lang_23 hunk 2 code 
-    /**
-     * Return the hashcode.
-     *
-     * @return the hashcode
-     */
---------------------------------------------------
-Lang_64 hunk 2 code             // ignore - should never happen
---------------------------------------------------
-Lang_64 hunk 3 code             // ignore - should never happen
---------------------------------------------------
-Lang_64 hunk 4 code             // ignore - should never happen
---------------------------------------------------
-Lang_41 hunk 1 code 
-        // Handle array encoding
---------------------------------------------------
-Lang_41 hunk 2 code             // Strip Object type encoding
---------------------------------------------------
-Lang_41 hunk 3 code 
---------------------------------------------------
-Lang_41 hunk 7 code         // Strip Object type encoding
 --------------------------------------------------
 Lang_65 hunk 1 code 
         // ----------------- Fix for LANG-59 ---------------------- START ---------------
@@ -46,17 +609,39 @@ Lang_65 hunk 5 code
 --------------------------------------------------
 Lang_37 hunk 2 code             // Check if problem is incompatible types
 --------------------------------------------------
+Lang_64 hunk 2 code             // ignore - should never happen
+--------------------------------------------------
+Lang_64 hunk 3 code             // ignore - should never happen
+--------------------------------------------------
+Lang_64 hunk 4 code             // ignore - should never happen
+--------------------------------------------------
+Lang_41 hunk 1 code 
+        // Handle array encoding
+--------------------------------------------------
+Lang_41 hunk 2 code             // Strip Object type encoding
+--------------------------------------------------
+Lang_41 hunk 3 code 
+--------------------------------------------------
+Lang_41 hunk 7 code         // Strip Object type encoding
+--------------------------------------------------
+Lang_23 hunk 2 code 
+    /**
+     * Return the hashcode.
+     *
+     * @return the hashcode
+     */
+--------------------------------------------------
 Lang_30 hunk 3 code                         // ch is a supplementary character
 --------------------------------------------------
 Lang_30 hunk 7 code                             // missing low surrogate, fine, like String.indexOf(String)
 --------------------------------------------------
 Lang_30 hunk 18 code                             // missing low surrogate, fine, like String.indexOf(String)
 --------------------------------------------------
+Lang_22 hunk 1 code         //if either operand is abs 1, return 1:
+--------------------------------------------------
 Lang_56 hunk 1 code     /**
      * The estimated maximum length.
      */
---------------------------------------------------
-Lang_19 hunk 4 code 
 --------------------------------------------------
 Lang_7 hunk 2 code             // this is protection for poorness in java.lang.BigDecimal.
             // it accepts this as a legal value, but it does not appear 
@@ -65,7 +650,31 @@ Lang_7 hunk 2 code             // this is protection for poorness in java.lang.B
 --------------------------------------------------
 Lang_31 hunk 2 code 						// ch is a supplementary character
 --------------------------------------------------
-Lang_22 hunk 1 code         //if either operand is abs 1, return 1:
+Lang_19 hunk 4 code 
+--------------------------------------------------
+Math_51 hunk 1 code                         // Update formula cannot make any progress: Update the
+                        // search interval.
+--------------------------------------------------
+Math_106 hunk 1 code             // minus signs should be leading, invalid expression
+--------------------------------------------------
+Math_106 hunk 3 code             // minus signs must be leading, invalid
+--------------------------------------------------
+Math_36 hunk 1 code             // Numerator and/or denominator must be out of range:
+            // Calculate how far to shift them to put them in range.
+--------------------------------------------------
+Math_36 hunk 3 code             // Numerator and/or denominator must be out of range:
+            // Calculate how far to shift them to put them in range.
+--------------------------------------------------
+Math_97 hunk 1 code             // check if either value is close to a zero
+--------------------------------------------------
+Math_97 hunk 4 code             // either min or max is a root
+--------------------------------------------------
+Math_84 hunk 2 code 
+            // check convergence
+--------------------------------------------------
+Math_42 hunk 1 code               // if the basic row is found to be the objective function row
+              // set the coefficient to 0 -> this case handles unconstrained 
+              // variables that are still part of the objective function
 --------------------------------------------------
 Math_3 hunk 1 code             // Revert to scalar multiplication.
 --------------------------------------------------
@@ -89,26 +698,6 @@ Math_90 hunk 1 code
      * @throws IllegalArgumentException if <code>v</code> is not comparable with previous entries
      */
 --------------------------------------------------
-Math_88 hunk 2 code                 // if multiple variables can take a given value 
-                // then we choose the first and set the rest equal to 0
---------------------------------------------------
-Math_84 hunk 2 code 
-            // check convergence
---------------------------------------------------
-Math_78 hunk 1 code                         // this is a corner case:
-                        // - there was an event near ta,
-                        // - there is another event between ta and tb
-                        // - when ta was computed, convergence was reached on the "wrong side" of the interval
-                        // this implies that the real sign of ga is the same as gb, so we need to slightly
-                        // shift ta to make sure ga and gb get opposite signs and the solver won't complain
-                        // about bracketing
---------------------------------------------------
-Math_78 hunk 2 code                             // this should never happen
---------------------------------------------------
-Math_97 hunk 1 code             // check if either value is close to a zero
---------------------------------------------------
-Math_97 hunk 4 code             // either min or max is a root
---------------------------------------------------
 Math_55 hunk 1 code 
       // rescale both vectors without losing precision,
       // to ensure their norm are the same order of magnitude
@@ -127,37 +716,17 @@ Math_55 hunk 3 code
 Math_55 hunk 4 code 
       // compute cross product from v3 and v2 instead of v1 and v2
 --------------------------------------------------
-Math_25 hunk 1 code                     // In some ill-conditioned cases (cf. MATH-844), the guesser
-                    // procedure cannot produce sensible results.
---------------------------------------------------
-Math_42 hunk 1 code               // if the basic row is found to be the objective function row
-              // set the coefficient to 0 -> this case handles unconstrained 
-              // variables that are still part of the objective function
---------------------------------------------------
-Math_106 hunk 1 code             // minus signs should be leading, invalid expression
---------------------------------------------------
-Math_106 hunk 3 code             // minus signs must be leading, invalid
---------------------------------------------------
-Math_51 hunk 1 code                         // Update formula cannot make any progress: Update the
-                        // search interval.
---------------------------------------------------
-Math_12 hunk 2 code     /** Serializable version identifier */
---------------------------------------------------
-Math_36 hunk 1 code             // Numerator and/or denominator must be out of range:
-            // Calculate how far to shift them to put them in range.
---------------------------------------------------
-Math_36 hunk 3 code             // Numerator and/or denominator must be out of range:
-            // Calculate how far to shift them to put them in range.
---------------------------------------------------
 Math_68 hunk 6 code                     // we use the vectorial convergence checker
 --------------------------------------------------
-Math_16 hunk 2 code               // Avoid overflow (MATH-905).
+Math_78 hunk 1 code                         // this is a corner case:
+                        // - there was an event near ta,
+                        // - there is another event between ta and tb
+                        // - when ta was computed, convergence was reached on the "wrong side" of the interval
+                        // this implies that the real sign of ga is the same as gb, so we need to slightly
+                        // shift ta to make sure ga and gb get opposite signs and the solver won't complain
+                        // about bracketing
 --------------------------------------------------
-Math_16 hunk 4 code               // Avoid overflow (MATH-905).
---------------------------------------------------
-Math_16 hunk 7 code               // Avoid overflow (MATH-905).
---------------------------------------------------
-Math_16 hunk 9 code               // Avoid overflow (MATH-905).
+Math_78 hunk 2 code                             // this should never happen
 --------------------------------------------------
 Math_92 hunk 1 code         // Use symmetry for large k
 --------------------------------------------------
@@ -205,6 +774,24 @@ Math_28 hunk 2 code
             //                       revert to the simple case of just returning the top-most row
             // This heuristic is based on empirical data gathered while investigating MATH-828.
 --------------------------------------------------
+Math_25 hunk 1 code                     // In some ill-conditioned cases (cf. MATH-844), the guesser
+                    // procedure cannot produce sensible results.
+--------------------------------------------------
+Math_88 hunk 2 code                 // if multiple variables can take a given value 
+                // then we choose the first and set the rest equal to 0
+--------------------------------------------------
+Math_12 hunk 2 code     /** Serializable version identifier */
+--------------------------------------------------
+Math_16 hunk 2 code               // Avoid overflow (MATH-905).
+--------------------------------------------------
+Math_16 hunk 4 code               // Avoid overflow (MATH-905).
+--------------------------------------------------
+Math_16 hunk 7 code               // Avoid overflow (MATH-905).
+--------------------------------------------------
+Math_16 hunk 9 code               // Avoid overflow (MATH-905).
+--------------------------------------------------
+Time_22 hunk 1 code         // bug [3264409]
+--------------------------------------------------
 Time_14 hunk 1 code             // month is largest field and being added to, such as month-day
 --------------------------------------------------
 Time_17 hunk 2 code         
@@ -218,7 +805,37 @@ Time_12 hunk 3 code             // handle years in era BC
 --------------------------------------------------
 Time_12 hunk 7 code             // handle years in era BC
 --------------------------------------------------
-Time_22 hunk 1 code         // bug [3264409]
+Closure_49 hunk 2 code 
+--------------------------------------------------
+Closure_49 hunk 3 code 
+          // Add the function parameters
+--------------------------------------------------
+Closure_49 hunk 4 code 
+          // Add the function body declarations
+--------------------------------------------------
+Closure_49 hunk 7 code         // Note: The parameters and function body variables live in the
+        // same scope, we introduce the scope when in the "shouldTraverse"
+        // visit of LP, but remove it when when we exit the function above.
+--------------------------------------------------
+Closure_51 hunk 2 code 
+--------------------------------------------------
+Closure_95 hunk 1 code 
+        // don't try to declare in the global scope if there's
+        // already a symbol there with this name.
+--------------------------------------------------
+Closure_103 hunk 2 code         // getGreatestSubtypeWithProperty does not guarantee that the property
+        // is defined on the returned type, it just indicates that it might be,
+        // so we have to double check.
+--------------------------------------------------
+Closure_144 hunk 4 code 
+--------------------------------------------------
+Closure_162 hunk 3 code 
+--------------------------------------------------
+Closure_162 hunk 4 code             // TODO(robbyw): Support using locals for private variables.
+--------------------------------------------------
+Closure_162 hunk 6 code 
+--------------------------------------------------
+Closure_162 hunk 8 code 
 --------------------------------------------------
 Closure_138 hunk 3 code         // There are two situations where we don't want to use type information
         // from the scope, even if we have it.
@@ -233,34 +850,34 @@ Closure_138 hunk 4 code
 --------------------------------------------------
 Closure_138 hunk 5 code 
 --------------------------------------------------
-Closure_157 hunk 3 code             // Object literal property names don't have to be quoted if they
-            // are not JavaScript keywords
+Closure_158 hunk 2 code 
+    /**
+     * Add warning guards.
+     */
 --------------------------------------------------
-Closure_157 hunk 4 code                 // do not encode literally any non-literal characters that
-                // were unicode escaped.
+Closure_158 hunk 4 code 
+    // The entries, in the order that they were added.
 --------------------------------------------------
-Closure_157 hunk 7 code 
+Closure_158 hunk 5 code 
 --------------------------------------------------
-Closure_157 hunk 11 code 
+Closure_158 hunk 6 code 
 --------------------------------------------------
-Closure_157 hunk 12 code 
-    // Return "1" instead of "1.0"
+Closure_158 hunk 13 code 
 --------------------------------------------------
-Closure_110 hunk 5 code             // Replace "function NAME() { ... }" with "var NAME;".
+Closure_158 hunk 14 code 
 --------------------------------------------------
-Closure_110 hunk 6 code 
-            // We can't keep the local name on the function expression,
-            // because IE is buggy and will leak the name into the global
-            // scope. This is covered in more detail here:
-            // http://wiki.ecmascript.org/lib/exe/fetch.php?id=resources:resources&cache=cache&media=resources:jscriptdeviationsfromes3.pdf
-            //
-            // This will only cause problems if this is a hoisted, recursive
-            // function, and the programmer is using the hoisting.
+Closure_158 hunk 15 code 
 --------------------------------------------------
-Closure_110 hunk 7 code 
+Closure_158 hunk 16 code 
 --------------------------------------------------
-Closure_110 hunk 8 code               // If this is a VAR, we can just detach the expression and
-              // the tree will still be valid.
+Closure_158 hunk 17 code 
+--------------------------------------------------
+Closure_158 hunk 18 code 
+--------------------------------------------------
+Closure_158 hunk 19 code 
+--------------------------------------------------
+Closure_24 hunk 2 code           // Bleeding functions already get a BAD_PARAMETERS error, so just
+          // do nothing.
 --------------------------------------------------
 Closure_176 hunk 1 code 
         // When looking at VAR initializers for declared VARs, we tend
@@ -282,25 +899,20 @@ Closure_176 hunk 1 code
 --------------------------------------------------
 Closure_176 hunk 2 code             // Makes it easier to check for NPEs.
 --------------------------------------------------
-Closure_165 hunk 4 code 
-  /**
-   * Creates a record type.
-   *
-   * @param registry The type registry under which this type lives.
-   * @param properties A map of all the properties of this record type.
-   * @param declared Whether this is a declared or synthesized type.
-   *     A synthesized record type is just used for bookkeeping
-   *     in the type system. A declared record type was actually used in the
-   *     user's program.
-   * @throws IllegalStateException if the {@code RecordProperty} associated
-   *         with a property is null.
-   */
+Closure_156 hunk 8 code 
 --------------------------------------------------
-Closure_88 hunk 1 code         // The expression to which the assignment is made is evaluated before
-        // the RHS is evaluated (normal left to right evaluation) but the KILL
-        // occurs after the RHS is evaluated.
+Closure_157 hunk 3 code             // Object literal property names don't have to be quoted if they
+            // are not JavaScript keywords
 --------------------------------------------------
-Closure_175 hunk 5 code       // Limit the inlining
+Closure_157 hunk 4 code                 // do not encode literally any non-literal characters that
+                // were unicode escaped.
+--------------------------------------------------
+Closure_157 hunk 7 code 
+--------------------------------------------------
+Closure_157 hunk 11 code 
+--------------------------------------------------
+Closure_157 hunk 12 code 
+    // Return "1" instead of "1.0"
 --------------------------------------------------
 Closure_137 hunk 4 code 
     // Stack reference sets.
@@ -344,74 +956,35 @@ Closure_137 hunk 20 code         // Add all referenced names to the set so it is
 --------------------------------------------------
 Closure_137 hunk 21 code         // Store only references to candidate names in the node map.
 --------------------------------------------------
-Closure_162 hunk 3 code 
+Closure_110 hunk 5 code             // Replace "function NAME() { ... }" with "var NAME;".
 --------------------------------------------------
-Closure_162 hunk 4 code             // TODO(robbyw): Support using locals for private variables.
+Closure_110 hunk 6 code 
+            // We can't keep the local name on the function expression,
+            // because IE is buggy and will leak the name into the global
+            // scope. This is covered in more detail here:
+            // http://wiki.ecmascript.org/lib/exe/fetch.php?id=resources:resources&cache=cache&media=resources:jscriptdeviationsfromes3.pdf
+            //
+            // This will only cause problems if this is a hoisted, recursive
+            // function, and the programmer is using the hoisting.
 --------------------------------------------------
-Closure_162 hunk 6 code 
+Closure_110 hunk 7 code 
 --------------------------------------------------
-Closure_162 hunk 8 code 
+Closure_110 hunk 8 code               // If this is a VAR, we can just detach the expression and
+              // the tree will still be valid.
 --------------------------------------------------
-Closure_174 hunk 2 code         // Most passes try to report as many errors as possible,
-        // so there may already be errors. We only care if there were
-        // errors in the code we just parsed.
---------------------------------------------------
-Closure_37 hunk 2 code         // When in ideMode Rhino tries to parse some constructs the compiler
-        // doesn't support, repair it here. see Rhino's
-        // Parser#parseFunctionBodyExpr.
---------------------------------------------------
-Closure_136 hunk 3 code           // Blindly de-uniquify for the Prototype library for issue 103.
---------------------------------------------------
-Closure_134 hunk 8 code         // If it's not, then check to see if it's implemented
-        // on an implemented interface.
---------------------------------------------------
-Closure_98 hunk 2 code 
-    /**
-     * Whether this block denotes a loop.
-     */
---------------------------------------------------
-Closure_98 hunk 4 code 
---------------------------------------------------
-Closure_163 hunk 2 code           // NOTE(nicksantos): We use the same anonymous node for all
-          // functions that do not have reasonable names. I can't remember
-          // at the moment why we do this. I think it's because anonymous
-          // nodes can never have in-edges. They're just there as a placeholder
-          // for scope information, and do not matter in the edge propagation.
---------------------------------------------------
-Closure_163 hunk 10 code         // Make sure that we're not handling object literals being
-        // assigned to a prototype, as in:
-        // Foo.prototype = {bar: 3, baz: 5};
---------------------------------------------------
-Closure_163 hunk 15 code 
---------------------------------------------------
-Closure_163 hunk 17 code 
-    /**
-     * Returns the name of a prototype property being assigned to this r-value.
-     *
-     * Returns null if this is not the R-value of a prototype property, or if
-     * the R-value is used in multiple expressions (i.e., if there's
-     * a prototype property assignment in a more complex expression).
-     */
---------------------------------------------------
-Closure_163 hunk 18 code 
---------------------------------------------------
-Closure_163 hunk 20 code 
---------------------------------------------------
-Closure_163 hunk 25 code 
---------------------------------------------------
-Closure_163 hunk 36 code 
---------------------------------------------------
-Closure_163 hunk 41 code 
---------------------------------------------------
-Closure_163 hunk 46 code 
---------------------------------------------------
-Closure_163 hunk 48 code 
---------------------------------------------------
-Closure_121 hunk 1 code           // Inlining the variable based solely on well-defined and assigned
-          // once is *NOT* correct. We relax the correctness requirement if
-          // the variable is declared constant.
---------------------------------------------------
-Closure_48 hunk 1 code         // Determining declaration for #2
+Closure_165 hunk 4 code 
+  /**
+   * Creates a record type.
+   *
+   * @param registry The type registry under which this type lives.
+   * @param properties A map of all the properties of this record type.
+   * @param declared Whether this is a declared or synthesized type.
+   *     A synthesized record type is just used for bookkeeping
+   *     in the type system. A declared record type was actually used in the
+   *     user's program.
+   * @throws IllegalStateException if the {@code RecordProperty} associated
+   *         with a property is null.
+   */
 --------------------------------------------------
 Closure_153 hunk 4 code         // We allow variables to be duplicate declared if one
         // declaration appears in source and the other in externs.
@@ -419,79 +992,6 @@ Closure_153 hunk 4 code         // We allow variables to be duplicate declared i
         // in one browser but not in another.
 --------------------------------------------------
 Closure_153 hunk 16 code 
---------------------------------------------------
-Closure_96 hunk 1 code       // If there are no parameters left in the list, then the while loop
-      // above implies that this must be a var_args function.
---------------------------------------------------
-Closure_42 hunk 1 code 
-        // Return the bare minimum to put the AST in a valid state.
---------------------------------------------------
-Closure_32 hunk 4 code               // All tokens must be separated by a space.
---------------------------------------------------
-Closure_156 hunk 8 code 
---------------------------------------------------
-Closure_169 hunk 3 code     // Please keep this method in sync with the hashCode() method below.
---------------------------------------------------
-Closure_169 hunk 14 code         // If we're checking for invariance, the unknown type is invariant
-        // with everyone.
---------------------------------------------------
-Closure_103 hunk 2 code         // getGreatestSubtypeWithProperty does not guarantee that the property
-        // is defined on the returned type, it just indicates that it might be,
-        // so we have to double check.
---------------------------------------------------
-Closure_17 hunk 1 code                 // If rValue has a type-cast, we use the type in the type-cast.
---------------------------------------------------
-Closure_158 hunk 2 code 
-    /**
-     * Add warning guards.
-     */
---------------------------------------------------
-Closure_158 hunk 4 code 
-    // The entries, in the order that they were added.
---------------------------------------------------
-Closure_158 hunk 5 code 
---------------------------------------------------
-Closure_158 hunk 6 code 
---------------------------------------------------
-Closure_158 hunk 13 code 
---------------------------------------------------
-Closure_158 hunk 14 code 
---------------------------------------------------
-Closure_158 hunk 15 code 
---------------------------------------------------
-Closure_158 hunk 16 code 
---------------------------------------------------
-Closure_158 hunk 17 code 
---------------------------------------------------
-Closure_158 hunk 18 code 
---------------------------------------------------
-Closure_158 hunk 19 code 
---------------------------------------------------
-Closure_154 hunk 6 code         // Implemented, but not correctly typed
---------------------------------------------------
-Closure_76 hunk 7 code         // With a AND/OR the first branch always runs, but the second is
-        // may not.
---------------------------------------------------
-Closure_51 hunk 2 code 
---------------------------------------------------
-Closure_164 hunk 1 code 
-      // "that" can't be a supertype, because it's missing a required argument.
---------------------------------------------------
-Closure_164 hunk 2 code         // NOTE(nicksantos): In our type system, we use {function(...?)} and
-        // {function(...NoType)} to to indicate that arity should not be
-        // checked. Strictly speaking, this is not a correct formulation,
-        // because now a sub-function can required arguments that are var_args
-        // in the super-function. So we special-case this.
---------------------------------------------------
-Closure_145 hunk 1 code         // For labels with block children, we need to ensure that a
-        // labeled FUNCTION or DO isn't generated when extraneous BLOCKs 
-        // are skipped. 
---------------------------------------------------
-Closure_145 hunk 2 code           // Either a empty statement or an block with more than one child,
-          // way it isn't a FUNCTION or DO.
---------------------------------------------------
-Closure_2 hunk 1 code       // This can be the case if interfaceType is proxy to a non-existent
-      // object (which is a bad type annotation, but shouldn't crash).
 --------------------------------------------------
 Closure_139 hunk 2 code 
     /**
@@ -523,33 +1023,22 @@ Closure_139 hunk 6 code
 --------------------------------------------------
 Closure_139 hunk 8 code       // If name is "arguments", Var maybe null.
 --------------------------------------------------
-Closure_19 hunk 1 code         // "this" references aren't currently modeled in the CFG.
+Closure_174 hunk 2 code         // Most passes try to report as many errors as possible,
+        // so there may already be errors. We only care if there were
+        // errors in the code we just parsed.
 --------------------------------------------------
-Closure_170 hunk 1 code             // We make a special exception when the entire cfgNode is a chain
-            // of assignments, since in that case the assignment statements
-            // will happen after the inlining of the right hand side.
-            // TODO(blickly): Make the SIDE_EFFECT_PREDICATE check more exact
-            //   and remove this special case.
+Closure_87 hunk 1 code           // IE has a bug where event handlers behave differently when
+          // their return value is used vs. when their return value is in
+          // an EXPR_RESULT. It's pretty freaking weird. See:
+          // http://code.google.com/p/closure-compiler/issues/detail?id=291
+          // We try to detect this case, and not fold EXPR_RESULTs
+          // into other expressions.
 --------------------------------------------------
-Closure_170 hunk 2 code               // Don't count lhs of top-level assignment chain
+Closure_87 hunk 2 code 
+            // We only have to worry about methods with an implicit 'this'
+            // param, or this doesn't happen.
 --------------------------------------------------
-Closure_50 hunk 2 code       // "," is the default, it doesn't need to be explicit
---------------------------------------------------
-Closure_144 hunk 4 code 
---------------------------------------------------
-Closure_101 hunk 1 code 
---------------------------------------------------
-Closure_49 hunk 2 code 
---------------------------------------------------
-Closure_49 hunk 3 code 
-          // Add the function parameters
---------------------------------------------------
-Closure_49 hunk 4 code 
-          // Add the function body declarations
---------------------------------------------------
-Closure_49 hunk 7 code         // Note: The parameters and function body variables live in the
-        // same scope, we introduce the scope when in the "shouldTraverse"
-        // visit of LP, but remove it when when we exit the function above.
+Closure_87 hunk 3 code 
 --------------------------------------------------
 Closure_155 hunk 3 code             // Any reference that is not a read of the arguments property
             // consider a escape of the arguments object.
@@ -564,25 +1053,54 @@ Closure_155 hunk 12 code
 --------------------------------------------------
 Closure_155 hunk 13 code 
 --------------------------------------------------
-Closure_44 hunk 1 code       // Do not allow a forward slash to appear after a DIV.
-      // For example,
-      // REGEXP DIV REGEXP
-      // is valid and should print like
-      // / // / /
+Closure_54 hunk 4 code       // Disassociating the old prototype makes this easier to debug--
+      // we don't have to worry about two prototypes running around.
 --------------------------------------------------
-Closure_7 hunk 1 code           // Objects are restricted to "Function", subtypes are left
---------------------------------------------------
-Closure_7 hunk 2 code           // Only filter out subtypes of "function"
---------------------------------------------------
-Closure_66 hunk 1 code           // Object literal keys are not typeable
+Closure_42 hunk 1 code 
+        // Return the bare minimum to put the AST in a valid state.
 --------------------------------------------------
 Closure_75 hunk 1 code       // vertical tab is not always whitespace
 --------------------------------------------------
-Closure_117 hunk 1 code 
-    // The best type name is the actual type name.
+Closure_37 hunk 2 code         // When in ideMode Rhino tries to parse some constructs the compiler
+        // doesn't support, repair it here. see Rhino's
+        // Parser#parseFunctionBodyExpr.
 --------------------------------------------------
-Closure_54 hunk 4 code       // Disassociating the old prototype makes this easier to debug--
-      // we don't have to worry about two prototypes running around.
+Closure_76 hunk 7 code         // With a AND/OR the first branch always runs, but the second is
+        // may not.
+--------------------------------------------------
+Closure_66 hunk 1 code           // Object literal keys are not typeable
+--------------------------------------------------
+Closure_164 hunk 1 code 
+      // "that" can't be a supertype, because it's missing a required argument.
+--------------------------------------------------
+Closure_164 hunk 2 code         // NOTE(nicksantos): In our type system, we use {function(...?)} and
+        // {function(...NoType)} to to indicate that arity should not be
+        // checked. Strictly speaking, this is not a correct formulation,
+        // because now a sub-function can required arguments that are var_args
+        // in the super-function. So we special-case this.
+--------------------------------------------------
+Closure_50 hunk 2 code       // "," is the default, it doesn't need to be explicit
+--------------------------------------------------
+Closure_101 hunk 1 code 
+--------------------------------------------------
+Closure_121 hunk 1 code           // Inlining the variable based solely on well-defined and assigned
+          // once is *NOT* correct. We relax the correctness requirement if
+          // the variable is declared constant.
+--------------------------------------------------
+Closure_145 hunk 1 code         // For labels with block children, we need to ensure that a
+        // labeled FUNCTION or DO isn't generated when extraneous BLOCKs 
+        // are skipped. 
+--------------------------------------------------
+Closure_145 hunk 2 code           // Either a empty statement or an block with more than one child,
+          // way it isn't a FUNCTION or DO.
+--------------------------------------------------
+Closure_2 hunk 1 code       // This can be the case if interfaceType is proxy to a non-existent
+      // object (which is a bad type annotation, but shouldn't crash).
+--------------------------------------------------
+Closure_134 hunk 8 code         // If it's not, then check to see if it's implemented
+        // on an implemented interface.
+--------------------------------------------------
+Closure_154 hunk 6 code         // Implemented, but not correctly typed
 --------------------------------------------------
 Closure_148 hunk 4 code 
 --------------------------------------------------
@@ -681,28 +1199,100 @@ Closure_148 hunk 51 code
 --------------------------------------------------
 Closure_148 hunk 60 code       // If the previous value is null, no mapping exists.
 --------------------------------------------------
-Closure_95 hunk 1 code 
-        // don't try to declare in the global scope if there's
-        // already a symbol there with this name.
+Closure_163 hunk 2 code           // NOTE(nicksantos): We use the same anonymous node for all
+          // functions that do not have reasonable names. I can't remember
+          // at the moment why we do this. I think it's because anonymous
+          // nodes can never have in-edges. They're just there as a placeholder
+          // for scope information, and do not matter in the edge propagation.
 --------------------------------------------------
-Closure_24 hunk 2 code           // Bleeding functions already get a BAD_PARAMETERS error, so just
-          // do nothing.
+Closure_163 hunk 10 code         // Make sure that we're not handling object literals being
+        // assigned to a prototype, as in:
+        // Foo.prototype = {bar: 3, baz: 5};
 --------------------------------------------------
-Closure_87 hunk 1 code           // IE has a bug where event handlers behave differently when
-          // their return value is used vs. when their return value is in
-          // an EXPR_RESULT. It's pretty freaking weird. See:
-          // http://code.google.com/p/closure-compiler/issues/detail?id=291
-          // We try to detect this case, and not fold EXPR_RESULTs
-          // into other expressions.
+Closure_163 hunk 15 code 
 --------------------------------------------------
-Closure_87 hunk 2 code 
-            // We only have to worry about methods with an implicit 'this'
-            // param, or this doesn't happen.
+Closure_163 hunk 17 code 
+    /**
+     * Returns the name of a prototype property being assigned to this r-value.
+     *
+     * Returns null if this is not the R-value of a prototype property, or if
+     * the R-value is used in multiple expressions (i.e., if there's
+     * a prototype property assignment in a more complex expression).
+     */
 --------------------------------------------------
-Closure_87 hunk 3 code 
+Closure_163 hunk 18 code 
+--------------------------------------------------
+Closure_163 hunk 20 code 
+--------------------------------------------------
+Closure_163 hunk 25 code 
+--------------------------------------------------
+Closure_163 hunk 36 code 
+--------------------------------------------------
+Closure_163 hunk 41 code 
+--------------------------------------------------
+Closure_163 hunk 46 code 
+--------------------------------------------------
+Closure_163 hunk 48 code 
+--------------------------------------------------
+Closure_169 hunk 3 code     // Please keep this method in sync with the hashCode() method below.
+--------------------------------------------------
+Closure_169 hunk 15 code         // If we're checking for invariance, the unknown type is invariant
+        // with everyone.
+--------------------------------------------------
+Closure_96 hunk 1 code       // If there are no parameters left in the list, then the while loop
+      // above implies that this must be a var_args function.
+--------------------------------------------------
+Closure_170 hunk 1 code             // We make a special exception when the entire cfgNode is a chain
+            // of assignments, since in that case the assignment statements
+            // will happen after the inlining of the right hand side.
+            // TODO(blickly): Make the SIDE_EFFECT_PREDICATE check more exact
+            //   and remove this special case.
+--------------------------------------------------
+Closure_170 hunk 2 code               // Don't count lhs of top-level assignment chain
+--------------------------------------------------
+Closure_48 hunk 1 code         // Determining declaration for #2
+--------------------------------------------------
+Closure_17 hunk 1 code                 // If rValue has a type-cast, we use the type in the type-cast.
 --------------------------------------------------
 Closure_141 hunk 1 code         // Anonymous functions definitions are not changed by side-effects,
         // and named functions are not part of expressions.
+--------------------------------------------------
+Closure_7 hunk 1 code           // Objects are restricted to "Function", subtypes are left
+--------------------------------------------------
+Closure_7 hunk 2 code           // Only filter out subtypes of "function"
+--------------------------------------------------
+Closure_98 hunk 2 code 
+    /**
+     * Whether this block denotes a loop.
+     */
+--------------------------------------------------
+Closure_98 hunk 4 code 
+--------------------------------------------------
+Closure_136 hunk 3 code           // Blindly de-uniquify for the Prototype library for issue 103.
+--------------------------------------------------
+Closure_175 hunk 5 code       // Limit the inlining
+--------------------------------------------------
+Closure_32 hunk 4 code               // All tokens must be separated by a space.
+--------------------------------------------------
+Closure_88 hunk 1 code         // The expression to which the assignment is made is evaluated before
+        // the RHS is evaluated (normal left to right evaluation) but the KILL
+        // occurs after the RHS is evaluated.
+--------------------------------------------------
+Closure_19 hunk 1 code         // "this" references aren't currently modeled in the CFG.
+--------------------------------------------------
+Closure_44 hunk 1 code       // Do not allow a forward slash to appear after a DIV.
+      // For example,
+      // REGEXP DIV REGEXP
+      // is valid and should print like
+      // / // / /
+--------------------------------------------------
+Closure_117 hunk 1 code 
+    // The best type name is the actual type name.
+--------------------------------------------------
+Mockito_13 hunk 2 code                 // this means there is an invocation on a different mock. Re-adding verification mode 
+                // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)
+--------------------------------------------------
+Mockito_9 hunk 1 code 
 --------------------------------------------------
 Mockito_23 hunk 3 code 
 --------------------------------------------------
@@ -716,12 +1306,7 @@ Mockito_25 hunk 8 code
 --------------------------------------------------
 Mockito_25 hunk 9 code 
 --------------------------------------------------
-Mockito_12 hunk 2 code                 //in case of nested generics we don't go deep
---------------------------------------------------
-Mockito_9 hunk 1 code 
---------------------------------------------------
 Mockito_33 hunk 1 code         	/* Avoid unnecessary cloning */
 --------------------------------------------------
-Mockito_13 hunk 2 code                 // this means there is an invocation on a different mock. Re-adding verification mode 
-                // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)
+Mockito_12 hunk 2 code                 //in case of nested generics we don't go deep
 --------------------------------------------------

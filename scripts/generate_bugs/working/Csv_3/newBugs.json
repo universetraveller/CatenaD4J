@@ -1,0 +1,89 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/csv/Lexer.java",
+            "replaced_with": "            if (isDelimiter(c) || isEscape(c) || isQuoteChar(c) || isCommentStart(c)) {\n",
+            "patch_type": "insert",
+            "next_line_no": 111
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/csv/Lexer.java",
+            "replaced_with": "            }\n",
+            "patch_type": "insert",
+            "next_line_no": 112
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/csv/Lexer.java",
+            "replaced_with": "            return END_OF_STREAM;\n",
+            "patch_type": "insert",
+            "next_line_no": 113
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.csv.CSVLexerTest::testEscapedMySqlNullValue",
+            "org.apache.commons.csv.CSVLexerTest::testEscapedCharacter",
+            "org.apache.commons.csv.CSVParserTest::testBackslashEscaping"
+        ],
+        "org.apache.commons.csv.CSVLexerTest::testEscapedMySqlNullValue": {
+            "file_path": "src/test/java/org/apache/commons/csv/CSVLexerTest.java",
+            "Instance": "Begin: Pos(331, 5)\nEnd: Pos(336, 5)\nSource: /tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVLexerTest.java\nName: testEscapedMySqlNullValue\nChilds: [StatementAssertion<Begin: Pos(335, 9), End: Pos(335, 84)>,\n]",
+            "source": "/tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVLexerTest.java",
+            "name": "testEscapedMySqlNullValue",
+            "begin": "Pos(331, 5)",
+            "end": "Pos(336, 5)",
+            "begin_line_no": 331,
+            "end_line_no": 336,
+            "child": [
+                "Begin: Pos(335, 9)\nEnd: Pos(335, 84)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.apache.commons.csv.CSVLexerTest::testEscapedCharacter": {
+            "file_path": "src/test/java/org/apache/commons/csv/CSVLexerTest.java",
+            "Instance": "Begin: Pos(338, 5)\nEnd: Pos(342, 5)\nSource: /tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVLexerTest.java\nName: testEscapedCharacter\nChilds: [StatementAssertion<Begin: Pos(341, 9), End: Pos(341, 84)>,\n]",
+            "source": "/tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVLexerTest.java",
+            "name": "testEscapedCharacter",
+            "begin": "Pos(338, 5)",
+            "end": "Pos(342, 5)",
+            "begin_line_no": 338,
+            "end_line_no": 342,
+            "child": [
+                "Begin: Pos(341, 9)\nEnd: Pos(341, 84)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.apache.commons.csv.CSVParserTest::testBackslashEscaping": {
+            "file_path": "src/test/java/org/apache/commons/csv/CSVParserTest.java",
+            "Instance": "Begin: Pos(282, 5)\nEnd: Pos(323, 5)\nSource: /tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVParserTest.java\nName: testBackslashEscaping\nChilds: [StatementAssertion<Begin: Pos(320, 9), End: Pos(320, 39)>,\nStatementAssertion<Begin: Pos(322, 9), End: Pos(322, 76)>,\n]",
+            "source": "/tmp/c4j/Csv_3/src/test/java//org/apache/commons/csv/CSVParserTest.java",
+            "name": "testBackslashEscaping",
+            "begin": "Pos(282, 5)",
+            "end": "Pos(323, 5)",
+            "begin_line_no": 282,
+            "end_line_no": 323,
+            "child": [
+                "Begin: Pos(320, 9)\nEnd: Pos(320, 39)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(322, 9)\nEnd: Pos(322, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testBackslashEscaping$catena_0() throws IOException {\n\n        // To avoid confusion over the need for escaping chars in java code,\n        // We will test with a forward slash as the escape char, and a single\n        // quote as the encapsulator.\n\n        final String code =\n                \"one,two,three\\n\" // 0\n                        + \"'',''\\n\"       // 1) empty encapsulators\n                        + \"/',/'\\n\"       // 2) single encapsulators\n                        + \"'/'','/''\\n\"   // 3) single encapsulators encapsulated via escape\n                        + \"'''',''''\\n\"   // 4) single encapsulators encapsulated via doubling\n                        + \"/,,/,\\n\"       // 5) separator escaped\n                        + \"//,//\\n\"       // 6) escape escaped\n                        + \"'//','//'\\n\"   // 7) escape escaped in encapsulation\n                        + \"   8   ,   \\\"quoted \\\"\\\" /\\\" // string\\\"   \\n\"     // don't eat spaces\n                        + \"9,   /\\n   \\n\"  // escaped newline\n                        + \"\";\n        final String[][] res = {\n                {\"one\", \"two\", \"three\"}, // 0\n                {\"\", \"\"},                // 1\n                {\"'\", \"'\"},              // 2\n                {\"'\", \"'\"},              // 3\n                {\"'\", \"'\"},              // 4\n                {\",\", \",\"},              // 5\n                {\"/\", \"/\"},              // 6\n                {\"/\", \"/\"},              // 7\n                {\"   8   \", \"   \\\"quoted \\\"\\\" /\\\" / string\\\"   \"},\n                {\"9\", \"   \\n   \"},\n        };\n\n\n        final CSVFormat format = CSVFormat.newBuilder(',').withQuoteChar('\\'').withEscape('/')\n                               .withIgnoreEmptyLines(true).withRecordSeparator(CRLF).build();\n\n        final CSVParser parser = new CSVParser(code, format);\n        final List<CSVRecord> records = parser.getRecords();\n        assertTrue(records.size() > 0);                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ Utils.compare(\"Records do not match expected result\", res, records);                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testBackslashEscaping$catena_1() throws IOException {\n\n        // To avoid confusion over the need for escaping chars in java code,\n        // We will test with a forward slash as the escape char, and a single\n        // quote as the encapsulator.\n\n        final String code =\n                \"one,two,three\\n\" // 0\n                        + \"'',''\\n\"       // 1) empty encapsulators\n                        + \"/',/'\\n\"       // 2) single encapsulators\n                        + \"'/'','/''\\n\"   // 3) single encapsulators encapsulated via escape\n                        + \"'''',''''\\n\"   // 4) single encapsulators encapsulated via doubling\n                        + \"/,,/,\\n\"       // 5) separator escaped\n                        + \"//,//\\n\"       // 6) escape escaped\n                        + \"'//','//'\\n\"   // 7) escape escaped in encapsulation\n                        + \"   8   ,   \\\"quoted \\\"\\\" /\\\" // string\\\"   \\n\"     // don't eat spaces\n                        + \"9,   /\\n   \\n\"  // escaped newline\n                        + \"\";\n        final String[][] res = {\n                {\"one\", \"two\", \"three\"}, // 0\n                {\"\", \"\"},                // 1\n                {\"'\", \"'\"},              // 2\n                {\"'\", \"'\"},              // 3\n                {\"'\", \"'\"},              // 4\n                {\",\", \",\"},              // 5\n                {\"/\", \"/\"},              // 6\n                {\"/\", \"/\"},              // 7\n                {\"   8   \", \"   \\\"quoted \\\"\\\" /\\\" / string\\\"   \"},\n                {\"9\", \"   \\n   \"},\n        };\n\n\n        final CSVFormat format = CSVFormat.newBuilder(',').withQuoteChar('\\'').withEscape('/')\n                               .withIgnoreEmptyLines(true).withRecordSeparator(CRLF).build();\n\n        final CSVParser parser = new CSVParser(code, format);\n        final List<CSVRecord> records = parser.getRecords();\n        try{ assertTrue(records.size() > 0);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Utils.compare(\"Records do not match expected result\", res, records);                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testBackslashEscaping$catena_0() throws IOException {\n\n        // To avoid confusion over the need for escaping chars in java code,\n        // We will test with a forward slash as the escape char, and a single\n        // quote as the encapsulator.\n\n        final String code =\n                \"one,two,three\\n\" // 0\n                        + \"'',''\\n\"       // 1) empty encapsulators\n                        + \"/',/'\\n\"       // 2) single encapsulators\n                        + \"'/'','/''\\n\"   // 3) single encapsulators encapsulated via escape\n                        + \"'''',''''\\n\"   // 4) single encapsulators encapsulated via doubling\n                        + \"/,,/,\\n\"       // 5) separator escaped\n                        + \"//,//\\n\"       // 6) escape escaped\n                        + \"'//','//'\\n\"   // 7) escape escaped in encapsulation\n                        + \"   8   ,   \\\"quoted \\\"\\\" /\\\" // string\\\"   \\n\"     // don't eat spaces\n                        + \"9,   /\\n   \\n\"  // escaped newline\n                        + \"\";\n        final String[][] res = {\n                {\"one\", \"two\", \"three\"}, // 0\n                {\"\", \"\"},                // 1\n                {\"'\", \"'\"},              // 2\n                {\"'\", \"'\"},              // 3\n                {\"'\", \"'\"},              // 4\n                {\",\", \",\"},              // 5\n                {\"/\", \"/\"},              // 6\n                {\"/\", \"/\"},              // 7\n                {\"   8   \", \"   \\\"quoted \\\"\\\" /\\\" / string\\\"   \"},\n                {\"9\", \"   \\n   \"},\n        };\n\n\n        final CSVFormat format = CSVFormat.newBuilder(',').withQuoteChar('\\'').withEscape('/')\n                               .withIgnoreEmptyLines(true).withRecordSeparator(CRLF).build();\n\n        final CSVParser parser = new CSVParser(code, format);\n        final List<CSVRecord> records = parser.getRecords();\n        assertTrue(records.size() > 0);                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ Utils.compare(\"Records do not match expected result\", res, records);                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testBackslashEscaping$catena_1() throws IOException {\n\n        // To avoid confusion over the need for escaping chars in java code,\n        // We will test with a forward slash as the escape char, and a single\n        // quote as the encapsulator.\n\n        final String code =\n                \"one,two,three\\n\" // 0\n                        + \"'',''\\n\"       // 1) empty encapsulators\n                        + \"/',/'\\n\"       // 2) single encapsulators\n                        + \"'/'','/''\\n\"   // 3) single encapsulators encapsulated via escape\n                        + \"'''',''''\\n\"   // 4) single encapsulators encapsulated via doubling\n                        + \"/,,/,\\n\"       // 5) separator escaped\n                        + \"//,//\\n\"       // 6) escape escaped\n                        + \"'//','//'\\n\"   // 7) escape escaped in encapsulation\n                        + \"   8   ,   \\\"quoted \\\"\\\" /\\\" // string\\\"   \\n\"     // don't eat spaces\n                        + \"9,   /\\n   \\n\"  // escaped newline\n                        + \"\";\n        final String[][] res = {\n                {\"one\", \"two\", \"three\"}, // 0\n                {\"\", \"\"},                // 1\n                {\"'\", \"'\"},              // 2\n                {\"'\", \"'\"},              // 3\n                {\"'\", \"'\"},              // 4\n                {\",\", \",\"},              // 5\n                {\"/\", \"/\"},              // 6\n                {\"/\", \"/\"},              // 7\n                {\"   8   \", \"   \\\"quoted \\\"\\\" /\\\" / string\\\"   \"},\n                {\"9\", \"   \\n   \"},\n        };\n\n\n        final CSVFormat format = CSVFormat.newBuilder(',').withQuoteChar('\\'').withEscape('/')\n                               .withIgnoreEmptyLines(true).withRecordSeparator(CRLF).build();\n\n        final CSVParser parser = new CSVParser(code, format);\n        final List<CSVRecord> records = parser.getRecords();\n        try{ assertTrue(records.size() > 0);                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        Utils.compare(\"Records do not match expected result\", res, records);                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.apache.commons.csv.CSVLexerTest::testEscapedMySqlNullValue",
+            "org.apache.commons.csv.CSVLexerTest::testEscapedCharacter",
+            "org.apache.commons.csv.CSVParserTest::testBackslashEscaping$catena_1"
+        ]
+    }
+}

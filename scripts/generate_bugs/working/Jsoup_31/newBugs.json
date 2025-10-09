@@ -1,0 +1,59 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/Token.java",
+            "replaced_with": "        boolean bogus = false;\n",
+            "patch_type": "insert",
+            "next_line_no": 171
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/TokeniserState.java",
+            "replaced_with": "            comment.bogus = true;\n",
+            "patch_type": "insert",
+            "next_line_no": 1094
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "replaced_with": "        if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)\n            String data = comment.getData();\n            if (data.length() > 1 && (data.startsWith(\"!\") || data.startsWith(\"?\"))) {\n                String declaration = data.substring(1);\n                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith(\"!\"));\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 67
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration"
+        ],
+        "org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration": {
+            "file_path": "src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java",
+            "Instance": "Begin: Pos(97, 5)\nEnd: Pos(104, 5)\nSource: /tmp/c4j/Jsoup_31/src/test/java//org/jsoup/parser/XmlTreeBuilderTest.java\nName: handlesXmlDeclarationAsDeclaration\nChilds: [StatementAssertion<Begin: Pos(100, 9), End: Pos(101, 65)>,\nStatementAssertion<Begin: Pos(102, 9), End: Pos(102, 66)>,\nStatementAssertion<Begin: Pos(103, 9), End: Pos(103, 62)>,\n]",
+            "source": "/tmp/c4j/Jsoup_31/src/test/java//org/jsoup/parser/XmlTreeBuilderTest.java",
+            "name": "handlesXmlDeclarationAsDeclaration",
+            "begin": "Pos(97, 5)",
+            "end": "Pos(104, 5)",
+            "begin_line_no": 97,
+            "end_line_no": 104,
+            "child": [
+                "Begin: Pos(100, 9)\nEnd: Pos(101, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(102, 9)\nEnd: Pos(102, 66)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(103, 9)\nEnd: Pos(103, 62)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void handlesXmlDeclarationAsDeclaration$catena_0() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"#comment\", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void handlesXmlDeclarationAsDeclaration$catena_1() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        try{ assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"#comment\", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void handlesXmlDeclarationAsDeclaration$catena_2() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        try{ assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"#comment\", doc.childNode(2).nodeName());                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void handlesXmlDeclarationAsDeclaration$catena_0() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"#comment\", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void handlesXmlDeclarationAsDeclaration$catena_1() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        try{ assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"#comment\", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void handlesXmlDeclarationAsDeclaration$catena_2() {\n        String html = \"<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->\";\n        Document doc = Jsoup.parse(html, \"\", Parser.xmlParser());\n        try{ assertEquals(\"<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->\",\n                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"#declaration\", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"#comment\", doc.childNode(2).nodeName());                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0",
+            "org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1"
+        ]
+    }
+}

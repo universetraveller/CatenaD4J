@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/UnixStat.java",
+            "replaced_with": "    int FILE_TYPE_FLAG = 0170000;\n",
+            "patch_type": "insert",
+            "next_line_no": 35
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java",
+            "from_line_no": 297,
+            "to_line_no": 297,
+            "replaced_with": "        return (getUnixMode() & UnixStat.FILE_TYPE_FLAG) == UnixStat.LINK_FLAG;\n",
+            "replaced": "        return (getUnixMode() & UnixStat.LINK_FLAG) == UnixStat.LINK_FLAG;\n",
+            "patch_type": "replace",
+            "next_line_no": 298
+        }
+    ]
+}

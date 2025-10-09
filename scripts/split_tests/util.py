@@ -6,8 +6,12 @@ def code_to_AST(code:str):
 def file_to_AST(f):
     return code_to_AST(f.read())
 def readFileToAST(filename:str):
-    with open(filename, 'r') as f:
-        return file_to_AST(f)
+    try:
+        with open(filename, 'r') as f:
+            return file_to_AST(f)
+    except UnicodeDecodeError:
+        with open(filename, 'r', encoding='latin-1') as f:
+            return file_to_AST(f)
 def traverse_get_global(root, _filter = javalang.tree.MethodDeclaration, _key = 'name'):
     _globals = {}
     for _, node in root.filter(_filter):

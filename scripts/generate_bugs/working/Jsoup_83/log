@@ -1,0 +1,320 @@
+---
+Begin generate bug_id: Jsoup_83
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_83
+Try to checkout Jsoup_83
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/CharacterReader.java
+trace file: src/main/java/org/jsoup/parser/TokeniserState.java
+trying to replace old failing tests
+edit: replace from 58 range 13 at src/test/java/org/jsoup/parser/HtmlParserTest.java
+to
+    @Test public void parsesQuiteRoughAttributes$catena_0() {
+        String html = "<p =a>One<a <p>Something</p>Else";
+        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated
+        Document doc = Jsoup.parse(html);
+
+        // NOTE: per spec this should be the test case. but impacts too many ppl
+        // assertEquals("<p =a>One<a <p>Something</a></p>\n<a <p>Else</a>", doc.body().html());
+
+        assertEquals("<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>", TextUtil.stripNewlines(doc.body().html()));         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        doc = Jsoup.parse("<p .....>");
+        try{ assertEquals("<p .....></p>", doc.body().html());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void parsesQuiteRoughAttributes$catena_1() {
+        String html = "<p =a>One<a <p>Something</p>Else";
+        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated
+        Document doc = Jsoup.parse(html);
+
+        // NOTE: per spec this should be the test case. but impacts too many ppl
+        // assertEquals("<p =a>One<a <p>Something</a></p>\n<a <p>Else</a>", doc.body().html());
+
+        try{ assertEquals("<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>", TextUtil.stripNewlines(doc.body().html()));    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        doc = Jsoup.parse("<p .....>");
+        assertEquals("<p .....></p>", doc.body().html());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/HtmlParserTest.java
+new test num: 2
+ori test num: 1
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 23.51 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.98 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+No new failing tests but only 1 hunk
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+used time: Finished in 23.43 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+No new failing tests but only 1 hunk
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+patches are written to file
+running tests...
+used time: Finished in 24.88 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.55 seconds
+Failing tests: 1
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix ['org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0']
+select new bug
+Pattern: 0011
+new failing tests:
+org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.32 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.88 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+used time: Finished in 27.88 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.45 seconds
+Failing tests: 1
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.22 seconds
+Failing tests: 1
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.50 seconds
+Failing tests: 2
+	org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0
+	org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Can independently fix []
+Could not fix independently
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 254 with range 1 to
+            if (c == '\t'|| c ==  '\n'|| c ==  '\r'|| c ==  '\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)
+
+try to fix hunk: 1
+insert before 161 with                 case '<': // NOTE: out of spec, but clear author intent
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 2
+insert before 564 with                 case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)
+                    t.error(this);
+                    r.unconsume();
+
+try to fix hunk: 3
+delete from 581 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.67 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag']
+select new bug
+Pattern: 1111
+new failing tests:
+org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag
+Save found bug
+processed: 1111
+Find 2 new bugs

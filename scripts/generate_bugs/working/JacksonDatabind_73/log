@@ -1,0 +1,343 @@
+---
+Begin generate bug_id: JacksonDatabind_73
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_73
+Try to checkout JacksonDatabind_73
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertiesCollector.java
+trace file: src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder.java
+trying to replace old failing tests
+edit: replace from 61 range 10 at src/test/java/com/fasterxml/jackson/databind/deser/ReadOrWriteOnlyTest.java
+to
+    public void testReadOnlyAndWriteOnly$catena_0() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new ReadXWriteY());
+        assertEquals("{\"x\":1}", json);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+
+        ReadXWriteY result = MAPPER.readValue("{\"x\":5, \"y\":6}", ReadXWriteY.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.x);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, result.y);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testReadOnlyAndWriteOnly$catena_1() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new ReadXWriteY());
+        try{ assertEquals("{\"x\":1}", json);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        ReadXWriteY result = MAPPER.readValue("{\"x\":5, \"y\":6}", ReadXWriteY.class);
+        assertNotNull(result);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, result.x);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, result.y);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testReadOnlyAndWriteOnly$catena_2() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new ReadXWriteY());
+        try{ assertEquals("{\"x\":1}", json);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        ReadXWriteY result = MAPPER.readValue("{\"x\":5, \"y\":6}", ReadXWriteY.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, result.x);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(6, result.y);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testReadOnlyAndWriteOnly$catena_3() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new ReadXWriteY());
+        try{ assertEquals("{\"x\":1}", json);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        ReadXWriteY result = MAPPER.readValue("{\"x\":5, \"y\":6}", ReadXWriteY.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.x);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(6, result.y);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/ReadOrWriteOnlyTest.java
+new test num: 4
+ori test num: 1
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 202.43 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+patches are written to file
+running tests...
+used time: Finished in 189.75 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+used time: Finished in 198.27 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+Can independently fix []
+Could not fix independently
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+used time: Finished in 225.77 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+	com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+try to fix hunk: 1
+replace from 731 with range 1 to
+            Access acc = prop.removeNonVisible(inferMutators);
+            if (!_forSerialization && (acc == Access.READ_ONLY)) {
+                _collectIgnorals(prop.getName());
+            }
+
+try to fix hunk: 2
+replace from 644 with range 1 to
+    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+
+try to fix hunk: 3
+insert before 683 with         return acc;
+
+patches are written to file
+running tests...
+used time: Finished in 250.18 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0', 'com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935', 'com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1', 'com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3', 'com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2']
+select new bug
+Pattern: 1111
+new failing tests:
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2
+Save found bug
+processed: 1111
+Find 1 new bugs

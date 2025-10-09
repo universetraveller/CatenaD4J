@@ -1,0 +1,4 @@
+org.jsoup.parser.AttributeParseTest::moreAttributeUnescapes
+org.jsoup.parser.HtmlParserTest::relaxedBaseEntityMatchAndStrictExtendedMatch
+org.jsoup.parser.HtmlParserTest::doesNotFindShortestMatchingEntity
+org.jsoup.parser.AttributeParseTest::strictAttributeUnescapes$catena_0

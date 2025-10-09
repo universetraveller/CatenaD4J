@@ -1,0 +1,66 @@
+---
+Begin generate bug_id: JacksonCore_4
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_4
+Try to checkout JacksonCore_4
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 24.89 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.util.TestTextBuffer::testExpand
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 586 with range 1 to
+        if (newLen > MAX_SEGMENT_LEN) {
+            newLen = len + (len >> 2);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 585 with         int newLen = len + (len >> 1);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 585 with         int newLen = len + (len >> 1);
+
+try to fix hunk: 1
+replace from 586 with range 1 to
+        if (newLen > MAX_SEGMENT_LEN) {
+            newLen = len + (len >> 2);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 22.36 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.core.util.TestTextBuffer::testExpand']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.core.util.TestTextBuffer::testExpand
+Save found bug
+processed: 11
+Find 1 new bugs

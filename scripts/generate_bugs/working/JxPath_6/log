@@ -1,0 +1,98 @@
+---
+Begin generate bug_id: JxPath_6
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JxPath_6
+Try to checkout JxPath_6
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationCompare.java
+trying to replace old failing tests
+edit: replace from 276 range 5 at src/test/org/apache/commons/jxpath/ri/compiler/VariableTest.java
+to
+    public void testIterateVariable$catena_0() throws Exception {
+        assertXPathValueIterator(context, "$d", list("a", "b"));                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertXPathValue(context, "$d = 'a'", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertXPathValue(context, "$d = 'b'", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIterateVariable$catena_1() throws Exception {
+        try{ assertXPathValueIterator(context, "$d", list("a", "b"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertXPathValue(context, "$d = 'a'", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertXPathValue(context, "$d = 'b'", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIterateVariable$catena_2() throws Exception {
+        try{ assertXPathValueIterator(context, "$d", list("a", "b"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertXPathValue(context, "$d = 'a'", Boolean.TRUE);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertXPathValue(context, "$d = 'b'", Boolean.TRUE);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/jxpath/ri/compiler/VariableTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 26.23 seconds
+Failing tests: 2
+	org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_1
+	org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 61 with range 1 to
+        if (r instanceof InitialContext) {
+            ((EvalContext) r).reset();
+        }
+
+        if (r instanceof SelfContext) {
+
+patches are written to file
+running tests...
+used time: Finished in 22.38 seconds
+Failing tests: 2
+	org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_1
+	org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_2
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 57 with range 1 to
+        if (l instanceof InitialContext) {
+            ((EvalContext) l).reset();
+        }
+
+        if (l instanceof SelfContext) {
+
+patches are written to file
+running tests...
+used time: Finished in 23.56 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_1
+org.apache.commons.jxpath.ri.compiler.VariableTest::testIterateVariable$catena_2
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 57 with range 1 to
+        if (l instanceof InitialContext) {
+            ((EvalContext) l).reset();
+        }
+
+        if (l instanceof SelfContext) {
+
+try to fix hunk: 1
+replace from 61 with range 1 to
+        if (r instanceof InitialContext) {
+            ((EvalContext) r).reset();
+        }
+
+        if (r instanceof SelfContext) {
+
+patches are written to file
+running tests...
+used time: Finished in 24.01 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

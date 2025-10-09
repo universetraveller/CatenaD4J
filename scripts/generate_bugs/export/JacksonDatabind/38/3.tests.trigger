@@ -1,0 +1,5 @@
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2

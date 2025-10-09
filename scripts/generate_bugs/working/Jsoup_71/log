@@ -1,0 +1,2586 @@
+---
+Begin generate bug_id: Jsoup_71
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_71
+Try to checkout Jsoup_71
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/PseudoTextElement.java
+trace file: src/main/java/org/jsoup/select/Evaluator.java
+trace file: src/main/java/org/jsoup/select/QueryParser.java
+trying to replace old failing tests
+edit: replace from 786 range 10 at src/test/java/org/jsoup/select/SelectorTest.java
+to
+    @Test public void splitOnBr$catena_0() {
+        String html = "<div><p>One<br>Two<br>Three</p></div>";
+        Document doc = Jsoup.parse(html);
+
+        Elements els = doc.select("p:matchText");
+        assertEquals(3, els.size());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("One", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Two", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Three", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void splitOnBr$catena_1() {
+        String html = "<div><p>One<br>Two<br>Three</p></div>";
+        Document doc = Jsoup.parse(html);
+
+        Elements els = doc.select("p:matchText");
+        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("One", els.get(0).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Two", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Three", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void splitOnBr$catena_2() {
+        String html = "<div><p>One<br>Two<br>Three</p></div>";
+        Document doc = Jsoup.parse(html);
+
+        Elements els = doc.select("p:matchText");
+        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("One", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Two", els.get(1).text());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Three", els.get(2).toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void splitOnBr$catena_3() {
+        String html = "<div><p>One<br>Two<br>Three</p></div>";
+        Document doc = Jsoup.parse(html);
+
+        Elements els = doc.select("p:matchText");
+        try{ assertEquals(3, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("One", els.get(0).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Two", els.get(1).text());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Three", els.get(2).toString());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 770 range 15 at src/test/java/org/jsoup/select/SelectorTest.java
+to
+    @Test public void textAsElements$catena_0() {
+        String html = "<p>One<br>Two</p>";
+        Document doc = Jsoup.parse(html);
+        String origHtml = doc.html();
+
+        Elements one = doc.select("p:matchText:first-child");
+        assertEquals("One", one.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        Elements two = doc.select("p:matchText:last-child");
+        try{ assertEquals("Two", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("Two", doc.select("p:matchText + br + *").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void textAsElements$catena_1() {
+        String html = "<p>One<br>Two</p>";
+        Document doc = Jsoup.parse(html);
+        String origHtml = doc.html();
+
+        Elements one = doc.select("p:matchText:first-child");
+        try{ assertEquals("One", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Elements two = doc.select("p:matchText:last-child");
+        assertEquals("Two", two.first().text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals("Two", doc.select("p:matchText + br + *").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void textAsElements$catena_2() {
+        String html = "<p>One<br>Two</p>";
+        Document doc = Jsoup.parse(html);
+        String origHtml = doc.html();
+
+        Elements one = doc.select("p:matchText:first-child");
+        try{ assertEquals("One", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Elements two = doc.select("p:matchText:last-child");
+        try{ assertEquals("Two", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals(origHtml, doc.html());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals("Two", doc.select("p:matchText + br + *").text());                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void textAsElements$catena_3() {
+        String html = "<p>One<br>Two</p>";
+        Document doc = Jsoup.parse(html);
+        String origHtml = doc.html();
+
+        Elements one = doc.select("p:matchText:first-child");
+        try{ assertEquals("One", one.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Elements two = doc.select("p:matchText:last-child");
+        try{ assertEquals("Two", two.first().text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(origHtml, doc.html());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals("Two", doc.select("p:matchText + br + *").text());                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/select/SelectorTest.java
+new test num: 8
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 23.23 seconds
+Failing tests: 8
+	org.jsoup.select.SelectorTest::splitOnBr$catena_0
+	org.jsoup.select.SelectorTest::splitOnBr$catena_1
+	org.jsoup.select.SelectorTest::splitOnBr$catena_2
+	org.jsoup.select.SelectorTest::splitOnBr$catena_3
+	org.jsoup.select.SelectorTest::textAsElements$catena_0
+	org.jsoup.select.SelectorTest::textAsElements$catena_1
+	org.jsoup.select.SelectorTest::textAsElements$catena_2
+	org.jsoup.select.SelectorTest::textAsElements$catena_3
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+patches are written to file
+running tests...
+used time: Finished in 22.34 seconds
+Failing tests: 8
+	org.jsoup.select.SelectorTest::splitOnBr$catena_0
+	org.jsoup.select.SelectorTest::splitOnBr$catena_1
+	org.jsoup.select.SelectorTest::splitOnBr$catena_2
+	org.jsoup.select.SelectorTest::splitOnBr$catena_3
+	org.jsoup.select.SelectorTest::textAsElements$catena_0
+	org.jsoup.select.SelectorTest::textAsElements$catena_1
+	org.jsoup.select.SelectorTest::textAsElements$catena_2
+	org.jsoup.select.SelectorTest::textAsElements$catena_3
+No new failing tests but only 1 hunk
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+patches are written to file
+running tests...
+used time: Finished in 21.72 seconds
+Failing tests: 8
+	org.jsoup.select.SelectorTest::splitOnBr$catena_0
+	org.jsoup.select.SelectorTest::splitOnBr$catena_1
+	org.jsoup.select.SelectorTest::splitOnBr$catena_2
+	org.jsoup.select.SelectorTest::splitOnBr$catena_3
+	org.jsoup.select.SelectorTest::textAsElements$catena_0
+	org.jsoup.select.SelectorTest::textAsElements$catena_1
+	org.jsoup.select.SelectorTest::textAsElements$catena_2
+	org.jsoup.select.SelectorTest::textAsElements$catena_3
+Can independently fix []
+Could not fix independently
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 23.04 seconds
+Failing tests: 8
+	org.jsoup.select.SelectorTest::splitOnBr$catena_0
+	org.jsoup.select.SelectorTest::splitOnBr$catena_1
+	org.jsoup.select.SelectorTest::splitOnBr$catena_2
+	org.jsoup.select.SelectorTest::splitOnBr$catena_3
+	org.jsoup.select.SelectorTest::textAsElements$catena_0
+	org.jsoup.select.SelectorTest::textAsElements$catena_1
+	org.jsoup.select.SelectorTest::textAsElements$catena_2
+	org.jsoup.select.SelectorTest::textAsElements$catena_3
+Can independently fix []
+Could not fix independently
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 1 with package org.jsoup.nodes;
+
+import org.jsoup.parser.Tag;
+
+import java.io.IOException;
+
+/**
+ * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with
+ * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.
+ */
+public class PseudoTextElement extends Element {
+
+    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {
+        super(tag, baseUri, attributes);
+    }
+
+    @Override
+    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+
+    @Override
+    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {
+    }
+}
+
+try to fix hunk: 1
+insert before 9 with import org.jsoup.nodes.PseudoTextElement;
+import org.jsoup.nodes.TextNode;
+
+try to fix hunk: 2
+insert before 754 with     public static final class MatchText extends Evaluator {
+
+try to fix hunk: 3
+insert before 755 with         @Override
+        public boolean matches(Element root, Element element) {
+            if (element instanceof PseudoTextElement)
+                return true;
+
+            List<TextNode> textNodes = element.textNodes();
+            for (TextNode textNode : textNodes) {
+                PseudoTextElement pel = new PseudoTextElement(
+                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());
+                textNode.replaceWith(pel);
+                pel.appendChild(textNode);
+            }
+            return false;
+        }
+
+try to fix hunk: 4
+insert before 756 with         @Override
+        public String toString() {
+            return ":matchText";
+        }
+    }
+
+try to fix hunk: 5
+insert before 203 with         else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());
+
+patches are written to file
+running tests...
+used time: Finished in 21.79 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.select.SelectorTest::splitOnBr$catena_2', 'org.jsoup.select.SelectorTest::splitOnBr$catena_3', 'org.jsoup.select.SelectorTest::splitOnBr$catena_0', 'org.jsoup.select.SelectorTest::textAsElements$catena_0', 'org.jsoup.select.SelectorTest::textAsElements$catena_3', 'org.jsoup.select.SelectorTest::textAsElements$catena_2', 'org.jsoup.select.SelectorTest::splitOnBr$catena_1', 'org.jsoup.select.SelectorTest::textAsElements$catena_1']
+select new bug
+Pattern: 111111
+new failing tests:
+org.jsoup.select.SelectorTest::splitOnBr$catena_2
+org.jsoup.select.SelectorTest::splitOnBr$catena_3
+org.jsoup.select.SelectorTest::splitOnBr$catena_0
+org.jsoup.select.SelectorTest::textAsElements$catena_0
+org.jsoup.select.SelectorTest::textAsElements$catena_3
+org.jsoup.select.SelectorTest::textAsElements$catena_2
+org.jsoup.select.SelectorTest::splitOnBr$catena_1
+org.jsoup.select.SelectorTest::textAsElements$catena_1
+Save found bug
+processed: 111111
+Find 1 new bugs

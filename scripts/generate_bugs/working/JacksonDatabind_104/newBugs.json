@@ -1,0 +1,123 @@
+{
+    "original": {
+        "num_of_hunks": 8,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "        if (cal.get(Calendar.ERA) == GregorianCalendar.BC) {\n            _formatBCEYear(buffer, year);\n        } else {\n            if (year > 9999) {\n",
+            "patch_type": "insert",
+            "next_line_no": 441
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "                buffer.append('+');\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 446
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 447
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "    protected void _formatBCEYear(StringBuffer buffer, int bceYearNoSign) {\n",
+            "patch_type": "insert",
+            "next_line_no": 483
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "        if (bceYearNoSign == 1) {\n            buffer.append(\"+0000\");\n            return;\n        }\n        final int isoYear = bceYearNoSign - 1;\n        buffer.append('-');\n",
+            "patch_type": "insert",
+            "next_line_no": 485
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "        pad4(buffer, isoYear);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 488
+        },
+        "6": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "            if (h > 99) { // [databind#2167]: handle above 9999 correctly\n                buffer.append(h);\n            } else {\n",
+            "patch_type": "insert",
+            "next_line_no": 516
+        },
+        "7": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "replaced_with": "            }\n",
+            "patch_type": "insert",
+            "next_line_no": 517
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_10k",
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE"
+        ],
+        "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_10k": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java",
+            "Instance": "Begin: Pos(130, 12)\nEnd: Pos(137, 5)\nSource: /tmp/c4j/JacksonDatabind_104/src/test/java//com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java\nName: testDateISO8601_10k\nChilds: [StatementAssertion<Begin: Pos(134, 9), End: Pos(134, 101)>,\nStatementAssertion<Begin: Pos(136, 9), End: Pos(136, 103)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_104/src/test/java//com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java",
+            "name": "testDateISO8601_10k",
+            "begin": "Pos(130, 12)",
+            "end": "Pos(137, 5)",
+            "begin_line_no": 130,
+            "end_line_no": 137,
+            "child": [
+                "Begin: Pos(134, 9)\nEnd: Pos(134, 101)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(136, 9)\nEnd: Pos(136, 103)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testDateISO8601_10k$catena_0() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n        serialize(w, judate(10204, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+10204-01-01T00:00:00.000+0000\");           /***** ORIGINAL ASSERTION IS HERE *****/\n        // and although specification lacks for beyond 5 digits (well, actually even 5...), let's do our best:\n        try{ serialize(w, judate(123456, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+123456-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testDateISO8601_10k$catena_1() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n        try{ serialize(w, judate(10204, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+10204-01-01T00:00:00.000+0000\");      }catch(Throwable __SHOULD_BE_IGNORED){}\n        // and although specification lacks for beyond 5 digits (well, actually even 5...), let's do our best:\n        serialize(w, judate(123456, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+123456-01-01T00:00:00.000+0000\");         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testDateISO8601_10k$catena_0() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n        serialize(w, judate(10204, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+10204-01-01T00:00:00.000+0000\");           /***** ORIGINAL ASSERTION IS HERE *****/\n        // and although specification lacks for beyond 5 digits (well, actually even 5...), let's do our best:\n        try{ serialize(w, judate(123456, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+123456-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testDateISO8601_10k$catena_1() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n        try{ serialize(w, judate(10204, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+10204-01-01T00:00:00.000+0000\");      }catch(Throwable __SHOULD_BE_IGNORED){}\n        // and although specification lacks for beyond 5 digits (well, actually even 5...), let's do our best:\n        serialize(w, judate(123456, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+123456-01-01T00:00:00.000+0000\");         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java",
+            "Instance": "Begin: Pos(140, 12)\nEnd: Pos(152, 5)\nSource: /tmp/c4j/JacksonDatabind_104/src/test/java//com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java\nName: testDateISO8601_BCE\nChilds: [StatementAssertion<Begin: Pos(148, 9), End: Pos(148, 96)>,\nStatementAssertion<Begin: Pos(149, 9), End: Pos(149, 97)>,\nStatementAssertion<Begin: Pos(150, 9), End: Pos(150, 98)>,\nStatementAssertion<Begin: Pos(151, 9), End: Pos(151, 99)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_104/src/test/java//com/fasterxml/jackson/databind/ser/jdk/DateSerializationTest.java",
+            "name": "testDateISO8601_BCE",
+            "begin": "Pos(140, 12)",
+            "end": "Pos(152, 5)",
+            "begin_line_no": 140,
+            "end_line_no": 152,
+            "child": [
+                "Begin: Pos(148, 9)\nEnd: Pos(148, 96)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(149, 9)\nEnd: Pos(149, 97)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(150, 9)\nEnd: Pos(150, 98)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(151, 9)\nEnd: Pos(151, 99)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testDateISO8601_BCE$catena_0() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "    public void testDateISO8601_BCE$catena_1() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "    public void testDateISO8601_BCE$catena_2() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");         /***** ORIGINAL ASSERTION IS HERE *****/ // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "    public void testDateISO8601_BCE$catena_3() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");          /***** ORIGINAL ASSERTION IS HERE *****/ // Carthage FTW?\n    }"
+            ],
+            "func": {
+                "0": "    public void testDateISO8601_BCE$catena_0() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "1": "    public void testDateISO8601_BCE$catena_1() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "2": "    public void testDateISO8601_BCE$catena_2() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");         /***** ORIGINAL ASSERTION IS HERE *****/ // All hail Caesar\n        try{ serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");     }catch(Throwable __SHOULD_BE_IGNORED){} // Carthage FTW?\n    }",
+                "3": "    public void testDateISO8601_BCE$catena_3() throws IOException\n    {\n        ObjectWriter w = MAPPER.writer()\n                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);\n\n        // First: I _think_ BCE-1 is what you get with year 0, and should become \"+0000\"\n        // and from further back in time, it'll be \"-0001\" (BCE-2) etc)\n\n        try{ serialize(w, judate(0, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"+0000-01-01T00:00:00.000+0000\");                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-1, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0001-01-01T00:00:00.000+0000\");                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ serialize(w, judate(-49, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0049-01-01T00:00:00.000+0000\");    }catch(Throwable __SHOULD_BE_IGNORED){} // All hail Caesar\n        serialize(w, judate(-264, 1, 1,  00, 00, 00, 0, \"UTC\"),   \"-0264-01-01T00:00:00.000+0000\");          /***** ORIGINAL ASSERTION IS HERE *****/ // Carthage FTW?\n    }"
+            }
+        }
+    },
+    "11111100": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE$catena_3",
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE$catena_1",
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE$catena_0",
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_BCE$catena_2"
+        ]
+    },
+    "11111111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_10k$catena_1",
+            "com.fasterxml.jackson.databind.ser.jdk.DateSerializationTest::testDateISO8601_10k$catena_0"
+        ]
+    }
+}

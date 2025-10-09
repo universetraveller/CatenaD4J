@@ -1,0 +1,2571 @@
+---
+Begin generate bug_id: JacksonDatabind_87
+num_of_hunks: 11
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_87
+Try to checkout JacksonDatabind_87
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java
+trying to replace old failing tests
+edit: replace from 267 range 20 at src/test/java/com/fasterxml/jackson/databind/deser/TestDateDeserialization.java
+to
+    public void testDateUtilISO8601NoTimezoneNonDefault$catena_0() throws Exception
+    {
+        // In first case, no timezone -> SHOULD use configured timezone
+        ObjectReader r = MAPPER.readerFor(Date.class);
+        TimeZone tz = TimeZone.getTimeZone("GMT-2");
+        Date date1 = r.with(tz)
+                .readValue(quote("1970-01-01T00:00:00.000"));
+        // Second case, should use specified timezone, not configured
+        Date date2 = r.with(TimeZone.getTimeZone("GMT+5"))
+                .readValue(quote("1970-01-01T00:00:00.000-02:00"));
+        assertEquals(date1, date2);                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // also verify actual value, in GMT
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        c.setTime(date1);
+        try{ assertEquals(1970, c.get(Calendar.YEAR));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Calendar.JANUARY, c.get(Calendar.MONTH));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, c.get(Calendar.DAY_OF_MONTH));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, c.get(Calendar.HOUR_OF_DAY));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateUtilISO8601NoTimezoneNonDefault$catena_1() throws Exception
+    {
+        // In first case, no timezone -> SHOULD use configured timezone
+        ObjectReader r = MAPPER.readerFor(Date.class);
+        TimeZone tz = TimeZone.getTimeZone("GMT-2");
+        Date date1 = r.with(tz)
+                .readValue(quote("1970-01-01T00:00:00.000"));
+        // Second case, should use specified timezone, not configured
+        Date date2 = r.with(TimeZone.getTimeZone("GMT+5"))
+                .readValue(quote("1970-01-01T00:00:00.000-02:00"));
+        try{ assertEquals(date1, date2);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also verify actual value, in GMT
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        c.setTime(date1);
+        assertEquals(1970, c.get(Calendar.YEAR));                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(Calendar.JANUARY, c.get(Calendar.MONTH));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, c.get(Calendar.DAY_OF_MONTH));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, c.get(Calendar.HOUR_OF_DAY));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateUtilISO8601NoTimezoneNonDefault$catena_2() throws Exception
+    {
+        // In first case, no timezone -> SHOULD use configured timezone
+        ObjectReader r = MAPPER.readerFor(Date.class);
+        TimeZone tz = TimeZone.getTimeZone("GMT-2");
+        Date date1 = r.with(tz)
+                .readValue(quote("1970-01-01T00:00:00.000"));
+        // Second case, should use specified timezone, not configured
+        Date date2 = r.with(TimeZone.getTimeZone("GMT+5"))
+                .readValue(quote("1970-01-01T00:00:00.000-02:00"));
+        try{ assertEquals(date1, date2);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also verify actual value, in GMT
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        c.setTime(date1);
+        try{ assertEquals(1970, c.get(Calendar.YEAR));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(Calendar.JANUARY, c.get(Calendar.MONTH));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, c.get(Calendar.DAY_OF_MONTH));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, c.get(Calendar.HOUR_OF_DAY));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateUtilISO8601NoTimezoneNonDefault$catena_3() throws Exception
+    {
+        // In first case, no timezone -> SHOULD use configured timezone
+        ObjectReader r = MAPPER.readerFor(Date.class);
+        TimeZone tz = TimeZone.getTimeZone("GMT-2");
+        Date date1 = r.with(tz)
+                .readValue(quote("1970-01-01T00:00:00.000"));
+        // Second case, should use specified timezone, not configured
+        Date date2 = r.with(TimeZone.getTimeZone("GMT+5"))
+                .readValue(quote("1970-01-01T00:00:00.000-02:00"));
+        try{ assertEquals(date1, date2);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also verify actual value, in GMT
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        c.setTime(date1);
+        try{ assertEquals(1970, c.get(Calendar.YEAR));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Calendar.JANUARY, c.get(Calendar.MONTH));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, c.get(Calendar.DAY_OF_MONTH));                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, c.get(Calendar.HOUR_OF_DAY));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateUtilISO8601NoTimezoneNonDefault$catena_4() throws Exception
+    {
+        // In first case, no timezone -> SHOULD use configured timezone
+        ObjectReader r = MAPPER.readerFor(Date.class);
+        TimeZone tz = TimeZone.getTimeZone("GMT-2");
+        Date date1 = r.with(tz)
+                .readValue(quote("1970-01-01T00:00:00.000"));
+        // Second case, should use specified timezone, not configured
+        Date date2 = r.with(TimeZone.getTimeZone("GMT+5"))
+                .readValue(quote("1970-01-01T00:00:00.000-02:00"));
+        try{ assertEquals(date1, date2);                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also verify actual value, in GMT
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        c.setTime(date1);
+        try{ assertEquals(1970, c.get(Calendar.YEAR));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(Calendar.JANUARY, c.get(Calendar.MONTH));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, c.get(Calendar.DAY_OF_MONTH));                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, c.get(Calendar.HOUR_OF_DAY));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestDateDeserialization.java
+new test num: 5
+ori test num: 0
+pattern: 00000000000
+patches are written to file
+running tests...
+used time: Finished in 220.46 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+processed: 00000000000
+pattern: 00000000001
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000001
+pattern: 00000000010
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000010
+pattern: 00000000100
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000100
+pattern: 00000001000
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+used time: Finished in 221.09 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+No new failing tests but only 1 hunk
+processed: 00000001000
+pattern: 00000010000
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010000
+pattern: 00000100000
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100000
+pattern: 00001000000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+patches are written to file
+running tests...
+used time: Finished in 245.39 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+No new failing tests but only 1 hunk
+processed: 00001000000
+pattern: 00010000000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000000
+pattern: 00100000000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000000
+pattern: 01000000000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000000
+pattern: 10000000000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+patches are written to file
+running tests...
+used time: Finished in 215.38 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+No new failing tests but only 1 hunk
+processed: 10000000000
+pattern: 00000000011
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000011
+pattern: 00000000101
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000101
+pattern: 00000000110
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000110
+pattern: 00000001001
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001001
+pattern: 00000001010
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001010
+pattern: 00000001100
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001100
+pattern: 00000010001
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010001
+pattern: 00000010010
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010010
+pattern: 00000010100
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010100
+pattern: 00000011000
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011000
+pattern: 00000100001
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100001
+pattern: 00000100010
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100010
+pattern: 00000100100
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100100
+pattern: 00000101000
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101000
+pattern: 00000110000
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110000
+pattern: 00001000001
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+used time: Finished in 237.36 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 00001000001
+pattern: 00001000010
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000010
+pattern: 00001000100
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000100
+pattern: 00001001000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+used time: Finished in 245.38 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 00001001000
+pattern: 00001010000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010000
+pattern: 00001100000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100000
+pattern: 00010000001
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000001
+pattern: 00010000010
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000010
+pattern: 00010000100
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000100
+pattern: 00010001000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001000
+pattern: 00010010000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010000
+pattern: 00010100000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100000
+pattern: 00011000000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000000
+pattern: 00100000001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000001
+pattern: 00100000010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000010
+pattern: 00100000100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000100
+pattern: 00100001000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001000
+pattern: 00100010000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010000
+pattern: 00100100000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100000
+pattern: 00101000000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101000000
+pattern: 00110000000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110000000
+pattern: 01000000001
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000001
+pattern: 01000000010
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000010
+pattern: 01000000100
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000100
+pattern: 01000001000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000001000
+pattern: 01000010000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000010000
+pattern: 01000100000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000100000
+pattern: 01001000000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001000000
+pattern: 01010000000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010000000
+pattern: 01100000000
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100000000
+pattern: 10000000001
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000001
+pattern: 10000000010
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000010
+pattern: 10000000100
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000100
+pattern: 10000001000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+used time: Finished in 211.21 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 10000001000
+pattern: 10000010000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000010000
+pattern: 10000100000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000100000
+pattern: 10001000000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+patches are written to file
+running tests...
+used time: Finished in 209.78 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 10001000000
+pattern: 10010000000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010000000
+pattern: 10100000000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100000000
+pattern: 11000000000
+try to fix hunk: 0
+insert before 47 with     protected final static String DATE_FORMAT_STR_ISO8601_NO_TZ = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
+try to fix hunk: 1
+insert before 65 with         DATE_FORMAT_STR_ISO8601_NO_TZ,
+
+patches are written to file
+running tests...
+used time: Finished in 222.22 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 11000000000
+pattern: 00000000111
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000111
+pattern: 00000001011
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001011
+pattern: 00000001101
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001101
+pattern: 00000001110
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001110
+pattern: 00000010011
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010011
+pattern: 00000010101
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010101
+pattern: 00000010110
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010110
+pattern: 00000011001
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011001
+pattern: 00000011010
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011010
+pattern: 00000011100
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011100
+pattern: 00000100011
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100011
+pattern: 00000100101
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100101
+pattern: 00000100110
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100110
+pattern: 00000101001
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101001
+pattern: 00000101010
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101010
+pattern: 00000101100
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101100
+pattern: 00000110001
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110001
+pattern: 00000110010
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110010
+pattern: 00000110100
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110100
+pattern: 00000111000
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000111000
+pattern: 00001000011
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000011
+pattern: 00001000101
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000101
+pattern: 00001000110
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000110
+pattern: 00001001001
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+used time: Finished in 223.50 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_0
+	com.fasterxml.jackson.databind.deser.TestDateDeserialization::testDateUtilISO8601NoTimezoneNonDefault$catena_4
+Can independently fix []
+Could not fix independently
+processed: 00001001001
+pattern: 00001001010
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001001010
+pattern: 00001001100
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001001100
+pattern: 00001010001
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010001
+pattern: 00001010010
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010010
+pattern: 00001010100
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010100
+pattern: 00001011000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001011000
+pattern: 00001100001
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100001
+pattern: 00001100010
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100010
+pattern: 00001100100
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100100
+pattern: 00001101000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001101000
+pattern: 00001110000
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001110000
+pattern: 00010000011
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000011
+pattern: 00010000101
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000101
+pattern: 00010000110
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000110
+pattern: 00010001001
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001001
+pattern: 00010001010
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001010
+pattern: 00010001100
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001100
+pattern: 00010010001
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010001
+pattern: 00010010010
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010010
+pattern: 00010010100
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010100
+pattern: 00010011000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010011000
+pattern: 00010100001
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100001
+pattern: 00010100010
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100010
+pattern: 00010100100
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100100
+pattern: 00010101000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010101000
+pattern: 00010110000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010110000
+pattern: 00011000001
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000001
+pattern: 00011000010
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000010
+pattern: 00011000100
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000100
+pattern: 00011001000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011001000
+pattern: 00011010000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011010000
+pattern: 00011100000
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011100000
+pattern: 00100000011
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000011
+pattern: 00100000101
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000101
+pattern: 00100000110
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000110
+pattern: 00100001001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001001
+pattern: 00100001010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001010
+pattern: 00100001100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001100
+pattern: 00100010001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010001
+pattern: 00100010010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010010
+pattern: 00100010100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010100
+pattern: 00100011000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100011000
+pattern: 00100100001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100001
+pattern: 00100100010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100010
+pattern: 00100100100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100100
+pattern: 00100101000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100101000
+pattern: 00100110000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100110000
+pattern: 00101000001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101000001
+pattern: 00101000010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101000010
+pattern: 00101000100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101000100
+pattern: 00101001000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 7
+insert before 526 with                     dateStr = sb.toString();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101001000
+pattern: 00101010000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 6
+insert before 518 with                     StringBuilder sb = new StringBuilder(dateStr);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101010000
+pattern: 00101100000
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 4
+insert before 132 with     protected transient DateFormat _formatISO8601_noTz; // 2.8.10
+
+try to fix hunk: 5
+delete from 514 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101100000
+pattern: 00110000001
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 10
+insert before 597 with         _formatISO8601_noTz = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110000001
+pattern: 00110000010
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 9
+replace from 535 with range 2 to
+                    df = _formatISO8601_noTz = _cloneFormat(DATE_FORMAT_ISO8601_NO_TZ, formatStr,
+                            _timezone, _locale, _lenient);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110000010
+pattern: 00110000100
+try to fix hunk: 2
+insert before 84 with     protected final static DateFormat DATE_FORMAT_ISO8601_NO_TZ; // since 2.8.10
+
+try to fix hunk: 3
+insert before 102 with         DATE_FORMAT_ISO8601_NO_TZ = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_NO_TZ, DEFAULT_LOCALE);
+        DATE_FORMAT_ISO8601_NO_TZ.setTimeZone(DEFAULT_TIMEZONE);
+
+try to fix hunk: 8
+replace from 527 with range 4 to
+                df = _formatISO8601_noTz;
+                formatStr = DATE_FORMAT_STR_ISO8601_NO_TZ;
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

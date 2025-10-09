@@ -1,0 +1,49 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/ArchiveStreamFactory.java",
+            "replaced_with": "            if (signatureLength >= 512) {\n",
+            "patch_type": "insert",
+            "next_line_no": 240
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/ArchiveStreamFactory.java",
+            "replaced_with": "            }\n",
+            "patch_type": "insert",
+            "next_line_no": 249
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs"
+        ],
+        "org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java",
+            "Instance": "Begin: Pos(31, 5)\nEnd: Pos(40, 5)\nSource: /tmp/c4j/Compress_11/src/test/java//org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java\nName: shortTextFilesAreNoTARs\nChilds: [StatementAssertion<Begin: Pos(36, 13), End: Pos(36, 62)>,\nStatementAssertion<Begin: Pos(38, 13), End: Pos(38, 72)>,\n]",
+            "source": "/tmp/c4j/Compress_11/src/test/java//org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java",
+            "name": "shortTextFilesAreNoTARs",
+            "begin": "Pos(31, 5)",
+            "end": "Pos(40, 5)",
+            "begin_line_no": 31,
+            "end_line_no": 40,
+            "child": [
+                "Begin: Pos(36, 13)\nEnd: Pos(36, 62)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(38, 13)\nEnd: Pos(38, 72)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void shortTextFilesAreNoTARs$catena_0() throws Exception {\n        try {\n            new ArchiveStreamFactory()\n                .createArchiveInputStream(new ByteArrayInputStream(\"This certainly is not a tar archive, really, no kidding\".getBytes()));\n            fail(\"created an input stream for a non-archive\");                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (ArchiveException ae) {\n            try{ assertTrue(ae.getMessage().startsWith(\"No Archiver found\"));                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    @Test\n    public void shortTextFilesAreNoTARs$catena_1() throws Exception {\n        try {\n            new ArchiveStreamFactory()\n                .createArchiveInputStream(new ByteArrayInputStream(\"This certainly is not a tar archive, really, no kidding\".getBytes()));\n            try{ fail(\"created an input stream for a non-archive\");                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (ArchiveException ae) {\n            assertTrue(ae.getMessage().startsWith(\"No Archiver found\"));                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void shortTextFilesAreNoTARs$catena_0() throws Exception {\n        try {\n            new ArchiveStreamFactory()\n                .createArchiveInputStream(new ByteArrayInputStream(\"This certainly is not a tar archive, really, no kidding\".getBytes()));\n            fail(\"created an input stream for a non-archive\");                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (ArchiveException ae) {\n            try{ assertTrue(ae.getMessage().startsWith(\"No Archiver found\"));                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    @Test\n    public void shortTextFilesAreNoTARs$catena_1() throws Exception {\n        try {\n            new ArchiveStreamFactory()\n                .createArchiveInputStream(new ByteArrayInputStream(\"This certainly is not a tar archive, really, no kidding\".getBytes()));\n            try{ fail(\"created an input stream for a non-archive\");                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (ArchiveException ae) {\n            assertTrue(ae.getMessage().startsWith(\"No Archiver found\"));                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::shortTextFilesAreNoTARs$catena_0"
+        ]
+    }
+}

@@ -1,0 +1,205 @@
+---
+Begin generate bug_id: Compress_47
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Compress_47
+Try to checkout Compress_47
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java
+trying to replace old failing tests
+edit: replace from 329 range 13 at src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java
+to
+    @Test
+    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_0() throws Exception {
+        // we never read any data
+        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {
+            ZipArchiveEntry e = new ZipArchiveEntry("test");
+            e.setMethod(ZipMethod.DEFLATED.getCode());
+            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());
+            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+            e.setMethod(ZipMethod.BZIP2.getCode());
+            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_1() throws Exception {
+        // we never read any data
+        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {
+            ZipArchiveEntry e = new ZipArchiveEntry("test");
+            e.setMethod(ZipMethod.DEFLATED.getCode());
+            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());
+            assertTrue(zis.canReadEntryData(e));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+            e.setMethod(ZipMethod.BZIP2.getCode());
+            try{ assertFalse(zis.canReadEntryData(e));                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2() throws Exception {
+        // we never read any data
+        try (ZipArchiveInputStream zis = new ZipArchiveInputStream(new ByteArrayInputStream(new byte[0]))) {
+            ZipArchiveEntry e = new ZipArchiveEntry("test");
+            e.setMethod(ZipMethod.DEFLATED.getCode());
+            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+            e.setMethod(ZipMethod.ENHANCED_DEFLATED.getCode());
+            try{ assertTrue(zis.canReadEntryData(e));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+            e.setMethod(ZipMethod.BZIP2.getCode());
+            assertFalse(zis.canReadEntryData(e));                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java
+new test num: 3
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 69.52 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 809 with     private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {
+        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN
+            || entry.getMethod() == ZipEntry.DEFLATED
+            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()
+            || (entry.getGeneralPurposeBit().usesDataDescriptor()
+                && allowStoredEntriesWithDataDescriptor
+                && entry.getMethod() == ZipEntry.STORED);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 70.73 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 440 with         if (!supportsCompressedSizeFor(current.entry)) {
+            throw new UnsupportedZipFeatureException(UnsupportedZipFeatureException.Feature.UNKNOWN_COMPRESSED_SIZE,
+                    current.entry);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 415 with range 1 to
+                && supportsDataDescriptorFor(ze)
+                && supportsCompressedSizeFor(ze);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 440 with         if (!supportsCompressedSizeFor(current.entry)) {
+            throw new UnsupportedZipFeatureException(UnsupportedZipFeatureException.Feature.UNKNOWN_COMPRESSED_SIZE,
+                    current.entry);
+        }
+
+try to fix hunk: 2
+insert before 809 with     private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {
+        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN
+            || entry.getMethod() == ZipEntry.DEFLATED
+            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()
+            || (entry.getGeneralPurposeBit().usesDataDescriptor()
+                && allowStoredEntriesWithDataDescriptor
+                && entry.getMethod() == ZipEntry.STORED);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 71.04 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 415 with range 1 to
+                && supportsDataDescriptorFor(ze)
+                && supportsCompressedSizeFor(ze);
+
+try to fix hunk: 2
+insert before 809 with     private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {
+        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN
+            || entry.getMethod() == ZipEntry.DEFLATED
+            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()
+            || (entry.getGeneralPurposeBit().usesDataDescriptor()
+                && allowStoredEntriesWithDataDescriptor
+                && entry.getMethod() == ZipEntry.STORED);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 65.92 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2']
+select new bug
+Pattern: 101
+new failing tests:
+org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properlyMarksEntriesAsUnreadableIfUncompressedSizeIsUnknown$catena_2
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 415 with range 1 to
+                && supportsDataDescriptorFor(ze)
+                && supportsCompressedSizeFor(ze);
+
+try to fix hunk: 1
+insert before 440 with         if (!supportsCompressedSizeFor(current.entry)) {
+            throw new UnsupportedZipFeatureException(UnsupportedZipFeatureException.Feature.UNKNOWN_COMPRESSED_SIZE,
+                    current.entry);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 415 with range 1 to
+                && supportsDataDescriptorFor(ze)
+                && supportsCompressedSizeFor(ze);
+
+try to fix hunk: 1
+insert before 440 with         if (!supportsCompressedSizeFor(current.entry)) {
+            throw new UnsupportedZipFeatureException(UnsupportedZipFeatureException.Feature.UNKNOWN_COMPRESSED_SIZE,
+                    current.entry);
+        }
+
+try to fix hunk: 2
+insert before 809 with     private boolean supportsCompressedSizeFor(final ZipArchiveEntry entry) {
+        return entry.getCompressedSize() != ArchiveEntry.SIZE_UNKNOWN
+            || entry.getMethod() == ZipEntry.DEFLATED
+            || entry.getMethod() == ZipMethod.ENHANCED_DEFLATED.getCode()
+            || (entry.getGeneralPurposeBit().usesDataDescriptor()
+                && allowStoredEntriesWithDataDescriptor
+                && entry.getMethod() == ZipEntry.STORED);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 67.85 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

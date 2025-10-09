@@ -1,0 +1,54 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+            "from_line_no": 119,
+            "to_line_no": 119,
+            "replaced": "                if (_deserialize(text, ctxt) != null) {\n",
+            "patch_type": "delete",
+            "next_line_no": 120
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+            "from_line_no": 121,
+            "to_line_no": 121,
+            "replaced": "                }\n",
+            "patch_type": "delete",
+            "next_line_no": 122
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling"
+        ],
+        "com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java",
+            "Instance": "Begin: Pos(236, 12)\nEnd: Pos(249, 5)\nSource: /tmp/c4j/JacksonDatabind_83/src/test/java//com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java\nName: testWeirdStringHandling\nChilds: [StatementAssertion<Begin: Pos(242, 9), End: Pos(242, 49)>,\nStatementAssertion<Begin: Pos(248, 9), End: Pos(248, 28)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_83/src/test/java//com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java",
+            "name": "testWeirdStringHandling",
+            "begin": "Pos(236, 12)",
+            "end": "Pos(249, 5)",
+            "begin_line_no": 236,
+            "end_line_no": 249,
+            "child": [
+                "Begin: Pos(242, 9)\nEnd: Pos(242, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(248, 9)\nEnd: Pos(248, 28)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testWeirdStringHandling$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        assertEquals(SingleValuedEnum.A, result);                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        try{ assertNull(result2);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testWeirdStringHandling$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        try{ assertEquals(SingleValuedEnum.A, result);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        assertNull(result2);                                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testWeirdStringHandling$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        assertEquals(SingleValuedEnum.A, result);                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        try{ assertNull(result2);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testWeirdStringHandling$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper()\n            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))\n            ;\n        SingleValuedEnum result = mapper.readValue(\"\\\"B\\\"\", SingleValuedEnum.class);\n        try{ assertEquals(SingleValuedEnum.A, result);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // also, write [databind#1629] try this\n        mapper = new ObjectMapper()\n                .addHandler(new WeirdStringHandler(null));\n        UUID result2 = mapper.readValue(quote(\"not a uuid!\"), UUID.class);\n        assertNull(result2);                                                                                /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_1",
+            "com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_0"
+        ]
+    }
+}

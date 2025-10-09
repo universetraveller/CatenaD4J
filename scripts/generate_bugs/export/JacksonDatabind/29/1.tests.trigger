@@ -1,0 +1,2 @@
+com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_1
+com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_0

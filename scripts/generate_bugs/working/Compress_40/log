@@ -1,0 +1,1090 @@
+---
+Begin generate bug_id: Compress_40
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Compress_40
+Try to checkout Compress_40
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/utils/BitInputStream.java
+trying to replace old failing tests
+edit: replace from 124 range 23 at src/test/java/org/apache/commons/compress/utils/BitInputStreamTest.java
+to
+    @Test
+    public void littleEndianWithOverflow$catena_0() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.LITTLE_ENDIAN);
+        assertEquals(23, // 10111
+                     bin.readBits(5));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(714595605644185962l, // 0001-00111101-01011000-00011101-01011010-00001111-01000010-00101101-010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1186, // 01001010-0010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void littleEndianWithOverflow$catena_1() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.LITTLE_ENDIAN);
+        try{ assertEquals(23, // 10111
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(714595605644185962l, // 0001-00111101-01011000-00011101-01011010-00001111-01000010-00101101-010
+                     bin.readBits(63));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1186, // 01001010-0010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void littleEndianWithOverflow$catena_2() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.LITTLE_ENDIAN);
+        try{ assertEquals(23, // 10111
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(714595605644185962l, // 0001-00111101-01011000-00011101-01011010-00001111-01000010-00101101-010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1186, // 01001010-0010
+                     bin.readBits(12));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void littleEndianWithOverflow$catena_3() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.LITTLE_ENDIAN);
+        try{ assertEquals(23, // 10111
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(714595605644185962l, // 0001-00111101-01011000-00011101-01011010-00001111-01000010-00101101-010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1186, // 01001010-0010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1 , bin.readBits(1));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 148 range 23 at src/test/java/org/apache/commons/compress/utils/BitInputStreamTest.java
+to
+    @Test
+    public void bigEndianWithOverflow$catena_0() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.BIG_ENDIAN);
+        assertEquals(10, // 01010
+                     bin.readBits(5));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(8274274654740644818l, //111-00101101-01000010-00001111-01011010-00011101-01011000-00111101-0010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(330, // 0001-01001010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void bigEndianWithOverflow$catena_1() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.BIG_ENDIAN);
+        try{ assertEquals(10, // 01010
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(8274274654740644818l, //111-00101101-01000010-00001111-01011010-00011101-01011000-00111101-0010
+                     bin.readBits(63));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(330, // 0001-01001010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void bigEndianWithOverflow$catena_2() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.BIG_ENDIAN);
+        try{ assertEquals(10, // 01010
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(8274274654740644818l, //111-00101101-01000010-00001111-01011010-00011101-01011000-00111101-0010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(330, // 0001-01001010
+                     bin.readBits(12));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1 , bin.readBits(1));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void bigEndianWithOverflow$catena_3() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream(new byte[] {
+                87, // 01010111
+                45, // 00101101
+                66, // 01000010
+                15, // 00001111
+                90, // 01011010
+                29, // 00011101
+                88, // 01011000
+                61, // 00111101
+                33, // 00100001
+                74  // 01001010
+            });
+        BitInputStream bin = new BitInputStream(in, ByteOrder.BIG_ENDIAN);
+        try{ assertEquals(10, // 01010
+                     bin.readBits(5));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(8274274654740644818l, //111-00101101-01000010-00001111-01011010-00011101-01011000-00111101-0010
+                     bin.readBits(63));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(330, // 0001-01001010
+                     bin.readBits(12));                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1 , bin.readBits(1));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/compress/utils/BitInputStreamTest.java
+new test num: 8
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 30.96 seconds
+Failing tests: 2
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+patches are written to file
+running tests...
+used time: Finished in 33.57 seconds
+Failing tests: 3
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_1
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+Includes new failing tests, set to unusable
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 32.53 seconds
+Failing tests: 2
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+Can independently fix []
+Could not fix independently
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 32.52 seconds
+Failing tests: 4
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_2
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_3
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_3
+Includes new failing tests, set to unusable
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 35.00 seconds
+Failing tests: 2
+	org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1
+	org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+Can independently fix []
+Could not fix independently
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+replace from 85 with range 1 to
+        while (bitsCachedSize < count && bitsCachedSize < 57) {
+
+try to fix hunk: 1
+insert before 98 with         int overflowBits = 0;
+        long overflow = 0l;
+        if (bitsCachedSize < count) {
+
+try to fix hunk: 2
+insert before 99 with             int bitsToAddCount = count - bitsCachedSize;
+            overflowBits = 8 - bitsToAddCount;
+            final long nextByte = in.read();
+            if (nextByte < 0) {
+                return nextByte;
+            }
+            if (byteOrder == ByteOrder.LITTLE_ENDIAN) {
+                long bitsToAdd = nextByte & MASKS[bitsToAddCount];
+                bitsCached |= (bitsToAdd << bitsCachedSize);
+                overflow = (nextByte >>> bitsToAddCount) & MASKS[overflowBits];
+            } else {
+                bitsCached <<= bitsToAddCount;
+                long bitsToAdd = (nextByte >>> (overflowBits)) & MASKS[bitsToAddCount];
+                bitsCached |= bitsToAdd;
+                overflow = nextByte & MASKS[overflowBits];
+            }
+            bitsCachedSize = count;
+        }
+
+try to fix hunk: 3
+insert before 101 with         if (overflowBits == 0) {
+
+try to fix hunk: 4
+insert before 108 with         } else {
+            bitsOut = bitsCached & MASKS[count];
+            bitsCached = overflow;
+            bitsCachedSize = overflowBits;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 31.16 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1', 'org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2']
+select new bug
+Pattern: 11111
+new failing tests:
+org.apache.commons.compress.utils.BitInputStreamTest::bigEndianWithOverflow$catena_1
+org.apache.commons.compress.utils.BitInputStreamTest::littleEndianWithOverflow$catena_2
+Save found bug
+processed: 11111
+Find 1 new bugs
