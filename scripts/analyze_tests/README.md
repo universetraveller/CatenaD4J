@@ -23,13 +23,13 @@ For actual arguments please check the previous experiments and ensure they are d
 
 The paths of files/directories in arguments can be specified in the experiment `construct_database` (by default, they are `../construct_database/d4j_export/database.json`, `../construct_database/2toMore` and `/tmp` respectively). To analyze the bugs which are divied into two parts as mentioned in the overview, the script should be run twice and the argument `<path_to_bug_ids>` should be `../construct_database/2toMore6` and `../construct_database/2toMore11` respectively.
 
-The output is `./logs/log5` which contains the runtime log and the identifiers filtered by the script. You should change the file name of `./logs/log5` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./logs/log5_6` refers to the result of bugs in six projects and `./logs/log5_6` refers to the result of bugs in the other 11 projects). However, the result (a identifier list used in the later experiments) should be manually checked and written (the script only filters all suspicious identifiers and it may make mistakes).  
+The output is `./logs/log5` which contains the runtime log and the identifiers filtered by the script. You should change the file name of `./logs/log5` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./logs/log5_6` refers to the result of bugs in six projects and `./logs/log5_11` refers to the result of bugs in the other 11 projects). However, the result (a identifier list used in the later experiments) should be manually checked and written (the script only filters all suspicious identifiers and it may make mistakes).  
 
 ### Analyze stack trace of the trigger tests
 Script `analyze_triggers.py` further extracts identifiers that may cause test failed (even they are not an assertion).  
 `python3 analyze_triggers.py <path_to_bug_ids> [<path_to_defects4j>]`  
 
-The output is a log file `./names/tryTrigger` which is similar to file `./logs/log5` that we should check its result manually. You should change the file name of `./names/tryTrigger` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./names/tryTrigger6` refers to the result of bugs in six projects and `./names/tryTrigger11` refers to the result of bugs in the other 11 projects).  
+The output is a log file `./names/tryTrigger` which is similar to file `./logs/log5` that we should check its result manually. You should also change the file name of `./names/tryTrigger` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./names/tryTrigger6` refers to the result of bugs in six projects and `./names/tryTrigger11` refers to the result of bugs in the other 11 projects).  
 
 ### Generate identifiers list
 Scripts and text files under folder `./names` are for manually checking and identifiers list generation. 
