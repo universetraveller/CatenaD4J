@@ -17,7 +17,7 @@ The first argument is required. `<path_to_table>` is the table file that is gene
 
 The second and third arguments are optional. If they are not set, it takes default value (`/root/defects4j` and `/tmp`).  
 
-The arguments `<bug_id>` and `<path_to_bug_ids>` are mutually exclusive, and one of them must be provided. If `<bug_id>` is set, the script only execute minimization process on the specified bug id, otherwise, the script execute minimization process on all bug ids in `<path_to_bug_ids>`.  
+The arguments `<bug_id>` and `<path_to_bug_ids>` are mutually exclusive, and one of them must be provided. If `<bug_id>` is set, the script only executes minimization process on the specified bug id, otherwise, the script executes minimization process on all bug ids in `<path_to_bug_ids>`.  
 
 The argument `<path_to_metadata_file>` is optional. If it is not set, it use `./database.json` as default value.  
 
@@ -25,7 +25,7 @@ Example to minimize a single bug: `python3 run.py -d /root/defects4j -w /tmp -b 
 
 The output is a json file `./running/res5.json` which contains information of the original and minimized tests. You should change the file name of `./running/res5.json` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./running/res5_6.json` refers to the result of bugs in six projects and `./running/res5_11.json` refers to the result of bugs in the other 11 projects). Actually, `./running/res5.json` under this folder contains the merged results of `./running/res5_6.json` and `./running/res5_11.json`.
 
-The log of execution is also generated, and written in file `./running/log5` which contains a list of test methods that the spliter could not minimize because of limitation of single file AST analysis. The unhandled test methods could be minimized via more pricise ways (e.g. using Eclipse JDT). You should change the file name of `./running/log5` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./running/log5_6` refers to the result of bugs in six projects and `./running/log5_11` refers to the result of bugs in the other 11 projects). 
+The log of execution is also generated, and written in file `./running/log5` which contains a list of test methods that the spliter could not minimize because of limitation of single file AST analysis. The unhandled test methods could be minimized via more pricise ways (e.g. using Eclipse JDT). You should also change the file name of `./running/log5` if you run the script multiple times and each time on different parts of the bugs (see `./run.sh` for reference where `./running/log5_6` refers to the result of bugs in six projects and `./running/log5_11` refers to the result of bugs in the other 11 projects). 
 
 Notice the output file `./running/res5.json` is not the final version, we should manually modify the name of some minimized tests because specific names may cause test failed (that is another not fixed bug of the buggy project). We should also manually modify the result of `Cli_3` and `Math_44`, because the split tests from `Cli_3` have compilation issues, and the test intended to be split in `Math_44` cannot be separated due to its dependence on a static variable whose initial value changes after test execution.  
 
