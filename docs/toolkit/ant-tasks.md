@@ -3,7 +3,6 @@
 Custom Ant tasks for build file processing.
 
 
-Custom Ant tasks for build file processing.
 
 ### CheckAndRename
 
