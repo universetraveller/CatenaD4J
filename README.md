@@ -6,6 +6,12 @@ C4j works like a plugin of other datasets and now use Defects4J as default backe
 > [!NOTE]
 > In our experiments, we discovered some flaky bugs in the Mockito project within this dataset. These bugs produced varying test results when run in different environments (e.g. sequential versus parallel execution, or under high CPU usage). We wil be working to determine the reasons. It is recommended to avoid using bugs in the Mockito project currently.
 
+## Documentation
+
+- **[Usage Guide](docs/USAGE.md)** - Comprehensive guide for using CatenaD4J commands and workflows
+- **[Python API Documentation](docs/API.md)** - Complete Python API reference for programmatic access
+- **[Java Toolkit API Documentation](docs/JAVA_API.md)** - Java API reference for test execution and utilities
+
 ## Bugs  in the dataset  
 CatenaD4J now contains 6 projects and 367 bugs generated from Defects4J.  
 
