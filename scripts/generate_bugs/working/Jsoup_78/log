@@ -1,0 +1,287 @@
+---
+Begin generate bug_id: Jsoup_78
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_78
+Try to checkout Jsoup_78
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/helper/DataUtil.java
+trying to replace old failing tests
+edit: replace from 387 range 17 at src/test/java/org/jsoup/integration/ConnectTest.java
+to
+    @Test
+    public void handlesEmptyStreamDuringParseRead$catena_0() throws IOException {
+        // this handles situations where the remote server sets a content length greater than it actually writes
+
+        Connection.Response res = Jsoup.connect(InterruptedServlet.Url)
+            .timeout(200)
+            .execute();
+
+        boolean threw = false;
+        try {
+            Document document = res.parse();
+            assertEquals("Something", document.title());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IOException e) {
+            threw = true;
+        }
+        try{ assertEquals(true, threw);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void handlesEmptyStreamDuringParseRead$catena_1() throws IOException {
+        // this handles situations where the remote server sets a content length greater than it actually writes
+
+        Connection.Response res = Jsoup.connect(InterruptedServlet.Url)
+            .timeout(200)
+            .execute();
+
+        boolean threw = false;
+        try {
+            Document document = res.parse();
+            try{ assertEquals("Something", document.title());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IOException e) {
+            threw = true;
+        }
+        assertEquals(true, threw);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/integration/ConnectTest.java
+new test num: 2
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 21.62 seconds
+Failing tests: 2
+	org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_0
+	org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_1
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 151 with             try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+patches are written to file
+running tests...
+used time: Finished in 24.16 seconds
+Failing tests: 2
+	org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_0
+	org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_1
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 1
+insert before 151 with             try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 3 with import org.jsoup.UncheckedIOException;
+
+try to fix hunk: 1
+insert before 151 with             try {
+
+try to fix hunk: 2
+insert before 152 with             } catch (UncheckedIOException e) {
+
+try to fix hunk: 3
+insert before 153 with                 throw e.ioException();
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 21.63 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_1', 'org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_0']
+select new bug
+Pattern: 1111
+new failing tests:
+org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_1
+org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead$catena_0
+Save found bug
+processed: 1111
+Find 1 new bugs

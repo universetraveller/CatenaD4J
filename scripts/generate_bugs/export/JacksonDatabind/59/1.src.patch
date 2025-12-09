@@ -1,0 +1,28 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/JavaType.java",
+            "replaced_with": "    public JavaType withHandlersFrom(JavaType src) {\n        JavaType type = this;\n        Object h = src.getTypeHandler();\n        if (h != _typeHandler) {\n            type = type.withTypeHandler(h);\n        }\n        h = src.getValueHandler();\n        if (h != _valueHandler) {\n            type = type.withValueHandler(h);\n        }\n        return type;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 140
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java",
+            "replaced_with": "    @Override\n    public JavaType withHandlersFrom(JavaType src) {\n        JavaType type = super.withHandlersFrom(src);\n        JavaType srcKeyType = src.getKeyType();\n",
+            "patch_type": "insert",
+            "next_line_no": 148
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java",
+            "replaced_with": "        if (type instanceof MapLikeType) {\n            if (srcKeyType != null) {\n                JavaType ct = _keyType.withHandlersFrom(srcKeyType);\n                if (ct != _keyType) {\n                    type = ((MapLikeType) type).withKeyType(ct);\n                }\n            }\n        }\n        JavaType srcCt = src.getContentType();\n        if (srcCt != null) {\n            JavaType ct = _valueType.withHandlersFrom(srcCt);\n            if (ct != _valueType) {\n                type = type.withContentType(ct);\n            }\n        }\n        return type;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 149
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+            "replaced_with": "        newType = newType.withHandlersFrom(baseType);\n",
+            "patch_type": "insert",
+            "next_line_no": 428
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset$catena_0
+org.jsoup.helper.DataUtilTest::shouldReturnNullForIllegalCharsetNames
+org.jsoup.helper.DataUtilTest::shouldCorrectCharsetForDuplicateCharsetString
+org.jsoup.helper.DataUtilTest::shouldNotThrowExceptionOnEmptyCharset$catena_1

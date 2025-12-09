@@ -1,0 +1,5222 @@
+---
+Begin generate bug_id: Compress_22
+num_of_hunks: 13
+NOTICE: may not contains full fix patterns for hunks are too much (13 hunks)
+timeout for running: 3600
+use working dir: ./working/data/Compress_22
+Try to checkout Compress_22
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/compressors/bzip2/BZip2CompressorInputStream.java
+trying to replace old failing tests
+edit: replace from 84 range 22 at src/test/java/org/apache/commons/compress/compressors/bzip2/PythonTruncatedBzip2Test.java
+to
+    @Test
+    public void testPartialReadTruncatedData$catena_0() throws IOException {
+        //with BZ2File(self.filename) as f:
+        //    self.assertEqual(f.read(len(self.TEXT)), self.TEXT)
+        //    self.assertRaises(EOFError, f.read, 1)
+
+        final int length = TEXT.length();
+        ByteBuffer buffer = ByteBuffer.allocate(length);
+        bz2Channel.read(buffer);
+
+        assertArrayEquals(Arrays.copyOfRange(TEXT.getBytes(), 0, length),
+                buffer.array());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // subsequent read should throw
+        buffer = ByteBuffer.allocate(1);
+        try {
+            bz2Channel.read(buffer);
+            try{ Assert.fail("The read should have thrown.");                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (IOException e) {
+            // pass
+        }
+    }     @Test
+    public void testPartialReadTruncatedData$catena_1() throws IOException {
+        //with BZ2File(self.filename) as f:
+        //    self.assertEqual(f.read(len(self.TEXT)), self.TEXT)
+        //    self.assertRaises(EOFError, f.read, 1)
+
+        final int length = TEXT.length();
+        ByteBuffer buffer = ByteBuffer.allocate(length);
+        bz2Channel.read(buffer);
+
+        try{ assertArrayEquals(Arrays.copyOfRange(TEXT.getBytes(), 0, length),
+                buffer.array());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // subsequent read should throw
+        buffer = ByteBuffer.allocate(1);
+        try {
+            bz2Channel.read(buffer);
+            Assert.fail("The read should have thrown.");                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (IOException e) {
+            // pass
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/compressors/bzip2/PythonTruncatedBzip2Test.java
+new test num: 2
+ori test num: 0
+pattern: 0000000000000
+patches are written to file
+running tests...
+used time: Finished in 18.97 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+processed: 0000000000000
+pattern: 1000000000000
+try to fix hunk: 0
+delete from 67 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000000
+pattern: 0100000000000
+try to fix hunk: 1
+delete from 135 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.19 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000000
+pattern: 0010000000000
+try to fix hunk: 2
+delete from 199 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000000
+pattern: 0001000000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+used time: Finished in 18.32 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0001000000000
+pattern: 0000100000000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 19.64 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0000100000000
+pattern: 0000010000000
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 19.74 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0000010000000
+pattern: 0000001000000
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 19.15 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001000000
+pattern: 0000000100000
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 21.39 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000100000
+pattern: 0000000010000
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000010000
+pattern: 0000000001000
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 17.76 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0000000001000
+pattern: 0000000000100
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.40 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000000100
+pattern: 0000000000010
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 17.97 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0000000000010
+pattern: 0000000000001
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.05 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+No new failing tests but only 1 hunk
+processed: 0000000000001
+pattern: 1100000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000000000
+pattern: 1010000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000000000
+pattern: 1001000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000000000
+pattern: 1000100000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100000000
+pattern: 1000010000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010000000
+pattern: 1000001000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001000000
+pattern: 1000000100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000100000
+pattern: 1000000010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000010000
+pattern: 1000000001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000001000
+pattern: 1000000000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000100
+pattern: 1000000000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000010
+pattern: 1000000000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000001
+pattern: 0110000000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000000000
+pattern: 0101000000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+used time: Finished in 21.61 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101000000000
+pattern: 0100100000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 17.28 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100000000
+pattern: 0100010000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 18.29 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010000000
+pattern: 0100001000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 18.52 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001000000
+pattern: 0100000100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 19.28 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000100000
+pattern: 0100000010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000010000
+pattern: 0100000001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.68 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000001000
+pattern: 0100000000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.09 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000100
+pattern: 0100000000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.28 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000010
+pattern: 0100000000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.92 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000001
+pattern: 0011000000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000000000
+pattern: 0010100000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100000000
+pattern: 0010010000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010000000
+pattern: 0010001000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001000000
+pattern: 0010000100000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000100000
+pattern: 0010000010000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000010000
+pattern: 0010000001000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000001000
+pattern: 0010000000100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000100
+pattern: 0010000000010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000010
+pattern: 0010000000001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000001
+pattern: 0001100000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 19.90 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001100000000
+pattern: 0001010000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.10 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001010000000
+pattern: 0001001000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 22.62 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001000000
+pattern: 0001000100000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.75 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000100000
+pattern: 0001000010000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000010000
+pattern: 0001000001000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.65 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000001000
+pattern: 0001000000100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.85 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000000100
+pattern: 0001000000010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.66 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000000010
+pattern: 0001000000001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.63 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000000001
+pattern: 0000110000000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.75 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000110000000
+pattern: 0000101000000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 21.88 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000101000000
+pattern: 0000100100000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.80 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000100100000
+pattern: 0000100010000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100010000
+pattern: 0000100001000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.54 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000100001000
+pattern: 0000100000100
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.93 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000100000100
+pattern: 0000100000010
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.27 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000100000010
+pattern: 0000100000001
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.24 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000100000001
+pattern: 0000011000000
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 18.97 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000011000000
+pattern: 0000010100000
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 18.11 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000010100000
+pattern: 0000010010000
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010010000
+pattern: 0000010001000
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.38 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000010001000
+pattern: 0000010000100
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.19 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000010000100
+pattern: 0000010000010
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.13 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000010000010
+pattern: 0000010000001
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.39 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000010000001
+pattern: 0000001100000
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.08 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001100000
+pattern: 0000001010000
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001010000
+pattern: 0000001001000
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.39 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001001000
+pattern: 0000001000100
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.09 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001000100
+pattern: 0000001000010
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.14 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001000010
+pattern: 0000001000001
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.26 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000001000001
+pattern: 0000000110000
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000110000
+pattern: 0000000101000
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.67 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000101000
+pattern: 0000000100100
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.83 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000100100
+pattern: 0000000100010
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.54 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000100010
+pattern: 0000000100001
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.69 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000100001
+pattern: 0000000011000
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000011000
+pattern: 0000000010100
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000010100
+pattern: 0000000010010
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000010010
+pattern: 0000000010001
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000000010001
+pattern: 0000000001100
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.48 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000001100
+pattern: 0000000001010
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.42 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000000001010
+pattern: 0000000001001
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.30 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000000001001
+pattern: 0000000000110
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.33 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000000110
+pattern: 0000000000101
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.01 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000000000101
+pattern: 0000000000011
+try to fix hunk: 11
+delete from 913 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.96 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0000000000011
+pattern: 1110000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110000000000
+pattern: 1101000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101000000000
+pattern: 1100100000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100100000000
+pattern: 1100010000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100010000000
+pattern: 1100001000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100001000000
+pattern: 1100000100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000100000
+pattern: 1100000010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000010000
+pattern: 1100000001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000001000
+pattern: 1100000000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000000100
+pattern: 1100000000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000000010
+pattern: 1100000000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000000001
+pattern: 1011000000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011000000000
+pattern: 1010100000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010100000000
+pattern: 1010010000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010010000000
+pattern: 1010001000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010001000000
+pattern: 1010000100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000100000
+pattern: 1010000010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000010000
+pattern: 1010000001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000001000
+pattern: 1010000000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000000100
+pattern: 1010000000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000000010
+pattern: 1010000000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000000001
+pattern: 1001100000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001100000000
+pattern: 1001010000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001010000000
+pattern: 1001001000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001001000000
+pattern: 1001000100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000100000
+pattern: 1001000010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000010000
+pattern: 1001000001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000001000
+pattern: 1001000000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000000100
+pattern: 1001000000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000000010
+pattern: 1001000000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000000001
+pattern: 1000110000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000110000000
+pattern: 1000101000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000101000000
+pattern: 1000100100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100100000
+pattern: 1000100010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100010000
+pattern: 1000100001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100001000
+pattern: 1000100000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100000100
+pattern: 1000100000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100000010
+pattern: 1000100000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100000001
+pattern: 1000011000000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000011000000
+pattern: 1000010100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010100000
+pattern: 1000010010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010010000
+pattern: 1000010001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010001000
+pattern: 1000010000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010000100
+pattern: 1000010000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010000010
+pattern: 1000010000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010000001
+pattern: 1000001100000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001100000
+pattern: 1000001010000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001010000
+pattern: 1000001001000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001001000
+pattern: 1000001000100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001000100
+pattern: 1000001000010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001000010
+pattern: 1000001000001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001000001
+pattern: 1000000110000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000110000
+pattern: 1000000101000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000101000
+pattern: 1000000100100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000100100
+pattern: 1000000100010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000100010
+pattern: 1000000100001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000100001
+pattern: 1000000011000
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000011000
+pattern: 1000000010100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000010100
+pattern: 1000000010010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000010010
+pattern: 1000000010001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000010001
+pattern: 1000000001100
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000001100
+pattern: 1000000001010
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000001010
+pattern: 1000000001001
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000001001
+pattern: 1000000000110
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000110
+pattern: 1000000000101
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000101
+pattern: 1000000000011
+try to fix hunk: 0
+delete from 67 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000000011
+pattern: 0111000000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111000000000
+pattern: 0110100000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110100000000
+pattern: 0110010000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110010000000
+pattern: 0110001000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110001000000
+pattern: 0110000100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000100000
+pattern: 0110000010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000010000
+pattern: 0110000001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000001000
+pattern: 0110000000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000000100
+pattern: 0110000000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000000010
+pattern: 0110000000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000000001
+pattern: 0101100000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 21.10 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101100000000
+pattern: 0101010000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.44 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101010000000
+pattern: 0101001000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 20.15 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0', 'org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1']
+select new bug
+Pattern: 0101001000000
+new failing tests:
+org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Save found bug
+processed: 0101001000000
+pattern: 0101000100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 19.26 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101000100000
+pattern: 0101000010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101000010000
+pattern: 0101000001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.83 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101000001000
+pattern: 0101000000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.61 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0101000000100
+pattern: 0101000000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.66 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101000000010
+pattern: 0101000000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.54 seconds
+Failing tests: 6
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+Includes new failing tests, set to unusable
+processed: 0101000000001
+pattern: 0100110000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 23.12 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100110000000
+pattern: 0100101000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 19.69 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100101000000
+pattern: 0100100100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 21.15 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100100000
+pattern: 0100100010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100010000
+pattern: 0100100001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.37 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100001000
+pattern: 0100100000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.73 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100000100
+pattern: 0100100000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.16 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100000010
+pattern: 0100100000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.32 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100100000001
+pattern: 0100011000000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 22.72 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100011000000
+pattern: 0100010100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 19.71 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010100000
+pattern: 0100010010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100010010000
+pattern: 0100010001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.52 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010001000
+pattern: 0100010000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.41 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010000100
+pattern: 0100010000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.50 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010000010
+pattern: 0100010000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.03 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100010000001
+pattern: 0100001100000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 20.03 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001100000
+pattern: 0100001010000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100001010000
+pattern: 0100001001000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 18.12 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001001000
+pattern: 0100001000100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.42 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001000100
+pattern: 0100001000010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.13 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001000010
+pattern: 0100001000001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.12 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100001000001
+pattern: 0100000110000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000110000
+pattern: 0100000101000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.77 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000101000
+pattern: 0100000100100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.72 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000100100
+pattern: 0100000100010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.79 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000100010
+pattern: 0100000100001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.68 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000100001
+pattern: 0100000011000
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000011000
+pattern: 0100000010100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000010100
+pattern: 0100000010010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000010010
+pattern: 0100000010001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000010001
+pattern: 0100000001100
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.37 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000001100
+pattern: 0100000001010
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.57 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000001010
+pattern: 0100000001001
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.80 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000001001
+pattern: 0100000000110
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.61 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000110
+pattern: 0100000000101
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.69 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000101
+pattern: 0100000000011
+try to fix hunk: 1
+delete from 135 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.82 seconds
+Failing tests: 9
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzip2Unarchive
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0100000000011
+pattern: 0011100000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011100000000
+pattern: 0011010000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011010000000
+pattern: 0011001000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011001000000
+pattern: 0011000100000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000100000
+pattern: 0011000010000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000010000
+pattern: 0011000001000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000001000
+pattern: 0011000000100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000000100
+pattern: 0011000000010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000000010
+pattern: 0011000000001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000000001
+pattern: 0010110000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010110000000
+pattern: 0010101000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010101000000
+pattern: 0010100100000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100100000
+pattern: 0010100010000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100010000
+pattern: 0010100001000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100001000
+pattern: 0010100000100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100000100
+pattern: 0010100000010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100000010
+pattern: 0010100000001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100000001
+pattern: 0010011000000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010011000000
+pattern: 0010010100000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010100000
+pattern: 0010010010000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010010000
+pattern: 0010010001000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010001000
+pattern: 0010010000100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010000100
+pattern: 0010010000010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010000010
+pattern: 0010010000001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010000001
+pattern: 0010001100000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001100000
+pattern: 0010001010000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001010000
+pattern: 0010001001000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001001000
+pattern: 0010001000100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001000100
+pattern: 0010001000010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001000010
+pattern: 0010001000001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001000001
+pattern: 0010000110000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000110000
+pattern: 0010000101000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000101000
+pattern: 0010000100100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000100100
+pattern: 0010000100010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000100010
+pattern: 0010000100001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000100001
+pattern: 0010000011000
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000011000
+pattern: 0010000010100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000010100
+pattern: 0010000010010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000010010
+pattern: 0010000010001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000010001
+pattern: 0010000001100
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000001100
+pattern: 0010000001010
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000001010
+pattern: 0010000001001
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000001001
+pattern: 0010000000110
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000110
+pattern: 0010000000101
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000101
+pattern: 0010000000011
+try to fix hunk: 2
+delete from 199 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000000011
+pattern: 0001110000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 21.36 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001110000000
+pattern: 0001101000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 20.95 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001101000000
+pattern: 0001100100000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 21.26 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001100100000
+pattern: 0001100010000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100010000
+pattern: 0001100001000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.27 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001100001000
+pattern: 0001100000100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.28 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001100000100
+pattern: 0001100000010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.58 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001100000010
+pattern: 0001100000001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.93 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001100000001
+pattern: 0001011000000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 21.74 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001011000000
+pattern: 0001010100000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 22.88 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001010100000
+pattern: 0001010010000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010010000
+pattern: 0001010001000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.49 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001010001000
+pattern: 0001010000100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.40 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001010000100
+pattern: 0001010000010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.24 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001010000010
+pattern: 0001010000001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.94 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001010000001
+pattern: 0001001100000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+used time: Finished in 19.35 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001100000
+pattern: 0001001010000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001010000
+pattern: 0001001001000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.53 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001001000
+pattern: 0001001000100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 22.26 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001000100
+pattern: 0001001000010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.39 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001000010
+pattern: 0001001000001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.32 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001001000001
+pattern: 0001000110000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 8
+delete from 232 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000110000
+pattern: 0001000101000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.47 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000101000
+pattern: 0001000100100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.33 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000100100
+pattern: 0001000100010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.66 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000100010
+pattern: 0001000100001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.69 seconds
+Failing tests: 3
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000100001
+pattern: 0001000011000
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 9
+delete from 853 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000011000
+pattern: 0001000010100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000010100
+pattern: 0001000010010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000010010
+pattern: 0001000010001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 8
+delete from 232 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000010001
+pattern: 0001000001100
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 10
+delete from 871 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.63 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000001100
+pattern: 0001000001010
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 21.23 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000001010
+pattern: 0001000001001
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 9
+delete from 853 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 23.76 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000001001
+pattern: 0001000000110
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 11
+delete from 913 with range 1
+patches are written to file
+running tests...
+used time: Finished in 25.19 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000000110
+pattern: 0001000000101
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 10
+delete from 871 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 20.77 seconds
+Failing tests: 8
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testTruncatedData
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0001000000101
+pattern: 0001000000011
+try to fix hunk: 3
+replace from 205 with range 1 to
+            return setupBlock();
+
+try to fix hunk: 11
+delete from 913 with range 1
+try to fix hunk: 12
+delete from 942 with range 1
+patches are written to file
+running tests...
+used time: Finished in 19.74 seconds
+Failing tests: 2
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Can independently fix []
+Could not fix independently
+processed: 0001000000011
+pattern: 0000111000000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 6
+replace from 222 with range 2 to
+            return setupNoRandPartB();
+
+patches are written to file
+running tests...
+used time: Finished in 18.79 seconds
+Failing tests: 7
+	org.apache.commons.compress.ChainingTestCase::testTarBzip2
+	org.apache.commons.compress.compressors.BZip2TestCase::testBzipCreation
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFirstOnly
+	org.apache.commons.compress.compressors.BZip2TestCase::testConcatenatedStreamsReadFully
+	org.apache.commons.compress.compressors.BZip2TestCase::testCOMPRESS131
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_0
+	org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData$catena_1
+Includes new failing tests, set to unusable
+processed: 0000111000000
+pattern: 0000110100000
+try to fix hunk: 4
+replace from 211 with range 2 to
+            return setupRandPartB();
+
+try to fix hunk: 5
+replace from 215 with range 2 to
+            return setupRandPartC();
+
+try to fix hunk: 7
+replace from 226 with range 2 to
+            return setupNoRandPartC();
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

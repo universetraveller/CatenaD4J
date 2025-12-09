@@ -3,6 +3,7 @@ import ProjectManager as PM
 import json
 import os
 import timeout_decorator
+import re
 
 # status
 COMMON = 0
@@ -38,6 +39,7 @@ class Generator:
         self.proj = proj
         self.bug_id = bug_id
         self.setting = 4
+        self.modify_file = False
     def log(self, obj, console=True):
         if console:
             print('{}'.format(obj))
@@ -136,96 +138,104 @@ class Generator:
         self.log('patches are written to file')
         self.log('running tests...')
         failure = util.get_failing_tests(self.path, self.build_dir)
-        if failure.tag == util.CMDFAIL:
-            if 'see the compiler error output for details.' in failure.details or 'Compile failed' in  failure.details:
-                self.log('seems testing failed, see output:\n<OUTPUT>\n{}\n<ENDOUTPUT>'.format('<Common Compile Failed>'))
-            elif 'time out after' in failure.details:
-                self.log('EXCEPTION: tests time out')
-                # can raise an error there for pure testing
-                raise TimeoutError("tests time out")
-            else:
-                self.log('seems testing failed, see output:\n<OUTPUT>\n{}\n<ENDOUTPUT>'.format(failure.details))
-            if allSame(fix_pattern, False) or allSame(fix_pattern, True):
-                self.log('ERROR: Looks like unexpected compilation failed, may be methods are incorrectly split')
-                raise Exception('task should end')
-            thisHunk = Hunk(fix_pattern)
-            thisHunk.set_status(UNUSABLE)
-            thisHunk.set_failing_tests(set())
-            self.hunks.append(thisHunk)
-        elif failure.tag == util.D4J_TEST:
-            self.log('used time: {}'.format(failure.details))
-            self.log('Failing tests: {}'.format(failure.number))
-            for oneFT in failure.names:
-                self.log('\t{}'.format(oneFT))
-            if allSame(fix_pattern, False):
-                if failure.number == 0:
-                    self.log('EXCEPTION: Failing number equals to 0 before fixing, should check')
-                if len(set(failure.names) - self.virtualHunk.failing_tests) > 0:
-                    self.log('EXCEPTION: Raising new failing tests before fixing, should check')
-            if allSame(fix_pattern, True):
-                if not failure.number == 0:
-                    self.log('EXCEPTION: Could not pass after all fixed, should check')
-            ftInHunk = set(failure.names)
-            thisHunk = Hunk(fix_pattern)
-            thisHunk.set_failing_tests(ftInHunk)
-            if thisHunk.count() == 0:
-                thisHunk.set_status(UNSELECTABLE)
-            else:
-                # patch 29.7.2023 for new requirement that keeps signle hunk bugs
-                thisHunk.set_status(COMMON)
-                '''
-                if thisHunk.count() == 1:
+        stopFixCMDErr = False
+        while not stopFixCMDErr:
+            if failure.tag == util.CMDFAIL:
+                if 'see the compiler error output for details.' in failure.details or 'Compile failed' in  failure.details:
+                    if self.resolveThrowCompFail(failure.details):
+                        self.modify_file = True
+                        failure = util.get_failing_tests(self.path, self.build_dir)
+                        continue
+                    else:                        
+                        self.log('seems testing failed, see output:\n<OUTPUT>\n{}\n<ENDOUTPUT>'.format('<Common Compile Failed>'))
+                elif 'time out after' in failure.details:
+                    self.log('EXCEPTION: tests time out')
+                    # can raise an error there for pure testing
+                    raise TimeoutError("tests time out")
+                else:
+                    self.log('seems testing failed, see output:\n<OUTPUT>\n{}\n<ENDOUTPUT>'.format(failure.details))
+                if allSame(fix_pattern, False) or allSame(fix_pattern, True):
+                    self.log('ERROR: Looks like unexpected compilation failed, may be methods are incorrectly split')
+                    raise Exception('task should end')
+                thisHunk = Hunk(fix_pattern)
+                thisHunk.set_status(UNUSABLE)
+                thisHunk.set_failing_tests(set())
+                self.hunks.append(thisHunk)
+            elif failure.tag == util.D4J_TEST:
+                self.log('used time: {}'.format(failure.details))
+                self.log('Failing tests: {}'.format(failure.number))
+                for oneFT in failure.names:
+                    self.log('\t{}'.format(oneFT))
+                if allSame(fix_pattern, False):
+                    if failure.number == 0:
+                        self.log('EXCEPTION: Failing number equals to 0 before fixing, should check')
+                    if len(set(failure.names) - self.virtualHunk.failing_tests) > 0:
+                        self.log('EXCEPTION: Raising new failing tests before fixing, should check')
+                if allSame(fix_pattern, True):
+                    if not failure.number == 0:
+                        self.log('EXCEPTION: Could not pass after all fixed, should check')
+                ftInHunk = set(failure.names)
+                thisHunk = Hunk(fix_pattern)
+                thisHunk.set_failing_tests(ftInHunk)
+                if thisHunk.count() == 0:
                     thisHunk.set_status(UNSELECTABLE)
                 else:
+                    # patch 29.7.2023 for new requirement that keeps signle hunk bugs
                     thisHunk.set_status(COMMON)
-                '''
-                firstHunk = self.hunks[0]
-                #firstHunk = self.virtualHunk
-                newFT = thisHunk.failing_tests - firstHunk.failing_tests
-                if not len(newFT) == 0:
-                    self.log('Includes new failing tests, set to unusable')
-                    thisHunk.set_status(UNUSABLE)
-                elif thisHunk.count() > 1:
-                    canFix = firstHunk.failing_tests - thisHunk.failing_tests
-                    for preHunk in self.hunks:
-                        if preHunk.status >= UNUSABLE:
-                            continue
-                        if not preHunk.isSubHunkOf(thisHunk):
-                            continue
-                        preCanFix = firstHunk.failing_tests - preHunk.failing_tests
-                        if len(preCanFix) == 0:
-                            continue
-                        canFix = canFix - preCanFix
-                    self.log('Can independently fix {}'.format(list(canFix)))
-                    if not len(canFix) == 0:
-                        self.log('select new bug')
-                        self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
-                        self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
-                        self.newBugs[util.getLabel(fix_pattern)] = canFix
-                        self.save('./working/{}_{}'.format(self.proj, self.bug_id))
-                    else:
-                        self.log('Could not fix independently')
-                        thisHunk.set_status(UNSELECTABLE)
-                else:
-                    # patch 29.7.2023
-                    # single hunk fixed and contains no new failing tests indicates 2 cases:
-                    # failing tests are same as firstHunk 
-                    # or part of failing tests of firstHunk are fixed
-                    if len(thisHunk.failing_tests) == len(firstHunk.failing_tests):
-                        self.log('No new failing tests but only 1 hunk')
+                    '''
+                    if thisHunk.count() == 1:
                         thisHunk.set_status(UNSELECTABLE)
                     else:
-                        assert len(thisHunk.failing_tests) < len(firstHunk.failing_tests)
+                        thisHunk.set_status(COMMON)
+                    '''
+                    firstHunk = self.hunks[0]
+                    #firstHunk = self.virtualHunk
+                    newFT = thisHunk.failing_tests - firstHunk.failing_tests
+                    if not len(newFT) == 0:
+                        self.log('Includes new failing tests, set to unusable')
+                        thisHunk.set_status(UNUSABLE)
+                    elif thisHunk.count() > 1:
                         canFix = firstHunk.failing_tests - thisHunk.failing_tests
-                        self.log('select new bug')
-                        self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
-                        self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
-                        self.newBugs[util.getLabel(fix_pattern)] = canFix
-                        self.save('./working/{}_{}'.format(self.proj, self.bug_id))
-            self.hunks.append(thisHunk)
-        else:
-            self.log('what tag it is? {}'.format(failure.tag))
-            raise ValueError('what tag it is? {}'.format(failure.tag))
+                        for preHunk in self.hunks:
+                            if preHunk.status >= UNUSABLE:
+                                continue
+                            if not preHunk.isSubHunkOf(thisHunk):
+                                continue
+                            preCanFix = firstHunk.failing_tests - preHunk.failing_tests
+                            if len(preCanFix) == 0:
+                                continue
+                            canFix = canFix - preCanFix
+                        self.log('Can independently fix {}'.format(list(canFix)))
+                        if not len(canFix) == 0:
+                            self.log('select new bug')
+                            self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
+                            self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
+                            self.newBugs[util.getLabel(fix_pattern)] = canFix
+                            self.save('./working/{}_{}'.format(self.proj, self.bug_id))
+                        else:
+                            self.log('Could not fix independently')
+                            thisHunk.set_status(UNSELECTABLE)
+                    else:
+                        # patch 29.7.2023
+                        # single hunk fixed and contains no new failing tests indicates 2 cases:
+                        # failing tests are same as firstHunk 
+                        # or part of failing tests of firstHunk are fixed
+                        if len(thisHunk.failing_tests) == len(firstHunk.failing_tests):
+                            self.log('No new failing tests but only 1 hunk')
+                            thisHunk.set_status(UNSELECTABLE)
+                        else:
+                            assert len(thisHunk.failing_tests) < len(firstHunk.failing_tests)
+                            canFix = firstHunk.failing_tests - thisHunk.failing_tests
+                            self.log('select new bug')
+                            self.log('Pattern: {}'.format(util.getLabel(fix_pattern)))
+                            self.log('new failing tests:\n{}'.format('\n'.join(list(canFix))))
+                            self.newBugs[util.getLabel(fix_pattern)] = canFix
+                            self.save('./working/{}_{}'.format(self.proj, self.bug_id))
+                self.hunks.append(thisHunk)
+            else:
+                self.log('what tag it is? {}'.format(failure.tag))
+                raise ValueError('what tag it is? {}'.format(failure.tag))
+            stopFixCMDErr = True
         self.log('processed: {}'.format(util.getLabel(fix_pattern)))
     def useNewFailingTests(self):
         self.log('trying to replace old failing tests')
@@ -315,3 +325,85 @@ class Generator:
                 root[i]['failing_tests']  = list(self.newBugs[i])
         with open(bug_path, 'w') as f:
             f.write(json.dumps(root, indent=4))
+    def resolveThrowCompFail(self, stderr):
+        stderrs = stderr.split('\n')
+        throw_pattern = re.compile(r'\[javac\]\s*(.+\.java):\s*(\d+):\s*error:\s*exception\s+'
+            r'(.*)\s+is never thrown in body of corresponding try statement')
+        find_status = True
+        modify_test = False
+        file_lines = {}  # file_name -> (original source code, modified source code, encoding)
+        for err in stderrs:
+            if find_status:
+                m = throw_pattern.search(err)
+                if m:
+                    file_path = m.group(1)
+                    line_no = int(m.group(2))
+                    exception = m.group(3)
+                    find_status = False
+            else:
+                catch_pattern = rf'\s*\[javac\] (\s+catch\s*\(\s*(.*{exception})\s+.*\s*\).*)'                
+                # assume that the catch pattern directly follows the throw pattern.
+                m = re.match(catch_pattern, err)
+                assert m
+                line = m.group(1)
+                line_start = m.start(1)
+                exc_start = m.start(2)
+                exc_end = m.end(2)
+                orig_line = line
+                line = '{}{}{}'.format(line[:exc_start - line_start], 'Exception',
+                               line[exc_end - line_start:])
+                # replace the never thrown exception type with Exception
+                cached = file_lines.get(file_path)
+                if cached:
+                    src, lines, enc = cached
+                else:
+                    enc = 'utf-8'
+                    try:
+                        with open(file_path, 'r', encoding=enc) as f:
+                            src = f.read()
+                            lines = src.splitlines(keepends=True)
+                    except UnicodeDecodeError:
+                        enc = 'latin-1'
+                        with open(file_path, 'r', encoding=enc) as f:
+                            src = f.read()
+                            lines = src.splitlines(keepends=True)
+                    file_lines[file_path] = (src, lines, enc)
+                lines[line_no - 1] = line + '\n'         
+                self.log('will modify {} line of test file {} to resolve the compilation errors:'.format(line_no, file_path))
+                self.log('original line: {}'.format(orig_line))
+                self.log('replaced line: {}'.format(line))
+                find_status = True
+                modify_test = True
+
+                # modify self.method_base
+                method_name, start_line = util.get_method_info(src, line_no)
+                relative_loc = line_no - start_line
+                method_pre, catena_id = method_name.split("$catena_")
+                class_name = util.get_qualified_class_name(file_path)
+                test = '{}::{}'.format(class_name, method_pre)
+                met_to_modify = self.method_base[test]
+                splited = met_to_modify['splited']
+                func = met_to_modify['func']
+                for index, test in enumerate(splited):
+                    test_id, id_pos = util.get_catena_id_from_method(test)
+                    if catena_id == test_id:
+                        pos = id_pos
+                        for _ in range(relative_loc):
+                            pos = test.find('\n', pos) + 1
+                        assert pos != 0
+                        replace_start = pos
+                        replace_end = test.find('\n', replace_start)
+                        replace_end = replace_end if replace_end != -1 else len(test)
+                        test = '{}{}{}'.format(test[:replace_start], line, test[replace_end:])
+                        splited[index] = test
+                        func[str(index)] = test
+                        break
+                
+        # modify test files
+        if modify_test:
+            self.log('modify test files')
+            for file in file_lines:
+                _, lines, enc = file_lines[file]
+                with open(file, 'w', encoding=enc) as f:
+                    f.writelines(lines)
+        return modify_test

@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java",
+            "from_line_no": 1034,
+            "to_line_no": 1034,
+            "replaced_with": "        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));\n",
+            "replaced": "        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod())));\n",
+            "patch_type": "replace",
+            "next_line_no": 1035
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java",
+            "from_line_no": 1075,
+            "to_line_no": 1075,
+            "replaced_with": "        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);\n",
+            "replaced": "        final boolean dataDescriptor = usesDataDescriptor(zipMethod);\n",
+            "patch_type": "replace",
+            "next_line_no": 1076
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java",
+            "from_line_no": 1492,
+            "to_line_no": 1493,
+            "replaced_with": "    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {\n        return !phased && zipMethod == DEFLATED && channel == null;\n",
+            "replaced": "    private boolean usesDataDescriptor(final int zipMethod) {\n        return zipMethod == DEFLATED && channel == null;\n",
+            "patch_type": "replace",
+            "next_line_no": 1494
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/select/Selector.java",
+            "replaced_with": "        } else if (tq.matches(\":not(\")) {\n            return not();\n",
+            "patch_type": "insert",
+            "next_line_no": 181
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Selector.java",
+            "replaced_with": "    private Elements not() {\n        tq.consume(\":not\");\n        String subQuery = tq.chompBalanced('(', ')');\n        Validate.notEmpty(subQuery, \":not(selector) subselect must not be empty\");\n",
+            "patch_type": "insert",
+            "next_line_no": 305
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Selector.java",
+            "replaced_with": "        return filterOut(root.getAllElements(), select(subQuery, root));\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 306
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Selector.java",
+            "replaced_with": "    static Elements filterOut(Collection<Element> elements, Collection<Element> outs) {\n        Elements output = new Elements();\n        for (Element el: elements) {\n            boolean found = false;\n            for (Element out: outs) {\n                if (el.equals(out)) {\n                    found = true;\n                    break;\n                }\n            }\n            if (!found)\n                output.add(el);\n        }\n        return output;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 399
+        }
+    ]
+}

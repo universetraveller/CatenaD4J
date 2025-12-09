@@ -1,0 +1,134 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "from_line_no": 954,
+            "to_line_no": 954,
+            "replaced_with": "    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {\n      if (p == PEEKED_UNQUOTED) {\n        peekedString = nextUnquotedValue();\n      } else {\n",
+            "replaced": "    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n",
+            "patch_type": "replace",
+            "next_line_no": 955
+        },
+        "1": {
+            "file_name": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "replaced_with": "      }\n",
+            "patch_type": "insert",
+            "next_line_no": 956
+        },
+        "2": {
+            "file_name": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "from_line_no": 1182,
+            "to_line_no": 1182,
+            "replaced_with": "    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {\n      if (p == PEEKED_UNQUOTED) {\n        peekedString = nextUnquotedValue();\n      } else {\n",
+            "replaced": "    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n",
+            "patch_type": "replace",
+            "next_line_no": 1183
+        },
+        "3": {
+            "file_name": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "replaced_with": "      }\n",
+            "patch_type": "insert",
+            "next_line_no": 1184
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys",
+            "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers"
+        ],
+        "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys": {
+            "file_path": "gson/src/test/java/com/google/gson/functional/MapTest.java",
+            "Instance": "Begin: Pos(188, 10)\nEnd: Pos(196, 3)\nSource: /tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/functional/MapTest.java\nName: testMapDeserializationWithUnquotedLongKeys\nChilds: [StatementAssertion<Begin: Pos(193, 5), End: Pos(193, 32)>,\nStatementAssertion<Begin: Pos(194, 5), End: Pos(194, 41)>,\nStatementAssertion<Begin: Pos(195, 5), End: Pos(195, 42)>,\n]",
+            "source": "/tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/functional/MapTest.java",
+            "name": "testMapDeserializationWithUnquotedLongKeys",
+            "begin": "Pos(188, 10)",
+            "end": "Pos(196, 3)",
+            "begin_line_no": 188,
+            "end_line_no": 196,
+            "child": [
+                "Begin: Pos(193, 5)\nEnd: Pos(193, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(194, 5)\nEnd: Pos(194, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(195, 5)\nEnd: Pos(195, 42)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testMapDeserializationWithUnquotedLongKeys$catena_0() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\"456\", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testMapDeserializationWithUnquotedLongKeys$catena_1() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertTrue(map.containsKey(longKey));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"456\", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testMapDeserializationWithUnquotedLongKeys$catena_2() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"456\", map.get(longKey));                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testMapDeserializationWithUnquotedLongKeys$catena_0() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\"456\", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testMapDeserializationWithUnquotedLongKeys$catena_1() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertTrue(map.containsKey(longKey));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"456\", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testMapDeserializationWithUnquotedLongKeys$catena_2() {\n    long longKey = 9876543210L;\n    String json = String.format(\"{%d:\\\"456\\\"}\", longKey);\n    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();\n    Map<Long, String> map = gson.fromJson(json, typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"456\", map.get(longKey));                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys": {
+            "file_path": "gson/src/test/java/com/google/gson/functional/MapTest.java",
+            "Instance": "Begin: Pos(170, 10)\nEnd: Pos(176, 3)\nSource: /tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/functional/MapTest.java\nName: testMapDeserializationWithUnquotedIntegerKeys\nChilds: [StatementAssertion<Begin: Pos(173, 5), End: Pos(173, 32)>,\nStatementAssertion<Begin: Pos(174, 5), End: Pos(174, 37)>,\nStatementAssertion<Begin: Pos(175, 5), End: Pos(175, 38)>,\n]",
+            "source": "/tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/functional/MapTest.java",
+            "name": "testMapDeserializationWithUnquotedIntegerKeys",
+            "begin": "Pos(170, 10)",
+            "end": "Pos(176, 3)",
+            "begin_line_no": 170,
+            "end_line_no": 176,
+            "child": [
+                "Begin: Pos(173, 5)\nEnd: Pos(173, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(174, 5)\nEnd: Pos(174, 37)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(175, 5)\nEnd: Pos(175, 38)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_0() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\"456\", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_1() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertTrue(map.containsKey(123));                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"456\", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_2() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"456\", map.get(123));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_0() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertEquals(\"456\", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_1() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertTrue(map.containsKey(123));                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    try{ assertEquals(\"456\", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testMapDeserializationWithUnquotedIntegerKeys$catena_2() {\n    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();\n    Map<Integer, String> map = gson.fromJson(\"{123:\\\"456\\\"}\", typeOfMap);\n    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    assertEquals(\"456\", map.get(123));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        },
+        "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers": {
+            "file_path": "gson/src/test/java/com/google/gson/stream/JsonReaderTest.java",
+            "Instance": "Begin: Pos(496, 10)\nEnd: Pos(507, 3)\nSource: /tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/stream/JsonReaderTest.java\nName: testPeekingUnquotedStringsPrefixedWithIntegers\nChilds: [StatementAssertion<Begin: Pos(500, 5), End: Pos(500, 40)>,\nStatementAssertion<Begin: Pos(503, 7), End: Pos(503, 13)>,\nStatementAssertion<Begin: Pos(506, 5), End: Pos(506, 50)>,\n]",
+            "source": "/tmp/c4j/Gson_7/gson/src/test/java//com/google/gson/stream/JsonReaderTest.java",
+            "name": "testPeekingUnquotedStringsPrefixedWithIntegers",
+            "begin": "Pos(496, 10)",
+            "end": "Pos(507, 3)",
+            "begin_line_no": 496,
+            "end_line_no": 507,
+            "child": [
+                "Begin: Pos(500, 5)\nEnd: Pos(500, 40)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(503, 7)\nEnd: Pos(503, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(506, 5)\nEnd: Pos(506, 50)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_0() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    assertEquals(STRING, reader.peek());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    try {\n      reader.nextInt();\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (NumberFormatException expected) {\n    }\n    try{ assertEquals(\"12.34e5x\", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_1() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    try {\n      reader.nextInt();\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (NumberFormatException expected) {\n    }\n    try{ assertEquals(\"12.34e5x\", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_2() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    try {\n      reader.nextInt();\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (NumberFormatException expected) {\n    }\n    assertEquals(\"12.34e5x\", reader.nextString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            ],
+            "func": {
+                "0": "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_0() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    assertEquals(STRING, reader.peek());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n    try {\n      reader.nextInt();\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (NumberFormatException expected) {\n    }\n    try{ assertEquals(\"12.34e5x\", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "1": "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_1() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    try {\n      reader.nextInt();\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (NumberFormatException expected) {\n    }\n    try{ assertEquals(\"12.34e5x\", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n  }",
+                "2": "  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_2() throws IOException {\n    JsonReader reader = new JsonReader(reader(\"[12.34e5x]\"));\n    reader.setLenient(true);\n    reader.beginArray();\n    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n    try {\n      reader.nextInt();\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (NumberFormatException expected) {\n    }\n    assertEquals(\"12.34e5x\", reader.nextString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n  }"
+            }
+        }
+    },
+    "0011": {
+        "failing_tests": [
+            "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1",
+            "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2",
+            "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2"
+        ]
+    },
+    "1100": {
+        "failing_tests": [
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1",
+            "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0"
+        ]
+    }
+}

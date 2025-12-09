@@ -1,0 +1,592 @@
+---
+Begin generate bug_id: Csv_16
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Csv_16
+Try to checkout Csv_16
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/csv/CSVParser.java
+trying to replace old failing tests
+edit: replace from 1001 range 55 at src/test/java/org/apache/commons/csv/CSVParserTest.java
+to
+    @Test
+    public void testIteratorSequenceBreaking$catena_0() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testIteratorSequenceBreaking$catena_1() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testIteratorSequenceBreaking$catena_2() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testIteratorSequenceBreaking$catena_3() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testIteratorSequenceBreaking$catena_4() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     @Test
+    public void testIteratorSequenceBreaking$catena_5() throws IOException {
+        final String fiveRows = "1\n2\n3\n4\n5\n";
+
+        // Iterator hasNext() shouldn't break sequence
+        CSVParser parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        int recordNumber = 0;
+        Iterator<CSVRecord> iter = parser.iterator();
+        recordNumber = 0;
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        iter.hasNext();
+        while (iter.hasNext()) {
+            CSVRecord record = iter.next();
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        // Consecutive enhanced for loops with hasNext() peeking shouldn't break sequence
+        parser = CSVFormat.DEFAULT.parse(new StringReader(fiveRows));
+        recordNumber = 0;
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            try{ assertEquals(String.valueOf(recordNumber), record.get(0));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            if (recordNumber >= 2) {
+                break;
+            }
+        }
+        parser.iterator().hasNext();
+        for (CSVRecord record : parser) {
+            recordNumber++;
+            assertEquals(String.valueOf(recordNumber), record.get(0));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/org/apache/commons/csv/CSVParserTest.java
+new test num: 6
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 18.78 seconds
+Failing tests: 1
+	org.apache.commons.csv.CSVParserTest::testIteratorSequenceBreaking$catena_5
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 289 with     private final CSVRecordIterator csvRecordIterator;
+
+try to fix hunk: 1
+insert before 357 with         this.csvRecordIterator = new CSVRecordIterator();
+
+try to fix hunk: 2
+replace from 523 with range 1 to
+        return csvRecordIterator;
+    }
+    
+    class CSVRecordIterator implements Iterator<CSVRecord> {
+
+try to fix hunk: 3
+delete from 571 with range 1
+patches are written to file
+running tests...
+used time: Finished in 16.21 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.csv.CSVParserTest::testIteratorSequenceBreaking$catena_5']
+select new bug
+Pattern: 1111
+new failing tests:
+org.apache.commons.csv.CSVParserTest::testIteratorSequenceBreaking$catena_5
+Save found bug
+processed: 1111
+Find 1 new bugs

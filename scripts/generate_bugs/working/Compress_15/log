@@ -1,0 +1,105 @@
+---
+Begin generate bug_id: Compress_15
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_15
+Try to checkout Compress_15
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java
+trying to replace old failing tests
+edit: replace from 243 range 11 at src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntryTest.java
+to
+    public void testNullCommentEqualsEmptyComment$catena_0() {
+        ZipArchiveEntry entry1 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry2 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry3 = new ZipArchiveEntry("foo");
+        entry1.setComment(null);
+        entry2.setComment("");
+        entry3.setComment("bar");
+        assertEquals(entry1, entry2);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(entry1.equals(entry3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(entry2.equals(entry3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNullCommentEqualsEmptyComment$catena_1() {
+        ZipArchiveEntry entry1 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry2 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry3 = new ZipArchiveEntry("foo");
+        entry1.setComment(null);
+        entry2.setComment("");
+        entry3.setComment("bar");
+        try{ assertEquals(entry1, entry2);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(entry1.equals(entry3));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(entry2.equals(entry3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNullCommentEqualsEmptyComment$catena_2() {
+        ZipArchiveEntry entry1 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry2 = new ZipArchiveEntry("foo");
+        ZipArchiveEntry entry3 = new ZipArchiveEntry("foo");
+        entry1.setComment(null);
+        entry2.setComment("");
+        entry3.setComment("bar");
+        try{ assertEquals(entry1, entry2);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(entry1.equals(entry3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(entry2.equals(entry3));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntryTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 16.36 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_0
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 676 with             && myComment.equals(otherComment)
+
+patches are written to file
+running tests...
+used time: Finished in 16.35 seconds
+Failing tests: 3
+	org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_0
+	org.apache.commons.compress.changes.ChangeSetTestCase::testAddChangeTwiceWithoutReplace
+	org.apache.commons.compress.changes.ChangeSetTestCase::testAddChangeTwice
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 669 with range 5 to
+            myComment = "";
+        }
+        if (otherComment == null) {
+            otherComment = "";
+
+patches are written to file
+running tests...
+used time: Finished in 17.97 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_1
+	org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_2
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 669 with range 5 to
+            myComment = "";
+        }
+        if (otherComment == null) {
+            otherComment = "";
+
+try to fix hunk: 1
+insert before 676 with             && myComment.equals(otherComment)
+
+patches are written to file
+running tests...
+used time: Finished in 16.64 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::testNullCommentEqualsEmptyComment$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

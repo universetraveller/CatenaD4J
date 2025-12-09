@@ -1,0 +1,418 @@
+---
+Begin generate bug_id: Gson_7
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Gson_7
+Try to checkout Gson_7
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: gson/src/main/java/com/google/gson/stream/JsonReader.java
+trying to replace old failing tests
+edit: replace from 188 range 9 at gson/src/test/java/com/google/gson/functional/MapTest.java
+to
+  public void testMapDeserializationWithUnquotedLongKeys$catena_0() {
+    long longKey = 9876543210L;
+    String json = String.format("{%d:\"456\"}", longKey);
+    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
+    Map<Long, String> map = gson.fromJson(json, typeOfMap);
+    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("456", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMapDeserializationWithUnquotedLongKeys$catena_1() {
+    long longKey = 9876543210L;
+    String json = String.format("{%d:\"456\"}", longKey);
+    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
+    Map<Long, String> map = gson.fromJson(json, typeOfMap);
+    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertTrue(map.containsKey(longKey));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("456", map.get(longKey));                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMapDeserializationWithUnquotedLongKeys$catena_2() {
+    long longKey = 9876543210L;
+    String json = String.format("{%d:\"456\"}", longKey);
+    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
+    Map<Long, String> map = gson.fromJson(json, typeOfMap);
+    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(map.containsKey(longKey));                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("456", map.get(longKey));                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 170 range 7 at gson/src/test/java/com/google/gson/functional/MapTest.java
+to
+  public void testMapDeserializationWithUnquotedIntegerKeys$catena_0() {
+    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();
+    Map<Integer, String> map = gson.fromJson("{123:\"456\"}", typeOfMap);
+    assertEquals(1, map.size());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertEquals("456", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMapDeserializationWithUnquotedIntegerKeys$catena_1() {
+    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();
+    Map<Integer, String> map = gson.fromJson("{123:\"456\"}", typeOfMap);
+    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertTrue(map.containsKey(123));                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("456", map.get(123));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testMapDeserializationWithUnquotedIntegerKeys$catena_2() {
+    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();
+    Map<Integer, String> map = gson.fromJson("{123:\"456\"}", typeOfMap);
+    try{ assertEquals(1, map.size());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    try{ assertTrue(map.containsKey(123));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("456", map.get(123));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+edit: replace from 496 range 12 at gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
+to
+  public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_0() throws IOException {
+    JsonReader reader = new JsonReader(reader("[12.34e5x]"));
+    reader.setLenient(true);
+    reader.beginArray();
+    assertEquals(STRING, reader.peek());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    try {
+      reader.nextInt();
+      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (NumberFormatException expected) {
+    }
+    try{ assertEquals("12.34e5x", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_1() throws IOException {
+    JsonReader reader = new JsonReader(reader("[12.34e5x]"));
+    reader.setLenient(true);
+    reader.beginArray();
+    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try {
+      reader.nextInt();
+      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    } catch (NumberFormatException expected) {
+    }
+    try{ assertEquals("12.34e5x", reader.nextString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testPeekingUnquotedStringsPrefixedWithIntegers$catena_2() throws IOException {
+    JsonReader reader = new JsonReader(reader("[12.34e5x]"));
+    reader.setLenient(true);
+    reader.beginArray();
+    try{ assertEquals(STRING, reader.peek());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    try {
+      reader.nextInt();
+      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (NumberFormatException expected) {
+    }
+    assertEquals("12.34e5x", reader.nextString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
+trace file: gson/src/test/java/com/google/gson/functional/MapTest.java
+new test num: 9
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 20.68 seconds
+Failing tests: 9
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 956 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+used time: Finished in 19.25 seconds
+Failing tests: 3
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2
+Can independently fix ['com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1', 'com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0', 'com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1', 'com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0', 'com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2', 'com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2']
+select new bug
+Pattern: 0011
+new failing tests:
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 1
+insert before 956 with       }
+
+patches are written to file
+running tests...
+used time: Finished in 21.17 seconds
+Failing tests: 6
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1
+	com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1
+	com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2
+Can independently fix ['com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2', 'com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1', 'com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0']
+select new bug
+Pattern: 1100
+new failing tests:
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0
+Save found bug
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 954 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 1
+insert before 956 with       }
+
+try to fix hunk: 2
+replace from 1182 with range 1 to
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {
+      if (p == PEEKED_UNQUOTED) {
+        peekedString = nextUnquotedValue();
+      } else {
+
+try to fix hunk: 3
+insert before 1184 with       }
+
+patches are written to file
+running tests...
+used time: Finished in 19.57 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 2 new bugs

@@ -1,0 +1,2 @@
+com.google.gson.internal.UnsafeAllocatorInstantiationTest::testAbstractClassInstantiation$catena_1
+com.google.gson.internal.UnsafeAllocatorInstantiationTest::testInterfaceInstantiation$catena_1

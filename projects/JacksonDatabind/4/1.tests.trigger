@@ -1,0 +1,2 @@
+com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_7
+com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_6

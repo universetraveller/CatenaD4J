@@ -1,0 +1,3629 @@
+---
+Begin generate bug_id: JacksonDatabind_30
+num_of_hunks: 8
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_30
+Try to checkout JacksonDatabind_30
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ObjectMapper.java
+trace file: src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java
+trying to replace old failing tests
+edit: replace from 544 range 24 at src/test/java/com/fasterxml/jackson/databind/jsontype/TestExternalId.java
+to
+    public void testBigDecimal965$catena_0() throws Exception
+    {
+
+        Wrapper965 w = new Wrapper965();
+        w.typeEnum = Type965.BIG_DECIMAL;
+        final String NUM_STR = "-10000000000.0000000001";
+        w.value = new BigDecimal(NUM_STR);
+
+        String json = MAPPER.writeValueAsString(w);
+
+        // simple sanity check so serialization is faithful
+        if (!json.contains(NUM_STR)) {
+            fail("JSON content should contain value '"+NUM_STR+"', does not appear to: "+json);             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        
+        Wrapper965 w2 = MAPPER.readerFor(Wrapper965.class)
+                .with(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+                .readValue(json);
+
+        try{ assertEquals(w.typeEnum, w2.typeEnum);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(String.format("Expected %s = %s; got back %s = %s",
+            w.value.getClass().getSimpleName(), w.value.toString(), w2.value.getClass().getSimpleName(), w2.value.toString()),
+            w.value.equals(w2.value));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBigDecimal965$catena_1() throws Exception
+    {
+
+        Wrapper965 w = new Wrapper965();
+        w.typeEnum = Type965.BIG_DECIMAL;
+        final String NUM_STR = "-10000000000.0000000001";
+        w.value = new BigDecimal(NUM_STR);
+
+        String json = MAPPER.writeValueAsString(w);
+
+        // simple sanity check so serialization is faithful
+        if (!json.contains(NUM_STR)) {
+            try{ fail("JSON content should contain value '"+NUM_STR+"', does not appear to: "+json);        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        
+        Wrapper965 w2 = MAPPER.readerFor(Wrapper965.class)
+                .with(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+                .readValue(json);
+
+        assertEquals(w.typeEnum, w2.typeEnum);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(String.format("Expected %s = %s; got back %s = %s",
+            w.value.getClass().getSimpleName(), w.value.toString(), w2.value.getClass().getSimpleName(), w2.value.toString()),
+            w.value.equals(w2.value));                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testBigDecimal965$catena_2() throws Exception
+    {
+
+        Wrapper965 w = new Wrapper965();
+        w.typeEnum = Type965.BIG_DECIMAL;
+        final String NUM_STR = "-10000000000.0000000001";
+        w.value = new BigDecimal(NUM_STR);
+
+        String json = MAPPER.writeValueAsString(w);
+
+        // simple sanity check so serialization is faithful
+        if (!json.contains(NUM_STR)) {
+            try{ fail("JSON content should contain value '"+NUM_STR+"', does not appear to: "+json);        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        
+        Wrapper965 w2 = MAPPER.readerFor(Wrapper965.class)
+                .with(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+                .readValue(json);
+
+        try{ assertEquals(w.typeEnum, w2.typeEnum);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(String.format("Expected %s = %s; got back %s = %s",
+            w.value.getClass().getSimpleName(), w.value.toString(), w2.value.getClass().getSimpleName(), w2.value.toString()),
+            w.value.equals(w2.value));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TestExternalId.java
+new test num: 3
+ori test num: 0
+pattern: 00000000
+patches are written to file
+running tests...
+used time: Finished in 215.15 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+processed: 00000000
+pattern: 00000001
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001
+pattern: 00000010
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010
+pattern: 00000100
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100
+pattern: 00001000
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000
+pattern: 00010000
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000
+pattern: 00100000
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+patches are written to file
+running tests...
+used time: Finished in 177.37 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+No new failing tests but only 1 hunk
+processed: 00100000
+pattern: 01000000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000
+pattern: 10000000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000
+pattern: 00000011
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011
+pattern: 00000101
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101
+pattern: 00000110
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110
+pattern: 00001001
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001001
+pattern: 00001010
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010
+pattern: 00001100
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100
+pattern: 00010001
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001
+pattern: 00010010
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010
+pattern: 00010100
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100
+pattern: 00011000
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000
+pattern: 00100001
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001
+pattern: 00100010
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010
+pattern: 00100100
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100
+pattern: 00101000
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 181.18 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00101000
+pattern: 00110000
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+used time: Finished in 178.51 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00110000
+pattern: 01000001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000001
+pattern: 01000010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000010
+pattern: 01000100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000100
+pattern: 01001000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001000
+pattern: 01010000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010000
+pattern: 01100000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100000
+pattern: 10000001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000001
+pattern: 10000010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000010
+pattern: 10000100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000100
+pattern: 10001000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001000
+pattern: 10010000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010000
+pattern: 10100000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100000
+pattern: 11000000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000000
+pattern: 00000111
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000111
+pattern: 00001011
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001011
+pattern: 00001101
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001101
+pattern: 00001110
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001110
+pattern: 00010011
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010011
+pattern: 00010101
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010101
+pattern: 00010110
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010110
+pattern: 00011001
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011001
+pattern: 00011010
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011010
+pattern: 00011100
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011100
+pattern: 00100011
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100011
+pattern: 00100101
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 179.82 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Includes new failing tests, set to unusable
+processed: 00100101
+pattern: 00100110
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100110
+pattern: 00101001
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101001
+pattern: 00101010
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101010
+pattern: 00101100
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101100
+pattern: 00110001
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110001
+pattern: 00110010
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110010
+pattern: 00110100
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110100
+pattern: 00111000
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 213.08 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00111000
+pattern: 01000011
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000011
+pattern: 01000101
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000101
+pattern: 01000110
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000110
+pattern: 01001001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001001
+pattern: 01001010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001010
+pattern: 01001100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001100
+pattern: 01010001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010001
+pattern: 01010010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010010
+pattern: 01010100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010100
+pattern: 01011000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011000
+pattern: 01100001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100001
+pattern: 01100010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100010
+pattern: 01100100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100100
+pattern: 01101000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 175.69 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 01101000
+pattern: 01110000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110000
+pattern: 10000011
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000011
+pattern: 10000101
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000101
+pattern: 10000110
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000110
+pattern: 10001001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001001
+pattern: 10001010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001010
+pattern: 10001100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001100
+pattern: 10010001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010001
+pattern: 10010010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010010
+pattern: 10010100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010100
+pattern: 10011000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011000
+pattern: 10100001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100001
+pattern: 10100010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100010
+pattern: 10100100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100100
+pattern: 10101000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 195.78 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 10101000
+pattern: 10110000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110000
+pattern: 11000001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000001
+pattern: 11000010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000010
+pattern: 11000100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000100
+pattern: 11001000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001000
+pattern: 11010000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010000
+pattern: 11100000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100000
+pattern: 00001111
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001111
+pattern: 00010111
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010111
+pattern: 00011011
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011011
+pattern: 00011101
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011101
+pattern: 00011110
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011110
+pattern: 00100111
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 190.17 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00100111
+pattern: 00101011
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101011
+pattern: 00101101
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 185.27 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Includes new failing tests, set to unusable
+processed: 00101101
+pattern: 00101110
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101110
+pattern: 00110011
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110011
+pattern: 00110101
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 196.61 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00110101
+pattern: 00110110
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110110
+pattern: 00111001
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111001
+pattern: 00111010
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111010
+pattern: 00111100
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111100
+pattern: 01000111
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000111
+pattern: 01001011
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001011
+pattern: 01001101
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001101
+pattern: 01001110
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001110
+pattern: 01010011
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010011
+pattern: 01010101
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010101
+pattern: 01010110
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010110
+pattern: 01011001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011001
+pattern: 01011010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011010
+pattern: 01011100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011100
+pattern: 01100011
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100011
+pattern: 01100101
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100101
+pattern: 01100110
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100110
+pattern: 01101001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101001
+pattern: 01101010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101010
+pattern: 01101100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101100
+pattern: 01110001
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110001
+pattern: 01110010
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110010
+pattern: 01110100
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110100
+pattern: 01111000
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 182.27 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 01111000
+pattern: 10000111
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000111
+pattern: 10001011
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001011
+pattern: 10001101
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001101
+pattern: 10001110
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001110
+pattern: 10010011
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010011
+pattern: 10010101
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010101
+pattern: 10010110
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010110
+pattern: 10011001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011001
+pattern: 10011010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011010
+pattern: 10011100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011100
+pattern: 10100011
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100011
+pattern: 10100101
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100101
+pattern: 10100110
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100110
+pattern: 10101001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101001
+pattern: 10101010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101010
+pattern: 10101100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101100
+pattern: 10110001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110001
+pattern: 10110010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110010
+pattern: 10110100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110100
+pattern: 10111000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 177.88 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 10111000
+pattern: 11000011
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000011
+pattern: 11000101
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000101
+pattern: 11000110
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000110
+pattern: 11001001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001001
+pattern: 11001010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001010
+pattern: 11001100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001100
+pattern: 11010001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010001
+pattern: 11010010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010010
+pattern: 11010100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010100
+pattern: 11011000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011000
+pattern: 11100001
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100001
+pattern: 11100010
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100010
+pattern: 11100100
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100100
+pattern: 11101000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 183.92 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 11101000
+pattern: 11110000
+try to fix hunk: 0
+insert before 2510 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 1
+insert before 3426 with         if (isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)) {
+            buf = buf.forceUseOfBigDecimal(true);
+        }
+
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11110000
+pattern: 00011111
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011111
+pattern: 00101111
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 4
+insert before 193 with     public TokenBuffer forceUseOfBigDecimal(boolean b) {
+        _forceBigDecimal = b;
+        return this;
+    }
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 192.00 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testBigDecimal965$catena_2
+Can independently fix []
+Could not fix independently
+processed: 00101111
+pattern: 00110111
+try to fix hunk: 2
+insert before 80 with     protected boolean _forceBigDecimal;
+
+try to fix hunk: 3
+insert before 188 with         _forceBigDecimal = (ctxt == null) ? false
+                : ctxt.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+
+try to fix hunk: 5
+insert before 959 with             if (_forceBigDecimal) {
+
+try to fix hunk: 6
+insert before 964 with                 writeNumber(p.getDecimalValue());
+            } else {
+
+try to fix hunk: 7
+insert before 973 with                 }
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

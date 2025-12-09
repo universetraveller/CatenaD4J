@@ -1,0 +1,120 @@
+---
+Begin generate bug_id: JacksonCore_19
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_19
+Try to checkout JacksonCore_19
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java
+trace file: src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java
+trying to replace old failing tests
+edit: replace from 557 range 20 at src/test/java/com/fasterxml/jackson/core/json/TestNumericValues.java
+to
+    public void testLongerFloatingPoint$catena_0() throws Exception
+    {
+        StringBuilder input = new StringBuilder();
+        for (int i = 1; i < 201; i++) {
+            input.append(1);
+        }
+        input.append(".0");
+        final String DOC = input.toString();
+
+        // test out with both Reader and ByteArrayInputStream
+        JsonParser p;
+
+        p = FACTORY.createParser(new StringReader(DOC));
+        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        p.close();
+        
+        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes("UTF-8")));
+        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        p.close();
+    }     public void testLongerFloatingPoint$catena_1() throws Exception
+    {
+        StringBuilder input = new StringBuilder();
+        for (int i = 1; i < 201; i++) {
+            input.append(1);
+        }
+        input.append(".0");
+        final String DOC = input.toString();
+
+        // test out with both Reader and ByteArrayInputStream
+        JsonParser p;
+
+        p = FACTORY.createParser(new StringReader(DOC));
+        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        p.close();
+        
+        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes("UTF-8")));
+        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        p.close();
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/json/TestNumericValues.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 26.31 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_0
+	com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 1544 with             if (outPtr >= outBuf.length) {
+                outBuf = _textBuffer.finishCurrentSegment();
+                outPtr = 0;
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 27.07 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_1
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 1418 with             if (outPtr >= outBuf.length) {
+                outBuf = _textBuffer.finishCurrentSegment();
+                outPtr = 0;
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 26.84 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_0
+com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_1
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 1418 with             if (outPtr >= outBuf.length) {
+                outBuf = _textBuffer.finishCurrentSegment();
+                outPtr = 0;
+            }
+
+try to fix hunk: 1
+insert before 1544 with             if (outPtr >= outBuf.length) {
+                outBuf = _textBuffer.finishCurrentSegment();
+                outPtr = 0;
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 26.56 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

@@ -1,0 +1,275 @@
+---
+Begin generate bug_id: JacksonDatabind_77
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_77
+Try to checkout JacksonDatabind_77
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
+trying to replace old failing tests
+edit: replace from 16 range 24 at src/test/java/com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java
+to
+    public void testIssue1599$catena_0() throws Exception
+    {
+        final String JSON = aposToQuotes(
+ "{'id': 124,\n"
++" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\n"
++"  {\n"
++"    'transletBytecodes' : [ 'AAIAZQ==' ],\n"
++"    'transletName' : 'a.b',\n"
++"    'outputProperties' : { }\n"
++"  }\n"
++" ]\n"
++"}"
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        try {
+            mapper.readValue(JSON, Bean1599.class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Illegal type");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ verifyException(e, "to deserialize");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ verifyException(e, "prevented for security reasons");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testIssue1599$catena_1() throws Exception
+    {
+        final String JSON = aposToQuotes(
+ "{'id': 124,\n"
++" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\n"
++"  {\n"
++"    'transletBytecodes' : [ 'AAIAZQ==' ],\n"
++"    'transletName' : 'a.b',\n"
++"    'outputProperties' : { }\n"
++"  }\n"
++" ]\n"
++"}"
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        try {
+            mapper.readValue(JSON, Bean1599.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            verifyException(e, "Illegal type");                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ verifyException(e, "to deserialize");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ verifyException(e, "prevented for security reasons");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testIssue1599$catena_2() throws Exception
+    {
+        final String JSON = aposToQuotes(
+ "{'id': 124,\n"
++" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\n"
++"  {\n"
++"    'transletBytecodes' : [ 'AAIAZQ==' ],\n"
++"    'transletName' : 'a.b',\n"
++"    'outputProperties' : { }\n"
++"  }\n"
++" ]\n"
++"}"
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        try {
+            mapper.readValue(JSON, Bean1599.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Illegal type");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            verifyException(e, "to deserialize");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ verifyException(e, "prevented for security reasons");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testIssue1599$catena_3() throws Exception
+    {
+        final String JSON = aposToQuotes(
+ "{'id': 124,\n"
++" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\n"
++"  {\n"
++"    'transletBytecodes' : [ 'AAIAZQ==' ],\n"
++"    'transletName' : 'a.b',\n"
++"    'outputProperties' : { }\n"
++"  }\n"
++" ]\n"
++"}"
+        );
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        try {
+            mapper.readValue(JSON, Bean1599.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Illegal type");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ verifyException(e, "to deserialize");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+            verifyException(e, "prevented for security reasons");                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java
+new test num: 4
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 196.30 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_1
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_2
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_3
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 844 with range 1 to
+        Class<?> raw = type.getRawClass();
+        String name = raw.getSimpleName();
+
+        if ("TemplatesImpl".equals(name)) { // [databind#1599] 
+            if (raw.getName().startsWith("com.sun.org.apache.xalan")) {
+                throw JsonMappingException.from(ctxt,
+                        String.format("Illegal type (%s) to deserialize: prevented for security reasons",
+                                name));
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 842 with     protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
+            BeanDescription beanDesc)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 143 with         checkIllegalTypes(ctxt, type, beanDesc);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 842 with     protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
+            BeanDescription beanDesc)
+        throws JsonMappingException
+    {
+
+try to fix hunk: 2
+replace from 844 with range 1 to
+        Class<?> raw = type.getRawClass();
+        String name = raw.getSimpleName();
+
+        if ("TemplatesImpl".equals(name)) { // [databind#1599] 
+            if (raw.getName().startsWith("com.sun.org.apache.xalan")) {
+                throw JsonMappingException.from(ctxt,
+                        String.format("Illegal type (%s) to deserialize: prevented for security reasons",
+                                name));
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 196.58 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_1
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_2
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_3
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 143 with         checkIllegalTypes(ctxt, type, beanDesc);
+
+try to fix hunk: 2
+replace from 844 with range 1 to
+        Class<?> raw = type.getRawClass();
+        String name = raw.getSimpleName();
+
+        if ("TemplatesImpl".equals(name)) { // [databind#1599] 
+            if (raw.getName().startsWith("com.sun.org.apache.xalan")) {
+                throw JsonMappingException.from(ctxt,
+                        String.format("Illegal type (%s) to deserialize: prevented for security reasons",
+                                name));
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 143 with         checkIllegalTypes(ctxt, type, beanDesc);
+
+try to fix hunk: 1
+insert before 842 with     protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
+            BeanDescription beanDesc)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 143 with         checkIllegalTypes(ctxt, type, beanDesc);
+
+try to fix hunk: 1
+insert before 842 with     protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
+            BeanDescription beanDesc)
+        throws JsonMappingException
+    {
+
+try to fix hunk: 2
+replace from 844 with range 1 to
+        Class<?> raw = type.getRawClass();
+        String name = raw.getSimpleName();
+
+        if ("TemplatesImpl".equals(name)) { // [databind#1599] 
+            if (raw.getName().startsWith("com.sun.org.apache.xalan")) {
+                throw JsonMappingException.from(ctxt,
+                        String.format("Illegal type (%s) to deserialize: prevented for security reasons",
+                                name));
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 174.72 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_3', 'com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_1', 'com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_2']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_3
+com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_1
+com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_2
+Save found bug
+processed: 111
+Find 1 new bugs

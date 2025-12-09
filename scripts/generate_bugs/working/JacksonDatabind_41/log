@@ -1,0 +1,129 @@
+---
+Begin generate bug_id: JacksonDatabind_41
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_41
+Try to checkout JacksonDatabind_41
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+trying to replace old failing tests
+edit: replace from 92 range 17 at src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+to
+    @SuppressWarnings("deprecation")
+    public void testDeprecatedTypeResolution$catena_0() throws Exception
+    {
+        TypeFactory tf = MAPPER.getTypeFactory();
+
+        // first, with real (if irrelevant) context
+        JavaType t = tf.constructType(Point.class, getClass());
+        assertEquals(Point.class, t.getRawClass());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and then missing context
+        JavaType t2 = tf.constructType(Point.class, (Class<?>) null);
+        try{ assertEquals(Point.class, t2.getRawClass());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        JavaType ctxt = tf.constructType(getClass());
+        JavaType t3 = tf.constructType(Point.class, ctxt);
+        try{ assertEquals(Point.class, t3.getRawClass());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testDeprecatedTypeResolution$catena_1() throws Exception
+    {
+        TypeFactory tf = MAPPER.getTypeFactory();
+
+        // first, with real (if irrelevant) context
+        JavaType t = tf.constructType(Point.class, getClass());
+        try{ assertEquals(Point.class, t.getRawClass());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then missing context
+        JavaType t2 = tf.constructType(Point.class, (Class<?>) null);
+        assertEquals(Point.class, t2.getRawClass());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        JavaType ctxt = tf.constructType(getClass());
+        JavaType t3 = tf.constructType(Point.class, ctxt);
+        try{ assertEquals(Point.class, t3.getRawClass());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testDeprecatedTypeResolution$catena_2() throws Exception
+    {
+        TypeFactory tf = MAPPER.getTypeFactory();
+
+        // first, with real (if irrelevant) context
+        JavaType t = tf.constructType(Point.class, getClass());
+        try{ assertEquals(Point.class, t.getRawClass());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then missing context
+        JavaType t2 = tf.constructType(Point.class, (Class<?>) null);
+        try{ assertEquals(Point.class, t2.getRawClass());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        JavaType ctxt = tf.constructType(getClass());
+        JavaType t3 = tf.constructType(Point.class, ctxt);
+        assertEquals(Point.class, t3.getRawClass());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 208.62 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 610 with range 1 to
+        TypeBindings bindings = (contextType == null)
+                ? TypeBindings.emptyBindings() : contextType.getBindings();
+        return _fromAny(null, type, bindings);
+
+patches are written to file
+running tests...
+used time: Finished in 183.91 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_2
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 602 with range 1 to
+        TypeBindings bindings = (contextClass == null)
+                ? TypeBindings.emptyBindings() : constructType(contextClass).getBindings();
+        return _fromAny(null, type, bindings);
+
+patches are written to file
+running tests...
+used time: Finished in 186.65 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_2
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_0
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testDeprecatedTypeResolution$catena_1
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 602 with range 1 to
+        TypeBindings bindings = (contextClass == null)
+                ? TypeBindings.emptyBindings() : constructType(contextClass).getBindings();
+        return _fromAny(null, type, bindings);
+
+try to fix hunk: 1
+replace from 610 with range 1 to
+        TypeBindings bindings = (contextType == null)
+                ? TypeBindings.emptyBindings() : contextType.getBindings();
+        return _fromAny(null, type, bindings);
+
+patches are written to file
+running tests...
+used time: Finished in 185.75 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

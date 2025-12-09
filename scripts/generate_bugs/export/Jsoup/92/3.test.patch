@@ -1,0 +1,18 @@
+{
+    "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes": {
+        "begin_line_no": 58,
+        "end_line_no": 68,
+        "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+        "to": [
+            "    @Test public void dropsDuplicateAttributes$catena_0() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());         /***** ORIGINAL ASSERTION IS HERE *****/ // normalized names due to lower casing\n\n        try{ assertEquals(1, parser.getErrors().size());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }"
+        ]
+    },
+    "org.jsoup.parser.XmlTreeBuilderTest::dropsDuplicateAttributes": {
+        "begin_line_no": 249,
+        "end_line_no": 256,
+        "file_path": "src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java",
+        "to": [
+            ""
+        ]
+    }
+}

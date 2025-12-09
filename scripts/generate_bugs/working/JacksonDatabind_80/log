@@ -1,0 +1,280 @@
+---
+Begin generate bug_id: JacksonDatabind_80
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_80
+Try to checkout JacksonDatabind_80
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
+trying to replace old failing tests
+edit: replace from 44 range 17 at src/test/java/com/fasterxml/jackson/databind/jsontype/TestTypeNames.java
+to
+    public void testBaseTypeId1616$catena_0() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        Collection<NamedType> subtypes = new StdSubtypeResolver().collectAndResolveSubtypesByTypeId(
+                mapper.getDeserializationConfig(),
+                // note: `null` is fine here as `AnnotatedMember`:
+                null,
+                mapper.constructType(Base1616.class));
+        assertEquals(2, subtypes.size());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        Set<String> ok = new HashSet<>(Arrays.asList("A", "B"));
+        for (NamedType type : subtypes) {
+            String id = type.getName();
+            if (!ok.contains(id)) {
+                try{ fail("Unexpected id '"+id+"' (mapping to: "+type.getType()+"), should be one of: "+ok);    }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testBaseTypeId1616$catena_1() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        Collection<NamedType> subtypes = new StdSubtypeResolver().collectAndResolveSubtypesByTypeId(
+                mapper.getDeserializationConfig(),
+                // note: `null` is fine here as `AnnotatedMember`:
+                null,
+                mapper.constructType(Base1616.class));
+        try{ assertEquals(2, subtypes.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        Set<String> ok = new HashSet<>(Arrays.asList("A", "B"));
+        for (NamedType type : subtypes) {
+            String id = type.getName();
+            if (!ok.contains(id)) {
+                fail("Unexpected id '"+id+"' (mapping to: "+type.getType()+"), should be one of: "+ok);         /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TestTypeNames.java
+new test num: 2
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 212.61 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_1
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 86 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 234.36 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_0', 'com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_1']
+select new bug
+Pattern: 0011
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_0
+com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_1
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 1
+insert before 86 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 243.60 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestTypeNames::testBaseTypeId1616$catena_1
+Can independently fix []
+Could not fix independently
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 79 with         if (property != null) {
+
+try to fix hunk: 1
+insert before 86 with             }
+
+try to fix hunk: 2
+insert before 145 with         if (property != null) {
+
+try to fix hunk: 3
+insert before 151 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 237.58 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 1 new bugs

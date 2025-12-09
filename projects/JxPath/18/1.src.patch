@@ -1,0 +1,40 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java",
+            "replaced_with": "import org.apache.commons.jxpath.ri.Compiler;\n",
+            "patch_type": "insert",
+            "next_line_no": 19
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java",
+            "replaced_with": "import org.apache.commons.jxpath.ri.compiler.NodeTypeTest;\n",
+            "patch_type": "insert",
+            "next_line_no": 23
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java",
+            "replaced_with": "    private static final NodeNameTest WILDCARD_TEST = new NodeNameTest(new QName(null, \"*\"));\n",
+            "patch_type": "insert",
+            "next_line_no": 33
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java",
+            "from_line_no": 75,
+            "to_line_no": 75,
+            "replaced_with": "            NodeNameTest nodeNameTest = null;\n            if (nodeTest instanceof NodeTypeTest) {\n                if (((NodeTypeTest) nodeTest).getNodeType() == Compiler.NODE_TYPE_NODE) {\n                    nodeNameTest = WILDCARD_TEST;\n                }\n            }\n            else if (nodeTest instanceof NodeNameTest) {\n                nodeNameTest = (NodeNameTest) nodeTest;\n            }\n            if (nodeNameTest == null) {\n",
+            "replaced": "            if (!(nodeTest instanceof NodeNameTest)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 76
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java",
+            "from_line_no": 78,
+            "to_line_no": 80,
+            "replaced_with": "            iterator = parentContext.getCurrentNodePointer().attributeIterator(\n                    nodeNameTest.getNodeName());\n",
+            "replaced": "            QName name = ((NodeNameTest) nodeTest).getNodeName();\n            iterator =\n                parentContext.getCurrentNodePointer().attributeIterator(name);\n",
+            "patch_type": "replace",
+            "next_line_no": 81
+        }
+    ]
+}

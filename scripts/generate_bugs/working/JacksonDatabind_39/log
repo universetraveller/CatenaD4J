@@ -1,0 +1,150 @@
+---
+Begin generate bug_id: JacksonDatabind_39
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_39
+Try to checkout JacksonDatabind_39
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/NullifyingDeserializer.java
+trying to replace old failing tests
+edit: replace from 215 range 17 at src/test/java/com/fasterxml/jackson/databind/jsontype/TestPolymorphicWithDefaultImpl.java
+to
+    public void testUnknownTypeIDRecovery$catena_0() throws Exception
+    {
+        ObjectReader reader = MAPPER.readerFor(CallRecord.class).without(
+                DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
+        String json = aposToQuotes("{'version':0.0,'application':'123',"
+                +"'item':{'type':'xevent','location':'location1'},"
+                +"'item2':{'type':'event','location':'location1'}}");
+        // can't read item2 - which is valid
+        CallRecord r = reader.readValue(json);
+        assertNull(r.item);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(r.item2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        json = aposToQuotes("{'item':{'type':'xevent','location':'location1'}, 'version':0.0,'application':'123'}");
+        CallRecord r3 = reader.readValue(json);
+        try{ assertNull(r3.item);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("123", r3.application);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testUnknownTypeIDRecovery$catena_1() throws Exception
+    {
+        ObjectReader reader = MAPPER.readerFor(CallRecord.class).without(
+                DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
+        String json = aposToQuotes("{'version':0.0,'application':'123',"
+                +"'item':{'type':'xevent','location':'location1'},"
+                +"'item2':{'type':'event','location':'location1'}}");
+        // can't read item2 - which is valid
+        CallRecord r = reader.readValue(json);
+        try{ assertNull(r.item);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(r.item2);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        json = aposToQuotes("{'item':{'type':'xevent','location':'location1'}, 'version':0.0,'application':'123'}");
+        CallRecord r3 = reader.readValue(json);
+        try{ assertNull(r3.item);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("123", r3.application);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testUnknownTypeIDRecovery$catena_2() throws Exception
+    {
+        ObjectReader reader = MAPPER.readerFor(CallRecord.class).without(
+                DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
+        String json = aposToQuotes("{'version':0.0,'application':'123',"
+                +"'item':{'type':'xevent','location':'location1'},"
+                +"'item2':{'type':'event','location':'location1'}}");
+        // can't read item2 - which is valid
+        CallRecord r = reader.readValue(json);
+        try{ assertNull(r.item);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(r.item2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        json = aposToQuotes("{'item':{'type':'xevent','location':'location1'}, 'version':0.0,'application':'123'}");
+        CallRecord r3 = reader.readValue(json);
+        assertNull(r3.item);                                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("123", r3.application);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testUnknownTypeIDRecovery$catena_3() throws Exception
+    {
+        ObjectReader reader = MAPPER.readerFor(CallRecord.class).without(
+                DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
+        String json = aposToQuotes("{'version':0.0,'application':'123',"
+                +"'item':{'type':'xevent','location':'location1'},"
+                +"'item2':{'type':'event','location':'location1'}}");
+        // can't read item2 - which is valid
+        CallRecord r = reader.readValue(json);
+        try{ assertNull(r.item);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(r.item2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        json = aposToQuotes("{'item':{'type':'xevent','location':'location1'}, 'version':0.0,'application':'123'}");
+        CallRecord r3 = reader.readValue(json);
+        try{ assertNull(r3.item);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("123", r3.application);                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TestPolymorphicWithDefaultImpl.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 151.41 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_1
+	com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_2
+	com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 36 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 35 with         if (p.hasToken(JsonToken.FIELD_NAME)) {
+            while (true) {
+                JsonToken t = p.nextToken();
+                if ((t == null) || (t == JsonToken.END_OBJECT)) {
+                    break;
+                }
+                p.skipChildren();
+            }
+        } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 35 with         if (p.hasToken(JsonToken.FIELD_NAME)) {
+            while (true) {
+                JsonToken t = p.nextToken();
+                if ((t == null) || (t == JsonToken.END_OBJECT)) {
+                    break;
+                }
+                p.skipChildren();
+            }
+        } else {
+
+try to fix hunk: 1
+insert before 36 with         }
+
+patches are written to file
+running tests...
+used time: Finished in 161.68 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_1', 'com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_0', 'com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_3', 'com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_1
+com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_0
+com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_3
+com.fasterxml.jackson.databind.jsontype.TestPolymorphicWithDefaultImpl::testUnknownTypeIDRecovery$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

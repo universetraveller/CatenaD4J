@@ -1,0 +1,105 @@
+---
+Begin generate bug_id: Cli_37
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_37
+Try to checkout Cli_37
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/cli/DefaultParser.java
+trying to replace old failing tests
+edit: replace from 45 range 10 at src/test/java/org/apache/commons/cli/bug/BugCLI265Test.java
+to
+    @Test
+    public void shouldParseShortOptionWithoutValue$catena_0() throws Exception {
+        String[] twoShortOptions = new String[]{"-t1", "-last"};
+
+        final CommandLine commandLine = parser.parse(options, twoShortOptions);
+
+        assertTrue(commandLine.hasOption("t1"));                                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotEquals("Second option has been used as value for first option", "-last", commandLine.getOptionValue("t1"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Second option has not been detected", commandLine.hasOption("last"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseShortOptionWithoutValue$catena_1() throws Exception {
+        String[] twoShortOptions = new String[]{"-t1", "-last"};
+
+        final CommandLine commandLine = parser.parse(options, twoShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotEquals("Second option has been used as value for first option", "-last", commandLine.getOptionValue("t1"));         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("Second option has not been detected", commandLine.hasOption("last"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseShortOptionWithoutValue$catena_2() throws Exception {
+        String[] twoShortOptions = new String[]{"-t1", "-last"};
+
+        final CommandLine commandLine = parser.parse(options, twoShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotEquals("Second option has been used as value for first option", "-last", commandLine.getOptionValue("t1"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("Second option has not been detected", commandLine.hasOption("last"));                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/cli/bug/BugCLI265Test.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 6.18 seconds
+Failing tests: 2
+	org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_1
+	org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 305 with         int pos = token.indexOf("=");
+        String optName = pos == -1 ? token.substring(1) : token.substring(1, pos);
+        return options.hasShortOption(optName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 302 with range 1 to
+        if (!token.startsWith("-") || token.length() == 1)
+        {
+            return false;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 302 with range 1 to
+        if (!token.startsWith("-") || token.length() == 1)
+        {
+            return false;
+        }
+
+try to fix hunk: 1
+insert before 305 with         int pos = token.indexOf("=");
+        String optName = pos == -1 ? token.substring(1) : token.substring(1, pos);
+        return options.hasShortOption(optName);
+
+patches are written to file
+running tests...
+used time: Finished in 5.79 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_1', 'org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_1
+org.apache.commons.cli.bug.BugCLI265Test::shouldParseShortOptionWithoutValue$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

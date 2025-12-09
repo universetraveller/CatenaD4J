@@ -1,0 +1,3 @@
+com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass$catena_1
+com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1
+com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1

@@ -1,0 +1,28 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        if (_parsingContext.inRoot()) {\n            _verifyRootSpace(c);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 1244
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "            if (_parsingContext.inRoot()) {\n                _verifyRootSpace(c);\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 1407
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "    private final void _verifyRootSpace(int ch) throws IOException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 1421
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        switch (ch) {\n        case ' ':\n        case '\\t':\n            return;\n        case '\\r':\n            _skipCR();\n            return;\n        case '\\n':\n            ++_currInputRow;\n            _currInputRowStart = _inputPtr;\n            return;\n        }\n        _reportMissingRootWS(ch);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 1423
+        }
+    ]
+}

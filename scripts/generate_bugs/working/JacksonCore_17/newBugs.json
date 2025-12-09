@@ -1,0 +1,86 @@
+{
+    "original": {
+        "num_of_hunks": 7,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "replaced_with": "        if (len <= buf.length) {\n            text.getChars(offset, offset+len, buf, 0);\n            _writeRawSegment(buf, 0, len);\n            return;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 528
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "replaced_with": "        final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16\n        final int maxBytes = maxChunk * 3;\n",
+            "patch_type": "insert",
+            "next_line_no": 532
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "from_line_no": 534,
+            "to_line_no": 534,
+            "replaced_with": "            int len2 = Math.min(maxChunk, len);\n",
+            "replaced": "            int len2 = Math.min(buf.length, len);\n",
+            "patch_type": "replace",
+            "next_line_no": 535
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "from_line_no": 536,
+            "to_line_no": 536,
+            "replaced_with": "            if ((_outputTail + maxBytes) > _outputEnd) {\n                _flushBuffer();\n            }\n",
+            "replaced": "            writeRaw(buf, 0, len2);\n",
+            "patch_type": "replace",
+            "next_line_no": 537
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "replaced_with": "            if (len > 0) {\n                char ch = buf[len2-1];\n                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {\n                    --len2;\n                }\n            }\n            _writeRawSegment(buf, 0, len2);\n",
+            "patch_type": "insert",
+            "next_line_no": 539
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "replaced_with": "    private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException\n    {\n        main_loop:\n        while (offset < end) {\n            inner_loop:\n            while (true) {\n                int ch = (int) cbuf[offset];\n                if (ch > 0x7F) {\n                    break inner_loop;\n                }\n                _outputBuffer[_outputTail++] = (byte) ch;\n                if (++offset >= end) {\n                    break main_loop;\n                }\n            }\n            char ch = cbuf[offset++];\n            if (ch < 0x800) { // 2-byte?\n                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));\n                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));\n            } else {\n                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);\n            }\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 672
+        },
+        "6": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java",
+            "from_line_no": 1887,
+            "to_line_no": 1887,
+            "replaced_with": "                    _reportError(String.format(\n\"Split surrogate on writeRaw() input (last character): first character 0x%4x\", ch));\n",
+            "replaced": "                    _reportError(\"Split surrogate on writeRaw() input (last character)\");\n",
+            "patch_type": "replace",
+            "next_line_no": 1888
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString"
+        ],
+        "com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString": {
+            "file_path": "src/test/java/com/fasterxml/jackson/core/json/RawValueWithSurrogatesTest.java",
+            "Instance": "Begin: Pos(53, 12)\nEnd: Pos(55, 5)\nSource: /tmp/c4j/JacksonCore_17/src/test/java//com/fasterxml/jackson/core/json/RawValueWithSurrogatesTest.java\nName: testRawWithSurrogatesString\nChilds: [StatementAssertion<Begin: Pos(54, 9), End: Pos(54, 44)>,\n]",
+            "source": "/tmp/c4j/JacksonCore_17/src/test/java//com/fasterxml/jackson/core/json/RawValueWithSurrogatesTest.java",
+            "name": "testRawWithSurrogatesString",
+            "begin": "Pos(53, 12)",
+            "end": "Pos(55, 5)",
+            "begin_line_no": 53,
+            "end_line_no": 55,
+            "child": [
+                "Begin: Pos(54, 9)\nEnd: Pos(54, 44)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "0101110": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString"
+        ]
+    },
+    "1101010": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString"
+        ]
+    }
+}

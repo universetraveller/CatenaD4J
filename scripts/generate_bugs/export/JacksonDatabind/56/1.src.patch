@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+            "from_line_no": 231,
+            "to_line_no": 231,
+            "replaced_with": "                    int ix = _firstHyphenOrUnderscore(value);\n",
+            "replaced": "                    int ix = value.indexOf('_');\n",
+            "patch_type": "replace",
+            "next_line_no": 232
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+            "replaced_with": "        protected int _firstHyphenOrUnderscore(String str)\n        {\n            for (int i = 0, end = str.length(); i < end; ++i) {\n                char c = str.charAt(i);\n                if (c == '_' || c == '-') {\n                    return i;\n                }\n            }\n            return -1;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 292
+        }
+    ]
+}

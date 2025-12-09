@@ -1,0 +1,1746 @@
+---
+Begin generate bug_id: JacksonDatabind_4
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_4
+Try to checkout JacksonDatabind_4
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
+trying to replace old failing tests
+edit: replace from 205 range 39 at src/test/java/com/fasterxml/jackson/databind/deser/TestCollectionDeserialization.java
+to
+    public void testArrayIndexForExceptions$catena_0() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_1() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            verifyException(e, "Can not deserialize");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_2() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            assertEquals(1, refs.size());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_3() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(1, refs.get(0).getIndex());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_4() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_5() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            verifyException(e, "Can not deserialize");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_6() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            assertEquals(1, refs.size());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_7() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(1, refs.get(0).getIndex());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_8() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_9() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            verifyException(e, "Can not deserialize");                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_10() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            assertEquals(2, refs.size());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_11() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            assertEquals(-1, refs.get(0).getIndex());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_12() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals("keys", refs.get(0).getFieldName());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_13() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            assertEquals(1, refs.get(1).getIndex());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertNull(refs.get(1).getFieldName());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testArrayIndexForExceptions$catena_14() throws Exception
+    {
+        final String OBJECTS_JSON = "[ \"KEY2\", false ]";
+        try {
+            MAPPER.readValue(OBJECTS_JSON, Key[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("[ \"xyz\", { } ]", String[].class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(1, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(1, refs.get(0).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        try {
+            MAPPER.readValue("{\"keys\":"+OBJECTS_JSON+"}", KeyListBean.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "Can not deserialize");                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            List<JsonMappingException.Reference> refs = e.getPath();
+            try{ assertEquals(2, refs.size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            // Bean has no index, but has name:
+            try{ assertEquals(-1, refs.get(0).getIndex());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals("keys", refs.get(0).getFieldName());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // and for List, reverse:
+            try{ assertEquals(1, refs.get(1).getIndex());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertNull(refs.get(1).getFieldName());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestCollectionDeserialization.java
+new test num: 15
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 110.22 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_6
+	com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_7
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 59 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 106.52 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_6
+	com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_7
+Can independently fix []
+Could not fix independently
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 123.56 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_7', 'com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_6']
+select new bug
+Pattern: 111000
+new failing tests:
+com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_7
+com.fasterxml.jackson.databind.deser.TestCollectionDeserialization::testArrayIndexForExceptions$catena_6
+Save found bug
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 59 with         try {
+
+try to fix hunk: 1
+insert before 75 with         } catch (Exception e) {
+
+try to fix hunk: 2
+insert before 76 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+try to fix hunk: 3
+insert before 93 with         try {
+
+try to fix hunk: 4
+insert before 102 with         } catch (Exception e) {
+
+try to fix hunk: 5
+insert before 103 with             throw JsonMappingException.wrapWithPath(e, String.class, ix);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 129.63 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111111
+Find 1 new bugs

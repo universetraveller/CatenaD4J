@@ -1,0 +1,831 @@
+---
+Begin generate bug_id: JacksonCore_18
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_18
+Try to checkout JacksonCore_18
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java
+trace file: src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java
+trace file: src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java
+trying to replace old failing tests
+edit: replace from 111 range 53 at src/test/java/com/fasterxml/jackson/core/json/TestJsonGeneratorFeatures.java
+to
+    public void testTooBigBigDecimal$catena_0() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        f.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
+
+        // 24-Aug-2016, tatu: Initial check limits scale to [-9999,+9999]
+        BigDecimal BIG = new BigDecimal("1E+9999");
+        BigDecimal TOO_BIG = new BigDecimal("1E+10000");
+        BigDecimal SMALL = new BigDecimal("1E-9999");
+        BigDecimal TOO_SMALL = new BigDecimal("1E-10000");
+
+        for (boolean useBytes : new boolean[] { false, true } ) {
+            for (boolean asString : new boolean[] { false, true } ) {
+                JsonGenerator g;
+                
+                if (useBytes) {
+                    g = f.createGenerator(new ByteArrayOutputStream());
+                } else {
+                    g = f.createGenerator(new StringWriter());
+                }
+                if (asString) {
+                    g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                }
+
+                // first, ok cases:
+                g.writeStartArray();
+                g.writeNumber(BIG);
+                g.writeNumber(SMALL);
+                g.writeEndArray();
+                g.close();
+
+                // then invalid
+                for (BigDecimal input : new BigDecimal[] { TOO_BIG, TOO_SMALL }) {
+                    if (useBytes) {
+                        g = f.createGenerator(new ByteArrayOutputStream());
+                    } else {
+                        g = f.createGenerator(new StringWriter());
+                    }
+                    if (asString) {
+                        g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                    }
+                    try {
+                        g.writeNumber(input);
+                        fail("Should not have written without exception: "+input);                          /***** ORIGINAL ASSERTION IS HERE *****/
+                    } catch (JsonGenerationException e) {
+                        try{ verifyException(e, "Attempt to write plain `java.math.BigDecimal`");           }catch(Throwable __SHOULD_BE_IGNORED){}
+                        try{ verifyException(e, "illegal scale");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+                    }
+                    g.close();
+                }
+            }
+        }
+    }     public void testTooBigBigDecimal$catena_1() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        f.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
+
+        // 24-Aug-2016, tatu: Initial check limits scale to [-9999,+9999]
+        BigDecimal BIG = new BigDecimal("1E+9999");
+        BigDecimal TOO_BIG = new BigDecimal("1E+10000");
+        BigDecimal SMALL = new BigDecimal("1E-9999");
+        BigDecimal TOO_SMALL = new BigDecimal("1E-10000");
+
+        for (boolean useBytes : new boolean[] { false, true } ) {
+            for (boolean asString : new boolean[] { false, true } ) {
+                JsonGenerator g;
+                
+                if (useBytes) {
+                    g = f.createGenerator(new ByteArrayOutputStream());
+                } else {
+                    g = f.createGenerator(new StringWriter());
+                }
+                if (asString) {
+                    g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                }
+
+                // first, ok cases:
+                g.writeStartArray();
+                g.writeNumber(BIG);
+                g.writeNumber(SMALL);
+                g.writeEndArray();
+                g.close();
+
+                // then invalid
+                for (BigDecimal input : new BigDecimal[] { TOO_BIG, TOO_SMALL }) {
+                    if (useBytes) {
+                        g = f.createGenerator(new ByteArrayOutputStream());
+                    } else {
+                        g = f.createGenerator(new StringWriter());
+                    }
+                    if (asString) {
+                        g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                    }
+                    try {
+                        g.writeNumber(input);
+                        try{ fail("Should not have written without exception: "+input);                     }catch(Throwable __SHOULD_BE_IGNORED){}
+                    } catch (JsonGenerationException e) {
+                        verifyException(e, "Attempt to write plain `java.math.BigDecimal`");                /***** ORIGINAL ASSERTION IS HERE *****/
+                        try{ verifyException(e, "illegal scale");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+                    }
+                    g.close();
+                }
+            }
+        }
+    }     public void testTooBigBigDecimal$catena_2() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        f.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
+
+        // 24-Aug-2016, tatu: Initial check limits scale to [-9999,+9999]
+        BigDecimal BIG = new BigDecimal("1E+9999");
+        BigDecimal TOO_BIG = new BigDecimal("1E+10000");
+        BigDecimal SMALL = new BigDecimal("1E-9999");
+        BigDecimal TOO_SMALL = new BigDecimal("1E-10000");
+
+        for (boolean useBytes : new boolean[] { false, true } ) {
+            for (boolean asString : new boolean[] { false, true } ) {
+                JsonGenerator g;
+                
+                if (useBytes) {
+                    g = f.createGenerator(new ByteArrayOutputStream());
+                } else {
+                    g = f.createGenerator(new StringWriter());
+                }
+                if (asString) {
+                    g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                }
+
+                // first, ok cases:
+                g.writeStartArray();
+                g.writeNumber(BIG);
+                g.writeNumber(SMALL);
+                g.writeEndArray();
+                g.close();
+
+                // then invalid
+                for (BigDecimal input : new BigDecimal[] { TOO_BIG, TOO_SMALL }) {
+                    if (useBytes) {
+                        g = f.createGenerator(new ByteArrayOutputStream());
+                    } else {
+                        g = f.createGenerator(new StringWriter());
+                    }
+                    if (asString) {
+                        g.enable(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS);
+                    }
+                    try {
+                        g.writeNumber(input);
+                        try{ fail("Should not have written without exception: "+input);                     }catch(Throwable __SHOULD_BE_IGNORED){}
+                    } catch (JsonGenerationException e) {
+                        try{ verifyException(e, "Attempt to write plain `java.math.BigDecimal`");           }catch(Throwable __SHOULD_BE_IGNORED){}
+                        verifyException(e, "illegal scale");                                                /***** ORIGINAL ASSERTION IS HERE *****/
+                    }
+                    g.close();
+                }
+            }
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/json/TestJsonGeneratorFeatures.java
+new test num: 3
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 26.34 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 26.49 seconds
+Failing tests: 3
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlain
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 26.63 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+patches are written to file
+running tests...
+used time: Finished in 25.17 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+No new failing tests but only 1 hunk
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 23.19 seconds
+Failing tests: 3
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlain
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 26.73 seconds
+Failing tests: 3
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlain
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 28.03 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 28.31 seconds
+Failing tests: 3
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlain
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+Includes new failing tests, set to unusable
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.17 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+Can independently fix []
+Could not fix independently
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 23.44 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+Can independently fix []
+Could not fix independently
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 26.66 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+Can independently fix []
+Could not fix independently
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+insert before 53 with     protected final static int MAX_BIG_DECIMAL_SCALE = 9999;
+
+try to fix hunk: 1
+insert before 434 with         if (Feature.WRITE_BIGDECIMAL_AS_PLAIN.enabledIn(_features)) {
+
+try to fix hunk: 2
+insert before 435 with             int scale = value.scale();
+            if ((scale < -MAX_BIG_DECIMAL_SCALE) || (scale > MAX_BIG_DECIMAL_SCALE)) {
+                _reportError(String.format(
+"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]",
+scale, MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE));
+            }
+            return value.toPlainString();
+        }
+
+try to fix hunk: 3
+replace from 910 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+try to fix hunk: 4
+replace from 687 with range 4 to
+            _writeQuotedRaw(_asString(value));
+
+patches are written to file
+running tests...
+used time: Finished in 26.02 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0']
+select new bug
+Pattern: 11111
+new failing tests:
+com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testTooBigBigDecimal$catena_0
+Save found bug
+processed: 11111
+Find 1 new bugs

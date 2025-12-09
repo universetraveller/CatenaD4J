@@ -1,0 +1,190 @@
+{
+    "num_of_hunks": 27,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected final static int STATE_CLOSED = 0;\n",
+        "patch_type": "insert",
+        "next_line_no": 28
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected final static int STATE_NEED_RESYNC = 1;\n",
+        "patch_type": "insert",
+        "next_line_no": 32
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected final static int STATE_MAY_HAVE_VALUE = 2;\n",
+        "patch_type": "insert",
+        "next_line_no": 37
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected final static int STATE_HAS_VALUE = 3;\n",
+        "patch_type": "insert",
+        "next_line_no": 42
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 69,
+        "to_line_no": 69,
+        "replaced_with": "    protected final JsonParser _parser;\n",
+        "replaced": "    protected JsonParser _parser;\n",
+        "patch_type": "replace",
+        "next_line_no": 70
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected final JsonStreamContext _seqContext;\n",
+        "patch_type": "insert",
+        "next_line_no": 75
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 98,
+        "to_line_no": 98,
+        "replaced_with": "    protected int _state;\n",
+        "replaced": "    protected boolean _hasNextChecked;\n",
+        "patch_type": "replace",
+        "next_line_no": 99
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 138,
+        "to_line_no": 138,
+        "replaced_with": "        if (p == null) { // can this occur?\n            _seqContext = null;\n            _state = STATE_CLOSED;\n        } else {\n            JsonStreamContext sctxt = p.getParsingContext();\n            if (managedParser && p.isExpectedStartArrayToken()) {\n",
+        "replaced": "        if (managedParser && (p != null) && p.isExpectedStartArrayToken()) {\n",
+        "patch_type": "replace",
+        "next_line_no": 139
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "            } else {\n",
+        "patch_type": "insert",
+        "next_line_no": 141
+    },
+    "9": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "                JsonToken t = p.getCurrentToken();\n                if ((t == JsonToken.START_OBJECT) || (t == JsonToken.START_ARRAY)) {\n                    sctxt = sctxt.getParent();\n                }\n            }\n            _seqContext = sctxt;\n            _state = STATE_MAY_HAVE_VALUE;\n",
+        "patch_type": "insert",
+        "next_line_no": 144
+    },
+    "10": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        if (_state != STATE_CLOSED) {\n            _state = STATE_CLOSED;\n",
+        "patch_type": "insert",
+        "next_line_no": 189
+    },
+    "11": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        }\n",
+        "patch_type": "insert",
+        "next_line_no": 192
+    },
+    "12": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 210,
+        "to_line_no": 210,
+        "replaced_with": "        switch (_state) {\n        case STATE_CLOSED:\n",
+        "replaced": "        if (_parser == null) {\n",
+        "patch_type": "replace",
+        "next_line_no": 211
+    },
+    "13": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        case STATE_NEED_RESYNC:\n            _resync();\n",
+        "patch_type": "insert",
+        "next_line_no": 212
+    },
+    "14": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 213,
+        "to_line_no": 214,
+        "replaced_with": "        case STATE_MAY_HAVE_VALUE:\n",
+        "replaced": "        }\n        if (!_hasNextChecked) {\n",
+        "patch_type": "replace",
+        "next_line_no": 215
+    },
+    "15": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 216,
+        "to_line_no": 216,
+        "replaced": "            _hasNextChecked = true;\n",
+        "patch_type": "delete",
+        "next_line_no": 217
+    },
+    "16": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 221,
+        "to_line_no": 224,
+        "replaced_with": "                    _state = STATE_CLOSED;\n                    if (_closeParser && (_parser != null)) {\n                        _parser.close();\n",
+        "replaced": "                    JsonParser jp = _parser;\n                    _parser = null;\n                    if (_closeParser) {\n                        jp.close();\n",
+        "patch_type": "replace",
+        "next_line_no": 225
+    },
+    "17": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "            _state = STATE_HAS_VALUE;\n            return true;\n        case STATE_HAS_VALUE:\n",
+        "patch_type": "insert",
+        "next_line_no": 229
+    },
+    "18": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 236,
+        "to_line_no": 236,
+        "replaced_with": "        switch (_state) {\n        case STATE_CLOSED:\n            return _throwNoSuchElement();\n        case STATE_NEED_RESYNC: // fall-through, will do re-sync\n        case STATE_MAY_HAVE_VALUE:\n",
+        "replaced": "        if (!_hasNextChecked) {\n",
+        "patch_type": "replace",
+        "next_line_no": 237
+    },
+    "19": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "            break;\n        case STATE_HAS_VALUE:\n            break;\n",
+        "patch_type": "insert",
+        "next_line_no": 240
+    },
+    "20": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "from_line_no": 241,
+        "to_line_no": 244,
+        "replaced": "        if (_parser == null) {\n            return _throwNoSuchElement();\n        }\n        _hasNextChecked = false;\n",
+        "patch_type": "delete",
+        "next_line_no": 245
+    },
+    "21": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        int nextState = STATE_NEED_RESYNC;\n",
+        "patch_type": "insert",
+        "next_line_no": 246
+    },
+    "22": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "            nextState = STATE_MAY_HAVE_VALUE;\n",
+        "patch_type": "insert",
+        "next_line_no": 254
+    },
+    "23": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "            _state = nextState;\n",
+        "patch_type": "insert",
+        "next_line_no": 256
+    },
+    "24": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "    protected void _resync() throws IOException\n    {\n        final JsonParser p = _parser;\n",
+        "patch_type": "insert",
+        "next_line_no": 352
+    },
+    "25": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        if (p.getParsingContext() == _seqContext) {\n            return;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 353
+    },
+    "26": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/MappingIterator.java",
+        "replaced_with": "        while (true) {\n            JsonToken t = p.nextToken();\n            if ((t == JsonToken.END_ARRAY) || (t == JsonToken.END_OBJECT)) {\n                if (p.getParsingContext() == _seqContext) {\n                    p.clearCurrentToken();\n                    return;\n                }\n            } else if ((t == JsonToken.START_ARRAY) || (t == JsonToken.START_OBJECT)) {\n                p.skipChildren();\n            } else if (t == null) {\n                return;\n            }\n        }\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 354
+    }
+}

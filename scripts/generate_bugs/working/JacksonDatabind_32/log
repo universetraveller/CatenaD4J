@@ -1,0 +1,192 @@
+---
+Begin generate bug_id: JacksonDatabind_32
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_32
+Try to checkout JacksonDatabind_32
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/UntypedObjectDeserializer.java
+trying to replace old failing tests
+edit: replace from 254 range 15 at src/test/java/com/fasterxml/jackson/databind/deser/TestUntypedDeserialization.java
+to
+    public void testNestedUntyped989$catena_0() throws IOException
+    {
+        Untyped989 pojo;
+        ObjectReader r = MAPPER.readerFor(Untyped989.class);
+
+        pojo = r.readValue("[]");
+        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        pojo = r.readValue("[{}]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        pojo = r.readValue("{}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("{\"a\":[]}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUntyped989$catena_1() throws IOException
+    {
+        Untyped989 pojo;
+        ObjectReader r = MAPPER.readerFor(Untyped989.class);
+
+        pojo = r.readValue("[]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("[{}]");
+        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        pojo = r.readValue("{}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("{\"a\":[]}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUntyped989$catena_2() throws IOException
+    {
+        Untyped989 pojo;
+        ObjectReader r = MAPPER.readerFor(Untyped989.class);
+
+        pojo = r.readValue("[]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("[{}]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        pojo = r.readValue("{}");
+        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        pojo = r.readValue("{\"a\":[]}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUntyped989$catena_3() throws IOException
+    {
+        Untyped989 pojo;
+        ObjectReader r = MAPPER.readerFor(Untyped989.class);
+
+        pojo = r.readValue("[]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("[{}]");
+        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        pojo = r.readValue("{}");
+        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        pojo = r.readValue("{\"a\":[]}");
+        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestUntypedDeserialization.java
+new test num: 4
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 158.23 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 537 with                 return new LinkedHashMap<String,Object>(2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 535 with             case JsonTokenId.ID_END_OBJECT:
+
+patches are written to file
+running tests...
+used time: Finished in 137.94 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 221 with         case JsonTokenId.ID_END_OBJECT:
+
+patches are written to file
+running tests...
+used time: Finished in 166.50 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 535 with             case JsonTokenId.ID_END_OBJECT:
+
+try to fix hunk: 2
+insert before 537 with                 return new LinkedHashMap<String,Object>(2);
+
+patches are written to file
+running tests...
+used time: Finished in 152.66 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3', 'com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0', 'com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2', 'com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1']
+select new bug
+Pattern: 011
+new failing tests:
+com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3
+com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0
+com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2
+com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1
+Save found bug
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 221 with         case JsonTokenId.ID_END_OBJECT:
+
+try to fix hunk: 2
+insert before 537 with                 return new LinkedHashMap<String,Object>(2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 221 with         case JsonTokenId.ID_END_OBJECT:
+
+try to fix hunk: 1
+insert before 535 with             case JsonTokenId.ID_END_OBJECT:
+
+patches are written to file
+running tests...
+used time: Finished in 154.05 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2
+	com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 221 with         case JsonTokenId.ID_END_OBJECT:
+
+try to fix hunk: 1
+insert before 535 with             case JsonTokenId.ID_END_OBJECT:
+
+try to fix hunk: 2
+insert before 537 with                 return new LinkedHashMap<String,Object>(2);
+
+patches are written to file
+running tests...
+used time: Finished in 155.24 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

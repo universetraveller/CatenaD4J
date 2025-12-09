@@ -1,0 +1,1861 @@
+---
+Begin generate bug_id: JacksonDatabind_15
+num_of_hunks: 14
+NOTICE: may not contains full fix patterns for hunks are too much (14 hunks)
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_15
+Try to checkout JacksonDatabind_15
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/JavaType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/std/StdSerializer.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 00000000000000
+patches are written to file
+running tests...
+used time: Finished in 134.37 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+processed: 00000000000000
+pattern: 10000000000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+patches are written to file
+running tests...
+used time: Finished in 129.67 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 10000000000000
+pattern: 01000000000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000000000
+pattern: 00100000000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000000000
+pattern: 00010000000000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000000000
+pattern: 00001000000000
+try to fix hunk: 4
+insert before 122 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000000000
+pattern: 00000100000000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+used time: Finished in 142.93 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 00000100000000
+pattern: 00000010000000
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010000000
+pattern: 00000001000000
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001000000
+pattern: 00000000100000
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 131.29 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 00000000100000
+pattern: 00000000010000
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 159.98 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 00000000010000
+pattern: 00000000001000
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 141.82 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 00000000001000
+pattern: 00000000000100
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000000100
+pattern: 00000000000010
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000000010
+pattern: 00000000000001
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 154.39 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+No new failing tests but only 1 hunk
+processed: 00000000000001
+pattern: 11000000000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+used time: Finished in 160.76 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 11000000000000
+pattern: 10100000000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+patches are written to file
+running tests...
+used time: Finished in 162.57 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10100000000000
+pattern: 10010000000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010000000000
+pattern: 10001000000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 4
+insert before 122 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001000000000
+pattern: 10000100000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+used time: Finished in 146.44 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10000100000000
+pattern: 10000010000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000010000000
+pattern: 10000001000000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000001000000
+pattern: 10000000100000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 101.87 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10000000100000
+pattern: 10000000010000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 116.81 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10000000010000
+pattern: 10000000001000
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 123.31 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10000000001000
+pattern: 10000000000100
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000000100
+pattern: 10000000000010
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000000000010
+pattern: 10000000000001
+try to fix hunk: 0
+insert before 302 with     public final boolean isJavaLangObject() { return _class == Object.class; }
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 130.74 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 10000000000001
+pattern: 01100000000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100000000000
+pattern: 01010000000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010000000000
+pattern: 01001000000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 4
+insert before 122 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001000000000
+pattern: 01000100000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000100000000
+pattern: 01000010000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000010000000
+pattern: 01000001000000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000001000000
+pattern: 01000000100000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000100000
+pattern: 01000000010000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000010000
+pattern: 01000000001000
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000001000
+pattern: 01000000000100
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000000100
+pattern: 01000000000010
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000000010
+pattern: 01000000000001
+try to fix hunk: 1
+replace from 163 with range 1 to
+        if (ser == null && !delegateType.isJavaLangObject()) {
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000000000001
+pattern: 00110000000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110000000000
+pattern: 00101000000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 4
+insert before 122 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101000000000
+pattern: 00100100000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100100000000
+pattern: 00100010000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100010000000
+pattern: 00100001000000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100001000000
+pattern: 00100000100000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000100000
+pattern: 00100000010000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000010000
+pattern: 00100000001000
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000001000
+pattern: 00100000000100
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000000100
+pattern: 00100000000010
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000000010
+pattern: 00100000000001
+try to fix hunk: 2
+replace from 370 with range 1 to
+                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
+                            : provider.findValueSerializer(delegateType, prop);
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100000000001
+pattern: 00011000000000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 4
+insert before 122 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011000000000
+pattern: 00010100000000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010100000000
+pattern: 00010010000000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010010000000
+pattern: 00010001000000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010001000000
+pattern: 00010000100000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000100000
+pattern: 00010000010000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000010000
+pattern: 00010000001000
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000001000
+pattern: 00010000000100
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000000100
+pattern: 00010000000010
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000000010
+pattern: 00010000000001
+try to fix hunk: 3
+insert before 121 with             if (!delegateType.isJavaLangObject()) {
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010000000001
+pattern: 00001100000000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001100000000
+pattern: 00001010000000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001010000000
+pattern: 00001001000000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001001000000
+pattern: 00001000100000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000100000
+pattern: 00001000010000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000010000
+pattern: 00001000001000
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000001000
+pattern: 00001000000100
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000000100
+pattern: 00001000000010
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000000010
+pattern: 00001000000001
+try to fix hunk: 4
+insert before 122 with             }
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001000000001
+pattern: 00000110000000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000110000000
+pattern: 00000101000000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000101000000
+pattern: 00000100100000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 119.98 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000100100000
+pattern: 00000100010000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 124.90 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000100010000
+pattern: 00000100001000
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 116.47 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000100001000
+pattern: 00000100000100
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100000100
+pattern: 00000100000010
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000100000010
+pattern: 00000100000001
+try to fix hunk: 5
+replace from 126 with range 2 to
+        if (delSer == _delegateSerializer && delegateType == _delegateType) {
+            return this;
+        }
+        return withDelegate(_converter, delegateType, delSer);
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 137.83 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000100000001
+pattern: 00000011000000
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000011000000
+pattern: 00000010100000
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010100000
+pattern: 00000010010000
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010010000
+pattern: 00000010001000
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010001000
+pattern: 00000010000100
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010000100
+pattern: 00000010000010
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010000010
+pattern: 00000010000001
+try to fix hunk: 6
+replace from 161 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(delegateValue, provider);
+        }
+        ser.serialize(delegateValue, gen, provider);
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000010000001
+pattern: 00000001100000
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001100000
+pattern: 00000001010000
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001010000
+pattern: 00000001001000
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001001000
+pattern: 00000001000100
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001000100
+pattern: 00000001000010
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001000010
+pattern: 00000001000001
+try to fix hunk: 7
+replace from 172 with range 1 to
+        JsonSerializer<Object> ser = _delegateSerializer;
+        if (ser == null) {
+            ser = _findSerializer(value, provider);
+        }
+        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000001000001
+pattern: 00000000110000
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 125.40 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000110000
+pattern: 00000000101000
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 127.65 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000101000
+pattern: 00000000100100
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000100100
+pattern: 00000000100010
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000100010
+pattern: 00000000100001
+try to fix hunk: 8
+insert before 180 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 134.73 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000100001
+pattern: 00000000011000
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 111.84 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000011000
+pattern: 00000000010100
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000010100
+pattern: 00000000010010
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000010010
+pattern: 00000000010001
+try to fix hunk: 9
+insert before 187 with         if (_delegateSerializer == null) { // best we can do for now, too costly to look up
+            return (value == null);
+        }
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 126.92 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000010001
+pattern: 00000000001100
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000001100
+pattern: 00000000001010
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00000000001010
+pattern: 00000000001001
+try to fix hunk: 10
+replace from 224 with range 1 to
+        if (_delegateSerializer != null) {
+            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
+        }
+
+try to fix hunk: 13
+replace from 262 with range 1 to
+                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+
+patches are written to file
+running tests...
+used time: Finished in 98.27 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.convert.TestConvertingSerializer::testIssue731
+Can independently fix []
+Could not fix independently
+processed: 00000000001001
+pattern: 00000000000110
+try to fix hunk: 11
+insert before 256 with     protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
+        throws JsonMappingException
+    {
+
+try to fix hunk: 12
+insert before 257 with         return serializers.findValueSerializer(value.getClass());
+    }
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

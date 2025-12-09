@@ -1,0 +1,310 @@
+---
+Begin generate bug_id: JacksonDatabind_65
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_65
+Try to checkout JacksonDatabind_65
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/StdKeyDeserializer.java
+trace file: src/main/java/com/fasterxml/jackson/databind/introspect/BasicBeanDescription.java
+trying to replace old failing tests
+edit: replace from 37 range 11 at src/test/java/com/fasterxml/jackson/databind/deser/KeyDeser1429Test.java
+to
+    public void testDeserializeKeyViaFactory$catena_0() throws Exception
+    {
+        Map<FullName, Double> map =
+            new ObjectMapper().readValue("{\"first.last\": 42}",
+                    new TypeReference<Map<FullName, Double>>() { });
+        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();
+        FullName key = entry.getKey();
+        assertEquals(key._firstname, "first");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(key._lastname, "last");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDeserializeKeyViaFactory$catena_1() throws Exception
+    {
+        Map<FullName, Double> map =
+            new ObjectMapper().readValue("{\"first.last\": 42}",
+                    new TypeReference<Map<FullName, Double>>() { });
+        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();
+        FullName key = entry.getKey();
+        try{ assertEquals(key._firstname, "first");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(key._lastname, "last");                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(entry.getValue().doubleValue(), 42, 0);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDeserializeKeyViaFactory$catena_2() throws Exception
+    {
+        Map<FullName, Double> map =
+            new ObjectMapper().readValue("{\"first.last\": 42}",
+                    new TypeReference<Map<FullName, Double>>() { });
+        Map.Entry<FullName, Double> entry = map.entrySet().iterator().next();
+        FullName key = entry.getKey();
+        try{ assertEquals(key._firstname, "first");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(key._lastname, "last");                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(entry.getValue().doubleValue(), 42, 0);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/KeyDeser1429Test.java
+new test num: 3
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 187.91 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+used time: Finished in 173.93 seconds
+Failing tests: 0
+select new bug
+Pattern: 0100
+new failing tests:
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0
+Save found bug
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+patches are written to file
+running tests...
+used time: Finished in 175.46 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1
+	com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 169.81 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1', 'com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2', 'com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0']
+select new bug
+Pattern: 0011
+new failing tests:
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_1
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_2
+com.fasterxml.jackson.databind.deser.KeyDeser1429Test::testDeserializeKeyViaFactory$catena_0
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+used time: Finished in 177.32 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 185.54 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 173.80 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 128 with range 1 to
+            return ctxt.handleWeirdKey(_keyClass, key, "not a valid representation, problem: (%s) %s",
+                    re.getClass().getName(), re.getMessage());
+
+try to fix hunk: 1
+replace from 525 with range 1 to
+            if (isFactoryMethod(am) && am.getParameterCount() == 1) {
+
+try to fix hunk: 2
+insert before 558 with             if (am.getParameterCount() == 1) {
+
+try to fix hunk: 3
+insert before 559 with             }
+
+patches are written to file
+running tests...
+used time: Finished in 187.77 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 2 new bugs

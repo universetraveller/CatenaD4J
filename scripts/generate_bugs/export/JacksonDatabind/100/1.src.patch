@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java",
+            "from_line_no": 363,
+            "to_line_no": 371,
+            "replaced_with": "            if (n instanceof TextNode) {\n                return ((TextNode) n).getBinaryValue(b64variant);\n",
+            "replaced": "            byte[] data = n.binaryValue();\n            if (data != null) {\n                return data;\n            }\n            if (n.isPojo()) {\n                Object ob = ((POJONode) n).getPojo();\n                if (ob instanceof byte[]) {\n                    return (byte[]) ob;\n                }\n",
+            "patch_type": "replace",
+            "next_line_no": 372
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java",
+            "replaced_with": "            return n.binaryValue();\n",
+            "patch_type": "insert",
+            "next_line_no": 373
+        }
+    ]
+}

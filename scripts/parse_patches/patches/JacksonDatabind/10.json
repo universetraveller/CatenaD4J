@@ -1,0 +1,66 @@
+{
+    "num_of_hunks": 9,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "replaced_with": "    protected JsonSerializer<Object> _serializer;\n",
+        "patch_type": "insert",
+        "next_line_no": 24
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "from_line_no": 29,
+        "to_line_no": 29,
+        "replaced_with": "            AnnotatedMember accessor, JsonSerializer<?> serializer)\n",
+        "replaced": "            AnnotatedMember accessor, MapSerializer serializer)\n",
+        "patch_type": "replace",
+        "next_line_no": 30
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "replaced_with": "        _serializer = (JsonSerializer<Object>) serializer;\n        if (serializer instanceof MapSerializer) {\n",
+        "patch_type": "insert",
+        "next_line_no": 33
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "replaced_with": "        }\n",
+        "patch_type": "insert",
+        "next_line_no": 34
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "replaced_with": "        _serializer.serialize(value, gen, provider);\n",
+        "patch_type": "insert",
+        "next_line_no": 52
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "replaced_with": "        _serializer.serialize(value, gen, provider);\n",
+        "patch_type": "insert",
+        "next_line_no": 75
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/AnyGetterWriter.java",
+        "from_line_no": 82,
+        "to_line_no": 82,
+        "replaced_with": "        if (_serializer instanceof ContextualSerializer) {\n            JsonSerializer<?> ser = provider.handlePrimaryContextualization(_serializer, _property);\n            _serializer = (JsonSerializer<Object>) ser;\n            if (ser instanceof MapSerializer) {\n                _mapSerializer = (MapSerializer) ser;\n            }\n        }\n",
+        "replaced": "        _mapSerializer = (MapSerializer) provider.handlePrimaryContextualization(_mapSerializer, _property);\n",
+        "patch_type": "replace",
+        "next_line_no": 83
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java",
+        "from_line_no": 395,
+        "to_line_no": 395,
+        "replaced_with": "            JsonSerializer<?> anySer = findSerializerFromAnnotation(prov, anyGetter);\n            if (anySer == null) {\n",
+        "replaced": "            MapSerializer anySer = MapSerializer.construct(null, type, staticTyping, typeSer, null, null, null);\n",
+        "patch_type": "replace",
+        "next_line_no": 396
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java",
+        "replaced_with": "                anySer = MapSerializer.construct(/* ignored props*/ null, type, staticTyping,\n                        typeSer, null, null, /*filterId*/ null);\n            }\n",
+        "patch_type": "insert",
+        "next_line_no": 397
+    }
+}

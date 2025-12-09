@@ -1,0 +1,192 @@
+{
+    "original": {
+        "num_of_hunks": 8,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/Entities.java",
+            "replaced_with": "import org.jsoup.parser.Parser;\n",
+            "patch_type": "insert",
+            "next_line_no": 3
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/nodes/Entities.java",
+            "replaced_with": "    public static boolean isBaseNamedEntity(String name) {\n        return base.containsKey(name);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 61
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/nodes/Entities.java",
+            "from_line_no": 103,
+            "to_line_no": 129,
+            "replaced_with": "        return Parser.unescapeEntities(string, strict);\n",
+            "replaced": "        if (!string.contains(\"&\"))\n            return string;\n        Matcher m = strict? strictUnescapePattern.matcher(string) : unescapePattern.matcher(string);\n        StringBuffer accum = new StringBuffer(string.length());\n        while (m.find()) {\n            int charval = -1;\n            String num = m.group(3);\n            if (num != null) {\n                try {\n                    int base = m.group(2) != null ? 16 : 10;\n                    charval = Integer.valueOf(num, base);\n                } catch (NumberFormatException e) {\n                }\n            } else {\n                String name = m.group(1);\n                if (full.containsKey(name))\n                    charval = full.get(name);\n            }\n            if (charval != -1 || charval > 0xFFFF) {\n                String c = Character.toString((char) charval);\n                m.appendReplacement(accum, Matcher.quoteReplacement(c));\n            } else {\n                m.appendReplacement(accum, Matcher.quoteReplacement(m.group(0)));\n            }\n        }\n        m.appendTail(accum);\n        return accum.toString();\n",
+            "patch_type": "replace",
+            "next_line_no": 130
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+            "replaced_with": "    public static String unescapeEntities(String string, boolean inAttribute) {\n        Tokeniser tokeniser = new Tokeniser(new CharacterReader(string), ParseErrorList.noTracking());\n        return tokeniser.unescapeEntities(inAttribute);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 133
+        },
+        "4": {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 136,
+            "to_line_no": 136,
+            "replaced": "            String origNameRef = new String(nameRef);\n",
+            "patch_type": "delete",
+            "next_line_no": 137
+        },
+        "5": {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 139,
+            "to_line_no": 147,
+            "replaced_with": "            boolean found = (Entities.isBaseNamedEntity(nameRef) || (Entities.isNamedEntity(nameRef) && looksLegit));\n",
+            "replaced": "            boolean found = false;\n            while (nameRef.length() > 0 && !found) {\n                if (Entities.isNamedEntity(nameRef))\n                    found = true;\n                else {\n                    nameRef = nameRef.substring(0, nameRef.length()-1);\n                    reader.unconsume();\n                }\n            }\n",
+            "patch_type": "replace",
+            "next_line_no": 148
+        },
+        "6": {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 152,
+            "to_line_no": 152,
+            "replaced_with": "                    characterReferenceError(String.format(\"invalid named referenece '%s'\", nameRef));\n",
+            "replaced": "                    characterReferenceError(String.format(\"invalid named referenece '%s'\", origNameRef));\n",
+            "patch_type": "replace",
+            "next_line_no": 153
+        },
+        "7": {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "replaced_with": "    String unescapeEntities(boolean inAttribute) {\n        StringBuilder builder = new StringBuilder();\n        while (!reader.isEmpty()) {\n            builder.append(reader.consumeTo('&'));\n            if (reader.matches('&')) {\n                reader.consume();\n                Character c = consumeCharacterReference(null, inAttribute);\n                if (c == null)\n                    builder.append('&');\n                else\n                    builder.append(c);\n            }\n        }\n        return builder.toString();\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 238
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.nodes.EntitiesTest::unescape",
+            "org.jsoup.nodes.EntitiesTest::noSpuriousDecodes",
+            "org.jsoup.parser.AttributeParseTest::moreAttributeUnescapes",
+            "org.jsoup.parser.AttributeParseTest::strictAttributeUnescapes",
+            "org.jsoup.parser.HtmlParserTest::doesNotFindShortestMatchingEntity",
+            "org.jsoup.parser.HtmlParserTest::relaxedBaseEntityMatchAndStrictExtendedMatch"
+        ],
+        "org.jsoup.nodes.EntitiesTest::unescape": {
+            "file_path": "src/test/java/org/jsoup/nodes/EntitiesTest.java",
+            "Instance": "Begin: Pos(25, 5)\nEnd: Pos(30, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/nodes/EntitiesTest.java\nName: unescape\nChilds: [StatementAssertion<Begin: Pos(27, 9), End: Pos(27, 91)>,\nStatementAssertion<Begin: Pos(29, 9), End: Pos(29, 90)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/nodes/EntitiesTest.java",
+            "name": "unescape",
+            "begin": "Pos(25, 5)",
+            "end": "Pos(30, 5)",
+            "begin_line_no": 25,
+            "end_line_no": 30,
+            "child": [
+                "Begin: Pos(27, 9)\nEnd: Pos(27, 91)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(29, 9)\nEnd: Pos(29, 90)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void unescape$catena_0() {\n        String text = \"Hello &amp;&LT&gt; &reg &angst; &angst &#960; &#960 &#x65B0; there &! &frac34; &copy; &COPY;\";\n        assertEquals(\"Hello &<> \u00ae \u00c5 &angst \u03c0 \u03c0 \u65b0 there &! \u00be \u00a9 \u00a9\", Entities.unescape(text));                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(\"&0987654321; &unknown\", Entities.unescape(\"&0987654321; &unknown\"));             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void unescape$catena_1() {\n        String text = \"Hello &amp;&LT&gt; &reg &angst; &angst &#960; &#960 &#x65B0; there &! &frac34; &copy; &COPY;\";\n        try{ assertEquals(\"Hello &<> \u00ae \u00c5 &angst \u03c0 \u03c0 \u65b0 there &! \u00be \u00a9 \u00a9\", Entities.unescape(text));            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(\"&0987654321; &unknown\", Entities.unescape(\"&0987654321; &unknown\"));                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void unescape$catena_0() {\n        String text = \"Hello &amp;&LT&gt; &reg &angst; &angst &#960; &#960 &#x65B0; there &! &frac34; &copy; &COPY;\";\n        assertEquals(\"Hello &<> \u00ae \u00c5 &angst \u03c0 \u03c0 \u65b0 there &! \u00be \u00a9 \u00a9\", Entities.unescape(text));                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        try{ assertEquals(\"&0987654321; &unknown\", Entities.unescape(\"&0987654321; &unknown\"));             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void unescape$catena_1() {\n        String text = \"Hello &amp;&LT&gt; &reg &angst; &angst &#960; &#960 &#x65B0; there &! &frac34; &copy; &COPY;\";\n        try{ assertEquals(\"Hello &<> \u00ae \u00c5 &angst \u03c0 \u03c0 \u65b0 there &! \u00be \u00a9 \u00a9\", Entities.unescape(text));            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        assertEquals(\"&0987654321; &unknown\", Entities.unescape(\"&0987654321; &unknown\"));                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.nodes.EntitiesTest::noSpuriousDecodes": {
+            "file_path": "src/test/java/org/jsoup/nodes/EntitiesTest.java",
+            "Instance": "Begin: Pos(63, 5)\nEnd: Pos(66, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/nodes/EntitiesTest.java\nName: noSpuriousDecodes\nChilds: [StatementAssertion<Begin: Pos(65, 9), End: Pos(65, 56)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/nodes/EntitiesTest.java",
+            "name": "noSpuriousDecodes",
+            "begin": "Pos(63, 5)",
+            "end": "Pos(66, 5)",
+            "begin_line_no": 63,
+            "end_line_no": 66,
+            "child": [
+                "Begin: Pos(65, 9)\nEnd: Pos(65, 56)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.parser.AttributeParseTest::moreAttributeUnescapes": {
+            "file_path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+            "Instance": "Begin: Pos(64, 5)\nEnd: Pos(68, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/AttributeParseTest.java\nName: moreAttributeUnescapes\nChilds: [StatementAssertion<Begin: Pos(67, 9), End: Pos(67, 82)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/AttributeParseTest.java",
+            "name": "moreAttributeUnescapes",
+            "begin": "Pos(64, 5)",
+            "end": "Pos(68, 5)",
+            "begin_line_no": 64,
+            "end_line_no": 68,
+            "child": [
+                "Begin: Pos(67, 9)\nEnd: Pos(67, 82)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.parser.AttributeParseTest::strictAttributeUnescapes": {
+            "file_path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+            "Instance": "Begin: Pos(57, 5)\nEnd: Pos(62, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/AttributeParseTest.java\nName: strictAttributeUnescapes\nChilds: [StatementAssertion<Begin: Pos(60, 9), End: Pos(60, 71)>,\nStatementAssertion<Begin: Pos(61, 9), End: Pos(61, 67)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/AttributeParseTest.java",
+            "name": "strictAttributeUnescapes",
+            "begin": "Pos(57, 5)",
+            "end": "Pos(62, 5)",
+            "begin_line_no": 57,
+            "end_line_no": 62,
+            "child": [
+                "Begin: Pos(60, 9)\nEnd: Pos(60, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(61, 9)\nEnd: Pos(61, 67)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void strictAttributeUnescapes$catena_0() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void strictAttributeUnescapes$catena_1() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        try{ assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void strictAttributeUnescapes$catena_0() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                     /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void strictAttributeUnescapes$catena_1() {\n        String html = \"<a id=1 href='?foo=bar&mid&lt=true'>One</a> <a id=2 href='?foo=bar&lt;qux&lg=1'>Two</a>\";\n        Elements els = Jsoup.parse(html).select(\"a\");\n        try{ assertEquals(\"?foo=bar&mid&lt=true\", els.first().attr(\"href\"));                                }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"?foo=bar<qux&lg=1\", els.last().attr(\"href\"));                                         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.parser.HtmlParserTest::doesNotFindShortestMatchingEntity": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(724, 5)\nEnd: Pos(730, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: doesNotFindShortestMatchingEntity\nChilds: [StatementAssertion<Begin: Pos(729, 9), End: Pos(729, 97)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "doesNotFindShortestMatchingEntity",
+            "begin": "Pos(724, 5)",
+            "end": "Pos(730, 5)",
+            "begin_line_no": 724,
+            "end_line_no": 730,
+            "child": [
+                "Begin: Pos(729, 9)\nEnd: Pos(729, 97)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.parser.HtmlParserTest::relaxedBaseEntityMatchAndStrictExtendedMatch": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(732, 5)\nEnd: Pos(738, 5)\nSource: /tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: relaxedBaseEntityMatchAndStrictExtendedMatch\nChilds: [StatementAssertion<Begin: Pos(737, 9), End: Pos(737, 126)>,\n]",
+            "source": "/tmp/c4j/Jsoup_28/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "relaxedBaseEntityMatchAndStrictExtendedMatch",
+            "begin": "Pos(732, 5)",
+            "end": "Pos(738, 5)",
+            "begin_line_no": 732,
+            "end_line_no": 738,
+            "child": [
+                "Begin: Pos(737, 9)\nEnd: Pos(737, 126)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "01000100": {
+        "failing_tests": [
+            "org.jsoup.parser.AttributeParseTest::moreAttributeUnescapes",
+            "org.jsoup.parser.HtmlParserTest::relaxedBaseEntityMatchAndStrictExtendedMatch",
+            "org.jsoup.parser.HtmlParserTest::doesNotFindShortestMatchingEntity",
+            "org.jsoup.parser.AttributeParseTest::strictAttributeUnescapes$catena_0"
+        ]
+    },
+    "11110101": {
+        "failing_tests": [
+            "org.jsoup.nodes.EntitiesTest::unescape$catena_0",
+            "org.jsoup.nodes.EntitiesTest::noSpuriousDecodes"
+        ]
+    }
+}

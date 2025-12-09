@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+            "replaced_with": "        QName rootName = _rootNameFromConfig();\n        if (rootName == null) {\n            rootName = ROOT_NAME_FOR_NULL;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 204
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+            "from_line_no": 205,
+            "to_line_no": 205,
+            "replaced_with": "            _initWithRootName((ToXmlGenerator) jgen, rootName);\n",
+            "replaced": "            _initWithRootName((ToXmlGenerator) jgen, ROOT_NAME_FOR_NULL);\n",
+            "patch_type": "replace",
+            "next_line_no": 206
+        }
+    ]
+}

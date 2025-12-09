@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/beans/NullPropertyPointer.java",
+            "replaced_with": "import org.apache.commons.jxpath.AbstractFactory;\nimport org.apache.commons.jxpath.JXPathAbstractFactoryException;\n",
+            "patch_type": "insert",
+            "next_line_no": 19
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/beans/NullPropertyPointer.java",
+            "replaced_with": "            if (parent instanceof NullPointer && parent.equals(newParent)) {\n                throw createBadFactoryException(context.getFactory());\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 109
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/beans/NullPropertyPointer.java",
+            "replaced_with": "            if (parent instanceof NullPointer && parent.equals(newParent)) {\n                throw createBadFactoryException(context.getFactory());\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 138
+        },
+        "3": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/beans/NullPropertyPointer.java",
+            "replaced_with": "\n    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {\n        return new JXPathAbstractFactoryException(\"Factory \" + factory\n                + \" reported success creating object for path: \" + asPath()\n                + \" but object was null.  Terminating to avoid stack recursion.\");\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 224
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation"
+        ],
+        "org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation": {
+            "file_path": "src/test/org/apache/commons/jxpath/ri/model/beans/BadlyImplementedFactoryTest.java",
+            "Instance": "Begin: Pos(59, 12)\nEnd: Pos(66, 5)\nSource: /tmp/c4j/JxPath_3/src/test//org/apache/commons/jxpath/ri/model/beans/BadlyImplementedFactoryTest.java\nName: testBadFactoryImplementation\nChilds: [StatementAssertion<Begin: Pos(62, 13), End: Pos(62, 94)>,\nStatementAssertion<Begin: Pos(64, 13), End: Pos(64, 79)>,\n]",
+            "source": "/tmp/c4j/JxPath_3/src/test//org/apache/commons/jxpath/ri/model/beans/BadlyImplementedFactoryTest.java",
+            "name": "testBadFactoryImplementation",
+            "begin": "Pos(59, 12)",
+            "end": "Pos(66, 5)",
+            "begin_line_no": 59,
+            "end_line_no": 66,
+            "child": [
+                "Begin: Pos(62, 13)\nEnd: Pos(62, 94)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(64, 13)\nEnd: Pos(64, 79)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testBadFactoryImplementation$catena_0() {\n        try {\n            context.createPath(\"foo/bar\");\n            fail(\"should fail with JXPathException caused by JXPathAbstractFactoryException\");              /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JXPathException e) {\n            try{ assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testBadFactoryImplementation$catena_1() {\n        try {\n            context.createPath(\"foo/bar\");\n            try{ fail(\"should fail with JXPathException caused by JXPathAbstractFactoryException\");         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JXPathException e) {\n            assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                             /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testBadFactoryImplementation$catena_0() {\n        try {\n            context.createPath(\"foo/bar\");\n            fail(\"should fail with JXPathException caused by JXPathAbstractFactoryException\");              /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JXPathException e) {\n            try{ assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testBadFactoryImplementation$catena_1() {\n        try {\n            context.createPath(\"foo/bar\");\n            try{ fail(\"should fail with JXPathException caused by JXPathAbstractFactoryException\");         }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JXPathException e) {\n            assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                             /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "1101": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1"
+        ]
+    }
+}

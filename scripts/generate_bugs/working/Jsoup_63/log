@@ -1,0 +1,2468 @@
+---
+Begin generate bug_id: Jsoup_63
+num_of_hunks: 7
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_63
+Try to checkout Jsoup_63
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+trace file: src/main/java/org/jsoup/parser/Tokeniser.java
+trying to replace old failing tests
+edit: replace from 978 range 11 at src/test/java/org/jsoup/parser/HtmlParserTest.java
+to
+    @Test public void selfClosingOnNonvoidIsError$catena_0() {
+        String html = "<p>test</p><div /><div>Two</div>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        assertEquals(1, parser.getErrors().size());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("18: Tag cannot be self closing; not a void tag", parser.getErrors().get(0).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertFalse(Jsoup.isValid(html, Whitelist.relaxed()));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        String clean = Jsoup.clean(html, Whitelist.relaxed());
+        try{ assertEquals("<p>test</p> <div></div> <div> Two </div>", StringUtil.normaliseWhitespace(clean));         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void selfClosingOnNonvoidIsError$catena_1() {
+        String html = "<p>test</p><div /><div>Two</div>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        try{ assertEquals(1, parser.getErrors().size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("18: Tag cannot be self closing; not a void tag", parser.getErrors().get(0).toString());         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertFalse(Jsoup.isValid(html, Whitelist.relaxed()));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        String clean = Jsoup.clean(html, Whitelist.relaxed());
+        try{ assertEquals("<p>test</p> <div></div> <div> Two </div>", StringUtil.normaliseWhitespace(clean));         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void selfClosingOnNonvoidIsError$catena_2() {
+        String html = "<p>test</p><div /><div>Two</div>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        try{ assertEquals(1, parser.getErrors().size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("18: Tag cannot be self closing; not a void tag", parser.getErrors().get(0).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertFalse(Jsoup.isValid(html, Whitelist.relaxed()));                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        String clean = Jsoup.clean(html, Whitelist.relaxed());
+        try{ assertEquals("<p>test</p> <div></div> <div> Two </div>", StringUtil.normaliseWhitespace(clean));         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void selfClosingOnNonvoidIsError$catena_3() {
+        String html = "<p>test</p><div /><div>Two</div>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        try{ assertEquals(1, parser.getErrors().size());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("18: Tag cannot be self closing; not a void tag", parser.getErrors().get(0).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertFalse(Jsoup.isValid(html, Whitelist.relaxed()));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        String clean = Jsoup.clean(html, Whitelist.relaxed());
+        assertEquals("<p>test</p> <div></div> <div> Two </div>", StringUtil.normaliseWhitespace(clean));              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 967 range 10 at src/test/java/org/jsoup/parser/HtmlParserTest.java
+to
+    @Test public void selfClosingVoidIsNotAnError$catena_0() {
+        String html = "<p>test<br/>test<br/></p>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        assertEquals(0, parser.getErrors().size());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertTrue(Jsoup.isValid(html, Whitelist.basic()));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        String clean = Jsoup.clean(html, Whitelist.basic());
+        try{ assertEquals("<p>test<br>test<br></p>", clean);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void selfClosingVoidIsNotAnError$catena_1() {
+        String html = "<p>test<br/>test<br/></p>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        try{ assertEquals(0, parser.getErrors().size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertTrue(Jsoup.isValid(html, Whitelist.basic()));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        String clean = Jsoup.clean(html, Whitelist.basic());
+        try{ assertEquals("<p>test<br>test<br></p>", clean);                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void selfClosingVoidIsNotAnError$catena_2() {
+        String html = "<p>test<br/>test<br/></p>";
+        Parser parser = Parser.htmlParser().setTrackErrors(5);
+        parser.parseInput(html, "");
+        try{ assertEquals(0, parser.getErrors().size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertTrue(Jsoup.isValid(html, Whitelist.basic()));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        String clean = Jsoup.clean(html, Whitelist.basic());
+        assertEquals("<p>test<br>test<br></p>", clean);                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 689 range 13 at src/test/java/org/jsoup/parser/HtmlParserTest.java
+to
+    @Test public void tracksErrorsWhenRequested$catena_0() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        assertEquals(5, errors.size());                                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void tracksErrorsWhenRequested$catena_1() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        try{ assertEquals(5, errors.size());                                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void tracksErrorsWhenRequested$catena_2() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        try{ assertEquals(5, errors.size());                                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void tracksErrorsWhenRequested$catena_3() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        try{ assertEquals(5, errors.size());                                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void tracksErrorsWhenRequested$catena_4() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        try{ assertEquals(5, errors.size());                                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void tracksErrorsWhenRequested$catena_5() {
+        String html = "<p>One</p href='no'><!DOCTYPE html>&arrgh;<font /><br /><foo";
+        Parser parser = Parser.htmlParser().setTrackErrors(500);
+        Document doc = Jsoup.parse(html, "http://example.com", parser);
+        
+        List<ParseError> errors = parser.getErrors();
+        try{ assertEquals(5, errors.size());                                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("20: Attributes incorrectly present on end tag", errors.get(0).toString());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("35: Unexpected token [Doctype] when in state [InBody]", errors.get(1).toString());                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("36: Invalid character reference: invalid named referenece 'arrgh'", errors.get(2).toString());      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("50: Tag cannot be self closing; not a void tag", errors.get(3).toString());                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("61: Unexpectedly reached end of file (EOF) in input state [TagName]", errors.get(4).toString());         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/HtmlParserTest.java
+new test num: 13
+ori test num: 0
+pattern: 0000000
+patches are written to file
+running tests...
+used time: Finished in 17.27 seconds
+Failing tests: 4
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+processed: 0000000
+pattern: 0000001
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001
+pattern: 0000010
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 14.97 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0000010
+pattern: 0000100
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+used time: Finished in 18.47 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0000100
+pattern: 0001000
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000
+pattern: 0010000
+try to fix hunk: 2
+delete from 231 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000
+pattern: 0100000
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000
+pattern: 1000000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+patches are written to file
+running tests...
+used time: Finished in 20.82 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 1000000
+pattern: 0000011
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000011
+pattern: 0000101
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000101
+pattern: 0000110
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 18.16 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0000110
+pattern: 0001001
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001
+pattern: 0001010
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010
+pattern: 0001100
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100
+pattern: 0010001
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001
+pattern: 0010010
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010
+pattern: 0010100
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100
+pattern: 0011000
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000
+pattern: 0100001
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100001
+pattern: 0100010
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100010
+pattern: 0100100
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100
+pattern: 0101000
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101000
+pattern: 0110000
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+patches are written to file
+running tests...
+used time: Finished in 15.26 seconds
+Failing tests: 4
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+Can independently fix []
+Could not fix independently
+processed: 0110000
+pattern: 1000001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001
+pattern: 1000010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 17.39 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1', 'org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1', 'org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0', 'org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4']
+select new bug
+Pattern: 1000010
+new failing tests:
+org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+Save found bug
+processed: 1000010
+pattern: 1000100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+used time: Finished in 16.54 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1', 'org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1', 'org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0', 'org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4']
+select new bug
+Pattern: 1000100
+new failing tests:
+org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+Save found bug
+processed: 1000100
+pattern: 1001000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000
+pattern: 1010000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000
+pattern: 1100000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000
+pattern: 0000111
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000111
+pattern: 0001011
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001011
+pattern: 0001101
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001101
+pattern: 0001110
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001110
+pattern: 0010011
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010011
+pattern: 0010101
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010101
+pattern: 0010110
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010110
+pattern: 0011001
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011001
+pattern: 0011010
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011010
+pattern: 0011100
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011100
+pattern: 0100011
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100011
+pattern: 0100101
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100101
+pattern: 0100110
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100110
+pattern: 0101001
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101001
+pattern: 0101010
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101010
+pattern: 0101100
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101100
+pattern: 0110001
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110001
+pattern: 0110010
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 14.69 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0110010
+pattern: 0110100
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+used time: Finished in 16.53 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0110100
+pattern: 0111000
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111000
+pattern: 1000011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000011
+pattern: 1000101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000101
+pattern: 1000110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 17.15 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1000110
+pattern: 1001001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001001
+pattern: 1001010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001010
+pattern: 1001100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001100
+pattern: 1010001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010001
+pattern: 1010010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010010
+pattern: 1010100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010100
+pattern: 1011000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011000
+pattern: 1100001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100001
+pattern: 1100010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100010
+pattern: 1100100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100100
+pattern: 1101000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101000
+pattern: 1110000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+patches are written to file
+running tests...
+used time: Finished in 15.62 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 1110000
+pattern: 0001111
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001111
+pattern: 0010111
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010111
+pattern: 0011011
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011011
+pattern: 0011101
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011101
+pattern: 0011110
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011110
+pattern: 0100111
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100111
+pattern: 0101011
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101011
+pattern: 0101101
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101101
+pattern: 0101110
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101110
+pattern: 0110011
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110011
+pattern: 0110101
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110101
+pattern: 0110110
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 16.25 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_2
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 0110110
+pattern: 0111001
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111001
+pattern: 0111010
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111010
+pattern: 0111100
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111100
+pattern: 1000111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000111
+pattern: 1001011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001011
+pattern: 1001101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001101
+pattern: 1001110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001110
+pattern: 1010011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010011
+pattern: 1010101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010101
+pattern: 1010110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010110
+pattern: 1011001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011001
+pattern: 1011010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011010
+pattern: 1011100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011100
+pattern: 1100011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100011
+pattern: 1100101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100101
+pattern: 1100110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100110
+pattern: 1101001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101001
+pattern: 1101010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101010
+pattern: 1101100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101100
+pattern: 1110001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+used time: Finished in 18.64 seconds
+Failing tests: 6
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_0
+	org.jsoup.parser.HtmlParserTest::selfClosingVoidIsNotAnError$catena_1
+	org.jsoup.parser.HtmlParserTest::selfClosingOnNonvoidIsError$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_0
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_4
+	org.jsoup.parser.HtmlParserTest::tracksErrorsWhenRequested$catena_5
+Includes new failing tests, set to unusable
+processed: 1110001
+pattern: 1110010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 19.07 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110010
+pattern: 1110100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+used time: Finished in 16.52 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110100
+pattern: 1111000
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111000
+pattern: 0011111
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011111
+pattern: 0101111
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101111
+pattern: 0110111
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110111
+pattern: 0111011
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111011
+pattern: 0111101
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111101
+pattern: 0111110
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111110
+pattern: 1001111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001111
+pattern: 1010111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010111
+pattern: 1011011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011011
+pattern: 1011101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011101
+pattern: 1011110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011110
+pattern: 1100111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100111
+pattern: 1101011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101011
+pattern: 1101101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101101
+pattern: 1101110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101110
+pattern: 1110011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+used time: Finished in 16.67 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110011
+pattern: 1110101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+used time: Finished in 19.16 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110101
+pattern: 1110110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+used time: Finished in 16.92 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110110
+pattern: 1111001
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111001
+pattern: 1111010
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111010
+pattern: 1111100
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111100
+pattern: 0111111
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111111
+pattern: 1011111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011111
+pattern: 1101111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101111
+pattern: 1110111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+used time: Finished in 17.52 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110111
+pattern: 1111011
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111011
+pattern: 1111101
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111101
+pattern: 1111110
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111110
+pattern: 1111111
+try to fix hunk: 0
+replace from 227 with range 1 to
+                if (!tag.isEmpty())
+                    tokeniser.error("Tag cannot be self closing; not a void tag");
+
+try to fix hunk: 1
+replace from 229 with range 1 to
+            else // unknown tag, remember this is self closing for output
+
+try to fix hunk: 2
+delete from 231 with range 2
+try to fix hunk: 3
+delete from 36 with range 1
+try to fix hunk: 4
+delete from 44 with range 4
+try to fix hunk: 5
+delete from 76 with range 2
+try to fix hunk: 6
+delete from 124 with range 3
+patches are written to file
+running tests...
+used time: Finished in 18.47 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111111
+Find 2 new bugs

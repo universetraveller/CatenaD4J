@@ -1,0 +1,229 @@
+---
+Begin generate bug_id: Jsoup_42
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_42
+Try to checkout Jsoup_42
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/FormElement.java
+trying to replace old failing tests
+edit: replace from 27 range 21 at src/test/java/org/jsoup/nodes/FormElementTest.java
+to
+    @Test public void createsFormData$catena_0() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        assertEquals(6, data.size());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_1() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("one=two", data.get(0).toString());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_2() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("three=four", data.get(1).toString());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_3() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("three=five", data.get(2).toString());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_4() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("six=seven", data.get(3).toString());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_5() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("seven=on", data.get(4).toString());                                            /***** ORIGINAL ASSERTION IS HERE *****/ // set
+        try{ assertEquals("eight=on", data.get(5).toString());                                   }catch(Throwable __SHOULD_BE_IGNORED){} // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }     @Test public void createsFormData$catena_6() {
+        String html = "<form><input name='one' value='two'><select name='three'><option value='not'>" +
+                "<option value='four' selected><option value='five' selected><textarea name=six>seven</textarea>" +
+                "<input name='seven' type='radio' value='on' checked><input name='seven' type='radio' value='off'>" +
+                "<input name='eight' type='checkbox' checked><input name='nine' type='checkbox' value='unset'>" +
+                "<input name='ten' value='text' disabled>" +
+                "</form>";
+        Document doc = Jsoup.parse(html);
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+
+        try{ assertEquals(6, data.size());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("one=two", data.get(0).toString());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=four", data.get(1).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three=five", data.get(2).toString());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("six=seven", data.get(3).toString());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("seven=on", data.get(4).toString());                                       }catch(Throwable __SHOULD_BE_IGNORED){} // set
+        assertEquals("eight=on", data.get(5).toString());                                        /***** ORIGINAL ASSERTION IS HERE *****/ // default
+        // nine should not appear, not checked checkbox
+        // ten should not appear, disabled
+    }
+edit: replace from 118 range 7 at src/test/java/org/jsoup/nodes/FormElementTest.java
+to
+    @Test public void usesOnForCheckboxValueIfNoValueSet$catena_0() {
+        Document doc = Jsoup.parse("<form><input type=checkbox checked name=foo></form>");
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+        assertEquals("on", data.get(0).value());                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("foo", data.get(0).key());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void usesOnForCheckboxValueIfNoValueSet$catena_1() {
+        Document doc = Jsoup.parse("<form><input type=checkbox checked name=foo></form>");
+        FormElement form = (FormElement) doc.select("form").first();
+        List<Connection.KeyVal> data = form.formData();
+        try{ assertEquals("on", data.get(0).value());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("foo", data.get(0).key());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/FormElementTest.java
+new test num: 9
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 14.91 seconds
+Failing tests: 3
+	org.jsoup.nodes.FormElementTest::usesOnForCheckboxValueIfNoValueSet$catena_0
+	org.jsoup.nodes.FormElementTest::createsFormData$catena_0
+	org.jsoup.nodes.FormElementTest::createsFormData$catena_6
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 99 with range 1 to
+                    final String val = el.val().length() >  0 ? el.val() : "on";
+
+patches are written to file
+running tests...
+used time: Finished in 13.04 seconds
+Failing tests: 1
+	org.jsoup.nodes.FormElementTest::createsFormData$catena_0
+select new bug
+Pattern: 01
+new failing tests:
+org.jsoup.nodes.FormElementTest::usesOnForCheckboxValueIfNoValueSet$catena_0
+org.jsoup.nodes.FormElementTest::createsFormData$catena_6
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 80 with             if (el.hasAttr("disabled")) continue; // skip disabled form inputs
+
+patches are written to file
+running tests...
+used time: Finished in 14.65 seconds
+Failing tests: 2
+	org.jsoup.nodes.FormElementTest::usesOnForCheckboxValueIfNoValueSet$catena_0
+	org.jsoup.nodes.FormElementTest::createsFormData$catena_6
+select new bug
+Pattern: 10
+new failing tests:
+org.jsoup.nodes.FormElementTest::createsFormData$catena_0
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 80 with             if (el.hasAttr("disabled")) continue; // skip disabled form inputs
+
+try to fix hunk: 1
+replace from 99 with range 1 to
+                    final String val = el.val().length() >  0 ? el.val() : "on";
+
+patches are written to file
+running tests...
+used time: Finished in 15.75 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

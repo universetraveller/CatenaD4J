@@ -1,1 +1,0 @@
-com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldTypeof$catena_6

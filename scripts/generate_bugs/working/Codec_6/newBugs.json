@@ -1,0 +1,59 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+            "replaced_with": "            int readLen = 0;\n",
+            "patch_type": "insert",
+            "next_line_no": 148
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+            "replaced_with": "            while (readLen == 0) {\n",
+            "patch_type": "insert",
+            "next_line_no": 164
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+            "from_line_no": 178,
+            "to_line_no": 178,
+            "replaced_with": "                readLen = base64.readResults(b, offset, len);\n            }\n            return readLen;\n",
+            "replaced": "            return base64.readResults(b, offset, len);\n",
+            "patch_type": "replace",
+            "next_line_no": 179
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec101"
+        ],
+        "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec101": {
+            "file_path": "src/test/org/apache/commons/codec/binary/Base64InputStreamTest.java",
+            "Instance": "Begin: Pos(55, 12)\nEnd: Pos(65, 5)\nSource: /tmp/c4j/Codec_6/src/test//org/apache/commons/codec/binary/Base64InputStreamTest.java\nName: testCodec101\nChilds: [StatementAssertion<Begin: Pos(61, 9), End: Pos(61, 75)>,\nStatementAssertion<Begin: Pos(64, 9), End: Pos(64, 93)>,\n]",
+            "source": "/tmp/c4j/Codec_6/src/test//org/apache/commons/codec/binary/Base64InputStreamTest.java",
+            "name": "testCodec101",
+            "begin": "Pos(55, 12)",
+            "end": "Pos(65, 5)",
+            "begin_line_no": 55,
+            "end_line_no": 65,
+            "child": [
+                "Begin: Pos(61, 9)\nEnd: Pos(61, 75)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(64, 9)\nEnd: Pos(64, 93)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testCodec101$catena_0() throws Exception {\n        byte[] codec101 = StringUtils.getBytesUtf8(Base64TestData.CODEC_101_MULTIPLE_OF_3);\n        ByteArrayInputStream bais = new ByteArrayInputStream(codec101);\n        Base64InputStream in = new Base64InputStream(bais);\n        byte[] result = new byte[8192];\n        int c = in.read(result);\n        assertTrue(\"Codec101: First read successful [c=\" + c + \"]\", c > 0);                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        c = in.read(result);\n        try{ assertTrue(\"Codec101: Second read should report end-of-stream [c=\" + c + \"]\", c < 0);          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testCodec101$catena_1() throws Exception {\n        byte[] codec101 = StringUtils.getBytesUtf8(Base64TestData.CODEC_101_MULTIPLE_OF_3);\n        ByteArrayInputStream bais = new ByteArrayInputStream(codec101);\n        Base64InputStream in = new Base64InputStream(bais);\n        byte[] result = new byte[8192];\n        int c = in.read(result);\n        try{ assertTrue(\"Codec101: First read successful [c=\" + c + \"]\", c > 0);                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        c = in.read(result);\n        assertTrue(\"Codec101: Second read should report end-of-stream [c=\" + c + \"]\", c < 0);               /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testCodec101$catena_0() throws Exception {\n        byte[] codec101 = StringUtils.getBytesUtf8(Base64TestData.CODEC_101_MULTIPLE_OF_3);\n        ByteArrayInputStream bais = new ByteArrayInputStream(codec101);\n        Base64InputStream in = new Base64InputStream(bais);\n        byte[] result = new byte[8192];\n        int c = in.read(result);\n        assertTrue(\"Codec101: First read successful [c=\" + c + \"]\", c > 0);                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        c = in.read(result);\n        try{ assertTrue(\"Codec101: Second read should report end-of-stream [c=\" + c + \"]\", c < 0);          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testCodec101$catena_1() throws Exception {\n        byte[] codec101 = StringUtils.getBytesUtf8(Base64TestData.CODEC_101_MULTIPLE_OF_3);\n        ByteArrayInputStream bais = new ByteArrayInputStream(codec101);\n        Base64InputStream in = new Base64InputStream(bais);\n        byte[] result = new byte[8192];\n        int c = in.read(result);\n        try{ assertTrue(\"Codec101: First read successful [c=\" + c + \"]\", c > 0);                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        c = in.read(result);\n        assertTrue(\"Codec101: Second read should report end-of-stream [c=\" + c + \"]\", c < 0);               /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec101$catena_0",
+            "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec101$catena_1"
+        ]
+    }
+}

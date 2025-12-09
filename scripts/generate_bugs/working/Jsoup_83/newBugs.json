@@ -1,0 +1,87 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "from_line_no": 254,
+            "to_line_no": 254,
+            "replaced_with": "            if (c == '\\t'|| c ==  '\\n'|| c ==  '\\r'|| c ==  '\\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c == '<' || c ==  TokeniserState.nullChar)\n",
+            "replaced": "            if (c == '\\t'|| c ==  '\\n'|| c ==  '\\r'|| c ==  '\\f'|| c ==  ' '|| c ==  '/'|| c ==  '>'|| c ==  TokeniserState.nullChar)\n",
+            "patch_type": "replace",
+            "next_line_no": 255
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/TokeniserState.java",
+            "replaced_with": "                case '<': // NOTE: out of spec, but clear author intent\n                    t.error(this);\n                    r.unconsume();\n",
+            "patch_type": "insert",
+            "next_line_no": 161
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/parser/TokeniserState.java",
+            "replaced_with": "                case '<': // NOTE: out of spec, but clear (spec has this as a part of the attribute name)\n                    t.error(this);\n                    r.unconsume();\n",
+            "patch_type": "insert",
+            "next_line_no": 564
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/parser/TokeniserState.java",
+            "from_line_no": 581,
+            "to_line_no": 581,
+            "replaced": "                case '<':\n",
+            "patch_type": "delete",
+            "next_line_no": 582
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes",
+            "org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag"
+        ],
+        "org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(58, 5)\nEnd: Pos(70, 5)\nSource: /tmp/c4j/Jsoup_83/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: parsesQuiteRoughAttributes\nChilds: [StatementAssertion<Begin: Pos(66, 9), End: Pos(66, 122)>,\nStatementAssertion<Begin: Pos(69, 9), End: Pos(69, 57)>,\n]",
+            "source": "/tmp/c4j/Jsoup_83/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "parsesQuiteRoughAttributes",
+            "begin": "Pos(58, 5)",
+            "end": "Pos(70, 5)",
+            "begin_line_no": 58,
+            "end_line_no": 70,
+            "child": [
+                "Begin: Pos(66, 9)\nEnd: Pos(66, 122)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(69, 9)\nEnd: Pos(69, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void parsesQuiteRoughAttributes$catena_0() {\n        String html = \"<p =a>One<a <p>Something</p>Else\";\n        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated\n        Document doc = Jsoup.parse(html);\n\n        // NOTE: per spec this should be the test case. but impacts too many ppl\n        // assertEquals(\"<p =a>One<a <p>Something</a></p>\\n<a <p>Else</a>\", doc.body().html());\n\n        assertEquals(\"<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>\", TextUtil.stripNewlines(doc.body().html()));         /***** ORIGINAL ASSERTION IS HERE *****/\n\n        doc = Jsoup.parse(\"<p .....>\");\n        try{ assertEquals(\"<p .....></p>\", doc.body().html());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void parsesQuiteRoughAttributes$catena_1() {\n        String html = \"<p =a>One<a <p>Something</p>Else\";\n        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated\n        Document doc = Jsoup.parse(html);\n\n        // NOTE: per spec this should be the test case. but impacts too many ppl\n        // assertEquals(\"<p =a>One<a <p>Something</a></p>\\n<a <p>Else</a>\", doc.body().html());\n\n        try{ assertEquals(\"<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>\", TextUtil.stripNewlines(doc.body().html()));    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        doc = Jsoup.parse(\"<p .....>\");\n        assertEquals(\"<p .....></p>\", doc.body().html());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void parsesQuiteRoughAttributes$catena_0() {\n        String html = \"<p =a>One<a <p>Something</p>Else\";\n        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated\n        Document doc = Jsoup.parse(html);\n\n        // NOTE: per spec this should be the test case. but impacts too many ppl\n        // assertEquals(\"<p =a>One<a <p>Something</a></p>\\n<a <p>Else</a>\", doc.body().html());\n\n        assertEquals(\"<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>\", TextUtil.stripNewlines(doc.body().html()));         /***** ORIGINAL ASSERTION IS HERE *****/\n\n        doc = Jsoup.parse(\"<p .....>\");\n        try{ assertEquals(\"<p .....></p>\", doc.body().html());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void parsesQuiteRoughAttributes$catena_1() {\n        String html = \"<p =a>One<a <p>Something</p>Else\";\n        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated\n        Document doc = Jsoup.parse(html);\n\n        // NOTE: per spec this should be the test case. but impacts too many ppl\n        // assertEquals(\"<p =a>One<a <p>Something</a></p>\\n<a <p>Else</a>\", doc.body().html());\n\n        try{ assertEquals(\"<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>\", TextUtil.stripNewlines(doc.body().html()));    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        doc = Jsoup.parse(\"<p .....>\");\n        assertEquals(\"<p .....></p>\", doc.body().html());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag": {
+            "file_path": "src/test/java/org/jsoup/parser/TokeniserStateTest.java",
+            "Instance": "Begin: Pos(203, 5)\nEnd: Pos(208, 5)\nSource: /tmp/c4j/Jsoup_83/src/test/java//org/jsoup/parser/TokeniserStateTest.java\nName: handlesLessInTagThanAsNewTag\nChilds: [StatementAssertion<Begin: Pos(207, 9), End: Pos(207, 120)>,\n]",
+            "source": "/tmp/c4j/Jsoup_83/src/test/java//org/jsoup/parser/TokeniserStateTest.java",
+            "name": "handlesLessInTagThanAsNewTag",
+            "begin": "Pos(203, 5)",
+            "end": "Pos(208, 5)",
+            "begin_line_no": 203,
+            "end_line_no": 208,
+            "child": [
+                "Begin: Pos(207, 9)\nEnd: Pos(207, 120)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "0011": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes$catena_0"
+        ]
+    },
+    "1111": {
+        "failing_tests": [
+            "org.jsoup.parser.TokeniserStateTest::handlesLessInTagThanAsNewTag"
+        ]
+    }
+}

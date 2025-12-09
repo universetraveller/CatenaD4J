@@ -1,0 +1,55 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+            "replaced_with": "            if (outPtr >= outBuf.length) {\n                outBuf = _textBuffer.finishCurrentSegment();\n                outPtr = 0;\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 1418
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "            if (outPtr >= outBuf.length) {\n                outBuf = _textBuffer.finishCurrentSegment();\n                outPtr = 0;\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 1544
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint"
+        ],
+        "com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint": {
+            "file_path": "src/test/java/com/fasterxml/jackson/core/json/TestNumericValues.java",
+            "Instance": "Begin: Pos(557, 12)\nEnd: Pos(576, 5)\nSource: /tmp/c4j/JacksonCore_19/src/test/java//com/fasterxml/jackson/core/json/TestNumericValues.java\nName: testLongerFloatingPoint\nChilds: [StatementAssertion<Begin: Pos(570, 9), End: Pos(570, 33)>,\nStatementAssertion<Begin: Pos(574, 9), End: Pos(574, 33)>,\n]",
+            "source": "/tmp/c4j/JacksonCore_19/src/test/java//com/fasterxml/jackson/core/json/TestNumericValues.java",
+            "name": "testLongerFloatingPoint",
+            "begin": "Pos(557, 12)",
+            "end": "Pos(576, 5)",
+            "begin_line_no": 557,
+            "end_line_no": 576,
+            "child": [
+                "Begin: Pos(570, 9)\nEnd: Pos(570, 33)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(574, 9)\nEnd: Pos(574, 33)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testLongerFloatingPoint$catena_0() throws Exception\n    {\n        StringBuilder input = new StringBuilder();\n        for (int i = 1; i < 201; i++) {\n            input.append(1);\n        }\n        input.append(\".0\");\n        final String DOC = input.toString();\n\n        // test out with both Reader and ByteArrayInputStream\n        JsonParser p;\n\n        p = FACTORY.createParser(new StringReader(DOC));\n        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        p.close();\n        \n        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes(\"UTF-8\")));\n        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        p.close();\n    }",
+                "    public void testLongerFloatingPoint$catena_1() throws Exception\n    {\n        StringBuilder input = new StringBuilder();\n        for (int i = 1; i < 201; i++) {\n            input.append(1);\n        }\n        input.append(\".0\");\n        final String DOC = input.toString();\n\n        // test out with both Reader and ByteArrayInputStream\n        JsonParser p;\n\n        p = FACTORY.createParser(new StringReader(DOC));\n        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        p.close();\n        \n        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes(\"UTF-8\")));\n        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        p.close();\n    }"
+            ],
+            "func": {
+                "0": "    public void testLongerFloatingPoint$catena_0() throws Exception\n    {\n        StringBuilder input = new StringBuilder();\n        for (int i = 1; i < 201; i++) {\n            input.append(1);\n        }\n        input.append(\".0\");\n        final String DOC = input.toString();\n\n        // test out with both Reader and ByteArrayInputStream\n        JsonParser p;\n\n        p = FACTORY.createParser(new StringReader(DOC));\n        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        p.close();\n        \n        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes(\"UTF-8\")));\n        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        p.close();\n    }",
+                "1": "    public void testLongerFloatingPoint$catena_1() throws Exception\n    {\n        StringBuilder input = new StringBuilder();\n        for (int i = 1; i < 201; i++) {\n            input.append(1);\n        }\n        input.append(\".0\");\n        final String DOC = input.toString();\n\n        // test out with both Reader and ByteArrayInputStream\n        JsonParser p;\n\n        p = FACTORY.createParser(new StringReader(DOC));\n        try{ _testLongerFloat(p, DOC);                                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        p.close();\n        \n        p = FACTORY.createParser(new ByteArrayInputStream(DOC.getBytes(\"UTF-8\")));\n        _testLongerFloat(p, DOC);                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        p.close();\n    }"
+            }
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_1"
+        ]
+    },
+    "10": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_0",
+            "com.fasterxml.jackson.core.json.TestNumericValues::testLongerFloatingPoint$catena_1"
+        ]
+    }
+}

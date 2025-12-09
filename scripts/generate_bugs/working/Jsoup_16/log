@@ -1,0 +1,335 @@
+---
+Begin generate bug_id: Jsoup_16
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_16
+Try to checkout Jsoup_16
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/DocumentType.java
+trying to replace old failing tests
+edit: replace from 28 range 13 at src/test/java/org/jsoup/nodes/DocumentTypeTest.java
+to
+    @Test public void outerHtmlGeneration$catena_0() {
+        DocumentType html5 = new DocumentType("html", "", "", "");
+        assertEquals("<!DOCTYPE html>", html5.outerHtml());                                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+
+        DocumentType publicDocType = new DocumentType("html", "-//IETF//DTD HTML//", "", "");
+        try{ assertEquals("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML//\">", publicDocType.outerHtml());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType systemDocType = new DocumentType("html", "", "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd", "");
+        try{ assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">", systemDocType.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType combo = new DocumentType("notHtml", "--public", "--system", "");
+        try{ assertEquals("<!DOCTYPE notHtml PUBLIC \"--public\" \"--system\">", combo.outerHtml());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void outerHtmlGeneration$catena_1() {
+        DocumentType html5 = new DocumentType("html", "", "", "");
+        try{ assertEquals("<!DOCTYPE html>", html5.outerHtml());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType publicDocType = new DocumentType("html", "-//IETF//DTD HTML//", "", "");
+        assertEquals("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML//\">", publicDocType.outerHtml());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        DocumentType systemDocType = new DocumentType("html", "", "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd", "");
+        try{ assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">", systemDocType.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType combo = new DocumentType("notHtml", "--public", "--system", "");
+        try{ assertEquals("<!DOCTYPE notHtml PUBLIC \"--public\" \"--system\">", combo.outerHtml());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void outerHtmlGeneration$catena_2() {
+        DocumentType html5 = new DocumentType("html", "", "", "");
+        try{ assertEquals("<!DOCTYPE html>", html5.outerHtml());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType publicDocType = new DocumentType("html", "-//IETF//DTD HTML//", "", "");
+        try{ assertEquals("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML//\">", publicDocType.outerHtml());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType systemDocType = new DocumentType("html", "", "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd", "");
+        assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">", systemDocType.outerHtml());         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        DocumentType combo = new DocumentType("notHtml", "--public", "--system", "");
+        try{ assertEquals("<!DOCTYPE notHtml PUBLIC \"--public\" \"--system\">", combo.outerHtml());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void outerHtmlGeneration$catena_3() {
+        DocumentType html5 = new DocumentType("html", "", "", "");
+        try{ assertEquals("<!DOCTYPE html>", html5.outerHtml());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType publicDocType = new DocumentType("html", "-//IETF//DTD HTML//", "", "");
+        try{ assertEquals("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML//\">", publicDocType.outerHtml());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType systemDocType = new DocumentType("html", "", "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd", "");
+        try{ assertEquals("<!DOCTYPE html \"http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd\">", systemDocType.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DocumentType combo = new DocumentType("notHtml", "--public", "--system", "");
+        assertEquals("<!DOCTYPE notHtml PUBLIC \"--public\" \"--system\">", combo.outerHtml());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/DocumentTypeTest.java
+new test num: 4
+ori test num: 1
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 11.41 seconds
+Failing tests: 3
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 13.23 seconds
+Failing tests: 2
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+select new bug
+Pattern: 0001
+new failing tests:
+org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+Save found bug
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+patches are written to file
+running tests...
+used time: Finished in 14.15 seconds
+Failing tests: 3
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+No new failing tests but only 1 hunk
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+patches are written to file
+running tests...
+used time: Finished in 12.18 seconds
+Failing tests: 3
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 13.62 seconds
+Failing tests: 1
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+Can independently fix ['org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3']
+select new bug
+Pattern: 0011
+new failing tests:
+org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Save found bug
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 12.84 seconds
+Failing tests: 2
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+patches are written to file
+running tests...
+used time: Finished in 12.58 seconds
+Failing tests: 3
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+patches are written to file
+running tests...
+used time: Finished in 15.60 seconds
+Failing tests: 2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Can independently fix ['org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName']
+select new bug
+Pattern: 1100
+new failing tests:
+org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+Save found bug
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 11.20 seconds
+Failing tests: 1
+	org.jsoup.nodes.DocumentTypeTest::constructorValidationThrowsExceptionOnBlankName
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 11.62 seconds
+Failing tests: 1
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+patches are written to file
+running tests...
+used time: Finished in 12.31 seconds
+Failing tests: 2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_2
+	org.jsoup.nodes.DocumentTypeTest::outerHtmlGeneration$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 4 with import org.jsoup.helper.Validate;
+
+try to fix hunk: 1
+insert before 21 with         Validate.notEmpty(name);
+
+try to fix hunk: 2
+replace from 33 with range 1 to
+        accum.append("<!DOCTYPE ").append(attr("name"));
+
+try to fix hunk: 3
+replace from 37 with range 1 to
+            accum.append(" \"").append(attr("systemId")).append("\"");
+
+patches are written to file
+running tests...
+used time: Finished in 12.35 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 3 new bugs

@@ -1,0 +1,119 @@
+{
+    "original": {
+        "num_of_hunks": 11,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+            "replaced_with": "            if (_parsingContext.inRoot()) {\n                _verifyRootSpace(ch);\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 952
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+            "replaced_with": "            if (_parsingContext.inRoot()) {\n                _verifyRootSpace(c);\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 1081
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+            "replaced_with": "    private final void _verifyRootSpace(int ch) throws IOException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 1162
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java",
+            "replaced_with": "        ++_inputPtr;\n        switch (ch) {\n        case ' ':\n        case '\\t':\n            return;\n        case '\\r':\n            _skipCR();\n            return;\n        case '\\n':\n            ++_currInputRow;\n            _currInputRowStart = _inputPtr;\n            return;\n        }\n        _reportMissingRootWS(ch);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 1163
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        if (_parsingContext.inRoot()) {\n            _verifyRootSpace(c);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 1244
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        if (_parsingContext.inRoot()) {\n            _verifyRootSpace(_inputBuffer[_inputPtr++] & 0xFF);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 1280
+        },
+        "6": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "            if (_parsingContext.inRoot()) {\n                _verifyRootSpace(c);\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 1407
+        },
+        "7": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "    private final void _verifyRootSpace(int ch) throws IOException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 1421
+        },
+        "8": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        ++_inputPtr;\n",
+            "patch_type": "insert",
+            "next_line_no": 1422
+        },
+        "9": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "replaced_with": "        switch (ch) {\n        case ' ':\n        case '\\t':\n            return;\n        case '\\r':\n            _skipCR();\n            return;\n        case '\\n':\n            ++_currInputRow;\n            _currInputRowStart = _inputPtr;\n            return;\n        }\n        _reportMissingRootWS(ch);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 1423
+        },
+        "10": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+            "from_line_no": 2575,
+            "to_line_no": 2577,
+            "replaced": "                if (i < 32) {\n                    _throwInvalidSpace(i);\n                }\n",
+            "patch_type": "delete",
+            "next_line_no": 2578
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersBytes",
+            "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersChars"
+        ],
+        "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersBytes": {
+            "file_path": "src/test/java/com/fasterxml/jackson/core/json/TestParserErrorHandling.java",
+            "Instance": "Begin: Pos(21, 12)\nEnd: Pos(23, 5)\nSource: /tmp/c4j/JacksonCore_2/src/test/java//com/fasterxml/jackson/core/json/TestParserErrorHandling.java\nName: testMangledNumbersBytes\nChilds: [StatementAssertion<Begin: Pos(22, 9), End: Pos(22, 34)>,\n]",
+            "source": "/tmp/c4j/JacksonCore_2/src/test/java//com/fasterxml/jackson/core/json/TestParserErrorHandling.java",
+            "name": "testMangledNumbersBytes",
+            "begin": "Pos(21, 12)",
+            "end": "Pos(23, 5)",
+            "begin_line_no": 21,
+            "end_line_no": 23,
+            "child": [
+                "Begin: Pos(22, 9)\nEnd: Pos(22, 34)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersChars": {
+            "file_path": "src/test/java/com/fasterxml/jackson/core/json/TestParserErrorHandling.java",
+            "Instance": "Begin: Pos(25, 12)\nEnd: Pos(27, 5)\nSource: /tmp/c4j/JacksonCore_2/src/test/java//com/fasterxml/jackson/core/json/TestParserErrorHandling.java\nName: testMangledNumbersChars\nChilds: [StatementAssertion<Begin: Pos(26, 9), End: Pos(26, 35)>,\n]",
+            "source": "/tmp/c4j/JacksonCore_2/src/test/java//com/fasterxml/jackson/core/json/TestParserErrorHandling.java",
+            "name": "testMangledNumbersChars",
+            "begin": "Pos(25, 12)",
+            "end": "Pos(27, 5)",
+            "begin_line_no": 25,
+            "end_line_no": 27,
+            "child": [
+                "Begin: Pos(26, 9)\nEnd: Pos(26, 35)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "10110000000": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersChars"
+        ]
+    },
+    "00001011010": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.json.TestParserErrorHandling::testMangledNumbersBytes"
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "from_line_no": 406,
+            "to_line_no": 407,
+            "replaced_with": "                int timeLen = len - dateStr.lastIndexOf('T') - 6;\n                if (timeLen < 12) { // 8 for hh:mm:ss, 4 for .sss\n                    int offset = len - 5; // insertion offset, before tz-offset\n",
+            "replaced": "                c = dateStr.charAt(len-9);\n                if (Character.isDigit(c)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 408
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/StdDateFormat.java",
+            "from_line_no": 409,
+            "to_line_no": 409,
+            "replaced_with": "                    switch (timeLen) {\n                    case 11:\n                        sb.insert(offset, '0'); break;\n                    case 10:\n                        sb.insert(offset, \"00\"); break;\n                    case 9: // is this legal? (just second fraction marker)\n                        sb.insert(offset, \"000\"); break;\n                    case 8:\n                        sb.insert(offset, \".000\"); break;\n                    case 7: // not legal to have single-digit second\n                        break;\n                    case 6: // probably not legal, but let's allow\n                        sb.insert(offset, \"00.000\");\n                    case 5: // is legal to omit seconds\n                        sb.insert(offset, \":00.000\");\n                    }\n",
+            "replaced": "                    sb.insert(len-5, \".000\");\n",
+            "patch_type": "replace",
+            "next_line_no": 410
+        }
+    ]
+}

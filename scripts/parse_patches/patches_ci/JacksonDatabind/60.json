@@ -1,0 +1,171 @@
+{
+    "num_of_hunks": 24,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "import com.fasterxml.jackson.annotation.JsonTypeInfo.As;\n",
+        "patch_type": "insert",
+        "next_line_no": 9
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;\n",
+        "patch_type": "insert",
+        "next_line_no": 17
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "from_line_no": 226,
+        "to_line_no": 226,
+        "replaced_with": "            TypeSerializerRerouter rr = new TypeSerializerRerouter(typeSer0, bean);\n            ser.serializeWithType(value, gen, provider, rr);\n",
+        "replaced": "            ser.serializeWithType(value, gen, provider, typeSer0);\n",
+        "patch_type": "replace",
+        "next_line_no": 227
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "    static class TypeSerializerRerouter\n        extends TypeSerializer\n    {\n        protected final TypeSerializer _typeSerializer;\n        protected final Object _forObject;\n",
+        "patch_type": "insert",
+        "next_line_no": 363
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        public TypeSerializerRerouter(TypeSerializer ts, Object ob) {\n            _typeSerializer = ts;\n            _forObject = ob;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 364,
+        "is_extra_hunk": true
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public TypeSerializer forProperty(BeanProperty prop) { // should never get called\n            throw new UnsupportedOperationException();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 365,
+        "is_extra_hunk": true
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public As getTypeInclusion() {\n            return _typeSerializer.getTypeInclusion();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 366,
+        "is_extra_hunk": true
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public String getPropertyName() {\n            return _typeSerializer.getPropertyName();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 367,
+        "is_extra_hunk": true
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public TypeIdResolver getTypeIdResolver() {\n            return _typeSerializer.getTypeIdResolver();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 368,
+        "is_extra_hunk": true
+    },
+    "9": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypePrefixForScalar(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypePrefixForScalar(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 369,
+        "is_extra_hunk": true
+    },
+    "10": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypePrefixForObject(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypePrefixForObject(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 370,
+        "is_extra_hunk": true
+    },
+    "11": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypePrefixForArray(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypePrefixForArray(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 371,
+        "is_extra_hunk": true
+    },
+    "12": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypeSuffixForScalar(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypeSuffixForScalar(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 372,
+        "is_extra_hunk": true
+    },
+    "13": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypeSuffixForObject(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypeSuffixForObject(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 373,
+        "is_extra_hunk": true
+    },
+    "14": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeTypeSuffixForArray(Object value, JsonGenerator gen) throws IOException {\n            _typeSerializer.writeTypeSuffixForArray(_forObject, gen);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 374,
+        "is_extra_hunk": true
+    },
+    "15": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        public void writeTypePrefixForScalar(Object value, JsonGenerator gen, Class<?> type) throws IOException {\n            _typeSerializer.writeTypePrefixForScalar(_forObject, gen, type);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 375,
+        "is_extra_hunk": true
+    },
+    "16": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        public void writeTypePrefixForObject(Object value, JsonGenerator gen, Class<?> type) throws IOException {\n            _typeSerializer.writeTypePrefixForObject(_forObject, gen, type);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 376,
+        "is_extra_hunk": true
+    },
+    "17": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        public void writeTypePrefixForArray(Object value, JsonGenerator gen, Class<?> type) throws IOException {\n            _typeSerializer.writeTypePrefixForArray(_forObject, gen, type);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 377,
+        "is_extra_hunk": true
+    },
+    "18": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypePrefixForScalar(Object value, JsonGenerator gen, String typeId)\n                throws IOException {\n            _typeSerializer.writeCustomTypePrefixForScalar(_forObject, gen, typeId);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 378,
+        "is_extra_hunk": true
+    },
+    "19": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypePrefixForObject(Object value, JsonGenerator gen, String typeId) throws IOException {\n            _typeSerializer.writeCustomTypePrefixForObject(_forObject, gen, typeId);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 379,
+        "is_extra_hunk": true
+    },
+    "20": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypePrefixForArray(Object value, JsonGenerator gen, String typeId) throws IOException {\n            _typeSerializer.writeCustomTypePrefixForArray(_forObject, gen, typeId);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 380,
+        "is_extra_hunk": true
+    },
+    "21": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypeSuffixForScalar(Object value, JsonGenerator gen, String typeId) throws IOException {\n            _typeSerializer.writeCustomTypeSuffixForScalar(_forObject, gen, typeId);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 381,
+        "is_extra_hunk": true
+    },
+    "22": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypeSuffixForObject(Object value, JsonGenerator gen, String typeId) throws IOException {\n            _typeSerializer.writeCustomTypeSuffixForObject(_forObject, gen, typeId);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 382,
+        "is_extra_hunk": true
+    },
+    "23": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/JsonValueSerializer.java",
+        "replaced_with": "        @Override\n        public void writeCustomTypeSuffixForArray(Object value, JsonGenerator gen, String typeId) throws IOException {\n            _typeSerializer.writeCustomTypeSuffixForArray(_forObject, gen, typeId);\n        }\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 383,
+        "is_extra_hunk": true
+    },
+    "num_of_hunks_ci": 4
+}

@@ -1,0 +1,88 @@
+---
+Begin generate bug_id: JacksonDatabind_83
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_83
+Try to checkout JacksonDatabind_83
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+trying to replace old failing tests
+edit: replace from 236 range 14 at src/test/java/com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java
+to
+    public void testWeirdStringHandling$catena_0() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper()
+            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))
+            ;
+        SingleValuedEnum result = mapper.readValue("\"B\"", SingleValuedEnum.class);
+        assertEquals(SingleValuedEnum.A, result);                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // also, write [databind#1629] try this
+        mapper = new ObjectMapper()
+                .addHandler(new WeirdStringHandler(null));
+        UUID result2 = mapper.readValue(quote("not a uuid!"), UUID.class);
+        try{ assertNull(result2);                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testWeirdStringHandling$catena_1() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper()
+            .addHandler(new WeirdStringHandler(SingleValuedEnum.A))
+            ;
+        SingleValuedEnum result = mapper.readValue("\"B\"", SingleValuedEnum.class);
+        try{ assertEquals(SingleValuedEnum.A, result);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, write [databind#1629] try this
+        mapper = new ObjectMapper()
+                .addHandler(new WeirdStringHandler(null));
+        UUID result2 = mapper.readValue(quote("not a uuid!"), UUID.class);
+        assertNull(result2);                                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/filter/ProblemHandlerTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 223.44 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_0
+	com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+delete from 121 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+delete from 119 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+delete from 119 with range 1
+try to fix hunk: 1
+delete from 121 with range 1
+patches are written to file
+running tests...
+used time: Finished in 246.35 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_1', 'com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_1
+com.fasterxml.jackson.databind.filter.ProblemHandlerTest::testWeirdStringHandling$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

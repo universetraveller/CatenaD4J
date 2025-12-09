@@ -1,0 +1,321 @@
+---
+Begin generate bug_id: JacksonDatabind_25
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_25
+Try to checkout JacksonDatabind_25
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java
+trace file: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java
+trace file: src/main/java/com/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver.java
+trying to replace old failing tests
+edit: replace from 561 range 8 at src/test/java/com/fasterxml/jackson/databind/deser/TestArrayDeserialization.java
+to
+    public void testByteArrayTypeOverride890$catena_0() throws Exception
+    {
+        HiddenBinaryBean890 result = MAPPER.readValue(
+                aposToQuotes("{'someBytes':'AQIDBA=='}"), HiddenBinaryBean890.class);
+        assertNotNull(result);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(result.someBytes);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(byte[].class, result.someBytes.getClass());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testByteArrayTypeOverride890$catena_1() throws Exception
+    {
+        HiddenBinaryBean890 result = MAPPER.readValue(
+                aposToQuotes("{'someBytes':'AQIDBA=='}"), HiddenBinaryBean890.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(result.someBytes);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(byte[].class, result.someBytes.getClass());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testByteArrayTypeOverride890$catena_2() throws Exception
+    {
+        HiddenBinaryBean890 result = MAPPER.readValue(
+                aposToQuotes("{'someBytes':'AQIDBA=='}"), HiddenBinaryBean890.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(result.someBytes);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(byte[].class, result.someBytes.getClass());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestArrayDeserialization.java
+new test num: 3
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 178.40 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 183.85 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+No new failing tests but only 1 hunk
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+patches are written to file
+running tests...
+used time: Finished in 171.55 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+No new failing tests but only 1 hunk
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+patches are written to file
+running tests...
+used time: Finished in 182.37 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+No new failing tests but only 1 hunk
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+patches are written to file
+running tests...
+used time: Finished in 175.58 seconds
+Failing tests: 0
+select new bug
+Pattern: 1000
+new failing tests:
+com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+Save found bug
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 185.11 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+Can independently fix []
+Could not fix independently
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 197.74 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+Can independently fix []
+Could not fix independently
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+patches are written to file
+running tests...
+used time: Finished in 172.70 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+Can independently fix []
+Could not fix independently
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 206.64 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+patches are written to file
+running tests...
+used time: Finished in 189.67 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+patches are written to file
+running tests...
+used time: Finished in 196.34 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 179.52 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_0
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_1
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testByteArrayTypeOverride890$catena_2
+Can independently fix []
+Could not fix independently
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 177.78 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 175.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+patches are written to file
+running tests...
+used time: Finished in 170.75 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 1757 with range 1 to
+                type = (T) ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 1
+replace from 477 with range 1 to
+                type = ctxt.getTypeFactory().constructSpecializedType(type, subclass);
+
+try to fix hunk: 2
+replace from 177 with range 1 to
+                    type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+
+try to fix hunk: 3
+replace from 80 with range 1 to
+        return config.getTypeFactory().constructSpecializedType(type, dst);
+
+patches are written to file
+running tests...
+used time: Finished in 184.30 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 1 new bugs

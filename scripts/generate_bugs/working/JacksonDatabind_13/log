@@ -1,0 +1,91 @@
+---
+Begin generate bug_id: JacksonDatabind_13
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_13
+Try to checkout JacksonDatabind_13
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
+trying to replace old failing tests
+edit: replace from 460 range 9 at src/test/java/com/fasterxml/jackson/databind/struct/TestObjectIdDeserialization.java
+to
+    public void testNullObjectId$catena_0() throws Exception
+    {
+        // Ok, so missing Object Id is ok, but so is null.
+        
+        Identifiable value = MAPPER.readValue
+                (aposToQuotes("{'value':3, 'next':null, 'id':null}"), Identifiable.class);
+        assertNotNull(value);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, value.value);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNullObjectId$catena_1() throws Exception
+    {
+        // Ok, so missing Object Id is ok, but so is null.
+        
+        Identifiable value = MAPPER.readValue
+                (aposToQuotes("{'value':3, 'next':null, 'id':null}"), Identifiable.class);
+        try{ assertNotNull(value);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, value.value);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/struct/TestObjectIdDeserialization.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 125.10 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_0
+	com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 92 with         if (id == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 132.02 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_1
+com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_0
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 87 with         if (id == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 126.37 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_0
+	com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_1
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 87 with         if (id == null) {
+            return null;
+        }
+
+try to fix hunk: 1
+insert before 92 with         if (id == null) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 113.76 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

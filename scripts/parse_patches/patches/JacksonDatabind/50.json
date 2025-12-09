@@ -1,0 +1,69 @@
+{
+    "num_of_hunks": 11,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId.Referring;\n",
+        "patch_type": "insert",
+        "next_line_no": 9
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "        List<BeanReferring> referrings = null;\n",
+        "patch_type": "insert",
+        "next_line_no": 387
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "                try {\n",
+        "patch_type": "insert",
+        "next_line_no": 429
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "                } catch (UnresolvedForwardReference reference) {\n",
+        "patch_type": "insert",
+        "next_line_no": 430
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "                    BeanReferring referring = handleUnresolvedReference(p, prop, buffer, reference);\n                    if (referrings == null) {\n                        referrings = new ArrayList<BeanReferring>();\n                    }\n                    referrings.add(referring);\n                }\n",
+        "patch_type": "insert",
+        "next_line_no": 433
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "        if (referrings != null) {\n            for (BeanReferring referring : referrings) {\n               referring.setBean(bean);\n            }\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 465
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "    private BeanReferring handleUnresolvedReference(JsonParser p,\n            SettableBeanProperty prop, PropertyValueBuffer buffer,\n            UnresolvedForwardReference reference)\n        throws JsonMappingException\n    {\n        BeanReferring referring = new BeanReferring(reference, prop.getType().getRawClass(),\n                buffer, prop);\n        reference.getRoid().appendReferring(referring);\n        return referring;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 479
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "    static class BeanReferring extends Referring {\n        private final SettableBeanProperty _prop;\n        private Object _bean;\n",
+        "patch_type": "insert",
+        "next_line_no": 933
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "        public void setBean(Object bean) {\n            _bean = bean;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 934
+    },
+    "9": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "        BeanReferring(UnresolvedForwardReference ref,\n                Class<?> valueType, PropertyValueBuffer buffer, SettableBeanProperty prop)\n        {\n            super(ref, valueType);\n            _prop = prop;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 935
+    },
+    "10": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java",
+        "replaced_with": "        @Override\n        public void handleResolvedForwardReference(Object id, Object value) throws IOException {\n            _prop.set(_bean, value);\n        }\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 936
+    }
+}

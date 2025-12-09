@@ -1,0 +1,40 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/PseudoTextElement.java",
+            "replaced_with": "package org.jsoup.nodes;\n\nimport org.jsoup.parser.Tag;\n\nimport java.io.IOException;\n\n/**\n * Represents a {@link TextNode} as an {@link Element}, to enable text nodes to be selected with\n * the {@link org.jsoup.select.Selector} {@code :matchText} syntax.\n */\npublic class PseudoTextElement extends Element {\n\n    public PseudoTextElement(Tag tag, String baseUri, Attributes attributes) {\n        super(tag, baseUri, attributes);\n    }\n\n    @Override\n    void outerHtmlHead(Appendable accum, int depth, Document.OutputSettings out) throws IOException {\n    }\n\n    @Override\n    void outerHtmlTail(Appendable accum, int depth, Document.OutputSettings out) throws IOException {\n    }\n}\n",
+            "patch_type": "insert",
+            "next_line_no": 1
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "import org.jsoup.nodes.PseudoTextElement;\nimport org.jsoup.nodes.TextNode;\n",
+            "patch_type": "insert",
+            "next_line_no": 9
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "    public static final class MatchText extends Evaluator {\n",
+            "patch_type": "insert",
+            "next_line_no": 754
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "        @Override\n        public boolean matches(Element root, Element element) {\n            if (element instanceof PseudoTextElement)\n                return true;\n\n            List<TextNode> textNodes = element.textNodes();\n            for (TextNode textNode : textNodes) {\n                PseudoTextElement pel = new PseudoTextElement(\n                    org.jsoup.parser.Tag.valueOf(element.tagName()), element.baseUri(), element.attributes());\n                textNode.replaceWith(pel);\n                pel.appendChild(textNode);\n            }\n            return false;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 755
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/Evaluator.java",
+            "replaced_with": "        @Override\n        public String toString() {\n            return \":matchText\";\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 756
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/QueryParser.java",
+            "replaced_with": "        else if (tq.matchChomp(\":matchText\"))\n            evals.add(new Evaluator.MatchText());\n",
+            "patch_type": "insert",
+            "next_line_no": 203
+        }
+    ]
+}

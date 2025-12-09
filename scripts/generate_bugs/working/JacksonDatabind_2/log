@@ -1,0 +1,1605 @@
+---
+Begin generate bug_id: JacksonDatabind_2
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_2
+Try to checkout JacksonDatabind_2
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java
+trying to replace old failing tests
+edit: replace from 252 range 14 at src/test/java/com/fasterxml/jackson/databind/node/TestConversions.java
+to
+    public void testConversionOfPojos$catena_0() throws Exception
+    {
+        final Issue467Bean input = new Issue467Bean(13);
+        final String EXP = "{\"x\":13}";
+        
+        // first, sanity check
+        String json = MAPPER.writeValueAsString(input);
+        assertEquals(EXP, json);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // then via conversions: should become JSON Object
+        JsonNode tree = MAPPER.valueToTree(input);
+        try{ assertTrue("Expected Object, got "+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testConversionOfPojos$catena_1() throws Exception
+    {
+        final Issue467Bean input = new Issue467Bean(13);
+        final String EXP = "{\"x\":13}";
+        
+        // first, sanity check
+        String json = MAPPER.writeValueAsString(input);
+        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then via conversions: should become JSON Object
+        JsonNode tree = MAPPER.valueToTree(input);
+        assertTrue("Expected Object, got "+tree.getNodeType(), tree.isObject());                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testConversionOfPojos$catena_2() throws Exception
+    {
+        final Issue467Bean input = new Issue467Bean(13);
+        final String EXP = "{\"x\":13}";
+        
+        // first, sanity check
+        String json = MAPPER.writeValueAsString(input);
+        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // then via conversions: should become JSON Object
+        JsonNode tree = MAPPER.valueToTree(input);
+        try{ assertTrue("Expected Object, got "+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(EXP, MAPPER.writeValueAsString(tree));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/node/TestConversions.java
+new test num: 3
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 132.37 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 141.45 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1
+No new failing tests but only 1 hunk
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 125.46 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 163.79 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testUUIDAux
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testURL
+	com.fasterxml.jackson.databind.util.TestTokenBuffer::testSimpleArray
+Includes new failing tests, set to unusable
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 151.42 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 128.67 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testUUIDAux
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testURL
+	com.fasterxml.jackson.databind.util.TestTokenBuffer::testSimpleArray
+Includes new failing tests, set to unusable
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 116.50 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1']
+select new bug
+Pattern: 111000
+new failing tests:
+com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1
+Save found bug
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 104.66 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testUUIDAux
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testURL
+	com.fasterxml.jackson.databind.util.TestTokenBuffer::testSimpleArray
+Includes new failing tests, set to unusable
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 113.95 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 118.55 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testUUIDAux
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testURL
+	com.fasterxml.jackson.databind.util.TestTokenBuffer::testSimpleArray
+Includes new failing tests, set to unusable
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 118.58 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 783 with         if (value == null) {
+            writeNull();
+            return;
+        }
+        Class<?> raw = value.getClass();
+        if (raw == byte[].class) {
+
+try to fix hunk: 1
+insert before 784 with             return;
+        } else if (_objectCodec == null) {
+
+try to fix hunk: 2
+insert before 788 with             _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+        } else {
+            _objectCodec.writeValue(this, value);
+        }
+
+try to fix hunk: 3
+insert before 793 with         if (node == null) {
+            writeNull();
+            return;
+        }
+
+try to fix hunk: 4
+insert before 794 with         if (_objectCodec == null) {
+
+try to fix hunk: 5
+insert before 796 with         } else {
+            _objectCodec.writeTree(this, node);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 128.75 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111111
+Find 1 new bugs

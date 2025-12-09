@@ -1,0 +1,102 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        input = input.replaceAll(\"\\r\\n?\", \"\\n\"); // normalise carriage returns to newlines\n",
+            "patch_type": "insert",
+            "next_line_no": 18
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "from_line_no": 99,
+            "to_line_no": 99,
+            "replaced_with": "        String data = input.substring(pos, input.length());\n",
+            "replaced": "        String data = input.substring(pos, input.length() - 1);\n",
+            "patch_type": "replace",
+            "next_line_no": 100
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed",
+            "org.jsoup.parser.CharacterReaderTest::consumeToEnd",
+            "org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag"
+        ],
+        "org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed": {
+            "file_path": "src/test/java/org/jsoup/parser/CharacterReaderTest.java",
+            "Instance": "Begin: Pos(64, 5)\nEnd: Pos(71, 5)\nSource: /tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/CharacterReaderTest.java\nName: handleCarriageReturnAsLineFeed\nChilds: [StatementAssertion<Begin: Pos(69, 9), End: Pos(69, 36)>,\nStatementAssertion<Begin: Pos(70, 9), End: Pos(70, 58)>,\n]",
+            "source": "/tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/CharacterReaderTest.java",
+            "name": "handleCarriageReturnAsLineFeed",
+            "begin": "Pos(64, 5)",
+            "end": "Pos(71, 5)",
+            "begin_line_no": 64,
+            "end_line_no": 71,
+            "child": [
+                "Begin: Pos(69, 9)\nEnd: Pos(69, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(70, 9)\nEnd: Pos(70, 58)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void handleCarriageReturnAsLineFeed$catena_0() {\n        String in = \"one \\r two \\r\\n three\";\n        CharacterReader r = new CharacterReader(in);\n\n        String first = r.consumeTo('\\n');\n        assertEquals(\"one \", first);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"\\n two \\n three\", r.consumeToEnd());                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void handleCarriageReturnAsLineFeed$catena_1() {\n        String in = \"one \\r two \\r\\n three\";\n        CharacterReader r = new CharacterReader(in);\n\n        String first = r.consumeTo('\\n');\n        try{ assertEquals(\"one \", first);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"\\n two \\n three\", r.consumeToEnd());                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void handleCarriageReturnAsLineFeed$catena_0() {\n        String in = \"one \\r two \\r\\n three\";\n        CharacterReader r = new CharacterReader(in);\n\n        String first = r.consumeTo('\\n');\n        assertEquals(\"one \", first);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"\\n two \\n three\", r.consumeToEnd());                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void handleCarriageReturnAsLineFeed$catena_1() {\n        String in = \"one \\r two \\r\\n three\";\n        CharacterReader r = new CharacterReader(in);\n\n        String first = r.consumeTo('\\n');\n        try{ assertEquals(\"one \", first);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"\\n two \\n three\", r.consumeToEnd());                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.parser.CharacterReaderTest::consumeToEnd": {
+            "file_path": "src/test/java/org/jsoup/parser/CharacterReaderTest.java",
+            "Instance": "Begin: Pos(73, 5)\nEnd: Pos(79, 5)\nSource: /tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/CharacterReaderTest.java\nName: consumeToEnd\nChilds: [StatementAssertion<Begin: Pos(77, 9), End: Pos(77, 32)>,\nStatementAssertion<Begin: Pos(78, 9), End: Pos(78, 32)>,\n]",
+            "source": "/tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/CharacterReaderTest.java",
+            "name": "consumeToEnd",
+            "begin": "Pos(73, 5)",
+            "end": "Pos(79, 5)",
+            "begin_line_no": 73,
+            "end_line_no": 79,
+            "child": [
+                "Begin: Pos(77, 9)\nEnd: Pos(77, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(78, 9)\nEnd: Pos(78, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void consumeToEnd$catena_0() {\n        String in = \"one two three\";\n        CharacterReader r = new CharacterReader(in);\n        String toEnd = r.consumeToEnd();\n        assertEquals(in, toEnd);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(r.isEmpty());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void consumeToEnd$catena_1() {\n        String in = \"one two three\";\n        CharacterReader r = new CharacterReader(in);\n        String toEnd = r.consumeToEnd();\n        try{ assertEquals(in, toEnd);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(r.isEmpty());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void consumeToEnd$catena_0() {\n        String in = \"one two three\";\n        CharacterReader r = new CharacterReader(in);\n        String toEnd = r.consumeToEnd();\n        assertEquals(in, toEnd);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(r.isEmpty());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void consumeToEnd$catena_1() {\n        String in = \"one two three\";\n        CharacterReader r = new CharacterReader(in);\n        String toEnd = r.consumeToEnd();\n        try{ assertEquals(in, toEnd);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(r.isEmpty());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag": {
+            "file_path": "src/test/java/org/jsoup/parser/ParserTest.java",
+            "Instance": "Begin: Pos(617, 5)\nEnd: Pos(620, 5)\nSource: /tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/ParserTest.java\nName: handlesNewlinesAndWhitespaceInTag\nChilds: [StatementAssertion<Begin: Pos(619, 9), End: Pos(619, 75)>,\n]",
+            "source": "/tmp/c4j/Jsoup_18/src/test/java//org/jsoup/parser/ParserTest.java",
+            "name": "handlesNewlinesAndWhitespaceInTag",
+            "begin": "Pos(617, 5)",
+            "end": "Pos(620, 5)",
+            "begin_line_no": 617,
+            "end_line_no": 620,
+            "child": [
+                "Begin: Pos(619, 9)\nEnd: Pos(619, 75)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "org.jsoup.parser.CharacterReaderTest::consumeToEnd$catena_0"
+        ]
+    },
+    "10": {
+        "failing_tests": [
+            "org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_0",
+            "org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag"
+        ]
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1"
+        ]
+    }
+}

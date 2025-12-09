@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/Jsoup.java",
+            "from_line_no": 250,
+            "to_line_no": 250,
+            "replaced_with": "        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);\n",
+            "replaced": "        return new Cleaner(whitelist).isValid(parseBodyFragment(bodyHtml, \"\"));\n",
+            "patch_type": "replace",
+            "next_line_no": 251
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+            "replaced_with": "    public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {\n        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();\n        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 129
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/safety/Cleaner.java",
+            "replaced_with": "import java.util.List;\n",
+            "patch_type": "insert",
+            "next_line_no": 17
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/safety/Cleaner.java",
+            "replaced_with": "    public boolean isValidBodyHtml(String bodyHtml) {\n        Document clean = Document.createShell(\"\");\n        Document dirty = Document.createShell(\"\");\n        ParseErrorList errorList = ParseErrorList.tracking(1);\n        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), \"\", errorList);\n        dirty.body().insertChildren(0, nodes);\n        int numDiscarded = copySafeNodes(dirty.body(), clean.body());\n        return numDiscarded == 0 && errorList.size() == 0;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 81
+        }
+    ]
+}

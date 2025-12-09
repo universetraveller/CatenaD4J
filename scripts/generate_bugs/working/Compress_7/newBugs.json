@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 98,
+            "to_line_no": 98,
+            "replaced_with": "            byte b = buffer[i];\n            if (b == 0) { // Trailing null\n",
+            "replaced": "            if (buffer[i] == 0) {\n",
+            "patch_type": "replace",
+            "next_line_no": 99
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 101,
+            "to_line_no": 101,
+            "replaced_with": "            result.append((char) (b & 0xFF)); // Allow for sign-extension\n",
+            "replaced": "            result.append((char) buffer[i]);\n",
+            "patch_type": "replace",
+            "next_line_no": 102
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames"
+        ],
+        "org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/tar/TarUtilsTest.java",
+            "Instance": "Begin: Pos(120, 12)\nEnd: Pos(127, 5)\nSource: /tmp/c4j/Compress_7/src/test/java//org/apache/commons/compress/archivers/tar/TarUtilsTest.java\nName: testRoundTripNames\nChilds: [StatementAssertion<Begin: Pos(121, 9), End: Pos(121, 22)>,\nStatementAssertion<Begin: Pos(122, 9), End: Pos(122, 43)>,\nStatementAssertion<Begin: Pos(123, 9), End: Pos(123, 26)>,\nStatementAssertion<Begin: Pos(126, 9), End: Pos(126, 93)>,\n]",
+            "source": "/tmp/c4j/Compress_7/src/test/java//org/apache/commons/compress/archivers/tar/TarUtilsTest.java",
+            "name": "testRoundTripNames",
+            "begin": "Pos(120, 12)",
+            "end": "Pos(127, 5)",
+            "begin_line_no": 120,
+            "end_line_no": 127,
+            "child": [
+                "Begin: Pos(121, 9)\nEnd: Pos(121, 22)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(122, 9)\nEnd: Pos(122, 43)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(123, 9)\nEnd: Pos(123, 26)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(126, 9)\nEnd: Pos(126, 93)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testRoundTripNames$catena_0(){\n        checkName(\"\");                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testRoundTripNames$catena_1(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        checkName(\"The quick brown fox\\n\");                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testRoundTripNames$catena_2(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        checkName(\"\\177\");                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testRoundTripNames$catena_3(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");               /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testRoundTripNames$catena_0(){\n        checkName(\"\");                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testRoundTripNames$catena_1(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        checkName(\"The quick brown fox\\n\");                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testRoundTripNames$catena_2(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        checkName(\"\\177\");                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        try{ checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");          }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    public void testRoundTripNames$catena_3(){\n        try{ checkName(\"\");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"The quick brown fox\\n\");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ checkName(\"\\177\");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        // checkName(\"\\0\"); // does not work, because NUL is ignored\n        // COMPRESS-114\n        checkName(\"0302-0601-3\u00b1\u00b1\u00b1F06\u00b1W220\u00b1ZB\u00b1LALALA\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1\u00b1CAN\u00b1\u00b1DC\u00b1\u00b1\u00b104\u00b1060302\u00b1MOE.model\");               /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames$catena_3"
+        ]
+    }
+}

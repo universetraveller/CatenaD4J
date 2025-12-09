@@ -1,0 +1,2 @@
+org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4
+org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testThrowOnInvalidEntry$catena_0

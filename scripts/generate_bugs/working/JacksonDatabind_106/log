@@ -1,0 +1,1340 @@
+---
+Begin generate bug_id: JacksonDatabind_106
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_106
+Try to checkout JacksonDatabind_106
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java
+trying to replace old failing tests
+edit: replace from 314 range 40 at src/test/java/com/fasterxml/jackson/databind/node/TestTreeTraversingParser.java
+to
+    public void testNumberOverflowLong$catena_0() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            assertToken(JsonToken.START_ARRAY, p.nextToken());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_1() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_2() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_3() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                fail("Expected failure for `long` overflow");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_4() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig+") out of range of long");                      /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_5() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            assertToken(JsonToken.START_OBJECT, p.nextToken());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_6() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.FIELD_NAME, p.nextToken());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_7() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_8() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_9() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                fail("Expected failure for `long` overflow");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_10() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig+") out of range of long");                      /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_11() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            assertToken(JsonToken.START_ARRAY, p.nextToken());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_12() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_13() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.DOUBLE, p.getNumberType());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_14() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                fail("Expected failure for `long` overflow");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowLong$catena_15() throws IOException
+    {
+        final BigInteger tooBig = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.BIG_INTEGER, p.getNumberType());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of long");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e30";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getLongValue();
+                try{ fail("Expected failure for `long` overflow");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig2+") out of range of long");                     /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+    }
+edit: replace from 273 range 40 at src/test/java/com/fasterxml/jackson/databind/node/TestTreeTraversingParser.java
+to
+    public void testNumberOverflowInt$catena_0() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            assertToken(JsonToken.START_ARRAY, p.nextToken());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_1() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_2() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.LONG, p.getNumberType());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_3() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                fail("Expected failure for `int` overflow");                                                /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_4() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig+") out of range of int");                       /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_5() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            assertToken(JsonToken.START_OBJECT, p.nextToken());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_6() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.FIELD_NAME, p.nextToken());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_7() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_8() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.LONG, p.getNumberType());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_9() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                fail("Expected failure for `int` overflow");                                                /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_10() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig+") out of range of int");                       /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_11() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            assertToken(JsonToken.START_ARRAY, p.nextToken());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_12() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_13() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(NumberType.DOUBLE, p.getNumberType());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_14() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                fail("Expected failure for `int` overflow");                                                /***** ORIGINAL ASSERTION IS HERE *****/
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                 }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+    }     public void testNumberOverflowInt$catena_15() throws IOException
+    {
+        final long tooBig = 1L + Integer.MAX_VALUE;
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        try (final JsonParser p = MAPPER.readTree("{ \"value\" : "+tooBig+" }").traverse()) {
+            try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.LONG, p.getNumberType());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                try{ verifyException(e, "Numeric value ("+tooBig+") out of range of int");                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            }
+        }
+        // But also from floating-point
+        final String tooBig2 = "1.0e10";
+        try (final JsonParser p = MAPPER.readTree("[ "+tooBig2+" ]").traverse()) {
+            try{ assertToken(JsonToken.START_ARRAY, p.nextToken());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertToken(JsonToken.VALUE_NUMBER_FLOAT, p.nextToken());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(NumberType.DOUBLE, p.getNumberType());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+            try {
+                p.getIntValue();
+                try{ fail("Expected failure for `int` overflow");                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+            } catch (InputCoercionException e) {
+                verifyException(e, "Numeric value ("+tooBig2+") out of range of int");                      /***** ORIGINAL ASSERTION IS HERE *****/
+            }
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/node/TestTreeTraversingParser.java
+new test num: 32
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 272.15 seconds
+Failing tests: 6
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_9
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_14
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_14
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_9
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 314 with         if (!node.canConvertToInt()) {
+            reportOverflowLong();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 259.07 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_14
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_9
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_14
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_3
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_9
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 308 with         if (!node.canConvertToInt()) {
+            reportOverflowInt();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 253.94 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_3
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_9
+	com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowLong$catena_14
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_14
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_3
+com.fasterxml.jackson.databind.node.TestTreeTraversingParser::testNumberOverflowInt$catena_9
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 308 with         if (!node.canConvertToInt()) {
+            reportOverflowInt();
+        }
+
+try to fix hunk: 1
+insert before 314 with         if (!node.canConvertToInt()) {
+            reportOverflowLong();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 271.69 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

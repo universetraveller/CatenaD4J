@@ -1,0 +1,151 @@
+{
+    "num_of_hunks": 18,
+    "0": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 296,
+        "to_line_no": 297,
+        "replaced_with": "    protected static String findEnclosingAttribute(Node n, String attrName) {\n",
+        "replaced": "    protected String getLanguage() {\n        Node n = node;\n",
+        "patch_type": "replace",
+        "next_line_no": 298
+    },
+    "1": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 301,
+        "to_line_no": 301,
+        "replaced_with": "                String attr = e.getAttribute(attrName);\n",
+        "replaced": "                String attr = e.getAttribute(\"xml:lang\");\n",
+        "patch_type": "replace",
+        "next_line_no": 302
+    },
+    "2": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "    protected String getLanguage() {\n        return findEnclosingAttribute(node, \"xml:lang\");\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 311
+    },
+    "3": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "        if (node.getNodeType() == Node.COMMENT_NODE) {\n            String text = ((Comment) node).getData();\n            return text == null ? \"\" : text.trim();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 632
+    },
+    "4": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 638,
+        "to_line_no": 639,
+        "replaced_with": "            return \"\";\n",
+        "replaced": "            String text = ((Comment) node).getData();\n            return text == null ? \"\" : text.trim();\n",
+        "patch_type": "replace",
+        "next_line_no": 640
+    },
+    "5": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "        boolean trim = !\"preserve\".equals(findEnclosingAttribute(node, \"xml:space\"));\n",
+        "patch_type": "insert",
+        "next_line_no": 641
+    },
+    "6": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 643,
+        "to_line_no": 643,
+        "replaced_with": "            return text == null ? \"\" : trim ? text.trim() : text;\n",
+        "replaced": "            return text == null ? \"\" : text.trim();\n",
+        "patch_type": "replace",
+        "next_line_no": 644
+    },
+    "7": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 647,
+        "to_line_no": 647,
+        "replaced_with": "            return text == null ? \"\" : trim ? text.trim() : text;\n",
+        "replaced": "            return text == null ? \"\" : text.trim();\n",
+        "patch_type": "replace",
+        "next_line_no": 648
+    },
+    "8": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 653,
+        "to_line_no": 656,
+        "replaced": "            if (child.getNodeType() == Node.TEXT_NODE) {\n                buf.append(child.getNodeValue());\n            }\n            else {\n",
+        "patch_type": "delete",
+        "next_line_no": 657
+    },
+    "9": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 658,
+        "to_line_no": 658,
+        "replaced": "            }\n",
+        "patch_type": "delete",
+        "next_line_no": 659
+    },
+    "10": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 660,
+        "to_line_no": 660,
+        "replaced_with": "        return buf.toString();\n",
+        "replaced": "        return buf.toString().trim();\n",
+        "patch_type": "replace",
+        "next_line_no": 661
+    },
+    "11": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 240,
+        "to_line_no": 240,
+        "replaced_with": "            StringBuffer buf = new StringBuffer();\n            for (NodeIterator children = childIterator(null, false, null); children.setPosition(children.getPosition() + 1);) {\n                NodePointer ptr = children.getNodePointer();\n                if (ptr.getImmediateNode() instanceof Element || ptr.getImmediateNode() instanceof Text) {\n                    buf.append(ptr.getValue());\n                }\n            }\n            return buf.toString();\n",
+        "replaced": "            return ((Element) node).getTextTrim();\n",
+        "patch_type": "replace",
+        "next_line_no": 241
+    },
+    "12": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "replaced_with": "        String result = null;\n",
+        "patch_type": "insert",
+        "next_line_no": 249
+    },
+    "13": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 250,
+        "to_line_no": 253,
+        "replaced_with": "            result = ((Text) node).getText();\n",
+        "replaced": "            return ((Text) node).getTextTrim();\n        }\n        if (node instanceof CDATA) {\n            return ((CDATA) node).getTextTrim();\n",
+        "patch_type": "replace",
+        "next_line_no": 254
+    },
+    "14": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 256,
+        "to_line_no": 260,
+        "replaced_with": "            result = ((ProcessingInstruction) node).getData();\n",
+        "replaced": "            String text = ((ProcessingInstruction) node).getData();\n            if (text != null) {\n                text = text.trim();\n            }\n            return text;\n",
+        "patch_type": "replace",
+        "next_line_no": 261
+    },
+    "15": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 262,
+        "to_line_no": 262,
+        "replaced_with": "        boolean trim = !\"preserve\".equals(findEnclosingAttribute(node, \"space\", Namespace.XML_NAMESPACE));\n        return result != null && trim ? result.trim() : result;\n",
+        "replaced": "        return null;\n",
+        "patch_type": "replace",
+        "next_line_no": 263
+    },
+    "16": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 436,
+        "to_line_no": 436,
+        "replaced_with": "        return findEnclosingAttribute(node, \"lang\", Namespace.XML_NAMESPACE);\n    }\n\n    protected static String findEnclosingAttribute(Object n, String attrName, Namespace ns) {\n",
+        "replaced": "        Object n = node;\n",
+        "patch_type": "replace",
+        "next_line_no": 437
+    },
+    "17": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "from_line_no": 440,
+        "to_line_no": 441,
+        "replaced_with": "                String attr = e.getAttributeValue(attrName, ns);\n",
+        "replaced": "                String attr =\n                    e.getAttributeValue(\"lang\", Namespace.XML_NAMESPACE);\n",
+        "patch_type": "replace",
+        "next_line_no": 442
+    }
+}

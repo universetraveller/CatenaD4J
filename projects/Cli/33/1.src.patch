@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/cli/HelpFormatter.java",
+            "from_line_no": 730,
+            "to_line_no": 730,
+            "replaced_with": "        renderWrappedTextBlock(sb, width, nextLineTabStop, text);\n",
+            "replaced": "        renderWrappedText(sb, width, nextLineTabStop, text);\n",
+            "patch_type": "replace",
+            "next_line_no": 731
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/cli/HelpFormatter.java",
+            "replaced_with": "    private StringBuffer renderWrappedTextBlock(StringBuffer sb, int width, int nextLineTabStop, String text) {\n        try {\n            BufferedReader in = new BufferedReader(new StringReader(text));\n            String line;\n            boolean firstLine = true;\n            while ((line = in.readLine()) != null) {\n                if (!firstLine) {\n                    sb.append(getNewLine());\n                } else {\n                    firstLine = false;\n                }\n                renderWrappedText(sb, width, nextLineTabStop, line);\n            }\n        } catch (IOException e) {\n",
+            "patch_type": "insert",
+            "next_line_no": 900
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/cli/HelpFormatter.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 901
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/cli/HelpFormatter.java",
+            "replaced_with": "        return sb;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 902
+        }
+    ]
+}

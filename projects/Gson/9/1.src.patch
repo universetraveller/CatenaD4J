@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java",
+            "replaced_with": "  @Override public JsonWriter value(Boolean value) throws IOException {\n    if (value == null) {\n      return nullValue();\n    }\n    put(new JsonPrimitive(value));\n    return this;\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 162
+        },
+        {
+            "file_name": "gson/src/main/java/com/google/gson/stream/JsonWriter.java",
+            "replaced_with": "  public JsonWriter value(Boolean value) throws IOException {\n    if (value == null) {\n      return nullValue();\n    }\n    writeDeferredName();\n    beforeValue();\n    out.write(value ? \"true\" : \"false\");\n    return this;\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 476
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/TreeBuilder.java",
+            "replaced_with": "        if (currentToken == start) { // don't recycle an in-use token\n            return process(new Token.StartTag().name(name));\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 61
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/TreeBuilder.java",
+            "replaced_with": "        if (currentToken == start) { // don't recycle an in-use token\n            return process(new Token.StartTag().nameAttr(name, attrs));\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 65
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/parser/TreeBuilder.java",
+            "replaced_with": "        if (currentToken == end) { // don't recycle an in-use token\n            return process(new Token.EndTag().name(name));\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 71
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::testInvalidTableContents"
+        ],
+        "org.jsoup.parser.HtmlParserTest::testInvalidTableContents": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(854, 5)\nEnd: Pos(865, 5)\nSource: /tmp/c4j/Jsoup_44/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: testInvalidTableContents\nChilds: [StatementAssertion<Begin: Pos(862, 9), End: Pos(862, 57)>,\nStatementAssertion<Begin: Pos(863, 9), End: Pos(863, 60)>,\nStatementAssertion<Begin: Pos(864, 9), End: Pos(864, 85)>,\n]",
+            "source": "/tmp/c4j/Jsoup_44/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "testInvalidTableContents",
+            "begin": "Pos(854, 5)",
+            "end": "Pos(865, 5)",
+            "begin_line_no": 854,
+            "end_line_no": 865,
+            "child": [
+                "Begin: Pos(862, 9)\nEnd: Pos(862, 57)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(863, 9)\nEnd: Pos(863, 60)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(864, 9)\nEnd: Pos(864, 85)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testInvalidTableContents$catena_0() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        assertTrue(\"Comment not found\", endOfEmail > -1);                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Search text not found\", guarantee > -1);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testInvalidTableContents$catena_1() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        try{ assertTrue(\"Comment not found\", endOfEmail > -1);                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Search text not found\", guarantee > -1);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testInvalidTableContents$catena_2() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        try{ assertTrue(\"Comment not found\", endOfEmail > -1);                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Search text not found\", guarantee > -1);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testInvalidTableContents$catena_0() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        assertTrue(\"Comment not found\", endOfEmail > -1);                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Search text not found\", guarantee > -1);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testInvalidTableContents$catena_1() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        try{ assertTrue(\"Comment not found\", endOfEmail > -1);                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Search text not found\", guarantee > -1);                                                /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test\n    public void testInvalidTableContents$catena_2() throws IOException {\n        File in = ParseTest.getFile(\"/htmltests/table-invalid-elements.html\");\n        Document doc = Jsoup.parse(in, \"UTF-8\");\n        doc.outputSettings().prettyPrint(true);\n        String rendered = doc.toString();\n        int endOfEmail = rendered.indexOf(\"Comment\");\n        int guarantee = rendered.indexOf(\"Why am I here?\");\n        try{ assertTrue(\"Comment not found\", endOfEmail > -1);                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(\"Search text not found\", guarantee > -1);                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Search text did not come after comment\", guarantee > endOfEmail);                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "001": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::testInvalidTableContents$catena_2"
+        ]
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/ClassNameIdResolver.java",
+            "replaced_with": "            if (!t.isTypeOrSubTypeOf(_baseType.getRawClass())) {\n",
+            "patch_type": "insert",
+            "next_line_no": 58
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/ClassNameIdResolver.java",
+            "replaced_with": "                throw new IllegalArgumentException(String.format(\n                        \"Class %s not subtype of %s\", t.getRawClass().getName(), _baseType));\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 59
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735"
+        ],
+        "com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/jsontype/GenericTypeId1735Test.java",
+            "Instance": "Begin: Pos(53, 12)\nEnd: Pos(63, 5)\nSource: /tmp/c4j/JacksonDatabind_88/src/test/java//com/fasterxml/jackson/databind/jsontype/GenericTypeId1735Test.java\nName: testNestedTypeCheck1735\nChilds: [StatementAssertion<Begin: Pos(59, 13), End: Pos(59, 36)>,\nStatementAssertion<Begin: Pos(61, 13), End: Pos(61, 49)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_88/src/test/java//com/fasterxml/jackson/databind/jsontype/GenericTypeId1735Test.java",
+            "name": "testNestedTypeCheck1735",
+            "begin": "Pos(53, 12)",
+            "end": "Pos(63, 5)",
+            "begin_line_no": 53,
+            "end_line_no": 63,
+            "child": [
+                "Begin: Pos(59, 13)\nEnd: Pos(59, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(61, 13)\nEnd: Pos(61, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNestedTypeCheck1735$catena_0() throws Exception\n    {\n        try {\n            MAPPER.readValue(aposToQuotes(\n\"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}\"),\n                    Wrapper1735.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"not subtype of\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testNestedTypeCheck1735$catena_1() throws Exception\n    {\n        try {\n            MAPPER.readValue(aposToQuotes(\n\"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}\"),\n                    Wrapper1735.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            verifyException(e, \"not subtype of\");                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testNestedTypeCheck1735$catena_0() throws Exception\n    {\n        try {\n            MAPPER.readValue(aposToQuotes(\n\"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}\"),\n                    Wrapper1735.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"not subtype of\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testNestedTypeCheck1735$catena_1() throws Exception\n    {\n        try {\n            MAPPER.readValue(aposToQuotes(\n\"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}\"),\n                    Wrapper1735.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            verifyException(e, \"not subtype of\");                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735$catena_1"
+        ]
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java",
+            "replaced_with": "        if (t == JsonToken.VALUE_NULL) {\n            return null;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 228
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java",
+            "replaced_with": "        if (t == JsonToken.VALUE_NULL) {\n            _properties[index].getProperty().set(bean, null);\n            return;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 251
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull"
+        ],
+        "com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/jsontype/TestExternalId.java",
+            "Instance": "Begin: Pos(283, 12)\nEnd: Pos(294, 5)\nSource: /tmp/c4j/JacksonDatabind_29/src/test/java//com/fasterxml/jackson/databind/jsontype/TestExternalId.java\nName: testExternalTypeIdWithNull\nChilds: [StatementAssertion<Begin: Pos(290, 9), End: Pos(290, 25)>,\nStatementAssertion<Begin: Pos(293, 9), End: Pos(293, 25)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_29/src/test/java//com/fasterxml/jackson/databind/jsontype/TestExternalId.java",
+            "name": "testExternalTypeIdWithNull",
+            "begin": "Pos(283, 12)",
+            "end": "Pos(294, 5)",
+            "begin_line_no": 283,
+            "end_line_no": 294,
+            "child": [
+                "Begin: Pos(290, 9)\nEnd: Pos(290, 25)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(293, 9)\nEnd: Pos(293, 25)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testExternalTypeIdWithNull$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.registerSubtypes(ValueBean.class);\n        ExternalBean b;\n        b = mapper.readValue(aposToQuotes(\"{'bean':null,'extType':'vbean'}\"),\n                ExternalBean.class);\n        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        b = mapper.readValue(aposToQuotes(\"{'extType':'vbean','bean':null}\"),\n                ExternalBean.class);\n        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testExternalTypeIdWithNull$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.registerSubtypes(ValueBean.class);\n        ExternalBean b;\n        b = mapper.readValue(aposToQuotes(\"{'bean':null,'extType':'vbean'}\"),\n                ExternalBean.class);\n        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        b = mapper.readValue(aposToQuotes(\"{'extType':'vbean','bean':null}\"),\n                ExternalBean.class);\n        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testExternalTypeIdWithNull$catena_0() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.registerSubtypes(ValueBean.class);\n        ExternalBean b;\n        b = mapper.readValue(aposToQuotes(\"{'bean':null,'extType':'vbean'}\"),\n                ExternalBean.class);\n        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n        b = mapper.readValue(aposToQuotes(\"{'extType':'vbean','bean':null}\"),\n                ExternalBean.class);\n        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testExternalTypeIdWithNull$catena_1() throws Exception\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.registerSubtypes(ValueBean.class);\n        ExternalBean b;\n        b = mapper.readValue(aposToQuotes(\"{'bean':null,'extType':'vbean'}\"),\n                ExternalBean.class);\n        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n        b = mapper.readValue(aposToQuotes(\"{'extType':'vbean','bean':null}\"),\n                ExternalBean.class);\n        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_1",
+            "com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_0"
+        ]
+    }
+}

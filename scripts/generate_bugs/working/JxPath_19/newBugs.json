@@ -1,0 +1,89 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+            "from_line_no": 560,
+            "to_line_no": 562,
+            "replaced_with": "            if (n.getNodeType() == Node.ELEMENT_NODE && matchesQName(n)) {\n",
+            "replaced": "            if (n.getNodeType() == Node.ELEMENT_NODE) {\n                String nm = n.getNodeName();\n                if (nm.equals(node.getNodeName())) {\n",
+            "patch_type": "replace",
+            "next_line_no": 563
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+            "from_line_no": 564,
+            "to_line_no": 564,
+            "replaced": "                }\n",
+            "patch_type": "delete",
+            "next_line_no": 565
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+            "replaced_with": "    private boolean matchesQName(Node n) {\n        if (getNamespaceURI() != null) {\n            return equalStrings(getNamespaceURI(n), getNamespaceURI())\n                    && equalStrings(node.getLocalName(), n.getLocalName());\n        }\n        return equalStrings(node.getNodeName(), n.getNodeName());\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 571
+        },
+        "3": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+            "from_line_no": 696,
+            "to_line_no": 697,
+            "replaced_with": "                if (child instanceof Element && matchesQName(((Element) child))) {\n",
+            "replaced": "                if ((child instanceof Element)\n                    && ((Element) child).getQualifiedName().equals(name)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 698
+        },
+        "4": {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+            "replaced_with": "    private boolean matchesQName(Element element) {\n        if (getNamespaceURI() != null) {\n            String ns = getNamespaceURI(element);\n            if (ns == null || !ns.equals(getNamespaceURI())) {\n                return false;\n            }\n        }\n        return element.getName().equals(((Element) node).getName());\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 709
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateJDOM",
+            "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateDOM"
+        ],
+        "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateJDOM": {
+            "file_path": "src/test/org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java",
+            "Instance": "Begin: Pos(57, 12)\nEnd: Pos(59, 5)\nSource: /tmp/c4j/JxPath_19/src/test//org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java\nName: testIterateJDOM\nChilds: [StatementAssertion<Begin: Pos(58, 9), End: Pos(58, 52)>,\n]",
+            "source": "/tmp/c4j/JxPath_19/src/test//org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java",
+            "name": "testIterateJDOM",
+            "begin": "Pos(57, 12)",
+            "end": "Pos(59, 5)",
+            "begin_line_no": 57,
+            "end_line_no": 59,
+            "child": [
+                "Begin: Pos(58, 9)\nEnd: Pos(58, 52)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateDOM": {
+            "file_path": "src/test/org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java",
+            "Instance": "Begin: Pos(53, 12)\nEnd: Pos(55, 5)\nSource: /tmp/c4j/JxPath_19/src/test//org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java\nName: testIterateDOM\nChilds: [StatementAssertion<Begin: Pos(54, 9), End: Pos(54, 51)>,\n]",
+            "source": "/tmp/c4j/JxPath_19/src/test//org/apache/commons/jxpath/ri/model/AliasedNamespaceIterationTest.java",
+            "name": "testIterateDOM",
+            "begin": "Pos(53, 12)",
+            "end": "Pos(55, 5)",
+            "begin_line_no": 53,
+            "end_line_no": 55,
+            "child": [
+                "Begin: Pos(54, 9)\nEnd: Pos(54, 51)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "00011": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateJDOM"
+        ]
+    },
+    "11100": {
+        "failing_tests": [
+            "org.apache.commons.jxpath.ri.model.AliasedNamespaceIterationTest::testIterateDOM"
+        ]
+    }
+}

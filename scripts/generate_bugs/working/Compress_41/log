@@ -1,0 +1,334 @@
+---
+Begin generate bug_id: Compress_41
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_41
+Try to checkout Compress_41
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java
+trying to replace old failing tests
+edit: replace from 242 range 41 at src/test/java/org/apache/commons/compress/archivers/ZipTestCase.java
+to
+    @Test
+    public void testListAllFilesWithNestedArchive$catena_0() throws Exception {
+        final File input = getFile("OSX_ArchiveWithNestedArchive.zip");
+
+        final List<String> results = new ArrayList<>();
+        final List<ZipException> expectedExceptions = new ArrayList<>();
+
+        final InputStream is = new FileInputStream(input);
+        ArchiveInputStream in = null;
+        try {
+            in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
+
+            ZipArchiveEntry entry = null;
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
+                results.add(entry.getName());
+
+                final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
+                try {
+                    ZipArchiveEntry nestedEntry = null;
+                    while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
+                        results.add(nestedEntry.getName());
+                    }
+                } catch (ZipException ex) {
+                    // expected since you cannot create a final ArchiveInputStream from test3.xml
+                    expectedExceptions.add(ex);
+                }
+                // nested stream must not be closed here
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        is.close();
+
+        assertTrue(results.contains("NestedArchiv.zip"));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(results.contains("test1.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test2.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test3.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, expectedExceptions.size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testListAllFilesWithNestedArchive$catena_1() throws Exception {
+        final File input = getFile("OSX_ArchiveWithNestedArchive.zip");
+
+        final List<String> results = new ArrayList<>();
+        final List<ZipException> expectedExceptions = new ArrayList<>();
+
+        final InputStream is = new FileInputStream(input);
+        ArchiveInputStream in = null;
+        try {
+            in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
+
+            ZipArchiveEntry entry = null;
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
+                results.add(entry.getName());
+
+                final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
+                try {
+                    ZipArchiveEntry nestedEntry = null;
+                    while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
+                        results.add(nestedEntry.getName());
+                    }
+                } catch (ZipException ex) {
+                    // expected since you cannot create a final ArchiveInputStream from test3.xml
+                    expectedExceptions.add(ex);
+                }
+                // nested stream must not be closed here
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        is.close();
+
+        try{ assertTrue(results.contains("NestedArchiv.zip"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(results.contains("test1.xml"));                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(results.contains("test2.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test3.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, expectedExceptions.size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testListAllFilesWithNestedArchive$catena_2() throws Exception {
+        final File input = getFile("OSX_ArchiveWithNestedArchive.zip");
+
+        final List<String> results = new ArrayList<>();
+        final List<ZipException> expectedExceptions = new ArrayList<>();
+
+        final InputStream is = new FileInputStream(input);
+        ArchiveInputStream in = null;
+        try {
+            in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
+
+            ZipArchiveEntry entry = null;
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
+                results.add(entry.getName());
+
+                final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
+                try {
+                    ZipArchiveEntry nestedEntry = null;
+                    while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
+                        results.add(nestedEntry.getName());
+                    }
+                } catch (ZipException ex) {
+                    // expected since you cannot create a final ArchiveInputStream from test3.xml
+                    expectedExceptions.add(ex);
+                }
+                // nested stream must not be closed here
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        is.close();
+
+        try{ assertTrue(results.contains("NestedArchiv.zip"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test1.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(results.contains("test2.xml"));                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(results.contains("test3.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, expectedExceptions.size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testListAllFilesWithNestedArchive$catena_3() throws Exception {
+        final File input = getFile("OSX_ArchiveWithNestedArchive.zip");
+
+        final List<String> results = new ArrayList<>();
+        final List<ZipException> expectedExceptions = new ArrayList<>();
+
+        final InputStream is = new FileInputStream(input);
+        ArchiveInputStream in = null;
+        try {
+            in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
+
+            ZipArchiveEntry entry = null;
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
+                results.add(entry.getName());
+
+                final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
+                try {
+                    ZipArchiveEntry nestedEntry = null;
+                    while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
+                        results.add(nestedEntry.getName());
+                    }
+                } catch (ZipException ex) {
+                    // expected since you cannot create a final ArchiveInputStream from test3.xml
+                    expectedExceptions.add(ex);
+                }
+                // nested stream must not be closed here
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        is.close();
+
+        try{ assertTrue(results.contains("NestedArchiv.zip"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test1.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test2.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(results.contains("test3.xml"));                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, expectedExceptions.size());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testListAllFilesWithNestedArchive$catena_4() throws Exception {
+        final File input = getFile("OSX_ArchiveWithNestedArchive.zip");
+
+        final List<String> results = new ArrayList<>();
+        final List<ZipException> expectedExceptions = new ArrayList<>();
+
+        final InputStream is = new FileInputStream(input);
+        ArchiveInputStream in = null;
+        try {
+            in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
+
+            ZipArchiveEntry entry = null;
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
+                results.add(entry.getName());
+
+                final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
+                try {
+                    ZipArchiveEntry nestedEntry = null;
+                    while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
+                        results.add(nestedEntry.getName());
+                    }
+                } catch (ZipException ex) {
+                    // expected since you cannot create a final ArchiveInputStream from test3.xml
+                    expectedExceptions.add(ex);
+                }
+                // nested stream must not be closed here
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        is.close();
+
+        try{ assertTrue(results.contains("NestedArchiv.zip"));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test1.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test2.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(results.contains("test3.xml"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, expectedExceptions.size());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 235 range 15 at src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java
+to
+    @Test
+    public void testThrowOnInvalidEntry$catena_0() throws Exception {
+        final InputStream is = ZipArchiveInputStreamTest.class
+                .getResourceAsStream("/invalid-zip.zip");
+        final ZipArchiveInputStream zip = new ZipArchiveInputStream(is);
+
+        try {
+            zip.getNextZipEntry();
+            fail("IOException expected");                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (ZipException expected) {
+            try{ assertTrue(expected.getMessage().contains("Unexpected record signature"));                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        } finally {
+            zip.close();
+        }
+    }     @Test
+    public void testThrowOnInvalidEntry$catena_1() throws Exception {
+        final InputStream is = ZipArchiveInputStreamTest.class
+                .getResourceAsStream("/invalid-zip.zip");
+        final ZipArchiveInputStream zip = new ZipArchiveInputStream(is);
+
+        try {
+            zip.getNextZipEntry();
+            try{ fail("IOException expected");                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ZipException expected) {
+            assertTrue(expected.getMessage().contains("Unexpected record signature"));                      /***** ORIGINAL ASSERTION IS HERE *****/
+        } finally {
+            zip.close();
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/ZipTestCase.java
+trace file: src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStreamTest.java
+new test num: 7
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 32.62 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testThrowOnInvalidEntry$catena_0
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 249 with range 1 to
+            throw new ZipException(String.format("Unexpected record signature: 0X%X", sig.getValue()));
+
+patches are written to file
+running tests...
+used time: Finished in 27.84 seconds
+Failing tests: 34
+	org.apache.commons.compress.ArchiveReadTest::testArchive[file=FreeBSD.zip]
+	org.apache.commons.compress.ArchiveReadTest::testArchive[file=SunOS.zip]
+	org.apache.commons.compress.archivers.JarTestCase::testJarUnarchiveAll
+	org.apache.commons.compress.archivers.ZipTestCase::testSkipsPK00Prefix
+	org.apache.commons.compress.archivers.ZipTestCase::testZipArchiveCreationInMemory
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_0
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_1
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_2
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_3
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4
+	org.apache.commons.compress.archivers.ZipTestCase::testSkipEntryWithUnsupportedCompressionMethod
+	org.apache.commons.compress.archivers.ZipTestCase::testZipArchiveCreation
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::shouldConsumeArchiveCompletely
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::properUseOfInflater
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testWithBytesAfterData
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::shouldReadNestedZip
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteFromAndAddToZipUsingZipFilePerform
+	org.apache.commons.compress.changes.ChangeSetTestCase::testAddToEmptyArchive
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteAddToOneFileArchive
+	org.apache.commons.compress.changes.ChangeSetTestCase::testAddAllreadyExistingWithReplaceFalse
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeletePlusAddSame
+	org.apache.commons.compress.changes.ChangeSetTestCase::testAddAllreadyExistingWithReplaceTrue
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteFromJar
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteFromZip
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteFromAndAddToJar
+	org.apache.commons.compress.changes.ChangeSetTestCase::testDeleteFromAndAddToZip
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarArchiveCreationTempFile
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarUnarchiveAllInMemory
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarArchiveCreationInMemory
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarUnarchiveAllFileArgInMemory
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarUnarchiveAllFileTempFile
+	org.apache.commons.compress.compressors.Pack200TestCase::testJarUnarchiveAllTempFile
+	org.apache.commons.compress.compressors.pack200.Pack200UtilsTest::testNormalizeInPlace
+	org.apache.commons.compress.compressors.pack200.Pack200UtilsTest::testNormalize
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 247 with             return null;
+
+patches are written to file
+running tests...
+used time: Finished in 35.79 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4
+	org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testThrowOnInvalidEntry$catena_0
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 247 with             return null;
+
+try to fix hunk: 1
+replace from 249 with range 1 to
+            throw new ZipException(String.format("Unexpected record signature: 0X%X", sig.getValue()));
+
+patches are written to file
+running tests...
+used time: Finished in 34.39 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4', 'org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testThrowOnInvalidEntry$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.ZipTestCase::testListAllFilesWithNestedArchive$catena_4
+org.apache.commons.compress.archivers.zip.ZipArchiveInputStreamTest::testThrowOnInvalidEntry$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

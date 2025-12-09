@@ -1,0 +1,118 @@
+{
+    "original": {
+        "num_of_hunks": 8,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/cli/DefaultParser.java",
+            "from_line_no": 150,
+            "to_line_no": 150,
+            "replaced_with": "            Option opt = options.getOption(option);\n            if (opt == null)\n",
+            "replaced": "            if (!cmd.hasOption(option))\n",
+            "patch_type": "replace",
+            "next_line_no": 151
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/cli/DefaultParser.java",
+            "from_line_no": 152,
+            "to_line_no": 152,
+            "replaced_with": "                throw new UnrecognizedOptionException(\"Default option wasn't defined\", option);\n            }\n",
+            "replaced": "                Option opt = options.getOption(option);\n",
+            "patch_type": "replace",
+            "next_line_no": 153
+        },
+        "2": {
+            "file_name": "src/main/java/org/apache/commons/cli/DefaultParser.java",
+            "replaced_with": "            OptionGroup group = options.getOptionGroup(opt);\n            boolean selected = group != null && group.getSelected() != null;\n",
+            "patch_type": "insert",
+            "next_line_no": 155
+        },
+        "3": {
+            "file_name": "src/main/java/org/apache/commons/cli/DefaultParser.java",
+            "replaced_with": "            if (!cmd.hasOption(option) && !selected)\n            {\n",
+            "patch_type": "insert",
+            "next_line_no": 156
+        },
+        "4": {
+            "file_name": "src/main/java/org/apache/commons/cli/Parser.java",
+            "from_line_no": 263,
+            "to_line_no": 263,
+            "replaced_with": "            Option opt = options.getOption(option);\n            if (opt == null)\n",
+            "replaced": "            if (!cmd.hasOption(option))\n",
+            "patch_type": "replace",
+            "next_line_no": 264
+        },
+        "5": {
+            "file_name": "src/main/java/org/apache/commons/cli/Parser.java",
+            "from_line_no": 265,
+            "to_line_no": 265,
+            "replaced_with": "                throw new UnrecognizedOptionException(\"Default option wasn't defined\", option);\n            }\n",
+            "replaced": "                Option opt = getOptions().getOption(option);\n",
+            "patch_type": "replace",
+            "next_line_no": 266
+        },
+        "6": {
+            "file_name": "src/main/java/org/apache/commons/cli/Parser.java",
+            "replaced_with": "            OptionGroup group = options.getOptionGroup(opt);\n            boolean selected = group != null && group.getSelected() != null;\n",
+            "patch_type": "insert",
+            "next_line_no": 268
+        },
+        "7": {
+            "file_name": "src/main/java/org/apache/commons/cli/Parser.java",
+            "replaced_with": "            if (!cmd.hasOption(option) && !selected)\n            {\n",
+            "patch_type": "insert",
+            "next_line_no": 269
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli.BasicParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.BasicParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.DefaultParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.DefaultParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.GnuParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.GnuParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroupWithProperties",
+            "org.apache.commons.cli.PosixParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.PosixParserTest::testPropertyOptionUnexpected"
+        ],
+        "org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroupWithProperties": {
+            "file_path": "src/test/java/org/apache/commons/cli/OptionGroupTest.java",
+            "Instance": "Begin: Pos(191, 12)\nEnd: Pos(201, 5)\nSource: /tmp/c4j/Cli_30/src/test/java//org/apache/commons/cli/OptionGroupTest.java\nName: testTwoOptionsFromGroupWithProperties\nChilds: [StatementAssertion<Begin: Pos(199, 9), End: Pos(199, 38)>,\nStatementAssertion<Begin: Pos(200, 9), End: Pos(200, 39)>,\n]",
+            "source": "/tmp/c4j/Cli_30/src/test/java//org/apache/commons/cli/OptionGroupTest.java",
+            "name": "testTwoOptionsFromGroupWithProperties",
+            "begin": "Pos(191, 12)",
+            "end": "Pos(201, 5)",
+            "begin_line_no": 191,
+            "end_line_no": 201,
+            "child": [
+                "Begin: Pos(199, 9)\nEnd: Pos(199, 38)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(200, 9)\nEnd: Pos(200, 39)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testTwoOptionsFromGroupWithProperties$catena_0() throws Exception\n    {\n        String[] args = new String[] { \"-f\" };\n        \n        Properties properties = new Properties();\n        properties.put(\"d\", \"true\");\n        \n        CommandLine cl = parser.parse( _options, args, properties);\n        assertTrue(cl.hasOption(\"f\"));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(!cl.hasOption(\"d\"));                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testTwoOptionsFromGroupWithProperties$catena_1() throws Exception\n    {\n        String[] args = new String[] { \"-f\" };\n        \n        Properties properties = new Properties();\n        properties.put(\"d\", \"true\");\n        \n        CommandLine cl = parser.parse( _options, args, properties);\n        try{ assertTrue(cl.hasOption(\"f\"));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(!cl.hasOption(\"d\"));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testTwoOptionsFromGroupWithProperties$catena_0() throws Exception\n    {\n        String[] args = new String[] { \"-f\" };\n        \n        Properties properties = new Properties();\n        properties.put(\"d\", \"true\");\n        \n        CommandLine cl = parser.parse( _options, args, properties);\n        assertTrue(cl.hasOption(\"f\"));                                                                      /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(!cl.hasOption(\"d\"));                                                                }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testTwoOptionsFromGroupWithProperties$catena_1() throws Exception\n    {\n        String[] args = new String[] { \"-f\" };\n        \n        Properties properties = new Properties();\n        properties.put(\"d\", \"true\");\n        \n        CommandLine cl = parser.parse( _options, args, properties);\n        try{ assertTrue(cl.hasOption(\"f\"));                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(!cl.hasOption(\"d\"));                                                                     /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "00001111": {
+        "failing_tests": [
+            "org.apache.commons.cli.BasicParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.PosixParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.PosixParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroupWithProperties$catena_0",
+            "org.apache.commons.cli.GnuParserTest::testPropertyOptionGroup",
+            "org.apache.commons.cli.GnuParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroupWithProperties$catena_1",
+            "org.apache.commons.cli.BasicParserTest::testPropertyOptionGroup"
+        ]
+    },
+    "11110000": {
+        "failing_tests": [
+            "org.apache.commons.cli.DefaultParserTest::testPropertyOptionUnexpected",
+            "org.apache.commons.cli.DefaultParserTest::testPropertyOptionGroup"
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "        byteData.mark();\n        byte[] bom = new byte[4];\n        byteData.get(bom);\n        byteData.rewind();\n        if (bom[0] == 0x00 && bom[1] == 0x00 && bom[2] == (byte) 0xFE && bom[3] == (byte) 0xFF || // BE\n                bom[0] == (byte) 0xFF && bom[1] == (byte) 0xFE && bom[2] == 0x00 && bom[3] == 0x00) { // LE\n            charsetName = \"UTF-32\"; // and I hope it's on your system\n        } else if (bom[0] == (byte) 0xFE && bom[1] == (byte) 0xFF || // BE\n                bom[0] == (byte) 0xFF && bom[1] == (byte) 0xFE) {\n            charsetName = \"UTF-16\"; // in all Javas\n        } else if (bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF) {\n            charsetName = \"UTF-8\"; // in all Javas\n            byteData.position(3); // 16 and 32 decoders consume the BOM to determine be/le; utf-8 should be consumed\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 93
+        }
+    ]
+}

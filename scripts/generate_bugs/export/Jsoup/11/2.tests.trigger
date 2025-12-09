@@ -1,0 +1,9 @@
+org.jsoup.select.SelectorTest::notParas$catena_0
+org.jsoup.select.SelectorTest::notParas$catena_4
+org.jsoup.select.SelectorTest::notClass$catena_0
+org.jsoup.select.SelectorTest::notParas$catena_2
+org.jsoup.select.SelectorTest::notParas$catena_1
+org.jsoup.select.SelectorTest::notAll$catena_1
+org.jsoup.select.SelectorTest::notClass$catena_1
+org.jsoup.select.SelectorTest::notAll$catena_2
+org.jsoup.select.SelectorTest::notAll$catena_0

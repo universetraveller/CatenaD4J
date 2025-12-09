@@ -1,0 +1,5 @@
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_0
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnly935
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_1
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_3
+com.fasterxml.jackson.databind.deser.ReadOrWriteOnlyTest::testReadOnlyAndWriteOnly$catena_2

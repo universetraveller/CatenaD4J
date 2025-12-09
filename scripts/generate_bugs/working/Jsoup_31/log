@@ -1,0 +1,174 @@
+---
+Begin generate bug_id: Jsoup_31
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_31
+Try to checkout Jsoup_31
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/Token.java
+trace file: src/main/java/org/jsoup/parser/TokeniserState.java
+trace file: src/main/java/org/jsoup/parser/XmlTreeBuilder.java
+trying to replace old failing tests
+edit: replace from 97 range 8 at src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+to
+    @Test public void handlesXmlDeclarationAsDeclaration$catena_0() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        assertEquals("<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("#declaration", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("#comment", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesXmlDeclarationAsDeclaration$catena_1() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        try{ assertEquals("<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("#declaration", doc.childNode(0).nodeName());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("#comment", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesXmlDeclarationAsDeclaration$catena_2() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        try{ assertEquals("<?xml encoding='UTF-8' ?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("#declaration", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("#comment", doc.childNode(2).nodeName());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+new test num: 3
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 13.25 seconds
+Failing tests: 2
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 67 with         if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)
+            String data = comment.getData();
+            if (data.length() > 1 && (data.startsWith("!") || data.startsWith("?"))) {
+                String declaration = data.substring(1);
+                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith("!"));
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 1094 with             comment.bogus = true;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 171 with         boolean bogus = false;
+
+patches are written to file
+running tests...
+used time: Finished in 14.24 seconds
+Failing tests: 2
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 1094 with             comment.bogus = true;
+
+try to fix hunk: 2
+insert before 67 with         if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)
+            String data = comment.getData();
+            if (data.length() > 1 && (data.startsWith("!") || data.startsWith("?"))) {
+                String declaration = data.substring(1);
+                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith("!"));
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 171 with         boolean bogus = false;
+
+try to fix hunk: 2
+insert before 67 with         if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)
+            String data = comment.getData();
+            if (data.length() > 1 && (data.startsWith("!") || data.startsWith("?"))) {
+                String declaration = data.substring(1);
+                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith("!"));
+            }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 13.43 seconds
+Failing tests: 2
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 171 with         boolean bogus = false;
+
+try to fix hunk: 1
+insert before 1094 with             comment.bogus = true;
+
+patches are written to file
+running tests...
+used time: Finished in 13.60 seconds
+Failing tests: 2
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 171 with         boolean bogus = false;
+
+try to fix hunk: 1
+insert before 1094 with             comment.bogus = true;
+
+try to fix hunk: 2
+insert before 67 with         if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)
+            String data = comment.getData();
+            if (data.length() > 1 && (data.startsWith("!") || data.startsWith("?"))) {
+                String declaration = data.substring(1);
+                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith("!"));
+            }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 14.15 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0', 'org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1']
+select new bug
+Pattern: 111
+new failing tests:
+org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1
+Save found bug
+processed: 111
+Find 1 new bugs

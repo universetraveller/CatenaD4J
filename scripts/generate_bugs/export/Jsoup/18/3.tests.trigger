@@ -1,0 +1,1 @@
+org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1

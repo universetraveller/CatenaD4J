@@ -1,0 +1,225 @@
+---
+Begin generate bug_id: JacksonDatabind_56
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_56
+Try to checkout JacksonDatabind_56
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+trying to replace old failing tests
+edit: replace from 142 range 13 at src/test/java/com/fasterxml/jackson/databind/deser/TestJdkTypes.java
+to
+    public void testLocale$catena_0() throws IOException
+    {
+        assertEquals(new Locale("en"), MAPPER.readValue(quote("en"), Locale.class));                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Locale("es", "ES"), MAPPER.readValue(quote("es_ES"), Locale.class));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("FI", "fi", "savo"),
+                MAPPER.readValue(quote("fi_FI_savo"), Locale.class));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("en", "US"),
+                MAPPER.readValue(quote("en-US"), Locale.class));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // [databind#1123]
+        Locale loc = MAPPER.readValue(quote(""), Locale.class);
+        try{ assertSame(Locale.ROOT, loc);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocale$catena_1() throws IOException
+    {
+        try{ assertEquals(new Locale("en"), MAPPER.readValue(quote("en"), Locale.class));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Locale("es", "ES"), MAPPER.readValue(quote("es_ES"), Locale.class));               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Locale("FI", "fi", "savo"),
+                MAPPER.readValue(quote("fi_FI_savo"), Locale.class));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("en", "US"),
+                MAPPER.readValue(quote("en-US"), Locale.class));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // [databind#1123]
+        Locale loc = MAPPER.readValue(quote(""), Locale.class);
+        try{ assertSame(Locale.ROOT, loc);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocale$catena_2() throws IOException
+    {
+        try{ assertEquals(new Locale("en"), MAPPER.readValue(quote("en"), Locale.class));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("es", "ES"), MAPPER.readValue(quote("es_ES"), Locale.class));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Locale("FI", "fi", "savo"),
+                MAPPER.readValue(quote("fi_FI_savo"), Locale.class));                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(new Locale("en", "US"),
+                MAPPER.readValue(quote("en-US"), Locale.class));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // [databind#1123]
+        Locale loc = MAPPER.readValue(quote(""), Locale.class);
+        try{ assertSame(Locale.ROOT, loc);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocale$catena_3() throws IOException
+    {
+        try{ assertEquals(new Locale("en"), MAPPER.readValue(quote("en"), Locale.class));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("es", "ES"), MAPPER.readValue(quote("es_ES"), Locale.class));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("FI", "fi", "savo"),
+                MAPPER.readValue(quote("fi_FI_savo"), Locale.class));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(new Locale("en", "US"),
+                MAPPER.readValue(quote("en-US"), Locale.class));                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // [databind#1123]
+        Locale loc = MAPPER.readValue(quote(""), Locale.class);
+        try{ assertSame(Locale.ROOT, loc);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testLocale$catena_4() throws IOException
+    {
+        try{ assertEquals(new Locale("en"), MAPPER.readValue(quote("en"), Locale.class));                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("es", "ES"), MAPPER.readValue(quote("es_ES"), Locale.class));          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("FI", "fi", "savo"),
+                MAPPER.readValue(quote("fi_FI_savo"), Locale.class));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(new Locale("en", "US"),
+                MAPPER.readValue(quote("en-US"), Locale.class));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // [databind#1123]
+        Locale loc = MAPPER.readValue(quote(""), Locale.class);
+        assertSame(Locale.ROOT, loc);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestJdkTypes.java
+new test num: 5
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 176.98 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.deser.TestJdkTypes::testLocale$catena_3
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 292 with         protected int _firstHyphenOrUnderscore(String str)
+        {
+            for (int i = 0, end = str.length(); i < end; ++i) {
+                char c = str.charAt(i);
+                if (c == '_' || c == '-') {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 164.82 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.deser.TestJdkTypes::testLocale$catena_3
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 237 with range 1 to
+                    ix = _firstHyphenOrUnderscore(value);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 231 with range 1 to
+                    int ix = _firstHyphenOrUnderscore(value);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 237 with range 1 to
+                    ix = _firstHyphenOrUnderscore(value);
+
+try to fix hunk: 2
+insert before 292 with         protected int _firstHyphenOrUnderscore(String str)
+        {
+            for (int i = 0, end = str.length(); i < end; ++i) {
+                char c = str.charAt(i);
+                if (c == '_' || c == '-') {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 177.67 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.deser.TestJdkTypes::testLocale$catena_3
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 231 with range 1 to
+                    int ix = _firstHyphenOrUnderscore(value);
+
+try to fix hunk: 2
+insert before 292 with         protected int _firstHyphenOrUnderscore(String str)
+        {
+            for (int i = 0, end = str.length(); i < end; ++i) {
+                char c = str.charAt(i);
+                if (c == '_' || c == '-') {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 205.61 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.TestJdkTypes::testLocale$catena_3']
+select new bug
+Pattern: 101
+new failing tests:
+com.fasterxml.jackson.databind.deser.TestJdkTypes::testLocale$catena_3
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 231 with range 1 to
+                    int ix = _firstHyphenOrUnderscore(value);
+
+try to fix hunk: 1
+replace from 237 with range 1 to
+                    ix = _firstHyphenOrUnderscore(value);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 231 with range 1 to
+                    int ix = _firstHyphenOrUnderscore(value);
+
+try to fix hunk: 1
+replace from 237 with range 1 to
+                    ix = _firstHyphenOrUnderscore(value);
+
+try to fix hunk: 2
+insert before 292 with         protected int _firstHyphenOrUnderscore(String str)
+        {
+            for (int i = 0, end = str.length(); i < end; ++i) {
+                char c = str.charAt(i);
+                if (c == '_' || c == '-') {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 160.07 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

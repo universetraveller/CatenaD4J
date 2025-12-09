@@ -1,0 +1,261 @@
+---
+Begin generate bug_id: JacksonDatabind_43
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_43
+Try to checkout JacksonDatabind_43
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
+trying to replace old failing tests
+edit: replace from 314 range 7 at src/test/java/com/fasterxml/jackson/databind/objectid/TestObjectIdSerialization.java
+to
+    public void testNullStringPropertyId$catena_0() throws Exception
+    {
+        IdentifiableStringId value = MAPPER.readValue
+                (aposToQuotes("{'value':3, 'next':null, 'id':null}"), IdentifiableStringId.class);
+        assertNotNull(value);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, value.value);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }         public void testNullStringPropertyId$catena_1() throws Exception
+    {
+        IdentifiableStringId value = MAPPER.readValue
+                (aposToQuotes("{'value':3, 'next':null, 'id':null}"), IdentifiableStringId.class);
+        try{ assertNotNull(value);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, value.value);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }    
+trace file: src/test/java/com/fasterxml/jackson/databind/objectid/TestObjectIdSerialization.java
+new test num: 2
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 205.89 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+delete from 78 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+patches are written to file
+running tests...
+used time: Finished in 193.42 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+patches are written to file
+running tests...
+used time: Finished in 191.06 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0
+	com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1
+Can independently fix []
+Could not fix independently
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 1
+delete from 78 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 7 with import com.fasterxml.jackson.core.JsonToken;
+
+try to fix hunk: 1
+delete from 78 with range 1
+try to fix hunk: 2
+replace from 85 with range 1 to
+        if (p.hasToken(JsonToken.VALUE_NULL)) {
+
+try to fix hunk: 3
+insert before 88 with         Object id = _valueDeserializer.deserialize(p, ctxt);
+
+patches are written to file
+running tests...
+used time: Finished in 187.28 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0', 'com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1']
+select new bug
+Pattern: 1111
+new failing tests:
+com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0
+com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1
+Save found bug
+processed: 1111
+Find 1 new bugs

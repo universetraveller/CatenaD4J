@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        if (jp.getCurrentTokenId() != JsonToken.FIELD_NAME.id()) {\n",
+            "patch_type": "insert",
+            "next_line_no": 405
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "            return this;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 406
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        JsonToken t;\n        writeStartObject();\n        do {\n            copyCurrentStructure(jp);\n        } while ((t = jp.nextToken()) == JsonToken.FIELD_NAME);\n        if (t != JsonToken.END_OBJECT) {\n            throw ctxt.mappingException(\"Expected END_OBJECT after copying contents of a JsonParser into TokenBuffer, got \"+t);\n        }\n        writeEndObject();\n",
+            "patch_type": "insert",
+            "next_line_no": 410
+        }
+    ]
+}

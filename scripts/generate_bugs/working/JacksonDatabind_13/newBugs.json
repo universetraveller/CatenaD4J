@@ -1,0 +1,50 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java",
+            "replaced_with": "        if (id == null) {\n            return null;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 87
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java",
+            "replaced_with": "        if (id == null) {\n            return null;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 92
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId"
+        ],
+        "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/struct/TestObjectIdDeserialization.java",
+            "Instance": "Begin: Pos(460, 12)\nEnd: Pos(468, 5)\nSource: /tmp/c4j/JacksonDatabind_13/src/test/java//com/fasterxml/jackson/databind/struct/TestObjectIdDeserialization.java\nName: testNullObjectId\nChilds: [StatementAssertion<Begin: Pos(466, 9), End: Pos(466, 29)>,\nStatementAssertion<Begin: Pos(467, 9), End: Pos(467, 37)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_13/src/test/java//com/fasterxml/jackson/databind/struct/TestObjectIdDeserialization.java",
+            "name": "testNullObjectId",
+            "begin": "Pos(460, 12)",
+            "end": "Pos(468, 5)",
+            "begin_line_no": 460,
+            "end_line_no": 468,
+            "child": [
+                "Begin: Pos(466, 9)\nEnd: Pos(466, 29)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(467, 9)\nEnd: Pos(467, 37)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNullObjectId$catena_0() throws Exception\n    {\n        // Ok, so missing Object Id is ok, but so is null.\n        \n        Identifiable value = MAPPER.readValue\n                (aposToQuotes(\"{'value':3, 'next':null, 'id':null}\"), Identifiable.class);\n        assertNotNull(value);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(3, value.value);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNullObjectId$catena_1() throws Exception\n    {\n        // Ok, so missing Object Id is ok, but so is null.\n        \n        Identifiable value = MAPPER.readValue\n                (aposToQuotes(\"{'value':3, 'next':null, 'id':null}\"), Identifiable.class);\n        try{ assertNotNull(value);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(3, value.value);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testNullObjectId$catena_0() throws Exception\n    {\n        // Ok, so missing Object Id is ok, but so is null.\n        \n        Identifiable value = MAPPER.readValue\n                (aposToQuotes(\"{'value':3, 'next':null, 'id':null}\"), Identifiable.class);\n        assertNotNull(value);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(3, value.value);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testNullObjectId$catena_1() throws Exception\n    {\n        // Ok, so missing Object Id is ok, but so is null.\n        \n        Identifiable value = MAPPER.readValue\n                (aposToQuotes(\"{'value':3, 'next':null, 'id':null}\"), Identifiable.class);\n        try{ assertNotNull(value);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(3, value.value);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_1",
+            "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_0"
+        ]
+    }
+}

@@ -1,0 +1,82 @@
+---
+Begin generate bug_id: JacksonDatabind_89
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_89
+Try to checkout JacksonDatabind_89
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
+trying to replace old failing tests
+edit: replace from 59 range 5 at src/test/java/com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java
+to
+    public void testJDKTypes1737$catena_0() throws Exception
+    {
+        _testTypes1737(java.util.logging.FileHandler.class);                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testTypes1737(java.rmi.server.UnicastRemoteObject.class);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testJDKTypes1737$catena_1() throws Exception
+    {
+        try{ _testTypes1737(java.util.logging.FileHandler.class);                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testTypes1737(java.rmi.server.UnicastRemoteObject.class);                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 231.25 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_0
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 66 with         s.add("org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor");
+        s.add("org.springframework.beans.factory.config.PropertyPathFactoryBean");
+        s.add("com.mchange.v2.c3p0.JndiRefForwardingDataSource");
+        s.add("com.mchange.v2.c3p0.WrapperConnectionPoolDataSource");
+
+patches are written to file
+running tests...
+used time: Finished in 227.93 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_0
+	com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_1
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 65 with         s.add("java.util.logging.FileHandler");
+        s.add("java.rmi.server.UnicastRemoteObject");
+
+patches are written to file
+running tests...
+used time: Finished in 223.52 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_0
+com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testJDKTypes1737$catena_1
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 65 with         s.add("java.util.logging.FileHandler");
+        s.add("java.rmi.server.UnicastRemoteObject");
+
+try to fix hunk: 1
+insert before 66 with         s.add("org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor");
+        s.add("org.springframework.beans.factory.config.PropertyPathFactoryBean");
+        s.add("com.mchange.v2.c3p0.JndiRefForwardingDataSource");
+        s.add("com.mchange.v2.c3p0.WrapperConnectionPoolDataSource");
+
+patches are written to file
+running tests...
+used time: Finished in 229.97 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,5100 @@
+---
+Begin generate bug_id: JacksonCore_17
+num_of_hunks: 7
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_17
+Try to checkout JacksonCore_17
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 0000000
+patches are written to file
+running tests...
+used time: Finished in 27.07 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+processed: 0000000
+pattern: 0000001
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.59 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+No new failing tests but only 1 hunk
+processed: 0000001
+pattern: 0000010
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.80 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+No new failing tests but only 1 hunk
+processed: 0000010
+pattern: 0000100
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100
+pattern: 0001000
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000
+pattern: 0010000
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000
+pattern: 0100000
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+patches are written to file
+running tests...
+used time: Finished in 25.24 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+No new failing tests but only 1 hunk
+processed: 0100000
+pattern: 1000000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000
+pattern: 0000011
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.14 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0000011
+pattern: 0000101
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000101
+pattern: 0000110
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 25.07 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0000110
+pattern: 0001001
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001
+pattern: 0001010
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010
+pattern: 0001100
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100
+pattern: 0010001
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001
+pattern: 0010010
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010
+pattern: 0010100
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100
+pattern: 0011000
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000
+pattern: 0100001
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 24.75 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0100001
+pattern: 0100010
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 25.33 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0100010
+pattern: 0100100
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100
+pattern: 0101000
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 25.18 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0101000
+pattern: 0110000
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+patches are written to file
+running tests...
+used time: Finished in 26.93 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0110000
+pattern: 1000001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001
+pattern: 1000010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.39 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1000010
+pattern: 1000100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100
+pattern: 1001000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000
+pattern: 1010000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000
+pattern: 1100000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000
+pattern: 0000111
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.75 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0000111
+pattern: 0001011
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001011
+pattern: 0001101
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001101
+pattern: 0001110
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001110
+pattern: 0010011
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010011
+pattern: 0010101
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010101
+pattern: 0010110
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010110
+pattern: 0011001
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011001
+pattern: 0011010
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011010
+pattern: 0011100
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011100
+pattern: 0100011
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 24.88 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0100011
+pattern: 0100101
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100101
+pattern: 0100110
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 25.48 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0100110
+pattern: 0101001
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 24.07 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0101001
+pattern: 0101010
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 26.47 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0101010
+pattern: 0101100
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101100
+pattern: 0110001
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.24 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0110001
+pattern: 0110010
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 25.49 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0110010
+pattern: 0110100
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110100
+pattern: 0111000
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 23.25 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0111000
+pattern: 1000011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.91 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1000011
+pattern: 1000101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000101
+pattern: 1000110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 24.61 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1000110
+pattern: 1001001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001001
+pattern: 1001010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001010
+pattern: 1001100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001100
+pattern: 1010001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010001
+pattern: 1010010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010010
+pattern: 1010100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010100
+pattern: 1011000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011000
+pattern: 1100001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100001
+pattern: 1100010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 26.83 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1100010
+pattern: 1100100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100100
+pattern: 1101000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101000
+pattern: 1110000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110000
+pattern: 0001111
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001111
+pattern: 0010111
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010111
+pattern: 0011011
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011011
+pattern: 0011101
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011101
+pattern: 0011110
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011110
+pattern: 0100111
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 28.07 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0100111
+pattern: 0101011
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 26.61 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0101011
+pattern: 0101101
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101101
+pattern: 0101110
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 26.53 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString']
+select new bug
+Pattern: 0101110
+new failing tests:
+com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Save found bug
+processed: 0101110
+pattern: 0110011
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 26.60 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 0110011
+pattern: 0110101
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110101
+pattern: 0110110
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.08 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0110110
+pattern: 0111001
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.44 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0111001
+pattern: 0111010
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 28.57 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0111010
+pattern: 0111100
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111100
+pattern: 1000111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.71 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1000111
+pattern: 1001011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001011
+pattern: 1001101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001101
+pattern: 1001110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001110
+pattern: 1010011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010011
+pattern: 1010101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010101
+pattern: 1010110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010110
+pattern: 1011001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011001
+pattern: 1011010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011010
+pattern: 1011100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011100
+pattern: 1100011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.14 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1100011
+pattern: 1100101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100101
+pattern: 1100110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 28.18 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1100110
+pattern: 1101001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101001
+pattern: 1101010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.56 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString']
+select new bug
+Pattern: 1101010
+new failing tests:
+com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Save found bug
+processed: 1101010
+pattern: 1101100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101100
+pattern: 1110001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110001
+pattern: 1110010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 28.25 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1110010
+pattern: 1110100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110100
+pattern: 1111000
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111000
+pattern: 0011111
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011111
+pattern: 0101111
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.94 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 0101111
+pattern: 0110111
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.70 seconds
+Failing tests: 11
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0110111
+pattern: 0111011
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 26.05 seconds
+Failing tests: 10
+	com.fasterxml.jackson.core.json.TestJsonGeneratorFeatures::testBigDecimalAsPlainString
+	com.fasterxml.jackson.core.json.TestUtf8Generator::testSurrogatesWithRaw
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testObjectCount
+	com.fasterxml.jackson.core.main.TestPrettyPrinter::testArrayCount
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testSystemLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testUnixLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWindowsLinefeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithLineFeed
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testWithIndent
+	com.fasterxml.jackson.core.util.TestDefaultPrettyPrinter::testTabIndent
+Includes new failing tests, set to unusable
+processed: 0111011
+pattern: 0111101
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111101
+pattern: 0111110
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 28.20 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 0111110
+pattern: 1001111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001111
+pattern: 1010111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010111
+pattern: 1011011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011011
+pattern: 1011101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011101
+pattern: 1011110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011110
+pattern: 1100111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.64 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1100111
+pattern: 1101011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 25.93 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1101011
+pattern: 1101101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101101
+pattern: 1101110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 28.05 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1101110
+pattern: 1110011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.02 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1110011
+pattern: 1110101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110101
+pattern: 1110110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.81 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1110110
+pattern: 1111001
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111001
+pattern: 1111010
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 26.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111010
+pattern: 1111100
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111100
+pattern: 0111111
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 29.95 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 0111111
+pattern: 1011111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011111
+pattern: 1101111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 30.42 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1101111
+pattern: 1110111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 28.35 seconds
+Failing tests: 1
+	com.fasterxml.jackson.core.json.RawValueWithSurrogatesTest::testRawWithSurrogatesString
+Can independently fix []
+Could not fix independently
+processed: 1110111
+pattern: 1111011
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.02 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111011
+pattern: 1111101
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111101
+pattern: 1111110
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 27.98 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111110
+pattern: 1111111
+try to fix hunk: 0
+insert before 528 with         if (len <= buf.length) {
+            text.getChars(offset, offset+len, buf, 0);
+            _writeRawSegment(buf, 0, len);
+            return;
+        }
+
+try to fix hunk: 1
+insert before 532 with         final int maxChunk = (_outputEnd >> 2) + (_outputEnd >> 4); // == (1/4 + 1/16) == 5/16
+        final int maxBytes = maxChunk * 3;
+
+try to fix hunk: 2
+replace from 534 with range 1 to
+            int len2 = Math.min(maxChunk, len);
+
+try to fix hunk: 3
+replace from 536 with range 1 to
+            if ((_outputTail + maxBytes) > _outputEnd) {
+                _flushBuffer();
+            }
+
+try to fix hunk: 4
+insert before 539 with             if (len > 0) {
+                char ch = buf[len2-1];
+                if ((ch >= SURR1_FIRST) && (ch <= SURR1_LAST)) {
+                    --len2;
+                }
+            }
+            _writeRawSegment(buf, 0, len2);
+
+try to fix hunk: 5
+insert before 672 with     private void _writeRawSegment(char[] cbuf, int offset, int end) throws IOException
+    {
+        main_loop:
+        while (offset < end) {
+            inner_loop:
+            while (true) {
+                int ch = (int) cbuf[offset];
+                if (ch > 0x7F) {
+                    break inner_loop;
+                }
+                _outputBuffer[_outputTail++] = (byte) ch;
+                if (++offset >= end) {
+                    break main_loop;
+                }
+            }
+            char ch = cbuf[offset++];
+            if (ch < 0x800) { // 2-byte?
+                _outputBuffer[_outputTail++] = (byte) (0xc0 | (ch >> 6));
+                _outputBuffer[_outputTail++] = (byte) (0x80 | (ch & 0x3f));
+            } else {
+                offset = _outputRawMultiByteChar(ch, cbuf, offset, end);
+            }
+        }
+    }
+
+try to fix hunk: 6
+replace from 1887 with range 1 to
+                    _reportError(String.format(
+"Split surrogate on writeRaw() input (last character): first character 0x%4x", ch));
+
+patches are written to file
+running tests...
+used time: Finished in 27.81 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111111
+Find 2 new bugs

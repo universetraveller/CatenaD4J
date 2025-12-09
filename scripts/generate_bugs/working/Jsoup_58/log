@@ -1,0 +1,1013 @@
+---
+Begin generate bug_id: Jsoup_58
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_58
+Try to checkout Jsoup_58
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/Jsoup.java
+trace file: src/main/java/org/jsoup/parser/Parser.java
+trace file: src/main/java/org/jsoup/safety/Cleaner.java
+trying to replace old failing tests
+edit: replace from 145 range 21 at src/test/java/org/jsoup/safety/CleanerTest.java
+to
+    @Test public void testIsValidBodyHtml$catena_0() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_1() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_2() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_3() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_4() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_5() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_6() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_7() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_8() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidBodyHtml$catena_9() {
+        String ok = "<p>Test <b><a href='http://example.com/' rel='nofollow'>OK</a></b></p>";
+        String ok1 = "<p>Test <b><a href='http://example.com/'>OK</a></b></p>"; // missing enforced is OK because still needs run thru cleaner
+        String nok1 = "<p><script></script>Not <b>OK</b></p>";
+        String nok2 = "<p align=right>Test Not <b>OK</b></p>";
+        String nok3 = "<!-- comment --><p>Not OK</p>"; // comments and the like will be cleaned
+        String nok4 = "<html><head>Foo</head><body><b>OK</b></body></html>"; // not body html
+        String nok5 = "<p>Test <b><a href='http://example.com/' rel='nofollowme'>OK</a></b></p>";
+        String nok6 = "<p>Test <b><a href='http://example.com/'>OK</b></p>"; // missing close tag
+        String nok7 = "</div>What";
+        try{ assertTrue(Jsoup.isValid(ok, Whitelist.basic()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(Jsoup.isValid(ok1, Whitelist.basic()));                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok1, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok2, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok3, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok4, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok5, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(nok6, Whitelist.basic()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(Jsoup.isValid(ok, Whitelist.none()));                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(Jsoup.isValid(nok7, Whitelist.basic()));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 167 range 11 at src/test/java/org/jsoup/safety/CleanerTest.java
+to
+    @Test public void testIsValidDocument$catena_0() {
+        String ok = "<html><head></head><body><p>Hello</p></body><html>";
+        String nok = "<html><head><script>woops</script><title>Hello</title></head><body><p>Hello</p></body><html>";
+
+        Whitelist relaxed = Whitelist.relaxed();
+        Cleaner cleaner = new Cleaner(relaxed);
+        Document okDoc = Jsoup.parse(ok);
+        assertTrue(cleaner.isValid(okDoc));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(cleaner.isValid(Jsoup.parse(nok)));                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(new Cleaner(Whitelist.none()).isValid(okDoc));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidDocument$catena_1() {
+        String ok = "<html><head></head><body><p>Hello</p></body><html>";
+        String nok = "<html><head><script>woops</script><title>Hello</title></head><body><p>Hello</p></body><html>";
+
+        Whitelist relaxed = Whitelist.relaxed();
+        Cleaner cleaner = new Cleaner(relaxed);
+        Document okDoc = Jsoup.parse(ok);
+        try{ assertTrue(cleaner.isValid(okDoc));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(cleaner.isValid(Jsoup.parse(nok)));                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(new Cleaner(Whitelist.none()).isValid(okDoc));                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testIsValidDocument$catena_2() {
+        String ok = "<html><head></head><body><p>Hello</p></body><html>";
+        String nok = "<html><head><script>woops</script><title>Hello</title></head><body><p>Hello</p></body><html>";
+
+        Whitelist relaxed = Whitelist.relaxed();
+        Cleaner cleaner = new Cleaner(relaxed);
+        Document okDoc = Jsoup.parse(ok);
+        try{ assertTrue(cleaner.isValid(okDoc));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(cleaner.isValid(Jsoup.parse(nok)));                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(new Cleaner(Whitelist.none()).isValid(okDoc));                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/safety/CleanerTest.java
+new test num: 13
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 14.75 seconds
+Failing tests: 4
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+used time: Finished in 14.07 seconds
+Failing tests: 3
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+select new bug
+Pattern: 00010
+new failing tests:
+org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+Save found bug
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+patches are written to file
+running tests...
+used time: Finished in 16.11 seconds
+Failing tests: 4
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+No new failing tests but only 1 hunk
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 13.51 seconds
+Failing tests: 4
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+No new failing tests but only 1 hunk
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+used time: Finished in 15.38 seconds
+Failing tests: 3
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+used time: Finished in 14.55 seconds
+Failing tests: 3
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+patches are written to file
+running tests...
+used time: Finished in 13.59 seconds
+Failing tests: 4
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 12.80 seconds
+Failing tests: 4
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+used time: Finished in 14.97 seconds
+Failing tests: 3
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 16.38 seconds
+Failing tests: 3
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+	org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+Can independently fix []
+Could not fix independently
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 15.80 seconds
+Failing tests: 1
+	org.jsoup.safety.CleanerTest::testIsValidDocument$catena_1
+Can independently fix ['org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5', 'org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9', 'org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7']
+select new bug
+Pattern: 11101
+new failing tests:
+org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_5
+org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_9
+org.jsoup.safety.CleanerTest::testIsValidBodyHtml$catena_7
+Save found bug
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+replace from 250 with range 1 to
+        return new Cleaner(whitelist).isValidBodyHtml(bodyHtml);
+
+try to fix hunk: 1
+insert before 129 with     public static List<Node> parseFragment(String fragmentHtml, Element context, String baseUri, ParseErrorList errorList) {
+        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();
+        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, errorList, treeBuilder.defaultSettings());
+    }
+
+try to fix hunk: 2
+insert before 17 with import java.util.List;
+
+try to fix hunk: 3
+replace from 78 with range 1 to
+        return numDiscarded == 0
+            && dirtyDocument.head().childNodes().size() == 0; // because we only look at the body, but we start from a shell, make sure there's nothing in the head
+
+try to fix hunk: 4
+insert before 81 with     public boolean isValidBodyHtml(String bodyHtml) {
+        Document clean = Document.createShell("");
+        Document dirty = Document.createShell("");
+        ParseErrorList errorList = ParseErrorList.tracking(1);
+        List<Node> nodes = Parser.parseFragment(bodyHtml, dirty.body(), "", errorList);
+        dirty.body().insertChildren(0, nodes);
+        int numDiscarded = copySafeNodes(dirty.body(), clean.body());
+        return numDiscarded == 0 && errorList.size() == 0;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 16.47 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11111
+Find 2 new bugs

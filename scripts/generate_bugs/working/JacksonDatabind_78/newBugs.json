@@ -1,0 +1,87 @@
+{
+    "original": {
+        "num_of_hunks": 7,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected final static Set<String> DEFAULT_NO_DESER_CLASS_NAMES;\n    static {\n        Set<String> s = new HashSet<>();\n",
+            "patch_type": "insert",
+            "next_line_no": 48
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        s.add(\"org.apache.commons.collections.functors.InvokerTransformer\");\n        s.add(\"org.apache.commons.collections.functors.InstantiateTransformer\");\n        s.add(\"org.apache.commons.collections4.functors.InvokerTransformer\");\n        s.add(\"org.apache.commons.collections4.functors.InstantiateTransformer\");\n        s.add(\"org.codehaus.groovy.runtime.ConvertedClosure\");\n        s.add(\"org.codehaus.groovy.runtime.MethodClosure\");\n        s.add(\"org.springframework.beans.factory.ObjectFactory\");\n        s.add(\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\");\n        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 50
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;\n",
+            "patch_type": "insert",
+            "next_line_no": 56
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        checkIllegalTypes(ctxt, type, beanDesc);\n",
+            "patch_type": "insert",
+            "next_line_no": 156
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,\n            BeanDescription beanDesc)\n        throws JsonMappingException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 878
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        String full = type.getRawClass().getName();\n",
+            "patch_type": "insert",
+            "next_line_no": 880
+        },
+        "6": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        if (_cfgIllegalClassNames.contains(full)) {\n            ctxt.reportBadTypeDefinition(beanDesc,\n                    \"Illegal type (%s) to deserialize: prevented for security reasons\", full);\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 881
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599"
+        ],
+        "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java",
+            "Instance": "Begin: Pos(16, 12)\nEnd: Pos(39, 5)\nSource: /tmp/c4j/JacksonDatabind_78/src/test/java//com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java\nName: testIssue1599\nChilds: [StatementAssertion<Begin: Pos(33, 13), End: Pos(33, 36)>,\nStatementAssertion<Begin: Pos(35, 13), End: Pos(35, 47)>,\nStatementAssertion<Begin: Pos(36, 13), End: Pos(36, 49)>,\nStatementAssertion<Begin: Pos(37, 13), End: Pos(37, 65)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_78/src/test/java//com/fasterxml/jackson/databind/interop/IllegalTypesCheckTest.java",
+            "name": "testIssue1599",
+            "begin": "Pos(16, 12)",
+            "end": "Pos(39, 5)",
+            "begin_line_no": 16,
+            "end_line_no": 39,
+            "child": [
+                "Begin: Pos(33, 13)\nEnd: Pos(33, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(35, 13)\nEnd: Pos(35, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(36, 13)\nEnd: Pos(36, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(37, 13)\nEnd: Pos(37, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testIssue1599$catena_0() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testIssue1599$catena_1() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            verifyException(e, \"Illegal type\");                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testIssue1599$catena_2() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            verifyException(e, \"to deserialize\");                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testIssue1599$catena_3() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            verifyException(e, \"prevented for security reasons\");                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testIssue1599$catena_0() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testIssue1599$catena_1() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            verifyException(e, \"Illegal type\");                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "2": "    public void testIssue1599$catena_2() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            verifyException(e, \"to deserialize\");                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n            try{ verifyException(e, \"prevented for security reasons\");                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "3": "    public void testIssue1599$catena_3() throws Exception\n    {\n        final String JSON = aposToQuotes(\n \"{'id': 124,\\n\"\n+\" 'obj':[ 'com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl',\\n\"\n+\"  {\\n\"\n+\"    'transletBytecodes' : [ 'AAIAZQ==' ],\\n\"\n+\"    'transletName' : 'a.b',\\n\"\n+\"    'outputProperties' : { }\\n\"\n+\"  }\\n\"\n+\" ]\\n\"\n+\"}\"\n        );\n        ObjectMapper mapper = new ObjectMapper();\n        mapper.enableDefaultTyping();\n        try {\n            mapper.readValue(JSON, Bean1599.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            try{ verifyException(e, \"Illegal type\");                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n            try{ verifyException(e, \"to deserialize\");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}\n            verifyException(e, \"prevented for security reasons\");                                           /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "1111111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_2",
+            "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_3",
+            "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest::testIssue1599$catena_1"
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/UnixStat.java",
+            "replaced_with": "    int FILE_TYPE_FLAG = 0170000;\n",
+            "patch_type": "insert",
+            "next_line_no": 35
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java",
+            "from_line_no": 297,
+            "to_line_no": 297,
+            "replaced_with": "        return (getUnixMode() & UnixStat.FILE_TYPE_FLAG) == UnixStat.LINK_FLAG;\n",
+            "replaced": "        return (getUnixMode() & UnixStat.LINK_FLAG) == UnixStat.LINK_FLAG;\n",
+            "patch_type": "replace",
+            "next_line_no": 298
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::isUnixSymlinkIsFalseIfMoreThanOneFlagIsSet"
+        ],
+        "org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::isUnixSymlinkIsFalseIfMoreThanOneFlagIsSet": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntryTest.java",
+            "Instance": "Begin: Pos(276, 5)\nEnd: Pos(282, 5)\nSource: /tmp/c4j/Compress_42/src/test/java//org/apache/commons/compress/archivers/zip/ZipArchiveEntryTest.java\nName: isUnixSymlinkIsFalseIfMoreThanOneFlagIsSet\nChilds: [StatementAssertion<Begin: Pos(280, 13), End: Pos(280, 44)>,\n]",
+            "source": "/tmp/c4j/Compress_42/src/test/java//org/apache/commons/compress/archivers/zip/ZipArchiveEntryTest.java",
+            "name": "isUnixSymlinkIsFalseIfMoreThanOneFlagIsSet",
+            "begin": "Pos(276, 5)",
+            "end": "Pos(282, 5)",
+            "begin_line_no": 276,
+            "end_line_no": 282,
+            "child": [
+                "Begin: Pos(280, 13)\nEnd: Pos(280, 44)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.zip.ZipArchiveEntryTest::isUnixSymlinkIsFalseIfMoreThanOneFlagIsSet"
+        ]
+    }
+}

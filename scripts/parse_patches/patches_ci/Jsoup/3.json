@@ -1,0 +1,149 @@
+{
+    "num_of_hunks": 19,
+    "0": {
+        "file_name": "src/main/java/org/jsoup/nodes/Element.java",
+        "from_line_no": 270,
+        "to_line_no": 270,
+        "replaced_with": "        Element fragment = Parser.parseBodyFragmentRelaxed(html, baseUri()).body();\n",
+        "replaced": "        Element fragment = Parser.parseBodyFragment(html, baseUri).body();\n",
+        "patch_type": "replace",
+        "next_line_no": 271
+    },
+    "1": {
+        "file_name": "src/main/java/org/jsoup/nodes/Element.java",
+        "from_line_no": 287,
+        "to_line_no": 287,
+        "replaced_with": "        Element fragment = Parser.parseBodyFragmentRelaxed(html, baseUri()).body();\n",
+        "replaced": "        Element fragment = Parser.parseBodyFragment(html, baseUri).body();\n",
+        "patch_type": "replace",
+        "next_line_no": 288
+    },
+    "2": {
+        "file_name": "src/main/java/org/jsoup/nodes/Element.java",
+        "from_line_no": 314,
+        "to_line_no": 314,
+        "replaced_with": "        Element wrapBody = Parser.parseBodyFragmentRelaxed(html, baseUri).body();\n",
+        "replaced": "        Element wrapBody = Parser.parseBodyFragment(html, baseUri).body();\n",
+        "patch_type": "replace",
+        "next_line_no": 315
+    },
+    "3": {
+        "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+        "replaced_with": "    private boolean relaxed = false;\n",
+        "patch_type": "insert",
+        "next_line_no": 26
+    },
+    "4": {
+        "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+        "replaced_with": "    public static Document parseBodyFragmentRelaxed(String bodyHtml, String baseUri) {\n        Parser parser = new Parser(bodyHtml, baseUri, true);\n        parser.relaxed = true;\n        return parser.parse();\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 73
+    },
+    "5": {
+        "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+        "from_line_no": 224,
+        "to_line_no": 224,
+        "replaced_with": "        if (!validAncestor && !relaxed) {\n",
+        "replaced": "        if (!validAncestor) {\n",
+        "patch_type": "replace",
+        "next_line_no": 225
+    },
+    "6": {
+        "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+        "replaced_with": "        if (childTag.requiresSpecificParent())\n            return stack.getLast().tag().isValidParent(childTag);\n",
+        "patch_type": "insert",
+        "next_line_no": 253
+    },
+    "7": {
+        "file_name": "src/main/java/org/jsoup/parser/Parser.java",
+        "from_line_no": 258,
+        "to_line_no": 258,
+        "replaced_with": "            if (parent2.isValidAncestor(childTag)) {\n",
+        "replaced": "            if (parent2.isValidParent(childTag)) {\n",
+        "patch_type": "replace",
+        "next_line_no": 259
+    },
+    "8": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "    private Tag parent; // if not null, elements must be a direct child of parent\n",
+        "patch_type": "insert",
+        "next_line_no": 28
+    },
+    "9": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "        if (this.requiresSpecificParent() && this.getImplicitParent().equals(child))\n            return false;\n",
+        "patch_type": "insert",
+        "next_line_no": 99
+    },
+    "10": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "    boolean requiresSpecificParent() {\n        return this.parent != null;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 155
+    },
+    "11": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "        return this.equals(child.parent);\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 157
+    },
+    "12": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "    boolean isValidAncestor(Tag child) {\n",
+        "patch_type": "insert",
+        "next_line_no": 158,
+        "is_extra_hunk": true
+    },
+    "13": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "from_line_no": 224,
+        "to_line_no": 225,
+        "replaced_with": "        createBlock(\"FRAME\").setParent(\"FRAMESET\").setEmpty();\n        createBlock(\"NOFRAMES\").setParent(\"FRAMESET\").setContainDataOnly();\n",
+        "replaced": "        createBlock(\"FRAME\").setAncestor(\"FRAMESET\").setEmpty();\n        createBlock(\"NOFRAMES\").setAncestor(\"FRAMESET\").setContainDataOnly();\n",
+        "patch_type": "replace",
+        "next_line_no": 226
+    },
+    "14": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "from_line_no": 288,
+        "to_line_no": 289,
+        "replaced_with": "        createInline(\"OPTGROUP\").setParent(\"SELECT\"); //  only contain option\n        createInline(\"OPTION\").setParent(\"SELECT\").setContainDataOnly();\n",
+        "replaced": "        createInline(\"OPTGROUP\").setAncestor(\"SELECT\");\n        createInline(\"OPTION\").setAncestor(\"SELECT\").setContainDataOnly();\n",
+        "patch_type": "replace",
+        "next_line_no": 290
+    },
+    "15": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "from_line_no": 295,
+        "to_line_no": 295,
+        "replaced_with": "        createInline(\"PARAM\").setParent(\"OBJECT\").setEmpty();\n",
+        "replaced": "        createInline(\"PARAM\").setAncestor(\"OBJECT\").setEmpty();\n",
+        "patch_type": "replace",
+        "next_line_no": 296
+    },
+    "16": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "from_line_no": 300,
+        "to_line_no": 301,
+        "replaced_with": "        createInline(\"DT\").setParent(\"DL\").setOptionalClosing(); // only within DL.\n        createInline(\"DD\").setParent(\"DL\").setOptionalClosing(); // only within DL.\n",
+        "replaced": "        createInline(\"DT\").setAncestor(\"DL\").setOptionalClosing();\n        createInline(\"DD\").setAncestor(\"DL\").setOptionalClosing();\n",
+        "patch_type": "replace",
+        "next_line_no": 302
+    },
+    "17": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "from_line_no": 307,
+        "to_line_no": 315,
+        "replaced_with": "        createBlock(\"CAPTION\").setParent(\"TABLE\");\n        createBlock(\"THEAD\").setParent(\"TABLE\").setOptionalClosing(); // just TR\n        createBlock(\"TFOOT\").setParent(\"TABLE\").setOptionalClosing(); // just TR\n        createBlock(\"TBODY\").setParent(\"TABLE\").setOptionalClosing(); // optional / implicit open too. just TR\n        createBlock(\"COLGROUP\").setParent(\"TABLE\").setOptionalClosing(); // just COL\n        createBlock(\"COL\").setParent(\"COLGROUP\").setEmpty();\n        createBlock(\"TR\").setParent(\"TABLE\").setOptionalClosing(); // just TH, TD\n        createBlock(\"TH\").setParent(\"TR\").setOptionalClosing();\n        createBlock(\"TD\").setParent(\"TR\").setOptionalClosing();\n",
+        "replaced": "        createBlock(\"CAPTION\").setAncestor(\"TABLE\");\n        createBlock(\"THEAD\").setAncestor(\"TABLE\").setOptionalClosing();\n        createBlock(\"TFOOT\").setAncestor(\"TABLE\").setOptionalClosing();\n        createBlock(\"TBODY\").setAncestor(\"TABLE\").setOptionalClosing();\n        createBlock(\"COLGROUP\").setAncestor(\"TABLE\").setOptionalClosing();\n        createBlock(\"COL\").setAncestor(\"COLGROUP\").setEmpty();\n        createBlock(\"TR\").setAncestor(\"TABLE\").setOptionalClosing();\n        createBlock(\"TH\").setAncestor(\"TR\").setOptionalClosing();\n        createBlock(\"TD\").setAncestor(\"TR\").setOptionalClosing();\n",
+        "patch_type": "replace",
+        "next_line_no": 316
+    },
+    "18": {
+        "file_name": "src/main/java/org/jsoup/parser/Tag.java",
+        "replaced_with": "    private Tag setParent(String tagName) {\n        parent = Tag.valueOf(tagName);\n        setAncestor(tagName);\n        return this;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 379
+    },
+    "num_of_hunks_ci": 18
+}

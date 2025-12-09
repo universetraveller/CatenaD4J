@@ -1,0 +1,55 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+            "replaced_with": "        QName rootName = _rootNameFromConfig();\n        if (rootName == null) {\n            rootName = ROOT_NAME_FOR_NULL;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 204
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+            "from_line_no": 205,
+            "to_line_no": 205,
+            "replaced_with": "            _initWithRootName((ToXmlGenerator) jgen, rootName);\n",
+            "replaced": "            _initWithRootName((ToXmlGenerator) jgen, ROOT_NAME_FOR_NULL);\n",
+            "patch_type": "replace",
+            "next_line_no": 206
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName"
+        ],
+        "com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName": {
+            "file_path": "src/test/java/com/fasterxml/jackson/dataformat/xml/misc/RootNameTest.java",
+            "Instance": "Begin: Pos(67, 12)\nEnd: Pos(82, 5)\nSource: /tmp/c4j/JacksonXml_4/src/test/java//com/fasterxml/jackson/dataformat/xml/misc/RootNameTest.java\nName: testDynamicRootName\nChilds: [StatementAssertion<Begin: Pos(74, 9), End: Pos(74, 59)>,\nStatementAssertion<Begin: Pos(77, 9), End: Pos(77, 50)>,\nStatementAssertion<Begin: Pos(81, 9), End: Pos(81, 37)>,\n]",
+            "source": "/tmp/c4j/JacksonXml_4/src/test/java//com/fasterxml/jackson/dataformat/xml/misc/RootNameTest.java",
+            "name": "testDynamicRootName",
+            "begin": "Pos(67, 12)",
+            "end": "Pos(82, 5)",
+            "begin_line_no": 67,
+            "end_line_no": 82,
+            "child": [
+                "Begin: Pos(74, 9)\nEnd: Pos(74, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(77, 9)\nEnd: Pos(77, 50)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(81, 9)\nEnd: Pos(81, 37)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testDynamicRootName$catena_0() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        xml = w.writeValueAsString(new StringBean(null));\n        try{ assertEquals(\"<rudy><text/></rudy>\", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        try{ assertEquals(\"<rudy/>\", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testDynamicRootName$catena_1() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        try{ assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        xml = w.writeValueAsString(new StringBean(null));\n        assertEquals(\"<rudy><text/></rudy>\", xml);                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        try{ assertEquals(\"<rudy/>\", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testDynamicRootName$catena_2() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        try{ assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        xml = w.writeValueAsString(new StringBean(null));\n        try{ assertEquals(\"<rudy><text/></rudy>\", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        assertEquals(\"<rudy/>\", xml);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testDynamicRootName$catena_0() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\n        xml = w.writeValueAsString(new StringBean(null));\n        try{ assertEquals(\"<rudy><text/></rudy>\", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        try{ assertEquals(\"<rudy/>\", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testDynamicRootName$catena_1() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        try{ assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        xml = w.writeValueAsString(new StringBean(null));\n        assertEquals(\"<rudy><text/></rudy>\", xml);                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        try{ assertEquals(\"<rudy/>\", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testDynamicRootName$catena_2() throws IOException\n    {\n        String xml;\n\n        ObjectWriter w = _xmlMapper.writer().withRootName(\"rudy\");\n\n        xml = w.writeValueAsString(new StringBean(\"foo\"));\n        try{ assertEquals(\"<rudy><text>foo</text></rudy>\", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        xml = w.writeValueAsString(new StringBean(null));\n        try{ assertEquals(\"<rudy><text/></rudy>\", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // and even with null will respect configured root name\n        xml = w.writeValueAsString(null);\n        assertEquals(\"<rudy/>\", xml);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName$catena_2"
+        ]
+    }
+}

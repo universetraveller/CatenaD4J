@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/ArchiveUtils.java",
+            "replaced_with": "    private static final int MAX_SANITIZED_NAME_LENGTH = 255;\n",
+            "patch_type": "insert",
+            "next_line_no": 31
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/utils/ArchiveUtils.java",
+            "from_line_no": 273,
+            "to_line_no": 273,
+            "replaced_with": "        final char[] cs = s.toCharArray();\n        final char[] chars = cs.length <= MAX_SANITIZED_NAME_LENGTH ? cs : Arrays.copyOf(cs, MAX_SANITIZED_NAME_LENGTH);\n        if (cs.length > MAX_SANITIZED_NAME_LENGTH) {\n            for (int i = MAX_SANITIZED_NAME_LENGTH - 3; i < MAX_SANITIZED_NAME_LENGTH; i++) {\n                chars[i] = '.';\n            }\n        }\n",
+            "replaced": "        final char[] chars = s.toCharArray();\n",
+            "patch_type": "replace",
+            "next_line_no": 274
+        }
+    ]
+}

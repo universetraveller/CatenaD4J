@@ -1,0 +1,58 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "import org.jsoup.parser.ParseSettings;\n",
+            "patch_type": "insert",
+            "next_line_no": 6
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "from_line_no": 118,
+            "to_line_no": 118,
+            "replaced_with": "    public Attributes add(String key, String value) {\n",
+            "replaced": "    private void add(String key, String value) {\n",
+            "patch_type": "replace",
+            "next_line_no": 119
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "        return this;\n",
+            "patch_type": "insert",
+            "next_line_no": 123
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "    public boolean isEmpty() {\n        return size == 0;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 239
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "    public int deduplicate(ParseSettings settings) {\n        if (isEmpty())\n            return 0;\n        boolean preserve = settings.preserveAttributeCase();\n        int dupes = 0;\n        OUTER: for (int i = 0; i < keys.length; i++) {\n            for (int j = i + 1; j < keys.length; j++) {\n                if (keys[j] == null)\n                    continue OUTER; // keys.length doesn't shrink when removing, so re-test\n                if ((preserve && keys[i].equals(keys[j])) || (!preserve && keys[i].equalsIgnoreCase(keys[j]))) {\n                    dupes++;\n                    remove(j);\n                    j--;\n                }\n            }\n        }\n        return dupes;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 397
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/ParseSettings.java",
+            "replaced_with": "    public boolean preserveAttributeCase() {\n        return preserveAttributeCase;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 38
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/Token.java",
+            "from_line_no": 116,
+            "to_line_no": 116,
+            "replaced_with": "                    attributes.add(pendingAttributeName, value);\n",
+            "replaced": "                    attributes.put(pendingAttributeName, value);\n",
+            "patch_type": "replace",
+            "next_line_no": 117
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "replaced_with": "        startTag.attributes.deduplicate(settings);\n",
+            "patch_type": "insert",
+            "next_line_no": 78
+        }
+    ]
+}

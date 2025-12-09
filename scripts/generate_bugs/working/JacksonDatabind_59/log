@@ -1,0 +1,1232 @@
+---
+Begin generate bug_id: JacksonDatabind_59
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_59
+Try to checkout JacksonDatabind_59
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/JavaType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+trying to replace old failing tests
+edit: replace from 119 range 13 at src/test/java/com/fasterxml/jackson/databind/jsontype/TypeRefinementForMapTest.java
+to
+    public void testMapKeyRefinement1384$catena_0() throws Exception
+    {
+        final String TEST_INSTANCE_SERIALIZED =
+                "{\"mapProperty\":[\"java.util.HashMap\",{\"Compound|Key\":\"Value\"}]}";
+        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);
+        assertEquals(1, testInstance.mapProperty.size());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        Object key = testInstance.mapProperty.keySet().iterator().next();
+        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        String testInstanceSerialized = mapper.writeValueAsString(testInstance);
+        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMapKeyRefinement1384$catena_1() throws Exception
+    {
+        final String TEST_INSTANCE_SERIALIZED =
+                "{\"mapProperty\":[\"java.util.HashMap\",{\"Compound|Key\":\"Value\"}]}";
+        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);
+        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object key = testInstance.mapProperty.keySet().iterator().next();
+        assertEquals(CompoundKey.class, key.getClass());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        String testInstanceSerialized = mapper.writeValueAsString(testInstance);
+        try{ assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMapKeyRefinement1384$catena_2() throws Exception
+    {
+        final String TEST_INSTANCE_SERIALIZED =
+                "{\"mapProperty\":[\"java.util.HashMap\",{\"Compound|Key\":\"Value\"}]}";
+        ObjectMapper mapper = new ObjectMapper().enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        TestClass testInstance = mapper.readValue(TEST_INSTANCE_SERIALIZED, TestClass.class);
+        try{ assertEquals(1, testInstance.mapProperty.size());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object key = testInstance.mapProperty.keySet().iterator().next();
+        try{ assertEquals(CompoundKey.class, key.getClass());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        String testInstanceSerialized = mapper.writeValueAsString(testInstance);
+        assertEquals(TEST_INSTANCE_SERIALIZED, testInstanceSerialized);                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TypeRefinementForMapTest.java
+new test num: 3
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 170.34 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 182.86 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+No new failing tests but only 1 hunk
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+used time: Finished in 152.50 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Can independently fix []
+Could not fix independently
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 171.81 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Can independently fix []
+Could not fix independently
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 173.50 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Can independently fix []
+Could not fix independently
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+used time: Finished in 188.09 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Can independently fix []
+Could not fix independently
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+used time: Finished in 187.90 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1', 'com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0', 'com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2']
+select new bug
+Pattern: 10111
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Save found bug
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 188.58 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_0
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_1
+	com.fasterxml.jackson.databind.jsontype.TypeRefinementForMapTest::testMapKeyRefinement1384$catena_2
+Can independently fix []
+Could not fix independently
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+insert before 140 with     public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = this;
+        Object h = src.getTypeHandler();
+        if (h != _typeHandler) {
+            type = type.withTypeHandler(h);
+        }
+        h = src.getValueHandler();
+        if (h != _valueHandler) {
+            type = type.withValueHandler(h);
+        }
+        return type;
+    }
+
+try to fix hunk: 1
+insert before 136 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _elementType.withHandlersFrom(srcCt);
+            if (ct != _elementType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 2
+insert before 148 with     @Override
+    public JavaType withHandlersFrom(JavaType src) {
+        JavaType type = super.withHandlersFrom(src);
+        JavaType srcKeyType = src.getKeyType();
+
+try to fix hunk: 3
+insert before 149 with         if (type instanceof MapLikeType) {
+            if (srcKeyType != null) {
+                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
+                if (ct != _keyType) {
+                    type = ((MapLikeType) type).withKeyType(ct);
+                }
+            }
+        }
+        JavaType srcCt = src.getContentType();
+        if (srcCt != null) {
+            JavaType ct = _valueType.withHandlersFrom(srcCt);
+            if (ct != _valueType) {
+                type = type.withContentType(ct);
+            }
+        }
+        return type;
+    }
+
+try to fix hunk: 4
+insert before 428 with         newType = newType.withHandlersFrom(baseType);
+
+patches are written to file
+running tests...
+used time: Finished in 190.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11111
+Find 1 new bugs

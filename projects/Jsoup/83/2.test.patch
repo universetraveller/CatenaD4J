@@ -1,0 +1,10 @@
+{
+    "org.jsoup.parser.HtmlParserTest::parsesQuiteRoughAttributes": {
+        "begin_line_no": 58,
+        "end_line_no": 70,
+        "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+        "to": [
+            "    @Test public void parsesQuiteRoughAttributes$catena_1() {\n        String html = \"<p =a>One<a <p>Something</p>Else\";\n        // this (used to; now gets cleaner) gets a <p> with attr '=a' and an <a tag with an attribue named '<p'; and then auto-recreated\n        Document doc = Jsoup.parse(html);\n\n        // NOTE: per spec this should be the test case. but impacts too many ppl\n        // assertEquals(\"<p =a>One<a <p>Something</a></p>\\n<a <p>Else</a>\", doc.body().html());\n\n        try{ assertEquals(\"<p =a>One<a></a></p><p><a>Something</a></p><a>Else</a>\", TextUtil.stripNewlines(doc.body().html()));    }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        doc = Jsoup.parse(\"<p .....>\");\n        assertEquals(\"<p .....></p>\", doc.body().html());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+        ]
+    }
+}

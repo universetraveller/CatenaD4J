@@ -1,0 +1,46 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected final static Set<String> DEFAULT_NO_DESER_CLASS_NAMES;\n    static {\n        Set<String> s = new HashSet<>();\n",
+            "patch_type": "insert",
+            "next_line_no": 48
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        s.add(\"org.apache.commons.collections.functors.InvokerTransformer\");\n        s.add(\"org.apache.commons.collections.functors.InstantiateTransformer\");\n        s.add(\"org.apache.commons.collections4.functors.InvokerTransformer\");\n        s.add(\"org.apache.commons.collections4.functors.InstantiateTransformer\");\n        s.add(\"org.codehaus.groovy.runtime.ConvertedClosure\");\n        s.add(\"org.codehaus.groovy.runtime.MethodClosure\");\n        s.add(\"org.springframework.beans.factory.ObjectFactory\");\n        s.add(\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\");\n        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 50
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;\n",
+            "patch_type": "insert",
+            "next_line_no": 56
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        checkIllegalTypes(ctxt, type, beanDesc);\n",
+            "patch_type": "insert",
+            "next_line_no": 156
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,\n            BeanDescription beanDesc)\n        throws JsonMappingException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 878
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        String full = type.getRawClass().getName();\n",
+            "patch_type": "insert",
+            "next_line_no": 880
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        if (_cfgIllegalClassNames.contains(full)) {\n            ctxt.reportBadTypeDefinition(beanDesc,\n                    \"Illegal type (%s) to deserialize: prevented for security reasons\", full);\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 881
+        }
+    ]
+}

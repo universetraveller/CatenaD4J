@@ -1,0 +1,2 @@
+com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_1
+com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization::testNullObjectId$catena_0

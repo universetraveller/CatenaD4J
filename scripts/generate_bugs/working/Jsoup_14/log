@@ -1,0 +1,186 @@
+---
+Begin generate bug_id: Jsoup_14
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_14
+Try to checkout Jsoup_14
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/Tokeniser.java
+trace file: src/main/java/org/jsoup/parser/TokeniserState.java
+trying to replace old failing tests
+edit: replace from 97 range 7 at src/test/java/org/jsoup/parser/ParserTest.java
+to
+    @Test public void parsesUnterminatedTextarea$catena_0() {
+        // don't parse right to end, but break on <p>
+        Document doc = Jsoup.parse("<body><p><textarea>one<p>two");
+        Element t = doc.select("textarea").first();
+        assertEquals("one", t.text());                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("two", doc.select("p").get(1).text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void parsesUnterminatedTextarea$catena_1() {
+        // don't parse right to end, but break on <p>
+        Document doc = Jsoup.parse("<body><p><textarea>one<p>two");
+        Element t = doc.select("textarea").first();
+        try{ assertEquals("one", t.text());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("two", doc.select("p").get(1).text());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 554 range 9 at src/test/java/org/jsoup/parser/ParserTest.java
+to
+    @Test public void handlesUnclosedTitle$catena_0() {
+        Document one = Jsoup.parse("<title>One <b>Two <b>Three</TITLE><p>Test</p>"); // has title, so <b> is plain text
+        assertEquals("One <b>Two <b>Three", one.title());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Test", one.select("p").first().text());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Document two = Jsoup.parse("<title>One<b>Two <p>Test</p>"); // no title, so <b> causes </title> breakout
+        try{ assertEquals("One", two.title());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("<b>Two <p>Test</p></b>", two.body().html());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesUnclosedTitle$catena_1() {
+        Document one = Jsoup.parse("<title>One <b>Two <b>Three</TITLE><p>Test</p>"); // has title, so <b> is plain text
+        try{ assertEquals("One <b>Two <b>Three", one.title());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Test", one.select("p").first().text());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+
+        Document two = Jsoup.parse("<title>One<b>Two <p>Test</p>"); // no title, so <b> causes </title> breakout
+        try{ assertEquals("One", two.title());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("<b>Two <p>Test</p></b>", two.body().html());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesUnclosedTitle$catena_2() {
+        Document one = Jsoup.parse("<title>One <b>Two <b>Three</TITLE><p>Test</p>"); // has title, so <b> is plain text
+        try{ assertEquals("One <b>Two <b>Three", one.title());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Test", one.select("p").first().text());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Document two = Jsoup.parse("<title>One<b>Two <p>Test</p>"); // no title, so <b> causes </title> breakout
+        assertEquals("One", two.title());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("<b>Two <p>Test</p></b>", two.body().html());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesUnclosedTitle$catena_3() {
+        Document one = Jsoup.parse("<title>One <b>Two <b>Three</TITLE><p>Test</p>"); // has title, so <b> is plain text
+        try{ assertEquals("One <b>Two <b>Three", one.title());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Test", one.select("p").first().text());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Document two = Jsoup.parse("<title>One<b>Two <p>Test</p>"); // no title, so <b> causes </title> breakout
+        try{ assertEquals("One", two.title());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("<b>Two <p>Test</p></b>", two.body().html());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/ParserTest.java
+new test num: 6
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 13.79 seconds
+Failing tests: 4
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_0
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_1
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_2
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_3
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 220 with                 t.tagPending = new Token.EndTag(t.appropriateEndTagName());
+                t.emitTagPending();
+                r.unconsume(); // undo "<"
+                t.transition(Data);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 218 with             } else if (r.matchesLetter() && !r.containsIgnoreCase("</" + t.appropriateEndTagName())) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 197 with     String appropriateEndTagName() {
+        return lastStartTag.tagName;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 12.43 seconds
+Failing tests: 4
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_0
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_1
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_2
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_3
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 218 with             } else if (r.matchesLetter() && !r.containsIgnoreCase("</" + t.appropriateEndTagName())) {
+
+try to fix hunk: 2
+insert before 220 with                 t.tagPending = new Token.EndTag(t.appropriateEndTagName());
+                t.emitTagPending();
+                r.unconsume(); // undo "<"
+                t.transition(Data);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 197 with     String appropriateEndTagName() {
+        return lastStartTag.tagName;
+    }
+
+try to fix hunk: 2
+insert before 220 with                 t.tagPending = new Token.EndTag(t.appropriateEndTagName());
+                t.emitTagPending();
+                r.unconsume(); // undo "<"
+                t.transition(Data);
+
+patches are written to file
+running tests...
+used time: Finished in 14.59 seconds
+Failing tests: 9
+	org.jsoup.nodes.DocumentTest::testClone
+	org.jsoup.nodes.ElementTest::testFormatHtml
+	org.jsoup.nodes.ElementTest::testContainerOutput
+	org.jsoup.parser.ParserTest::createsDocumentStructure
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_0
+	org.jsoup.parser.ParserTest::parsesUnterminatedTextarea$catena_1
+	org.jsoup.parser.ParserTest::handlesUnclosedTitleAtEof
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_2
+	org.jsoup.parser.ParserTest::handlesUnclosedTitle$catena_3
+Includes new failing tests, set to unusable
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 197 with     String appropriateEndTagName() {
+        return lastStartTag.tagName;
+    }
+
+try to fix hunk: 1
+insert before 218 with             } else if (r.matchesLetter() && !r.containsIgnoreCase("</" + t.appropriateEndTagName())) {
+
+patches are written to file
+running tests...
+EXCEPTION: tests time out
+EXCEPTION: Inside Exception tests time out
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 153, in taskSingleHunk
+    raise TimeoutError("tests time out")
+TimeoutError: tests time out
+

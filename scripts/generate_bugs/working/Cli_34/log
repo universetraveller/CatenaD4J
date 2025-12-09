@@ -1,0 +1,501 @@
+---
+Begin generate bug_id: Cli_34
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_34
+Try to checkout Cli_34
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/cli/Option.java
+trace file: src/main/java/org/apache/commons/cli/OptionBuilder.java
+trying to replace old failing tests
+edit: replace from 65 range 11 at src/test/java/org/apache/commons/cli/CommandLineTest.java
+to
+    public void testGetParsedOptionValue$catena_0() throws Exception {
+        Options options = new Options();
+        options.addOption(OptionBuilder.hasArg().withType(Number.class).create("i"));
+        options.addOption(OptionBuilder.hasArg().create("f"));
+        
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[] { "-i", "123", "-f", "foo" });
+        
+        assertEquals(123, ((Number) cmd.getParsedOptionValue("i")).intValue());                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("foo", cmd.getParsedOptionValue("f"));                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetParsedOptionValue$catena_1() throws Exception {
+        Options options = new Options();
+        options.addOption(OptionBuilder.hasArg().withType(Number.class).create("i"));
+        options.addOption(OptionBuilder.hasArg().create("f"));
+        
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[] { "-i", "123", "-f", "foo" });
+        
+        try{ assertEquals(123, ((Number) cmd.getParsedOptionValue("i")).intValue());                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("foo", cmd.getParsedOptionValue("f"));                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 42 range 30 at src/test/java/org/apache/commons/cli/OptionBuilderTest.java
+to
+    public void testTwoCompleteOptions$catena_0( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        assertEquals( "s", simple.getOpt() );                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_1( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "simple option", simple.getLongOpt() );                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_2( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "this is a simple option", simple.getDescription() );                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_3( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( simple.getType(), Float.class );                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_4( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( simple.hasArg() );                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_5( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( simple.isRequired() );                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_6( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( simple.hasArgs() );                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_7( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        assertEquals( "d", simple.getOpt() );                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_8( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "dimple option", simple.getLongOpt() );                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_9( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( "this is a dimple option", simple.getDescription() );                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_10( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals( String.class, simple.getType() );                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_11( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( simple.hasArg() );                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_12( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( !simple.isRequired() );                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue( !simple.hasArgs() );                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testTwoCompleteOptions$catena_13( ) {
+        Option simple = OptionBuilder.withLongOpt( "simple option")
+                                     .hasArg( )
+                                     .isRequired( )
+                                     .hasArgs( )
+                                     .withType( Float.class )
+                                     .withDescription( "this is a simple option" )
+                                     .create( 's' );
+
+        try{ assertEquals( "s", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "simple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a simple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( simple.getType(), Float.class );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.isRequired() );                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArgs() );                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        simple = OptionBuilder.withLongOpt( "dimple option")
+                              .hasArg( )
+                              .withDescription( "this is a dimple option" )
+                              .create( 'd' );
+
+        try{ assertEquals( "d", simple.getOpt() );                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "dimple option", simple.getLongOpt() );                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( "this is a dimple option", simple.getDescription() );                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals( String.class, simple.getType() );                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( simple.hasArg() );                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue( !simple.isRequired() );                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue( !simple.hasArgs() );                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/cli/OptionBuilderTest.java
+trace file: src/test/java/org/apache/commons/cli/CommandLineTest.java
+new test num: 16
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 5.58 seconds
+Failing tests: 2
+	org.apache.commons.cli.CommandLineTest::testGetParsedOptionValue$catena_1
+	org.apache.commons.cli.OptionBuilderTest::testTwoCompleteOptions$catena_10
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 84 with range 1 to
+        type = String.class;
+
+patches are written to file
+running tests...
+used time: Finished in 5.71 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.cli.CommandLineTest::testGetParsedOptionValue$catena_1
+org.apache.commons.cli.OptionBuilderTest::testTwoCompleteOptions$catena_10
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 72 with range 1 to
+    private Class type = String.class;
+
+patches are written to file
+running tests...
+used time: Finished in 6.24 seconds
+Failing tests: 2
+	org.apache.commons.cli.CommandLineTest::testGetParsedOptionValue$catena_1
+	org.apache.commons.cli.OptionBuilderTest::testTwoCompleteOptions$catena_10
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 72 with range 1 to
+    private Class type = String.class;
+
+try to fix hunk: 1
+replace from 84 with range 1 to
+        type = String.class;
+
+patches are written to file
+running tests...
+used time: Finished in 5.51 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

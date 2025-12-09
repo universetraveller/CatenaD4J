@@ -1,0 +1,108 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java",
+            "from_line_no": 10,
+            "to_line_no": 10,
+            "replaced": "import com.fasterxml.jackson.databind.util.ClassUtil;\n",
+            "patch_type": "delete",
+            "next_line_no": 11
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java",
+            "replaced_with": "                    int arrays = 0;\n                    while (cls.isArray()) {\n                        cls = cls.getComponentType();\n                        ++arrays;\n                    }\n                    sb.append(cls.getName());\n                    while (--arrays >= 0) {\n                        sb.append(\"[]\");\n                    }\n                    /* was:\n",
+            "patch_type": "insert",
+            "next_line_no": 131
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java",
+            "from_line_no": 136,
+            "to_line_no": 136,
+            "replaced_with": "                    */\n",
+            "replaced": "                    sb.append(cls.getSimpleName());\n",
+            "patch_type": "replace",
+            "next_line_no": 137
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass",
+            "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference",
+            "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference"
+        ],
+        "com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/exc/ExceptionPathTest.java",
+            "Instance": "Begin: Pos(29, 12)\nEnd: Pos(40, 5)\nSource: /tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/ExceptionPathTest.java\nName: testReferenceChainForInnerClass\nChilds: [StatementAssertion<Begin: Pos(34, 13), End: Pos(34, 36)>,\nStatementAssertion<Begin: Pos(37, 13), End: Pos(38, 42)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/ExceptionPathTest.java",
+            "name": "testReferenceChainForInnerClass",
+            "begin": "Pos(29, 12)",
+            "end": "Pos(40, 5)",
+            "begin_line_no": 29,
+            "end_line_no": 40,
+            "child": [
+                "Begin: Pos(34, 13)\nEnd: Pos(34, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(37, 13)\nEnd: Pos(38, 42)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testReferenceChainForInnerClass$catena_0() throws Exception\n    {\n        String json = MAPPER.writeValueAsString(new Outer());\n        try {\n            MAPPER.readValue(json, Outer.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            JsonMappingException.Reference reference = e.getPath().get(0);\n            try{ assertEquals(getClass().getName()+\"$Outer[\\\"inner\\\"]\",\n                    reference.toString());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testReferenceChainForInnerClass$catena_1() throws Exception\n    {\n        String json = MAPPER.writeValueAsString(new Outer());\n        try {\n            MAPPER.readValue(json, Outer.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            JsonMappingException.Reference reference = e.getPath().get(0);\n            assertEquals(getClass().getName()+\"$Outer[\\\"inner\\\"]\",\n                    reference.toString());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testReferenceChainForInnerClass$catena_0() throws Exception\n    {\n        String json = MAPPER.writeValueAsString(new Outer());\n        try {\n            MAPPER.readValue(json, Outer.class);\n            fail(\"Should not pass\");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException e) {\n            JsonMappingException.Reference reference = e.getPath().get(0);\n            try{ assertEquals(getClass().getName()+\"$Outer[\\\"inner\\\"]\",\n                    reference.toString());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testReferenceChainForInnerClass$catena_1() throws Exception\n    {\n        String json = MAPPER.writeValueAsString(new Outer());\n        try {\n            MAPPER.readValue(json, Outer.class);\n            try{ fail(\"Should not pass\");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException e) {\n            JsonMappingException.Reference reference = e.getPath().get(0);\n            assertEquals(getClass().getName()+\"$Outer[\\\"inner\\\"]\",\n                    reference.toString());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        },
+        "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithDefaultDeserialization.java",
+            "Instance": "Begin: Pos(41, 12)\nEnd: Pos(56, 5)\nSource: /tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithDefaultDeserialization.java\nName: testShouldThrowJsonMappingExceptionWithPathReference\nChilds: [StatementAssertion<Begin: Pos(50, 13), End: Pos(50, 58)>,\nStatementAssertion<Begin: Pos(53, 13), End: Pos(54, 43)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithDefaultDeserialization.java",
+            "name": "testShouldThrowJsonMappingExceptionWithPathReference",
+            "begin": "Pos(41, 12)",
+            "end": "Pos(56, 5)",
+            "begin_line_no": 41,
+            "end_line_no": 56,
+            "child": [
+                "Begin: Pos(50, 13)\nEnd: Pos(50, 58)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(53, 13)\nEnd: Pos(54, 43)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            fail(\"Upsss! Exception has not been thrown.\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException ex) {\n            // then\n            try{ assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            try{ fail(\"Upsss! Exception has not been thrown.\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException ex) {\n            // then\n            assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            fail(\"Upsss! Exception has not been thrown.\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException ex) {\n            // then\n            try{ assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            try{ fail(\"Upsss! Exception has not been thrown.\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException ex) {\n            // then\n            assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        },
+        "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithJsonCreatorDeserialization.java",
+            "Instance": "Begin: Pos(52, 12)\nEnd: Pos(67, 5)\nSource: /tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithJsonCreatorDeserialization.java\nName: testShouldThrowJsonMappingExceptionWithPathReference\nChilds: [StatementAssertion<Begin: Pos(61, 13), End: Pos(61, 58)>,\nStatementAssertion<Begin: Pos(64, 13), End: Pos(65, 43)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_63/src/test/java//com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithJsonCreatorDeserialization.java",
+            "name": "testShouldThrowJsonMappingExceptionWithPathReference",
+            "begin": "Pos(52, 12)",
+            "end": "Pos(67, 5)",
+            "begin_line_no": 52,
+            "end_line_no": 67,
+            "child": [
+                "Begin: Pos(61, 13)\nEnd: Pos(61, 58)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(64, 13)\nEnd: Pos(65, 43)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            fail(\"Upsss! Exception has not been thrown.\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException ex) {\n            // then\n            try{ assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            try{ fail(\"Upsss! Exception has not been thrown.\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException ex) {\n            // then\n            assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            ],
+            "func": {
+                "0": "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            fail(\"Upsss! Exception has not been thrown.\");                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (JsonMappingException ex) {\n            // then\n            try{ assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n    }",
+                "1": "    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {\n        // given\n        ObjectMapper mapper = new ObjectMapper();\n        String input = \"{\\\"bar\\\":{\\\"baz\\\":{qux:\\\"quxValue\\\"))}\";\n        final String THIS = getClass().getName();\n\n        // when\n        try {\n            mapper.readValue(input, Foo.class);\n            try{ fail(\"Upsss! Exception has not been thrown.\");                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (JsonMappingException ex) {\n            // then\n            assertEquals(THIS+\"$Foo[\\\"bar\\\"]->\"+THIS+\"$Bar[\\\"baz\\\"]\",\n                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n    }"
+            }
+        }
+    },
+    "011": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass$catena_1",
+            "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1",
+            "com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1"
+        ]
+    }
+}

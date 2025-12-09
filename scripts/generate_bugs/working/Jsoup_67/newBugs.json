@@ -1,0 +1,52 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+            "replaced_with": "    public static final int MaxScopeSearchDepth = 100; // prevents the parser bogging down in exceptionally broken pages\n",
+            "patch_type": "insert",
+            "next_line_no": 42
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+            "replaced_with": "        if (depth > MaxScopeSearchDepth) {\n            depth = MaxScopeSearchDepth;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 468
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::handlesDeepStack"
+        ],
+        "org.jsoup.parser.HtmlParserTest::handlesDeepStack": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(904, 5)\nEnd: Pos(925, 5)\nSource: /tmp/c4j/Jsoup_67/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: handlesDeepStack\nChilds: [StatementAssertion<Begin: Pos(922, 9), End: Pos(922, 52)>,\nStatementAssertion<Begin: Pos(923, 9), End: Pos(923, 53)>,\nStatementAssertion<Begin: Pos(924, 9), End: Pos(924, 62)>,\n]",
+            "source": "/tmp/c4j/Jsoup_67/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "handlesDeepStack",
+            "begin": "Pos(904, 5)",
+            "end": "Pos(925, 5)",
+            "begin_line_no": 904,
+            "end_line_no": 925,
+            "child": [
+                "Begin: Pos(922, 9)\nEnd: Pos(922, 52)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(923, 9)\nEnd: Pos(923, 53)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(924, 9)\nEnd: Pos(924, 62)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void handlesDeepStack$catena_0() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        assertEquals(2, doc.body().childNodeSize());                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(25000, doc.select(\"dd\").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void handlesDeepStack$catena_1() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(25000, doc.select(\"dd\").size());                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void handlesDeepStack$catena_2() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(25000, doc.select(\"dd\").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(System.currentTimeMillis() - start < 1000);                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void handlesDeepStack$catena_0() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        assertEquals(2, doc.body().childNodeSize());                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(25000, doc.select(\"dd\").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void handlesDeepStack$catena_1() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(25000, doc.select(\"dd\").size());                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void handlesDeepStack$catena_2() {\n        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955\n        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it\n\n        // Arrange\n        StringBuilder longBody = new StringBuilder(500000);\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"<dl><dd>\");\n        }\n        for (int i = 0; i < 25000; i++) {\n            longBody.append(i).append(\"</dd></dl>\");\n        }\n\n        // Act\n        long start = System.currentTimeMillis();\n        Document doc = Parser.parseBodyFragment(longBody.toString(), \"\");\n\n        // Assert\n        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(25000, doc.select(\"dd\").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(System.currentTimeMillis() - start < 1000);                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::handlesDeepStack$catena_2"
+        ]
+    }
+}

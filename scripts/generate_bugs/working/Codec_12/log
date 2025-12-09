@@ -1,0 +1,1296 @@
+---
+Begin generate bug_id: Codec_12
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Codec_12
+Try to checkout Codec_12
+build dir: ['target/classes', 'target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java
+trying to replace old failing tests
+edit: replace from 521 range 10 at src/test/java/org/apache/commons/codec/binary/Base32InputStreamTest.java
+to
+    @Test
+    public void testSkipToEnd$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        assertEquals(3, b32stream.skip(3));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipToEnd$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(3, b32stream.skip(3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipToEnd$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(3, b32stream.skip(3));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 152 range 12 at src/test/java/org/apache/commons/codec/binary/Base32InputStreamTest.java
+to
+    @Test
+    public void testAvailable$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        assertEquals(1, b32stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(1, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, b32stream.skip(10));                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(1, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(0, b32stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_3() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(1, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_4() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(1, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_5() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(1, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b32stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0, b32stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 505 range 10 at src/test/java/org/apache/commons/codec/binary/Base32InputStreamTest.java
+to
+    @Test
+    public void testSkipPastEnd$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        assertEquals(3, b32stream.skip(10));                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipPastEnd$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipPastEnd$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(3, b32stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 490 range 9 at src/test/java/org/apache/commons/codec/binary/Base32InputStreamTest.java
+to
+    @Test
+    public void testSkipBig$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        assertEquals(3, b32stream.skip(1024));                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipBig$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(3, b32stream.skip(1024));                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipBig$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_FOO));
+        Base32InputStream b32stream = new Base32InputStream(ins);
+        try{ assertEquals(3, b32stream.skip(1024));                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b32stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b32stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 532 range 10 at src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java
+to
+    @Test
+    public void testSkipToEnd$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        assertEquals(6, b64stream.skip(6));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipToEnd$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(6, b64stream.skip(6));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipToEnd$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(6, b64stream.skip(6));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 160 range 12 at src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java
+to
+    @Test
+    public void testAvailable$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        assertEquals(1, b64stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(1, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(6, b64stream.skip(10));                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(1, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(0, b64stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_3() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(1, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_4() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(1, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testAvailable$catena_5() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(1, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(0, b64stream.available());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(0, b64stream.available());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 516 range 10 at src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java
+to
+    @Test
+    public void testSkipPastEnd$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        assertEquals(6, b64stream.skip(10));                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipPastEnd$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipPastEnd$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        // due to CODEC-130, skip now skips correctly decoded characters rather than encoded
+        try{ assertEquals(6, b64stream.skip(10));                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 484 range 9 at src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java
+to
+    @Test
+    public void testSkipBig$catena_0() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        assertEquals(6, b64stream.skip(1024));                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipBig$catena_1() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(6, b64stream.skip(1024));                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testSkipBig$catena_2() throws Throwable {
+        InputStream ins = new ByteArrayInputStream(StringUtils.getBytesIso8859_1(ENCODED_B64));
+        Base64InputStream b64stream = new Base64InputStream(ins);
+        try{ assertEquals(6, b64stream.skip(1024));                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        // End of stream reached
+        try{ assertEquals(-1, b64stream.read());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(-1, b64stream.read());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/codec/binary/Base64InputStreamTest.java
+trace file: src/test/java/org/apache/commons/codec/binary/Base32InputStreamTest.java
+new test num: 30
+ori test num: 4
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 17.43 seconds
+Failing tests: 14
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipWrongArgument
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipWrongArgument
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 18.08 seconds
+Failing tests: 14
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipWrongArgument
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_2
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipWrongArgument
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_2
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1
+Includes new failing tests, set to unusable
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 19.52 seconds
+Failing tests: 32
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipNone
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_2
+	org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_2
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_2
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_3
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_4
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_2
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipNone
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_2
+	org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_2
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_2
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_3
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_4
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_2
+Includes new failing tests, set to unusable
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 20.74 seconds
+Failing tests: 12
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipNone
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipNone
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+	org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_0
+Includes new failing tests, set to unusable
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 22.22 seconds
+Failing tests: 2
+	org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0
+	org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0
+Can independently fix ['org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0', 'org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130', 'org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1', 'org.apache.commons.codec.binary.Base64InputStreamTest::testSkipWrongArgument', 'org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0', 'org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130', 'org.apache.commons.codec.binary.Base32InputStreamTest::testSkipWrongArgument', 'org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1', 'org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1', 'org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0', 'org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1', 'org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0']
+select new bug
+Pattern: 11100
+new failing tests:
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130
+org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipWrongArgument
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipWrongArgument
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0
+Save found bug
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+insert before 142 with     @Override
+    public long skip(long n) throws IOException {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative skip length");
+        }
+
+try to fix hunk: 1
+insert before 144 with         final byte[] b = new byte[512];
+        final int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+
+        while (total < max) {
+            int len = max - total;
+            if (len > b.length) {
+                len = b.length;
+            }
+            len = read(b, 0, len);
+            if (len == EOF) {
+                break;
+            }
+            total += len;
+        }
+
+try to fix hunk: 2
+insert before 145 with         return total;
+    }
+
+try to fix hunk: 3
+insert before 152 with     public int available() throws IOException {
+
+try to fix hunk: 4
+insert before 158 with         if (baseNCodec.eof) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 22.01 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0', 'org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0']
+select new bug
+Pattern: 11111
+new failing tests:
+org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_0
+org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_0
+Save found bug
+processed: 11111
+Find 2 new bugs

@@ -1,0 +1,53 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/Element.java",
+            "replaced_with": "            int i = 0;\n            do {\n",
+            "patch_type": "insert",
+            "next_line_no": 1091
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/nodes/Element.java",
+            "from_line_no": 1093,
+            "to_line_no": 1094,
+            "replaced_with": "                el = el.parent();\n                i++;\n            } while (i < 6 && el != null);\n",
+            "replaced": "                else\n                    return el.parent() != null && el.parent().tag.preserveWhitespace();\n",
+            "patch_type": "replace",
+            "next_line_no": 1095
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.nodes.ElementTest::testKeepsPreTextAtDepth"
+        ],
+        "org.jsoup.nodes.ElementTest::testKeepsPreTextAtDepth": {
+            "file_path": "src/test/java/org/jsoup/nodes/ElementTest.java",
+            "Instance": "Begin: Pos(107, 5)\nEnd: Pos(112, 5)\nSource: /tmp/c4j/Jsoup_70/src/test/java//org/jsoup/nodes/ElementTest.java\nName: testKeepsPreTextAtDepth\nChilds: [StatementAssertion<Begin: Pos(110, 9), End: Pos(110, 49)>,\nStatementAssertion<Begin: Pos(111, 9), End: Pos(111, 100)>,\n]",
+            "source": "/tmp/c4j/Jsoup_70/src/test/java//org/jsoup/nodes/ElementTest.java",
+            "name": "testKeepsPreTextAtDepth",
+            "begin": "Pos(107, 5)",
+            "end": "Pos(112, 5)",
+            "begin_line_no": 107,
+            "end_line_no": 112,
+            "child": [
+                "Begin: Pos(110, 9)\nEnd: Pos(110, 49)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(111, 9)\nEnd: Pos(111, 100)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void testKeepsPreTextAtDepth$catena_0() {\n        String h = \"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\";\n        Document doc = Jsoup.parse(h);\n        assertEquals(\"code\\n\\ncode\", doc.text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\", doc.body().html());    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void testKeepsPreTextAtDepth$catena_1() {\n        String h = \"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\";\n        Document doc = Jsoup.parse(h);\n        try{ assertEquals(\"code\\n\\ncode\", doc.text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\", doc.body().html());         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void testKeepsPreTextAtDepth$catena_0() {\n        String h = \"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\";\n        Document doc = Jsoup.parse(h);\n        assertEquals(\"code\\n\\ncode\", doc.text());                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\", doc.body().html());    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void testKeepsPreTextAtDepth$catena_1() {\n        String h = \"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\";\n        Document doc = Jsoup.parse(h);\n        try{ assertEquals(\"code\\n\\ncode\", doc.text());                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"<pre><code><span><b>code\\n\\ncode</b></span></code></pre>\", doc.body().html());         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.nodes.ElementTest::testKeepsPreTextAtDepth$catena_0",
+            "org.jsoup.nodes.ElementTest::testKeepsPreTextAtDepth$catena_1"
+        ]
+    }
+}

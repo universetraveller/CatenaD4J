@@ -1,0 +1,865 @@
+---
+Begin generate bug_id: Cli_3
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_3
+Try to checkout Cli_3
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli/TypeHandler.java
+trying to replace old failing tests
+edit: replace from 45 range 40 at src/test/org/apache/commons/cli/PatternOptionBuilderTest.java
+to
+   public void testSimplePattern$catena_0()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           assertEquals("flag a", "foo", line.getOptionValue("a"));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_1()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("flag a", "foo", line.getOptionValue('a'));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_2()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("string flag a", "foo", line.getOptionObject("a"));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_3()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("string flag a", "foo", line.getOptionObject('a'));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_4()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                              /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_5()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                              /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_6()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("boolean true flag c", true, line.hasOption("c"));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_7()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("boolean true flag c", true, line.hasOption('c'));                                                /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_8()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("boolean false flag d", false, line.hasOption("d"));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_9()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("boolean false flag d", false, line.hasOption('d'));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_10()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                         /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_11()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                         /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_12()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                             /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_13()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                             /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_14()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_15()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_16()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));         /***** ORIGINAL ASSERTION IS HERE *****/
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( java.net.MalformedURLException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_17()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));         /***** ORIGINAL ASSERTION IS HERE *****/
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( java.net.MalformedURLException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_18()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           fail( exp.getMessage() );                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+       }
+       catch( Exception exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+   }    public void testSimplePattern$catena_19()
+   {
+       try {
+           Options options = PatternOptionBuilder.parsePattern("a:b@cde>f+n%t/");
+           String[] args = new String[] { "-c", "-a", "foo", "-b", "java.util.Vector", "-e", "build.xml", "-f", "java.util.Calendar", "-n", "4.5", "-t", "http://jakarta.apache.org/" };
+      
+           CommandLineParser parser = new PosixParser();
+           CommandLine line = parser.parse(options,args);
+
+           // tests the char methods of CommandLine that delegate to
+           // the String methods
+           try{ assertEquals("flag a", "foo", line.getOptionValue("a"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("flag a", "foo", line.getOptionValue('a'));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject("a"));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("string flag a", "foo", line.getOptionObject('a'));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject("b"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("object flag b", new java.util.Vector(), line.getOptionObject('b'));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption("c"));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean true flag c", true, line.hasOption('c'));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption("d"));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("boolean false flag d", false, line.hasOption('d'));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject("e"));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("file flag e", new java.io.File("build.xml"), line.getOptionObject('e'));                    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject("f"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("class flag f", java.util.Calendar.class, line.getOptionObject('f'));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject("n"));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("number flag n", new Double(4.5), line.getOptionObject('n'));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject("t"));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           try{ assertEquals("url flag t", new java.net.URL("http://jakarta.apache.org/"), line.getOptionObject('t'));    }catch(Throwable __SHOULD_BE_IGNORED){}
+           /// DATES NOT SUPPORTED YET.
+           //      assertEquals("number flag t", new java.util.Date(1023400137276L), line.getOptionObject('z'));
+           //     input is:  "Thu Jun 06 17:48:57 EDT 2002"
+       }
+       catch( ParseException exp ) {
+           try{ fail( exp.getMessage() );                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+       }
+       catch( Exception exp ) {
+           fail( exp.getMessage() );                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+       }
+   }
+trace file: src/test/org/apache/commons/cli/PatternOptionBuilderTest.java
+new test num: 20
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 1.17 seconds
+Failing tests: 2
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern$catena_14
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern$catena_15
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 162 with range 1 to
+            if( str != null )
+            {
+                if( str.indexOf('.') != -1 )
+                {
+                    return Double.valueOf(str);
+                }
+                else
+                {
+                    return Long.valueOf(str);
+                }
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 1.06 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern$catena_14
+org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern$catena_15
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+delete from 25 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+delete from 25 with range 1
+try to fix hunk: 1
+replace from 162 with range 1 to
+            if( str != null )
+            {
+                if( str.indexOf('.') != -1 )
+                {
+                    return Double.valueOf(str);
+                }
+                else
+                {
+                    return Long.valueOf(str);
+                }
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 1.09 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

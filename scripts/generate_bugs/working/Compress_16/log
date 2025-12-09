@@ -1,0 +1,94 @@
+---
+Begin generate bug_id: Compress_16
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_16
+Try to checkout Compress_16
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/ArchiveStreamFactory.java
+trying to replace old failing tests
+edit: replace from 50 range 15 at src/test/java/org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java
+to
+    @Test
+    public void aiffFilesAreNoTARs$catena_0() throws Exception {
+        InputStream is = null;
+        try {
+            is = new BufferedInputStream(new FileInputStream("src/test/resources/testAIFF.aif"));
+            new ArchiveStreamFactory().createArchiveInputStream(is);
+            fail("created an input stream for a non-archive");                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (ArchiveException ae) {
+            try{ assertTrue(ae.getMessage().startsWith("No Archiver found"));                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }     @Test
+    public void aiffFilesAreNoTARs$catena_1() throws Exception {
+        InputStream is = null;
+        try {
+            is = new BufferedInputStream(new FileInputStream("src/test/resources/testAIFF.aif"));
+            new ArchiveStreamFactory().createArchiveInputStream(is);
+            try{ fail("created an input stream for a non-archive");                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (ArchiveException ae) {
+            assertTrue(ae.getMessage().startsWith("No Archiver found"));                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/ArchiveStreamFactoryTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 16.29 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::aiffFilesAreNoTARs$catena_0
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 246 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 244 with range 1 to
+                    if (tais.getNextTarEntry().isCheckSumOK()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 244 with range 1 to
+                    if (tais.getNextTarEntry().isCheckSumOK()) {
+
+try to fix hunk: 1
+insert before 246 with                     }
+
+patches are written to file
+running tests...
+used time: Finished in 15.97 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::aiffFilesAreNoTARs$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.ArchiveStreamFactoryTest::aiffFilesAreNoTARs$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

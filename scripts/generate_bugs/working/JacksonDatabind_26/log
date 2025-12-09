@@ -1,0 +1,268 @@
+---
+Begin generate bug_id: JacksonDatabind_26
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_26
+Try to checkout JacksonDatabind_26
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/BeanPropertyWriter.java
+trying to replace old failing tests
+edit: replace from 71 range 32 at src/test/java/com/fasterxml/jackson/databind/TestJDKSerialization.java
+to
+    public void testEnumHandlers$catena_0() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        assertNotNull(result);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        try{ assertNotNull(mapper2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        try{ assertNotNull(r);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        try{ assertNotNull(w);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        try{ assertEquals(json, json2);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        EnumPOJO result2 = r.readValue(json2);
+        try{ assertNotNull(result2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEnumHandlers$catena_1() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        assertNotNull(mapper2);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        try{ assertNotNull(r);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        try{ assertNotNull(w);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        try{ assertEquals(json, json2);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        EnumPOJO result2 = r.readValue(json2);
+        try{ assertNotNull(result2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEnumHandlers$catena_2() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        try{ assertNotNull(mapper2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        assertNotNull(r);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        try{ assertNotNull(w);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        try{ assertEquals(json, json2);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        EnumPOJO result2 = r.readValue(json2);
+        try{ assertNotNull(result2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEnumHandlers$catena_3() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        try{ assertNotNull(mapper2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        try{ assertNotNull(r);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        assertNotNull(w);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        try{ assertEquals(json, json2);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        EnumPOJO result2 = r.readValue(json2);
+        try{ assertNotNull(result2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEnumHandlers$catena_4() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        try{ assertNotNull(mapper2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        try{ assertNotNull(r);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        try{ assertNotNull(w);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        assertEquals(json, json2);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        EnumPOJO result2 = r.readValue(json2);
+        try{ assertNotNull(result2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEnumHandlers$catena_5() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        // ensure we have serializers and/or deserializers, first
+        String json = mapper.writerFor(EnumPOJO.class)
+                .writeValueAsString(new EnumPOJO());
+        EnumPOJO result = mapper.readerFor(EnumPOJO.class)
+                .readValue(json);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and then use JDK serialization to freeze/thaw objects
+        byte[] bytes = jdkSerialize(mapper);
+        ObjectMapper mapper2 = jdkDeserialize(bytes);
+        try{ assertNotNull(mapper2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        bytes = jdkSerialize(mapper.readerFor(EnumPOJO.class));
+        ObjectReader r = jdkDeserialize(bytes);
+        try{ assertNotNull(r);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        /* 14-Aug-2015, tatu: Looks like pre-loading JsonSerializer is problematic
+         *    at this point; comment out for now. Try to fix later on.
+         */
+        bytes = jdkSerialize(mapper.writerFor(EnumPOJO.class));
+        ObjectWriter w = jdkDeserialize(bytes);
+        try{ assertNotNull(w);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // plus, ensure objects are usable:
+        String json2 = w.writeValueAsString(new EnumPOJO());
+        try{ assertEquals(json, json2);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        EnumPOJO result2 = r.readValue(json2);
+        assertNotNull(result2);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/TestJDKSerialization.java
+new test num: 6
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 187.46 seconds
+Failing tests: 6
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_0
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_1
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_2
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_3
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_4
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_5
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 42 with     private static final long serialVersionUID = 4603296144163950020L;
+
+patches are written to file
+running tests...
+used time: Finished in 150.09 seconds
+Failing tests: 6
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_0
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_1
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_2
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_3
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_4
+	com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_5
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 39 with range 1 to
+    implements BeanProperty,
+        java.io.Serializable // since 2.6.2
+
+patches are written to file
+running tests...
+used time: Finished in 157.47 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_0
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_4
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_1
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_3
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_5
+com.fasterxml.jackson.databind.TestJDKSerialization::testEnumHandlers$catena_2
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 39 with range 1 to
+    implements BeanProperty,
+        java.io.Serializable // since 2.6.2
+
+try to fix hunk: 1
+insert before 42 with     private static final long serialVersionUID = 4603296144163950020L;
+
+patches are written to file
+running tests...
+used time: Finished in 166.82 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

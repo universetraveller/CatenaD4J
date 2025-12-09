@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java",
+            "replaced_with": "    protected boolean _suppressNextToken;\n",
+            "patch_type": "insert",
+            "next_line_no": 35
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java",
+            "replaced_with": "        _suppressNextToken = delegate.hasCurrentToken();\n",
+            "patch_type": "insert",
+            "next_line_no": 45
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java",
+            "replaced_with": "        if (delegate == null) {\n            return null;\n        }\n        if (_suppressNextToken) {\n            _suppressNextToken = false;\n            return delegate.currentToken();\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 106
+        }
+    ]
+}

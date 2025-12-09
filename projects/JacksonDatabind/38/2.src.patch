@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/CollectionType.java",
+            "replaced_with": "import java.lang.reflect.TypeVariable;\n",
+            "patch_type": "insert",
+            "next_line_no": 3
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/CollectionType.java",
+            "from_line_no": 50,
+            "to_line_no": 50,
+            "replaced_with": "        TypeVariable<?>[] vars = rawType.getTypeParameters();\n        TypeBindings bindings;\n        if ((vars == null) || (vars.length != 1)) {\n            bindings = TypeBindings.emptyBindings();\n        } else {\n            bindings = TypeBindings.create(rawType, elemT);\n        }\n        return new CollectionType(rawType, bindings,\n",
+            "replaced": "        return new CollectionType(rawType, null,\n",
+            "patch_type": "replace",
+            "next_line_no": 51
+        }
+    ]
+}

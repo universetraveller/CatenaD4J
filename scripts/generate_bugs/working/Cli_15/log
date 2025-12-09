@@ -1,0 +1,439 @@
+---
+Begin generate bug_id: Cli_15
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Cli_15
+Try to checkout Cli_15
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java
+trying to replace old failing tests
+edit: replace from 62 range 10 at src/test/org/apache/commons/cli2/bug/BugCLI158Test.java
+to
+    public void testSingleOptionSingleArgument$catena_0() throws Exception {
+        Parser parser = createDefaultValueParser(new String[]{"100", "1000"});
+        String enteredValue1 = "1";
+        String[] args = new String[]{"-b", enteredValue1};
+        CommandLine cl = parser.parse(args);
+        CommandLine cmd = cl;
+        assertNotNull(cmd);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        List b = cmd.getValues("-b");
+        try{ assertEquals("[" + enteredValue1 + ", 1000]", b + "");                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSingleOptionSingleArgument$catena_1() throws Exception {
+        Parser parser = createDefaultValueParser(new String[]{"100", "1000"});
+        String enteredValue1 = "1";
+        String[] args = new String[]{"-b", enteredValue1};
+        CommandLine cl = parser.parse(args);
+        CommandLine cmd = cl;
+        try{ assertNotNull(cmd);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        List b = cmd.getValues("-b");
+        assertEquals("[" + enteredValue1 + ", 1000]", b + "");                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 83 range 31 at src/test/org/apache/commons/cli2/bug/BugCLI158Test.java
+to
+    public void testSingleOptionMaximumNumberOfArgument$catena_0() throws Exception {
+        String[] args = new String[]{"-b", "1", "2"};
+        final ArgumentBuilder abuilder = new ArgumentBuilder();
+        final DefaultOptionBuilder obuilder = new DefaultOptionBuilder();
+        final GroupBuilder gbuilder = new GroupBuilder();
+
+        DefaultOption bOption = obuilder.withShortName("b")
+                .withLongName("b")
+                .withArgument(abuilder.withName("b")
+                        .withMinimum(2)
+                        .withMaximum(4)
+                        .withDefault("100")
+                        .withDefault("1000")
+                        .withDefault("10000")
+                        .create())
+                .create();
+
+        Group options = gbuilder
+                .withName("options")
+                .withOption(bOption)
+                .create();
+
+        Parser parser = new Parser();
+        parser.setHelpTrigger("--help");
+        parser.setGroup(options);
+        CommandLine cl = parser.parse(args);
+        CommandLine cmd = cl;
+        assertNotNull(cmd);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        List b = cmd.getValues("-b");
+        try{ assertEquals("[1, 2, 10000]", b + "");                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSingleOptionMaximumNumberOfArgument$catena_1() throws Exception {
+        String[] args = new String[]{"-b", "1", "2"};
+        final ArgumentBuilder abuilder = new ArgumentBuilder();
+        final DefaultOptionBuilder obuilder = new DefaultOptionBuilder();
+        final GroupBuilder gbuilder = new GroupBuilder();
+
+        DefaultOption bOption = obuilder.withShortName("b")
+                .withLongName("b")
+                .withArgument(abuilder.withName("b")
+                        .withMinimum(2)
+                        .withMaximum(4)
+                        .withDefault("100")
+                        .withDefault("1000")
+                        .withDefault("10000")
+                        .create())
+                .create();
+
+        Group options = gbuilder
+                .withName("options")
+                .withOption(bOption)
+                .create();
+
+        Parser parser = new Parser();
+        parser.setHelpTrigger("--help");
+        parser.setGroup(options);
+        CommandLine cl = parser.parse(args);
+        CommandLine cmd = cl;
+        try{ assertNotNull(cmd);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        List b = cmd.getValues("-b");
+        assertEquals("[1, 2, 10000]", b + "");                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/org/apache/commons/cli2/bug/BugCLI158Test.java
+new test num: 4
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 9.79 seconds
+Failing tests: 3
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionMaximumNumberOfArgument$catena_1
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionSingleArgument$catena_1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+patches are written to file
+running tests...
+used time: Finished in 7.88 seconds
+Failing tests: 8
+	org.apache.commons.cli2.CommandLineDefaultsTest::testValues_Method_Option
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionMaximumNumberOfArgument$catena_1
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionSingleArgument$catena_1
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetValuesStringList
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetValuesOptionList
+	org.apache.commons.cli2.option.ArgumentTest::testProcess_StripBoundaryQuotes
+	org.apache.commons.cli2.option.ArgumentTest::testProcess_InterrogatedDefaultValues
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Includes new failing tests, set to unusable
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 7.96 seconds
+Failing tests: 6
+	org.apache.commons.cli2.CommandLineDefaultsTest::testValues_Option
+	org.apache.commons.cli2.bug.BugCLI145Test::testWithMaximumUsingDefaultValues
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionMaximumNumberOfArgument$catena_1
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionSingleArgument$catena_1
+	org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionNoArgument
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Includes new failing tests, set to unusable
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 117 with range 2 to
+        if (defaultValues == null || defaultValues.isEmpty()) {
+            defaultValues = (List) this.defaultValues.get(option);
+
+try to fix hunk: 1
+replace from 122 with range 3 to
+        if (defaultValues != null && !defaultValues.isEmpty()) {
+            if (valueList == null || valueList.isEmpty()) {
+                valueList = defaultValues;
+            } else {
+
+try to fix hunk: 2
+insert before 127 with                 if (defaultValues.size() > valueList.size()) {
+
+try to fix hunk: 3
+insert before 128 with                     valueList = new ArrayList(valueList);
+                    for (int i=valueList.size(); i<defaultValues.size(); i++) {
+                        valueList.add(defaultValues.get(i));
+                    }
+                }
+            }
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 8.77 seconds
+Failing tests: 1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Could not pass after all fixed, should check
+Can independently fix ['org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionMaximumNumberOfArgument$catena_1', 'org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionSingleArgument$catena_1']
+select new bug
+Pattern: 1111
+new failing tests:
+org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionMaximumNumberOfArgument$catena_1
+org.apache.commons.cli2.bug.BugCLI158Test::testSingleOptionSingleArgument$catena_1
+Save found bug
+processed: 1111
+Find 1 new bugs

@@ -1,0 +1,21 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 594,
+            "to_line_no": 594,
+            "replaced_with": "        long storedSum = parseOctal(header, CHKSUM_OFFSET, CHKSUMLEN);\n",
+            "replaced": "        long storedSum = 0;\n",
+            "patch_type": "replace",
+            "next_line_no": 595
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 602,
+            "to_line_no": 606,
+            "replaced": "                if ('0' <= b && b <= '7' && digits++ < 6) {\n                    storedSum = storedSum * 8 + b - '0';\n                } else if (digits > 0) {\n                    digits = 6;\n                }\n",
+            "patch_type": "delete",
+            "next_line_no": 607
+        }
+    ]
+}

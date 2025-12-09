@@ -1,0 +1,53 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+            "from_line_no": 833,
+            "to_line_no": 833,
+            "replaced_with": "        return (TypeAdapter<T2>) new TypeAdapter<T1>() {\n          @Override public void write(JsonWriter out, T1 value) throws IOException {\n            typeAdapter.write(out, value);\n          }\n",
+            "replaced": "        return (TypeAdapter<T2>) typeAdapter;\n",
+            "patch_type": "replace",
+            "next_line_no": 834
+        },
+        "1": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+            "replaced_with": "          @Override public T1 read(JsonReader in) throws IOException {\n            T1 result = typeAdapter.read(in);\n            if (result != null && !requestedType.isInstance(result)) {\n              throw new JsonSyntaxException(\"Expected a \" + requestedType.getName()\n                  + \" but was \" + result.getClass().getName());\n            }\n            return result;\n          }\n        };\n",
+            "patch_type": "insert",
+            "next_line_no": 835
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch"
+        ],
+        "com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch": {
+            "file_path": "gson/src/test/java/com/google/gson/functional/DefaultTypeAdaptersTest.java",
+            "Instance": "Begin: Pos(621, 10)\nEnd: Pos(629, 3)\nSource: /tmp/c4j/Gson_2/gson/src/test/java//com/google/gson/functional/DefaultTypeAdaptersTest.java\nName: testJsonElementTypeMismatch\nChilds: [StatementAssertion<Begin: Pos(624, 7), End: Pos(624, 13)>,\nStatementAssertion<Begin: Pos(626, 7), End: Pos(627, 33)>,\n]",
+            "source": "/tmp/c4j/Gson_2/gson/src/test/java//com/google/gson/functional/DefaultTypeAdaptersTest.java",
+            "name": "testJsonElementTypeMismatch",
+            "begin": "Pos(621, 10)",
+            "end": "Pos(629, 3)",
+            "begin_line_no": 621,
+            "end_line_no": 629,
+            "child": [
+                "Begin: Pos(624, 7)\nEnd: Pos(624, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(626, 7)\nEnd: Pos(627, 33)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testJsonElementTypeMismatch$catena_0() {\n    try {\n      gson.fromJson(\"\\\"abc\\\"\", JsonObject.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (JsonSyntaxException expected) {\n      try{ assertEquals(\"Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive\",\n          expected.getMessage());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "  public void testJsonElementTypeMismatch$catena_1() {\n    try {\n      gson.fromJson(\"\\\"abc\\\"\", JsonObject.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (JsonSyntaxException expected) {\n      assertEquals(\"Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive\",\n          expected.getMessage());                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            ],
+            "func": {
+                "0": "  public void testJsonElementTypeMismatch$catena_0() {\n    try {\n      gson.fromJson(\"\\\"abc\\\"\", JsonObject.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (JsonSyntaxException expected) {\n      try{ assertEquals(\"Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive\",\n          expected.getMessage());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "1": "  public void testJsonElementTypeMismatch$catena_1() {\n    try {\n      gson.fromJson(\"\\\"abc\\\"\", JsonObject.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (JsonSyntaxException expected) {\n      assertEquals(\"Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive\",\n          expected.getMessage());                                                                           /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_1",
+            "com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_0"
+        ]
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \tif(!_allowMultipleMatches && _currToken != null && _exposedContext == null){\n",
+            "patch_type": "insert",
+            "next_line_no": 227
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \t\tif((_currToken.isStructEnd()  && _headContext.isStartHandled()) ){\n    \t\t\treturn (_currToken = null);\n    \t\t}\n",
+            "patch_type": "insert",
+            "next_line_no": 228
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java",
+            "replaced_with": "    \t\telse if(_currToken.isScalarValue() && !_headContext.isStartHandled() && !_includePath \n    \t\t\t\t&& _itemFilter == TokenFilter.INCLUDE_ALL) {\n    \t\t\treturn (_currToken = null);\n    \t\t}\n    \t}\n",
+            "patch_type": "insert",
+            "next_line_no": 230
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.filter.BasicParserFilteringTest::testNotAllowMultipleMatches"
+        ],
+        "com.fasterxml.jackson.core.filter.BasicParserFilteringTest::testNotAllowMultipleMatches": {
+            "file_path": "src/test/java/com/fasterxml/jackson/core/filter/BasicParserFilteringTest.java",
+            "Instance": "Begin: Pos(107, 5)\nEnd: Pos(119, 5)\nSource: /tmp/c4j/JacksonCore_15/src/test/java//com/fasterxml/jackson/core/filter/BasicParserFilteringTest.java\nName: testNotAllowMultipleMatches\nChilds: [StatementAssertion<Begin: Pos(118, 9), End: Pos(118, 48)>,\n]",
+            "source": "/tmp/c4j/JacksonCore_15/src/test/java//com/fasterxml/jackson/core/filter/BasicParserFilteringTest.java",
+            "name": "testNotAllowMultipleMatches",
+            "begin": "Pos(107, 5)",
+            "end": "Pos(119, 5)",
+            "begin_line_no": 107,
+            "end_line_no": 119,
+            "child": [
+                "Begin: Pos(118, 9)\nEnd: Pos(118, 48)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.core.filter.BasicParserFilteringTest::testNotAllowMultipleMatches"
+        ]
+    }
+}

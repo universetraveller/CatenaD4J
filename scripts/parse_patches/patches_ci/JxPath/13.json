@@ -1,0 +1,89 @@
+{
+    "num_of_hunks": 12,
+    "0": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "replaced_with": "    protected static String getPrefix(NodePointer pointer, String namespaceURI) {\n        NodePointer currentPointer = pointer;\n        while (currentPointer != null) {\n            NodeIterator ni = currentPointer.namespaceIterator();\n            for (int position = 1; ni != null && ni.setPosition(position); position++) {\n                NodePointer nsPointer = ni.getNodePointer();\n                String uri = nsPointer.getNamespaceURI();\n                if (uri.equals(namespaceURI)) {\n                    String prefix = nsPointer.getName().getName();\n                    if (!\"\".equals(prefix)) {\n                        return prefix;\n                    }\n                }\n            }\n            currentPointer = pointer.getParent();\n        }\n        return null;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 47
+    },
+    "1": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "replaced_with": "        String uri = getExternallyRegisteredNamespaceURI(prefix);\n        return uri == null && pointer != null ? pointer.getNamespaceURI(prefix)\n                : uri;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 108
+    },
+    "2": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "replaced_with": "     protected synchronized String getExternallyRegisteredNamespaceURI(\n            String prefix) {\n",
+        "patch_type": "insert",
+        "next_line_no": 116,
+        "is_extra_hunk": true
+    },
+    "3": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "from_line_no": 117,
+        "to_line_no": 123,
+        "replaced_with": "        return uri == null && parent != null ? parent\n                .getExternallyRegisteredNamespaceURI(prefix) : uri;\n",
+        "replaced": "        if (uri == null && pointer != null) {\n            uri = pointer.getNamespaceURI(prefix);\n        }\n        if (uri == null && parent != null) {\n            return parent.getNamespaceURI(prefix);\n        }\n        return uri;\n",
+        "patch_type": "replace",
+        "next_line_no": 124
+    },
+    "4": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "replaced_with": "        String prefix = getExternallyRegisteredPrefix(namespaceURI);\n        return prefix == null && pointer != null ? getPrefix(pointer,\n                namespaceURI) : prefix;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 132
+    },
+    "5": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "replaced_with": "    protected synchronized String getExternallyRegisteredPrefix(String namespaceURI) {\n",
+        "patch_type": "insert",
+        "next_line_no": 139,
+        "is_extra_hunk": true
+    },
+    "6": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "from_line_no": 141,
+        "to_line_no": 151,
+        "replaced": "            NodeIterator ni = pointer.namespaceIterator();\n            if (ni != null) {\n                for (int position = 1; ni.setPosition(position); position++) {\n                    NodePointer nsPointer = ni.getNodePointer();\n                    String uri = nsPointer.getNamespaceURI();                    \n                    String prefix = nsPointer.getName().getName();\n                    if (!\"\".equals(prefix)) {\n                        reverseMap.put(uri, prefix);\n                    }\n                }\n            }\n",
+        "patch_type": "delete",
+        "next_line_no": 152
+    },
+    "7": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/NamespaceResolver.java",
+        "from_line_no": 159,
+        "to_line_no": 162,
+        "replaced_with": "        return prefix == null && parent != null ? parent\n                .getExternallyRegisteredPrefix(namespaceURI) : prefix;\n",
+        "replaced": "        if (prefix == null && parent != null) {\n            return parent.getPrefix(namespaceURI);\n        }\n        return prefix;\n",
+        "patch_type": "replace",
+        "next_line_no": 163
+    },
+    "8": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "import org.apache.commons.jxpath.ri.NamespaceResolver;\n",
+        "patch_type": "insert",
+        "next_line_no": 29
+    },
+    "9": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "    private NamespaceResolver localNamespaceResolver;\n",
+        "patch_type": "insert",
+        "next_line_no": 61
+    },
+    "10": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "replaced_with": "    public synchronized NamespaceResolver getNamespaceResolver() {\n        if (localNamespaceResolver == null) {\n            localNamespaceResolver = new NamespaceResolver(super.getNamespaceResolver());\n            localNamespaceResolver.setNamespaceContextPointer(this);\n        }\n        return localNamespaceResolver;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 189
+    },
+    "11": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "from_line_no": 415,
+        "to_line_no": 415,
+        "replaced_with": "            String ns = null;\n            NamespaceResolver nsr = getNamespaceResolver();\n            if (nsr != null) {\n                ns = nsr.getNamespaceURI(prefix);\n            }\n",
+        "replaced": "            String ns = getNamespaceURI(prefix);\n",
+        "patch_type": "replace",
+        "next_line_no": 416
+    },
+    "num_of_hunks_ci": 10
+}

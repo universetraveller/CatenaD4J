@@ -1,0 +1,202 @@
+---
+Begin generate bug_id: JacksonDatabind_61
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_61
+Try to checkout JacksonDatabind_61
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ObjectMapper.java
+trace file: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java
+trying to replace old failing tests
+edit: replace from 17 range 25 at src/test/java/com/fasterxml/jackson/databind/jsontype/DefaultTypingWithPrimitivesTest.java
+to
+    public void testDefaultTypingWithLong$catena_0() throws Exception
+    {
+        Data data = new Data();
+        data.key = 1L;
+        Map<String, Object> mapData = new HashMap<String, Object>();
+        mapData.put("longInMap", 2L);
+        mapData.put("longAsField", data);
+
+        // Configure Jackson to preserve types
+        ObjectMapper mapper = new ObjectMapper();
+        StdTypeResolverBuilder resolver = new StdTypeResolverBuilder();
+        resolver.init(JsonTypeInfo.Id.CLASS, null);
+        resolver.inclusion(JsonTypeInfo.As.PROPERTY);
+        resolver.typeProperty("__t");
+        mapper.setDefaultTyping(resolver);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        // Serialize
+        String json = mapper.writeValueAsString(mapData);
+
+        // Deserialize
+        Map<?,?> result = mapper.readValue(json, Map.class);
+        assertNotNull(result);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, result.size());                                                                }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDefaultTypingWithLong$catena_1() throws Exception
+    {
+        Data data = new Data();
+        data.key = 1L;
+        Map<String, Object> mapData = new HashMap<String, Object>();
+        mapData.put("longInMap", 2L);
+        mapData.put("longAsField", data);
+
+        // Configure Jackson to preserve types
+        ObjectMapper mapper = new ObjectMapper();
+        StdTypeResolverBuilder resolver = new StdTypeResolverBuilder();
+        resolver.init(JsonTypeInfo.Id.CLASS, null);
+        resolver.inclusion(JsonTypeInfo.As.PROPERTY);
+        resolver.typeProperty("__t");
+        mapper.setDefaultTyping(resolver);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        // Serialize
+        String json = mapper.writeValueAsString(mapData);
+
+        // Deserialize
+        Map<?,?> result = mapper.readValue(json, Map.class);
+        try{ assertNotNull(result);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, result.size());                                                                     /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/DefaultTypingWithPrimitivesTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 192.85 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 104 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 168.70 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+No new failing tests but only 1 hunk
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 74 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 202.87 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+No new failing tests but only 1 hunk
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 232 with             if (t.isPrimitive()) {
+                return false;
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 194.19 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 74 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+try to fix hunk: 2
+insert before 104 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 190.86 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0', 'com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1']
+select new bug
+Pattern: 011
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+Save found bug
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 232 with             if (t.isPrimitive()) {
+                return false;
+            }
+
+try to fix hunk: 2
+insert before 104 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 178.78 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 232 with             if (t.isPrimitive()) {
+                return false;
+            }
+
+try to fix hunk: 1
+insert before 74 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 171.92 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_0
+	com.fasterxml.jackson.databind.jsontype.DefaultTypingWithPrimitivesTest::testDefaultTypingWithLong$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 232 with             if (t.isPrimitive()) {
+                return false;
+            }
+
+try to fix hunk: 1
+insert before 74 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+try to fix hunk: 2
+insert before 104 with         if (baseType.isPrimitive()) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 177.34 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

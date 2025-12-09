@@ -1,0 +1,55 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "replaced_with": "        if (length < 2){\n            throw new IllegalArgumentException(\"Length \"+length+\" must be at least 2\");\n        }\n\n        boolean allNUL = true;\n",
+            "patch_type": "insert",
+            "next_line_no": 57
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 58,
+            "to_line_no": 59,
+            "replaced_with": "            if (buffer[i] != 0){\n                allNUL = false;\n",
+            "replaced": "            final byte currentByte = buffer[i];\n            if (currentByte == 0) {\n",
+            "patch_type": "replace",
+            "next_line_no": 60
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "replaced_with": "        }\n        if (allNUL) {\n            return 0L;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 62
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 64,
+            "to_line_no": 68,
+            "replaced_with": "        while (start < end){\n            if (buffer[start] == ' '){\n                start++;\n            } else {\n",
+            "replaced": "            if (currentByte == (byte) ' ' || currentByte == '0') {\n                if (stillPadding) {\n                   continue;\n            }\n                if (currentByte == (byte) ' ') {\n",
+            "patch_type": "replace",
+            "next_line_no": 69
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "replaced_with": "        byte trailer;\n        trailer = buffer[end-1];\n        if (trailer == 0 || trailer == ' '){\n            end--;\n        } else {\n            throw new IllegalArgumentException(\n                    exceptionMessage(buffer, offset, length, end-1, trailer));\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 74
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "replaced_with": "        trailer = buffer[end-1];\n        if (trailer == 0 || trailer == ' '){\n            end--;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 75
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 76,
+            "to_line_no": 76,
+            "replaced_with": "        for ( ;start < end; start++) {\n            final byte currentByte = buffer[start];\n",
+            "replaced": "            stillPadding = false;\n",
+            "patch_type": "replace",
+            "next_line_no": 77
+        }
+    ]
+}

@@ -73,7 +73,10 @@ class failing_test(Assertion):
         self.splited = []
         if len(self.child) <= 1:
             return False
-        code = open(self.source, 'r').read()
+        try:
+            code = open(self.source, 'r').read()
+        except UnicodeDecodeError:
+            code = open(self.source, 'r', encoding='latin-1').read()
         if CONFIG_UTIL_INSERT:
             javalang_code = convert_to_javalang_code(code)
             #javalang_style_code_lines = javalang_code.splitlines()
@@ -179,7 +182,7 @@ class failing_test(Assertion):
                 break
             '''
         return True
-cache = get_member_cache()
+cache = None
 class Appendable:
     def __init__(self):
         pass
@@ -347,19 +350,24 @@ def parse_node_boby(node, _globals, tokens):
             # not implemented
             continue
     return Assertions, check
-def process_test_node_v2(filename, name, _globals=None, tokens=None):
+def process_test_node_v2(filename, name, table, _globals=None, tokens=None):
     # name: name of failing test method
     # _globals: name map of the file AST
     if _globals == None:
         _globals = traverse_get_global(readFileToAST(filename))
     if tokens == None:
-        tokens = tokenize_java_code(open(filename, 'r').read())
+        try:
+            tokens = tokenize_java_code(open(filename, 'r').read())
+        except UnicodeDecodeError:
+            tokens = tokenize_java_code(open(filename, 'r', encoding='latin-1').read())
     # tokens: Separator tokens of file code
     node = get_only_node(name, _globals)
     begin_pos = begin_pos_of_node(node)
     least = least_pos_of_node(node)
     end_pos = parse_ending_point(begin_pos, tokens, least)
     test = failing_test(begin_pos, end_pos, filename, name)
+    global cache
+    cache = get_member_cache(table)
     childs, check = parse_node_body_v2(node, _globals, tokens)
     test.fill_child(childs)
     return test, check

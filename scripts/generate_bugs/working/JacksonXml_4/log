@@ -1,0 +1,117 @@
+---
+Begin generate bug_id: JacksonXml_4
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonXml_4
+Try to checkout JacksonXml_4
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
+trying to replace old failing tests
+edit: replace from 67 range 16 at src/test/java/com/fasterxml/jackson/dataformat/xml/misc/RootNameTest.java
+to
+    public void testDynamicRootName$catena_0() throws IOException
+    {
+        String xml;
+
+        ObjectWriter w = _xmlMapper.writer().withRootName("rudy");
+
+        xml = w.writeValueAsString(new StringBean("foo"));
+        assertEquals("<rudy><text>foo</text></rudy>", xml);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        xml = w.writeValueAsString(new StringBean(null));
+        try{ assertEquals("<rudy><text/></rudy>", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and even with null will respect configured root name
+        xml = w.writeValueAsString(null);
+        try{ assertEquals("<rudy/>", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDynamicRootName$catena_1() throws IOException
+    {
+        String xml;
+
+        ObjectWriter w = _xmlMapper.writer().withRootName("rudy");
+
+        xml = w.writeValueAsString(new StringBean("foo"));
+        try{ assertEquals("<rudy><text>foo</text></rudy>", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        xml = w.writeValueAsString(new StringBean(null));
+        assertEquals("<rudy><text/></rudy>", xml);                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // and even with null will respect configured root name
+        xml = w.writeValueAsString(null);
+        try{ assertEquals("<rudy/>", xml);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDynamicRootName$catena_2() throws IOException
+    {
+        String xml;
+
+        ObjectWriter w = _xmlMapper.writer().withRootName("rudy");
+
+        xml = w.writeValueAsString(new StringBean("foo"));
+        try{ assertEquals("<rudy><text>foo</text></rudy>", xml);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        xml = w.writeValueAsString(new StringBean(null));
+        try{ assertEquals("<rudy><text/></rudy>", xml);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // and even with null will respect configured root name
+        xml = w.writeValueAsString(null);
+        assertEquals("<rudy/>", xml);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/dataformat/xml/misc/RootNameTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 46.06 seconds
+Failing tests: 1
+	com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 205 with range 1 to
+            _initWithRootName((ToXmlGenerator) jgen, rootName);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 204 with         QName rootName = _rootNameFromConfig();
+        if (rootName == null) {
+            rootName = ROOT_NAME_FOR_NULL;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 41.35 seconds
+Failing tests: 1
+	com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName$catena_2
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 204 with         QName rootName = _rootNameFromConfig();
+        if (rootName == null) {
+            rootName = ROOT_NAME_FOR_NULL;
+        }
+
+try to fix hunk: 1
+replace from 205 with range 1 to
+            _initWithRootName((ToXmlGenerator) jgen, rootName);
+
+patches are written to file
+running tests...
+used time: Finished in 36.36 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.dataformat.xml.misc.RootNameTest::testDynamicRootName$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

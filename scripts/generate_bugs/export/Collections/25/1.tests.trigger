@@ -1,0 +1,6 @@
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_5
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_0
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_3
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_1
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_2
+org.apache.commons.collections4.IteratorUtilsTest::testCollatedIterator$catena_4

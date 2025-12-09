@@ -1,0 +1,144 @@
+{
+    "original": {
+        "num_of_hunks": 9,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "import org.jsoup.parser.ParseSettings;\n",
+            "patch_type": "insert",
+            "next_line_no": 6
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "from_line_no": 118,
+            "to_line_no": 118,
+            "replaced_with": "    public Attributes add(String key, String value) {\n",
+            "replaced": "    private void add(String key, String value) {\n",
+            "patch_type": "replace",
+            "next_line_no": 119
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "        return this;\n",
+            "patch_type": "insert",
+            "next_line_no": 123
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "    public boolean isEmpty() {\n        return size == 0;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 239
+        },
+        "4": {
+            "file_name": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "replaced_with": "    public int deduplicate(ParseSettings settings) {\n        if (isEmpty())\n            return 0;\n        boolean preserve = settings.preserveAttributeCase();\n        int dupes = 0;\n        OUTER: for (int i = 0; i < keys.length; i++) {\n            for (int j = i + 1; j < keys.length; j++) {\n                if (keys[j] == null)\n                    continue OUTER; // keys.length doesn't shrink when removing, so re-test\n                if ((preserve && keys[i].equals(keys[j])) || (!preserve && keys[i].equalsIgnoreCase(keys[j]))) {\n                    dupes++;\n                    remove(j);\n                    j--;\n                }\n            }\n        }\n        return dupes;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 397
+        },
+        "5": {
+            "file_name": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+            "replaced_with": "        if (!startTag.attributes.isEmpty()) {\n            int dupes = startTag.attributes.deduplicate(settings);\n            if (dupes > 0) {\n                error(\"Duplicate attribute\");\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 199
+        },
+        "6": {
+            "file_name": "src/main/java/org/jsoup/parser/ParseSettings.java",
+            "replaced_with": "    public boolean preserveAttributeCase() {\n        return preserveAttributeCase;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 38
+        },
+        "7": {
+            "file_name": "src/main/java/org/jsoup/parser/Token.java",
+            "from_line_no": 116,
+            "to_line_no": 116,
+            "replaced_with": "                    attributes.add(pendingAttributeName, value);\n",
+            "replaced": "                    attributes.put(pendingAttributeName, value);\n",
+            "patch_type": "replace",
+            "next_line_no": 117
+        },
+        "8": {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "replaced_with": "        startTag.attributes.deduplicate(settings);\n",
+            "patch_type": "insert",
+            "next_line_no": 78
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::retainsAttributesOfDifferentCaseIfSensitive",
+            "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes",
+            "org.jsoup.parser.XmlTreeBuilderTest::dropsDuplicateAttributes"
+        ],
+        "org.jsoup.parser.HtmlParserTest::retainsAttributesOfDifferentCaseIfSensitive": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(70, 5)\nEnd: Pos(75, 5)\nSource: /tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: retainsAttributesOfDifferentCaseIfSensitive\nChilds: [StatementAssertion<Begin: Pos(74, 9), End: Pos(74, 121)>,\n]",
+            "source": "/tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "retainsAttributesOfDifferentCaseIfSensitive",
+            "begin": "Pos(70, 5)",
+            "end": "Pos(75, 5)",
+            "begin_line_no": 70,
+            "end_line_no": 75,
+            "child": [
+                "Begin: Pos(74, 9)\nEnd: Pos(74, 121)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        },
+        "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(58, 5)\nEnd: Pos(68, 5)\nSource: /tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: dropsDuplicateAttributes\nChilds: [StatementAssertion<Begin: Pos(64, 9), End: Pos(64, 75)>,\nStatementAssertion<Begin: Pos(66, 9), End: Pos(66, 51)>,\nStatementAssertion<Begin: Pos(67, 9), End: Pos(67, 89)>,\n]",
+            "source": "/tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "dropsDuplicateAttributes",
+            "begin": "Pos(58, 5)",
+            "end": "Pos(68, 5)",
+            "begin_line_no": 58,
+            "end_line_no": 68,
+            "child": [
+                "Begin: Pos(64, 9)\nEnd: Pos(64, 75)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(66, 9)\nEnd: Pos(66, 51)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(67, 9)\nEnd: Pos(67, 89)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void dropsDuplicateAttributes$catena_0() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());         /***** ORIGINAL ASSERTION IS HERE *****/ // normalized names due to lower casing\n\n        try{ assertEquals(1, parser.getErrors().size());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void dropsDuplicateAttributes$catena_1() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        try{ assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // normalized names due to lower casing\n\n        assertEquals(1, parser.getErrors().size());                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void dropsDuplicateAttributes$catena_2() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        try{ assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // normalized names due to lower casing\n\n        try{ assertEquals(1, parser.getErrors().size());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void dropsDuplicateAttributes$catena_0() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());         /***** ORIGINAL ASSERTION IS HERE *****/ // normalized names due to lower casing\n\n        try{ assertEquals(1, parser.getErrors().size());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void dropsDuplicateAttributes$catena_1() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        try{ assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // normalized names due to lower casing\n\n        assertEquals(1, parser.getErrors().size());                                                                         /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void dropsDuplicateAttributes$catena_2() {\n        String html = \"<p One=One ONE=Two Two=two one=Three One=Four two=Five>Text</p>\";\n        Parser parser = Parser.htmlParser().setTrackErrors(10);\n        Document doc = parser.parseInput(html, \"\");\n\n        Element p = doc.selectFirst(\"p\");\n        try{ assertEquals(\"<p one=\\\"One\\\" two=\\\"two\\\">Text</p>\", p.outerHtml());    }catch(Throwable __SHOULD_BE_IGNORED){} // normalized names due to lower casing\n\n        try{ assertEquals(1, parser.getErrors().size());                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Duplicate attribute\", parser.getErrors().get(0).getErrorMessage());                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.parser.XmlTreeBuilderTest::dropsDuplicateAttributes": {
+            "file_path": "src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java",
+            "Instance": "Begin: Pos(249, 5)\nEnd: Pos(256, 5)\nSource: /tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/XmlTreeBuilderTest.java\nName: dropsDuplicateAttributes\nChilds: [StatementAssertion<Begin: Pos(255, 9), End: Pos(255, 134)>,\n]",
+            "source": "/tmp/c4j/Jsoup_92/src/test/java//org/jsoup/parser/XmlTreeBuilderTest.java",
+            "name": "dropsDuplicateAttributes",
+            "begin": "Pos(249, 5)",
+            "end": "Pos(256, 5)",
+            "begin_line_no": 249,
+            "end_line_no": 256,
+            "child": [
+                "Begin: Pos(255, 9)\nEnd: Pos(255, 134)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "100111100": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes$catena_1",
+            "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes$catena_2"
+        ]
+    },
+    "111110111": {
+        "failing_tests": [
+            "org.jsoup.parser.XmlTreeBuilderTest::dropsDuplicateAttributes"
+        ]
+    },
+    "111111110": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::retainsAttributesOfDifferentCaseIfSensitive",
+            "org.jsoup.parser.HtmlParserTest::dropsDuplicateAttributes$catena_0"
+        ]
+    }
+}

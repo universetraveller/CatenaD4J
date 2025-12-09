@@ -1,0 +1,25 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java",
+            "from_line_no": 612,
+            "to_line_no": 612,
+            "replaced_with": "            _externalTypeIdHandler = extTypes.build(_beanProperties);\n",
+            "replaced": "            _externalTypeIdHandler = extTypes.build();\n",
+            "patch_type": "replace",
+            "next_line_no": 613
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java",
+            "replaced_with": "        public ExternalTypeHandler build(BeanPropertyMap otherProps) {\n",
+            "patch_type": "insert",
+            "next_line_no": 310
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java",
+            "replaced_with": "            final int len = _properties.size();\n            ExtTypedProperty[] extProps = new ExtTypedProperty[len];\n            for (int i = 0; i < len; ++i) {\n                ExtTypedProperty extProp = _properties.get(i);\n                String typePropId = extProp.getTypePropertyName();\n                SettableBeanProperty typeProp = otherProps.find(typePropId);\n                if (typeProp != null) {\n                    extProp.linkTypeProperty(typeProp);\n                }\n                extProps[i] = extProp;\n            }\n            return new ExternalTypeHandler(extProps, _nameToPropertyIndex, null, null);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 311
+        }
+    ]
+}

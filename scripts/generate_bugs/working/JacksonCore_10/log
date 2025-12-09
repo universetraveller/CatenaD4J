@@ -1,0 +1,578 @@
+---
+Begin generate bug_id: JacksonCore_10
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_10
+Try to checkout JacksonCore_10
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
+trying to replace old failing tests
+edit: replace from 303 range 25 at src/test/java/com/fasterxml/jackson/core/sym/TestSymbolTables.java
+to
+    public void testCollisionsWithBytesNew187b$catena_0() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        assertEquals(COUNT, symbols.size());                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        try{ assertEquals(5402, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary higher than usual, above 25%
+        try{ assertEquals(2744, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(1834, symbols.tertiaryCount());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        // with a bit of spillover
+        try{ assertEquals(20, symbols.spilloverCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testCollisionsWithBytesNew187b$catena_1() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        assertEquals(16384, symbols.bucketCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        try{ assertEquals(5402, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary higher than usual, above 25%
+        try{ assertEquals(2744, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(1834, symbols.tertiaryCount());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        // with a bit of spillover
+        try{ assertEquals(20, symbols.spilloverCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testCollisionsWithBytesNew187b$catena_2() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        assertEquals(5402, symbols.primaryCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        // secondary higher than usual, above 25%
+        try{ assertEquals(2744, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(1834, symbols.tertiaryCount());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        // with a bit of spillover
+        try{ assertEquals(20, symbols.spilloverCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testCollisionsWithBytesNew187b$catena_3() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        try{ assertEquals(5402, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary higher than usual, above 25%
+        assertEquals(2744, symbols.secondaryCount());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        // and most of remaining in tertiary
+        try{ assertEquals(1834, symbols.tertiaryCount());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        // with a bit of spillover
+        try{ assertEquals(20, symbols.spilloverCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testCollisionsWithBytesNew187b$catena_4() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        try{ assertEquals(5402, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary higher than usual, above 25%
+        try{ assertEquals(2744, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        assertEquals(1834, symbols.tertiaryCount());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        // with a bit of spillover
+        try{ assertEquals(20, symbols.spilloverCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testCollisionsWithBytesNew187b$catena_5() throws IOException
+    {
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(1).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 10000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = String.valueOf(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // fragile, but essential to verify low collision counts;
+        // here bit low primary, 55% 
+        try{ assertEquals(5402, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary higher than usual, above 25%
+        try{ assertEquals(2744, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(1834, symbols.tertiaryCount());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        // with a bit of spillover
+        assertEquals(20, symbols.spilloverCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 64 range 26 at src/test/java/com/fasterxml/jackson/core/sym/TestSymbolTables.java
+to
+    public void testSyntheticWithBytesNew$catena_0() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        assertEquals(COUNT, symbols.size());                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        try{ assertEquals(8534, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary between 10-20%
+        try{ assertEquals(2534, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(932, symbols.tertiaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // so that spill-over is empty or close to
+        try{ assertEquals(0, symbols.spilloverCount());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSyntheticWithBytesNew$catena_1() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(16384, symbols.bucketCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        try{ assertEquals(8534, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary between 10-20%
+        try{ assertEquals(2534, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(932, symbols.tertiaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // so that spill-over is empty or close to
+        try{ assertEquals(0, symbols.spilloverCount());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSyntheticWithBytesNew$catena_2() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        assertEquals(8534, symbols.primaryCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        // secondary between 10-20%
+        try{ assertEquals(2534, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(932, symbols.tertiaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // so that spill-over is empty or close to
+        try{ assertEquals(0, symbols.spilloverCount());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSyntheticWithBytesNew$catena_3() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        try{ assertEquals(8534, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary between 10-20%
+        assertEquals(2534, symbols.secondaryCount());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        // and most of remaining in tertiary
+        try{ assertEquals(932, symbols.tertiaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // so that spill-over is empty or close to
+        try{ assertEquals(0, symbols.spilloverCount());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSyntheticWithBytesNew$catena_4() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        try{ assertEquals(8534, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary between 10-20%
+        try{ assertEquals(2534, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        assertEquals(932, symbols.tertiaryCount());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        // so that spill-over is empty or close to
+        try{ assertEquals(0, symbols.spilloverCount());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSyntheticWithBytesNew$catena_5() throws IOException
+    {
+        // pass seed, to keep results consistent:
+        final int SEED = 33333;
+        ByteQuadsCanonicalizer symbols =
+                ByteQuadsCanonicalizer.createRoot(SEED).makeChild(JsonFactory.Feature.collectDefaults());
+
+        final int COUNT = 12000;
+        for (int i = 0; i < COUNT; ++i) {
+            String id = fieldNameFor(i);
+            int[] quads = calcQuads(id.getBytes("UTF-8"));
+            symbols.addName(id, quads, quads.length);
+        }
+        try{ assertEquals(COUNT, symbols.size());                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(16384, symbols.bucketCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        // fragile, but essential to verify low collision counts;
+        // anywhere between 70-80% primary matches
+        try{ assertEquals(8534, symbols.primaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // secondary between 10-20%
+        try{ assertEquals(2534, symbols.secondaryCount());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // and most of remaining in tertiary
+        try{ assertEquals(932, symbols.tertiaryCount());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        // so that spill-over is empty or close to
+        assertEquals(0, symbols.spilloverCount());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 460 range 25 at src/test/java/com/fasterxml/jackson/core/sym/TestSymbolTables.java
+to
+    public void testShortNameCollisionsDirectNew$catena_0() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            assertEquals(COUNT, symbols.size());                                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_1() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            assertEquals(1024, symbols.bucketCount());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_2() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            assertEquals(564, symbols.primaryCount());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_3() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(122, symbols.secondaryCount());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_4() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(14, symbols.tertiaryCount());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_5() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertEquals(0, symbols.spilloverCount());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+            try{ assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShortNameCollisionsDirectNew$catena_6() throws IOException
+    {
+        final int COUNT = 700;
+        {
+            ByteQuadsCanonicalizer symbols =
+                    ByteQuadsCanonicalizer.createRoot(333).makeChild(JsonFactory.Feature.collectDefaults());
+            for (int i = 0; i < COUNT; ++i) {
+                String id = String.valueOf((char) i);
+                int[] quads = calcQuads(id.getBytes("UTF-8"));
+                symbols.addName(id, quads, quads.length);
+            }
+            try{ assertEquals(COUNT, symbols.size());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            try{ assertEquals(1024, symbols.bucketCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            // Primary is good, but secondary spills cluster in nasty way...
+            try{ assertEquals(564, symbols.primaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(122, symbols.secondaryCount());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(14, symbols.tertiaryCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertEquals(0, symbols.spilloverCount());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+            assertEquals(COUNT,
+                    symbols.primaryCount() + symbols.secondaryCount() + symbols.tertiaryCount() + symbols.spilloverCount());    /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/sym/TestSymbolTables.java
+new test num: 19
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 27.16 seconds
+Failing tests: 13
+	com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_1
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_3
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_4
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_5
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_1
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_3
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_4
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_5
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_4
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 984 with range 1 to
+        hash ^= (hash << 3); // shuffle back a bit
+        hash += (hash >>> 12); // and bit more
+
+patches are written to file
+running tests...
+used time: Finished in 28.15 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_4
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_2
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_5
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_3
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_1
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_5
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_1
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_3
+com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_4
+com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_4
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_2
+com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_2
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 925 with range 1 to
+        final int end = (_hashSize << 3);
+        if (_spilloverEnd >= end) {
+
+patches are written to file
+running tests...
+used time: Finished in 27.88 seconds
+Failing tests: 12
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_1
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_3
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_4
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_5
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_1
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_3
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_4
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_5
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_2
+	com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_4
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 925 with range 1 to
+        final int end = (_hashSize << 3);
+        if (_spilloverEnd >= end) {
+
+try to fix hunk: 1
+replace from 984 with range 1 to
+        hash ^= (hash << 3); // shuffle back a bit
+        hash += (hash >>> 12); // and bit more
+
+patches are written to file
+running tests...
+used time: Finished in 28.32 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 2 new bugs

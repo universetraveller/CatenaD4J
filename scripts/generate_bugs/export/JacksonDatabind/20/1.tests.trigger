@@ -1,0 +1,5 @@
+com.fasterxml.jackson.databind.introspect.TestNamingStrategyStd::testNamingWithObjectNode$catena_3
+com.fasterxml.jackson.databind.introspect.TestNamingStrategyStd::testNamingWithObjectNode$catena_2
+com.fasterxml.jackson.databind.introspect.TestNamingStrategyStd::testNamingWithObjectNode$catena_0
+com.fasterxml.jackson.databind.introspect.TestNamingStrategyStd::testNamingWithObjectNode$catena_1
+com.fasterxml.jackson.databind.introspect.TestNamingStrategyStd::testNamingWithObjectNode$catena_4

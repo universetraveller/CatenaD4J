@@ -1,0 +1,340 @@
+---
+Begin generate bug_id: JxPath_3
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/JxPath_3
+Try to checkout JxPath_3
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/jxpath/ri/model/beans/NullPropertyPointer.java
+trying to replace old failing tests
+edit: replace from 59 range 8 at src/test/org/apache/commons/jxpath/ri/model/beans/BadlyImplementedFactoryTest.java
+to
+    public void testBadFactoryImplementation$catena_0() {
+        try {
+            context.createPath("foo/bar");
+            fail("should fail with JXPathException caused by JXPathAbstractFactoryException");              /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JXPathException e) {
+            try{ assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testBadFactoryImplementation$catena_1() {
+        try {
+            context.createPath("foo/bar");
+            try{ fail("should fail with JXPathException caused by JXPathAbstractFactoryException");         }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JXPathException e) {
+            assertTrue(e.getCause() instanceof JXPathAbstractFactoryException);                             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/org/apache/commons/jxpath/ri/model/beans/BadlyImplementedFactoryTest.java
+new test num: 2
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 17.69 seconds
+Failing tests: 1
+	org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+patches are written to file
+running tests...
+used time: Finished in 16.71 seconds
+Failing tests: 1
+	org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1
+No new failing tests but only 1 hunk
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 18.61 seconds
+Failing tests: 1
+	org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1
+Can independently fix []
+Could not fix independently
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 18.50 seconds
+Failing tests: 1
+	org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1
+Can independently fix []
+Could not fix independently
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 20.27 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1']
+select new bug
+Pattern: 1101
+new failing tests:
+org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest::testBadFactoryImplementation$catena_1
+Save found bug
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+insert before 19 with import org.apache.commons.jxpath.AbstractFactory;
+import org.apache.commons.jxpath.JXPathAbstractFactoryException;
+
+try to fix hunk: 1
+insert before 109 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 2
+insert before 138 with             if (parent instanceof NullPointer && parent.equals(newParent)) {
+                throw createBadFactoryException(context.getFactory());
+            }
+
+try to fix hunk: 3
+insert before 224 with 
+    private JXPathAbstractFactoryException createBadFactoryException(AbstractFactory factory) {
+        return new JXPathAbstractFactoryException("Factory " + factory
+                + " reported success creating object for path: " + asPath()
+                + " but object was null.  Terminating to avoid stack recursion.");
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 16.41 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 1 new bugs

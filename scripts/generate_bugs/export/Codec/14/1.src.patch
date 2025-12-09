@@ -1,0 +1,46 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java",
+            "from_line_no": 31,
+            "to_line_no": 31,
+            "replaced_with": "import java.util.TreeMap;\n",
+            "replaced": "import java.util.TreeSet;\n",
+            "patch_type": "replace",
+            "next_line_no": 32
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java",
+            "from_line_no": 338,
+            "to_line_no": 338,
+            "replaced_with": "        final Map<Rule.Phoneme, Rule.Phoneme> phonemes =\n            new TreeMap<Rule.Phoneme, Rule.Phoneme>(Rule.Phoneme.COMPARATOR);\n",
+            "replaced": "        final Set<Rule.Phoneme> phonemes = new TreeSet<Rule.Phoneme>(Rule.Phoneme.COMPARATOR);\n",
+            "patch_type": "replace",
+            "next_line_no": 339
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java",
+            "from_line_no": 361,
+            "to_line_no": 361,
+            "replaced_with": "            for (final Rule.Phoneme newPhoneme : subBuilder.getPhonemes()) {\n                if (phonemes.containsKey(newPhoneme)) {\n                    final Rule.Phoneme oldPhoneme = phonemes.remove(newPhoneme);\n                    final Rule.Phoneme mergedPhoneme = oldPhoneme.mergeWithLanguage(newPhoneme.getLanguages());\n                    phonemes.put(mergedPhoneme, mergedPhoneme);\n                } else {\n                    phonemes.put(newPhoneme, newPhoneme);\n                }\n            }\n",
+            "replaced": "            phonemes.addAll(subBuilder.getPhonemes());\n",
+            "patch_type": "replace",
+            "next_line_no": 362
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java",
+            "from_line_no": 364,
+            "to_line_no": 364,
+            "replaced_with": "        return new PhonemeBuilder(phonemes.keySet());\n",
+            "replaced": "        return new PhonemeBuilder(phonemes);\n",
+            "patch_type": "replace",
+            "next_line_no": 365
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/bm/Rule.java",
+            "replaced_with": "        public Phoneme mergeWithLanguage(final LanguageSet lang) {\n          return new Phoneme(this.phonemeText.toString(), this.languages.merge(lang));\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 158
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+com.fasterxml.jackson.databind.jsontype.WrapperObjectWithObjectIdTest::testSimple$catena_0
+com.fasterxml.jackson.databind.jsontype.WrapperObjectWithObjectIdTest::testSimple$catena_1
+com.fasterxml.jackson.databind.jsontype.WrapperObjectWithObjectIdTest::testSimple$catena_2

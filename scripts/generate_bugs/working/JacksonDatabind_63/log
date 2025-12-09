@@ -1,0 +1,250 @@
+---
+Begin generate bug_id: JacksonDatabind_63
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_63
+Try to checkout JacksonDatabind_63
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java
+trying to replace old failing tests
+edit: replace from 29 range 12 at src/test/java/com/fasterxml/jackson/databind/deser/exc/ExceptionPathTest.java
+to
+    public void testReferenceChainForInnerClass$catena_0() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new Outer());
+        try {
+            MAPPER.readValue(json, Outer.class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            JsonMappingException.Reference reference = e.getPath().get(0);
+            try{ assertEquals(getClass().getName()+"$Outer[\"inner\"]",
+                    reference.toString());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testReferenceChainForInnerClass$catena_1() throws Exception
+    {
+        String json = MAPPER.writeValueAsString(new Outer());
+        try {
+            MAPPER.readValue(json, Outer.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            JsonMappingException.Reference reference = e.getPath().get(0);
+            assertEquals(getClass().getName()+"$Outer[\"inner\"]",
+                    reference.toString());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 41 range 16 at src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithDefaultDeserialization.java
+to
+    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {
+        // given
+        ObjectMapper mapper = new ObjectMapper();
+        String input = "{\"bar\":{\"baz\":{qux:\"quxValue\"))}";
+        final String THIS = getClass().getName();
+
+        // when
+        try {
+            mapper.readValue(input, Foo.class);
+            fail("Upsss! Exception has not been thrown.");                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException ex) {
+            // then
+            try{ assertEquals(THIS+"$Foo[\"bar\"]->"+THIS+"$Bar[\"baz\"]",
+                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {
+        // given
+        ObjectMapper mapper = new ObjectMapper();
+        String input = "{\"bar\":{\"baz\":{qux:\"quxValue\"))}";
+        final String THIS = getClass().getName();
+
+        // when
+        try {
+            mapper.readValue(input, Foo.class);
+            try{ fail("Upsss! Exception has not been thrown.");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException ex) {
+            // then
+            assertEquals(THIS+"$Foo[\"bar\"]->"+THIS+"$Bar[\"baz\"]",
+                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 52 range 16 at src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithJsonCreatorDeserialization.java
+to
+    public void testShouldThrowJsonMappingExceptionWithPathReference$catena_0() throws IOException {
+        // given
+        ObjectMapper mapper = new ObjectMapper();
+        String input = "{\"bar\":{\"baz\":{qux:\"quxValue\"))}";
+        final String THIS = getClass().getName();
+
+        // when
+        try {
+            mapper.readValue(input, Foo.class);
+            fail("Upsss! Exception has not been thrown.");                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException ex) {
+            // then
+            try{ assertEquals(THIS+"$Foo[\"bar\"]->"+THIS+"$Bar[\"baz\"]",
+                    ex.getPathReference());                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testShouldThrowJsonMappingExceptionWithPathReference$catena_1() throws IOException {
+        // given
+        ObjectMapper mapper = new ObjectMapper();
+        String input = "{\"bar\":{\"baz\":{qux:\"quxValue\"))}";
+        final String THIS = getClass().getName();
+
+        // when
+        try {
+            mapper.readValue(input, Foo.class);
+            try{ fail("Upsss! Exception has not been thrown.");                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException ex) {
+            // then
+            assertEquals(THIS+"$Foo[\"bar\"]->"+THIS+"$Bar[\"baz\"]",
+                    ex.getPathReference());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/exc/ExceptionPathTest.java
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithJsonCreatorDeserialization.java
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/exc/TestExceptionHandlingWithDefaultDeserialization.java
+new test num: 6
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 218.13 seconds
+Failing tests: 3
+	com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass$catena_1
+	com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1
+	com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 136 with range 1 to
+                    */
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 131 with                     int arrays = 0;
+                    while (cls.isArray()) {
+                        cls = cls.getComponentType();
+                        ++arrays;
+                    }
+                    sb.append(cls.getName());
+                    while (--arrays >= 0) {
+                        sb.append("[]");
+                    }
+                    /* was:
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+delete from 10 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 131 with                     int arrays = 0;
+                    while (cls.isArray()) {
+                        cls = cls.getComponentType();
+                        ++arrays;
+                    }
+                    sb.append(cls.getName());
+                    while (--arrays >= 0) {
+                        sb.append("[]");
+                    }
+                    /* was:
+
+try to fix hunk: 2
+replace from 136 with range 1 to
+                    */
+
+patches are written to file
+running tests...
+used time: Finished in 205.04 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass$catena_1', 'com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1', 'com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1']
+select new bug
+Pattern: 011
+new failing tests:
+com.fasterxml.jackson.databind.deser.exc.ExceptionPathTest::testReferenceChainForInnerClass$catena_1
+com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithJsonCreatorDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1
+com.fasterxml.jackson.databind.deser.exc.TestExceptionHandlingWithDefaultDeserialization::testShouldThrowJsonMappingExceptionWithPathReference$catena_1
+Save found bug
+processed: 011
+pattern: 101
+try to fix hunk: 0
+delete from 10 with range 1
+try to fix hunk: 2
+replace from 136 with range 1 to
+                    */
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+delete from 10 with range 1
+try to fix hunk: 1
+insert before 131 with                     int arrays = 0;
+                    while (cls.isArray()) {
+                        cls = cls.getComponentType();
+                        ++arrays;
+                    }
+                    sb.append(cls.getName());
+                    while (--arrays >= 0) {
+                        sb.append("[]");
+                    }
+                    /* was:
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+delete from 10 with range 1
+try to fix hunk: 1
+insert before 131 with                     int arrays = 0;
+                    while (cls.isArray()) {
+                        cls = cls.getComponentType();
+                        ++arrays;
+                    }
+                    sb.append(cls.getName());
+                    while (--arrays >= 0) {
+                        sb.append("[]");
+                    }
+                    /* was:
+
+try to fix hunk: 2
+replace from 136 with range 1 to
+                    */
+
+patches are written to file
+running tests...
+used time: Finished in 250.81 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

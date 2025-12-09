@@ -1,0 +1,25 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "        checkIllegalTypes(ctxt, type, beanDesc);\n",
+            "patch_type": "insert",
+            "next_line_no": 143
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "replaced_with": "    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,\n            BeanDescription beanDesc)\n        throws JsonMappingException\n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 842
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java",
+            "from_line_no": 844,
+            "to_line_no": 844,
+            "replaced_with": "        Class<?> raw = type.getRawClass();\n        String name = raw.getSimpleName();\n\n        if (\"TemplatesImpl\".equals(name)) { // [databind#1599] \n            if (raw.getName().startsWith(\"com.sun.org.apache.xalan\")) {\n                throw JsonMappingException.from(ctxt,\n                        String.format(\"Illegal type (%s) to deserialize: prevented for security reasons\",\n                                name));\n            }\n        }\n    }\n",
+            "replaced": "\n",
+            "patch_type": "replace",
+            "next_line_no": 845
+        }
+    ]
+}

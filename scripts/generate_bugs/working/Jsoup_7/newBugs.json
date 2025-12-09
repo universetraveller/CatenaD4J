@@ -1,0 +1,54 @@
+{
+    "original": {
+        "num_of_hunks": 4,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/nodes/Document.java",
+            "replaced_with": "import org.jsoup.select.Elements;\n",
+            "patch_type": "insert",
+            "next_line_no": 5
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/nodes/Document.java",
+            "replaced_with": "        normaliseStructure(\"head\", htmlEl);\n        normaliseStructure(\"body\", htmlEl);\n",
+            "patch_type": "insert",
+            "next_line_no": 113
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/nodes/Document.java",
+            "replaced_with": "    private void normaliseStructure(String tag, Element htmlEl) {\n        Elements elements = this.getElementsByTag(tag);\n        Element master = elements.first(); // will always be available as created above if not existent\n        if (elements.size() > 1) { // dupes, move contents to master\n            List<Node> toMove = new ArrayList<Node>();\n            for (int i = 1; i < elements.size(); i++) {\n                Node dupe = elements.get(i);\n                for (Node node : dupe.childNodes)\n                    toMove.add(node);\n                dupe.remove();\n            }\n\n            for (Node dupe : toMove)\n                master.appendChild(dupe);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 137
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/nodes/Document.java",
+            "replaced_with": "        if (!master.parent().equals(htmlEl)) {\n            htmlEl.appendChild(master); // includes remove()            \n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 138
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.nodes.DocumentTest::testNormalisesStructure"
+        ],
+        "org.jsoup.nodes.DocumentTest::testNormalisesStructure": {
+            "file_path": "src/test/java/org/jsoup/nodes/DocumentTest.java",
+            "Instance": "Begin: Pos(57, 5)\nEnd: Pos(60, 5)\nSource: /tmp/c4j/Jsoup_7/src/test/java//org/jsoup/nodes/DocumentTest.java\nName: testNormalisesStructure\nChilds: [StatementAssertion<Begin: Pos(59, 9), End: Pos(59, 163)>,\n]",
+            "source": "/tmp/c4j/Jsoup_7/src/test/java//org/jsoup/nodes/DocumentTest.java",
+            "name": "testNormalisesStructure",
+            "begin": "Pos(57, 5)",
+            "end": "Pos(60, 5)",
+            "begin_line_no": 57,
+            "end_line_no": 60,
+            "child": [
+                "Begin: Pos(59, 9)\nEnd: Pos(59, 163)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "1111": {
+        "failing_tests": [
+            "org.jsoup.nodes.DocumentTest::testNormalisesStructure"
+        ]
+    }
+}

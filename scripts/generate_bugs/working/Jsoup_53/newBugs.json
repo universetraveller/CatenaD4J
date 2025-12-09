@@ -1,0 +1,50 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/TokenQueue.java",
+            "replaced_with": "        boolean inQuote = false;\n",
+            "patch_type": "insert",
+            "next_line_no": 265
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/TokenQueue.java",
+            "replaced_with": "                if (c.equals('\\'') || c.equals('\"') && c != open)\n                    inQuote = !inQuote;\n                if (inQuote)\n                    continue;\n",
+            "patch_type": "insert",
+            "next_line_no": 270
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.select.SelectorTest::attributeWithBrackets"
+        ],
+        "org.jsoup.select.SelectorTest::attributeWithBrackets": {
+            "file_path": "src/test/java/org/jsoup/select/SelectorTest.java",
+            "Instance": "Begin: Pos(665, 5)\nEnd: Pos(670, 5)\nSource: /tmp/c4j/Jsoup_53/src/test/java//org/jsoup/select/SelectorTest.java\nName: attributeWithBrackets\nChilds: [StatementAssertion<Begin: Pos(668, 9), End: Pos(668, 74)>,\nStatementAssertion<Begin: Pos(669, 9), End: Pos(669, 81)>,\n]",
+            "source": "/tmp/c4j/Jsoup_53/src/test/java//org/jsoup/select/SelectorTest.java",
+            "name": "attributeWithBrackets",
+            "begin": "Pos(665, 5)",
+            "end": "Pos(670, 5)",
+            "begin_line_no": 665,
+            "end_line_no": 670,
+            "child": [
+                "Begin: Pos(668, 9)\nEnd: Pos(668, 74)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(669, 9)\nEnd: Pos(669, 81)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void attributeWithBrackets$catena_0() {\n        String html = \"<div data='End]'>One</div> <div data='[Another)]]'>Two</div>\";\n        Document doc = Jsoup.parse(html);\n        assertEquals(\"One\", doc.select(\"div[data='End]'\").first().text());                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Two\", doc.select(\"div[data='[Another)]]'\").first().text());                      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void attributeWithBrackets$catena_1() {\n        String html = \"<div data='End]'>One</div> <div data='[Another)]]'>Two</div>\";\n        Document doc = Jsoup.parse(html);\n        try{ assertEquals(\"One\", doc.select(\"div[data='End]'\").first().text());                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Two\", doc.select(\"div[data='[Another)]]'\").first().text());                           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void attributeWithBrackets$catena_0() {\n        String html = \"<div data='End]'>One</div> <div data='[Another)]]'>Two</div>\";\n        Document doc = Jsoup.parse(html);\n        assertEquals(\"One\", doc.select(\"div[data='End]'\").first().text());                                  /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"Two\", doc.select(\"div[data='[Another)]]'\").first().text());                      }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void attributeWithBrackets$catena_1() {\n        String html = \"<div data='End]'>One</div> <div data='[Another)]]'>Two</div>\";\n        Document doc = Jsoup.parse(html);\n        try{ assertEquals(\"One\", doc.select(\"div[data='End]'\").first().text());                             }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"Two\", doc.select(\"div[data='[Another)]]'\").first().text());                           /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.select.SelectorTest::attributeWithBrackets$catena_1",
+            "org.jsoup.select.SelectorTest::attributeWithBrackets$catena_0"
+        ]
+    }
+}

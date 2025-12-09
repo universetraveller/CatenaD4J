@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/binary/CharSequenceUtils.java",
+            "replaced_with": "package org.apache.commons.codec.binary;\n\n/**\n * <p>\n * Operations on {@link CharSequence} that are {@code null} safe.\n * </p>\n * <p>\n * Copied from Apache Commons Lang r1586295 on April 10, 2014 (day of 3.3.2 release).\n * </p>\n * \n * @see CharSequence\n * @since 1.10\n */\npublic class CharSequenceUtils {\n\n    /**\n     * Green implementation of regionMatches.\n     * \n     * @param cs\n     *            the {@code CharSequence} to be processed\n     * @param ignoreCase\n     *            whether or not to be case insensitive\n     * @param thisStart\n     *            the index to start on the {@code cs} CharSequence\n     * @param substring\n     *            the {@code CharSequence} to be looked for\n     * @param start\n     *            the index to start on the {@code substring} CharSequence\n     * @param length\n     *            character length of the region\n     * @return whether the region matched\n     */\n    static boolean regionMatches(final CharSequence cs, final boolean ignoreCase, final int thisStart,\n            final CharSequence substring, final int start, final int length) {\n        if (cs instanceof String && substring instanceof String) {\n            return ((String) cs).regionMatches(ignoreCase, thisStart, (String) substring, start, length);\n        }\n        int index1 = thisStart;\n        int index2 = start;\n        int tmpLen = length;\n\n        while (tmpLen-- > 0) {\n            char c1 = cs.charAt(index1++);\n            char c2 = substring.charAt(index2++);\n\n            if (c1 == c2) {\n                continue;\n            }\n\n            if (!ignoreCase) {\n                return false;\n            }\n\n            // The same check as in String.regionMatches():\n            if (Character.toUpperCase(c1) != Character.toUpperCase(c2)\n                    && Character.toLowerCase(c1) != Character.toLowerCase(c2)) {\n                return false;\n            }\n        }\n\n        return true;\n    }\n}\n",
+            "patch_type": "insert",
+            "next_line_no": 1
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/binary/StringUtils.java",
+            "replaced_with": "    public static boolean equals(final CharSequence cs1, final CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n        if (cs1 instanceof String && cs2 instanceof String) {\n            return cs1.equals(cs2);\n        }\n        return CharSequenceUtils.regionMatches(cs1, false, 0, cs2, 0, Math.max(cs1.length(), cs2.length()));\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 70
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java",
+            "replaced_with": "import org.apache.commons.codec.binary.StringUtils;\n",
+            "patch_type": "insert",
+            "next_line_no": 22
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java",
+            "from_line_no": 244,
+            "to_line_no": 244,
+            "replaced_with": "        return StringUtils.equals(doubleMetaphone(value1, alternate), doubleMetaphone(value2, alternate));\n",
+            "replaced": "        return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));\n",
+            "patch_type": "replace",
+            "next_line_no": 245
+        }
+    ]
+}

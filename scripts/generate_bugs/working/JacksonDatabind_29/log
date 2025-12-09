@@ -1,0 +1,98 @@
+---
+Begin generate bug_id: JacksonDatabind_29
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_29
+Try to checkout JacksonDatabind_29
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java
+trying to replace old failing tests
+edit: replace from 283 range 12 at src/test/java/com/fasterxml/jackson/databind/jsontype/TestExternalId.java
+to
+    public void testExternalTypeIdWithNull$catena_0() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerSubtypes(ValueBean.class);
+        ExternalBean b;
+        b = mapper.readValue(aposToQuotes("{'bean':null,'extType':'vbean'}"),
+                ExternalBean.class);
+        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        b = mapper.readValue(aposToQuotes("{'extType':'vbean','bean':null}"),
+                ExternalBean.class);
+        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testExternalTypeIdWithNull$catena_1() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerSubtypes(ValueBean.class);
+        ExternalBean b;
+        b = mapper.readValue(aposToQuotes("{'bean':null,'extType':'vbean'}"),
+                ExternalBean.class);
+        try{ assertNotNull(b);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        b = mapper.readValue(aposToQuotes("{'extType':'vbean','bean':null}"),
+                ExternalBean.class);
+        assertNotNull(b);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TestExternalId.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 217.01 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 251 with         if (t == JsonToken.VALUE_NULL) {
+            _properties[index].getProperty().set(bean, null);
+            return;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 182.47 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_1
+com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_0
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 228 with         if (t == JsonToken.VALUE_NULL) {
+            return null;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 207.71 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testExternalTypeIdWithNull$catena_1
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 228 with         if (t == JsonToken.VALUE_NULL) {
+            return null;
+        }
+
+try to fix hunk: 1
+insert before 251 with         if (t == JsonToken.VALUE_NULL) {
+            _properties[index].getProperty().set(bean, null);
+            return;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 194.36 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

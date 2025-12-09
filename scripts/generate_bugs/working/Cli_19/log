@@ -1,0 +1,325 @@
+---
+Begin generate bug_id: Cli_19
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Cli_19
+Try to checkout Cli_19
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli/PosixParser.java
+trying to replace old failing tests
+edit: replace from 103 range 14 at src/test/org/apache/commons/cli/PosixParserTest.java
+to
+    public void testUnrecognizedOption2$catena_0() throws Exception
+    {
+        String[] args = new String[] { "-z", "-abtoast", "foo", "bar" };
+
+        try
+        {
+            parser.parse(options, args);
+            fail("UnrecognizedOptionException wasn't thrown");                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        catch (UnrecognizedOptionException e)
+        {
+            try{ assertEquals("-z", e.getOption());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testUnrecognizedOption2$catena_1() throws Exception
+    {
+        String[] args = new String[] { "-z", "-abtoast", "foo", "bar" };
+
+        try
+        {
+            parser.parse(options, args);
+            try{ fail("UnrecognizedOptionException wasn't thrown");                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        catch (UnrecognizedOptionException e)
+        {
+            assertEquals("-z", e.getOption());                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/org/apache/commons/cli/PosixParserTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 6.28 seconds
+Failing tests: 1
+	org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 239 with 
+        tokens.add(token);
+
+patches are written to file
+running tests...
+used time: Finished in 5.27 seconds
+Failing tests: 46
+	org.apache.commons.cli.BugsTest::test11680
+	org.apache.commons.cli.BugsTest::test15046
+	org.apache.commons.cli.BugsTest::test15648
+	org.apache.commons.cli.ParseRequiredTest::testWithRequiredOption
+	org.apache.commons.cli.ParseRequiredTest::testOptionAndRequiredOption
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testURLPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testClassPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testNumberPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testObjectPattern
+	org.apache.commons.cli.PosixParserTest::testSimpleShort
+	org.apache.commons.cli.PosixParserTest::testStop2
+	org.apache.commons.cli.PosixParserTest::testPropertiesOption
+	org.apache.commons.cli.PosixParserTest::testLongOptionWithShort
+	org.apache.commons.cli.PosixParserTest::testDoubleDash
+	org.apache.commons.cli.PosixParserTest::testSingleDash
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValues
+	org.apache.commons.cli.ValueTest::testLongOptionalArgValue
+	org.apache.commons.cli.ValueTest::testPropertyOverrideValues
+	org.apache.commons.cli.ValueTest::testShortOptionalArgNoValue
+	org.apache.commons.cli.ValueTest::testLongWithArg
+	org.apache.commons.cli.ValueTest::testPropertyOptionSingularValue
+	org.apache.commons.cli.ValueTest::testPropertyOptionMultipleValues
+	org.apache.commons.cli.ValueTest::testPropertyOptionFlags
+	org.apache.commons.cli.ValueTest::testLongOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testShortWithArg
+	org.apache.commons.cli.ValueTest::testLongOptionalArgValues
+	org.apache.commons.cli.ValueTest::testShortOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testLongNoArg
+	org.apache.commons.cli.ValueTest::testShortNoArg
+	org.apache.commons.cli.ValueTest::testLongOptionalNoValue
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValue
+	org.apache.commons.cli.ValuesTest::testTwoArgValues
+	org.apache.commons.cli.ValuesTest::testShortArgs
+	org.apache.commons.cli.ValuesTest::testCharSeparator
+	org.apache.commons.cli.ValuesTest::testExtraArgs
+	org.apache.commons.cli.ValuesTest::testShortArgsWithValue
+	org.apache.commons.cli.ValuesTest::testComplexValues
+	org.apache.commons.cli.ValuesTest::testMultipleArgValues
+	org.apache.commons.cli.bug.BugCLI13Test::testCLI13
+	org.apache.commons.cli.bug.BugCLI148Test::testWorkaround2
+	org.apache.commons.cli.bug.BugCLI51Test::test
+	org.apache.commons.cli.bug.BugCLI71Test::testBasic
+	org.apache.commons.cli.bug.BugCLI71Test::testMistakenArgument
+	org.apache.commons.cli.bug.BugCLI71Test::testGetsDefaultIfOptional
+Includes new failing tests, set to unusable
+processed: 001
+pattern: 010
+try to fix hunk: 1
+delete from 237 with range 1
+patches are written to file
+running tests...
+used time: Finished in 5.27 seconds
+Failing tests: 2
+	org.apache.commons.cli.PosixParserTest::testStop2
+	org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0
+Includes new failing tests, set to unusable
+processed: 010
+pattern: 100
+try to fix hunk: 0
+delete from 232 with range 1
+patches are written to file
+running tests...
+used time: Finished in 5.53 seconds
+Failing tests: 47
+	org.apache.commons.cli.ArgumentIsOptionTest::testOptionAndOptionWithArgument
+	org.apache.commons.cli.ArgumentIsOptionTest::testOption
+	org.apache.commons.cli.BugsTest::test13425
+	org.apache.commons.cli.BugsTest::test13935
+	org.apache.commons.cli.BugsTest::test15046
+	org.apache.commons.cli.BugsTest::test15648
+	org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromDifferentGroup
+	org.apache.commons.cli.OptionGroupTest::testTwoValidOptions
+	org.apache.commons.cli.OptionGroupTest::testSingleOption
+	org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroup
+	org.apache.commons.cli.OptionGroupTest::testSingleOptionFromGroup
+	org.apache.commons.cli.ParseRequiredTest::testWithRequiredOption
+	org.apache.commons.cli.ParseRequiredTest::testOptionAndRequiredOption
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testURLPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testClassPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testNumberPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testObjectPattern
+	org.apache.commons.cli.PosixParserTest::testSimpleShort
+	org.apache.commons.cli.PosixParserTest::testStop
+	org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0
+	org.apache.commons.cli.PosixParserTest::testPropertiesOption
+	org.apache.commons.cli.PosixParserTest::testLongOptionWithShort
+	org.apache.commons.cli.PosixParserTest::testDoubleDash
+	org.apache.commons.cli.PosixParserTest::testSingleDash
+	org.apache.commons.cli.PosixParserTest::testMultiple
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValues
+	org.apache.commons.cli.ValueTest::testPropertyOverrideValues
+	org.apache.commons.cli.ValueTest::testShortOptionalArgNoValue
+	org.apache.commons.cli.ValueTest::testShortWithArg
+	org.apache.commons.cli.ValueTest::testShortOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testShortNoArg
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValue
+	org.apache.commons.cli.ValuesTest::testTwoArgValues
+	org.apache.commons.cli.ValuesTest::testShortArgs
+	org.apache.commons.cli.ValuesTest::testExtraArgs
+	org.apache.commons.cli.ValuesTest::testShortArgsWithValue
+	org.apache.commons.cli.ValuesTest::testComplexValues
+	org.apache.commons.cli.ValuesTest::testMultipleArgValues
+	org.apache.commons.cli.bug.BugCLI13Test::testCLI13
+	org.apache.commons.cli.bug.BugCLI148Test::testWorkaround2
+	org.apache.commons.cli.bug.BugCLI51Test::test
+	org.apache.commons.cli.bug.BugCLI71Test::testBasic
+	org.apache.commons.cli.bug.BugCLI71Test::testLackOfError
+	org.apache.commons.cli.bug.BugCLI71Test::testMistakenArgument
+	org.apache.commons.cli.bug.BugCLI71Test::testGetsDefaultIfOptional
+Includes new failing tests, set to unusable
+processed: 100
+pattern: 011
+try to fix hunk: 1
+delete from 237 with range 1
+try to fix hunk: 2
+insert before 239 with 
+        tokens.add(token);
+
+patches are written to file
+running tests...
+used time: Finished in 5.18 seconds
+Failing tests: 45
+	org.apache.commons.cli.BugsTest::test11680
+	org.apache.commons.cli.BugsTest::test15046
+	org.apache.commons.cli.BugsTest::test15648
+	org.apache.commons.cli.ParseRequiredTest::testWithRequiredOption
+	org.apache.commons.cli.ParseRequiredTest::testOptionAndRequiredOption
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testURLPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testClassPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testNumberPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testObjectPattern
+	org.apache.commons.cli.PosixParserTest::testSimpleShort
+	org.apache.commons.cli.PosixParserTest::testPropertiesOption
+	org.apache.commons.cli.PosixParserTest::testLongOptionWithShort
+	org.apache.commons.cli.PosixParserTest::testDoubleDash
+	org.apache.commons.cli.PosixParserTest::testSingleDash
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValues
+	org.apache.commons.cli.ValueTest::testLongOptionalArgValue
+	org.apache.commons.cli.ValueTest::testPropertyOverrideValues
+	org.apache.commons.cli.ValueTest::testShortOptionalArgNoValue
+	org.apache.commons.cli.ValueTest::testLongWithArg
+	org.apache.commons.cli.ValueTest::testPropertyOptionSingularValue
+	org.apache.commons.cli.ValueTest::testPropertyOptionMultipleValues
+	org.apache.commons.cli.ValueTest::testPropertyOptionFlags
+	org.apache.commons.cli.ValueTest::testLongOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testShortWithArg
+	org.apache.commons.cli.ValueTest::testLongOptionalArgValues
+	org.apache.commons.cli.ValueTest::testShortOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testLongNoArg
+	org.apache.commons.cli.ValueTest::testShortNoArg
+	org.apache.commons.cli.ValueTest::testLongOptionalNoValue
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValue
+	org.apache.commons.cli.ValuesTest::testTwoArgValues
+	org.apache.commons.cli.ValuesTest::testShortArgs
+	org.apache.commons.cli.ValuesTest::testCharSeparator
+	org.apache.commons.cli.ValuesTest::testExtraArgs
+	org.apache.commons.cli.ValuesTest::testShortArgsWithValue
+	org.apache.commons.cli.ValuesTest::testComplexValues
+	org.apache.commons.cli.ValuesTest::testMultipleArgValues
+	org.apache.commons.cli.bug.BugCLI13Test::testCLI13
+	org.apache.commons.cli.bug.BugCLI148Test::testWorkaround2
+	org.apache.commons.cli.bug.BugCLI51Test::test
+	org.apache.commons.cli.bug.BugCLI71Test::testBasic
+	org.apache.commons.cli.bug.BugCLI71Test::testMistakenArgument
+	org.apache.commons.cli.bug.BugCLI71Test::testGetsDefaultIfOptional
+Includes new failing tests, set to unusable
+processed: 011
+pattern: 101
+try to fix hunk: 0
+delete from 232 with range 1
+try to fix hunk: 2
+insert before 239 with 
+        tokens.add(token);
+
+patches are written to file
+running tests...
+used time: Finished in 5.77 seconds
+Failing tests: 1
+	org.apache.commons.cli.PosixParserTest::testStop2
+Includes new failing tests, set to unusable
+processed: 101
+pattern: 110
+try to fix hunk: 0
+delete from 232 with range 1
+try to fix hunk: 1
+delete from 237 with range 1
+patches are written to file
+running tests...
+used time: Finished in 5.85 seconds
+Failing tests: 48
+	org.apache.commons.cli.ArgumentIsOptionTest::testOptionAndOptionWithArgument
+	org.apache.commons.cli.ArgumentIsOptionTest::testOption
+	org.apache.commons.cli.BugsTest::test13425
+	org.apache.commons.cli.BugsTest::test13935
+	org.apache.commons.cli.BugsTest::test15046
+	org.apache.commons.cli.BugsTest::test15648
+	org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromDifferentGroup
+	org.apache.commons.cli.OptionGroupTest::testTwoValidOptions
+	org.apache.commons.cli.OptionGroupTest::testSingleOption
+	org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroup
+	org.apache.commons.cli.OptionGroupTest::testSingleOptionFromGroup
+	org.apache.commons.cli.ParseRequiredTest::testWithRequiredOption
+	org.apache.commons.cli.ParseRequiredTest::testOptionAndRequiredOption
+	org.apache.commons.cli.PatternOptionBuilderTest::testSimplePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testURLPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testClassPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testNumberPattern
+	org.apache.commons.cli.PatternOptionBuilderTest::testObjectPattern
+	org.apache.commons.cli.PosixParserTest::testSimpleShort
+	org.apache.commons.cli.PosixParserTest::testStop2
+	org.apache.commons.cli.PosixParserTest::testStop
+	org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0
+	org.apache.commons.cli.PosixParserTest::testPropertiesOption
+	org.apache.commons.cli.PosixParserTest::testLongOptionWithShort
+	org.apache.commons.cli.PosixParserTest::testDoubleDash
+	org.apache.commons.cli.PosixParserTest::testSingleDash
+	org.apache.commons.cli.PosixParserTest::testMultiple
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValues
+	org.apache.commons.cli.ValueTest::testPropertyOverrideValues
+	org.apache.commons.cli.ValueTest::testShortOptionalArgNoValue
+	org.apache.commons.cli.ValueTest::testShortWithArg
+	org.apache.commons.cli.ValueTest::testShortOptionalNArgValues
+	org.apache.commons.cli.ValueTest::testShortNoArg
+	org.apache.commons.cli.ValueTest::testShortOptionalArgValue
+	org.apache.commons.cli.ValuesTest::testTwoArgValues
+	org.apache.commons.cli.ValuesTest::testShortArgs
+	org.apache.commons.cli.ValuesTest::testExtraArgs
+	org.apache.commons.cli.ValuesTest::testShortArgsWithValue
+	org.apache.commons.cli.ValuesTest::testComplexValues
+	org.apache.commons.cli.ValuesTest::testMultipleArgValues
+	org.apache.commons.cli.bug.BugCLI13Test::testCLI13
+	org.apache.commons.cli.bug.BugCLI148Test::testWorkaround2
+	org.apache.commons.cli.bug.BugCLI51Test::test
+	org.apache.commons.cli.bug.BugCLI71Test::testBasic
+	org.apache.commons.cli.bug.BugCLI71Test::testLackOfError
+	org.apache.commons.cli.bug.BugCLI71Test::testMistakenArgument
+	org.apache.commons.cli.bug.BugCLI71Test::testGetsDefaultIfOptional
+Includes new failing tests, set to unusable
+processed: 110
+pattern: 111
+try to fix hunk: 0
+delete from 232 with range 1
+try to fix hunk: 1
+delete from 237 with range 1
+try to fix hunk: 2
+insert before 239 with 
+        tokens.add(token);
+
+patches are written to file
+running tests...
+used time: Finished in 4.74 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0']
+select new bug
+Pattern: 111
+new failing tests:
+org.apache.commons.cli.PosixParserTest::testUnrecognizedOption2$catena_0
+Save found bug
+processed: 111
+Find 1 new bugs

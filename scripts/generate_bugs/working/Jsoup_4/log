@@ -1,0 +1,198 @@
+---
+Begin generate bug_id: Jsoup_4
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_4
+Try to checkout Jsoup_4
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/Entities.java
+trying to replace old failing tests
+edit: replace from 11 range 11 at src/test/java/org/jsoup/nodes/EntitiesTest.java
+to
+    @Test public void escape$catena_0() {
+        String text = "Hello &<> Å å π 新 there";
+        String escapedAscii = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.base);
+        String escapedAsciiFull = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.extended);
+        String escapedUtf = Entities.escape(text, Charset.forName("UTF-8").newEncoder(), Entities.EscapeMode.base);
+
+        assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; &#960; &#26032; there", escapedAscii);            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Hello &amp;&lt;&gt; &angst; &aring; &pi; &#26032; there", escapedAsciiFull);     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; π 新 there", escapedUtf);                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        // odd that it's defined as aring in base but angst in full
+    }     @Test public void escape$catena_1() {
+        String text = "Hello &<> Å å π 新 there";
+        String escapedAscii = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.base);
+        String escapedAsciiFull = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.extended);
+        String escapedUtf = Entities.escape(text, Charset.forName("UTF-8").newEncoder(), Entities.EscapeMode.base);
+
+        try{ assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; &#960; &#26032; there", escapedAscii);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Hello &amp;&lt;&gt; &angst; &aring; &pi; &#26032; there", escapedAsciiFull);          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; π 新 there", escapedUtf);                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        // odd that it's defined as aring in base but angst in full
+    }     @Test public void escape$catena_2() {
+        String text = "Hello &<> Å å π 新 there";
+        String escapedAscii = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.base);
+        String escapedAsciiFull = Entities.escape(text, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.extended);
+        String escapedUtf = Entities.escape(text, Charset.forName("UTF-8").newEncoder(), Entities.EscapeMode.base);
+
+        try{ assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; &#960; &#26032; there", escapedAscii);       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Hello &amp;&lt;&gt; &angst; &aring; &pi; &#26032; there", escapedAsciiFull);     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Hello &amp;&lt;&gt; &Aring; &aring; π 新 there", escapedUtf);                          /***** ORIGINAL ASSERTION IS HERE *****/
+        // odd that it's defined as aring in base but angst in full
+    }
+edit: replace from 30 range 7 at src/test/java/org/jsoup/nodes/EntitiesTest.java
+to
+    @Test public void caseSensitive$catena_0() {
+        String unescaped = "Ü ü & &";
+        assertEquals("&Uuml; &uuml; &amp; &amp;", Entities.escape(unescaped, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.extended));         /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        String escaped = "&Uuml; &uuml; &amp; &AMP";
+        try{ assertEquals("Ü ü & &", Entities.unescape(escaped));                                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void caseSensitive$catena_1() {
+        String unescaped = "Ü ü & &";
+        try{ assertEquals("&Uuml; &uuml; &amp; &amp;", Entities.escape(unescaped, Charset.forName("ascii").newEncoder(), Entities.EscapeMode.extended));    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        String escaped = "&Uuml; &uuml; &amp; &AMP";
+        assertEquals("Ü ü & &", Entities.unescape(escaped));                                                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/EntitiesTest.java
+new test num: 5
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 10.50 seconds
+Failing tests: 4
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_0
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_1
+	org.jsoup.nodes.EntitiesTest::escape$catena_0
+	org.jsoup.nodes.EntitiesTest::escape$catena_2
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 2240 with range 1 to
+            fullByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 9.19 seconds
+Failing tests: 3
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_1
+	org.jsoup.nodes.EntitiesTest::escape$catena_0
+	org.jsoup.nodes.EntitiesTest::escape$catena_2
+select new bug
+Pattern: 001
+new failing tests:
+org.jsoup.nodes.EntitiesTest::caseSensitive$catena_0
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 2235 with range 1 to
+            baseByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 9.47 seconds
+Failing tests: 2
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_0
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_1
+select new bug
+Pattern: 010
+new failing tests:
+org.jsoup.nodes.EntitiesTest::escape$catena_2
+org.jsoup.nodes.EntitiesTest::escape$catena_0
+Save found bug
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 64 with range 1 to
+                String name = m.group(1);
+
+patches are written to file
+running tests...
+used time: Finished in 9.65 seconds
+Failing tests: 3
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_0
+	org.jsoup.nodes.EntitiesTest::escape$catena_0
+	org.jsoup.nodes.EntitiesTest::escape$catena_2
+select new bug
+Pattern: 100
+new failing tests:
+org.jsoup.nodes.EntitiesTest::caseSensitive$catena_1
+Save found bug
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 2235 with range 1 to
+            baseByVal.put(c, ((String) entity[0]));
+
+try to fix hunk: 2
+replace from 2240 with range 1 to
+            fullByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 8.51 seconds
+Failing tests: 1
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_1
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 64 with range 1 to
+                String name = m.group(1);
+
+try to fix hunk: 2
+replace from 2240 with range 1 to
+            fullByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 8.77 seconds
+Failing tests: 2
+	org.jsoup.nodes.EntitiesTest::escape$catena_0
+	org.jsoup.nodes.EntitiesTest::escape$catena_2
+Can independently fix []
+Could not fix independently
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 64 with range 1 to
+                String name = m.group(1);
+
+try to fix hunk: 1
+replace from 2235 with range 1 to
+            baseByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 8.16 seconds
+Failing tests: 1
+	org.jsoup.nodes.EntitiesTest::caseSensitive$catena_0
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 64 with range 1 to
+                String name = m.group(1);
+
+try to fix hunk: 1
+replace from 2235 with range 1 to
+            baseByVal.put(c, ((String) entity[0]));
+
+try to fix hunk: 2
+replace from 2240 with range 1 to
+            fullByVal.put(c, ((String) entity[0]));
+
+patches are written to file
+running tests...
+used time: Finished in 9.85 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 3 new bugs

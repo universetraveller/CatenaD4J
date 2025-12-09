@@ -1,0 +1,11 @@
+{
+    "com.fasterxml.jackson.databind.deser.jdk.UtilCollectionsTypesTest::testUnmodifiableListFromLinkedList": {
+        "begin_line_no": 64,
+        "end_line_no": 76,
+        "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/jdk/UtilCollectionsTypesTest.java",
+        "to": [
+            "   public void testUnmodifiableListFromLinkedList$catena_1() throws Exception {\n       final List<String> input = new LinkedList<>();\n       input.add(\"first\");\n       input.add(\"second\");\n\n       // Can't use simple \"_verifyCollection\" as type may change; instead use\n       // bit more flexible check:\n       Collection<?> act = _writeReadCollection(Collections.unmodifiableList(input));\n       try{ assertEquals(input, act);                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n\n       // and this check may be bit fragile (may need to revisit), but is good enough for now:\n       assertEquals(Collections.unmodifiableList(new ArrayList<>(input)).getClass(), act.getClass());         /***** ORIGINAL ASSERTION IS HERE *****/\n   }",
+            "   public void testUnmodifiableListFromLinkedList$catena_0() throws Exception {\n       final List<String> input = new LinkedList<>();\n       input.add(\"first\");\n       input.add(\"second\");\n\n       // Can't use simple \"_verifyCollection\" as type may change; instead use\n       // bit more flexible check:\n       Collection<?> act = _writeReadCollection(Collections.unmodifiableList(input));\n       assertEquals(input, act);                                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n\n       // and this check may be bit fragile (may need to revisit), but is good enough for now:\n       try{ assertEquals(Collections.unmodifiableList(new ArrayList<>(input)).getClass(), act.getClass());    }catch(Throwable __SHOULD_BE_IGNORED){}\n   }"
+        ]
+    }
+}

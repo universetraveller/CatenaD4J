@@ -1,0 +1,2 @@
+com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_0
+com.fasterxml.jackson.databind.objectid.TestObjectIdSerialization::testNullStringPropertyId$catena_1

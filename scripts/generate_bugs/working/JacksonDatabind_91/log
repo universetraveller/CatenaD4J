@@ -1,0 +1,128 @@
+---
+Begin generate bug_id: JacksonDatabind_91
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_91
+Try to checkout JacksonDatabind_91
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java
+trying to replace old failing tests
+edit: replace from 35 range 17 at src/test/java/com/fasterxml/jackson/databind/deser/jdk/MapDeserializerCachingTest.java
+to
+    public void testCachedSerialize$catena_0() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = aposToQuotes("{'data':{'1st':'onedata','2nd':'twodata'}}");
+
+        // Do deserialization with non-annotated map property
+        NonAnnotatedMapHolderClass ignored = mapper.readValue(json, NonAnnotatedMapHolderClass.class);
+        assertTrue(ignored.data.containsKey("1st"));                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(ignored.data.containsKey("2nd"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+//mapper = new ObjectMapper();
+        
+        MapHolder model2 = mapper.readValue(json, MapHolder.class);
+        if (!model2.data.containsKey("1st (CUSTOM)")
+            || !model2.data.containsKey("2nd (CUSTOM)")) {
+            try{ fail("Not using custom key deserializer for input: "+json+"; resulted in: "+model2.data);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testCachedSerialize$catena_1() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = aposToQuotes("{'data':{'1st':'onedata','2nd':'twodata'}}");
+
+        // Do deserialization with non-annotated map property
+        NonAnnotatedMapHolderClass ignored = mapper.readValue(json, NonAnnotatedMapHolderClass.class);
+        try{ assertTrue(ignored.data.containsKey("1st"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(ignored.data.containsKey("2nd"));                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+//mapper = new ObjectMapper();
+        
+        MapHolder model2 = mapper.readValue(json, MapHolder.class);
+        if (!model2.data.containsKey("1st (CUSTOM)")
+            || !model2.data.containsKey("2nd (CUSTOM)")) {
+            try{ fail("Not using custom key deserializer for input: "+json+"; resulted in: "+model2.data);    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testCachedSerialize$catena_2() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = aposToQuotes("{'data':{'1st':'onedata','2nd':'twodata'}}");
+
+        // Do deserialization with non-annotated map property
+        NonAnnotatedMapHolderClass ignored = mapper.readValue(json, NonAnnotatedMapHolderClass.class);
+        try{ assertTrue(ignored.data.containsKey("1st"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(ignored.data.containsKey("2nd"));                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+//mapper = new ObjectMapper();
+        
+        MapHolder model2 = mapper.readValue(json, MapHolder.class);
+        if (!model2.data.containsKey("1st (CUSTOM)")
+            || !model2.data.containsKey("2nd (CUSTOM)")) {
+            fail("Not using custom key deserializer for input: "+json+"; resulted in: "+model2.data);         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/jdk/MapDeserializerCachingTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 231.84 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.deser.jdk.MapDeserializerCachingTest::testCachedSerialize$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 543 with             if (t.isMapLikeType()) {
+                JavaType kt = t.getKeyType();
+                if (kt.getValueHandler() != null) {
+                    return true;
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 541 with range 1 to
+                if ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null)) {
+                    return true;
+                }
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 541 with range 1 to
+                if ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null)) {
+                    return true;
+                }
+            }
+
+try to fix hunk: 1
+insert before 543 with             if (t.isMapLikeType()) {
+                JavaType kt = t.getKeyType();
+                if (kt.getValueHandler() != null) {
+                    return true;
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 255.54 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.jdk.MapDeserializerCachingTest::testCachedSerialize$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.deser.jdk.MapDeserializerCachingTest::testCachedSerialize$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

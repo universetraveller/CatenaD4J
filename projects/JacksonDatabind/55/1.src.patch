@@ -1,0 +1,43 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "import com.fasterxml.jackson.databind.util.EnumValues;\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "from_line_no": 82,
+            "to_line_no": 82,
+            "replaced_with": "                return EnumKeySerializer.construct(rawKeyType,\n                        EnumValues.constructFromName(config, (Class<Enum<?>>) rawKeyType));\n",
+            "replaced": "                return new Default(Default.TYPE_ENUM, rawKeyType);\n",
+            "patch_type": "replace",
+            "next_line_no": 83
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "    public static class EnumKeySerializer extends StdSerializer<Object>\n    {\n        protected final EnumValues _values;\n",
+            "patch_type": "insert",
+            "next_line_no": 215
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        protected EnumKeySerializer(Class<?> enumType, EnumValues values) {\n            super(enumType, false);\n            _values = values;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 216
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        public static EnumKeySerializer construct(Class<?> enumType,\n                EnumValues enumValues)\n        {\n            return new EnumKeySerializer(enumType, enumValues);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 217
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        @Override\n        public void serialize(Object value, JsonGenerator g, SerializerProvider serializers)\n                throws IOException\n        {\n            if (serializers.isEnabled(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)) {\n                g.writeFieldName(value.toString());\n                return;\n            }\n            Enum<?> en = (Enum<?>) value;\n            g.writeFieldName(_values.serializedValueFor(en));\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 218
+        }
+    ]
+}

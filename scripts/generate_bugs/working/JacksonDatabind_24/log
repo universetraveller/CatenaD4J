@@ -1,0 +1,399 @@
+---
+Begin generate bug_id: JacksonDatabind_24
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_24
+Try to checkout JacksonDatabind_24
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/cfg/BaseSettings.java
+trying to replace old failing tests
+edit: replace from 195 range 31 at src/test/java/com/fasterxml/jackson/databind/ser/TestConfig.java
+to
+    public void testDateFormatConfig$catena_0() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        assertEquals(tz1, tz1);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_1() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz2, tz2);                                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_2() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            fail();                                                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_3() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_4() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_5() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_6() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_7() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_8() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_9() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testDateFormatConfig$catena_10() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        TimeZone tz1 = TimeZone.getTimeZone("America/Los_Angeles");
+        TimeZone tz2 = TimeZone.getTimeZone("Central Standard Time");
+
+        // sanity checks
+        try{ assertEquals(tz1, tz1);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz2, tz2);                                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        if (tz1.equals(tz2)) {
+            try{ fail();                                                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+
+        mapper.setTimeZone(tz1);
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also better stick via reader/writer as well
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        f.setTimeZone(tz2);
+        mapper.setDateFormat(f);
+
+        // should not change the timezone tho
+        try{ assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.getDeserializationConfig().getTimeZone());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(tz1, mapper.writer().getConfig().getTimeZone());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(tz1, mapper.reader().getConfig().getTimeZone());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/ser/TestConfig.java
+new test num: 11
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 147.84 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_10
+	com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_7
+	com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_8
+	com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_9
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 237 with range 1 to
+                _timeZone, _defaultBase64);
+
+patches are written to file
+running tests...
+used time: Finished in 162.31 seconds
+Failing tests: 0
+select new bug
+Pattern: 01
+new failing tests:
+com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_9
+com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_8
+com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_10
+com.fasterxml.jackson.databind.ser.TestConfig::testDateFormatConfig$catena_7
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+delete from 234 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+delete from 234 with range 1
+try to fix hunk: 1
+replace from 237 with range 1 to
+                _timeZone, _defaultBase64);
+
+patches are written to file
+running tests...
+used time: Finished in 176.83 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

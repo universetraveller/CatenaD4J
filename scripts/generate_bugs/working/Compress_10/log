@@ -1,0 +1,121 @@
+---
+Begin generate bug_id: Compress_10
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_10
+Try to checkout Compress_10
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java
+trying to replace old failing tests
+edit: replace from 126 range 13 at src/test/java/org/apache/commons/compress/archivers/zip/UTF8ZipFilesTest.java
+to
+    public void testReadWinZipArchive$catena_0() throws IOException, URISyntaxException {
+        URL zip = getClass().getResource("/utf8-winzip-test.zip");
+        File archive = new File(new URI(zip.toString()));
+        ZipFile zf = null;
+        try {
+            zf = new ZipFile(archive, null, true);
+            assertCanRead(zf, ASCII_TXT);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        } finally {
+            ZipFile.closeQuietly(zf);
+        }
+    }     public void testReadWinZipArchive$catena_1() throws IOException, URISyntaxException {
+        URL zip = getClass().getResource("/utf8-winzip-test.zip");
+        File archive = new File(new URI(zip.toString()));
+        ZipFile zf = null;
+        try {
+            zf = new ZipFile(archive, null, true);
+            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+            try{ assertCanRead(zf, OIL_BARREL_TXT);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        } finally {
+            ZipFile.closeQuietly(zf);
+        }
+    }     public void testReadWinZipArchive$catena_2() throws IOException, URISyntaxException {
+        URL zip = getClass().getResource("/utf8-winzip-test.zip");
+        File archive = new File(new URI(zip.toString()));
+        ZipFile zf = null;
+        try {
+            zf = new ZipFile(archive, null, true);
+            try{ assertCanRead(zf, ASCII_TXT);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+            try{ assertCanRead(zf, EURO_FOR_DOLLAR_TXT);                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+            assertCanRead(zf, OIL_BARREL_TXT);                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        } finally {
+            ZipFile.closeQuietly(zf);
+        }
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/zip/UTF8ZipFilesTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 13.81 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 842 with             entries.put(ze, offsetEntry);
+
+patches are written to file
+running tests...
+used time: Finished in 14.65 seconds
+Failing tests: 4
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_0
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testZipArchiveInputStreamReadsUnicodeFields
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 808 with range 2 to
+        Map<ZipArchiveEntry, OffsetEntry> origMap =
+            new LinkedHashMap<ZipArchiveEntry, OffsetEntry>(entries);
+        entries.clear();
+        for (ZipArchiveEntry ze : origMap.keySet()) {
+            OffsetEntry offsetEntry = origMap.get(ze);
+
+patches are written to file
+running tests...
+used time: Finished in 14.68 seconds
+Failing tests: 7
+	org.apache.commons.compress.archivers.zip.EncryptedArchiveTest::testReadPasswordEncryptedEntryViaZipFile
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_0
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1
+	org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2
+	org.apache.commons.compress.archivers.zip.ZipFileTest::testReadingOfStoredEntry
+	org.apache.commons.compress.archivers.zip.ZipFileTest::testPhysicalOrder
+	org.apache.commons.compress.archivers.zip.ZipFileTest::testCDOrder
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 808 with range 2 to
+        Map<ZipArchiveEntry, OffsetEntry> origMap =
+            new LinkedHashMap<ZipArchiveEntry, OffsetEntry>(entries);
+        entries.clear();
+        for (ZipArchiveEntry ze : origMap.keySet()) {
+            OffsetEntry offsetEntry = origMap.get(ze);
+
+try to fix hunk: 1
+insert before 842 with             entries.put(ze, offsetEntry);
+
+patches are written to file
+running tests...
+used time: Finished in 15.12 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1', 'org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_1
+org.apache.commons.compress.archivers.zip.UTF8ZipFilesTest::testReadWinZipArchive$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs
