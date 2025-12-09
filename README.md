@@ -1,194 +1,320 @@
 # CatenaD4J
-CatenaD4J (c4j) is a dataset that can be used to evaluate existing techniques on repairing indivisible multi-hunk bugs. This repository also contains an implementation of tool for  detecting and creating indivisible bugs.  
 
-C4j works like a plugin of other datasets and now use Defects4J as default backend because c4j contains a lot of bugs generated from defects4j. But it is easy to switch its backend or expand its commands and bugs.  
+CatenaD4J (c4j) is a dataset for evaluating techniques on repairing indivisible multi-hunk bugs. It contains tools for detecting and creating indivisible bugs where multiple code hunks depend on each other and must all be fixed together.
+
+C4j works as a plugin to other datasets and uses Defects4J as the default backend. The dataset contains bugs generated from Defects4J, but it's designed to be easily extensible to other backends or custom commands.
 
 > [!NOTE]
-> In our experiments, we discovered some flaky bugs in the Mockito project within this dataset. These bugs produced varying test results when run in different environments (e.g. sequential versus parallel execution, or under high CPU usage). We wil be working to determine the reasons. It is recommended to avoid using bugs in the Mockito project currently.
+> Some bugs in the Mockito project have been found to be flaky, producing varying test results in different environments (e.g., sequential vs. parallel execution, or under high CPU usage). We recommend avoiding Mockito project bugs until this is resolved.
 
-## Documentation
+## Quick Links
 
-- **[Usage Guide](docs/USAGE.md)** - Comprehensive guide for using CatenaD4J commands and workflows
-- **[Python API Documentation](docs/API.md)** - Complete Python API reference for programmatic access
-- **[Java Toolkit API Documentation](docs/JAVA_API.md)** - Java API reference for test execution and utilities
+- **[API Documentation](docs/)** - Python and Java API references
+- **[Reproduce Experiments](scripts/README.md)** - Steps to reproduce FSE 2024 paper experiments
 
-## Bugs  in the dataset  
-CatenaD4J now contains 6 projects and 367 bugs generated from Defects4J.  
+## Bugs in the Dataset
 
-- The dataset consists of original bugs that is indivisible from d4j and isolated new bugs what original bugs of d4j are divided into.
+CatenaD4J contains **6 projects** and **367 bugs** generated from Defects4J.
 
-- Each bug would have its new failing tests that only contains single valid assertion statement so that techniques and debuggers cannot detect repairing effects from one failing test, and that is our real debugging scenario.
+- The dataset consists of original indivisible bugs from Defects4J and new isolated bugs created by dividing original bugs
+- Each bug has failing tests containing only single assertion statements, preventing techniques from detecting partial fixes
+- All bugs are **catena bugs** - catenated hunks that depend on each other and must all be fixed together
+- Each bug has a `catena_id (cid)` for identification
 
-- All bugs in the dataset are isolated and minimal. We would like to name these bugs **catena bugs** that means the bugs are catenated which consist of hunks depending on each other so that only by fixing all hunks can we fix the catena bug.
+**Bug Format:** `<bug_id><b/f><cid>` where b/f indicates buggy/fixed version
 
-- All bugs would be assigned a `catena_id (cid)`. To find a specific bug, you may use project\_name that the bug belongs to, bug\_id that indicates the source bug of this bug and the cid to recognize bugs generated from the same source bug.  
+### Active Bugs
 
-To distinguish a bug there is the tag `<bug_id><b/f><cid>`. **b/f** means the **buggy/fixed** version.  
-## Active bugs  
-You can check all available cids with its bug\_id in file `./projects/<project_name>/bugs-registry.csv`  
+Check available bugs in `./projects/<project_name>/bugs-registry.csv`
 
-Every line in bugs-registry represents a `catena bug` and conforms to format `<project_name>, <bug_id>, <cid>, <loader>`.  
+Each line represents a catena bug: `<project_name>, <bug_id>, <cid>, <loader>`
 
-Each valid bug should have a entry in bugs-registry so that the dataset knows how to check out it.  
 ## Requirements
-* Python3
 
-  It is already installed in most Linux distributions and MacOS. If you are using OS without python3, check [python official website](https://www.python.org/downloads/) for installation.
-    
-* Defects4J v2.0
-  
-  Check [defects4j](https://github.com/rjust/defects4j.git) for installation.
-  
-* Java 1.8
-  
-  Check [JDK 8](https://openjdk.org/projects/jdk8/) for installation.
-  
+* **Python 3** - Pre-installed on most Linux/MacOS systems ([download](https://www.python.org/downloads/))
+* **Defects4J v2.0** - ([installation guide](https://github.com/rjust/defects4j.git))
+* **Java 1.8** - JDK 8 ([download](https://openjdk.org/projects/jdk8/))
+
 ## Installation
-### Install from Dockerfile
-* Ensure you have docker installed on your computer  
 
-	If you have no docker cli available, check [Install Docker Engine](https://docs.docker.com/engine/install/) for installation.  
+### Using Docker
 
-* Check if curl is available
+```bash
+# Download Dockerfile
+curl https://raw.githubusercontent.com/universetraveller/CatenaD4J/main/Dockerfile -o Dockerfile
 
-	If you have no curl installed on your computer, check [Install curl](https://curl.se/docs/install.html) for installation.  
+# Build image
+docker build -t catena4j:main -f ./Dockerfile .
 
-	Please check [the man page of curl](https://curl.se/docs/manpage.html) for usage and any problem.  
+# Run container
+docker run -it catena4j:main /bin/bash
+```
 
+### Manual Installation
 
-* Download the Dockerfile  
-`curl https://raw.githubusercontent.com/universetraveller/CatenaD4J/main/Dockerfile -o Dockerfile`  
+```bash
+# Clone repository
+git clone https://github.com/universetraveller/CatenaD4J.git
 
-	You can also use other approaches to download the Dockerfile (e.g. Download [it](Dockerfile) directly from this repo).  
+# Add to PATH
+export PATH=$PATH:<path to CatenaD4J>
 
-* Build the docker image via Dockerfile
-`docker build -t catena4j:main -f ./Dockerfile .`
+# Verify installation
+catena4j pids
+```
 
-* Create a container with CatenaD4J using the built image  
-`docker run -it catena4j:main /bin/bash`
+**Note:** The `catena4j` script requires `python3` command. Edit the first line of the script if your Python executable has a different name.
 
-### Install step by step manually
-* Ensure the softwares in the **Requirements** section are all installed.  
-  
-* Clone the repository
-`git clone https://github.com/universetraveller/CatenaD4J.git`  
+## Command-Line Usage
 
-* Add executable script **catena4j** to environment variable **PATH**:  
-`export PATH=$PATH:<path to this repo>`  
+### Quick Start
 
+```bash
+# List available projects
+catena4j pids
 
-* Check installation:  
-`catena4j pids`  
+# List bugs in a project
+catena4j bids -p Chart
 
-Note that the script `catena4j` assumes the command `python3` is usable otherwise you should edit the first line of the script (It points to the path of your executable python).  
-## Available commands  
-|Commands |Description |
-|---------|------------|
-|checkout |Check out the specific version of a bug|
-|export   |Export specific infomation of a bug|
-|reset    |Reset all unstaged modification for a working directory|
-|pids     |Print available project\_names|
-|bids     |Print available bug\_ids that contains at least one cid|
-|cids     |Print available catena ids for a bug\_id|
-|info     |Not implemented now|
-|test     |Not implemented now|
-|compile  |Not implemented now|
-|ver      |Not implemented now|
+# List catena IDs for a bug
+catena4j cids -p Chart -b 15
 
+# Check out a bug
+catena4j checkout -p Chart -v 15b1 -w ./buggy
 
-If you try to pass not implemented commands to catena4j, the script would pass it to the backend to try to run it.  
-## Usage  
-* checkout bugs  
-`catena4j checkout -p <project_name> -v <bug_id of defects4j><'b' or 'f'><cid of catena4j> -w <working_dir>`
+# Export bug properties
+catena4j export -p tests.trigger -w ./buggy
+```
 
-example: `catena4j checkout -p Chart -v 15b1 -w ./buggy`  
+### Command Reference
 
-* export `tests.trigger` or `classes.modified`
+#### checkout - Check out a bug
 
-`catena4j export -p <property_name> -w <working_dir> -o <output_file>`
+```bash
+catena4j checkout -p <project> -v <version_id> -w <work_dir> [--full-history]
+```
 
-* reset working directory
-  
-`catena4j reset [-w <working_dir>]`
+**Arguments:**
+- `-p`: Project name (Chart, Lang, Math, etc.)
+- `-v`: Version ID in format `<bug_id><b/f><cid>` (e.g., 15b1)
+  - `b` = buggy version, `f` = fixed version
+- `-w`: Working directory (created if doesn't exist)
+- `--full-history`: (Optional) Generate additional git commits
 
-* print available ids
+**Examples:**
+```bash
+# Check out buggy version
+catena4j checkout -p Chart -v 15b1 -w ./chart_bug
 
-`catana4j pids`
+# Check out fixed version
+catena4j checkout -p Math -v 2f3 -w ./math_fixed
 
-`catana4j bids -p <project_name>`   
+# With full history
+catena4j checkout -p Lang -v 10b1 -w ./lang --full-history
+```
 
-`catana4j cids -p <project_name> -b <bug_id>`  
+#### export - Export bug properties
 
-## About Defects4J backend  
-We did not fully re-implement checkout command of defects4j, so currently the default loader use defects4j to checkout original bugs. Besides we do not implement command test and compile now for defects4j supports them.   
+```bash
+catena4j export -p <property> [-w <work_dir>] [-o <output_file>] [--from-cache] [--update-cache]
+```
 
-However we note that defects4j is a complex system, and it works inefficient. Defects4J would call perl, ant, java and other commands so that it executes about n times slower than directly use these commands. It is better to re-implement defects4j's checkout, test and compile commands based on **git** and **java**.  
+**Available Properties:**
 
-In the future we would try to implement these commands and replace current defects4j backend with lightweight ones if possible.  
+*CatenaD4J Properties:*
+- `classes.modified` - Classes modified by the bug fix
+- `tests.trigger` - Trigger tests that expose the bug
 
-## Customization: Work with loader and command-entries  
-It is easy to take control of the dataset because all components are designed as replaceable, so that you can design your own commands or change the behaviours of current commands.  
+*Defects4J Static Properties:*
+- `classes.relevant` - Classes loaded by triggering tests
+- `dir.src.classes` - Source directory of classes
+- `dir.src.tests` - Source directory of tests  
+- `tests.relevant` - Relevant tests touching modified sources
 
-The implementation of the dataset is in folder `internal`.  
+*Defects4J Dynamic Properties:*
+- `cp.compile` - Classpath to compile the project
+- `cp.test` - Classpath to run tests
+- `dir.bin.classes` - Target directory of classes
+- `dir.bin.tests` - Target directory of test classes
+- `tests.all` - All developer-written tests
 
-**Loaders** are the real executor of the commands, and all bugs should specify its loader in bugs-registry to load infomation for itself.  
+**Examples:**
+```bash
+# Export to stdout
+catena4j export -p classes.modified -w ./buggy
 
-**Command entries** are the entrances of commands. Command-line interface would find the command implementation from command-entries via command input and then pass all args to the implementation.  
+# Export to file
+catena4j export -p tests.trigger -w ./buggy -o triggers.txt
 
-By implementing custom command as python function which processes args namespace, we can add our custom function to command-entries with a command name, and then add this command name to config file, so that we can use this custom command in command line.  
-### Example of custom command
-Command `cids` can be an example of creating custom command. First, we implement our command `cids` in [ids.py](internal/ids.py) as `def CIDS(args)`, then we add it into [entries.py](internal/entries.py) by adding this function to `__entry_map` or using function `register_command`. Then when try to input `catena4j cids` it can print some messages.  
+# Use cache (faster)
+catena4j export -p cp.compile -w ./buggy --from-cache
+```
 
-### Custom loader
-By implementing custom loader as python class we can take control of bug loading. Add our new loader to [loaders.py](internal/loaders.py) and modify the loader specification of any bug in bugs-registry then the script would use our custom loader to load the bug.  
+#### Other Commands
 
-Every loader should implement function `load`, `fix` and `get_attr` (Arguments can refer to [default_loader](internal/default_loader.py)).  
+```bash
+# Reset working directory
+catena4j reset [-w <work_dir>]
 
-### Default loader
-Catena4J use [DefaultPathLoader](internal/default_loader.py) as default loader. It loads bugs' infomation via specific formatted paths. By creating these specific files and adding a new entry into bugs-registry assigning loader to default, we can create a new active bug.
-## Reproduce experiments  
-Folder [scripts](scripts) contains all experiment codes to construct this dataset.  
+# List project IDs
+catena4j pids
 
-Please check [README of scripts](scripts/README.md) for information and guides about how to reproduce the experiments.  
+# List bug IDs for a project
+catena4j bids -p <project>
 
-## Statistics
-Check [here](scripts/generate_bugs/statstics) for the statistics of current bugs
+# List catena IDs for a bug
+catena4j cids -p <project> -b <bug_id>
+```
+
+**Not Yet Implemented:** `info`, `test`, `compile`, `ver` (forwarded to Defects4J backend)
+
+### Common Workflows
+
+#### Workflow 1: Explore Available Bugs
+
+```bash
+# List all projects
+catena4j pids
+
+# List bugs in Chart project
+catena4j bids -p Chart
+
+# List all variations of bug 15
+catena4j cids -p Chart -b 15
+```
+
+#### Workflow 2: Analyze a Bug
+
+```bash
+# Check out the bug
+catena4j checkout -p Chart -v 15b1 -w /tmp/chart15
+
+# Get trigger tests
+catena4j export -p tests.trigger -w /tmp/chart15 -o triggers.txt
+
+# Get modified classes
+catena4j export -p classes.modified -w /tmp/chart15 -o classes.txt
+
+# View results
+cat triggers.txt classes.txt
+```
+
+#### Workflow 3: Compare Buggy and Fixed
+
+```bash
+# Check out both versions
+catena4j checkout -p Math -v 2b1 -w /tmp/math_buggy
+catena4j checkout -p Math -v 2f1 -w /tmp/math_fixed
+
+# Compare properties
+catena4j export -p classes.modified -w /tmp/math_buggy -o buggy.txt
+catena4j export -p classes.modified -w /tmp/math_fixed -o fixed.txt
+diff -u buggy.txt fixed.txt
+```
+
+### Performance Tips
+
+- Use `--from-cache` for frequently accessed properties (much faster)
+- Dynamic properties (cp.*, tests.all) require build processing (slower)
+- Export properties once and cache them with `--update-cache`
+
+## API Documentation
+
+For programmatic access to CatenaD4J, see the [API documentation](docs/):
+
+- **[Python API](docs/)** - Commands, loaders, and utilities
+- **[Java Toolkit API](docs/)** - Test runners, agents, and build integration
+
+Example Python usage:
+```python
+from catena4j.dispatcher import ExecutionContext
+from catena4j.commands import checkout, export
+from argparse import Namespace
+
+context = ExecutionContext()
+context.args = Namespace(p='Chart', v='15b1', w='./bug', full_history=False)
+checkout.run(context)
+
+context.args = Namespace(p='tests.trigger', w='./bug', o=None, 
+                        from_cache=False, update_cache=False)
+result = export.run(context)
+print(result)
+```
+
+## About Defects4J Backend
+
+CatenaD4J uses Defects4J to checkout original bugs and supports `test` and `compile` commands through the backend. However, Defects4J is complex and relatively inefficient, calling Perl, Ant, and Java commands that execute slower than direct usage.
+
+**Future Plans:** Re-implement Defects4J's checkout, test, and compile commands using Git and Java for better performance.
+
+## Customization
+
+CatenaD4J is designed with replaceable components for easy customization.
+
+### Loaders
+
+**Loaders** execute commands and load bug information. Each bug in `bugs-registry.csv` specifies its loader. Project-specific loaders are in `catena4j/loaders/`.
+
+To create a custom loader:
+1. Implement a loader class with `load`, `fix`, and `get_attr` methods
+2. Add to `catena4j/loaders/`
+3. Specify in `bugs-registry.csv`
+
+### Commands
+
+**Command entries** are the entry points for CLI commands. The CLI finds implementations from command entries and passes arguments.
+
+To create a custom command:
+1. Implement as a Python function processing args namespace
+2. Add to command entries
+3. Register in config
+
+Example: `cids` command is implemented in `catena4j/commands/xids.py` and registered in the command system.
+
+See [API documentation](docs/) for implementation details.
 
 ## Development Plan
-The current version is available. We will try to make this dataset more concrete and add some features in the future.   
 
-The plan of development is as below. However, because the task is time-comsuming, some updates will only be developed when we have free time. Please notice that some urgent updates (e.g. bug fixes) will be prioritized and addressed as fast as possible.  
+The current version is stable and available. Future updates (developed as time permits):
 
-1. An implementation of faster `test` command using the custom test runner with abort-on-failure feature that supports up to Junit5.
-2. An implementation of faster `checkout` command to replace the current version (using defects4j's checkout).  
-3. Adding a fast and usable code coverage tool.  
-4. Adding a fast and usable spectrum-based fault localization tool.
-5. Complete replacement of the defects4j backend by re-implementing all used commands.
+1. Faster `test` command with abort-on-failure (JUnit 5 support)
+2. Faster `checkout` command replacing Defects4J
+3. Fast code coverage tool
+4. Spectrum-based fault localization tool
+5. Complete Defects4J backend replacement
 
-## Repository Structure  
+## Repository Structure
+
 ```
---------------------------------------------------------------------------------------------------------
-File tree                         | Introdcution
---------------------------------------------------------------------------------------------------------
-.                                 | Root path of the repo
-|-- Dockerfile                    | Script for docker to build an image contains this repo
-|-- LICENSE                       | Opensource license file
-|-- README.md                     | This file
-|-- catena4j                      | Executable script of the dataset
-|-- internal                      | Implementation of the dataset
-|-- projects                      | Bugs data of the dataset
-`-- scripts                       | Scripts for reproducing experiments in our FSE 2024 paper
-    |-- Dockerfile.experiments    | Script for docker to build an image used for reproducing experiments
-    |-- README.md                 | Steps and guides for reproducing experiments
-    |-- analyze_tests             | Extract assertion related identifiers from trigger tests 
-    |-- build.sh                  | Script to build the image for experiments in a single step
-    |-- construct_database        | Prepare bugs and metadata for the experiments
-    |-- generate_bugs             | Algorithm to detect and create indivisible bugs
-    |-- install_requirements.sh   | Script used to install dependencies of experiments
-    |-- parse_patches             | Extract hunks information of bugs
-    `-- split_tests               | Algorithm of tests minimization
-----------------------------------------------------------------------------------------------------------
+CatenaD4J/
+├── Dockerfile              # Docker build script
+├── LICENSE                 # Apache 2.0 license
+├── README.md               # This file
+├── catena4j                # Main executable script
+├── catena4j/               # Python implementation
+│   ├── commands/           # Command implementations
+│   ├── loaders/            # Project-specific loaders
+│   └── ...                 # Core modules
+├── docs/                   # API documentation
+├── projects/               # Bug data and metadata
+├── scripts/                # Experiment reproduction
+│   ├── construct_database/ # Data preparation
+│   ├── generate_bugs/      # Bug isolation algorithm
+│   ├── parse_patches/      # Hunk extraction
+│   └── split_tests/        # Test minimization
+└── toolkit/                # Java utilities
+    ├── src/                # Test runners and export
+    └── junit-agent/        # JUnit instrumentation
 ```
+
+## Statistics
+
+See [statistics](scripts/generate_bugs/statstics) for current bug counts and details.
 
 ## Publications
-* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. Detecting, Creating, Evaluating, and Understanding Indivisible Multi-Hunk Bugs. FSE 2024.  
+
+* Q. Xin, H. Wu, J. Tang, X. Liu, S. Reiss and J. Xuan. "Detecting, Creating, Evaluating, and Understanding Indivisible Multi-Hunk Bugs." FSE 2024.
+
+## License
+
+Apache License 2.0 - See [LICENSE](LICENSE) file for details.
