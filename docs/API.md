@@ -994,4 +994,4 @@ print(f"Test layout: {test_layout}")
 
 - [User Guide](README.md) - Command-line usage
 - [Architecture](ARCHITECTURE.md) - System design
-- [Component Guides](loaders/README.md) - Detailed component documentation
+- [Component Guides](loaders.md) - Detailed component documentation

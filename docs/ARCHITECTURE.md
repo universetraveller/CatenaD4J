@@ -740,4 +740,4 @@ bash compile.sh
 
 - [User Guide](README.md) - Installation and usage
 - [API Reference](API.md) - Programmatic interface
-- [Component Guides](commands/README.md) - Detailed component docs
+- [Component Guides](commands.md) - Detailed component docs

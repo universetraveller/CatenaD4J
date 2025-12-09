@@ -572,5 +572,5 @@ def initialize():
 ## See Also
 
 - [API Reference](../API.md) - Command dispatcher and execution context
-- [Commands Guide](../commands/README.md) - Implementing commands
+- [Commands Guide](../commands.md) - Implementing commands
 - [Architecture](../ARCHITECTURE.md) - System design overview

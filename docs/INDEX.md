@@ -13,11 +13,15 @@ Welcome to the CatenaD4J documentation! This index provides an overview of all a
 - **[Architecture Overview](ARCHITECTURE.md)** - System design and component relationships
 
 ### Component Guides
-- **[CLI Components](cli/README.md)** - Command-line interface internals
-- **[Commands](commands/README.md)** - Implementing and using commands
-- **[Loaders](loaders/README.md)** - Project-specific loader system
-- **[Utilities](utilities/README.md)** - Helper functions and utilities
-- **[Java Toolkit](toolkit/README.md)** - Java components and Ant tasks
+- **[CLI Components](cli.md)** - Command-line interface internals
+- **[Commands](commands.md)** - Implementing and using commands
+- **[Loaders](loaders.md)** - Project-specific loader system
+- **[Utilities](utilities.md)** - Helper functions and utilities
+- **Java Toolkit**
+  - **[Overview](toolkit/overview.md)** - Toolkit architecture and building
+  - **[Ant Tasks](toolkit/ant-tasks.md)** - Custom Ant task definitions
+  - **[Defects4J Integration](toolkit/defects4j-integration.md)** - D4J property export and execution
+  - **[Test Utilities](toolkit/test-utilities.md)** - JUnit helpers and test isolation
 
 ## Quick Links
 
@@ -29,22 +33,23 @@ Welcome to the CatenaD4J documentation! This index provides an overview of all a
 - [Troubleshooting](README.md#troubleshooting)
 
 ### For Developers
-- [Creating Custom Commands](commands/README.md#creating-custom-commands)
-- [Creating Custom Loaders](loaders/README.md#creating-custom-loaders)
-- [Extending the Toolkit](toolkit/README.md#extending-the-toolkit)
+- [Creating Custom Commands](commands.md#creating-custom-commands)
+- [Creating Custom Loaders](loaders.md#creating-custom-loaders)
+- [Extending the Toolkit](toolkit/overview.md#extending-the-toolkit)
 - [Extension Points](API.md#extension-points)
 
 ### For Researchers
 - [Dataset Structure](README.md#bug-structure)
-- [Bug Metadata](loaders/README.md#bug-registry)
-- [Property Access](utilities/README.md#property-access)
-- [Batch Processing Examples](utilities/README.md#example-2-batch-processing)
+- [Bug Metadata](loaders.md#bug-registry)
+- [Property Access](utilities.md#property-access)
+- [Batch Processing Examples](utilities.md#example-2-batch-processing)
 
 ## Documentation Statistics
 
-- **Total Files**: 8 markdown files
+- **Total Files**: 12 markdown files
 - **Total Lines**: ~3,500 lines of documentation
 - **Coverage**: Python API, Java API, CLI, Commands, Loaders, Utilities, Toolkit
+- **Structure**: Flat files for single-component docs, subdirectory for multi-component toolkit
 
 ## Documentation Features
 
