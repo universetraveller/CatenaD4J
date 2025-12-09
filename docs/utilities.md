@@ -608,6 +608,6 @@ def analyze_changes(project, bid, context):
 
 ## See Also
 
-- [API Reference](../API.md) - Complete API documentation
-- [Commands Guide](../commands.md) - Using utilities in commands
-- [Loaders Guide](../loaders.md) - Using utilities in loaders
+- [API Reference](API.md) - Complete API documentation
+- [Commands Guide](commands.md) - Using utilities in commands
+- [Loaders Guide](loaders.md) - Using utilities in loaders
