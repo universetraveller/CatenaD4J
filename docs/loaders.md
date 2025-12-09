@@ -808,7 +808,7 @@ rm -rf $WORKDIR
 
 ## See Also
 
-- [API Reference](../API.md) - Loader API details
-- [Commands Guide](../commands.md) - How commands use loaders
-- [Utilities Guide](../utilities.md) - Helper functions
-- [Architecture](../ARCHITECTURE.md) - Loader system design
+- [API Reference](API.md) - Loader API details
+- [Commands Guide](commands.md) - How commands use loaders
+- [Utilities Guide](utilities.md) - Helper functions
+- [Architecture](ARCHITECTURE.md) - Loader system design
