@@ -18,7 +18,7 @@ import io.github.universetraveller.util.DevNullPrintStream;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.SummaryAttribute;
 
 /*
- * 
+ * Runs tests from Defects4J projects using Ant's JUnitTask.
  */
 public class Defects4JTest1 extends AbstractDefects4JTest {
 

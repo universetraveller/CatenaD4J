@@ -18,6 +18,9 @@ import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
 //import org.junit.runner.notification.StoppedByUserException;
 
+/*
+* A helper class to run each test class in a separate classloader.
+*/
 public class JUnit4Helper1 {
     final static String[] ignoredTraces = {
         "junit.",
