@@ -1,6 +1,6 @@
 # CatenaD4J Java Toolkit API Documentation
 
-This document provides detailed API documentation for the Java toolkit component of CatenaD4J, which includes test execution utilities, Ant tasks, and Defects4J integration classes.
+This document provides detailed API documentation for the Java toolkit component of CatenaD4J. The toolkit includes test execution utilities, Ant tasks, and Defects4J integration classes.
 
 ## Table of Contents
 
