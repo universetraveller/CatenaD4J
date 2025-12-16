@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "catena4j"
+version = "2.0.0"
+description = "A dataset and tool for evaluating techniques on repairing indivisible multi-hunk bugs"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "universetraveller", email = "universetraveller@users.noreply.github.com"}
+]
+maintainers = [
+    {name = "universetraveller", email = "universetraveller@users.noreply.github.com"}
+]
+keywords = [
+    "defects4j",
+    "bug-dataset",
+    "program-repair",
+    "fault-localization",
+    "software-testing",
+    "multi-hunk-bugs",
+    "indivisible-bugs"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Java",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/universetraveller/CatenaD4J"
+Documentation = "https://github.com/universetraveller/CatenaD4J#readme"
+Repository = "https://github.com/universetraveller/CatenaD4J"
+Issues = "https://github.com/universetraveller/CatenaD4J/issues"
+
+[project.scripts]
+catena4j = "catena4j.bootstrap:system"
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["catena4j*"]
+exclude = ["scripts*", "docs*"]
+
+[tool.setuptools.package-data]
+catena4j = [
+    "../projects/**/*",
+    "../resources/*",
+    "../toolkit/target/toolkit.jar",
+]

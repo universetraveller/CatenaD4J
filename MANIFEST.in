@@ -1,0 +1,30 @@
+# Include important documentation files
+include README.md
+include LICENSE
+include MANIFEST.in
+
+# Include the executable script
+include c4j
+
+# Include project data files
+recursive-include projects *.csv *.patch *.txt *.properties
+
+# Include resources
+recursive-include resources *
+
+# Include toolkit source and JAR (if built)
+recursive-include toolkit *.java *.sh
+recursive-include toolkit/target *.jar
+
+# Exclude unnecessary files
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.so
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude *.class
+
+# Exclude scripts and docs (these are for development/experiments only)
+prune scripts
+prune docs
+prune .github
