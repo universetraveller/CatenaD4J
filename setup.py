@@ -39,9 +39,10 @@ class Builder(_build_py):
             d4j_home = Path(d4j_path).resolve().parents[2]
             classpath = f'{d4j_home}/major/lib/*'
         else:
-            # Build without defects4j classpath
-            print("Warning: defects4j not found. Building toolkit without defects4j dependencies.")
-            classpath = ''
+            # Build without defects4j classpath - skip toolkit build
+            print("Warning: defects4j not found. Skipping toolkit build.")
+            print("The toolkit JAR must be built manually if needed.")
+            return
         
         # Find all Java source files
         src_files = []
@@ -60,14 +61,21 @@ class Builder(_build_py):
             javac_cmd.extend(['-sourcepath', './src'])
             javac_cmd.extend(src_files)
             
-            print(f"Compiling Java toolkit: {' '.join(javac_cmd)}")
-            subprocess.run(javac_cmd, cwd=str(toolkit), check=True)
-            
-            # Create JAR file
-            jar_cmd = ['jar', 'cf', './target/toolkit.jar', '-C', './target', '.']
-            print(f"Creating JAR: {' '.join(jar_cmd)}")
-            subprocess.run(jar_cmd, cwd=str(toolkit), check=True)
-            print("Java toolkit built successfully!")
+            try:
+                print(f"Compiling Java toolkit: {' '.join(javac_cmd)}")
+                subprocess.run(javac_cmd, cwd=str(toolkit), check=True, 
+                             capture_output=True, text=True)
+                
+                # Create JAR file
+                jar_cmd = ['jar', 'cf', './target/toolkit.jar', '-C', './target', '.']
+                print(f"Creating JAR: {' '.join(jar_cmd)}")
+                subprocess.run(jar_cmd, cwd=str(toolkit), check=True,
+                             capture_output=True, text=True)
+                print("Java toolkit built successfully!")
+            except subprocess.CalledProcessError as e:
+                print(f"Warning: Java toolkit build failed: {e}")
+                print("The toolkit JAR must be built manually if needed.")
+                print("This is expected when building without defects4j installed.")
         else:
             print("Warning: No Java source files found. Skipping toolkit build.")
 

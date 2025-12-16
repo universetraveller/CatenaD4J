@@ -212,6 +212,21 @@ The package includes:
 
 ## Troubleshooting
 
+### Twine Check Warnings
+
+When running `twine check dist/*`, you may see a warning about `license-file`:
+
+```
+ERROR InvalidDistribution: Invalid distribution metadata: unrecognized or malformed field 'license-file'
+```
+
+**This is a false positive.** The package uses Metadata-Version 2.4 (PEP 639), which is supported by PyPI but not yet fully recognized by older versions of twine. The package will upload and install correctly. This warning can be safely ignored.
+
+To verify the package is valid:
+- Check the metadata manually: `unzip -p dist/*.whl */METADATA | head -40`
+- Test local installation: `pip install dist/*.whl` (should succeed)
+- Upload to TestPyPI (PyPI will accept the metadata)
+
 ### Java Toolkit Build Fails
 
 If the Java toolkit fails to build:
