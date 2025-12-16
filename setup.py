@@ -9,7 +9,6 @@ from setuptools.command.build_py import build_py as _build_py
 from pathlib import Path
 from shutil import which
 from os import getcwd
-import os
 import subprocess
 
 
@@ -35,6 +34,7 @@ class Builder(_build_py):
         
         # Check if defects4j is available (optional dependency)
         d4j_path = which('defects4j')
+        classpath = None
         if d4j_path:
             d4j_home = Path(d4j_path).resolve().parents[2]
             classpath = f'{d4j_home}/major/lib/*'
@@ -48,6 +48,7 @@ class Builder(_build_py):
         src_files = []
         src_dir = toolkit / 'src' / 'io' / 'github' / 'universetraveller'
         if src_dir.exists():
+            import os
             for root, _, files in os.walk(src_dir):
                 for file in files:
                     if file.endswith('.java'):
@@ -55,25 +56,24 @@ class Builder(_build_py):
         
         # Compile Java files if they exist
         if src_files:
-            javac_cmd = ['javac', '-d', './target']
-            if classpath:
-                javac_cmd.extend(['-cp', classpath])
-            javac_cmd.extend(['-sourcepath', './src'])
-            javac_cmd.extend(src_files)
+            javac_cmd = ['javac', '-d', './target', '-cp', classpath, 
+                        '-sourcepath', './src'] + src_files
             
             try:
-                print(f"Compiling Java toolkit: {' '.join(javac_cmd)}")
-                subprocess.run(javac_cmd, cwd=str(toolkit), check=True, 
-                             capture_output=True, text=True)
+                print(f"Compiling Java toolkit with {len(src_files)} source files...")
+                result = subprocess.run(javac_cmd, cwd=str(toolkit), check=True, 
+                                      capture_output=True, text=True)
                 
                 # Create JAR file
                 jar_cmd = ['jar', 'cf', './target/toolkit.jar', '-C', './target', '.']
-                print(f"Creating JAR: {' '.join(jar_cmd)}")
+                print(f"Creating JAR...")
                 subprocess.run(jar_cmd, cwd=str(toolkit), check=True,
                              capture_output=True, text=True)
                 print("Java toolkit built successfully!")
             except subprocess.CalledProcessError as e:
-                print(f"Warning: Java toolkit build failed: {e}")
+                print(f"Warning: Java toolkit build failed with exit code {e.returncode}")
+                if e.stderr:
+                    print(f"Error output: {e.stderr}")
                 print("The toolkit JAR must be built manually if needed.")
                 print("This is expected when building without defects4j installed.")
         else:
