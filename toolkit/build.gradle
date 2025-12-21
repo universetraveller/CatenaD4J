@@ -15,13 +15,17 @@ def javaVersion = JavaVersion.current()
 def isJava9Plus = javaVersion.isJava9Compatible()
 
 compileJava {
-    // For Java 9+, we need to add exports when compiling with Java 9+ JDK
-    // but targeting Java 8. However, --add-exports is not compatible with
-    // -target 8, so we only add it when running on Java 9+ AND targeting 9+
-    // 
-    // NOTE: For Java 8 target (current setting), the com.sun.source.* packages
-    // are available by default from tools.jar in the JDK, so no exports needed.
-    // This condition is here for future Java 11+ migration.
+    // --add-exports is a Java 9+ compiler/JVM option; it does not exist when
+    // compiling with a Java 8 JDK. When using a Java 9+ JDK you can still
+    // target Java 8 bytecode, but the extra module access granted by
+    // --add-exports is only effective at runtime if the application is also
+    // run on a Java 9+ JVM with matching exports configured.
+    //
+    // Therefore, we only add --add-exports when running on Java 9+ AND the
+    // target version is Java 9+ as well. For the current Java 8 target, the
+    // com.sun.source.* packages are available from tools.jar in the JDK, so
+    // no module exports are needed. This condition is primarily for future
+    // Java 11+ migration.
     def targetVersion = JavaVersion.toVersion(targetCompatibility)
     if (isJava9Plus && targetVersion.isJava9Compatible()) {
         options.compilerArgs.addAll([
