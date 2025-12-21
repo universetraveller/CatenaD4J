@@ -18,7 +18,10 @@ compileJava {
     // For Java 9+, we need to add exports when compiling with Java 9+ JDK
     // but targeting Java 8. However, --add-exports is not compatible with
     // -target 8, so we only add it when running on Java 9+ AND targeting 9+
-    // For Java 8 target, the tools.jar is on classpath by default
+    // 
+    // NOTE: For Java 8 target (current setting), the com.sun.source.* packages
+    // are available by default from tools.jar in the JDK, so no exports needed.
+    // This condition is here for future Java 11+ migration.
     def targetVersion = JavaVersion.toVersion(targetCompatibility)
     if (isJava9Plus && targetVersion.isJava9Compatible()) {
         options.compilerArgs.addAll([
@@ -58,7 +61,7 @@ jar {
     manifest {
         attributes(
             'Built-By': 'CatenaD4J',
-            'Add-Exports': 'jdk.compiler/com.sun.source.tree jdk.compiler/com.sun.source.util'
+            'Add-Exports': 'jdk.compiler/com.sun.source.tree=ALL-UNNAMED jdk.compiler/com.sun.source.util=ALL-UNNAMED'
         )
     }
 }
