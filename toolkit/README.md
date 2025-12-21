@@ -1,3 +1,59 @@
+# CatenaD4J Toolkit
+
+## Build System
+
+The toolkit now uses **Gradle with wrapper** for building, which eliminates the need for users to install Gradle manually. The wrapper downloads and uses the correct Gradle version automatically.
+
+### Building the Toolkit
+
+```bash
+# Using the Gradle wrapper (recommended)
+./gradlew clean build
+
+# Or using the compile.sh script
+./compile.sh
+```
+
+The build produces `target/toolkit.jar` which contains all compiled classes.
+
+### Dependencies
+
+The toolkit depends on:
+- Apache Ant 1.10.14 (for build tasks)
+- Apache Ant JUnit 1.10.14 (for JUnit integration)
+- JUnit 4.13.2 (for test runner support)
+
+All dependencies are managed by Gradle and downloaded automatically.
+
+### Java Version Compatibility
+
+**Current target:** Java 8 (for maximum compatibility)
+
+**Future migration to Java 11:** The build system is prepared for Java 11+ migration:
+- Proper handling of JDK compiler API packages (com.sun.source.*)
+- Manifest includes Add-Exports for Java 9+ module system
+- When compiling with JDK 9+, the build automatically adds necessary exports
+
+To check Java version information:
+```bash
+./gradlew javaVersionInfo
+```
+
+To build targeting Java 11 (experimental):
+```bash
+./gradlew clean buildJava11
+```
+
+### For Developers
+
+The Gradle wrapper files (`gradlew`, `gradlew.bat`, `gradle/`) are committed to the repository, so no Gradle installation is required. The wrapper handles:
+- Downloading the correct Gradle version (8.5)
+- Managing dependencies from Maven Central
+- Handling Java 8 compilation with JDK 17
+- Preparing for future Java 11+ migration
+
+---
+
 # Design of Export Command
 ## Concept
 Some properties are static while others should be computed via .xml build files. Defects4J uses ant to do this but however there are some redundant steps could be skipped to boost the performance.

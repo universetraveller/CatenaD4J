@@ -1,0 +1,122 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.github.universetraveller'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+// Determine Java version at runtime
+def javaVersion = JavaVersion.current()
+def isJava9Plus = javaVersion.isJava9Compatible()
+
+compileJava {
+    // For Java 9+, we need to add exports when compiling with Java 9+ JDK
+    // but targeting Java 8. However, --add-exports is not compatible with
+    // -target 8, so we only add it when running on Java 9+ AND targeting 9+
+    // For Java 8 target, the tools.jar is on classpath by default
+    def targetVersion = JavaVersion.toVersion(targetCompatibility)
+    if (isJava9Plus && targetVersion.isJava9Compatible()) {
+        options.compilerArgs.addAll([
+            '--add-exports', 'jdk.compiler/com.sun.source.tree=ALL-UNNAMED',
+            '--add-exports', 'jdk.compiler/com.sun.source.util=ALL-UNNAMED'
+        ])
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Apache Ant for build tasks
+    implementation 'org.apache.ant:ant:1.10.14'
+    
+    // Ant optional tasks for JUnit support
+    implementation 'org.apache.ant:ant-junit:1.10.14'
+    
+    // JUnit 4 for test runner support
+    implementation 'junit:junit:4.13.2'
+}
+
+jar {
+    archiveBaseName = 'toolkit'
+    archiveVersion = ''
+    
+    manifest {
+        attributes(
+            'Built-By': 'CatenaD4J',
+            'Add-Exports': 'jdk.compiler/com.sun.source.tree jdk.compiler/com.sun.source.util'
+        )
+    }
+}
+
+// Ensure JAR is built in target directory for compatibility
+tasks.named('jar') {
+    destinationDirectory = file('target')
+}
+
+// Create target directory if it doesn't exist
+tasks.register('createTargetDir') {
+    doLast {
+        file('target').mkdirs()
+    }
+}
+
+tasks.named('jar') {
+    dependsOn 'createTargetDir'
+}
+
+// Task for compatibility with existing scripts
+tasks.register('build-toolkit') {
+    dependsOn 'jar'
+    description = 'Build the toolkit JAR file'
+    group = 'build'
+}
+
+// Task to build for Java 11+ (for future migration)
+tasks.register('buildJava11', JavaCompile) {
+    description = 'Build toolkit targeting Java 11 (for future use)'
+    group = 'build'
+    
+    source = sourceSets.main.java
+    classpath = sourceSets.main.compileClasspath
+    destinationDirectory = file("$buildDir/classes-java11")
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+    
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.compilerArgs.addAll([
+            '--add-exports', 'jdk.compiler/com.sun.source.tree=ALL-UNNAMED',
+            '--add-exports', 'jdk.compiler/com.sun.source.util=ALL-UNNAMED'
+        ])
+    }
+}
+
+// Helper task for users to see Java version info
+tasks.register('javaVersionInfo') {
+    description = 'Display Java version information'
+    group = 'help'
+    
+    doLast {
+        println "Current Java version: ${JavaVersion.current()}"
+        println "Source compatibility: ${sourceCompatibility}"
+        println "Target compatibility: ${targetCompatibility}"
+        println "Java 9+ features available: ${JavaVersion.current().isJava9Compatible()}"
+        println ""
+        println "To build for Java 11, set JAVA_HOME to JDK 11+ and run:"
+        println "  ./gradlew clean buildJava11"
+    }
+}
