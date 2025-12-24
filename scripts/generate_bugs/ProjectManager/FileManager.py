@@ -1,5 +1,4 @@
-
-
+import os
 from .constants import EMPTY_ALIAS, BEGIN_POINTER
 from .Commit import Commit
 class NameConflictError(Exception):
@@ -22,14 +21,12 @@ def findLastMatch(l1, l2):
     return l1[max_idx-1]
 backup_encoding = ['utf-8', 'latin-1']
 def validate_encoding(filename):
+    if not os.path.isfile(filename):
+        return backup_encoding[0]
     for enc in backup_encoding:
         try:
             with open(filename, 'r', encoding=enc) as f:
                 f = f.read()
-            return enc
-        except FileNotFoundError:
-            with open(filename, 'w', encoding=enc) as f:
-                pass
             return enc
         except:
             continue

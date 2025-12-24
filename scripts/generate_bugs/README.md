@@ -39,7 +39,7 @@ The output corresponds to the contents of file [validation](./validation). Based
 
 First, some test methods are not properly handled because of limitation of single file AST analysis and we have to exclude them manually. The corresponding modified CatenaD4J bugs include `Math_22_1`, `Math_22_2`, `Math_29_1`, `Math_29_2`, `Codec_1_1`, `Codec_1_2`, `Codec_1_3`, `Cli_30_1`, `Cli_30_2`, `JxPath_11_1`, `JxPath_11_2`, `JxPath_16_1`, `JxPath_16_2`, `JxPath_17_1` and `JxPath_17_2`.  
 
-Second, certain test classes no longer contained any test methods after adjusting them to create indivisible bugs. Running those test classes with the Defects4J backend would result in test failures, so we removed those classes. The corresponding modified CatenaD4J bugs include `Mockito_4_1`, `Mockito_4_2` and `JacksonDatabind_11_2`.  
+Second, certain test classes no longer contained any test methods after adjusting them to create indivisible bugs. Running those test classes with the Defects4J backend would result in test failures, so we modified those classes. The corresponding modified CatenaD4J bugs include `Mockito_4_1`, `Mockito_4_2` and `JacksonDatabind_11_2`.  
 
 ### Generate the summary
 Script [statstics.py](./statstics/statstics.py) can generate summary for execution of the algorithm, the result is written in `./statstics/statstics2(_<project_name>).csv` in which we can find the category, hunks number etc. of the original and created bugs.  

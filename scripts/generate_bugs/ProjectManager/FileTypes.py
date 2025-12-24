@@ -1,3 +1,4 @@
+import os
 from .constants import *
 from .EditTypes import LineEdit
 from .Commit import FileDiff
@@ -87,6 +88,9 @@ class EditCacheFile:
         self.encoding=encoding
         self.read()
     def read(self):
+        if not os.path.exists(self.filepath):
+            self.content = [EditCacheLine(1, ''),]
+            return
         with open(self.filepath, 'r', encoding=self.encoding) as f:
             # with return characters
             # for line commit would add suffix after content
@@ -131,8 +135,6 @@ class EditCacheFile:
             edit.translate_into_meta_line_edits()
         for edit in edits:
             for idx_edit in edit.index_edits:
-                if len(self.content) == idx_edit.line_no - 1:
-                    self.content.append(EditCacheLine(1, ''))
                 lineInst = self.content[idx_edit.line_no - 1]
                 if not lineInst.line_no == idx_edit.line_no:
                     raise ValueError('Unmatched line number: {} and {}\n\tin {}'.format(lineInst.line_no, idx_edit.line_no, self.filepath))
