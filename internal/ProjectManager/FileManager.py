@@ -1,4 +1,3 @@
-
 import os
 from .constants import EMPTY_ALIAS, BEGIN_POINTER
 from .Commit import Commit
@@ -22,14 +21,12 @@ def findLastMatch(l1, l2):
     return l1[max_idx-1]
 backup_encoding = ['utf-8', 'latin-1']
 def validate_encoding(filename):
+    if not os.path.exists(filename):
+        return backup_encoding[0]
     for enc in backup_encoding:
         try:
             with open(filename, 'r', encoding=enc) as f:
                 f = f.read()
-            return enc
-        except FileNotFoundError:
-            with open(filename, 'w', encoding=enc) as f:
-                pass
             return enc
         except:
             continue
@@ -137,9 +134,8 @@ class FileManager(BaseFileManager):
     def write_to_file(self):
         for name in self.files:
             fileInst = self.getFile(name)
-            if os.path.exists(fileInst.filepath):
-                with open('{}/{}'.format(self.base_dir, name), 'w') as f:
-                    f.write(fileInst.toString())
+            with open('{}/{}'.format(self.base_dir, name), 'w') as f:
+                f.write(fileInst.toString())
         return True
     def _findRootPath(self, commit_id):
         if commit_id == BEGIN_POINTER:
