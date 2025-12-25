@@ -1,13 +1,17 @@
 # CatenaD4J
 CatenaD4J (c4j) is a dataset that can be used to evaluate existing techniques on repairing indivisible multi-hunk bugs. This repository also contains an implementation of tool for  detecting and creating indivisible bugs.  
 
-C4j works like a plugin of other datasets and now use Defects4J as default backend because c4j contains a lot of bugs generated from defects4j. But it is easy to switch its backend or expand its commands and bugs.  
+The implementation in this repository functions as a plugin on top of existing bug datasets. It currently uses Defects4J as the default backend, since a large portion of c4j bugs are derived from Defects4J. The backend is modular and can be easily replaced, and the commands and bugs can be extended with minimal effort.
+
+## Alternative Implementation
+
+A Python implementation of Defects4J and CatenaD4J is available at [catena4j](https://github.com/universetraveller/catena4j). This implementation emphasizes runtime performance and provides a native API, making it well suited for general users and everyday use.
 
 > [!NOTE]
-> In our experiments, we discovered some flaky bugs in the Mockito project within this dataset. These bugs produced varying test results when run in different environments (e.g. sequential versus parallel execution, or under high CPU usage). We wil be working to determine the reasons. It is recommended to avoid using bugs in the Mockito project currently.
+> For research purposes—especially when reproducing experiments from the paper or when strict consistency with the paper’s results is required—we recommend using the current implementation.
 
 ## Bugs  in the dataset  
-CatenaD4J now contains 6 projects and 367 bugs generated from Defects4J.  
+CatenaD4J currently includes 17 projects and over 600 bugs derived from Defects4J. Among these, 204 bugs are indivisible multi-hunk bugs isolated from Defects4J. In addition, the dataset includes 222 identified indivisible multi-hunk bugs from Defects4J with minimized tests.  
 
 - The dataset consists of original bugs that is indivisible from d4j and isolated new bugs what original bugs of d4j are divided into.
 
@@ -147,17 +151,6 @@ Please check [README of scripts](scripts/README.md) for information and guides a
 
 ## Statistics
 Check [here](scripts/generate_bugs/statstics) for the statistics of current bugs
-
-## Development Plan
-The current version is available. We will try to make this dataset more concrete and add some features in the future.   
-
-The plan of development is as below. However, because the task is time-comsuming, some updates will only be developed when we have free time. Please notice that some urgent updates (e.g. bug fixes) will be prioritized and addressed as fast as possible.  
-
-1. An implementation of faster `test` command using the custom test runner with abort-on-failure feature that supports up to Junit5.
-2. An implementation of faster `checkout` command to replace the current version (using defects4j's checkout).  
-3. Adding a fast and usable code coverage tool.  
-4. Adding a fast and usable spectrum-based fault localization tool.
-5. Complete replacement of the defects4j backend by re-implementing all used commands.
 
 ## Repository Structure  
 ```
