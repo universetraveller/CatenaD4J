@@ -1,0 +1,2 @@
+org.apache.commons.jxpath.ri.model.dom.DOMModelTest::testUnion
+org.apache.commons.jxpath.ri.model.jdom.JDOMModelTest::testUnion

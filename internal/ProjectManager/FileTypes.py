@@ -1,3 +1,4 @@
+import os
 from .constants import *
 from .EditTypes import LineEdit
 from .Commit import FileDiff
@@ -87,10 +88,16 @@ class EditCacheFile:
         self.encoding=encoding
         self.read()
     def read(self):
-        with open(self.filepath, 'r', encoding=self.encoding) as f:
-            # with return characters
-            # for line commit would add suffix after content
-            f = f.readlines()
+        if os.path.exists(self.filepath):
+            with open(self.filepath, 'r', encoding=self.encoding) as f:
+                # with return characters
+                # for line commit would add suffix after content
+                f = f.readlines()
+        else:
+            f = []
+        if not f:
+            self.content = [EditCacheLine(1, '')]
+            return
         for idx in range(len(f)):
             self.content.append(EditCacheLine(idx + 1, f[idx]))
     def toString(self, keeps_line_no:bool=False):

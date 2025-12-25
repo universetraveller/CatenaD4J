@@ -1,0 +1,61 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 128,
+            "to_line_no": 128,
+            "replaced_with": "                tokens.add(token);\n",
+            "replaced": "                processSingleHyphen(token);\n",
+            "patch_type": "replace",
+            "next_line_no": 129
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 213,
+            "to_line_no": 216,
+            "replaced": "    private void processSingleHyphen(String hyphen)\n    {\n        tokens.add(hyphen);\n    }\n",
+            "patch_type": "delete",
+            "next_line_no": 217
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "replaced_with": "            tokens.add(token);\n",
+            "patch_type": "insert",
+            "next_line_no": 241
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli.PosixParserTest::testStop2"
+        ],
+        "org.apache.commons.cli.PosixParserTest::testStop2": {
+            "file_path": "src/test/org/apache/commons/cli/PosixParserTest.java",
+            "Instance": "Begin: Pos(133, 12)\nEnd: Pos(142, 5)\nSource: /tmp/c4j/Cli_18/src/test//org/apache/commons/cli/PosixParserTest.java\nName: testStop2\nChilds: [StatementAssertion<Begin: Pos(140, 9), End: Pos(140, 64)>,\nStatementAssertion<Begin: Pos(141, 9), End: Pos(141, 100)>,\n]",
+            "source": "/tmp/c4j/Cli_18/src/test//org/apache/commons/cli/PosixParserTest.java",
+            "name": "testStop2",
+            "begin": "Pos(133, 12)",
+            "end": "Pos(142, 5)",
+            "begin_line_no": 133,
+            "end_line_no": 142,
+            "child": [
+                "Begin: Pos(140, 9)\nEnd: Pos(140, 64)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(141, 9)\nEnd: Pos(141, 100)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testStop2$catena_0() throws Exception\n    {\n        String[] args = new String[]{\"-z\",\n                                     \"-a\",\n                                     \"-btoast\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n        assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testStop2$catena_1() throws Exception\n    {\n        String[] args = new String[]{\"-z\",\n                                     \"-a\",\n                                     \"-btoast\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testStop2$catena_0() throws Exception\n    {\n        String[] args = new String[]{\"-z\",\n                                     \"-a\",\n                                     \"-btoast\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n        assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testStop2$catena_1() throws Exception\n    {\n        String[] args = new String[]{\"-z\",\n                                     \"-a\",\n                                     \"-btoast\"};\n\n        CommandLine cl = parser.parse(options, args, true);\n        try{ assertFalse(\"Confirm -a is not set\", cl.hasOption(\"a\"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"Confirm  3 extra args: \" + cl.getArgList().size(), cl.getArgList().size() == 3);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "001": {
+        "failing_tests": [
+            "org.apache.commons.cli.PosixParserTest::testStop2$catena_1",
+            "org.apache.commons.cli.PosixParserTest::testStop2$catena_0"
+        ]
+    }
+}

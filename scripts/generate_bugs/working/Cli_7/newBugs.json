@@ -1,0 +1,67 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli2/builder/PatternBuilder.java",
+            "from_line_no": 19,
+            "to_line_no": 19,
+            "replaced": "import java.util.HashSet;\n",
+            "patch_type": "delete",
+            "next_line_no": 20
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli2/builder/PatternBuilder.java",
+            "replaced_with": "import java.util.LinkedHashSet;\n",
+            "patch_type": "insert",
+            "next_line_no": 21
+        },
+        "2": {
+            "file_name": "src/java/org/apache/commons/cli2/builder/PatternBuilder.java",
+            "from_line_no": 67,
+            "to_line_no": 67,
+            "replaced_with": "    private final Set options = new LinkedHashSet();\n",
+            "replaced": "    private final Set options = new HashSet();\n",
+            "patch_type": "replace",
+            "next_line_no": 68
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions"
+        ],
+        "org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions": {
+            "file_path": "src/test/org/apache/commons/cli2/bug/Bug27575Test.java",
+            "Instance": "Begin: Pos(29, 9)\nEnd: Pos(40, 2)\nSource: /tmp/c4j/Cli_7/src/test//org/apache/commons/cli2/bug/Bug27575Test.java\nName: testRequiredOptions\nChilds: [StatementAssertion<Begin: Pos(33, 3), End: Pos(33, 42)>,\nStatementAssertion<Begin: Pos(37, 3), End: Pos(37, 43)>,\nStatementAssertion<Begin: Pos(38, 3), End: Pos(38, 47)>,\nStatementAssertion<Begin: Pos(39, 3), End: Pos(39, 27)>,\n]",
+            "source": "/tmp/c4j/Cli_7/src/test//org/apache/commons/cli2/bug/Bug27575Test.java",
+            "name": "testRequiredOptions",
+            "begin": "Pos(29, 9)",
+            "end": "Pos(40, 2)",
+            "begin_line_no": 29,
+            "end_line_no": 40,
+            "child": [
+                "Begin: Pos(33, 3)\nEnd: Pos(33, 42)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(37, 3)\nEnd: Pos(37, 43)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(38, 3)\nEnd: Pos(38, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(39, 3)\nEnd: Pos(39, 27)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "\tpublic void testRequiredOptions$catena_0(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\tassertTrue(option instanceof GroupImpl);                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "\tpublic void testRequiredOptions$catena_1(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\tassertEquals(\"[-h]\",i.next().toString());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "\tpublic void testRequiredOptions$catena_2(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\tassertEquals(\"-c <arg>\",i.next().toString());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "\tpublic void testRequiredOptions$catena_3(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\tassertFalse(i.hasNext());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\t}"
+            ],
+            "func": {
+                "0": "\tpublic void testRequiredOptions$catena_0(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\tassertTrue(option instanceof GroupImpl);                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "1": "\tpublic void testRequiredOptions$catena_1(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\tassertEquals(\"[-h]\",i.next().toString());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "2": "\tpublic void testRequiredOptions$catena_2(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\tassertEquals(\"-c <arg>\",i.next().toString());                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n\t\ttry{ assertFalse(i.hasNext());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t}",
+                "3": "\tpublic void testRequiredOptions$catena_3(){\n\t\tPatternBuilder builder = new PatternBuilder();\n\t\tbuilder.withPattern(\"hc!<\");\n\t\tOption option = builder.create();\n\t\ttry{ assertTrue(option instanceof GroupImpl);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\t\n\t\tGroupImpl group = (GroupImpl)option;\n\t\tIterator i = group.getOptions().iterator();\n\t\ttry{ assertEquals(\"[-h]\",i.next().toString());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\ttry{ assertEquals(\"-c <arg>\",i.next().toString());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n\t\tassertFalse(i.hasNext());                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n\t}"
+            }
+        }
+    },
+    "011": {
+        "failing_tests": [
+            "org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_2",
+            "org.apache.commons.cli2.bug.Bug27575Test::testRequiredOptions$catena_1"
+        ]
+    }
+}

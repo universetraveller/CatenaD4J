@@ -1,0 +1,162 @@
+---
+Begin generate bug_id: JacksonDatabind_64
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_64
+Try to checkout JacksonDatabind_64
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/PropertyBuilder.java
+trying to replace old failing tests
+edit: replace from 313 range 10 at src/test/java/com/fasterxml/jackson/databind/filter/JsonIncludeTest.java
+to
+    public void testIssue1351$catena_0() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        assertEquals(aposToQuotes("{}"),
+                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            /***** ORIGINAL ASSERTION IS HERE *****/
+        // [databind#1417]
+        try{ assertEquals(aposToQuotes("{}"),
+                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue1351$catena_1() throws Exception
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        try{ assertEquals(aposToQuotes("{}"),
+                mapper.writeValueAsString(new Issue1351Bean(null, (double) 0)));                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // [databind#1417]
+        assertEquals(aposToQuotes("{}"),
+                mapper.writeValueAsString(new Issue1351NonBean(0)));                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/filter/JsonIncludeTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 223.86 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 162 with range 1 to
+                try {
+                    valueToSuppress = am.getValue(defaultBean);
+                } catch (Exception e) {
+                    _throwWrapped(e, propDef.getName(), defaultBean);
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+replace from 157 with range 1 to
+            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 152 with             Object defaultBean;
+
+patches are written to file
+running tests...
+used time: Finished in 209.84 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351$catena_1
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+replace from 157 with range 1 to
+            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {
+
+try to fix hunk: 2
+replace from 162 with range 1 to
+                try {
+                    valueToSuppress = am.getValue(defaultBean);
+                } catch (Exception e) {
+                    _throwWrapped(e, propDef.getName(), defaultBean);
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 152 with             Object defaultBean;
+
+try to fix hunk: 2
+replace from 162 with range 1 to
+                try {
+                    valueToSuppress = am.getValue(defaultBean);
+                } catch (Exception e) {
+                    _throwWrapped(e, propDef.getName(), defaultBean);
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 152 with             Object defaultBean;
+
+try to fix hunk: 1
+replace from 157 with range 1 to
+            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {
+
+patches are written to file
+running tests...
+used time: Finished in 242.97 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351$catena_1']
+select new bug
+Pattern: 110
+new failing tests:
+com.fasterxml.jackson.databind.filter.JsonIncludeTest::testIssue1351$catena_1
+Save found bug
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 152 with             Object defaultBean;
+
+try to fix hunk: 1
+replace from 157 with range 1 to
+            if (_useRealPropertyDefaults && (defaultBean = getDefaultBean()) != null) {
+
+try to fix hunk: 2
+replace from 162 with range 1 to
+                try {
+                    valueToSuppress = am.getValue(defaultBean);
+                } catch (Exception e) {
+                    _throwWrapped(e, propDef.getName(), defaultBean);
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 236.58 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

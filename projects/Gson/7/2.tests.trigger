@@ -1,0 +1,3 @@
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_2
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_1
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys$catena_0

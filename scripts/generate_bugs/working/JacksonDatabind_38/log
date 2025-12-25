@@ -1,0 +1,2228 @@
+---
+Begin generate bug_id: JacksonDatabind_38
+num_of_hunks: 7
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_38
+Try to checkout JacksonDatabind_38
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/type/CollectionType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/type/MapType.java
+trace file: src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java
+trying to replace old failing tests
+edit: replace from 72 range 18 at src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+to
+    @SuppressWarnings("deprecation")
+    public void testExplicitMapType$catena_0() throws Exception
+    {
+        JavaType key = SimpleType.construct(String.class);
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = MapType.construct(Map.class, key, elem);
+
+        final String json = aposToQuotes("{'x':{'x':3,'y':5}}");        
+
+        Map<String,Point> m = MAPPER.readValue(json, t);
+        assertNotNull(m);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, m.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = m.values().iterator().next();
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(3, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(5, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitMapType$catena_1() throws Exception
+    {
+        JavaType key = SimpleType.construct(String.class);
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = MapType.construct(Map.class, key, elem);
+
+        final String json = aposToQuotes("{'x':{'x':3,'y':5}}");        
+
+        Map<String,Point> m = MAPPER.readValue(json, t);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, m.size());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        Object ob = m.values().iterator().next();
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(3, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(5, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitMapType$catena_2() throws Exception
+    {
+        JavaType key = SimpleType.construct(String.class);
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = MapType.construct(Map.class, key, elem);
+
+        final String json = aposToQuotes("{'x':{'x':3,'y':5}}");        
+
+        Map<String,Point> m = MAPPER.readValue(json, t);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, m.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = m.values().iterator().next();
+        assertEquals(Point.class, ob.getClass());                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        Point p = (Point) ob;
+        try{ assertEquals(3, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(5, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitMapType$catena_3() throws Exception
+    {
+        JavaType key = SimpleType.construct(String.class);
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = MapType.construct(Map.class, key, elem);
+
+        final String json = aposToQuotes("{'x':{'x':3,'y':5}}");        
+
+        Map<String,Point> m = MAPPER.readValue(json, t);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, m.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = m.values().iterator().next();
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        assertEquals(3, p.x);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(5, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitMapType$catena_4() throws Exception
+    {
+        JavaType key = SimpleType.construct(String.class);
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = MapType.construct(Map.class, key, elem);
+
+        final String json = aposToQuotes("{'x':{'x':3,'y':5}}");        
+
+        Map<String,Point> m = MAPPER.readValue(json, t);
+        try{ assertNotNull(m);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, m.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = m.values().iterator().next();
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(3, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(5, p.getY());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 54 range 17 at src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+to
+    @SuppressWarnings("deprecation")
+    public void testExplicitCollectionType$catena_0() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = CollectionType.construct(List.class, elem);
+
+        final String json = aposToQuotes("[ {'x':1,'y':2}, {'x':3,'y':6 }]");        
+
+        List<Point> l = MAPPER.readValue(json, t);
+        assertNotNull(l);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, l.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = l.get(0);
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitCollectionType$catena_1() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = CollectionType.construct(List.class, elem);
+
+        final String json = aposToQuotes("[ {'x':1,'y':2}, {'x':3,'y':6 }]");        
+
+        List<Point> l = MAPPER.readValue(json, t);
+        try{ assertNotNull(l);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, l.size());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        Object ob = l.get(0);
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitCollectionType$catena_2() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = CollectionType.construct(List.class, elem);
+
+        final String json = aposToQuotes("[ {'x':1,'y':2}, {'x':3,'y':6 }]");        
+
+        List<Point> l = MAPPER.readValue(json, t);
+        try{ assertNotNull(l);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, l.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = l.get(0);
+        assertEquals(Point.class, ob.getClass());                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        Point p = (Point) ob;
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitCollectionType$catena_3() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = CollectionType.construct(List.class, elem);
+
+        final String json = aposToQuotes("[ {'x':1,'y':2}, {'x':3,'y':6 }]");        
+
+        List<Point> l = MAPPER.readValue(json, t);
+        try{ assertNotNull(l);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, l.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = l.get(0);
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        assertEquals(1, p.x);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testExplicitCollectionType$catena_4() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point.class);
+        JavaType t = CollectionType.construct(List.class, elem);
+
+        final String json = aposToQuotes("[ {'x':1,'y':2}, {'x':3,'y':6 }]");        
+
+        List<Point> l = MAPPER.readValue(json, t);
+        try{ assertNotNull(l);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, l.size());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        Object ob = l.get(0);
+        try{ assertEquals(Point.class, ob.getClass());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Point p = (Point) ob;
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, p.getY());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 42 range 11 at src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+to
+    @SuppressWarnings("deprecation")
+    public void testPOJOSubType$catena_0() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point3D.class);
+
+        Point3D p = MAPPER.readValue(aposToQuotes("{'x':1,'z':3,'y':2}"), elem);
+        assertNotNull(p);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.z);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testPOJOSubType$catena_1() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point3D.class);
+
+        Point3D p = MAPPER.readValue(aposToQuotes("{'x':1,'z':3,'y':2}"), elem);
+        try{ assertNotNull(p);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, p.x);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.z);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testPOJOSubType$catena_2() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point3D.class);
+
+        Point3D p = MAPPER.readValue(aposToQuotes("{'x':1,'z':3,'y':2}"), elem);
+        try{ assertNotNull(p);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, p.getY());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, p.z);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("deprecation")
+    public void testPOJOSubType$catena_3() throws Exception
+    {
+        JavaType elem = SimpleType.construct(Point3D.class);
+
+        Point3D p = MAPPER.readValue(aposToQuotes("{'x':1,'z':3,'y':2}"), elem);
+        try{ assertNotNull(p);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, p.x);                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, p.getY());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, p.z);                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/interop/DeprecatedTypeHandling1102Test.java
+new test num: 14
+ori test num: 0
+pattern: 0000000
+patches are written to file
+running tests...
+used time: Finished in 175.52 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+processed: 0000000
+pattern: 0000001
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 190.39 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+No new failing tests but only 1 hunk
+processed: 0000001
+pattern: 0000010
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010
+pattern: 0000100
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000100
+pattern: 0001000
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000
+pattern: 0010000
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+patches are written to file
+running tests...
+used time: Finished in 154.32 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+No new failing tests but only 1 hunk
+processed: 0010000
+pattern: 0100000
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000
+pattern: 1000000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+patches are written to file
+running tests...
+used time: Finished in 142.49 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+No new failing tests but only 1 hunk
+processed: 1000000
+pattern: 0000011
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 168.73 seconds
+Failing tests: 10
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+Can independently fix ['com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0']
+select new bug
+Pattern: 0000011
+new failing tests:
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+Save found bug
+processed: 0000011
+pattern: 0000101
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000101
+pattern: 0000110
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000110
+pattern: 0001001
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001
+pattern: 0001010
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010
+pattern: 0001100
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100
+pattern: 0010001
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 147.72 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 0010001
+pattern: 0010010
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010
+pattern: 0010100
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100
+pattern: 0011000
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 173.82 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 0011000
+pattern: 0100001
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100001
+pattern: 0100010
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100010
+pattern: 0100100
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100
+pattern: 0101000
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101000
+pattern: 0110000
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000
+pattern: 1000001
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 163.36 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1000001
+pattern: 1000010
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010
+pattern: 1000100
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100
+pattern: 1001000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000
+pattern: 1010000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+patches are written to file
+running tests...
+used time: Finished in 166.41 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1010000
+pattern: 1100000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+patches are written to file
+running tests...
+used time: Finished in 143.81 seconds
+Failing tests: 9
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix ['com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4']
+select new bug
+Pattern: 1100000
+new failing tests:
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+Save found bug
+processed: 1100000
+pattern: 0000111
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000111
+pattern: 0001011
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001011
+pattern: 0001101
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001101
+pattern: 0001110
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001110
+pattern: 0010011
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 159.86 seconds
+Failing tests: 10
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+Can independently fix []
+Could not fix independently
+processed: 0010011
+pattern: 0010101
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010101
+pattern: 0010110
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010110
+pattern: 0011001
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 169.00 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 0011001
+pattern: 0011010
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011010
+pattern: 0011100
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+used time: Finished in 158.85 seconds
+Failing tests: 9
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix ['com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1', 'com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2']
+select new bug
+Pattern: 0011100
+new failing tests:
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+Save found bug
+processed: 0011100
+pattern: 0100011
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100011
+pattern: 0100101
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100101
+pattern: 0100110
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100110
+pattern: 0101001
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101001
+pattern: 0101010
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101010
+pattern: 0101100
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101100
+pattern: 0110001
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110001
+pattern: 0110010
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110010
+pattern: 0110100
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110100
+pattern: 0111000
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111000
+pattern: 1000011
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 173.19 seconds
+Failing tests: 10
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+Can independently fix []
+Could not fix independently
+processed: 1000011
+pattern: 1000101
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000101
+pattern: 1000110
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000110
+pattern: 1001001
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001001
+pattern: 1001010
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001010
+pattern: 1001100
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001100
+pattern: 1010001
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 173.13 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1010001
+pattern: 1010010
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010010
+pattern: 1010100
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010100
+pattern: 1011000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 177.17 seconds
+Failing tests: 14
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitCollectionType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1011000
+pattern: 1100001
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 189.11 seconds
+Failing tests: 9
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1100001
+pattern: 1100010
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100010
+pattern: 1100100
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100100
+pattern: 1101000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101000
+pattern: 1110000
+try to fix hunk: 0
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 1
+replace from 50 with range 1 to
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+patches are written to file
+running tests...
+used time: Finished in 206.05 seconds
+Failing tests: 9
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_3
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testExplicitMapType$catena_4
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_0
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_1
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_2
+	com.fasterxml.jackson.databind.interop.DeprecatedTypeHandling1102Test::testPOJOSubType$catena_3
+Can independently fix []
+Could not fix independently
+processed: 1110000
+pattern: 0001111
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001111
+pattern: 0010111
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 4
+replace from 48 with range 1 to
+        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010111
+pattern: 0011011
+try to fix hunk: 2
+insert before 3 with import java.lang.reflect.TypeVariable;
+
+try to fix hunk: 3
+insert before 47 with         TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 2)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, keyT, valueT);
+        }
+
+try to fix hunk: 5
+replace from 116 with range 2 to
+        TypeBindings b = TypeBindings.emptyBindings();
+        return new SimpleType(cls, b,
+                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+
+try to fix hunk: 6
+insert before 251 with     private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
+    {
+        if (superClass == null) {
+            return null;
+        }
+        if (superClass == Object.class) {
+            return TypeFactory.unknownType();
+        }
+        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
+        return new SimpleType(superClass, b,
+                superSuper, null, null, null, false);
+    }
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

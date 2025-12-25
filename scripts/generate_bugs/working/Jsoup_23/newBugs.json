@@ -1,0 +1,59 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "    String consumeLetterThenDigitSequence() {\n        int start = pos;\n        while (!isEmpty()) {\n            char c = input.charAt(pos);\n            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))\n                pos++;\n            else\n                break;\n        }\n        while (!isEmpty()) {\n            char c = input.charAt(pos);\n            if (c >= '0' && c <= '9')\n                pos++;\n            else\n                break;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 118
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        return input.substring(start, pos);\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 119
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/parser/Tokeniser.java",
+            "from_line_no": 135,
+            "to_line_no": 135,
+            "replaced_with": "            String nameRef = reader.consumeLetterThenDigitSequence();\n",
+            "replaced": "            String nameRef = reader.consumeLetterSequence();\n",
+            "patch_type": "replace",
+            "next_line_no": 136
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.nodes.EntitiesTest::letterDigitEntities"
+        ],
+        "org.jsoup.nodes.EntitiesTest::letterDigitEntities": {
+            "file_path": "src/test/java/org/jsoup/nodes/EntitiesTest.java",
+            "Instance": "Begin: Pos(56, 5)\nEnd: Pos(62, 5)\nSource: /tmp/c4j/Jsoup_23/src/test/java//org/jsoup/nodes/EntitiesTest.java\nName: letterDigitEntities\nChilds: [StatementAssertion<Begin: Pos(60, 9), End: Pos(60, 77)>,\nStatementAssertion<Begin: Pos(61, 9), End: Pos(61, 41)>,\n]",
+            "source": "/tmp/c4j/Jsoup_23/src/test/java//org/jsoup/nodes/EntitiesTest.java",
+            "name": "letterDigitEntities",
+            "begin": "Pos(56, 5)",
+            "end": "Pos(62, 5)",
+            "begin_line_no": 56,
+            "end_line_no": 62,
+            "child": [
+                "Begin: Pos(60, 9)\nEnd: Pos(60, 77)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(61, 9)\nEnd: Pos(61, 41)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void letterDigitEntities$catena_0() {\n        String html = \"<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>\";\n        Document doc = Jsoup.parse(html);\n        Element p = doc.select(\"p\").first();\n        assertEquals(\"&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;\", p.html());                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"\u00b9\u00b2\u00b3\u00bc\u00bd\u00be\", p.text());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void letterDigitEntities$catena_1() {\n        String html = \"<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>\";\n        Document doc = Jsoup.parse(html);\n        Element p = doc.select(\"p\").first();\n        try{ assertEquals(\"&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;\", p.html());                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"\u00b9\u00b2\u00b3\u00bc\u00bd\u00be\", p.text());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void letterDigitEntities$catena_0() {\n        String html = \"<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>\";\n        Document doc = Jsoup.parse(html);\n        Element p = doc.select(\"p\").first();\n        assertEquals(\"&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;\", p.html());                               /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"\u00b9\u00b2\u00b3\u00bc\u00bd\u00be\", p.text());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void letterDigitEntities$catena_1() {\n        String html = \"<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>\";\n        Document doc = Jsoup.parse(html);\n        Element p = doc.select(\"p\").first();\n        try{ assertEquals(\"&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;\", p.html());                          }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"\u00b9\u00b2\u00b3\u00bc\u00bd\u00be\", p.text());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111": {
+        "failing_tests": [
+            "org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_1",
+            "org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_0"
+        ]
+    }
+}

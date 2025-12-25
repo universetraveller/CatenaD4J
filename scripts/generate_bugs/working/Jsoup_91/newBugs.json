@@ -1,0 +1,121 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/UncheckedIOException.java",
+            "replaced_with": "    public UncheckedIOException(String message) {\n        super(new IOException(message));\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        if (isBinary()) {\n            throw new UncheckedIOException(\"Input is binary and unsupported\");\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 37
+        },
+        "2": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "    private static final int numNullsConsideredBinary = 10; // conservative\n",
+            "patch_type": "insert",
+            "next_line_no": 452
+        },
+        "3": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "    boolean isBinary() {\n        int nullsSeen = 0;\n",
+            "patch_type": "insert",
+            "next_line_no": 457
+        },
+        "4": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        for (int i = bufPos; i < bufLength; i++) {\n            if (charBuf[i] == '\\0')\n                nullsSeen++;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 458
+        },
+        "5": {
+            "file_name": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "replaced_with": "        return nullsSeen >= numNullsConsideredBinary;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 459
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored",
+            "org.jsoup.integration.ConnectTest::testBinaryResultThrows",
+            "org.jsoup.integration.ParseTest::testBinaryThrowsException"
+        ],
+        "org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored": {
+            "file_path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+            "Instance": "Begin: Pos(491, 5)\nEnd: Pos(507, 5)\nSource: /tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ConnectTest.java\nName: testBinaryThrowsExceptionWhenTypeIgnored\nChilds: [StatementAssertion<Begin: Pos(504, 13), End: Pos(504, 76)>,\nStatementAssertion<Begin: Pos(506, 9), End: Pos(506, 26)>,\n]",
+            "source": "/tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ConnectTest.java",
+            "name": "testBinaryThrowsExceptionWhenTypeIgnored",
+            "begin": "Pos(491, 5)",
+            "end": "Pos(507, 5)",
+            "begin_line_no": 491,
+            "end_line_no": 507,
+            "child": [
+                "Begin: Pos(504, 13)\nEnd: Pos(504, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(506, 9)\nEnd: Pos(506, 26)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_0() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"image/jpeg\");\n        con.ignoreContentType(true);\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_1() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"image/jpeg\");\n        con.ignoreContentType(true);\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_0() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"image/jpeg\");\n        con.ignoreContentType(true);\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_1() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"image/jpeg\");\n        con.ignoreContentType(true);\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.integration.ConnectTest::testBinaryResultThrows": {
+            "file_path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+            "Instance": "Begin: Pos(509, 5)\nEnd: Pos(524, 5)\nSource: /tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ConnectTest.java\nName: testBinaryResultThrows\nChilds: [StatementAssertion<Begin: Pos(521, 13), End: Pos(521, 76)>,\nStatementAssertion<Begin: Pos(523, 9), End: Pos(523, 26)>,\n]",
+            "source": "/tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ConnectTest.java",
+            "name": "testBinaryResultThrows",
+            "begin": "Pos(509, 5)",
+            "end": "Pos(524, 5)",
+            "begin_line_no": 509,
+            "end_line_no": 524,
+            "child": [
+                "Begin: Pos(521, 13)\nEnd: Pos(521, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(523, 9)\nEnd: Pos(523, 26)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testBinaryResultThrows$catena_0() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"text/html\");\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testBinaryResultThrows$catena_1() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"text/html\");\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testBinaryResultThrows$catena_0() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"text/html\");\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testBinaryResultThrows$catena_1() {\n        Connection con = Jsoup.connect(FileServlet.Url);\n        con.data(FileServlet.LocationParam, \"/htmltests/thumb.jpg\");\n        con.data(FileServlet.ContentTypeParam, \"text/html\");\n\n        boolean threw = false;\n        try {\n            con.execute();\n            Document doc = con.response().parse();\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.jsoup.integration.ParseTest::testBinaryThrowsException": {
+            "file_path": "src/test/java/org/jsoup/integration/ParseTest.java",
+            "Instance": "Begin: Pos(68, 5)\nEnd: Pos(80, 5)\nSource: /tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ParseTest.java\nName: testBinaryThrowsException\nChilds: [StatementAssertion<Begin: Pos(77, 13), End: Pos(77, 76)>,\nStatementAssertion<Begin: Pos(79, 9), End: Pos(79, 26)>,\n]",
+            "source": "/tmp/c4j/Jsoup_91/src/test/java//org/jsoup/integration/ParseTest.java",
+            "name": "testBinaryThrowsException",
+            "begin": "Pos(68, 5)",
+            "end": "Pos(80, 5)",
+            "begin_line_no": 68,
+            "end_line_no": 80,
+            "child": [
+                "Begin: Pos(77, 13)\nEnd: Pos(77, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(79, 9)\nEnd: Pos(79, 26)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testBinaryThrowsException$catena_0() throws IOException {\n        File in = getFile(\"/htmltests/thumb.jpg\");\n\n        boolean threw = false;\n        try {\n            Document doc = Jsoup.parse(in, \"UTF-8\");\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testBinaryThrowsException$catena_1() throws IOException {\n        File in = getFile(\"/htmltests/thumb.jpg\");\n\n        boolean threw = false;\n        try {\n            Document doc = Jsoup.parse(in, \"UTF-8\");\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testBinaryThrowsException$catena_0() throws IOException {\n        File in = getFile(\"/htmltests/thumb.jpg\");\n\n        boolean threw = false;\n        try {\n            Document doc = Jsoup.parse(in, \"UTF-8\");\n        } catch (IOException e) {\n            threw = true;\n            assertEquals(\"Input is binary and unsupported\", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/\n        }\n        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testBinaryThrowsException$catena_1() throws IOException {\n        File in = getFile(\"/htmltests/thumb.jpg\");\n\n        boolean threw = false;\n        try {\n            Document doc = Jsoup.parse(in, \"UTF-8\");\n        } catch (IOException e) {\n            threw = true;\n            try{ assertEquals(\"Input is binary and unsupported\", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}\n        }\n        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111111": {
+        "failing_tests": [
+            "org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1",
+            "org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1",
+            "org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1"
+        ]
+    }
+}

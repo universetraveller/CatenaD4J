@@ -1,0 +1,98 @@
+---
+Begin generate bug_id: Compress_7
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Compress_7
+Try to checkout Compress_7
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
+trying to replace old failing tests
+edit: replace from 120 range 8 at src/test/java/org/apache/commons/compress/archivers/tar/TarUtilsTest.java
+to
+    public void testRoundTripNames$catena_0(){
+        checkName("");                                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ checkName("The quick brown fox\n");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ checkName("\177");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // checkName("\0"); // does not work, because NUL is ignored
+        // COMPRESS-114
+        try{ checkName("0302-0601-3±±±F06±W220±ZB±LALALA±±±±±±±±±±CAN±±DC±±±04±060302±MOE.model");          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundTripNames$catena_1(){
+        try{ checkName("");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        checkName("The quick brown fox\n");                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ checkName("\177");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // checkName("\0"); // does not work, because NUL is ignored
+        // COMPRESS-114
+        try{ checkName("0302-0601-3±±±F06±W220±ZB±LALALA±±±±±±±±±±CAN±±DC±±±04±060302±MOE.model");          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundTripNames$catena_2(){
+        try{ checkName("");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ checkName("The quick brown fox\n");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        checkName("\177");                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        // checkName("\0"); // does not work, because NUL is ignored
+        // COMPRESS-114
+        try{ checkName("0302-0601-3±±±F06±W220±ZB±LALALA±±±±±±±±±±CAN±±DC±±±04±060302±MOE.model");          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testRoundTripNames$catena_3(){
+        try{ checkName("");                                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ checkName("The quick brown fox\n");                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ checkName("\177");                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        // checkName("\0"); // does not work, because NUL is ignored
+        // COMPRESS-114
+        checkName("0302-0601-3±±±F06±W220±ZB±LALALA±±±±±±±±±±CAN±±DC±±±04±060302±MOE.model");               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/tar/TarUtilsTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 12.31 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 101 with range 1 to
+            result.append((char) (b & 0xFF)); // Allow for sign-extension
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 98 with range 1 to
+            byte b = buffer[i];
+            if (b == 0) { // Trailing null
+
+patches are written to file
+running tests...
+used time: Finished in 11.59 seconds
+Failing tests: 1
+	org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames$catena_3
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 98 with range 1 to
+            byte b = buffer[i];
+            if (b == 0) { // Trailing null
+
+try to fix hunk: 1
+replace from 101 with range 1 to
+            result.append((char) (b & 0xFF)); // Allow for sign-extension
+
+patches are written to file
+running tests...
+used time: Finished in 11.84 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.compress.archivers.tar.TarUtilsTest::testRoundTripNames$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

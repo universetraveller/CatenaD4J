@@ -1,0 +1,515 @@
+---
+Begin generate bug_id: JacksonXml_1
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonXml_1
+Try to checkout JacksonXml_1
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/dataformat/xml/deser/FromXmlParser.java
+trying to replace old failing tests
+edit: replace from 38 range 36 at src/test/java/com/fasterxml/jackson/dataformat/xml/lists/NestedUnwrappedLists180Test.java
+to
+    public void testNestedUnwrappedLists180$catena_0() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        assertNotNull(result.records);                                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, result.records.size());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(result.records.get(1));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.records.get(1).fields.size());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("b", result.records.get(1).fields.get(0).name);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, first one ought not be null should it? Ideally not...
+        try{ assertNotNull(result.records.get(0));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUnwrappedLists180$catena_1() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        try{ assertNotNull(result.records);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, result.records.size());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(result.records.get(1));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.records.get(1).fields.size());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("b", result.records.get(1).fields.get(0).name);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, first one ought not be null should it? Ideally not...
+        try{ assertNotNull(result.records.get(0));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUnwrappedLists180$catena_2() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        try{ assertNotNull(result.records);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, result.records.size());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(result.records.get(1));                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, result.records.get(1).fields.size());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("b", result.records.get(1).fields.get(0).name);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, first one ought not be null should it? Ideally not...
+        try{ assertNotNull(result.records.get(0));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUnwrappedLists180$catena_3() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        try{ assertNotNull(result.records);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, result.records.size());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(result.records.get(1));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, result.records.get(1).fields.size());                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("b", result.records.get(1).fields.get(0).name);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, first one ought not be null should it? Ideally not...
+        try{ assertNotNull(result.records.get(0));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUnwrappedLists180$catena_4() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        try{ assertNotNull(result.records);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, result.records.size());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(result.records.get(1));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.records.get(1).fields.size());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("b", result.records.get(1).fields.get(0).name);                                        /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // also, first one ought not be null should it? Ideally not...
+        try{ assertNotNull(result.records.get(0));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedUnwrappedLists180$catena_5() throws Exception
+    {
+        /*
+        Records recs = new Records();
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.add(new Record());
+        recs.records.get(0).fields.add(new Field("a"));
+        recs.records.get(2).fields.add(new Field("b"));
+
+        String xml = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(recs);
+        */
+
+        String xml =
+"<Records>\n"
+// Important: it's the empty CDATA here that causes breakage -- empty element alone would be fine
+//+"<records>\n</records>\n"
++"<records></records>\n"
++"  <records>\n"
++"   <fields name='b'/>\n"
++"  </records>\n"
++"</Records>\n"
+;
+        
+//System.out.println("XML: "+xml);
+
+        Records result = MAPPER.readValue(xml, Records.class);
+        try{ assertNotNull(result.records);                                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, result.records.size());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(result.records.get(1));                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, result.records.get(1).fields.size());                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("b", result.records.get(1).fields.get(0).name);                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // also, first one ought not be null should it? Ideally not...
+        assertNotNull(result.records.get(0));                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 103 range 21 at src/test/java/com/fasterxml/jackson/dataformat/xml/lists/NestedUnwrappedListsTest.java
+to
+    public void testNestedWithEmpty2$catena_0() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"    <VehicleActivity>\n"
++"    </VehicleActivity>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        assertNotNull(svc);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        VehicleMonitoringDelivery del = svc.vehicleMonitoringDelivery.get(0);
+        try{ assertNotNull(del.vehicleActivity);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, del.vehicleActivity.size());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty2$catena_1() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"    <VehicleActivity>\n"
++"    </VehicleActivity>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(svc.vehicleMonitoringDelivery);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        VehicleMonitoringDelivery del = svc.vehicleMonitoringDelivery.get(0);
+        try{ assertNotNull(del.vehicleActivity);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, del.vehicleActivity.size());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty2$catena_2() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"    <VehicleActivity>\n"
++"    </VehicleActivity>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(1, svc.vehicleMonitoringDelivery.size());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        VehicleMonitoringDelivery del = svc.vehicleMonitoringDelivery.get(0);
+        try{ assertNotNull(del.vehicleActivity);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, del.vehicleActivity.size());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty2$catena_3() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"    <VehicleActivity>\n"
++"    </VehicleActivity>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        VehicleMonitoringDelivery del = svc.vehicleMonitoringDelivery.get(0);
+        assertNotNull(del.vehicleActivity);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, del.vehicleActivity.size());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty2$catena_4() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"    <VehicleActivity>\n"
++"    </VehicleActivity>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        VehicleMonitoringDelivery del = svc.vehicleMonitoringDelivery.get(0);
+        try{ assertNotNull(del.vehicleActivity);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        assertEquals(1, del.vehicleActivity.size());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 86 range 16 at src/test/java/com/fasterxml/jackson/dataformat/xml/lists/NestedUnwrappedListsTest.java
+to
+    public void testNestedWithEmpty$catena_0() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        assertNotNull(svc);                                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty$catena_1() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(svc.vehicleMonitoringDelivery);                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        try{ assertEquals(1, svc.vehicleMonitoringDelivery.size());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testNestedWithEmpty$catena_2() throws Exception
+    {
+        final String XML =
+"<ServiceDelivery>\n"
++"  <ResponseTimestamp>2012-09-12T09:28:17.213-04:00</ResponseTimestamp>\n"
++"  <VehicleMonitoringDelivery>\n"
++"  </VehicleMonitoringDelivery>\n"
++"</ServiceDelivery>\n"
+                ;
+        
+        ServiceDelivery svc = _xmlMapper.readValue(XML, ServiceDelivery.class);
+        try{ assertNotNull(svc);                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(svc.vehicleMonitoringDelivery);                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        // 06-Jan-2015, tatu: Really should have one empty entry, not 0
+        assertEquals(1, svc.vehicleMonitoringDelivery.size());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/dataformat/xml/lists/NestedUnwrappedListsTest.java
+trace file: src/test/java/com/fasterxml/jackson/dataformat/xml/lists/NestedUnwrappedLists180Test.java
+new test num: 14
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 40.77 seconds
+Failing tests: 3
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedLists180Test::testNestedUnwrappedLists180$catena_5
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty$catena_2
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty2$catena_4
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 550 with range 4 to
+                        _nextToken = JsonToken.END_OBJECT;
+                        _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                        return (_currToken = JsonToken.START_OBJECT);
+
+patches are written to file
+running tests...
+used time: Finished in 35.22 seconds
+Failing tests: 1
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedLists180Test::testNestedUnwrappedLists180$catena_5
+select new bug
+Pattern: 001
+new failing tests:
+com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty2$catena_4
+com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty$catena_2
+Save found bug
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 514 with                     _nextToken = JsonToken.END_OBJECT;
+                    _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                    return (_currToken = JsonToken.START_OBJECT);
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 512 with                 if (_parsingContext.inArray()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 514 with                     _nextToken = JsonToken.END_OBJECT;
+                    _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                    return (_currToken = JsonToken.START_OBJECT);
+                }
+
+try to fix hunk: 2
+replace from 550 with range 4 to
+                        _nextToken = JsonToken.END_OBJECT;
+                        _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                        return (_currToken = JsonToken.START_OBJECT);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 512 with                 if (_parsingContext.inArray()) {
+
+try to fix hunk: 2
+replace from 550 with range 4 to
+                        _nextToken = JsonToken.END_OBJECT;
+                        _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                        return (_currToken = JsonToken.START_OBJECT);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 512 with                 if (_parsingContext.inArray()) {
+
+try to fix hunk: 1
+insert before 514 with                     _nextToken = JsonToken.END_OBJECT;
+                    _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                    return (_currToken = JsonToken.START_OBJECT);
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 33.38 seconds
+Failing tests: 2
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty$catena_2
+	com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedListsTest::testNestedWithEmpty2$catena_4
+Can independently fix ['com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedLists180Test::testNestedUnwrappedLists180$catena_5']
+select new bug
+Pattern: 110
+new failing tests:
+com.fasterxml.jackson.dataformat.xml.lists.NestedUnwrappedLists180Test::testNestedUnwrappedLists180$catena_5
+Save found bug
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 512 with                 if (_parsingContext.inArray()) {
+
+try to fix hunk: 1
+insert before 514 with                     _nextToken = JsonToken.END_OBJECT;
+                    _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                    return (_currToken = JsonToken.START_OBJECT);
+                }
+
+try to fix hunk: 2
+replace from 550 with range 4 to
+                        _nextToken = JsonToken.END_OBJECT;
+                        _parsingContext = _parsingContext.createChildObjectContext(-1, -1);
+                        return (_currToken = JsonToken.START_OBJECT);
+
+patches are written to file
+running tests...
+used time: Finished in 40.89 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 2 new bugs

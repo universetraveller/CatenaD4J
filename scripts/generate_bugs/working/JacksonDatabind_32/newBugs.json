@@ -1,0 +1,64 @@
+{
+    "original": {
+        "num_of_hunks": 3,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/UntypedObjectDeserializer.java",
+            "replaced_with": "        case JsonTokenId.ID_END_OBJECT:\n",
+            "patch_type": "insert",
+            "next_line_no": 221
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/UntypedObjectDeserializer.java",
+            "replaced_with": "            case JsonTokenId.ID_END_OBJECT:\n",
+            "patch_type": "insert",
+            "next_line_no": 535
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/UntypedObjectDeserializer.java",
+            "replaced_with": "                return new LinkedHashMap<String,Object>(2);\n",
+            "patch_type": "insert",
+            "next_line_no": 537
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989"
+        ],
+        "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/deser/TestUntypedDeserialization.java",
+            "Instance": "Begin: Pos(254, 12)\nEnd: Pos(268, 5)\nSource: /tmp/c4j/JacksonDatabind_32/src/test/java//com/fasterxml/jackson/databind/deser/TestUntypedDeserialization.java\nName: testNestedUntyped989\nChilds: [StatementAssertion<Begin: Pos(260, 9), End: Pos(260, 47)>,\nStatementAssertion<Begin: Pos(262, 9), End: Pos(262, 47)>,\nStatementAssertion<Begin: Pos(265, 9), End: Pos(265, 46)>,\nStatementAssertion<Begin: Pos(267, 9), End: Pos(267, 46)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_32/src/test/java//com/fasterxml/jackson/databind/deser/TestUntypedDeserialization.java",
+            "name": "testNestedUntyped989",
+            "begin": "Pos(254, 12)",
+            "end": "Pos(268, 5)",
+            "begin_line_no": 254,
+            "end_line_no": 268,
+            "child": [
+                "Begin: Pos(260, 9)\nEnd: Pos(260, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(262, 9)\nEnd: Pos(262, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(265, 9)\nEnd: Pos(265, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(267, 9)\nEnd: Pos(267, 46)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testNestedUntyped989$catena_0() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNestedUntyped989$catena_1() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNestedUntyped989$catena_2() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testNestedUntyped989$catena_3() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testNestedUntyped989$catena_0() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testNestedUntyped989$catena_1() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        assertTrue(pojo.value instanceof List);                                                             /***** ORIGINAL ASSERTION IS HERE *****/\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testNestedUntyped989$catena_2() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "3": "    public void testNestedUntyped989$catena_3() throws IOException\n    {\n        Untyped989 pojo;\n        ObjectReader r = MAPPER.readerFor(Untyped989.class);\n\n        pojo = r.readValue(\"[]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"[{}]\");\n        try{ assertTrue(pojo.value instanceof List);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}\n        \n        pojo = r.readValue(\"{}\");\n        try{ assertTrue(pojo.value instanceof Map);                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        pojo = r.readValue(\"{\\\"a\\\":[]}\");\n        assertTrue(pojo.value instanceof Map);                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "011": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_3",
+            "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_0",
+            "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_2",
+            "com.fasterxml.jackson.databind.deser.TestUntypedDeserialization::testNestedUntyped989$catena_1"
+        ]
+    }
+}

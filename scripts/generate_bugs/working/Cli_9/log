@@ -1,0 +1,167 @@
+---
+Begin generate bug_id: Cli_9
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_9
+Try to checkout Cli_9
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli/Parser.java
+trying to replace old failing tests
+edit: replace from 108 range 11 at src/test/org/apache/commons/cli/OptionsTest.java
+to
+    public void testMissingOptionsException$catena_0() throws ParseException {
+        Options options = new Options();
+        options.addOption(OptionBuilder.isRequired().create("f"));
+        options.addOption(OptionBuilder.isRequired().create("x"));
+        try {
+            new PosixParser().parse(options, new String[0]);
+            fail("Expected MissingOptionException to be thrown");                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (MissingOptionException e) {
+            try{ assertEquals("Missing required options: f, x", e.getMessage());                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testMissingOptionsException$catena_1() throws ParseException {
+        Options options = new Options();
+        options.addOption(OptionBuilder.isRequired().create("f"));
+        options.addOption(OptionBuilder.isRequired().create("x"));
+        try {
+            new PosixParser().parse(options, new String[0]);
+            try{ fail("Expected MissingOptionException to be thrown");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (MissingOptionException e) {
+            assertEquals("Missing required options: f, x", e.getMessage());                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+edit: replace from 118 range 24 at src/test/org/apache/commons/cli/ParseRequiredTest.java
+to
+    public void testMissingRequiredOptions$catena_0()
+    {
+        String[] args = new String[] { "-a" };
+
+        _options.addOption( OptionBuilder.withLongOpt( "cfile" )
+                                     .hasArg()
+                                     .isRequired()
+                                     .withDescription( "set the value of [c]" )
+                                     .create( 'c' ) );
+
+        try
+        {
+            CommandLine cl = parser.parse(_options,args);
+            fail( "exception should have been thrown" );                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        catch (MissingOptionException e)
+        {
+            try{ assertEquals( "Incorrect exception message", "Missing required options: b, c", e.getMessage() );    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        catch (ParseException e)
+        {
+            try{ fail( "expected to catch MissingOptionException" );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testMissingRequiredOptions$catena_1()
+    {
+        String[] args = new String[] { "-a" };
+
+        _options.addOption( OptionBuilder.withLongOpt( "cfile" )
+                                     .hasArg()
+                                     .isRequired()
+                                     .withDescription( "set the value of [c]" )
+                                     .create( 'c' ) );
+
+        try
+        {
+            CommandLine cl = parser.parse(_options,args);
+            try{ fail( "exception should have been thrown" );                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        catch (MissingOptionException e)
+        {
+            assertEquals( "Incorrect exception message", "Missing required options: b, c", e.getMessage() );         /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        catch (ParseException e)
+        {
+            try{ fail( "expected to catch MissingOptionException" );                                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testMissingRequiredOptions$catena_2()
+    {
+        String[] args = new String[] { "-a" };
+
+        _options.addOption( OptionBuilder.withLongOpt( "cfile" )
+                                     .hasArg()
+                                     .isRequired()
+                                     .withDescription( "set the value of [c]" )
+                                     .create( 'c' ) );
+
+        try
+        {
+            CommandLine cl = parser.parse(_options,args);
+            try{ fail( "exception should have been thrown" );                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        catch (MissingOptionException e)
+        {
+            try{ assertEquals( "Incorrect exception message", "Missing required options: b, c", e.getMessage() );    }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        catch (ParseException e)
+        {
+            fail( "expected to catch MissingOptionException" );                                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/org/apache/commons/cli/OptionsTest.java
+trace file: src/test/org/apache/commons/cli/ParseRequiredTest.java
+new test num: 5
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 1.54 seconds
+Failing tests: 2
+	org.apache.commons.cli.OptionsTest::testMissingOptionsException$catena_1
+	org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOptions$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 322 with range 1 to
+            throw new MissingOptionException(buff.substring(0, buff.length() - 2));
+
+patches are written to file
+running tests...
+used time: Finished in 5.60 seconds
+Failing tests: 4
+	org.apache.commons.cli.OptionsTest::testMissingOptionException
+	org.apache.commons.cli.OptionsTest::testMissingOptionsException$catena_1
+	org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOptions$catena_1
+	org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOption
+Includes new failing tests, set to unusable
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 320 with                 buff.append(", ");
+
+patches are written to file
+running tests...
+used time: Finished in 5.14 seconds
+Failing tests: 4
+	org.apache.commons.cli.OptionsTest::testMissingOptionException
+	org.apache.commons.cli.OptionsTest::testMissingOptionsException$catena_1
+	org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOptions$catena_1
+	org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOption
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 320 with                 buff.append(", ");
+
+try to fix hunk: 1
+replace from 322 with range 1 to
+            throw new MissingOptionException(buff.substring(0, buff.length() - 2));
+
+patches are written to file
+running tests...
+used time: Finished in 5.11 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.OptionsTest::testMissingOptionsException$catena_1', 'org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOptions$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.cli.OptionsTest::testMissingOptionsException$catena_1
+org.apache.commons.cli.ParseRequiredTest::testMissingRequiredOptions$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

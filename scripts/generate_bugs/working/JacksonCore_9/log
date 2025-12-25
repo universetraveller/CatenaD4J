@@ -1,0 +1,1587 @@
+---
+Begin generate bug_id: JacksonCore_9
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_9
+Try to checkout JacksonCore_9
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/base/ParserMinimalBase.java
+trace file: src/main/java/com/fasterxml/jackson/core/json/ReaderBasedJsonParser.java
+trace file: src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java
+trying to replace old failing tests
+edit: replace from 515 range 6 at src/test/java/com/fasterxml/jackson/core/json/TestJsonParser.java
+to
+    public void testGetValueAsTextBytes$catena_0() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        _testGetValueAsText(f, true, false);                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testGetValueAsText(f, true, true);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetValueAsTextBytes$catena_1() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        try{ _testGetValueAsText(f, true, false);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testGetValueAsText(f, true, true);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 522 range 6 at src/test/java/com/fasterxml/jackson/core/json/TestJsonParser.java
+to
+    public void testGetValueAsTextChars$catena_0() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        _testGetValueAsText(f, false, false);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testGetValueAsText(f, false, true);                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testGetValueAsTextChars$catena_1() throws Exception
+    {
+        JsonFactory f = new JsonFactory();
+        try{ _testGetValueAsText(f, false, false);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testGetValueAsText(f, false, true);                                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/json/TestJsonParser.java
+new test num: 4
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 24.85 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.80 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+No new failing tests but only 1 hunk
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.17 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+select new bug
+Pattern: 000010
+new failing tests:
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Save found bug
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.57 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+No new failing tests but only 1 hunk
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.12 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+select new bug
+Pattern: 001000
+new failing tests:
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+Save found bug
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.46 seconds
+Failing tests: 0
+select new bug
+Pattern: 010000
+new failing tests:
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Save found bug
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.71 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+No new failing tests but only 1 hunk
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.25 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.48 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.35 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.14 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.90 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.53 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.21 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.14 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.29 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.73 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.28 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.63 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.27 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.00 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 23.44 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.26 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.44 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.54 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.11 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 29.44 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.49 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.52 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.37 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.54 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.06 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.03 seconds
+Failing tests: 4
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.26 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.98 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.98 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 28.85 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.28 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.05 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.93 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.59 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.30 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 28.81 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.20 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.38 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.60 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 28.38 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars$catena_1
+Can independently fix []
+Could not fix independently
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.80 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.00 seconds
+Failing tests: 2
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_0
+	com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.35 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.83 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.28 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 28.66 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.44 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.19 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.38 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.80 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 29.49 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 26.23 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.85 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.97 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 27.98 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 392 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 1
+insert before 400 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 2
+insert before 253 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 3
+insert before 266 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 4
+insert before 305 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+try to fix hunk: 5
+insert before 319 with         if (_currToken == JsonToken.FIELD_NAME) {
+            return getCurrentName();
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 24.22 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111111
+Find 3 new bugs

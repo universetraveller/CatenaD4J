@@ -1,0 +1,16 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/NumberDeserializers.java",
+            "replaced_with": "        @Override\n        public T getEmptyValue(DeserializationContext ctxt) throws JsonMappingException {\n",
+            "patch_type": "insert",
+            "next_line_no": 148
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/NumberDeserializers.java",
+            "replaced_with": "            if (_primitive && ctxt.isEnabled(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)) {\n                throw ctxt.mappingException(\n                        \"Can not map Empty String as null into type %s (set DeserializationConfig.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES to 'false' to allow)\",\n                        handledType().toString());\n            }\n            return _nullValue;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 150
+        }
+    ]
+}

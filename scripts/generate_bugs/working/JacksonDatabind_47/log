@@ -1,0 +1,143 @@
+---
+Begin generate bug_id: JacksonDatabind_47
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_47
+Try to checkout JacksonDatabind_47
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/AnnotationIntrospector.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 2
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 161.27 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.ser.TestJsonSerialize::testBrokenAnnotation
+	com.fasterxml.jackson.databind.ser.TestJsonSerializeAs::testSpecializedAsIntermediate
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 820 with                     } else if (currRaw.isAssignableFrom(serClass)) { // specialization, ok as well
+                        type = tf.constructSpecializedType(type, serClass);
+                    } else {
+                        throw new JsonMappingException(null,
+                                String.format("Can not refine serialization type %s into %s; types not related",
+                                        type, serClass.getName()));
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 819 with                     if (serClass.isAssignableFrom(currRaw)) { // common case
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 816 with                 Class<?> currRaw = type.getRawClass();
+
+patches are written to file
+running tests...
+used time: Finished in 177.60 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.ser.TestJsonSerialize::testBrokenAnnotation
+	com.fasterxml.jackson.databind.ser.TestJsonSerializeAs::testSpecializedAsIntermediate
+No new failing tests but only 1 hunk
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 819 with                     if (serClass.isAssignableFrom(currRaw)) { // common case
+
+try to fix hunk: 2
+insert before 820 with                     } else if (currRaw.isAssignableFrom(serClass)) { // specialization, ok as well
+                        type = tf.constructSpecializedType(type, serClass);
+                    } else {
+                        throw new JsonMappingException(null,
+                                String.format("Can not refine serialization type %s into %s; types not related",
+                                        type, serClass.getName()));
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 816 with                 Class<?> currRaw = type.getRawClass();
+
+try to fix hunk: 2
+insert before 820 with                     } else if (currRaw.isAssignableFrom(serClass)) { // specialization, ok as well
+                        type = tf.constructSpecializedType(type, serClass);
+                    } else {
+                        throw new JsonMappingException(null,
+                                String.format("Can not refine serialization type %s into %s; types not related",
+                                        type, serClass.getName()));
+                    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 816 with                 Class<?> currRaw = type.getRawClass();
+
+try to fix hunk: 1
+insert before 819 with                     if (serClass.isAssignableFrom(currRaw)) { // common case
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 816 with                 Class<?> currRaw = type.getRawClass();
+
+try to fix hunk: 1
+insert before 819 with                     if (serClass.isAssignableFrom(currRaw)) { // common case
+
+try to fix hunk: 2
+insert before 820 with                     } else if (currRaw.isAssignableFrom(serClass)) { // specialization, ok as well
+                        type = tf.constructSpecializedType(type, serClass);
+                    } else {
+                        throw new JsonMappingException(null,
+                                String.format("Can not refine serialization type %s into %s; types not related",
+                                        type, serClass.getName()));
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 153.66 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.ser.TestJsonSerialize::testBrokenAnnotation', 'com.fasterxml.jackson.databind.ser.TestJsonSerializeAs::testSpecializedAsIntermediate']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.ser.TestJsonSerialize::testBrokenAnnotation
+com.fasterxml.jackson.databind.ser.TestJsonSerializeAs::testSpecializedAsIntermediate
+Save found bug
+processed: 111
+Find 1 new bugs

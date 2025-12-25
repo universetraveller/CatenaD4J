@@ -1,0 +1,91 @@
+{
+    "original": {
+        "num_of_hunks": 5,
+        "0": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "import java.lang.reflect.Modifier;\n",
+            "patch_type": "insert",
+            "next_line_no": 23
+        },
+        "1": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "          assertInstantiable(c);\n",
+            "patch_type": "insert",
+            "next_line_no": 48
+        },
+        "2": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "          assertInstantiable(c);\n",
+            "patch_type": "insert",
+            "next_line_no": 71
+        },
+        "3": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "          assertInstantiable(c);\n",
+            "patch_type": "insert",
+            "next_line_no": 90
+        },
+        "4": {
+            "file_name": "gson/src/main/java/com/google/gson/internal/UnsafeAllocator.java",
+            "replaced_with": "  private static void assertInstantiable(Class<?> c) {\n    int modifiers = c.getModifiers();\n    if (Modifier.isInterface(modifiers)) {\n      throw new UnsupportedOperationException(\"Interface can't be instantiated! Interface name: \" + c.getName());\n    }\n    if (Modifier.isAbstract(modifiers)) {\n      throw new UnsupportedOperationException(\"Abstract class can't be instantiated! Class name: \" + c.getName());\n    }\n  }\n",
+            "patch_type": "insert",
+            "next_line_no": 110
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testInterfaceInstantiation",
+            "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testAbstractClassInstantiation"
+        ],
+        "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testInterfaceInstantiation": {
+            "file_path": "gson/src/test/java/com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+            "Instance": "Begin: Pos(39, 10)\nEnd: Pos(47, 3)\nSource: /tmp/c4j/Gson_8/gson/src/test/java//com/google/gson/internal/UnsafeAllocatorInstantiationTest.java\nName: testInterfaceInstantiation\nChilds: [StatementAssertion<Begin: Pos(43, 7), End: Pos(43, 13)>,\nStatementAssertion<Begin: Pos(45, 7), End: Pos(45, 70)>,\n]",
+            "source": "/tmp/c4j/Gson_8/gson/src/test/java//com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+            "name": "testInterfaceInstantiation",
+            "begin": "Pos(39, 10)",
+            "end": "Pos(47, 3)",
+            "begin_line_no": 39,
+            "end_line_no": 47,
+            "child": [
+                "Begin: Pos(43, 7)\nEnd: Pos(43, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(45, 7)\nEnd: Pos(45, 70)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testInterfaceInstantiation$catena_0() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(Interface.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (Exception e) {\n      try{ assertEquals(e.getClass(), UnsupportedOperationException.class);                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "  public void testInterfaceInstantiation$catena_1() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(Interface.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (Exception e) {\n      assertEquals(e.getClass(), UnsupportedOperationException.class);                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            ],
+            "func": {
+                "0": "  public void testInterfaceInstantiation$catena_0() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(Interface.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (Exception e) {\n      try{ assertEquals(e.getClass(), UnsupportedOperationException.class);                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "1": "  public void testInterfaceInstantiation$catena_1() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(Interface.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (Exception e) {\n      assertEquals(e.getClass(), UnsupportedOperationException.class);                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            }
+        },
+        "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testAbstractClassInstantiation": {
+            "file_path": "gson/src/test/java/com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+            "Instance": "Begin: Pos(53, 10)\nEnd: Pos(61, 3)\nSource: /tmp/c4j/Gson_8/gson/src/test/java//com/google/gson/internal/UnsafeAllocatorInstantiationTest.java\nName: testAbstractClassInstantiation\nChilds: [StatementAssertion<Begin: Pos(57, 7), End: Pos(57, 13)>,\nStatementAssertion<Begin: Pos(59, 7), End: Pos(59, 70)>,\n]",
+            "source": "/tmp/c4j/Gson_8/gson/src/test/java//com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+            "name": "testAbstractClassInstantiation",
+            "begin": "Pos(53, 10)",
+            "end": "Pos(61, 3)",
+            "begin_line_no": 53,
+            "end_line_no": 61,
+            "child": [
+                "Begin: Pos(57, 7)\nEnd: Pos(57, 13)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(59, 7)\nEnd: Pos(59, 70)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "  public void testAbstractClassInstantiation$catena_0() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(AbstractClass.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (Exception e) {\n      try{ assertEquals(e.getClass(), UnsupportedOperationException.class);                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "  public void testAbstractClassInstantiation$catena_1() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(AbstractClass.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (Exception e) {\n      assertEquals(e.getClass(), UnsupportedOperationException.class);                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            ],
+            "func": {
+                "0": "  public void testAbstractClassInstantiation$catena_0() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(AbstractClass.class);\n      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/\n    } catch (Exception e) {\n      try{ assertEquals(e.getClass(), UnsupportedOperationException.class);                                 }catch(Throwable __SHOULD_BE_IGNORED){}\n    }\n  }",
+                "1": "  public void testAbstractClassInstantiation$catena_1() {\n    UnsafeAllocator unsafeAllocator = UnsafeAllocator.create();\n    try {\n      unsafeAllocator.newInstance(AbstractClass.class);\n      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}\n    } catch (Exception e) {\n      assertEquals(e.getClass(), UnsupportedOperationException.class);                                      /***** ORIGINAL ASSERTION IS HERE *****/\n    }\n  }"
+            }
+        }
+    },
+    "11001": {
+        "failing_tests": [
+            "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testAbstractClassInstantiation$catena_1",
+            "com.google.gson.internal.UnsafeAllocatorInstantiationTest::testInterfaceInstantiation$catena_1"
+        ]
+    }
+}

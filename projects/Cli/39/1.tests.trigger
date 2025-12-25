@@ -1,0 +1,2 @@
+org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1
+org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist

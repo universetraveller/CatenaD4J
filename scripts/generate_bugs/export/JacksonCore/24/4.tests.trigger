@@ -1,0 +1,9 @@
+com.fasterxml.jackson.core.read.NumberOverflowTest::testSimpleLongOverflow$catena_0
+com.fasterxml.jackson.core.read.NumberOverflowTest::testSimpleLongOverflow$catena_1
+com.fasterxml.jackson.core.read.NumberOverflowTest::testSimpleLongOverflow$catena_2
+com.fasterxml.jackson.core.read.NumberOverflowTest::testMaliciousLongOverflow$catena_2
+com.fasterxml.jackson.core.read.NumberOverflowTest::testMaliciousLongOverflow$catena_1
+com.fasterxml.jackson.core.read.NumberOverflowTest::testMaliciousLongOverflow$catena_0
+com.fasterxml.jackson.core.read.NumberOverflowTest::testSimpleLongOverflow$catena_3
+com.fasterxml.jackson.core.read.NumberOverflowTest::testMaliciousLongOverflow$catena_3
+com.fasterxml.jackson.core.read.NumberOverflowTest::testMaliciousLongOverflow$catena_4

@@ -1,0 +1,105 @@
+---
+Begin generate bug_id: Jsoup_12
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_12
+Try to checkout Jsoup_12
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/select/Selector.java
+trying to replace old failing tests
+edit: replace from 127 range 6 at src/test/java/org/jsoup/select/SelectorTest.java
+to
+    @Test public void testByAttributeRegexCombined$catena_0() {
+        Document doc = Jsoup.parse("<div><table class=x><td>Hello</td></table></div>");
+        Elements els = doc.select("div table[class~=x|y]");
+        assertEquals(1, els.size());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Hello", els.text());                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void testByAttributeRegexCombined$catena_1() {
+        Document doc = Jsoup.parse("<div><table class=x><td>Hello</td></table></div>");
+        Elements els = doc.select("div table[class~=x|y]");
+        try{ assertEquals(1, els.size());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Hello", els.text());                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/select/SelectorTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 10.27 seconds
+Failing tests: 2
+	org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_0
+	org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 156 with     private String consumeSubQuery() {
+        StringBuilder sq = new StringBuilder();
+        while (!tq.isEmpty()) {
+            if (tq.matches("("))
+                sq.append("(").append(tq.chompBalanced('(', ')')).append(")");
+            else if (tq.matches("["))
+                sq.append("[").append(tq.chompBalanced('[', ']')).append("]");
+            else if (tq.matchesAny(combinators))
+                break;
+            else
+                sq.append(tq.consume());
+        }
+        return sq.toString();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.89 seconds
+Failing tests: 2
+	org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_0
+	org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_1
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 139 with range 1 to
+        String subQuery = consumeSubQuery(); // support multi > childs
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 139 with range 1 to
+        String subQuery = consumeSubQuery(); // support multi > childs
+
+try to fix hunk: 1
+insert before 156 with     private String consumeSubQuery() {
+        StringBuilder sq = new StringBuilder();
+        while (!tq.isEmpty()) {
+            if (tq.matches("("))
+                sq.append("(").append(tq.chompBalanced('(', ')')).append(")");
+            else if (tq.matches("["))
+                sq.append("[").append(tq.chompBalanced('[', ']')).append("]");
+            else if (tq.matchesAny(combinators))
+                break;
+            else
+                sq.append(tq.consume());
+        }
+        return sq.toString();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 11.68 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_1', 'org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_1
+org.jsoup.select.SelectorTest::testByAttributeRegexCombined$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

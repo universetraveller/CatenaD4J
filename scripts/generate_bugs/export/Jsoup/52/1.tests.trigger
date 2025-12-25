@@ -1,0 +1,4 @@
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0

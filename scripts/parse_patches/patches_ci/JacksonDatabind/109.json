@@ -1,0 +1,90 @@
+{
+    "num_of_hunks": 13,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "    protected final static int MAX_BIG_DECIMAL_SCALE = 9999;\n",
+        "patch_type": "insert",
+        "next_line_no": 37
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "                if (((Class<?>) handledType()) == BigDecimal.class) {\n                    return bigDecimalAsStringSerializer();\n                }\n",
+        "patch_type": "insert",
+        "next_line_no": 58
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "    public static JsonSerializer<?> bigDecimalAsStringSerializer() {\n        return BigDecimalAsStringSerializer.BD_INSTANCE;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 113
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "    final static class BigDecimalAsStringSerializer\n        extends ToStringSerializerBase\n    {\n        final static BigDecimalAsStringSerializer BD_INSTANCE = new BigDecimalAsStringSerializer();\n        \n        public BigDecimalAsStringSerializer() {\n            super(BigDecimal.class);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 114,
+        "is_extra_hunk": true
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "        @Override\n        public boolean isEmpty(SerializerProvider prov, Object value) {\n            return valueToString(value).isEmpty();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 115,
+        "is_extra_hunk": true
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "        @Override\n        public void serialize(Object value, JsonGenerator gen, SerializerProvider provider)\n            throws IOException\n        {\n            final String text;\n            if (gen.isEnabled(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN)) {\n                final BigDecimal bd = (BigDecimal) value;\n",
+        "patch_type": "insert",
+        "next_line_no": 116,
+        "is_extra_hunk": true
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "                if (!_verifyBigDecimalRange(gen, bd)) {\n",
+        "patch_type": "insert",
+        "next_line_no": 117,
+        "is_extra_hunk": true
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "                    final String errorMsg = String.format(\n                            \"Attempt to write plain `java.math.BigDecimal` (see JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN) with illegal scale (%d): needs to be between [-%d, %d]\",\n                            bd.scale(), MAX_BIG_DECIMAL_SCALE, MAX_BIG_DECIMAL_SCALE);\n                    provider.reportMappingProblem(errorMsg);\n                }\n                text = bd.toPlainString();\n            } else {\n                text = value.toString();\n            }\n            gen.writeString(text);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 119,
+        "is_extra_hunk": true
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "        @Override\n        public String valueToString(Object value) {\n",
+        "patch_type": "insert",
+        "next_line_no": 120,
+        "is_extra_hunk": true
+    },
+    "9": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "            throw new IllegalStateException();\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 121,
+        "is_extra_hunk": true
+    },
+    "10": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "replaced_with": "        protected boolean _verifyBigDecimalRange(JsonGenerator gen, BigDecimal value) throws IOException {\n            int scale = value.scale();\n            return ((scale >= -MAX_BIG_DECIMAL_SCALE) && (scale <= MAX_BIG_DECIMAL_SCALE));\n        }\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 123,
+        "is_extra_hunk": true
+    },
+    "11": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializers.java",
+        "replaced_with": "import java.math.BigDecimal;\n",
+        "patch_type": "insert",
+        "next_line_no": 5
+    },
+    "12": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializers.java",
+        "replaced_with": "                    if (((Class<?>) handledType()) == BigDecimal.class) {\n                        return NumberSerializer.bigDecimalAsStringSerializer();\n                    }\n",
+        "patch_type": "insert",
+        "next_line_no": 100
+    },
+    "num_of_hunks_ci": 5
+}

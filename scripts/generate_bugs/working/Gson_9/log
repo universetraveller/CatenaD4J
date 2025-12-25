@@ -1,0 +1,177 @@
+---
+Begin generate bug_id: Gson_9
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Gson_9
+Try to checkout Gson_9
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
+trace file: gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+trace file: gson/src/main/java/com/google/gson/stream/JsonWriter.java
+trying to replace old failing tests
+new test num: 0
+ori test num: 1
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 20.44 seconds
+Failing tests: 1
+	com.google.gson.stream.JsonWriterTest::testBoxedBooleans
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 476 with   public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    writeDeferredName();
+    beforeValue();
+    out.write(value ? "true" : "false");
+    return this;
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 19.51 seconds
+Failing tests: 4
+	com.google.gson.functional.JsonTreeTest::testToJsonTreeObjectType
+	com.google.gson.functional.JsonTreeTest::testJsonTreeToString
+	com.google.gson.functional.JsonTreeTest::testJsonTreeNull
+	com.google.gson.functional.JsonTreeTest::testToJsonTree
+Includes new failing tests, set to unusable
+processed: 001
+pattern: 010
+try to fix hunk: 1
+delete from 165 with range 4
+patches are written to file
+running tests...
+used time: Finished in 22.03 seconds
+Failing tests: 2
+	com.google.gson.functional.DefaultTypeAdaptersTest::testNullSerialization
+	com.google.gson.stream.JsonWriterTest::testBoxedBooleans
+Includes new failing tests, set to unusable
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 162 with   @Override public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    put(new JsonPrimitive(value));
+    return this;
+  }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+delete from 165 with range 4
+try to fix hunk: 2
+insert before 476 with   public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    writeDeferredName();
+    beforeValue();
+    out.write(value ? "true" : "false");
+    return this;
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 20.92 seconds
+Failing tests: 4
+	com.google.gson.functional.JsonTreeTest::testToJsonTreeObjectType
+	com.google.gson.functional.JsonTreeTest::testJsonTreeToString
+	com.google.gson.functional.JsonTreeTest::testJsonTreeNull
+	com.google.gson.functional.JsonTreeTest::testToJsonTree
+Includes new failing tests, set to unusable
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 162 with   @Override public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    put(new JsonPrimitive(value));
+    return this;
+  }
+
+try to fix hunk: 2
+insert before 476 with   public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    writeDeferredName();
+    beforeValue();
+    out.write(value ? "true" : "false");
+    return this;
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 21.19 seconds
+Failing tests: 0
+Can independently fix ['com.google.gson.stream.JsonWriterTest::testBoxedBooleans']
+select new bug
+Pattern: 101
+new failing tests:
+com.google.gson.stream.JsonWriterTest::testBoxedBooleans
+Save found bug
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 162 with   @Override public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    put(new JsonPrimitive(value));
+    return this;
+  }
+
+try to fix hunk: 1
+delete from 165 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 162 with   @Override public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    put(new JsonPrimitive(value));
+    return this;
+  }
+
+try to fix hunk: 1
+delete from 165 with range 4
+try to fix hunk: 2
+insert before 476 with   public JsonWriter value(Boolean value) throws IOException {
+    if (value == null) {
+      return nullValue();
+    }
+    writeDeferredName();
+    beforeValue();
+    out.write(value ? "true" : "false");
+    return this;
+  }
+
+patches are written to file
+running tests...
+used time: Finished in 20.20 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111
+Find 1 new bugs

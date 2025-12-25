@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+            "from_line_no": 88,
+            "to_line_no": 88,
+            "replaced_with": "            return containsMatch(left, (Iterator) right);\n",
+            "replaced": "            return containsMatch((Iterator) right, left);\n",
+            "patch_type": "replace",
+            "next_line_no": 89
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+            "replaced_with": "    private boolean containsMatch(Object value, Iterator it) {\n        while (it.hasNext()) {\n            Object element = it.next();\n            if (compute(value, element)) {\n                return true;\n            }\n        }\n        return false;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 138
+        }
+    ]
+}

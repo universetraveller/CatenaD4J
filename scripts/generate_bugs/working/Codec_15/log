@@ -1,0 +1,125 @@
+---
+Begin generate bug_id: Codec_15
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Codec_15
+Try to checkout Codec_15
+build dir: ['target/classes', 'target/tests']
+init FileManager
+trace file: src/main/java/org/apache/commons/codec/language/Soundex.java
+trying to replace old failing tests
+edit: replace from 223 range 11 at src/test/java/org/apache/commons/codec/language/SoundexTest.java
+to
+    @Test
+    public void testHWRuleEx1$catena_0() {
+        // From
+        // http://www.archives.gov/research_room/genealogy/census/soundex.html:
+        // Ashcraft is coded A-261 (A, 2 for the S, C ignored, 6 for the R, 1
+        // for the F). It is not coded A-226.
+        Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcraft"));                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcroft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yehudit"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yhwdyt"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testHWRuleEx1$catena_1() {
+        // From
+        // http://www.archives.gov/research_room/genealogy/census/soundex.html:
+        // Ashcraft is coded A-261 (A, 2 for the S, C ignored, 6 for the R, 1
+        // for the F). It is not coded A-226.
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcraft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcroft"));                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yehudit"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yhwdyt"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testHWRuleEx1$catena_2() {
+        // From
+        // http://www.archives.gov/research_room/genealogy/census/soundex.html:
+        // Ashcraft is coded A-261 (A, 2 for the S, C ignored, 6 for the R, 1
+        // for the F). It is not coded A-226.
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcraft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcroft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals("Y330", this.getStringEncoder().encode("yehudit"));                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yhwdyt"));                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testHWRuleEx1$catena_3() {
+        // From
+        // http://www.archives.gov/research_room/genealogy/census/soundex.html:
+        // Ashcraft is coded A-261 (A, 2 for the S, C ignored, 6 for the R, 1
+        // for the F). It is not coded A-226.
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcraft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("A261", this.getStringEncoder().encode("Ashcroft"));                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ Assert.assertEquals("Y330", this.getStringEncoder().encode("yehudit"));                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        Assert.assertEquals("Y330", this.getStringEncoder().encode("yhwdyt"));                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/codec/language/SoundexTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 18.28 seconds
+Failing tests: 1
+	org.apache.commons.codec.language.SoundexTest::testHWRuleEx1$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 195 with                 if ('H'!=prevChar && 'W'!=prevChar) {
+                    break;
+                }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 188 with range 5 to
+            for (int i=index-1 ; i>=0 ; i--) {
+                final char prevChar = str.charAt(i);
+                if (this.map(prevChar)==mappedChar) {
+
+patches are written to file
+running tests...
+used time: Finished in 19.53 seconds
+Failing tests: 12
+	org.apache.commons.codec.language.SoundexTest::testWikipediaAmericanSoundex
+	org.apache.commons.codec.language.SoundexTest::testMsSqlServer3
+	org.apache.commons.codec.language.SoundexTest::testEncodeBatch2
+	org.apache.commons.codec.language.SoundexTest::testEncodeBatch3
+	org.apache.commons.codec.language.SoundexTest::testEncodeBatch4
+	org.apache.commons.codec.language.SoundexTest::testHWRuleEx1$catena_2
+	org.apache.commons.codec.language.SoundexTest::testHWRuleEx1$catena_3
+	org.apache.commons.codec.language.SoundexTest::testEncodeIgnoreHyphens
+	org.apache.commons.codec.language.SoundexTest::testEncodeIgnoreTrimmable
+	org.apache.commons.codec.language.SoundexTest::testDifference
+	org.apache.commons.codec.language.SoundexTest::testEncodeBasic
+	org.apache.commons.codec.language.SoundexTest::testHWRuleEx2
+Includes new failing tests, set to unusable
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 188 with range 5 to
+            for (int i=index-1 ; i>=0 ; i--) {
+                final char prevChar = str.charAt(i);
+                if (this.map(prevChar)==mappedChar) {
+
+try to fix hunk: 1
+insert before 195 with                 if ('H'!=prevChar && 'W'!=prevChar) {
+                    break;
+                }
+
+patches are written to file
+running tests...
+used time: Finished in 19.49 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.codec.language.SoundexTest::testHWRuleEx1$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.codec.language.SoundexTest::testHWRuleEx1$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

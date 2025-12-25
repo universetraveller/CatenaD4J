@@ -1,0 +1,13 @@
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_3
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_1
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_12
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_9
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_4
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_5
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_10
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_0
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_8
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_2
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_6
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_7
+com.fasterxml.jackson.databind.type.TestTypeFactory::testCanonicalNames$catena_11

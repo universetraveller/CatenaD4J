@@ -1,0 +1,34 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        if (!_class.isAssignableFrom(subclass)) {\n",
+            "patch_type": "insert",
+            "next_line_no": 132
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        }\n",
+            "patch_type": "insert",
+            "next_line_no": 138
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        Class<?> next = subclass.getSuperclass();\n        if (next == _class) { // straight up parent class? Great.\n            return new SimpleType(subclass, _bindings, this,\n                    _superInterfaces, _valueHandler, _typeHandler, _asStatic);\n        }\n        if ((next != null) && _class.isAssignableFrom(next)) {\n            JavaType superb = _narrow(next);\n            return new SimpleType(subclass, _bindings, superb,\n                    null, _valueHandler, _typeHandler, _asStatic);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 139
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        Class<?>[] nextI = subclass.getInterfaces();\n        for (Class<?> iface : nextI) {\n            if (iface == _class) { // directly implemented\n                return new SimpleType(subclass, _bindings, null,\n                        new JavaType[] { this }, _valueHandler, _typeHandler, _asStatic);\n            }\n            if (_class.isAssignableFrom(iface)) { // indirect, so recurse\n                JavaType superb = _narrow(iface);\n                return new SimpleType(subclass, _bindings, null,\n                        new JavaType[] { superb }, _valueHandler, _typeHandler, _asStatic);\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 140
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "replaced_with": "        throw new IllegalArgumentException(\"Internal error: Can not resolve sub-type for Class \"+subclass.getName()+\" to \"\n                +_class.getName());\n",
+            "patch_type": "insert",
+            "next_line_no": 141
+        }
+    ]
+}

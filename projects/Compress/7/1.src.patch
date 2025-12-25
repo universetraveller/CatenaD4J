@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 98,
+            "to_line_no": 98,
+            "replaced_with": "            byte b = buffer[i];\n            if (b == 0) { // Trailing null\n",
+            "replaced": "            if (buffer[i] == 0) {\n",
+            "patch_type": "replace",
+            "next_line_no": 99
+        },
+        {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+            "from_line_no": 101,
+            "to_line_no": 101,
+            "replaced_with": "            result.append((char) (b & 0xFF)); // Allow for sign-extension\n",
+            "replaced": "            result.append((char) buffer[i]);\n",
+            "patch_type": "replace",
+            "next_line_no": 102
+        }
+    ]
+}

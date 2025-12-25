@@ -1,0 +1,66 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/java/org/apache/commons/cli/HelpFormatter.java",
+            "from_line_no": 824,
+            "to_line_no": 824,
+            "replaced": "            int lastPos = pos;\n",
+            "patch_type": "delete",
+            "next_line_no": 825
+        },
+        "1": {
+            "file_name": "src/java/org/apache/commons/cli/HelpFormatter.java",
+            "from_line_no": 833,
+            "to_line_no": 836,
+            "replaced_with": "            }\n            \n            if ( (text.length() > width) && (pos == nextLineTabStop - 1) ) {\n                sb.append(text);\n\n                return sb;\n",
+            "replaced": "            } else\n            if (pos == lastPos)\n            {\n                throw new RuntimeException(\"Text too long for line - throwing exception to avoid infinite loop [CLI-162]: \" + text);\n",
+            "patch_type": "replace",
+            "next_line_no": 837
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli.bug.BugCLI162Test::testInfiniteLoop",
+            "org.apache.commons.cli.bug.BugCLI162Test::testPrintHelpLongLines"
+        ],
+        "org.apache.commons.cli.bug.BugCLI162Test::testInfiniteLoop": {
+            "file_path": "src/test/org/apache/commons/cli/bug/BugCLI162Test.java",
+            "Instance": "Begin: Pos(42, 12)\nEnd: Pos(46, 5)\nSource: /tmp/c4j/Cli_23/src/test//org/apache/commons/cli/bug/BugCLI162Test.java\nName: testInfiniteLoop\nChilds: []",
+            "source": "/tmp/c4j/Cli_23/src/test//org/apache/commons/cli/bug/BugCLI162Test.java",
+            "name": "testInfiniteLoop",
+            "begin": "Pos(42, 12)",
+            "end": "Pos(46, 5)",
+            "begin_line_no": 42,
+            "end_line_no": 46,
+            "child": [],
+            "splited": [],
+            "func": {}
+        },
+        "org.apache.commons.cli.bug.BugCLI162Test::testPrintHelpLongLines": {
+            "file_path": "src/test/org/apache/commons/cli/bug/BugCLI162Test.java",
+            "check": [
+                "Use pattern matching: None.testPrintHelp",
+                "Selector contains assertion"
+            ],
+            "Instance": "Begin: Pos(52, 12)\nEnd: Pos(237, 5)\nSource: /tmp/c4j/Cli_23/src/test//org/apache/commons/cli/bug/BugCLI162Test.java\nName: testPrintHelpLongLines\nChilds: [StatementAssertion<Begin: Pos(236, 9), End: Pos(236, 47)>,\n]",
+            "source": "/tmp/c4j/Cli_23/src/test//org/apache/commons/cli/bug/BugCLI162Test.java",
+            "name": "testPrintHelpLongLines",
+            "begin": "Pos(52, 12)",
+            "end": "Pos(237, 5)",
+            "begin_line_no": 52,
+            "end_line_no": 237,
+            "child": [
+                "Begin: Pos(236, 9)\nEnd: Pos(236, 47)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "01": {
+        "failing_tests": [
+            "org.apache.commons.cli.bug.BugCLI162Test::testPrintHelpLongLines",
+            "org.apache.commons.cli.bug.BugCLI162Test::testInfiniteLoop"
+        ]
+    }
+}

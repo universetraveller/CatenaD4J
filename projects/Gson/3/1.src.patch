@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/ConstructorConstructor.java",
+            "replaced_with": "import java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.ConcurrentMap;\nimport java.util.concurrent.ConcurrentNavigableMap;\nimport java.util.concurrent.ConcurrentSkipListMap;\n",
+            "patch_type": "insert",
+            "next_line_no": 36
+        },
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/ConstructorConstructor.java",
+            "from_line_no": 175,
+            "to_line_no": 175,
+            "replaced_with": "      if (ConcurrentNavigableMap.class.isAssignableFrom(rawType)) {\n        return new ObjectConstructor<T>() {\n          @Override public T construct() {\n            return (T) new ConcurrentSkipListMap<Object, Object>();\n          }\n        };\n      } else if (ConcurrentMap.class.isAssignableFrom(rawType)) {\n        return new ObjectConstructor<T>() {\n          @Override public T construct() {\n            return (T) new ConcurrentHashMap<Object, Object>();\n          }\n        };\n      } else if (SortedMap.class.isAssignableFrom(rawType)) {\n",
+            "replaced": "      if (SortedMap.class.isAssignableFrom(rawType)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 176
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "num_of_hunks": 9,
+    "0": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "from_line_no": 67,
+        "to_line_no": 72,
+        "replaced_with": "        if (format.hasPattern()) {\n",
+        "replaced": "                if ((shape == JsonFormat.Shape.STRING) || format.hasPattern()\n                                || format.hasLocale() || format.hasTimeZone()) {\n                    TimeZone tz = format.getTimeZone();\n                    final String pattern = format.hasPattern()\n                                    ? format.getPattern()\n                                    : StdDateFormat.DATE_FORMAT_STR_ISO8601;\n",
+        "patch_type": "replace",
+        "next_line_no": 73
+    },
+    "1": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "from_line_no": 76,
+        "to_line_no": 79,
+        "replaced_with": "            SimpleDateFormat df = new SimpleDateFormat(format.getPattern(), loc);\n            TimeZone tz = format.hasTimeZone() ? format.getTimeZone()\n                    : serializers.getTimeZone();\n",
+        "replaced": "                    SimpleDateFormat df = new SimpleDateFormat(pattern, loc);\n                    if (tz == null) {\n                        tz = serializers.getTimeZone();\n                    }\n",
+        "patch_type": "replace",
+        "next_line_no": 80
+    },
+    "2": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "        final boolean hasLocale = format.hasLocale();\n        final boolean hasTZ = format.hasTimeZone();\n        final boolean asString = (shape == JsonFormat.Shape.STRING);\n",
+        "patch_type": "insert",
+        "next_line_no": 85
+    },
+    "3": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "        if (!hasLocale && !hasTZ && !asString) {\n            return this;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 86
+    },
+    "4": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "        DateFormat df0 = serializers.getConfig().getDateFormat();\n",
+        "patch_type": "insert",
+        "next_line_no": 87
+    },
+    "5": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "        if (df0 instanceof StdDateFormat) {\n            StdDateFormat std = (StdDateFormat) df0;\n            if (format.hasLocale()) {\n                std = std.withLocale(format.getLocale());\n            }\n            if (format.hasTimeZone()) {\n                std = std.withTimeZone(format.getTimeZone());\n            }\n            return withFormat(Boolean.FALSE, std);\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 88
+    },
+    "6": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "        if (!(df0 instanceof SimpleDateFormat)) {\n",
+        "patch_type": "insert",
+        "next_line_no": 92
+    },
+    "7": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "replaced_with": "            serializers.reportMappingProblem(\n\"Configured `DateFormat` (%s) not a `SimpleDateFormat`; can not configure `Locale` or `TimeZone`\",\ndf0.getClass().getName());\n        }\n        SimpleDateFormat df = (SimpleDateFormat) df0;\n        if (hasLocale) {\n",
+        "patch_type": "insert",
+        "next_line_no": 93
+    },
+    "8": {
+        "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "from_line_no": 94,
+        "to_line_no": 94,
+        "replaced_with": "            df = new SimpleDateFormat(df.toPattern(), format.getLocale());\n        } else {\n            df = (SimpleDateFormat) df.clone();\n        }\n        TimeZone newTz = format.getTimeZone();\n        boolean changeTZ = (newTz != null) && !newTz.equals(df.getTimeZone());\n        if (changeTZ) {\n            df.setTimeZone(newTz);\n        }\n        return withFormat(Boolean.FALSE, df);\n",
+        "replaced": "        return this;\n",
+        "patch_type": "replace",
+        "next_line_no": 95
+    }
+}

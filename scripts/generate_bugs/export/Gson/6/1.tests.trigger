@@ -1,0 +1,2 @@
+com.google.gson.regression.JsonAdapterNullSafeTest::testNullSafeBugDeserialize
+com.google.gson.regression.JsonAdapterNullSafeTest::testNullSafeBugSerialize

@@ -1,0 +1,11 @@
+{
+    "org.jsoup.integration.ConnectTest::handlesEmptyStreamDuringParseRead": {
+        "begin_line_no": 387,
+        "end_line_no": 403,
+        "file_path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+        "to": [
+            "    @Test\n    public void handlesEmptyStreamDuringParseRead$catena_1() throws IOException {\n        // this handles situations where the remote server sets a content length greater than it actually writes\n\n        Connection.Response res = Jsoup.connect(InterruptedServlet.Url)\n            .timeout(200)\n            .execute();\n\n        boolean threw = false;\n        try {\n            Document document = res.parse();\n            try{ assertEquals(\"Something\", document.title());                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IOException e) {\n            threw = true;\n        }\n        assertEquals(true, threw);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n    }",
+            "    @Test\n    public void handlesEmptyStreamDuringParseRead$catena_0() throws IOException {\n        // this handles situations where the remote server sets a content length greater than it actually writes\n\n        Connection.Response res = Jsoup.connect(InterruptedServlet.Url)\n            .timeout(200)\n            .execute();\n\n        boolean threw = false;\n        try {\n            Document document = res.parse();\n            assertEquals(\"Something\", document.title());                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IOException e) {\n            threw = true;\n        }\n        try{ assertEquals(true, threw);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n    }"
+        ]
+    }
+}

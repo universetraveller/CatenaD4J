@@ -1,0 +1,3335 @@
+---
+Begin generate bug_id: Cli_16
+num_of_hunks: 7
+timeout for running: 3600
+use working dir: ./working/data/Cli_16
+Try to checkout Cli_16
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/java/org/apache/commons/cli2/Option.java
+trace file: src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java
+trace file: src/java/org/apache/commons/cli2/option/GroupImpl.java
+trace file: src/java/org/apache/commons/cli2/option/OptionImpl.java
+trying to replace old failing tests
+edit: replace from 91 range 11 at src/test/org/apache/commons/cli2/bug/BugCLI123Test.java
+to
+    public void testMultipleChildOptions$catena_0() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test",
+                "--sub", "anotherTest" });
+        assertTrue("Child option not found", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Sub option not found", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for sub option", "anotherTest", cl
+                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMultipleChildOptions$catena_1() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test",
+                "--sub", "anotherTest" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("Sub option not found", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for sub option", "anotherTest", cl
+                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMultipleChildOptions$catena_2() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test",
+                "--sub", "anotherTest" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("Sub option not found", cl.hasOption(childOption2));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wrong value for sub option", "anotherTest", cl
+                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMultipleChildOptions$catena_3() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test",
+                "--sub", "anotherTest" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Sub option not found", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wrong value for sub option", "anotherTest", cl
+                .getValue(childOption2));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testMultipleChildOptions$catena_4() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test",
+                "--sub", "anotherTest" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Sub option not found", cl.hasOption(childOption2));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for sub option", "anotherTest", cl
+                .getValue(childOption2));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("Child group not found", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 80 range 7 at src/test/org/apache/commons/cli2/bug/BugCLI123Test.java
+to
+    public void testSingleChildOption$catena_0() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test" });
+        assertTrue("Child option not found", cl.hasOption(childOption1));                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSingleChildOption$catena_1() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("Child group not found", cl.hasOption(childGroup));                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testSingleChildOption$catena_2() throws OptionException {
+        CommandLine cl = parser.parse(new String[] { "--child", "test" });
+        try{ assertTrue("Child option not found", cl.hasOption(childOption1));                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("Wrong value for option", "test", cl
+                .getValue(childOption1));                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("Child group not found", cl.hasOption(childGroup));                                      /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+NOTICE: skip org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order for cannot find node in method_base
+NOTICE: skip org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order for cannot find node in method_base
+NOTICE: skip org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order for cannot find node in method_base
+NOTICE: skip org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order for cannot find node in method_base
+trace file: src/test/org/apache/commons/cli2/bug/BugCLI123Test.java
+new test num: 8
+ori test num: 5
+pattern: 0000000
+patches are written to file
+running tests...
+used time: Finished in 9.83 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Raising new failing tests before fixing, should check
+processed: 0000000
+pattern: 0000001
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000001
+pattern: 0000010
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000010
+pattern: 0000100
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+used time: Finished in 7.77 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+No new failing tests but only 1 hunk
+processed: 0000100
+pattern: 0001000
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001000
+pattern: 0010000
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010000
+pattern: 0100000
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100000
+pattern: 1000000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000000
+pattern: 0000011
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0000011
+pattern: 0000101
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 7.98 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0000101
+pattern: 0000110
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 9.50 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0000110
+pattern: 0001001
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001001
+pattern: 0001010
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001010
+pattern: 0001100
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001100
+pattern: 0010001
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010001
+pattern: 0010010
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010010
+pattern: 0010100
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010100
+pattern: 0011000
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011000
+pattern: 0100001
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100001
+pattern: 0100010
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100010
+pattern: 0100100
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100100
+pattern: 0101000
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101000
+pattern: 0110000
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110000
+pattern: 1000001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000001
+pattern: 1000010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000010
+pattern: 1000100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000100
+pattern: 1001000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001000
+pattern: 1010000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010000
+pattern: 1100000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100000
+pattern: 0000111
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.14 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0000111
+pattern: 0001011
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001011
+pattern: 0001101
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001101
+pattern: 0001110
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001110
+pattern: 0010011
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010011
+pattern: 0010101
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010101
+pattern: 0010110
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010110
+pattern: 0011001
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011001
+pattern: 0011010
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011010
+pattern: 0011100
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011100
+pattern: 0100011
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100011
+pattern: 0100101
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.00 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0100101
+pattern: 0100110
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100110
+pattern: 0101001
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101001
+pattern: 0101010
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101010
+pattern: 0101100
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101100
+pattern: 0110001
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110001
+pattern: 0110010
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110010
+pattern: 0110100
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110100
+pattern: 0111000
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111000
+pattern: 1000011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000011
+pattern: 1000101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000101
+pattern: 1000110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.87 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1000110
+pattern: 1001001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001001
+pattern: 1001010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001010
+pattern: 1001100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001100
+pattern: 1010001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010001
+pattern: 1010010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010010
+pattern: 1010100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010100
+pattern: 1011000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011000
+pattern: 1100001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100001
+pattern: 1100010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100010
+pattern: 1100100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100100
+pattern: 1101000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101000
+pattern: 1110000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110000
+pattern: 0001111
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001111
+pattern: 0010111
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010111
+pattern: 0011011
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011011
+pattern: 0011101
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011101
+pattern: 0011110
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011110
+pattern: 0100111
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 12.58 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0100111
+pattern: 0101011
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101011
+pattern: 0101101
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+Running ant (compile.tests)................................................ OK
+Running ant (run.dev.tests)................................................ FAIL
+Executed command:  cd /root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16 && /root/rjy/defects4j/major/bin/ant -f /root/rjy/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/root/rjy/defects4j -Dd4j.dir.projects=/root/rjy/defects4j/framework/projects -Dbasedir=/root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16 -Dbuild.compiler=javac1.7 -DOUTFILE=/root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16/failing_tests  run.dev.tests 2>&1
+OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=1G; support was removed in 8.0
+Buildfile: /root/rjy/defects4j/framework/projects/defects4j.build.xml
+
+init:
+
+junit-present:
+
+setProxy:
+
+noProxy:
+     [echo] Proxy not used.
+
+get-custom-dep-commons-lang.jar:
+
+get-dep-commons-lang.jar:
+      [get] Getting: file:/root/rjy/defects4j/framework/projects/Cli/lib/commons-lang/commons-lang/2.1/commons-lang-2.1.jar
+      [get] To: /root/.maven/repository/commons-lang/jars/commons-lang-2.1.jar
+
+get-custom-dep-junit.jar:
+      [get] Getting: file:/root/rjy/defects4j/framework/projects/lib/junit-4.11.jar
+      [get] To: /root/.maven/repository/junit/jars/junit-3.8.1.jar
+
+get-dep-junit.jar:
+
+get-custom-dep-jdepend.jar:
+
+get-dep-jdepend.jar:
+      [get] Getting: file:/root/rjy/defects4j/framework/projects/Cli/lib/jdepend/jdepend/2.5/jdepend-2.5.jar
+      [get] To: /root/.maven/repository/jdepend/jars/jdepend-2.5.jar
+
+get-deps:
+
+compile:
+    [javac] /root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16/build.xml:74: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+
+compile.tests:
+    [javac] /root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16/build.xml:151: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+
+update.all.tests:
+
+run.dev.tests:
+    [junit] Running org.apache.commons.cli2.CommandLineDefaultsTest
+    [junit] Tests run: 15, Failures: 0, Errors: 0, Time elapsed: 0.018 sec
+    [junit] Running org.apache.commons.cli2.DocumentationTest
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0.054 sec
+    [junit] Running org.apache.commons.cli2.PrecedenceTest
+    [junit] Tests run: 8, Failures: 0, Errors: 0, Time elapsed: 0.06 sec
+    [junit] Running org.apache.commons.cli2.application.AntTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.043 sec
+    [junit] Running org.apache.commons.cli2.application.CpTest
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 0.059 sec
+    [junit] Running org.apache.commons.cli2.application.CvsTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.066 sec
+    [junit] Running org.apache.commons.cli2.application.LsTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.019 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug13886Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.015 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug13935Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.028 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug15046Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.028 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug15648Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.02 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug27575Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.024 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug28005Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.03 sec
+    [junit] Running org.apache.commons.cli2.bug.Bug32533Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.018 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI122Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.027 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI123Test
+    [junit] Tests run: 10, Failures: 1, Errors: 8, Time elapsed: 0.045 sec
+    [junit] Test org.apache.commons.cli2.bug.BugCLI123Test FAILED
+    [junit] Running org.apache.commons.cli2.bug.BugCLI126Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.019 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI12Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.023 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI144Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.016 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI145Test
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.013 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI158Test
+    [junit] Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0.042 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI18Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.011 sec
+    [junit] Running org.apache.commons.cli2.bug.BugCLI80Test
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.052 sec
+    [junit] Running org.apache.commons.cli2.bug.BugLoopingOptionLookAlikeTest
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.032 sec
+    [junit] Running org.apache.commons.cli2.builder.ArgumentBuilderTest
+    [junit] Tests run: 20, Failures: 0, Errors: 0, Time elapsed: 0.018 sec
+    [junit] Running org.apache.commons.cli2.builder.DefaultOptionBuilderTest
+    [junit] Tests run: 11, Failures: 0, Errors: 0, Time elapsed: 0.016 sec
+    [junit] Running org.apache.commons.cli2.commandline.DefaultingCommandLineTest
+    [junit] Tests run: 36, Failures: 1, Errors: 0, Time elapsed: 0.032 sec
+    [junit] Test org.apache.commons.cli2.commandline.DefaultingCommandLineTest FAILED
+    [junit] Running org.apache.commons.cli2.commandline.ParserTest
+    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.05 sec
+    [junit] Running org.apache.commons.cli2.commandline.PreferencesCommandLineTest
+    [junit] Tests run: 36, Failures: 1, Errors: 0, Time elapsed: 0.104 sec
+    [junit] Test org.apache.commons.cli2.commandline.PreferencesCommandLineTest FAILED
+    [junit] Running org.apache.commons.cli2.commandline.PropertiesCommandLineTest
+    [junit] Tests run: 36, Failures: 1, Errors: 0, Time elapsed: 0.085 sec
+    [junit] Test org.apache.commons.cli2.commandline.PropertiesCommandLineTest FAILED
+    [junit] Running org.apache.commons.cli2.commandline.WriteableCommandLineImplTest
+    [junit] Tests run: 38, Failures: 1, Errors: 0, Time elapsed: 0.053 sec
+    [junit] Test org.apache.commons.cli2.commandline.WriteableCommandLineImplTest FAILED
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0x7) at pc=0x00007f8968e90d9b, pid=188821, tid=0x00007f8968fe6640
+#
+# JRE version: OpenJDK Runtime Environment (8.0_442-b06) (build 1.8.0_442-8u442-b06~us1-0ubuntu1~22.04-b06)
+# Java VM: OpenJDK 64-Bit Server VM (25.442-b06 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libzip.so+0x5d9b]
+#
+# Core dump written. Default location: /root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16/core or core.188821
+#
+# An error report file with more information is saved as:
+# /root/rjy/c4j/scripts/generate_bugs/working/data/Cli_16/hs_err_pid188821.log
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+Aborted (core dumped)
+Cannot run tests! at /root/rjy/defects4j/framework/bin/d4j/d4j-test line 135.
+Compilation failed in require at /root/rjy/defects4j/framework/bin/defects4j line 195.
+
+<ENDOUTPUT>
+processed: 0101101
+pattern: 0101110
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101110
+pattern: 0110011
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110011
+pattern: 0110101
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110101
+pattern: 0110110
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110110
+pattern: 0111001
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111001
+pattern: 0111010
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111010
+pattern: 0111100
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111100
+pattern: 1000111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 11.27 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1000111
+pattern: 1001011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001011
+pattern: 1001101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001101
+pattern: 1001110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001110
+pattern: 1010011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010011
+pattern: 1010101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010101
+pattern: 1010110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 9.42 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1010110
+pattern: 1011001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011001
+pattern: 1011010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011010
+pattern: 1011100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011100
+pattern: 1100011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100011
+pattern: 1100101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100101
+pattern: 1100110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100110
+pattern: 1101001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101001
+pattern: 1101010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101010
+pattern: 1101100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101100
+pattern: 1110001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110001
+pattern: 1110010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110010
+pattern: 1110100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110100
+pattern: 1111000
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111000
+pattern: 0011111
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011111
+pattern: 0101111
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 11.69 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 0101111
+pattern: 0110111
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110111
+pattern: 0111011
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111011
+pattern: 0111101
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111101
+pattern: 0111110
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111110
+pattern: 1001111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001111
+pattern: 1010111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 12.13 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1010111
+pattern: 1011011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011011
+pattern: 1011101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011101
+pattern: 1011110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011110
+pattern: 1100111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.16 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1100111
+pattern: 1101011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101011
+pattern: 1101101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101101
+pattern: 1101110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1101110
+pattern: 1110011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110011
+pattern: 1110101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110101
+pattern: 1110110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110110
+pattern: 1111001
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111001
+pattern: 1111010
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111010
+pattern: 1111100
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111100
+pattern: 0111111
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111111
+pattern: 1011111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011111
+pattern: 1101111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 12.27 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1101111
+pattern: 1110111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.72 seconds
+Failing tests: 14
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+	org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+	org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+	org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+	org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+Can independently fix []
+Could not fix independently
+processed: 1110111
+pattern: 1111011
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111011
+pattern: 1111101
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111101
+pattern: 1111110
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1111110
+pattern: 1111111
+try to fix hunk: 0
+insert before 206 with     Option getParent();
+
+try to fix hunk: 1
+insert before 216 with     void setParent(Option parent);
+
+try to fix hunk: 2
+insert before 74 with         Option parent = option.getParent();
+        while (parent != null && !options.contains(parent)) {
+            options.add(parent);
+            parent = parent.getParent();
+        }
+
+try to fix hunk: 3
+insert before 92 with             option.setParent(this);
+
+try to fix hunk: 4
+insert before 36 with     private Option parent;
+
+try to fix hunk: 5
+insert before 128 with     public Option getParent() {
+        return parent;
+    }
+
+try to fix hunk: 6
+insert before 129 with     public void setParent(Option parent) {
+        this.parent = parent;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 10.94 seconds
+Failing tests: 1
+	org.apache.commons.cli2.validation.FileValidatorTest::testValidate_WritableFile
+EXCEPTION: Could not pass after all fixed, should check
+Can independently fix ['org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order', 'org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3', 'org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1', 'org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1', 'org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order', 'org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order', 'org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4', 'org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0', 'org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0', 'org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order', 'org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2', 'org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2', 'org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption']
+select new bug
+Pattern: 1111111
+new failing tests:
+org.apache.commons.cli2.commandline.PropertiesCommandLineTest::testGetOptions_Order
+org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_3
+org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_1
+org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_1
+org.apache.commons.cli2.commandline.DefaultingCommandLineTest::testGetOptions_Order
+org.apache.commons.cli2.commandline.WriteableCommandLineImplTest::testGetOptions_Order
+org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_4
+org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_0
+org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_0
+org.apache.commons.cli2.commandline.PreferencesCommandLineTest::testGetOptions_Order
+org.apache.commons.cli2.bug.BugCLI123Test::testSingleChildOption$catena_2
+org.apache.commons.cli2.bug.BugCLI123Test::testMultipleChildOptions$catena_2
+org.apache.commons.cli2.bug.BugCLI123Test::testParentOptionAndChildOption
+Save found bug
+processed: 1111111
+Find 1 new bugs

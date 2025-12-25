@@ -1,0 +1,727 @@
+---
+Begin generate bug_id: Compress_43
+num_of_hunks: 4
+timeout for running: 3600
+use working dir: ./working/data/Compress_43
+Try to checkout Compress_43
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java
+trying to replace old failing tests
+edit: replace from 134 range 50 at src/test/java/org/apache/commons/compress/archivers/zip/DataDescriptorTest.java
+to
+    @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_0() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_1() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_2() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_3() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_4() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_5() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        assertEquals(3, sizeFromLFH);                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_6() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        assertEquals(crcFromLFH, crcFromCDH);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_7() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        assertEquals(cSizeFromLFH, cSizeFromCDH);                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        try{ assertEquals(sizeFromLFH, sizeFromCDH);                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void doesntWriteDataDescriptorWhenAddingRawEntries$catena_8() throws IOException {
+        ByteArrayOutputStream init = new ByteArrayOutputStream();
+        try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(init)) {
+            zos.putArchiveEntry(new ZipArchiveEntry("test1.txt"));
+            zos.write("foo".getBytes("UTF-8"));
+            zos.closeArchiveEntry();
+        }
+
+        File f = new File(dir, "test.zip");
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(init.toByteArray());
+        }
+
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
+        ZipArchiveEntry zae;
+        try (ZipFile zf = new ZipFile(f);
+             ZipArchiveOutputStream zos = new ZipArchiveOutputStream(o)) {
+            zae = zf.getEntry("test1.txt");
+            zos.addRawArchiveEntry(zae, zf.getRawInputStream(zae));
+        }
+
+        byte[] data = o.toByteArray();
+        byte[] versionInLFH = Arrays.copyOfRange(data, 4, 6);
+        // still 2.0 because of Deflate
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInLFH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInLFH = Arrays.copyOfRange(data, 6, 8);
+        // no DD but EFS flag
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInLFH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int cdhStart = findCentralDirectory(data);
+        byte[] versionInCDH = Arrays.copyOfRange(data, cdhStart + 6, cdhStart + 8);
+        try{ assertArrayEquals(new byte[] { 20, 0 }, versionInCDH);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        byte[] gpbInCDH = Arrays.copyOfRange(data, cdhStart + 8, cdhStart + 10);
+        try{ assertArrayEquals(new byte[] { 0, 8 }, gpbInCDH);                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        int ddStart = cdhStart - 16;
+        try{ assertNotEquals(ZipLong.DD_SIG, new ZipLong(data, ddStart));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        long crcFromLFH = ZipLong.getValue(data, 14);
+        long cSizeFromLFH = ZipLong.getValue(data, 18);
+        long sizeFromLFH = ZipLong.getValue(data, 22);
+        try{ assertEquals(3, sizeFromLFH);                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        long crcFromCDH = ZipLong.getValue(data, cdhStart + 16);
+        try{ assertEquals(crcFromLFH, crcFromCDH);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        long cSizeFromCDH = ZipLong.getValue(data, cdhStart + 20);
+        try{ assertEquals(cSizeFromLFH, cSizeFromCDH);                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        long sizeFromCDH = ZipLong.getValue(data, cdhStart + 24);
+        assertEquals(sizeFromLFH, sizeFromCDH);                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/compress/archivers/zip/DataDescriptorTest.java
+new test num: 9
+ori test num: 0
+pattern: 0000
+patches are written to file
+running tests...
+used time: Finished in 67.28 seconds
+Failing tests: 2
+	org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_1
+	org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_3
+processed: 0000
+pattern: 0001
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0001
+pattern: 0010
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0010
+pattern: 0100
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0100
+pattern: 1000
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1000
+pattern: 0011
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0011
+pattern: 0101
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0101
+pattern: 0110
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0110
+pattern: 1001
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1001
+pattern: 1010
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1010
+pattern: 1100
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1100
+pattern: 0111
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 0111
+pattern: 1011
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1011
+pattern: 1101
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+used time: Finished in 65.33 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_3', 'org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_1']
+select new bug
+Pattern: 1101
+new failing tests:
+org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_3
+org.apache.commons.compress.archivers.zip.DataDescriptorTest::doesntWriteDataDescriptorWhenAddingRawEntries$catena_1
+Save found bug
+processed: 1101
+pattern: 1110
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 1110
+pattern: 1111
+try to fix hunk: 0
+replace from 1034 with range 1 to
+        metaData.put(ze, new EntryMetaData(localHeaderStart, usesDataDescriptor(ze.getMethod(), phased)));
+
+try to fix hunk: 1
+replace from 1075 with range 1 to
+        final boolean dataDescriptor = usesDataDescriptor(zipMethod, phased);
+
+try to fix hunk: 2
+replace from 1171 with range 1 to
+        if (!usesDataDescriptor(ze.getMethod(), false)) {
+
+try to fix hunk: 3
+replace from 1492 with range 2 to
+    private boolean usesDataDescriptor(final int zipMethod, boolean phased) {
+        return !phased && zipMethod == DEFLATED && channel == null;
+
+patches are written to file
+running tests...
+used time: Finished in 65.77 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 1111
+Find 1 new bugs

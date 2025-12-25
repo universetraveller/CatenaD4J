@@ -1,0 +1,11 @@
+{
+    "org.apache.commons.compress.compressors.bzip2.PythonTruncatedBzip2Test::testPartialReadTruncatedData": {
+        "begin_line_no": 84,
+        "end_line_no": 105,
+        "file_path": "src/test/java/org/apache/commons/compress/compressors/bzip2/PythonTruncatedBzip2Test.java",
+        "to": [
+            "    @Test\n    public void testPartialReadTruncatedData$catena_0() throws IOException {\n        //with BZ2File(self.filename) as f:\n        //    self.assertEqual(f.read(len(self.TEXT)), self.TEXT)\n        //    self.assertRaises(EOFError, f.read, 1)\n\n        final int length = TEXT.length();\n        ByteBuffer buffer = ByteBuffer.allocate(length);\n        bz2Channel.read(buffer);\n\n        assertArrayEquals(Arrays.copyOfRange(TEXT.getBytes(), 0, length),\n                buffer.array());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // subsequent read should throw\n        buffer = ByteBuffer.allocate(1);\n        try {\n            bz2Channel.read(buffer);\n            try{ Assert.fail(\"The read should have thrown.\");                                               }catch(Throwable __SHOULD_BE_IGNORED){}\n        } catch (IOException e) {\n            // pass\n        }\n    }",
+            "    @Test\n    public void testPartialReadTruncatedData$catena_1() throws IOException {\n        //with BZ2File(self.filename) as f:\n        //    self.assertEqual(f.read(len(self.TEXT)), self.TEXT)\n        //    self.assertRaises(EOFError, f.read, 1)\n\n        final int length = TEXT.length();\n        ByteBuffer buffer = ByteBuffer.allocate(length);\n        bz2Channel.read(buffer);\n\n        try{ assertArrayEquals(Arrays.copyOfRange(TEXT.getBytes(), 0, length),\n                buffer.array());                                                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // subsequent read should throw\n        buffer = ByteBuffer.allocate(1);\n        try {\n            bz2Channel.read(buffer);\n            Assert.fail(\"The read should have thrown.\");                                                    /***** ORIGINAL ASSERTION IS HERE *****/\n        } catch (IOException e) {\n            // pass\n        }\n    }"
+        ]
+    }
+}

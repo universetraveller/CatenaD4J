@@ -1,0 +1,22 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/parser/Token.java",
+            "replaced_with": "        boolean bogus = false;\n",
+            "patch_type": "insert",
+            "next_line_no": 171
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/TokeniserState.java",
+            "replaced_with": "            comment.bogus = true;\n",
+            "patch_type": "insert",
+            "next_line_no": 1094
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "replaced_with": "        if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)\n            String data = comment.getData();\n            if (data.length() > 1 && (data.startsWith(\"!\") || data.startsWith(\"?\"))) {\n                String declaration = data.substring(1);\n                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith(\"!\"));\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 67
+        }
+    ]
+}

@@ -3,6 +3,9 @@ import traceback
 import itertools
 import time
 import math
+import javalang
+import re
+import os
 
 def runCommand(cmd, encoding='utf-8', cwd=None, timeout=None):
     try:
@@ -104,3 +107,35 @@ def validate_encoding(filename):
         except:
             continue
     return backup_encoding[0]
+def get_method_info(source_code, target_line):
+    tree = javalang.parse.parse(source_code)
+    closest_method = None
+    closest_start = -1
+
+    for path, node in tree:
+        if isinstance(node, javalang.tree.MethodDeclaration):
+            if node.position:
+                start_line = node.position.line
+                if start_line <= target_line and start_line > closest_start:
+                    closest_start = start_line
+                    closest_method = node
+
+    if closest_method:
+        return closest_method.name, closest_start
+
+    return None
+
+def get_catena_id_from_method(source_code):
+    match = re.search(r'(public|private|protected)?\s*(?:\s*(?:static|final|synchronized))*\s*(?:<[\w\s,?<>]+>\s*)?([\w\<\>\[\]\?]+\s+)?'
+                      r'[\w]+[$_]catena_(\d+)\s*\(.*?\)', source_code)
+    return match.group(3), match.start(3)
+
+def get_qualified_class_name(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        source = f.read()
+    tree = javalang.parse.parse(source)
+    package_name = ''
+    if tree.package:
+        package_name = tree.package.name + '.'
+    file_name = os.path.splitext(os.path.basename(file_path))[0]
+    return "{}{}".format(package_name, file_name)

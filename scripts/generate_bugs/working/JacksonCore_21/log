@@ -1,0 +1,1554 @@
+---
+Begin generate bug_id: JacksonCore_21
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonCore_21
+Try to checkout JacksonCore_21
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
+trying to replace old failing tests
+edit: replace from 65 range 54 at src/test/java/com/fasterxml/jackson/core/filter/TokenVerifyingParserFiltering330Test.java
+to
+    @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_0() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        assertFalse(p.hasCurrentToken());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_1() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNull(p.getCurrentToken());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_2() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_3() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(p.isExpectedStartObjectToken());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_4() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(p.isExpectedStartArrayToken());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_5() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        assertToken(JsonToken.START_OBJECT, p.nextToken());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_6() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_7() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(p.isExpectedStartObjectToken());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_8() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(p.isExpectedStartArrayToken());                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_9() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.FIELD_NAME, p.nextToken());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_10() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_11() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("ob", p.getCurrentName());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_12() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        assertToken(JsonToken.START_OBJECT, p.nextToken());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_13() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("ob", p.getCurrentName());                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_14() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.FIELD_NAME, p.nextToken());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_15() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("value", p.getCurrentName());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_16() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("value", p.getText());                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_17() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_18() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_19() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(NumberType.INT, p.getNumberType());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_20() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, p.getIntValue());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_21() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("value", p.getCurrentName());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_22() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.END_OBJECT, p.nextToken());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_23() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_24() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertToken(JsonToken.END_OBJECT, p.nextToken());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_25() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+
+        p.clearCurrentToken();
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        p.close();
+    }     @SuppressWarnings("resource")
+    public void testTokensSingleMatchWithPath$catena_26() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+        try{ assertFalse(p.hasCurrentToken());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.getCurrentToken());                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonTokenId.ID_NO_TOKEN, p.getCurrentTokenId());                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartObjectToken());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+// {'a':123,'array':[1,2],'ob':{'value0':2,'value':3,'value2':4},'b':true}
+//      String result = readAndWrite(JSON_F, p);
+//      assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.START_OBJECT, p.getCurrentToken());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(p.isExpectedStartObjectToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(p.isExpectedStartArrayToken());                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.FIELD_NAME, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+//        assertEquals("ob", p.getText());
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("ob", p.getCurrentName());                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.FIELD_NAME, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getText());                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.VALUE_NUMBER_INT, p.nextToken());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.VALUE_NUMBER_INT, p.getCurrentToken());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(NumberType.INT, p.getNumberType());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, p.getIntValue());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("value", p.getCurrentName());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertToken(JsonToken.END_OBJECT, p.nextToken());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        p.clearCurrentToken();
+        assertNull(p.getCurrentToken());                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        p.close();
+    }
+edit: replace from 120 range 17 at src/test/java/com/fasterxml/jackson/core/filter/TokenVerifyingParserFiltering330Test.java
+to
+    @SuppressWarnings("resource")
+    public void testSkippingForSingleWithPath$catena_0() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+//        assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        assertToken(JsonToken.START_OBJECT, p.nextToken());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        p.skipChildren();
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(p.nextToken());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("resource")
+    public void testSkippingForSingleWithPath$catena_1() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+//        assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        p.skipChildren();
+        assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNull(p.nextToken());                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @SuppressWarnings("resource")
+    public void testSkippingForSingleWithPath$catena_2() throws Exception
+    {
+        JsonParser p0 = JSON_F.createParser(SIMPLE);
+        JsonParser p = new FilteringParserDelegate(p0,
+               new NameMatchFilter("value"),
+                   true, // includePath
+                   false // multipleMatches
+                );
+
+//        assertEquals(aposToQuotes("{'ob':{'value':3}}"), result);
+
+        try{ assertToken(JsonToken.START_OBJECT, p.nextToken());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        p.skipChildren();
+        try{ assertEquals(JsonToken.END_OBJECT, p.getCurrentToken());                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNull(p.nextToken());                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/core/filter/TokenVerifyingParserFiltering330Test.java
+new test num: 30
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 34.91 seconds
+Failing tests: 5
+	com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_1
+	com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_2
+	com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testBasicSingleMatchFilteringWithPath
+	com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_24
+	com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_25
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 248 with                 }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 238 with             if (!_includePath) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 238 with             if (!_includePath) {
+
+try to fix hunk: 1
+insert before 248 with                 }
+
+patches are written to file
+running tests...
+used time: Finished in 34.21 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_2', 'com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_1', 'com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testBasicSingleMatchFilteringWithPath', 'com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_24', 'com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_25']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_2
+com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testSkippingForSingleWithPath$catena_1
+com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testBasicSingleMatchFilteringWithPath
+com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_24
+com.fasterxml.jackson.core.filter.TokenVerifyingParserFiltering330Test::testTokensSingleMatchWithPath$catena_25
+Save found bug
+processed: 11
+Find 1 new bugs

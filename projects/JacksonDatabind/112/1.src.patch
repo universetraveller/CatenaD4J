@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/StringCollectionDeserializer.java",
+            "from_line_no": 107,
+            "to_line_no": 107,
+            "replaced_with": "            AnnotatedWithParams delegateCreator = _valueInstantiator.getArrayDelegateCreator();\n",
+            "replaced": "            AnnotatedWithParams delegateCreator = _valueInstantiator.getDelegateCreator();\n",
+            "patch_type": "replace",
+            "next_line_no": 108
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/deser/std/StringCollectionDeserializer.java",
+            "replaced_with": "                JavaType delegateType = _valueInstantiator.getArrayDelegateType(ctxt.getConfig());\n                delegate = findDeserializer(ctxt, delegateType, property);\n            } else if ((delegateCreator = _valueInstantiator.getDelegateCreator()) != null) {\n",
+            "patch_type": "insert",
+            "next_line_no": 109
+        }
+    ]
+}

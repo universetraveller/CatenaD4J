@@ -1,0 +1,106 @@
+---
+Begin generate bug_id: Jsoup_89
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_89
+Try to checkout Jsoup_89
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/Attribute.java
+trying to replace old failing tests
+edit: replace from 41 range 9 at src/test/java/org/jsoup/nodes/AttributeTest.java
+to
+    @Test public void settersOnOrphanAttribute$catena_0() {
+        Attribute attr = new Attribute("one", "two");
+        attr.setKey("three");
+        String oldVal = attr.setValue("four");
+        assertEquals("two", oldVal);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("three", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("four", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void settersOnOrphanAttribute$catena_1() {
+        Attribute attr = new Attribute("one", "two");
+        attr.setKey("three");
+        String oldVal = attr.setValue("four");
+        try{ assertEquals("two", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("three", attr.getKey());                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("four", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void settersOnOrphanAttribute$catena_2() {
+        Attribute attr = new Attribute("one", "two");
+        attr.setKey("three");
+        String oldVal = attr.setValue("four");
+        try{ assertEquals("two", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("four", attr.getValue());                                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(null, attr.parent);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void settersOnOrphanAttribute$catena_3() {
+        Attribute attr = new Attribute("one", "two");
+        attr.setKey("three");
+        String oldVal = attr.setValue("four");
+        try{ assertEquals("two", oldVal);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("three", attr.getKey());                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("four", attr.getValue());                                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(null, attr.parent);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/AttributeTest.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 22.99 seconds
+Failing tests: 4
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_0
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_1
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_2
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 90 with             oldVal = parent.get(this.key); // trust the container more
+
+patches are written to file
+running tests...
+used time: Finished in 22.11 seconds
+Failing tests: 4
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_0
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_1
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_2
+	org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_3
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 88 with range 1 to
+        String oldVal = this.val;
+
+patches are written to file
+running tests...
+used time: Finished in 22.11 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_2
+org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_1
+org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_0
+org.jsoup.nodes.AttributeTest::settersOnOrphanAttribute$catena_3
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 88 with range 1 to
+        String oldVal = this.val;
+
+try to fix hunk: 1
+insert before 90 with             oldVal = parent.get(this.key); // trust the container more
+
+patches are written to file
+running tests...
+used time: Finished in 21.01 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

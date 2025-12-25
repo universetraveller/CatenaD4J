@@ -1,0 +1,84 @@
+---
+Begin generate bug_id: Jsoup_8
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_8
+Try to checkout Jsoup_8
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/Node.java
+trying to replace old failing tests
+edit: replace from 416 range 8 at src/test/java/org/jsoup/nodes/ElementTest.java
+to
+    @Test public void parentlessToString$catena_0() {
+        Document doc = Jsoup.parse("<img src='foo'>");
+        Element img = doc.select("img").first();
+        assertEquals("\n<img src=\"foo\" />", img.toString());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+
+        img.remove(); // lost its parent
+        try{ assertEquals("<img src=\"foo\" />", img.toString());                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void parentlessToString$catena_1() {
+        Document doc = Jsoup.parse("<img src='foo'>");
+        Element img = doc.select("img").first();
+        try{ assertEquals("\n<img src=\"foo\" />", img.toString());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        img.remove(); // lost its parent
+        assertEquals("<img src=\"foo\" />", img.toString());                                                /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/ElementTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 8.81 seconds
+Failing tests: 1
+	org.jsoup.nodes.ElementTest::parentlessToString$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 367 with     private Document.OutputSettings getOutputSettings() {
+        return ownerDocument() != null ? ownerDocument().outputSettings() : (new Document("")).outputSettings();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 8.94 seconds
+Failing tests: 1
+	org.jsoup.nodes.ElementTest::parentlessToString$catena_1
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 363 with range 1 to
+        new NodeTraversor(new OuterHtmlVisitor(accum, getOutputSettings())).traverse(this);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 363 with range 1 to
+        new NodeTraversor(new OuterHtmlVisitor(accum, getOutputSettings())).traverse(this);
+
+try to fix hunk: 1
+insert before 367 with     private Document.OutputSettings getOutputSettings() {
+        return ownerDocument() != null ? ownerDocument().outputSettings() : (new Document("")).outputSettings();
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 8.58 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.nodes.ElementTest::parentlessToString$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+org.jsoup.nodes.ElementTest::parentlessToString$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

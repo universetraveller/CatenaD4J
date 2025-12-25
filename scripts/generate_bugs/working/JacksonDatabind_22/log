@@ -1,0 +1,3470 @@
+---
+Begin generate bug_id: JacksonDatabind_22
+num_of_hunks: 24
+NOTICE: may not contains full fix patterns for hunks are too much (24 hunks)
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_22
+Try to checkout JacksonDatabind_22
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/BasicSerializerFactory.java
+trace file: src/main/java/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java
+trying to replace old failing tests
+edit: replace from 270 range 14 at src/test/java/com/fasterxml/jackson/databind/ser/TestJsonValue.java
+to
+    public void testJsonValueWithCustomOverride$catena_0() throws Exception
+    {
+        final Bean838 INPUT = new Bean838();
+
+        // by default, @JsonValue should be used
+        assertEquals(quote("value"), MAPPER.writeValueAsString(INPUT));                                     /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // but custom serializer should override it
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new SimpleModule()
+            .addSerializer(Bean838.class, new Bean838Serializer())
+            );
+        try{ assertEquals("42", mapper.writeValueAsString(INPUT));                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testJsonValueWithCustomOverride$catena_1() throws Exception
+    {
+        final Bean838 INPUT = new Bean838();
+
+        // by default, @JsonValue should be used
+        try{ assertEquals(quote("value"), MAPPER.writeValueAsString(INPUT));                                }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // but custom serializer should override it
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new SimpleModule()
+            .addSerializer(Bean838.class, new Bean838Serializer())
+            );
+        assertEquals("42", mapper.writeValueAsString(INPUT));                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/ser/TestJsonValue.java
+new test num: 2
+ori test num: 0
+pattern: 000000000000000000000000
+patches are written to file
+running tests...
+used time: Finished in 180.94 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+processed: 000000000000000000000000
+pattern: 100000000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000000
+pattern: 010000000000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000000
+pattern: 001000000000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000000
+pattern: 000100000000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000000
+pattern: 000010000000000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000000
+pattern: 000001000000000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+used time: Finished in 167.44 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+No new failing tests but only 1 hunk
+processed: 000001000000000000000000
+pattern: 000000100000000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000000
+pattern: 000000010000000000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000000
+pattern: 000000001000000000000000
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000000
+pattern: 000000000100000000000000
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+used time: Finished in 175.24 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.module.TestTypeModifiers::testCollectionLikeSerialization
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Includes new failing tests, set to unusable
+processed: 000000000100000000000000
+pattern: 000000000010000000000000
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+used time: Finished in 168.07 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+No new failing tests but only 1 hunk
+processed: 000000000010000000000000
+pattern: 000000000001000000000000
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000001000000000000
+pattern: 000000000000100000000000
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000100000000000
+pattern: 000000000000010000000000
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000010000000000
+pattern: 000000000000001000000000
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000001000000000
+pattern: 000000000000000100000000
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000100000000
+pattern: 000000000000000010000000
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000010000000
+pattern: 000000000000000001000000
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000001000000
+pattern: 000000000000000000100000
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000100000
+pattern: 000000000000000000010000
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000010000
+pattern: 000000000000000000001000
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000001000
+pattern: 000000000000000000000100
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000000000000000100
+pattern: 000000000000000000000010
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+used time: Finished in 167.20 seconds
+Failing tests: 51
+	com.fasterxml.jackson.databind.TestObjectMapperBeanDeserializer::testListBean
+	com.fasterxml.jackson.databind.creators.TestPolymorphicDelegating::testAbstractDelegateWithCreator
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testBeanArray
+	com.fasterxml.jackson.databind.deser.TestJacksonTypes::testJavaType
+	com.fasterxml.jackson.databind.jsonschema.NewSchemaTest::testEnumWithJsonValue
+	com.fasterxml.jackson.databind.jsonschema.TestGenerateJsonSchema::testSchemaSerialization
+	com.fasterxml.jackson.databind.jsonschema.TestReadJsonSchema::testDeserializeSimple
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testWithAsValue
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleArrayField
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleMapMethod
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleListMethod
+	com.fasterxml.jackson.databind.node.TestConversions::testBeanToTree
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfTrees
+	com.fasterxml.jackson.databind.node.TestConversions::testIssue709
+	com.fasterxml.jackson.databind.node.TestJsonNode::testRawValue
+	com.fasterxml.jackson.databind.node.TestNumberNodes::testBigDecimalAsPlain
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWithArray
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWith
+	com.fasterxml.jackson.databind.node.TestObjectNode::testNonEmptySerialization
+	com.fasterxml.jackson.databind.node.TestTreeDeserialization::testReadFromString
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testNull
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromMap
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testSmallNumbers
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromArray
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testBinary
+	com.fasterxml.jackson.databind.seq.ObjectWriterTest::testObjectWriterWithNode
+	com.fasterxml.jackson.databind.ser.RawValueTest::testWithValueToTree
+	com.fasterxml.jackson.databind.ser.RawValueTest::testRawFromMapToTree
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testSerializableEnum
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValueUsingMixin
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleBean
+	com.fasterxml.jackson.databind.ser.TestJSONP::testWithType
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleScalars
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMixedJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMapWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testPolymorphicSerdeWithDelegate
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithUseSerializer
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_0
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithMap
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testSimpleJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testInList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testValueWithStaticType
+	com.fasterxml.jackson.databind.ser.TestKeySerializers::testUnWrappedMapWithKeySerializer
+	com.fasterxml.jackson.databind.ser.TestNullSerialization::testCustomNullForTrees
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOIntArray
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testSimpleViaObjectMapper
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOString
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOBean
+Includes new failing tests, set to unusable
+processed: 000000000000000000000010
+pattern: 000000000000000000000001
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 177.02 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+No new failing tests but only 1 hunk
+processed: 000000000000000000000001
+pattern: 110000000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110000000000000000000000
+pattern: 101000000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 2
+delete from 586 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000000000000000000000
+pattern: 100100000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100000000000000000000
+pattern: 100010000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 4
+delete from 594 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010000000000000000000
+pattern: 100001000000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001000000000000000000
+pattern: 100000100000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000100000000000000000
+pattern: 100000010000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000010000000000000000
+pattern: 100000001000000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000001000000000000000
+pattern: 100000000100000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000100000000000000
+pattern: 100000000010000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000010000000000000
+pattern: 100000000001000000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000001000000000000
+pattern: 100000000000100000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000100000000000
+pattern: 100000000000010000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000010000000000
+pattern: 100000000000001000000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000001000000000
+pattern: 100000000000000100000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000100000000
+pattern: 100000000000000010000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000010000000
+pattern: 100000000000000001000000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000001000000
+pattern: 100000000000000000100000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000100000
+pattern: 100000000000000000010000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000010000
+pattern: 100000000000000000001000
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000001000
+pattern: 100000000000000000000100
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000100
+pattern: 100000000000000000000010
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000010
+pattern: 100000000000000000000001
+try to fix hunk: 0
+replace from 580 with range 1 to
+                return buildMapSerializer(prov, (MapType) mlt, beanDesc, staticTyping,
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000000000000000000001
+pattern: 011000000000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 2
+delete from 586 with range 1
+patches are written to file
+running tests...
+used time: Finished in 160.45 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Can independently fix []
+Could not fix independently
+processed: 011000000000000000000000
+pattern: 010100000000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100000000000000000000
+pattern: 010010000000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 4
+delete from 594 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010000000000000000000
+pattern: 010001000000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001000000000000000000
+pattern: 010000100000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000100000000000000000
+pattern: 010000010000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000010000000000000000
+pattern: 010000001000000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000001000000000000000
+pattern: 010000000100000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000100000000000000
+pattern: 010000000010000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000010000000000000
+pattern: 010000000001000000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000001000000000000
+pattern: 010000000000100000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000100000000000
+pattern: 010000000000010000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000010000000000
+pattern: 010000000000001000000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000001000000000
+pattern: 010000000000000100000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000100000000
+pattern: 010000000000000010000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000010000000
+pattern: 010000000000000001000000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000001000000
+pattern: 010000000000000000100000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000100000
+pattern: 010000000000000000010000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000010000
+pattern: 010000000000000000001000
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000001000
+pattern: 010000000000000000000100
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000100
+pattern: 010000000000000000000010
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000010
+pattern: 010000000000000000000001
+try to fix hunk: 1
+insert before 585 with             MapLikeType mlType = (MapLikeType) type;
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000000000000000000001
+pattern: 001100000000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100000000000000000000
+pattern: 001010000000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 4
+delete from 594 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010000000000000000000
+pattern: 001001000000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001000000000000000000
+pattern: 001000100000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000100000000000000000
+pattern: 001000010000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000010000000000000000
+pattern: 001000001000000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000001000000000000000
+pattern: 001000000100000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000100000000000000
+pattern: 001000000010000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000010000000000000
+pattern: 001000000001000000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000001000000000000
+pattern: 001000000000100000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000100000000000
+pattern: 001000000000010000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000010000000000
+pattern: 001000000000001000000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000001000000000
+pattern: 001000000000000100000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000100000000
+pattern: 001000000000000010000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000010000000
+pattern: 001000000000000001000000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000001000000
+pattern: 001000000000000000100000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000100000
+pattern: 001000000000000000010000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000010000
+pattern: 001000000000000000001000
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000001000
+pattern: 001000000000000000000100
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000100
+pattern: 001000000000000000000010
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000010
+pattern: 001000000000000000000001
+try to fix hunk: 2
+delete from 586 with range 1
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001000000000000000000001
+pattern: 000110000000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 4
+delete from 594 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110000000000000000000
+pattern: 000101000000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101000000000000000000
+pattern: 000100100000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100100000000000000000
+pattern: 000100010000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100010000000000000000
+pattern: 000100001000000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100001000000000000000
+pattern: 000100000100000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000100000000000000
+pattern: 000100000010000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000010000000000000
+pattern: 000100000001000000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000001000000000000
+pattern: 000100000000100000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000100000000000
+pattern: 000100000000010000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000010000000000
+pattern: 000100000000001000000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000001000000000
+pattern: 000100000000000100000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000100000000
+pattern: 000100000000000010000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000010000000
+pattern: 000100000000000001000000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000001000000
+pattern: 000100000000000000100000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000100000
+pattern: 000100000000000000010000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000010000
+pattern: 000100000000000000001000
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000001000
+pattern: 000100000000000000000100
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000100
+pattern: 000100000000000000000010
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000010
+pattern: 000100000000000000000001
+try to fix hunk: 3
+insert before 589 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100000000000000000001
+pattern: 000011000000000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011000000000000000000
+pattern: 000010100000000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010100000000000000000
+pattern: 000010010000000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010010000000000000000
+pattern: 000010001000000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010001000000000000000
+pattern: 000010000100000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000100000000000000
+pattern: 000010000010000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000010000000000000
+pattern: 000010000001000000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000001000000000000
+pattern: 000010000000100000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000100000000000
+pattern: 000010000000010000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000010000000000
+pattern: 000010000000001000000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000001000000000
+pattern: 000010000000000100000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000100000000
+pattern: 000010000000000010000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000010000000
+pattern: 000010000000000001000000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000001000000
+pattern: 000010000000000000100000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000100000
+pattern: 000010000000000000010000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000010000
+pattern: 000010000000000000001000
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000001000
+pattern: 000010000000000000000100
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000100
+pattern: 000010000000000000000010
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000010
+pattern: 000010000000000000000001
+try to fix hunk: 4
+delete from 594 with range 2
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010000000000000000001
+pattern: 000001100000000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001100000000000000000
+pattern: 000001010000000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001010000000000000000
+pattern: 000001001000000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001001000000000000000
+pattern: 000001000100000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+used time: Finished in 176.74 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.module.TestTypeModifiers::testCollectionLikeSerialization
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Includes new failing tests, set to unusable
+processed: 000001000100000000000000
+pattern: 000001000010000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+used time: Finished in 179.98 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000001000010000000000000
+pattern: 000001000001000000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000001000000000000
+pattern: 000001000000100000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000100000000000
+pattern: 000001000000010000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000010000000000
+pattern: 000001000000001000000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000001000000000
+pattern: 000001000000000100000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000100000000
+pattern: 000001000000000010000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000010000000
+pattern: 000001000000000001000000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000001000000
+pattern: 000001000000000000100000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000100000
+pattern: 000001000000000000010000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000010000
+pattern: 000001000000000000001000
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000001000
+pattern: 000001000000000000000100
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001000000000000000100
+pattern: 000001000000000000000010
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+used time: Finished in 167.67 seconds
+Failing tests: 51
+	com.fasterxml.jackson.databind.TestObjectMapperBeanDeserializer::testListBean
+	com.fasterxml.jackson.databind.creators.TestPolymorphicDelegating::testAbstractDelegateWithCreator
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testBeanArray
+	com.fasterxml.jackson.databind.deser.TestJacksonTypes::testJavaType
+	com.fasterxml.jackson.databind.jsonschema.NewSchemaTest::testEnumWithJsonValue
+	com.fasterxml.jackson.databind.jsonschema.TestGenerateJsonSchema::testSchemaSerialization
+	com.fasterxml.jackson.databind.jsonschema.TestReadJsonSchema::testDeserializeSimple
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testWithAsValue
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleArrayField
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleMapMethod
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleListMethod
+	com.fasterxml.jackson.databind.node.TestConversions::testBeanToTree
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfTrees
+	com.fasterxml.jackson.databind.node.TestConversions::testIssue709
+	com.fasterxml.jackson.databind.node.TestJsonNode::testRawValue
+	com.fasterxml.jackson.databind.node.TestNumberNodes::testBigDecimalAsPlain
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWithArray
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWith
+	com.fasterxml.jackson.databind.node.TestObjectNode::testNonEmptySerialization
+	com.fasterxml.jackson.databind.node.TestTreeDeserialization::testReadFromString
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testNull
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromMap
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testSmallNumbers
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromArray
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testBinary
+	com.fasterxml.jackson.databind.seq.ObjectWriterTest::testObjectWriterWithNode
+	com.fasterxml.jackson.databind.ser.RawValueTest::testWithValueToTree
+	com.fasterxml.jackson.databind.ser.RawValueTest::testRawFromMapToTree
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testSerializableEnum
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValueUsingMixin
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleBean
+	com.fasterxml.jackson.databind.ser.TestJSONP::testWithType
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleScalars
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMixedJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMapWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testPolymorphicSerdeWithDelegate
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithUseSerializer
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_0
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithMap
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testSimpleJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testInList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testValueWithStaticType
+	com.fasterxml.jackson.databind.ser.TestKeySerializers::testUnWrappedMapWithKeySerializer
+	com.fasterxml.jackson.databind.ser.TestNullSerialization::testCustomNullForTrees
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOIntArray
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testSimpleViaObjectMapper
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOString
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOBean
+Includes new failing tests, set to unusable
+processed: 000001000000000000000010
+pattern: 000001000000000000000001
+try to fix hunk: 5
+replace from 598 with range 1 to
+            return ser;
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 168.18 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000001000000000000000001
+pattern: 000000110000000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000110000000000000000
+pattern: 000000101000000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000101000000000000000
+pattern: 000000100100000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100100000000000000
+pattern: 000000100010000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100010000000000000
+pattern: 000000100001000000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100001000000000000
+pattern: 000000100000100000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000100000000000
+pattern: 000000100000010000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000010000000000
+pattern: 000000100000001000000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000001000000000
+pattern: 000000100000000100000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000100000000
+pattern: 000000100000000010000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000010000000
+pattern: 000000100000000001000000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000001000000
+pattern: 000000100000000000100000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000100000
+pattern: 000000100000000000010000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000010000
+pattern: 000000100000000000001000
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000001000
+pattern: 000000100000000000000100
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000100
+pattern: 000000100000000000000010
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000010
+pattern: 000000100000000000000001
+try to fix hunk: 6
+replace from 603 with range 1 to
+                return buildCollectionSerializer(prov,  (CollectionType) clt, beanDesc, staticTyping,
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000100000000000000001
+pattern: 000000011000000000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 8
+delete from 616 with range 1
+patches are written to file
+running tests...
+used time: Finished in 167.36 seconds
+Failing tests: 2
+	com.fasterxml.jackson.databind.module.TestTypeModifiers::testCollectionLikeSerialization
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Includes new failing tests, set to unusable
+processed: 000000011000000000000000
+pattern: 000000010100000000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010100000000000000
+pattern: 000000010010000000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010010000000000000
+pattern: 000000010001000000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010001000000000000
+pattern: 000000010000100000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000100000000000
+pattern: 000000010000010000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000010000000000
+pattern: 000000010000001000000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000001000000000
+pattern: 000000010000000100000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000100000000
+pattern: 000000010000000010000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000010000000
+pattern: 000000010000000001000000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000001000000
+pattern: 000000010000000000100000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000100000
+pattern: 000000010000000000010000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000010000
+pattern: 000000010000000000001000
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000001000
+pattern: 000000010000000000000100
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000100
+pattern: 000000010000000000000010
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000010
+pattern: 000000010000000000000001
+try to fix hunk: 7
+insert before 612 with                 if (ser != null) {
+                    break;
+                }
+            }
+            if (ser == null) { // (2) Annotations-based ones:
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000010000000000000001
+pattern: 000000001100000000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 9
+delete from 618 with range 1
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001100000000000000
+pattern: 000000001010000000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001010000000000000
+pattern: 000000001001000000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001001000000000000
+pattern: 000000001000100000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000100000000000
+pattern: 000000001000010000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000010000000000
+pattern: 000000001000001000000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000001000000000
+pattern: 000000001000000100000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000100000000
+pattern: 000000001000000010000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000010000000
+pattern: 000000001000000001000000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000001000000
+pattern: 000000001000000000100000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000100000
+pattern: 000000001000000000010000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000010000
+pattern: 000000001000000000001000
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000001000
+pattern: 000000001000000000000100
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000100
+pattern: 000000001000000000000010
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000010
+pattern: 000000001000000000000001
+try to fix hunk: 8
+delete from 616 with range 1
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000001000000000000001
+pattern: 000000000110000000000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 10
+replace from 621 with range 1 to
+            return ser;
+
+patches are written to file
+running tests...
+used time: Finished in 164.85 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000000000110000000000000
+pattern: 000000000101000000000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 11
+replace from 624 with range 1 to
+            return buildArraySerializer(prov, (ArrayType) type, beanDesc, staticTyping,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000101000000000000
+pattern: 000000000100100000000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 12
+replace from 636 with range 1 to
+    protected JsonSerializer<?> buildCollectionSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100100000000000
+pattern: 000000000100010000000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 13
+insert before 641 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100010000000000
+pattern: 000000000100001000000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 14
+insert before 655 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100001000000000
+pattern: 000000000100000100000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 15
+insert before 691 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000100000000
+pattern: 000000000100000010000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 16
+replace from 737 with range 1 to
+    protected JsonSerializer<?> buildMapSerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000010000000
+pattern: 000000000100000001000000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 17
+insert before 743 with         final SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000001000000
+pattern: 000000000100000000100000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 18
+insert before 756 with             ser = findSerializerByAnnotations(prov, type, beanDesc); // (2) Annotations
+            if (ser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000100000
+pattern: 000000000100000000010000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 19
+insert before 784 with         }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000010000
+pattern: 000000000100000000001000
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 20
+replace from 831 with range 1 to
+    protected JsonSerializer<?> buildArraySerializer(SerializerProvider prov,
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000001000
+pattern: 000000000100000000000100
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 21
+insert before 841 with         SerializationConfig config = prov.getConfig();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000000000100000000000100
+pattern: 000000000100000000000010
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 22
+replace from 174 with range 4 to
+        JsonSerializer<?> ser = null;
+
+patches are written to file
+running tests...
+used time: Finished in 171.74 seconds
+Failing tests: 52
+	com.fasterxml.jackson.databind.TestObjectMapperBeanDeserializer::testListBean
+	com.fasterxml.jackson.databind.creators.TestPolymorphicDelegating::testAbstractDelegateWithCreator
+	com.fasterxml.jackson.databind.deser.TestArrayDeserialization::testBeanArray
+	com.fasterxml.jackson.databind.deser.TestJacksonTypes::testJavaType
+	com.fasterxml.jackson.databind.jsonschema.NewSchemaTest::testEnumWithJsonValue
+	com.fasterxml.jackson.databind.jsonschema.TestGenerateJsonSchema::testSchemaSerialization
+	com.fasterxml.jackson.databind.jsonschema.TestReadJsonSchema::testDeserializeSimple
+	com.fasterxml.jackson.databind.jsontype.TestExternalId::testWithAsValue
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleArrayField
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleMapMethod
+	com.fasterxml.jackson.databind.jsontype.TestPropertyTypeInfo::testSimpleListMethod
+	com.fasterxml.jackson.databind.module.TestTypeModifiers::testCollectionLikeSerialization
+	com.fasterxml.jackson.databind.node.TestConversions::testBeanToTree
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos
+	com.fasterxml.jackson.databind.node.TestConversions::testConversionOfTrees
+	com.fasterxml.jackson.databind.node.TestConversions::testIssue709
+	com.fasterxml.jackson.databind.node.TestJsonNode::testRawValue
+	com.fasterxml.jackson.databind.node.TestNumberNodes::testBigDecimalAsPlain
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWithArray
+	com.fasterxml.jackson.databind.node.TestObjectNode::testValidWith
+	com.fasterxml.jackson.databind.node.TestObjectNode::testNonEmptySerialization
+	com.fasterxml.jackson.databind.node.TestTreeDeserialization::testReadFromString
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testNull
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromMap
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testSmallNumbers
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testFromArray
+	com.fasterxml.jackson.databind.node.TestTreeMapperSerializer::testBinary
+	com.fasterxml.jackson.databind.seq.ObjectWriterTest::testObjectWriterWithNode
+	com.fasterxml.jackson.databind.ser.RawValueTest::testWithValueToTree
+	com.fasterxml.jackson.databind.ser.RawValueTest::testRawFromMapToTree
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testSerializableEnum
+	com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonValueUsingMixin
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleBean
+	com.fasterxml.jackson.databind.ser.TestJSONP::testWithType
+	com.fasterxml.jackson.databind.ser.TestJSONP::testSimpleScalars
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMixedJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testMapWithJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testPolymorphicSerdeWithDelegate
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithUseSerializer
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testJsonValueWithCustomOverride$catena_0
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testWithMap
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testSimpleJsonValue
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testInList
+	com.fasterxml.jackson.databind.ser.TestJsonValue::testValueWithStaticType
+	com.fasterxml.jackson.databind.ser.TestKeySerializers::testUnWrappedMapWithKeySerializer
+	com.fasterxml.jackson.databind.ser.TestNullSerialization::testCustomNullForTrees
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOIntArray
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testSimpleViaObjectMapper
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOString
+	com.fasterxml.jackson.databind.ser.TestTreeSerialization::testPOJOBean
+Includes new failing tests, set to unusable
+processed: 000000000100000000000010
+pattern: 000000000100000000000001
+try to fix hunk: 9
+delete from 618 with range 1
+try to fix hunk: 23
+insert before 212 with             if (ser == null) {
+                ser = findSerializerByAnnotations(prov, type, beanDesc);
+            }
+
+patches are written to file
+running tests...
+EXCEPTION: Inside Exception generator.run() timeout
+Traceback (most recent call last):
+  File "/root/rjy/c4j/scripts/generate_bugs/run.py", line 41, in task
+    generator.run()
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 82, in new_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 85, in run
+    self._run()
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 111, in _run
+    self.taskSingleHunk(task)
+  File "/root/rjy/c4j/scripts/generate_bugs/runner.py", line 140, in taskSingleHunk
+    failure = util.get_failing_tests(self.path, self.build_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 49, in get_failing_tests
+    result = runCommand(['defects4j', 'test', '-w', '{}'.format(path)], timeout=timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/util.py", line 12, in runCommand
+    finished = subprocess.run(cmd, capture_output=True, cwd=cwd, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/subprocess.py", line 2113, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/anaconda3/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 69, in handler
+    _raise_exception(timeout_exception, exception_message)
+  File "/root/rjy/c4j/scripts/generate_bugs/timeout_decorator/timeout_decorator.py", line 47, in _raise_exception
+    raise exception(exception_message)
+TimeoutError: generator.run() timeout
+

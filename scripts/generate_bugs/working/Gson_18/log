@@ -1,0 +1,92 @@
+---
+Begin generate bug_id: Gson_18
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Gson_18
+Try to checkout Gson_18
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: gson/src/main/java/com/google/gson/internal/$Gson$Types.java
+trying to replace old failing tests
+edit: replace from 401 range 13 at gson/src/test/java/com/google/gson/functional/CollectionTest.java
+to
+  public void testIssue1107$catena_0() {
+    String json = "{\n" +
+            "  \"inBig\": {\n" +
+            "    \"key\": [\n" +
+            "      { \"inSmall\": \"hello\" }\n" +
+            "    ]\n" +
+            "  }\n" +
+            "}";
+    BigClass bigClass = new Gson().fromJson(json, BigClass.class);
+    SmallClass small = bigClass.inBig.get("key").get(0);
+    assertNotNull(small);                                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    try{ assertEquals("hello", small.inSmall);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+  }   public void testIssue1107$catena_1() {
+    String json = "{\n" +
+            "  \"inBig\": {\n" +
+            "    \"key\": [\n" +
+            "      { \"inSmall\": \"hello\" }\n" +
+            "    ]\n" +
+            "  }\n" +
+            "}";
+    BigClass bigClass = new Gson().fromJson(json, BigClass.class);
+    SmallClass small = bigClass.inBig.get("key").get(0);
+    try{ assertNotNull(small);                                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    assertEquals("hello", small.inSmall);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+  }
+trace file: gson/src/test/java/com/google/gson/functional/CollectionTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 21.22 seconds
+Failing tests: 2
+	com.google.gson.functional.CollectionTest::testIssue1107$catena_0
+	com.google.gson.functional.CollectionTest::testIssue1107$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 279 with       context = ((WildcardType)context).getUpperBounds()[0];
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 278 with     if (context instanceof WildcardType) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 278 with     if (context instanceof WildcardType) {
+
+try to fix hunk: 1
+insert before 279 with       context = ((WildcardType)context).getUpperBounds()[0];
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 21.23 seconds
+Failing tests: 0
+Can independently fix ['com.google.gson.functional.CollectionTest::testIssue1107$catena_1', 'com.google.gson.functional.CollectionTest::testIssue1107$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.gson.functional.CollectionTest::testIssue1107$catena_1
+com.google.gson.functional.CollectionTest::testIssue1107$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

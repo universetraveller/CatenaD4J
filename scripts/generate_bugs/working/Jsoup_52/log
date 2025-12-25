@@ -1,0 +1,1843 @@
+---
+Begin generate bug_id: Jsoup_52
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_52
+Try to checkout Jsoup_52
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/helper/DataUtil.java
+trace file: src/main/java/org/jsoup/nodes/XmlDeclaration.java
+trace file: src/main/java/org/jsoup/parser/XmlTreeBuilder.java
+trying to replace old failing tests
+edit: replace from 345 range 15 at src/test/java/org/jsoup/nodes/DocumentTest.java
+to
+    @Test
+    public void testMetaCharsetUpdateXmlNoCharset$catena_0() {
+        final Document doc = createXmlDocument("1.0", "none", false);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        assertEquals(xmlCharsetUTF8, doc.toString());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlNoCharset$catena_1() {
+        final Document doc = createXmlDocument("1.0", "none", false);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetUTF8, doc.toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 327 range 17 at src/test/java/org/jsoup/nodes/DocumentTest.java
+to
+    @Test
+    public void testMetaCharsetUpdateXmlIso8859$catena_0() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetIso8859));
+        
+        final String xmlCharsetISO = "<?xml version=\"1.0\" encoding=\"" + charsetIso8859 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        assertEquals(xmlCharsetISO, doc.toString());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetIso8859, doc.charset().name());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(charsetIso8859, selectedNode.attr("encoding"));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlIso8859$catena_1() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetIso8859));
+        
+        final String xmlCharsetISO = "<?xml version=\"1.0\" encoding=\"" + charsetIso8859 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetISO, doc.toString());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        assertEquals(charsetIso8859, doc.charset().name());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(charsetIso8859, selectedNode.attr("encoding"));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlIso8859$catena_2() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetIso8859));
+        
+        final String xmlCharsetISO = "<?xml version=\"1.0\" encoding=\"" + charsetIso8859 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetISO, doc.toString());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetIso8859, doc.charset().name());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(charsetIso8859, selectedNode.attr("encoding"));                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlIso8859$catena_3() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetIso8859));
+        
+        final String xmlCharsetISO = "<?xml version=\"1.0\" encoding=\"" + charsetIso8859 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetISO, doc.toString());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetIso8859, doc.charset().name());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(charsetIso8859, selectedNode.attr("encoding"));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(doc.charset(), doc.outputSettings().charset());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 309 range 17 at src/test/java/org/jsoup/nodes/DocumentTest.java
+to
+    @Test
+    public void testMetaCharsetUpdateXmlUtf8$catena_0() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        assertEquals(xmlCharsetUTF8, doc.toString());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetUtf8, doc.charset().name());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlUtf8$catena_1() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetUTF8, doc.toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        assertEquals(charsetUtf8, doc.charset().name());                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlUtf8$catena_2() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetUTF8, doc.toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetUtf8, doc.charset().name());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(doc.charset(), doc.outputSettings().charset());                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlUtf8$catena_3() {
+        final Document doc = createXmlDocument("1.0", "changeThis", true);
+        doc.updateMetaCharsetElement(true);
+        doc.charset(Charset.forName(charsetUtf8));
+        
+        final String xmlCharsetUTF8 = "<?xml version=\"1.0\" encoding=\"" + charsetUtf8 + "\"?>\n" +
+                                        "<root>\n" +
+                                        " node\n" +
+                                        "</root>";
+        try{ assertEquals(xmlCharsetUTF8, doc.toString());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals(charsetUtf8, doc.charset().name());                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(charsetUtf8, selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(doc.charset(), doc.outputSettings().charset());                                        /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 371 range 14 at src/test/java/org/jsoup/nodes/DocumentTest.java
+to
+    @Test
+    public void testMetaCharsetUpdateXmlDisabledNoChanges$catena_0() {
+        final Document doc = createXmlDocument("dontTouch", "dontTouch", true);
+        
+        final String xmlCharset = "<?xml version=\"dontTouch\" encoding=\"dontTouch\"?>\n" +
+                                    "<root>\n" +
+                                    " node\n" +
+                                    "</root>";
+        assertEquals(xmlCharset, doc.toString());                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("dontTouch", selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("dontTouch", selectedNode.attr("version"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlDisabledNoChanges$catena_1() {
+        final Document doc = createXmlDocument("dontTouch", "dontTouch", true);
+        
+        final String xmlCharset = "<?xml version=\"dontTouch\" encoding=\"dontTouch\"?>\n" +
+                                    "<root>\n" +
+                                    " node\n" +
+                                    "</root>";
+        try{ assertEquals(xmlCharset, doc.toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        assertEquals("dontTouch", selectedNode.attr("encoding"));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("dontTouch", selectedNode.attr("version"));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMetaCharsetUpdateXmlDisabledNoChanges$catena_2() {
+        final Document doc = createXmlDocument("dontTouch", "dontTouch", true);
+        
+        final String xmlCharset = "<?xml version=\"dontTouch\" encoding=\"dontTouch\"?>\n" +
+                                    "<root>\n" +
+                                    " node\n" +
+                                    "</root>";
+        try{ assertEquals(xmlCharset, doc.toString());                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        XmlDeclaration selectedNode = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("dontTouch", selectedNode.attr("encoding"));                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("dontTouch", selectedNode.attr("version"));                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 105 range 8 at src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+to
+    @Test public void handlesXmlDeclarationAsDeclaration$catena_0() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        assertEquals("<?xml encoding=\"UTF-8\"?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("#declaration", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("#comment", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesXmlDeclarationAsDeclaration$catena_1() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        try{ assertEquals("<?xml encoding=\"UTF-8\"?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("#declaration", doc.childNode(0).nodeName());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("#comment", doc.childNode(2).nodeName());                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesXmlDeclarationAsDeclaration$catena_2() {
+        String html = "<?xml encoding='UTF-8' ?><body>One</body><!-- comment -->";
+        Document doc = Jsoup.parse(html, "", Parser.xmlParser());
+        try{ assertEquals("<?xml encoding=\"UTF-8\"?> <body> One </body> <!-- comment -->",
+                StringUtil.normaliseWhitespace(doc.outerHtml()));                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("#declaration", doc.childNode(0).nodeName());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("#comment", doc.childNode(2).nodeName());                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 136 range 9 at src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+to
+    @Test
+    public void testDetectCharsetEncodingDeclaration$catena_0() throws IOException, URISyntaxException {
+        File xmlFile = new File(XmlTreeBuilder.class.getResource("/htmltests/xml-charset.xml").toURI());
+        InputStream inStream = new FileInputStream(xmlFile);
+        Document doc = Jsoup.parse(inStream, null, "http://example.com/", Parser.xmlParser());
+        assertEquals("ISO-8859-1", doc.charset().name());                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <data>äöåéü</data>",
+            TextUtil.stripNewlines(doc.html()));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testDetectCharsetEncodingDeclaration$catena_1() throws IOException, URISyntaxException {
+        File xmlFile = new File(XmlTreeBuilder.class.getResource("/htmltests/xml-charset.xml").toURI());
+        InputStream inStream = new FileInputStream(xmlFile);
+        Document doc = Jsoup.parse(inStream, null, "http://example.com/", Parser.xmlParser());
+        try{ assertEquals("ISO-8859-1", doc.charset().name());                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <data>äöåéü</data>",
+            TextUtil.stripNewlines(doc.html()));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 146 range 11 at src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+to
+    @Test
+    public void testParseDeclarationAttributes$catena_0() {
+        String xml = "<?xml version='1' encoding='UTF-8' something='else'?><val>One</val>";
+        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        XmlDeclaration decl = (XmlDeclaration) doc.childNode(0);
+        assertEquals("1", decl.attr("version"));                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("UTF-8", decl.attr("encoding"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("else", decl.attr("something"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("version=\"1\" encoding=\"UTF-8\" something=\"else\"", decl.getWholeDeclaration());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("<?xml version=\"1\" encoding=\"UTF-8\" something=\"else\"?>", decl.outerHtml());      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testParseDeclarationAttributes$catena_1() {
+        String xml = "<?xml version='1' encoding='UTF-8' something='else'?><val>One</val>";
+        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        XmlDeclaration decl = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("1", decl.attr("version"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("UTF-8", decl.attr("encoding"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("else", decl.attr("something"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("version=\"1\" encoding=\"UTF-8\" something=\"else\"", decl.getWholeDeclaration());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("<?xml version=\"1\" encoding=\"UTF-8\" something=\"else\"?>", decl.outerHtml());      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testParseDeclarationAttributes$catena_2() {
+        String xml = "<?xml version='1' encoding='UTF-8' something='else'?><val>One</val>";
+        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        XmlDeclaration decl = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("1", decl.attr("version"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("UTF-8", decl.attr("encoding"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("else", decl.attr("something"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("version=\"1\" encoding=\"UTF-8\" something=\"else\"", decl.getWholeDeclaration());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("<?xml version=\"1\" encoding=\"UTF-8\" something=\"else\"?>", decl.outerHtml());      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testParseDeclarationAttributes$catena_3() {
+        String xml = "<?xml version='1' encoding='UTF-8' something='else'?><val>One</val>";
+        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        XmlDeclaration decl = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("1", decl.attr("version"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("UTF-8", decl.attr("encoding"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("else", decl.attr("something"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("version=\"1\" encoding=\"UTF-8\" something=\"else\"", decl.getWholeDeclaration());         /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("<?xml version=\"1\" encoding=\"UTF-8\" something=\"else\"?>", decl.outerHtml());      }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testParseDeclarationAttributes$catena_4() {
+        String xml = "<?xml version='1' encoding='UTF-8' something='else'?><val>One</val>";
+        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        XmlDeclaration decl = (XmlDeclaration) doc.childNode(0);
+        try{ assertEquals("1", decl.attr("version"));                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("UTF-8", decl.attr("encoding"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("else", decl.attr("something"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals("version=\"1\" encoding=\"UTF-8\" something=\"else\"", decl.getWholeDeclaration());    }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("<?xml version=\"1\" encoding=\"UTF-8\" something=\"else\"?>", decl.outerHtml());           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/DocumentTest.java
+trace file: src/test/java/org/jsoup/parser/XmlTreeBuilderTest.java
+new test num: 23
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 17.57 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 16.81 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+No new failing tests but only 1 hunk
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+used time: Finished in 16.15 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+select new bug
+Pattern: 000100
+new failing tests:
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+Save found bug
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+patches are written to file
+running tests...
+used time: Finished in 18.08 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+No new failing tests but only 1 hunk
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+delete from 115 with range 4
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+delete from 112 with range 2
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 17.29 seconds
+Failing tests: 8
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix ['org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0', 'org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0', 'org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2', 'org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1']
+select new bug
+Pattern: 000011
+new failing tests:
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+Save found bug
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 17.68 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 17.43 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+used time: Finished in 15.35 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+patches are written to file
+running tests...
+used time: Finished in 14.86 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 19.03 seconds
+Failing tests: 1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+Can independently fix ['org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0', 'org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1', 'org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4']
+select new bug
+Pattern: 000111
+new failing tests:
+org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+Save found bug
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 15.12 seconds
+Failing tests: 7
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix ['org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3']
+select new bug
+Pattern: 001011
+new failing tests:
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+Save found bug
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 14.47 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 13.03 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+used time: Finished in 13.47 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+patches are written to file
+running tests...
+used time: Finished in 14.95 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 13.85 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 15.73 seconds
+Failing tests: 8
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 15.88 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 15.38 seconds
+Failing tests: 12
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+patches are written to file
+running tests...
+used time: Finished in 15.62 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 15.33 seconds
+Failing tests: 1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+Can independently fix []
+Could not fix independently
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 14.54 seconds
+Failing tests: 7
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlNoCharset$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlIso8859$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlDisabledNoChanges$catena_0
+	org.jsoup.nodes.DocumentTest::testMetaCharsetUpdateXmlUtf8$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+patches are written to file
+running tests...
+used time: Finished in 15.61 seconds
+Failing tests: 8
+	org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_3
+	org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_4
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+	org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+delete from 112 with range 2
+try to fix hunk: 1
+delete from 115 with range 4
+try to fix hunk: 2
+replace from 46 with range 16 to
+        return attributes.html().trim(); // attr html starts with a " "
+
+try to fix hunk: 3
+replace from 68 with range 1 to
+            .append(name);
+        attributes.html(accum, out);
+        accum
+            .append(isProcessingInstruction ? "!" : "?")
+
+try to fix hunk: 4
+insert before 3 with import org.jsoup.Jsoup;
+
+try to fix hunk: 5
+replace from 76 with range 2 to
+                Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+                Element el = doc.child(0);
+                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith("!"));
+                insert.attributes().addAll(el.attributes());
+
+patches are written to file
+running tests...
+used time: Finished in 16.02 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 111111
+Find 4 new bugs

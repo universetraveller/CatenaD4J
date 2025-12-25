@@ -1,0 +1,69 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "import com.fasterxml.jackson.databind.util.EnumValues;\n",
+            "patch_type": "insert",
+            "next_line_no": 10
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "from_line_no": 82,
+            "to_line_no": 82,
+            "replaced_with": "                return EnumKeySerializer.construct(rawKeyType,\n                        EnumValues.constructFromName(config, (Class<Enum<?>>) rawKeyType));\n",
+            "replaced": "                return new Default(Default.TYPE_ENUM, rawKeyType);\n",
+            "patch_type": "replace",
+            "next_line_no": 83
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "    public static class EnumKeySerializer extends StdSerializer<Object>\n    {\n        protected final EnumValues _values;\n",
+            "patch_type": "insert",
+            "next_line_no": 215
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        protected EnumKeySerializer(Class<?> enumType, EnumValues values) {\n            super(enumType, false);\n            _values = values;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 216
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        public static EnumKeySerializer construct(Class<?> enumType,\n                EnumValues enumValues)\n        {\n            return new EnumKeySerializer(enumType, enumValues);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 217
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java",
+            "replaced_with": "        @Override\n        public void serialize(Object value, JsonGenerator g, SerializerProvider serializers)\n                throws IOException\n        {\n            if (serializers.isEnabled(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)) {\n                g.writeFieldName(value.toString());\n                return;\n            }\n            Enum<?> en = (Enum<?>) value;\n            g.writeFieldName(_values.serializedValueFor(en));\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 218
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonPropertyAsKey"
+        ],
+        "com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonPropertyAsKey": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/ser/TestEnumSerialization.java",
+            "Instance": "Begin: Pos(437, 12)\nEnd: Pos(442, 5)\nSource: /tmp/c4j/JacksonDatabind_55/src/test/java//com/fasterxml/jackson/databind/ser/TestEnumSerialization.java\nName: testEnumsWithJsonPropertyAsKey\nChilds: [StatementAssertion<Begin: Pos(441, 9), End: Pos(441, 76)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_55/src/test/java//com/fasterxml/jackson/databind/ser/TestEnumSerialization.java",
+            "name": "testEnumsWithJsonPropertyAsKey",
+            "begin": "Pos(437, 12)",
+            "end": "Pos(442, 5)",
+            "begin_line_no": 437,
+            "end_line_no": 442,
+            "child": [
+                "Begin: Pos(441, 9)\nEnd: Pos(441, 76)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "111111": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.ser.TestEnumSerialization::testEnumsWithJsonPropertyAsKey"
+        ]
+    }
+}

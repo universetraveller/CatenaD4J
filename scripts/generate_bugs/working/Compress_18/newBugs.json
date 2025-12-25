@@ -1,0 +1,50 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java",
+            "replaced_with": "        while (name.endsWith(\"/\")) {\n",
+            "patch_type": "insert",
+            "next_line_no": 457
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java",
+            "replaced_with": "            name = name.substring(0, name.length() - 1);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 459
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode"
+        ],
+        "org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode": {
+            "file_path": "src/test/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java",
+            "Instance": "Begin: Pos(412, 12)\nEnd: Pos(428, 5)\nSource: /tmp/c4j/Compress_18/src/test/java//org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java\nName: testWriteNonAsciiDirectoryNamePosixMode\nChilds: [StatementAssertion<Begin: Pos(425, 9), End: Pos(425, 37)>,\nStatementAssertion<Begin: Pos(426, 9), End: Pos(426, 36)>,\n]",
+            "source": "/tmp/c4j/Compress_18/src/test/java//org/apache/commons/compress/archivers/tar/TarArchiveOutputStreamTest.java",
+            "name": "testWriteNonAsciiDirectoryNamePosixMode",
+            "begin": "Pos(412, 12)",
+            "end": "Pos(428, 5)",
+            "begin_line_no": 412,
+            "end_line_no": 428,
+            "child": [
+                "Begin: Pos(425, 9)\nEnd: Pos(425, 37)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(426, 9)\nEnd: Pos(426, 36)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_0() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        assertEquals(n, e.getName());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(e.isDirectory());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        tin.close();\n    }",
+                "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_1() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        try{ assertEquals(n, e.getName());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(e.isDirectory());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        tin.close();\n    }"
+            ],
+            "func": {
+                "0": "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_0() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        assertEquals(n, e.getName());                                                                       /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(e.isDirectory());                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}\n        tin.close();\n    }",
+                "1": "    public void testWriteNonAsciiDirectoryNamePosixMode$catena_1() throws Exception {\n        String n = \"f\\u00f6\\u00f6/\";\n        TarArchiveEntry t = new TarArchiveEntry(n);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        TarArchiveOutputStream tos = new TarArchiveOutputStream(bos);\n        tos.setAddPaxHeadersForNonAsciiNames(true);\n        tos.putArchiveEntry(t);\n        tos.closeArchiveEntry();\n        tos.close();\n        byte[] data = bos.toByteArray();\n        TarArchiveInputStream tin =\n            new TarArchiveInputStream(new ByteArrayInputStream(data));\n        TarArchiveEntry e = tin.getNextTarEntry();\n        try{ assertEquals(n, e.getName());                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(e.isDirectory());                                                                        /***** ORIGINAL ASSERTION IS HERE *****/\n        tin.close();\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_1",
+            "org.apache.commons.compress.archivers.tar.TarArchiveOutputStreamTest::testWriteNonAsciiDirectoryNamePosixMode$catena_0"
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_7
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_2
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_4
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypeWithSkipValue
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_9
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_1
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_0
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_8
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_6
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_3
+com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes$catena_5

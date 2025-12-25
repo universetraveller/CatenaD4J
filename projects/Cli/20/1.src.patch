@@ -1,0 +1,31 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 114,
+            "to_line_no": 114,
+            "replaced_with": "                int pos = token.indexOf('=');\n                String opt = pos == -1 ? token : token.substring(0, pos); // --foo\n\n                if (!options.hasOption(opt) && stopAtNonOption)\n",
+            "replaced": "                if (token.indexOf('=') != -1)\n",
+            "patch_type": "replace",
+            "next_line_no": 115
+        },
+        {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 116,
+            "to_line_no": 117,
+            "replaced_with": "                    process(token);\n",
+            "replaced": "                    tokens.add(token.substring(0, token.indexOf('=')));\n                    tokens.add(token.substring(token.indexOf('=') + 1, token.length()));\n",
+            "patch_type": "replace",
+            "next_line_no": 118
+        },
+        {
+            "file_name": "src/java/org/apache/commons/cli/PosixParser.java",
+            "from_line_no": 121,
+            "to_line_no": 121,
+            "replaced_with": "                    tokens.add(opt);\n                    if (pos != -1) {\n                        tokens.add(token.substring(pos + 1));\n                    }\n",
+            "replaced": "                    tokens.add(token);\n",
+            "patch_type": "replace",
+            "next_line_no": 122
+        }
+    ]
+}

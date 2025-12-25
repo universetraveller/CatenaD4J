@@ -1,0 +1,11 @@
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_6
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_2
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_0
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_9
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_7
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_8
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_3
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_10
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_4
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_5
+org.apache.commons.compress.compressors.DetectCompressorTestCase::testDetection$catena_1

@@ -1,0 +1,12 @@
+{
+    "num_of_hunks": 1,
+    "0": {
+        "file_name": "src/java/org/apache/commons/collections/list/SetUniqueList.java",
+        "from_line_no": 286,
+        "to_line_no": 286,
+        "replaced_with": "        List superSubList = super.subList(fromIndex, toIndex);\n        Set subSet = createSetBasedOnList(set, superSubList);\n        return new SetUniqueList(superSubList, subSet);\n    }\n\n    protected Set createSetBasedOnList(Set set, List list) {\n        Set subSet = null;\n        if(set.getClass().equals(HashSet.class)) {\n            subSet = new HashSet();\n        } else {\n            try {\n                subSet = (Set) set.getClass().newInstance();\n            } catch(InstantiationException ie) {\n                subSet = new HashSet();\n            } catch(IllegalAccessException iae) {\n                subSet = new HashSet();\n            }\n        }\n        subSet.addAll(list);\n        return subSet;\n",
+        "replaced": "        return new SetUniqueList(super.subList(fromIndex, toIndex), set);\n",
+        "patch_type": "replace",
+        "next_line_no": 287
+    }
+}

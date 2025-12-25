@@ -1,0 +1,139 @@
+{
+    "num_of_hunks": 16,
+    "0": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 19,
+        "to_line_no": 19,
+        "replaced": "import java.util.HashMap;\n",
+        "patch_type": "delete",
+        "next_line_no": 20
+    },
+    "1": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 23,
+        "to_line_no": 23,
+        "replaced_with": "import java.util.Set;\nimport java.util.HashSet;\n",
+        "replaced": "import java.util.Map;\n",
+        "patch_type": "replace",
+        "next_line_no": 24
+    },
+    "2": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 46,
+        "to_line_no": 47,
+        "replaced_with": "    private Set options = new HashSet();\n",
+        "replaced": "    private Map options = new HashMap();\n    private Map names = new HashMap();\n",
+        "patch_type": "replace",
+        "next_line_no": 48
+    },
+    "3": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 51,
+        "to_line_no": 51,
+        "replaced": "    private Map hashcodeMap = new HashMap();\n",
+        "patch_type": "delete",
+        "next_line_no": 52,
+        "is_extra_hunk": true
+    },
+    "4": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 69,
+        "to_line_no": 69,
+        "replaced_with": "        return options.contains( resolveOption(opt));\n",
+        "replaced": "        return options.containsKey(opt);\n",
+        "patch_type": "replace",
+        "next_line_no": 70
+    },
+    "5": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 93,
+        "to_line_no": 93,
+        "replaced_with": "        Option option = resolveOption(opt);\n        if (option == null)\n",
+        "replaced": "        if (!options.containsKey(opt))\n",
+        "patch_type": "replace",
+        "next_line_no": 94
+    },
+    "6": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 98,
+        "to_line_no": 98,
+        "replaced_with": "        Object type = option.getType();\n",
+        "replaced": "        Object type = ((Option) options.get(opt)).getType();\n",
+        "patch_type": "replace",
+        "next_line_no": 99
+    },
+    "7": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 149,
+        "to_line_no": 152,
+        "replaced_with": "        Option key = resolveOption( opt );\n",
+        "replaced": "        opt = Util.stripLeadingHyphens(opt);\n\n        String key = opt;\n        if (names.containsKey(opt))\n",
+        "patch_type": "replace",
+        "next_line_no": 153
+    },
+    "8": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "replaced_with": "        if (options.contains(key))\n",
+        "patch_type": "insert",
+        "next_line_no": 154,
+        "is_extra_hunk": true
+    },
+    "9": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 155,
+        "to_line_no": 155,
+        "replaced_with": "            return key.getValues();\n",
+        "replaced": "            key = (String) names.get(opt);\n",
+        "patch_type": "replace",
+        "next_line_no": 156
+    },
+    "10": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 158,
+        "to_line_no": 161,
+        "replaced": "        if (options.containsKey(key))\n        {\n            return ((Option) options.get(key)).getValues();\n        }\n",
+        "patch_type": "delete",
+        "next_line_no": 162
+    },
+    "11": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "replaced_with": "    private Option resolveOption( String opt )\n    {\n        opt = Util.stripLeadingHyphens(opt);\n        for ( Iterator it = options.iterator(); it.hasNext(); )\n        {\n            Option option = (Option) it.next();\n            if (opt.equals(option.getOpt()))\n            {\n                return option;\n            }\n            if (opt.equals( option.getLongOpt()))\n            {\n                return option;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 170
+    },
+    "12": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "replaced_with": "        }\n        return null;\n    }\n",
+        "patch_type": "insert",
+        "next_line_no": 171,
+        "is_extra_hunk": true
+    },
+    "13": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 278,
+        "to_line_no": 288,
+        "replaced_with": "        options.add(opt);\n",
+        "replaced": "        hashcodeMap.put(new Integer(opt.hashCode()), opt);\n        String key = opt.getKey();\n        if (key == null)\n        {\n            key = opt.getLongOpt();\n        }\n        else\n        {\n            names.put(opt.getLongOpt(), key);\n        }\n        options.put(key, opt);\n",
+        "patch_type": "replace",
+        "next_line_no": 289
+    },
+    "14": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 299,
+        "to_line_no": 299,
+        "replaced_with": "        return options.iterator();\n",
+        "replaced": "        return hashcodeMap.values().iterator();\n",
+        "patch_type": "replace",
+        "next_line_no": 300
+    },
+    "15": {
+        "file_name": "src/java/org/apache/commons/cli/CommandLine.java",
+        "from_line_no": 309,
+        "to_line_no": 309,
+        "replaced_with": "        Collection processed = options;\n",
+        "replaced": "        Collection processed = options.values();\n",
+        "patch_type": "replace",
+        "next_line_no": 310
+    },
+    "num_of_hunks_ci": 13
+}

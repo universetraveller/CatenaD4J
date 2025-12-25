@@ -1,0 +1,54 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "            if (!charset.canEncode()) {\n",
+            "patch_type": "insert",
+            "next_line_no": 171
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "replaced_with": "                doc.charset(Charset.forName(defaultCharset));\n            }\n",
+            "patch_type": "insert",
+            "next_line_no": 172
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::fallbackToUtfIfCantEncode"
+        ],
+        "org.jsoup.parser.HtmlParserTest::fallbackToUtfIfCantEncode": {
+            "file_path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+            "Instance": "Begin: Pos(1201, 5)\nEnd: Pos(1212, 5)\nSource: /tmp/c4j/Jsoup_82/src/test/java//org/jsoup/parser/HtmlParserTest.java\nName: fallbackToUtfIfCantEncode\nChilds: [StatementAssertion<Begin: Pos(1207, 9), End: Pos(1207, 52)>,\nStatementAssertion<Begin: Pos(1208, 9), End: Pos(1208, 40)>,\nStatementAssertion<Begin: Pos(1211, 9), End: Pos(1211, 121)>,\n]",
+            "source": "/tmp/c4j/Jsoup_82/src/test/java//org/jsoup/parser/HtmlParserTest.java",
+            "name": "fallbackToUtfIfCantEncode",
+            "begin": "Pos(1201, 5)",
+            "end": "Pos(1212, 5)",
+            "begin_line_no": 1201,
+            "end_line_no": 1212,
+            "child": [
+                "Begin: Pos(1207, 9)\nEnd: Pos(1207, 52)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1208, 9)\nEnd: Pos(1208, 40)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(1211, 9)\nEnd: Pos(1211, 121)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test public void fallbackToUtfIfCantEncode$catena_0() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        assertEquals(\"UTF-8\", doc.charset().name());                                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"One\", doc.text());                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        String html = doc.outerHtml();\n        try{ assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void fallbackToUtfIfCantEncode$catena_1() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        try{ assertEquals(\"UTF-8\", doc.charset().name());                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"One\", doc.text());                                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n\n        String html = doc.outerHtml();\n        try{ assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test public void fallbackToUtfIfCantEncode$catena_2() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        try{ assertEquals(\"UTF-8\", doc.charset().name());                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", doc.text());                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        String html = doc.outerHtml();\n        assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test public void fallbackToUtfIfCantEncode$catena_0() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        assertEquals(\"UTF-8\", doc.charset().name());                                                                              /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(\"One\", doc.text());                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        String html = doc.outerHtml();\n        try{ assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test public void fallbackToUtfIfCantEncode$catena_1() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        try{ assertEquals(\"UTF-8\", doc.charset().name());                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(\"One\", doc.text());                                                                                          /***** ORIGINAL ASSERTION IS HERE *****/\n\n        String html = doc.outerHtml();\n        try{ assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    @Test public void fallbackToUtfIfCantEncode$catena_2() throws IOException {\n        // that charset can't be encoded, so make sure we flip to utf\n\n        String in = \"<html><meta charset=\\\"ISO-2022-CN\\\"/>One</html>\";\n        Document doc = Jsoup.parse(new ByteArrayInputStream(in.getBytes()), null, \"\");\n\n        try{ assertEquals(\"UTF-8\", doc.charset().name());                                                                         }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(\"One\", doc.text());                                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        String html = doc.outerHtml();\n        assertEquals(\"<html><head><meta charset=\\\"UTF-8\\\"></head><body>One</body></html>\", TextUtil.stripNewlines(html));         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.parser.HtmlParserTest::fallbackToUtfIfCantEncode$catena_2",
+            "org.jsoup.parser.HtmlParserTest::fallbackToUtfIfCantEncode$catena_0",
+            "org.jsoup.parser.HtmlParserTest::fallbackToUtfIfCantEncode$catena_1"
+        ]
+    }
+}

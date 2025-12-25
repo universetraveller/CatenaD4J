@@ -1,0 +1,766 @@
+---
+Begin generate bug_id: Jsoup_66
+num_of_hunks: 5
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_66
+Try to checkout Jsoup_66
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/nodes/Element.java
+trying to replace old failing tests
+edit: replace from 1214 range 24 at src/test/java/org/jsoup/nodes/ElementTest.java
+to
+	@Test
+    public void testNextElementSiblingAfterClone$catena_0() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        originalElement.after("<div>" + expectedText + "</div>");                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        try{ assertEquals(expectedText, originalNextElementSibling.text());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(expectedText, originalNextSibling.text());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element cloneElement = clone.body().child(0);
+        try{ cloneElement.after("<div>" + cloneExpect + "</div>");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        try{ assertEquals(cloneExpect, cloneNextElementSibling.text());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cloneExpect, cloneNextSibling.text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    } 	@Test
+    public void testNextElementSiblingAfterClone$catena_1() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        try{ originalElement.after("<div>" + expectedText + "</div>");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        assertEquals(expectedText, originalNextElementSibling.text());                                      /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(expectedText, originalNextSibling.text());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element cloneElement = clone.body().child(0);
+        try{ cloneElement.after("<div>" + cloneExpect + "</div>");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        try{ assertEquals(cloneExpect, cloneNextElementSibling.text());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cloneExpect, cloneNextSibling.text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    } 	@Test
+    public void testNextElementSiblingAfterClone$catena_2() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        try{ originalElement.after("<div>" + expectedText + "</div>");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        try{ assertEquals(expectedText, originalNextElementSibling.text());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(expectedText, originalNextSibling.text());                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        Element cloneElement = clone.body().child(0);
+        try{ cloneElement.after("<div>" + cloneExpect + "</div>");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        try{ assertEquals(cloneExpect, cloneNextElementSibling.text());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cloneExpect, cloneNextSibling.text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    } 	@Test
+    public void testNextElementSiblingAfterClone$catena_3() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        try{ originalElement.after("<div>" + expectedText + "</div>");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        try{ assertEquals(expectedText, originalNextElementSibling.text());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(expectedText, originalNextSibling.text());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element cloneElement = clone.body().child(0);
+        cloneElement.after("<div>" + cloneExpect + "</div>");                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        try{ assertEquals(cloneExpect, cloneNextElementSibling.text());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(cloneExpect, cloneNextSibling.text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    } 	@Test
+    public void testNextElementSiblingAfterClone$catena_4() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        try{ originalElement.after("<div>" + expectedText + "</div>");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        try{ assertEquals(expectedText, originalNextElementSibling.text());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(expectedText, originalNextSibling.text());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element cloneElement = clone.body().child(0);
+        try{ cloneElement.after("<div>" + cloneExpect + "</div>");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        assertEquals(cloneExpect, cloneNextElementSibling.text());                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(cloneExpect, cloneNextSibling.text());                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    } 	@Test
+    public void testNextElementSiblingAfterClone$catena_5() {
+        // via https://github.com/jhy/jsoup/issues/951
+        String html = "<!DOCTYPE html><html lang=\"en\"><head></head><body><div>Initial element</div></body></html>";
+        String expectedText = "New element";
+        String cloneExpect = "New element in clone";
+
+        Document original = Jsoup.parse(html);
+        Document clone = original.clone();
+
+        Element originalElement = original.body().child(0);
+        try{ originalElement.after("<div>" + expectedText + "</div>");                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element originalNextElementSibling = originalElement.nextElementSibling();
+        Element originalNextSibling = (Element) originalElement.nextSibling();
+        try{ assertEquals(expectedText, originalNextElementSibling.text());                                 }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(expectedText, originalNextSibling.text());                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        Element cloneElement = clone.body().child(0);
+        try{ cloneElement.after("<div>" + cloneExpect + "</div>");                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        Element cloneNextElementSibling = cloneElement.nextElementSibling();
+        Element cloneNextSibling = (Element) cloneElement.nextSibling();
+        try{ assertEquals(cloneExpect, cloneNextElementSibling.text());                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(cloneExpect, cloneNextSibling.text());                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/ElementTest.java
+new test num: 6
+ori test num: 0
+pattern: 00000
+patches are written to file
+running tests...
+used time: Finished in 18.30 seconds
+Failing tests: 1
+	org.jsoup.nodes.ElementTest::testNextElementSiblingAfterClone$catena_4
+processed: 00000
+pattern: 00001
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00001
+pattern: 00010
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00010
+pattern: 00100
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00100
+pattern: 01000
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01000
+pattern: 10000
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10000
+pattern: 00011
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00011
+pattern: 00101
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00101
+pattern: 00110
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00110
+pattern: 01001
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01001
+pattern: 01010
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01010
+pattern: 01100
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01100
+pattern: 10001
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10001
+pattern: 10010
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10010
+pattern: 10100
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10100
+pattern: 11000
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11000
+pattern: 00111
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 00111
+pattern: 01011
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01011
+pattern: 01101
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01101
+pattern: 01110
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01110
+pattern: 10011
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10011
+pattern: 10101
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10101
+pattern: 10110
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10110
+pattern: 11001
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11001
+pattern: 11010
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11010
+pattern: 11100
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11100
+pattern: 01111
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01111
+pattern: 10111
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10111
+pattern: 11011
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11011
+pattern: 11101
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11101
+pattern: 11110
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 11110
+pattern: 11111
+try to fix hunk: 0
+replace from 89 with range 1 to
+            childNodes = new NodeList(this, 4);
+
+try to fix hunk: 1
+replace from 1402 with range 1 to
+        clone.childNodes = new NodeList(clone, childNodes.size());
+
+try to fix hunk: 2
+replace from 1408 with range 2 to
+    private static final class NodeList extends ChangeNotifyingArrayList<Node> {
+        private final Element owner;
+
+        NodeList(Element owner, int initialCapacity) {
+
+try to fix hunk: 3
+insert before 1411 with             this.owner = owner;
+
+try to fix hunk: 4
+replace from 1414 with range 1 to
+            owner.nodelistChanged();
+
+patches are written to file
+running tests...
+used time: Finished in 17.29 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.nodes.ElementTest::testNextElementSiblingAfterClone$catena_4']
+select new bug
+Pattern: 11111
+new failing tests:
+org.jsoup.nodes.ElementTest::testNextElementSiblingAfterClone$catena_4
+Save found bug
+processed: 11111
+Find 1 new bugs

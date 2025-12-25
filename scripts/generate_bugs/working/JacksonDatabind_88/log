@@ -1,0 +1,88 @@
+---
+Begin generate bug_id: JacksonDatabind_88
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_88
+Try to checkout JacksonDatabind_88
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/ClassNameIdResolver.java
+trying to replace old failing tests
+edit: replace from 53 range 11 at src/test/java/com/fasterxml/jackson/databind/jsontype/GenericTypeId1735Test.java
+to
+    public void testNestedTypeCheck1735$catena_0() throws Exception
+    {
+        try {
+            MAPPER.readValue(aposToQuotes(
+"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}"),
+                    Wrapper1735.class);
+            fail("Should not pass");                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        } catch (JsonMappingException e) {
+            try{ verifyException(e, "not subtype of");                                                      }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+    }     public void testNestedTypeCheck1735$catena_1() throws Exception
+    {
+        try {
+            MAPPER.readValue(aposToQuotes(
+"{'w':{'type':'java.util.HashMap<java.lang.String,java.lang.String>'}}"),
+                    Wrapper1735.class);
+            try{ fail("Should not pass");                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        } catch (JsonMappingException e) {
+            verifyException(e, "not subtype of");                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/GenericTypeId1735Test.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 216.12 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 59 with                 throw new IllegalArgumentException(String.format(
+                        "Class %s not subtype of %s", t.getRawClass().getName(), _baseType));
+            }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 58 with             if (!t.isTypeOrSubTypeOf(_baseType.getRawClass())) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 58 with             if (!t.isTypeOrSubTypeOf(_baseType.getRawClass())) {
+
+try to fix hunk: 1
+insert before 59 with                 throw new IllegalArgumentException(String.format(
+                        "Class %s not subtype of %s", t.getRawClass().getName(), _baseType));
+            }
+
+patches are written to file
+running tests...
+used time: Finished in 222.21 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.GenericTypeId1735Test::testNestedTypeCheck1735$catena_1
+Save found bug
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,76 @@
+{
+    "original": {
+        "num_of_hunks": 6,
+        "0": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        if (value == null) {\n            writeNull();\n            return;\n        }\n        Class<?> raw = value.getClass();\n        if (raw == byte[].class) {\n",
+            "patch_type": "insert",
+            "next_line_no": 783
+        },
+        "1": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "            return;\n        } else if (_objectCodec == null) {\n",
+            "patch_type": "insert",
+            "next_line_no": 784
+        },
+        "2": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "            _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n        } else {\n            _objectCodec.writeValue(this, value);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 788
+        },
+        "3": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        if (node == null) {\n            writeNull();\n            return;\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 793
+        },
+        "4": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        if (_objectCodec == null) {\n",
+            "patch_type": "insert",
+            "next_line_no": 794
+        },
+        "5": {
+            "file_name": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "replaced_with": "        } else {\n            _objectCodec.writeTree(this, node);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 796
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos"
+        ],
+        "com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos": {
+            "file_path": "src/test/java/com/fasterxml/jackson/databind/node/TestConversions.java",
+            "Instance": "Begin: Pos(252, 12)\nEnd: Pos(265, 5)\nSource: /tmp/c4j/JacksonDatabind_2/src/test/java//com/fasterxml/jackson/databind/node/TestConversions.java\nName: testConversionOfPojos\nChilds: [StatementAssertion<Begin: Pos(259, 9), End: Pos(259, 32)>,\nStatementAssertion<Begin: Pos(263, 9), End: Pos(263, 80)>,\nStatementAssertion<Begin: Pos(264, 9), End: Pos(264, 59)>,\n]",
+            "source": "/tmp/c4j/JacksonDatabind_2/src/test/java//com/fasterxml/jackson/databind/node/TestConversions.java",
+            "name": "testConversionOfPojos",
+            "begin": "Pos(252, 12)",
+            "end": "Pos(265, 5)",
+            "begin_line_no": 252,
+            "end_line_no": 265,
+            "child": [
+                "Begin: Pos(259, 9)\nEnd: Pos(259, 32)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(263, 9)\nEnd: Pos(263, 80)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(264, 9)\nEnd: Pos(264, 59)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    public void testConversionOfPojos$catena_0() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        assertEquals(EXP, json);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        try{ assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testConversionOfPojos$catena_1() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    public void testConversionOfPojos$catena_2() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        try{ assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(EXP, MAPPER.writeValueAsString(tree));                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    public void testConversionOfPojos$catena_0() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        assertEquals(EXP, json);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        try{ assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    public void testConversionOfPojos$catena_1() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                            /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertEquals(EXP, MAPPER.writeValueAsString(tree));                                            }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "2": "    public void testConversionOfPojos$catena_2() throws Exception\n    {\n        final Issue467Bean input = new Issue467Bean(13);\n        final String EXP = \"{\\\"x\\\":13}\";\n        \n        // first, sanity check\n        String json = MAPPER.writeValueAsString(input);\n        try{ assertEquals(EXP, json);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}\n\n        // then via conversions: should become JSON Object\n        JsonNode tree = MAPPER.valueToTree(input);\n        try{ assertTrue(\"Expected Object, got \"+tree.getNodeType(), tree.isObject());                       }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertEquals(EXP, MAPPER.writeValueAsString(tree));                                                 /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        }
+    },
+    "111000": {
+        "failing_tests": [
+            "com.fasterxml.jackson.databind.node.TestConversions::testConversionOfPojos$catena_1"
+        ]
+    }
+}

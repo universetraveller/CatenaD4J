@@ -1,0 +1,106 @@
+---
+Begin generate bug_id: Gson_2
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Gson_2
+Try to checkout Gson_2
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+trying to replace old failing tests
+edit: replace from 621 range 9 at gson/src/test/java/com/google/gson/functional/DefaultTypeAdaptersTest.java
+to
+  public void testJsonElementTypeMismatch$catena_0() {
+    try {
+      gson.fromJson("\"abc\"", JsonObject.class);
+      fail();                                                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+    } catch (JsonSyntaxException expected) {
+      try{ assertEquals("Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive",
+          expected.getMessage());                                                                           }catch(Throwable __SHOULD_BE_IGNORED){}
+    }
+  }   public void testJsonElementTypeMismatch$catena_1() {
+    try {
+      gson.fromJson("\"abc\"", JsonObject.class);
+      try{ fail();                                                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+    } catch (JsonSyntaxException expected) {
+      assertEquals("Expected a com.google.gson.JsonObject but was com.google.gson.JsonPrimitive",
+          expected.getMessage());                                                                           /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+  }
+trace file: gson/src/test/java/com/google/gson/functional/DefaultTypeAdaptersTest.java
+new test num: 2
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 20.32 seconds
+Failing tests: 2
+	com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_0
+	com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_1
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 835 with           @Override public T1 read(JsonReader in) throws IOException {
+            T1 result = typeAdapter.read(in);
+            if (result != null && !requestedType.isInstance(result)) {
+              throw new JsonSyntaxException("Expected a " + requestedType.getName()
+                  + " but was " + result.getClass().getName());
+            }
+            return result;
+          }
+        };
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 833 with range 1 to
+        return (TypeAdapter<T2>) new TypeAdapter<T1>() {
+          @Override public void write(JsonWriter out, T1 value) throws IOException {
+            typeAdapter.write(out, value);
+          }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 833 with range 1 to
+        return (TypeAdapter<T2>) new TypeAdapter<T1>() {
+          @Override public void write(JsonWriter out, T1 value) throws IOException {
+            typeAdapter.write(out, value);
+          }
+
+try to fix hunk: 1
+insert before 835 with           @Override public T1 read(JsonReader in) throws IOException {
+            T1 result = typeAdapter.read(in);
+            if (result != null && !requestedType.isInstance(result)) {
+              throw new JsonSyntaxException("Expected a " + requestedType.getName()
+                  + " but was " + result.getClass().getName());
+            }
+            return result;
+          }
+        };
+
+patches are written to file
+running tests...
+used time: Finished in 19.94 seconds
+Failing tests: 0
+Can independently fix ['com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_1', 'com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_0']
+select new bug
+Pattern: 11
+new failing tests:
+com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_1
+com.google.gson.functional.DefaultTypeAdaptersTest::testJsonElementTypeMismatch$catena_0
+Save found bug
+processed: 11
+Find 1 new bugs

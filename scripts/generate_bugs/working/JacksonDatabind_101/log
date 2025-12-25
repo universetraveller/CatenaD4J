@@ -1,0 +1,97 @@
+---
+Begin generate bug_id: JacksonDatabind_101
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_101
+Try to checkout JacksonDatabind_101
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java
+trying to replace old failing tests
+edit: replace from 248 range 8 at src/test/java/com/fasterxml/jackson/databind/struct/TestUnwrapped.java
+to
+    public void testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_0() throws Exception
+    {
+        Issue2088Bean bean = MAPPER.readValue("{\"x\":1,\"a\":2,\"y\":3,\"b\":4}", Issue2088Bean.class);
+        assertEquals(1, bean.x);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(2, bean.w.a);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, bean.y);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(4, bean.w.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_1() throws Exception
+    {
+        Issue2088Bean bean = MAPPER.readValue("{\"x\":1,\"a\":2,\"y\":3,\"b\":4}", Issue2088Bean.class);
+        try{ assertEquals(1, bean.x);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(2, bean.w.a);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, bean.y);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(4, bean.w.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_2() throws Exception
+    {
+        Issue2088Bean bean = MAPPER.readValue("{\"x\":1,\"a\":2,\"y\":3,\"b\":4}", Issue2088Bean.class);
+        try{ assertEquals(1, bean.x);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, bean.w.a);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, bean.y);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(4, bean.w.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_3() throws Exception
+    {
+        Issue2088Bean bean = MAPPER.readValue("{\"x\":1,\"a\":2,\"y\":3,\"b\":4}", Issue2088Bean.class);
+        try{ assertEquals(1, bean.x);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(2, bean.w.a);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, bean.y);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(4, bean.w.b);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/struct/TestUnwrapped.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 305.00 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.struct.TestUnwrapped::testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 777 with                     if (t != JsonToken.END_OBJECT) {
+                        ctxt.reportWrongTokenException(this, JsonToken.END_OBJECT, 
+                                "Attempted to unwrap '%s' value",
+                                handledType().getName());
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 318.34 seconds
+Failing tests: 1
+	com.fasterxml.jackson.databind.struct.TestUnwrapped::testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_3
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+delete from 771 with range 1
+patches are written to file
+running tests...
+used time: Finished in 334.43 seconds
+Failing tests: 0
+select new bug
+Pattern: 10
+new failing tests:
+com.fasterxml.jackson.databind.struct.TestUnwrapped::testIssue2088UnwrappedFieldsAfterLastCreatorProp$catena_3
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+delete from 771 with range 1
+try to fix hunk: 1
+insert before 777 with                     if (t != JsonToken.END_OBJECT) {
+                        ctxt.reportWrongTokenException(this, JsonToken.END_OBJECT, 
+                                "Attempted to unwrap '%s' value",
+                                handledType().getName());
+                    }
+
+patches are written to file
+running tests...
+used time: Finished in 325.47 seconds
+Failing tests: 0
+Can independently fix []
+Could not fix independently
+processed: 11
+Find 1 new bugs

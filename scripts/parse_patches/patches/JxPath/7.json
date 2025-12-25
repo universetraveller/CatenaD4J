@@ -1,0 +1,89 @@
+{
+    "num_of_hunks": 11,
+    "0": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationGreaterThan.java",
+        "from_line_no": 19,
+        "to_line_no": 20,
+        "replaced": "import org.apache.commons.jxpath.ri.EvalContext;\nimport org.apache.commons.jxpath.ri.InfoSetUtil;\n",
+        "patch_type": "delete",
+        "next_line_no": 21
+    },
+    "1": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationGreaterThan.java",
+        "from_line_no": 33,
+        "to_line_no": 36,
+        "replaced_with": "    protected boolean evaluateCompare(int compare) {\n        return compare > 0;\n",
+        "replaced": "    public Object computeValue(EvalContext context) {\n        double l = InfoSetUtil.doubleValue(args[0].computeValue(context));\n        double r = InfoSetUtil.doubleValue(args[1].computeValue(context));\n        return l > r ? Boolean.TRUE : Boolean.FALSE;\n",
+        "patch_type": "replace",
+        "next_line_no": 37
+    },
+    "2": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationGreaterThanOrEqual.java",
+        "from_line_no": 19,
+        "to_line_no": 20,
+        "replaced": "import org.apache.commons.jxpath.ri.EvalContext;\nimport org.apache.commons.jxpath.ri.InfoSetUtil;\n",
+        "patch_type": "delete",
+        "next_line_no": 21
+    },
+    "3": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationGreaterThanOrEqual.java",
+        "from_line_no": 34,
+        "to_line_no": 37,
+        "replaced_with": "    protected boolean evaluateCompare(int compare) {\n        return compare >= 0;\n",
+        "replaced": "    public Object computeValue(EvalContext context) {\n        double l = InfoSetUtil.doubleValue(args[0].computeValue(context));\n        double r = InfoSetUtil.doubleValue(args[1].computeValue(context));\n        return l >= r ? Boolean.TRUE : Boolean.FALSE;\n",
+        "patch_type": "replace",
+        "next_line_no": 38
+    },
+    "4": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationLessThan.java",
+        "from_line_no": 19,
+        "to_line_no": 20,
+        "replaced": "import org.apache.commons.jxpath.ri.EvalContext;\nimport org.apache.commons.jxpath.ri.InfoSetUtil;\n",
+        "patch_type": "delete",
+        "next_line_no": 21
+    },
+    "5": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationLessThan.java",
+        "from_line_no": 33,
+        "to_line_no": 36,
+        "replaced_with": "    protected boolean evaluateCompare(int compare) {\n        return compare < 0;\n",
+        "replaced": "    public Object computeValue(EvalContext context) {\n        double l = InfoSetUtil.doubleValue(args[0].computeValue(context));\n        double r = InfoSetUtil.doubleValue(args[1].computeValue(context));\n        return l < r ? Boolean.TRUE : Boolean.FALSE;\n",
+        "patch_type": "replace",
+        "next_line_no": 37
+    },
+    "6": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationLessThanOrEqual.java",
+        "from_line_no": 19,
+        "to_line_no": 20,
+        "replaced": "import org.apache.commons.jxpath.ri.EvalContext;\nimport org.apache.commons.jxpath.ri.InfoSetUtil;\n",
+        "patch_type": "delete",
+        "next_line_no": 21
+    },
+    "7": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationLessThanOrEqual.java",
+        "from_line_no": 34,
+        "to_line_no": 37,
+        "replaced_with": "    protected boolean evaluateCompare(int compare) {\n        return compare <= 0;\n",
+        "replaced": "    public Object computeValue(EvalContext context) {\n        double l = InfoSetUtil.doubleValue(args[0].computeValue(context));\n        double r = InfoSetUtil.doubleValue(args[1].computeValue(context));\n        return l <= r ? Boolean.TRUE : Boolean.FALSE;\n",
+        "patch_type": "replace",
+        "next_line_no": 38
+    },
+    "8": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+        "replaced_with": "import java.util.Collection;\nimport java.util.HashSet;\nimport java.util.Iterator;\n\nimport org.apache.commons.jxpath.ri.EvalContext;\nimport org.apache.commons.jxpath.ri.InfoSetUtil;\nimport org.apache.commons.jxpath.ri.axes.InitialContext;\nimport org.apache.commons.jxpath.ri.axes.SelfContext;\n\n",
+        "patch_type": "insert",
+        "next_line_no": 19
+    },
+    "9": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+        "replaced_with": "    public final Object computeValue(EvalContext context) {\n        return compute(args[0].computeValue(context), args[1]\n                .computeValue(context)) ? Boolean.TRUE : Boolean.FALSE;\n    }\n\n",
+        "patch_type": "insert",
+        "next_line_no": 31
+    },
+    "10": {
+        "file_name": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+        "replaced_with": "    protected abstract boolean evaluateCompare(int compare);\n\n    private boolean compute(Object left, Object right) {\n        left = reduce(left);\n        right = reduce(right);\n\n        if (left instanceof InitialContext) {\n            ((InitialContext) left).reset();\n        }\n        if (right instanceof InitialContext) {\n            ((InitialContext) right).reset();\n        }\n        if (left instanceof Iterator && right instanceof Iterator) {\n            return findMatch((Iterator) left, (Iterator) right);\n        }\n        if (left instanceof Iterator) {\n            return containsMatch((Iterator) left, right);\n        }\n        if (right instanceof Iterator) {\n            return containsMatch((Iterator) right, left);\n        }\n        return evaluateCompare(compare(left, right));\n    }\n\n    private Object reduce(Object o) {\n        if (o instanceof SelfContext) {\n            o = ((EvalContext) o).getSingleNodePointer();\n        }\n        if (o instanceof Collection) {\n            o = ((Collection) o).iterator();\n        }\n        return o;\n    }\n\n    private boolean containsMatch(Iterator it, Object value) {\n        while (it.hasNext()) {\n            Object element = it.next();\n            if (evaluateCompare(compare(element, value))) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    private boolean findMatch(Iterator lit, Iterator rit) {\n        HashSet left = new HashSet();\n        while (lit.hasNext()) {\n            left.add(lit.next());\n        }\n        while (rit.hasNext()) {\n            if (containsMatch(left.iterator(), rit.next())) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    private int compare(Object l, Object r) {\n        double ld = InfoSetUtil.doubleValue(l);\n        double rd = InfoSetUtil.doubleValue(r);\n        return ld == rd ? 0 : ld < rd ? -1 : 1;\n    }\n\n",
+        "patch_type": "insert",
+        "next_line_no": 39
+    }
+}

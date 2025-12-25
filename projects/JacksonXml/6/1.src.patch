@@ -1,0 +1,52 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "    @Override\n    public int writeBinary(Base64Variant b64variant, InputStream data, int dataLength) throws IOException\n    {\n        if (data == null) {\n            writeNull();\n            return 0;\n        }\n        _verifyValueWrite(\"write Binary value\");\n        if (_nextName == null) {\n            handleMissingName();\n        }\n        try {\n            if (_nextIsAttribute) {\n",
+            "patch_type": "insert",
+            "next_line_no": 843
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "            } else {\n                if (_xmlPrettyPrinter != null) {\n                    _xmlPrettyPrinter.writeLeafElement(_xmlWriter,\n                            _nextName.getNamespaceURI(), _nextName.getLocalPart(),\n                            toFullBuffer(data, dataLength), 0, dataLength);\n                } else {\n                    _xmlWriter.writeStartElement(_nextName.getNamespaceURI(), _nextName.getLocalPart());\n                    writeStreamAsBinary(data, dataLength);\n                    _xmlWriter.writeEndElement();\n                }\n            }\n        } catch (XMLStreamException e) {\n            StaxUtil.throwAsGenerationException(e, this);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 846
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "        return dataLength;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 847
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "    private void writeStreamAsBinary(InputStream data, int len) throws IOException, XMLStreamException \n    {\n",
+            "patch_type": "insert",
+            "next_line_no": 848
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "        byte[] tmp = new byte[3];\n        int offset = 0;\n        int read;\n        while((read = data.read(tmp, offset, Math.min(3 - offset, len))) != -1) {\n            offset += read;\n            len -= read;\n            if(offset == 3) {\n                offset = 0;\n                _xmlWriter.writeBinary(tmp, 0, 3);\n            }\n            if (len == 0) {\n                break;\n            }\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 849
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "        if(offset > 0) {\n            _xmlWriter.writeBinary(tmp, 0, offset);\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 851
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "    private byte[] toFullBuffer(InputStream data, final int len) throws IOException \n    {\n        byte[] result = new byte[len];\n        int offset = 0;\n",
+            "patch_type": "insert",
+            "next_line_no": 866
+        },
+        {
+            "file_name": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/ToXmlGenerator.java",
+            "replaced_with": "        for (; offset < len; ) {\n            int count = data.read(result, offset, len - offset);\n            if (count < 0) {\n                _reportError(\"Too few bytes available: missing \"+(len - offset)+\" bytes (out of \"+len+\")\");\n            }\n            offset += count;\n        }\n        return result;\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 867
+        }
+    ]
+}

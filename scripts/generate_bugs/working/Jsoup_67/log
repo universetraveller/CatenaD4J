@@ -1,0 +1,131 @@
+---
+Begin generate bug_id: Jsoup_67
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_67
+Try to checkout Jsoup_67
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/HtmlTreeBuilder.java
+trying to replace old failing tests
+edit: replace from 904 range 22 at src/test/java/org/jsoup/parser/HtmlParserTest.java
+to
+    @Test public void handlesDeepStack$catena_0() {
+        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955
+        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it
+
+        // Arrange
+        StringBuilder longBody = new StringBuilder(500000);
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("<dl><dd>");
+        }
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("</dd></dl>");
+        }
+
+        // Act
+        long start = System.currentTimeMillis();
+        Document doc = Parser.parseBodyFragment(longBody.toString(), "");
+
+        // Assert
+        assertEquals(2, doc.body().childNodeSize());                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(25000, doc.select("dd").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesDeepStack$catena_1() {
+        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955
+        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it
+
+        // Arrange
+        StringBuilder longBody = new StringBuilder(500000);
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("<dl><dd>");
+        }
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("</dd></dl>");
+        }
+
+        // Act
+        long start = System.currentTimeMillis();
+        Document doc = Parser.parseBodyFragment(longBody.toString(), "");
+
+        // Assert
+        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(25000, doc.select("dd").size());                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(System.currentTimeMillis() - start < 1000);                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handlesDeepStack$catena_2() {
+        // inspired by http://sv.stargate.wikia.com/wiki/M2J and https://github.com/jhy/jsoup/issues/955
+        // I didn't put it in the integration tests, because explorer and intellij kept dieing trying to preview/index it
+
+        // Arrange
+        StringBuilder longBody = new StringBuilder(500000);
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("<dl><dd>");
+        }
+        for (int i = 0; i < 25000; i++) {
+            longBody.append(i).append("</dd></dl>");
+        }
+
+        // Act
+        long start = System.currentTimeMillis();
+        Document doc = Parser.parseBodyFragment(longBody.toString(), "");
+
+        // Assert
+        try{ assertEquals(2, doc.body().childNodeSize());                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(25000, doc.select("dd").size());                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(System.currentTimeMillis() - start < 1000);                                              /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/HtmlParserTest.java
+new test num: 3
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 373.39 seconds
+Failing tests: 1
+	org.jsoup.parser.HtmlParserTest::handlesDeepStack$catena_2
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 468 with         if (depth > MaxScopeSearchDepth) {
+            depth = MaxScopeSearchDepth;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 42 with     public static final int MaxScopeSearchDepth = 100; // prevents the parser bogging down in exceptionally broken pages
+
+patches are written to file
+running tests...
+used time: Finished in 376.45 seconds
+Failing tests: 1
+	org.jsoup.parser.HtmlParserTest::handlesDeepStack$catena_2
+No new failing tests but only 1 hunk
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 42 with     public static final int MaxScopeSearchDepth = 100; // prevents the parser bogging down in exceptionally broken pages
+
+try to fix hunk: 1
+insert before 468 with         if (depth > MaxScopeSearchDepth) {
+            depth = MaxScopeSearchDepth;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 25.96 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.HtmlParserTest::handlesDeepStack$catena_2']
+select new bug
+Pattern: 11
+new failing tests:
+org.jsoup.parser.HtmlParserTest::handlesDeepStack$catena_2
+Save found bug
+processed: 11
+Find 1 new bugs

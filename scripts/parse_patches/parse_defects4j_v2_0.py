@@ -3,7 +3,9 @@ import glob
 import os
 import sys
 root = '/root/defects4j/framework/projects/'
-projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+projs = ['Cli', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson', \
+         'JacksonCore', 'JacksonDatabind', 'JacksonXml', 'Jsoup', 'JxPath', \
+         'Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
 if len(sys.argv) > 1:
     root = f'{sys.argv[1]}/framework/projects/'
 if len(sys.argv) > 2:

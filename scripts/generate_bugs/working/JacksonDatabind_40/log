@@ -1,0 +1,104 @@
+---
+Begin generate bug_id: JacksonDatabind_40
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_40
+Try to checkout JacksonDatabind_40
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/deser/std/NumberDeserializers.java
+trying to replace old failing tests
+edit: replace from 262 range 6 at src/test/java/com/fasterxml/jackson/databind/deser/TestSimpleTypes.java
+to
+    public void testEmptyToNullCoercionForPrimitives$catena_0() throws Exception {
+        _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEmptyToNullCoercionForPrimitives$catena_1() throws Exception {
+        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                              /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEmptyToNullCoercionForPrimitives$catena_2() throws Exception {
+        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testEmptyToNullCoercionForPrimitives$catena_3() throws Exception {
+        try{ _testEmptyToNullCoercion(int.class, Integer.valueOf(0));                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(long.class, Long.valueOf(0));                                         }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ _testEmptyToNullCoercion(double.class, Double.valueOf(0.0));                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        _testEmptyToNullCoercion(float.class, Float.valueOf(0.0f));                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/deser/TestSimpleTypes.java
+new test num: 4
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 216.37 seconds
+Failing tests: 4
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_0
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_1
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_2
+	com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 150 with             if (_primitive && ctxt.isEnabled(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)) {
+                throw ctxt.mappingException(
+                        "Can not map Empty String as null into type %s (set DeserializationConfig.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES to 'false' to allow)",
+                        handledType().toString());
+            }
+            return _nullValue;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 148 with         @Override
+        public T getEmptyValue(DeserializationContext ctxt) throws JsonMappingException {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 148 with         @Override
+        public T getEmptyValue(DeserializationContext ctxt) throws JsonMappingException {
+
+try to fix hunk: 1
+insert before 150 with             if (_primitive && ctxt.isEnabled(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)) {
+                throw ctxt.mappingException(
+                        "Can not map Empty String as null into type %s (set DeserializationConfig.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES to 'false' to allow)",
+                        handledType().toString());
+            }
+            return _nullValue;
+        }
+
+patches are written to file
+running tests...
+used time: Finished in 220.05 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_2', 'com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_1', 'com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_0', 'com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_2
+com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_1
+com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_0
+com.fasterxml.jackson.databind.deser.TestSimpleTypes::testEmptyToNullCoercionForPrimitives$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

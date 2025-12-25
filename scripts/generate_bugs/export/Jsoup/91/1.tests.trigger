@@ -1,0 +1,3 @@
+org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1

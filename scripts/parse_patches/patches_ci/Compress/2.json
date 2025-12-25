@@ -1,0 +1,87 @@
+{
+    "num_of_hunks": 12,
+    "0": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "    private ArArchiveEntry currentEntry = null;\n",
+        "patch_type": "insert",
+        "next_line_no": 42
+    },
+    "1": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "    private long entryOffset = -1;\n",
+        "patch_type": "insert",
+        "next_line_no": 46,
+        "is_extra_hunk": true
+    },
+    "2": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "        if (currentEntry != null) {\n            final long entryEnd = entryOffset + currentEntry.getLength();\n            while (offset < entryEnd) {\n                int x = read();\n                if (x == -1) {\n",
+        "patch_type": "insert",
+        "next_line_no": 60
+    },
+    "3": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "                    return null;\n                }\n            }\n            currentEntry = null;\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 62,
+        "is_extra_hunk": true
+    },
+    "4": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "        if (offset % 2 != 0) {\n            if (read() < 0) {\n",
+        "patch_type": "insert",
+        "next_line_no": 77
+    },
+    "5": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "                return null;\n            }\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 78,
+        "is_extra_hunk": true
+    },
+    "6": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "from_line_no": 83,
+        "to_line_no": 85,
+        "replaced": "        if (offset % 2 != 0) {\n            read();\n        }\n",
+        "patch_type": "delete",
+        "next_line_no": 86
+    },
+    "7": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "from_line_no": 114,
+        "to_line_no": 114,
+        "replaced_with": "        entryOffset = offset;\n        currentEntry = new ArArchiveEntry(new String(name).trim(),\n",
+        "replaced": "        return new ArArchiveEntry(new String(name).trim(),\n",
+        "patch_type": "replace",
+        "next_line_no": 115
+    },
+    "8": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "        return currentEntry;\n",
+        "patch_type": "insert",
+        "next_line_no": 117
+    },
+    "9": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "        currentEntry = null;\n",
+        "patch_type": "insert",
+        "next_line_no": 129
+    },
+    "10": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "from_line_no": 132,
+        "to_line_no": 134,
+        "replaced_with": "        byte[] single = new byte[1];\n        int num = read(single, 0, 1);\n        return num == -1 ? -1 : single[0] & 0xff;\n",
+        "replaced": "        final int ret = input.read();\n        offset += (ret > 0 ? 1 : 0);\n        return ret;\n",
+        "patch_type": "replace",
+        "next_line_no": 135
+    },
+    "11": {
+        "file_name": "src/main/java/org/apache/commons/compress/archivers/ar/ArArchiveInputStream.java",
+        "replaced_with": "        if (currentEntry != null) {\n            final long entryEnd = entryOffset + currentEntry.getLength();\n            if (len > 0 && entryEnd > offset) {\n                toRead = (int) Math.min(len, entryEnd - offset);\n            } else {\n                return -1;\n            }\n        }\n",
+        "patch_type": "insert",
+        "next_line_no": 143
+    },
+    "num_of_hunks_ci": 9
+}

@@ -1,0 +1,6 @@
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_1
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_0
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_1
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_0
+com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys$catena_2
+com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers$catena_2

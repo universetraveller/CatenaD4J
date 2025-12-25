@@ -1,0 +1,13 @@
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_4
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_2
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_5
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_3
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_1
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_5
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_1
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_3
+com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_4
+com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207
+com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b$catena_4
+com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew$catena_2
+com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew$catena_2

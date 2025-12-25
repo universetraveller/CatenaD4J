@@ -1,0 +1,1891 @@
+---
+Begin generate bug_id: Csv_13
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Csv_13
+Try to checkout Csv_13
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/csv/CSVFormat.java
+trace file: src/main/java/org/apache/commons/csv/CSVPrinter.java
+trying to replace old failing tests
+edit: replace from 322 range 101 at src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+to
+    @Test
+    public void testMySqlNullOutput$catena_0() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_1() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(new Object[2], record0);                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_2() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_3() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_4() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_5() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_6() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_7() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_8() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_9() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_10() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_11() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_12() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_13() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_14() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_15() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_16() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        assertEquals(expected, writer.toString());                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testMySqlNullOutput$catena_17() throws IOException {
+        Object[] s = new String[] { "NULL", null };
+        CSVFormat format = CSVFormat.MYSQL.withQuote('"').withNullString("NULL").withQuoteMode(QuoteMode.NON_NUMERIC);
+        StringWriter writer = new StringWriter();
+        CSVPrinter printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        String expected = "\"NULL\"\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        String[] record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(new Object[2], record0);                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", null };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\n", "A" };
+        format = CSVFormat.MYSQL.withNullString("\\N");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\n\tA\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL.withNullString("NULL");
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\tNULL\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "", null };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\t\\N\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\N", "", "\u000e,\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\N\t\t\u000e,\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "NULL", "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "NULL\t\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        try{ assertArrayEquals(expectNulls(s, format), record0);                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        s = new String[] { "\\\r" };
+        format = CSVFormat.MYSQL;
+        writer = new StringWriter();
+        printer = new CSVPrinter(writer, format);
+        printer.printRecord(s);
+        printer.close();
+        expected = "\\\\\\r\n";
+        try{ assertEquals(expected, writer.toString());                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        record0 = toFirstRecordValues(expected, format);
+        assertArrayEquals(expectNulls(s, format), record0);                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+new test num: 18
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 15.88 seconds
+Failing tests: 5
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_10
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_11
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_0
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_2
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullStringDefault
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 139 with range 1 to
+        if (object == null) {
+            out.append(value);
+        } else if (format.isQuoteCharacterSet()) {
+
+patches are written to file
+running tests...
+used time: Finished in 14.82 seconds
+Failing tests: 3
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_10
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_11
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullStringDefault
+select new bug
+Pattern: 01
+new failing tests:
+org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_0
+org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_2
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 319 with range 1 to
+            .withQuote(null).withRecordSeparator(LF).withNullString("\\N");
+
+patches are written to file
+running tests...
+used time: Finished in 14.74 seconds
+Failing tests: 3
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_10
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_0
+	org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_2
+select new bug
+Pattern: 10
+new failing tests:
+org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_11
+org.apache.commons.csv.CSVPrinterTest::testMySqlNullStringDefault
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 319 with range 1 to
+            .withQuote(null).withRecordSeparator(LF).withNullString("\\N");
+
+try to fix hunk: 1
+replace from 139 with range 1 to
+        if (object == null) {
+            out.append(value);
+        } else if (format.isQuoteCharacterSet()) {
+
+patches are written to file
+running tests...
+used time: Finished in 16.47 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_10']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.csv.CSVPrinterTest::testMySqlNullOutput$catena_10
+Save found bug
+processed: 11
+Find 3 new bugs

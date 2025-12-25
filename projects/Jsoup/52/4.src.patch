@@ -1,0 +1,28 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/nodes/XmlDeclaration.java",
+            "from_line_no": 46,
+            "to_line_no": 61,
+            "replaced_with": "        return attributes.html().trim(); // attr html starts with a \" \"\n",
+            "replaced": "        final String decl = this.name;\n        if(decl.equals(\"xml\") && attributes.size() > 1 ) {\n            StringBuilder sb = new StringBuilder(decl);\n            final String version = attributes.get(\"version\");\n            if( version != null ) {\n                sb.append(\" version=\\\"\").append(version).append(\"\\\"\");\n            }\n            final String encoding = attributes.get(\"encoding\");\n            if( encoding != null ) {\n                sb.append(\" encoding=\\\"\").append(encoding).append(\"\\\"\");\n            }\n            return sb.toString();\n        }\n        else {\n            return this.name;\n        }\n",
+            "patch_type": "replace",
+            "next_line_no": 62
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "replaced_with": "import org.jsoup.Jsoup;\n",
+            "patch_type": "insert",
+            "next_line_no": 3
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "from_line_no": 76,
+            "to_line_no": 77,
+            "replaced_with": "                Document doc = Jsoup.parse(\"<\" + data.substring(1, data.length() -1) + \">\", baseUri, Parser.xmlParser());\n                Element el = doc.child(0);\n                insert = new XmlDeclaration(el.tagName(), comment.baseUri(), data.startsWith(\"!\"));\n                insert.attributes().addAll(el.attributes());\n",
+            "replaced": "                String declaration = data.substring(1);\n                insert = new XmlDeclaration(declaration, comment.baseUri(), data.startsWith(\"!\"));\n",
+            "patch_type": "replace",
+            "next_line_no": 78
+        }
+    ]
+}

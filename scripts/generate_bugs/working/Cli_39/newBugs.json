@@ -1,0 +1,69 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/apache/commons/cli/TypeHandler.java",
+            "from_line_no": 92,
+            "to_line_no": 92,
+            "replaced_with": "            return openFile(str);\n",
+            "replaced": "            return createFile(str);\n",
+            "patch_type": "replace",
+            "next_line_no": 93
+        },
+        "1": {
+            "file_name": "src/main/java/org/apache/commons/cli/TypeHandler.java",
+            "replaced_with": "    public static FileInputStream openFile(String str) throws ParseException\n    {\n        try\n        {\n            return new FileInputStream(str);\n        }\n        catch (FileNotFoundException e)\n        {\n            throw new ParseException(\"Unable to find file: \" + str);\n        }\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 234
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern",
+            "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist"
+        ],
+        "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern": {
+            "file_path": "src/test/java/org/apache/commons/cli/PatternOptionBuilderTest.java",
+            "Instance": "Begin: Pos(161, 5)\nEnd: Pos(172, 5)\nSource: /tmp/c4j/Cli_39/src/test/java//org/apache/commons/cli/PatternOptionBuilderTest.java\nName: testExistingFilePattern\nChilds: [StatementAssertion<Begin: Pos(170, 9), End: Pos(170, 71)>,\nStatementAssertion<Begin: Pos(171, 9), End: Pos(171, 104)>,\n]",
+            "source": "/tmp/c4j/Cli_39/src/test/java//org/apache/commons/cli/PatternOptionBuilderTest.java",
+            "name": "testExistingFilePattern",
+            "begin": "Pos(161, 5)",
+            "end": "Pos(172, 5)",
+            "begin_line_no": 161,
+            "end_line_no": 172,
+            "child": [
+                "Begin: Pos(170, 9)\nEnd: Pos(170, 71)\nSource: StatementExpression\nName: <Unknown>\nChilds: []",
+                "Begin: Pos(171, 9)\nEnd: Pos(171, 104)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [
+                "    @Test\n    public void testExistingFilePattern$catena_0() throws Exception\n    {\n        final Options options = PatternOptionBuilder.parsePattern(\"g<\");\n        final CommandLineParser parser = new PosixParser();\n        final CommandLine line = parser.parse(options, new String[] { \"-g\", \"src/test/resources/existing-readable.file\" });\n\n        final Object parsedReadableFileStream = line.getOptionObject(\"g\");\n\n        assertNotNull(\"option g not parsed\", parsedReadableFileStream);                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"option g not FileInputStream\", parsedReadableFileStream instanceof FileInputStream);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "    @Test\n    public void testExistingFilePattern$catena_1() throws Exception\n    {\n        final Options options = PatternOptionBuilder.parsePattern(\"g<\");\n        final CommandLineParser parser = new PosixParser();\n        final CommandLine line = parser.parse(options, new String[] { \"-g\", \"src/test/resources/existing-readable.file\" });\n\n        final Object parsedReadableFileStream = line.getOptionObject(\"g\");\n\n        try{ assertNotNull(\"option g not parsed\", parsedReadableFileStream);                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"option g not FileInputStream\", parsedReadableFileStream instanceof FileInputStream);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            ],
+            "func": {
+                "0": "    @Test\n    public void testExistingFilePattern$catena_0() throws Exception\n    {\n        final Options options = PatternOptionBuilder.parsePattern(\"g<\");\n        final CommandLineParser parser = new PosixParser();\n        final CommandLine line = parser.parse(options, new String[] { \"-g\", \"src/test/resources/existing-readable.file\" });\n\n        final Object parsedReadableFileStream = line.getOptionObject(\"g\");\n\n        assertNotNull(\"option g not parsed\", parsedReadableFileStream);                                          /***** ORIGINAL ASSERTION IS HERE *****/\n        try{ assertTrue(\"option g not FileInputStream\", parsedReadableFileStream instanceof FileInputStream);    }catch(Throwable __SHOULD_BE_IGNORED){}\n    }",
+                "1": "    @Test\n    public void testExistingFilePattern$catena_1() throws Exception\n    {\n        final Options options = PatternOptionBuilder.parsePattern(\"g<\");\n        final CommandLineParser parser = new PosixParser();\n        final CommandLine line = parser.parse(options, new String[] { \"-g\", \"src/test/resources/existing-readable.file\" });\n\n        final Object parsedReadableFileStream = line.getOptionObject(\"g\");\n\n        try{ assertNotNull(\"option g not parsed\", parsedReadableFileStream);                                     }catch(Throwable __SHOULD_BE_IGNORED){}\n        assertTrue(\"option g not FileInputStream\", parsedReadableFileStream instanceof FileInputStream);         /***** ORIGINAL ASSERTION IS HERE *****/\n    }"
+            }
+        },
+        "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist": {
+            "file_path": "src/test/java/org/apache/commons/cli/PatternOptionBuilderTest.java",
+            "Instance": "Begin: Pos(174, 5)\nEnd: Pos(181, 5)\nSource: /tmp/c4j/Cli_39/src/test/java//org/apache/commons/cli/PatternOptionBuilderTest.java\nName: testExistingFilePatternFileNotExist\nChilds: [StatementAssertion<Begin: Pos(180, 9), End: Pos(180, 65)>,\n]",
+            "source": "/tmp/c4j/Cli_39/src/test/java//org/apache/commons/cli/PatternOptionBuilderTest.java",
+            "name": "testExistingFilePatternFileNotExist",
+            "begin": "Pos(174, 5)",
+            "end": "Pos(181, 5)",
+            "begin_line_no": 174,
+            "end_line_no": 181,
+            "child": [
+                "Begin: Pos(180, 9)\nEnd: Pos(180, 65)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1",
+            "org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist"
+        ]
+    }
+}

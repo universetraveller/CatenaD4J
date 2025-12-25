@@ -1,0 +1,2 @@
+org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::handlesXmlDeclarationAsDeclaration$catena_1

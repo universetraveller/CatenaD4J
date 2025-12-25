@@ -1,0 +1,111 @@
+---
+Begin generate bug_id: Cli_39
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_39
+Try to checkout Cli_39
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/cli/TypeHandler.java
+trying to replace old failing tests
+edit: replace from 161 range 12 at src/test/java/org/apache/commons/cli/PatternOptionBuilderTest.java
+to
+    @Test
+    public void testExistingFilePattern$catena_0() throws Exception
+    {
+        final Options options = PatternOptionBuilder.parsePattern("g<");
+        final CommandLineParser parser = new PosixParser();
+        final CommandLine line = parser.parse(options, new String[] { "-g", "src/test/resources/existing-readable.file" });
+
+        final Object parsedReadableFileStream = line.getOptionObject("g");
+
+        assertNotNull("option g not parsed", parsedReadableFileStream);                                          /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue("option g not FileInputStream", parsedReadableFileStream instanceof FileInputStream);    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testExistingFilePattern$catena_1() throws Exception
+    {
+        final Options options = PatternOptionBuilder.parsePattern("g<");
+        final CommandLineParser parser = new PosixParser();
+        final CommandLine line = parser.parse(options, new String[] { "-g", "src/test/resources/existing-readable.file" });
+
+        final Object parsedReadableFileStream = line.getOptionObject("g");
+
+        try{ assertNotNull("option g not parsed", parsedReadableFileStream);                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue("option g not FileInputStream", parsedReadableFileStream instanceof FileInputStream);         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/cli/PatternOptionBuilderTest.java
+new test num: 2
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 6.53 seconds
+Failing tests: 2
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 234 with     public static FileInputStream openFile(String str) throws ParseException
+    {
+        try
+        {
+            return new FileInputStream(str);
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new ParseException("Unable to find file: " + str);
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 6.72 seconds
+Failing tests: 2
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1
+	org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist
+No new failing tests but only 1 hunk
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 92 with range 1 to
+            return openFile(str);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 92 with range 1 to
+            return openFile(str);
+
+try to fix hunk: 1
+insert before 234 with     public static FileInputStream openFile(String str) throws ParseException
+    {
+        try
+        {
+            return new FileInputStream(str);
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new ParseException("Unable to find file: " + str);
+        }
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 7.63 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1', 'org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePattern$catena_1
+org.apache.commons.cli.PatternOptionBuilderTest::testExistingFilePatternFileNotExist
+Save found bug
+processed: 11
+Find 1 new bugs

@@ -1,0 +1,2 @@
+org.jsoup.helper.DataUtilTest::shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags
+org.jsoup.helper.DataUtilTest::testQuotedCharset$catena_4

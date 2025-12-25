@@ -3,7 +3,14 @@ import os
 import json
 import javalang
 import sys
-projs = ['Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+projs = ['Cli', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson', \
+         'JacksonCore', 'JacksonDatabind', 'JacksonXml', 'Jsoup', 'JxPath', \
+         'Chart', 'Lang', 'Math', 'Time', 'Closure', 'Mockito']
+ex_bugs = ['Cli/6.json','Collections/20.json','Collections/24.json','Collections/1.json', \
+           'Collections/21.json','Collections/2.json','Collections/5.json','Collections/10.json', \
+           'Collections/6.json','Collections/15.json','Collections/7.json','Collections/17.json', \
+           'Collections/22.json','Collections/8.json','Collections/18.json', 'Collections/19.json', \
+           'Collections/4.json', 'Time/21.json']
 base_dir = './patches/'
 work_dir = '/tmp/'
 if len(sys.argv) > 1:
@@ -13,7 +20,7 @@ if len(sys.argv) > 1:
 if len(sys.argv) > 2:
     projs = [sys.argv[2]]
 if len(sys.argv) > 3:
-    base_dir = sys.argv[2]
+    base_dir = sys.argv[3]
 def convert_patches_to_comments_ignored_ver():
     if not os.path.exists('./patches_ci/'):
         os.makedirs('./patches_ci/')
@@ -24,7 +31,7 @@ def convert_patches_to_comments_ignored_ver():
 def _convert_ci_proj(proj):
     paths = glob.glob(f'{base_dir}{proj}/*')
     for path in paths:
-        if 'Time/21.json' in path:
+        if any(bug in path for bug in ex_bugs):
             continue
         idx = path.replace(f'{base_dir}{proj}/', '').replace('.json', '')
         with open(path, 'r') as f:
@@ -53,8 +60,11 @@ def _convert_ci_patch(proj, idx, patch):
         return num
     for file in file_map:
         hunks = file_map[file]
-        with open(f'{working}{file}', 'r', encoding='latin-1') as f:
-            src = f.read().splitlines()
+        try:
+            with open(f'{working}{file}', 'r', encoding='latin-1') as f:
+                src = f.read().splitlines()
+        except FileNotFoundError:
+            continue
         for i in range(1, len(hunks)):
             now = patch[hunks[i]]
             pre = patch[hunks[i-1]]

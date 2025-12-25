@@ -1,0 +1,162 @@
+---
+Begin generate bug_id: JacksonDatabind_51
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_51
+Try to checkout JacksonDatabind_51
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java
+trying to replace old failing tests
+edit: replace from 211 range 19 at src/test/java/com/fasterxml/jackson/databind/jsontype/TestCustomTypeIdResolver.java
+to
+    public void testPolymorphicTypeViaCustom$catena_0() throws Exception {
+        Base1270<Poly1> req = new Base1270<Poly1>();
+        Poly1 o = new Poly1();
+        o.val = "optionValue";
+        req.options = o;
+        req.val = "some value";
+        Top1270 top = new Top1270();
+        top.b = req;
+        String json = MAPPER.writeValueAsString(top);
+        JsonNode tree = MAPPER.readTree(json);
+        assertNotNull(tree.get("b"));                                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(tree.get("b").get("options"));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options").get("val"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Can we reverse the process? I have some doubts
+        Top1270 itemRead = MAPPER.readValue(json, Top1270.class);
+        try{ assertNotNull(itemRead);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(itemRead.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testPolymorphicTypeViaCustom$catena_1() throws Exception {
+        Base1270<Poly1> req = new Base1270<Poly1>();
+        Poly1 o = new Poly1();
+        o.val = "optionValue";
+        req.options = o;
+        req.val = "some value";
+        Top1270 top = new Top1270();
+        top.b = req;
+        String json = MAPPER.writeValueAsString(top);
+        JsonNode tree = MAPPER.readTree(json);
+        try{ assertNotNull(tree.get("b"));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(tree.get("b").get("options"));                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(tree.get("b").get("options").get("val"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Can we reverse the process? I have some doubts
+        Top1270 itemRead = MAPPER.readValue(json, Top1270.class);
+        try{ assertNotNull(itemRead);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(itemRead.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testPolymorphicTypeViaCustom$catena_2() throws Exception {
+        Base1270<Poly1> req = new Base1270<Poly1>();
+        Poly1 o = new Poly1();
+        o.val = "optionValue";
+        req.options = o;
+        req.val = "some value";
+        Top1270 top = new Top1270();
+        top.b = req;
+        String json = MAPPER.writeValueAsString(top);
+        JsonNode tree = MAPPER.readTree(json);
+        try{ assertNotNull(tree.get("b"));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options"));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(tree.get("b").get("options").get("val"));                                             /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // Can we reverse the process? I have some doubts
+        Top1270 itemRead = MAPPER.readValue(json, Top1270.class);
+        try{ assertNotNull(itemRead);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(itemRead.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testPolymorphicTypeViaCustom$catena_3() throws Exception {
+        Base1270<Poly1> req = new Base1270<Poly1>();
+        Poly1 o = new Poly1();
+        o.val = "optionValue";
+        req.options = o;
+        req.val = "some value";
+        Top1270 top = new Top1270();
+        top.b = req;
+        String json = MAPPER.writeValueAsString(top);
+        JsonNode tree = MAPPER.readTree(json);
+        try{ assertNotNull(tree.get("b"));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options"));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options").get("val"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Can we reverse the process? I have some doubts
+        Top1270 itemRead = MAPPER.readValue(json, Top1270.class);
+        assertNotNull(itemRead);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNotNull(itemRead.b);                                                                     }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testPolymorphicTypeViaCustom$catena_4() throws Exception {
+        Base1270<Poly1> req = new Base1270<Poly1>();
+        Poly1 o = new Poly1();
+        o.val = "optionValue";
+        req.options = o;
+        req.val = "some value";
+        Top1270 top = new Top1270();
+        top.b = req;
+        String json = MAPPER.writeValueAsString(top);
+        JsonNode tree = MAPPER.readTree(json);
+        try{ assertNotNull(tree.get("b"));                                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options"));                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNotNull(tree.get("b").get("options").get("val"));                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // Can we reverse the process? I have some doubts
+        Top1270 itemRead = MAPPER.readValue(json, Top1270.class);
+        try{ assertNotNull(itemRead);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNotNull(itemRead.b);                                                                          /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/jsontype/TestCustomTypeIdResolver.java
+new test num: 5
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 196.71 seconds
+Failing tests: 5
+	com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_0
+	com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_1
+	com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_2
+	com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_3
+	com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_4
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 185 with                     }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 184 with                     if (!type.hasGenericTypes()) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 184 with                     if (!type.hasGenericTypes()) {
+
+try to fix hunk: 1
+insert before 185 with                     }
+
+patches are written to file
+running tests...
+used time: Finished in 217.61 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_1', 'com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_0', 'com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_2', 'com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_4', 'com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_1
+com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_0
+com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_2
+com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_4
+com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver::testPolymorphicTypeViaCustom$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

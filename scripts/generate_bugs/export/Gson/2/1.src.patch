@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+            "from_line_no": 833,
+            "to_line_no": 833,
+            "replaced_with": "        return (TypeAdapter<T2>) new TypeAdapter<T1>() {\n          @Override public void write(JsonWriter out, T1 value) throws IOException {\n            typeAdapter.write(out, value);\n          }\n",
+            "replaced": "        return (TypeAdapter<T2>) typeAdapter;\n",
+            "patch_type": "replace",
+            "next_line_no": 834
+        },
+        {
+            "file_name": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+            "replaced_with": "          @Override public T1 read(JsonReader in) throws IOException {\n            T1 result = typeAdapter.read(in);\n            if (result != null && !requestedType.isInstance(result)) {\n              throw new JsonSyntaxException(\"Expected a \" + requestedType.getName()\n                  + \" but was \" + result.getClass().getName());\n            }\n            return result;\n          }\n        };\n",
+            "patch_type": "insert",
+            "next_line_no": 835
+        }
+    ]
+}

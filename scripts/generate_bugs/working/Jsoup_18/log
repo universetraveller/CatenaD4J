@@ -1,0 +1,110 @@
+---
+Begin generate bug_id: Jsoup_18
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_18
+Try to checkout Jsoup_18
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/CharacterReader.java
+trying to replace old failing tests
+edit: replace from 64 range 8 at src/test/java/org/jsoup/parser/CharacterReaderTest.java
+to
+    @Test public void handleCarriageReturnAsLineFeed$catena_0() {
+        String in = "one \r two \r\n three";
+        CharacterReader r = new CharacterReader(in);
+
+        String first = r.consumeTo('\n');
+        assertEquals("one ", first);                                                                        /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("\n two \n three", r.consumeToEnd());                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void handleCarriageReturnAsLineFeed$catena_1() {
+        String in = "one \r two \r\n three";
+        CharacterReader r = new CharacterReader(in);
+
+        String first = r.consumeTo('\n');
+        try{ assertEquals("one ", first);                                                                   }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("\n two \n three", r.consumeToEnd());                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 73 range 7 at src/test/java/org/jsoup/parser/CharacterReaderTest.java
+to
+    @Test public void consumeToEnd$catena_0() {
+        String in = "one two three";
+        CharacterReader r = new CharacterReader(in);
+        String toEnd = r.consumeToEnd();
+        assertEquals(in, toEnd);                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(r.isEmpty());                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void consumeToEnd$catena_1() {
+        String in = "one two three";
+        CharacterReader r = new CharacterReader(in);
+        String toEnd = r.consumeToEnd();
+        try{ assertEquals(in, toEnd);                                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(r.isEmpty());                                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/parser/CharacterReaderTest.java
+new test num: 4
+ori test num: 1
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 11.69 seconds
+Failing tests: 4
+	org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_0
+	org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1
+	org.jsoup.parser.CharacterReaderTest::consumeToEnd$catena_0
+	org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag
+processed: 00
+pattern: 01
+try to fix hunk: 1
+replace from 99 with range 1 to
+        String data = input.substring(pos, input.length());
+
+patches are written to file
+running tests...
+used time: Finished in 9.64 seconds
+Failing tests: 3
+	org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_0
+	org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1
+	org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag
+select new bug
+Pattern: 01
+new failing tests:
+org.jsoup.parser.CharacterReaderTest::consumeToEnd$catena_0
+Save found bug
+processed: 01
+pattern: 10
+try to fix hunk: 0
+insert before 18 with         input = input.replaceAll("\r\n?", "\n"); // normalise carriage returns to newlines
+
+patches are written to file
+running tests...
+used time: Finished in 11.20 seconds
+Failing tests: 2
+	org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1
+	org.jsoup.parser.CharacterReaderTest::consumeToEnd$catena_0
+select new bug
+Pattern: 10
+new failing tests:
+org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_0
+org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag
+Save found bug
+processed: 10
+pattern: 11
+try to fix hunk: 0
+insert before 18 with         input = input.replaceAll("\r\n?", "\n"); // normalise carriage returns to newlines
+
+try to fix hunk: 1
+replace from 99 with range 1 to
+        String data = input.substring(pos, input.length());
+
+patches are written to file
+running tests...
+used time: Finished in 12.05 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1']
+select new bug
+Pattern: 11
+new failing tests:
+org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_1
+Save found bug
+processed: 11
+Find 3 new bugs

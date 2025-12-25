@@ -1,0 +1,205 @@
+---
+Begin generate bug_id: Jsoup_23
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_23
+Try to checkout Jsoup_23
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/parser/CharacterReader.java
+trace file: src/main/java/org/jsoup/parser/Tokeniser.java
+trying to replace old failing tests
+edit: replace from 56 range 7 at src/test/java/org/jsoup/nodes/EntitiesTest.java
+to
+    @Test public void letterDigitEntities$catena_0() {
+        String html = "<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>";
+        Document doc = Jsoup.parse(html);
+        Element p = doc.select("p").first();
+        assertEquals("&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;", p.html());                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals("¹²³¼½¾", p.text());                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test public void letterDigitEntities$catena_1() {
+        String html = "<p>&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;</p>";
+        Document doc = Jsoup.parse(html);
+        Element p = doc.select("p").first();
+        try{ assertEquals("&sup1;&sup2;&sup3;&frac14;&frac12;&frac34;", p.html());                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals("¹²³¼½¾", p.text());                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/nodes/EntitiesTest.java
+new test num: 2
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 14.09 seconds
+Failing tests: 2
+	org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_0
+	org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_1
+processed: 000
+pattern: 001
+try to fix hunk: 2
+replace from 135 with range 1 to
+            String nameRef = reader.consumeLetterThenDigitSequence();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 119 with         return input.substring(start, pos);
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+insert before 118 with     String consumeLetterThenDigitSequence() {
+        int start = pos;
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                pos++;
+            else
+                break;
+        }
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if (c >= '0' && c <= '9')
+                pos++;
+            else
+                break;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 119 with         return input.substring(start, pos);
+    }
+
+try to fix hunk: 2
+replace from 135 with range 1 to
+            String nameRef = reader.consumeLetterThenDigitSequence();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011
+pattern: 101
+try to fix hunk: 0
+insert before 118 with     String consumeLetterThenDigitSequence() {
+        int start = pos;
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                pos++;
+            else
+                break;
+        }
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if (c >= '0' && c <= '9')
+                pos++;
+            else
+                break;
+        }
+
+try to fix hunk: 2
+replace from 135 with range 1 to
+            String nameRef = reader.consumeLetterThenDigitSequence();
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+insert before 118 with     String consumeLetterThenDigitSequence() {
+        int start = pos;
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                pos++;
+            else
+                break;
+        }
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if (c >= '0' && c <= '9')
+                pos++;
+            else
+                break;
+        }
+
+try to fix hunk: 1
+insert before 119 with         return input.substring(start, pos);
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 11.55 seconds
+Failing tests: 2
+	org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_0
+	org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_1
+Can independently fix []
+Could not fix independently
+processed: 110
+pattern: 111
+try to fix hunk: 0
+insert before 118 with     String consumeLetterThenDigitSequence() {
+        int start = pos;
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                pos++;
+            else
+                break;
+        }
+        while (!isEmpty()) {
+            char c = input.charAt(pos);
+            if (c >= '0' && c <= '9')
+                pos++;
+            else
+                break;
+        }
+
+try to fix hunk: 1
+insert before 119 with         return input.substring(start, pos);
+    }
+
+try to fix hunk: 2
+replace from 135 with range 1 to
+            String nameRef = reader.consumeLetterThenDigitSequence();
+
+patches are written to file
+running tests...
+used time: Finished in 14.07 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_1', 'org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_0']
+select new bug
+Pattern: 111
+new failing tests:
+org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_1
+org.jsoup.nodes.EntitiesTest::letterDigitEntities$catena_0
+Save found bug
+processed: 111
+Find 1 new bugs

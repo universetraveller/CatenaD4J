@@ -2,6 +2,11 @@ import javalang
 import json
 import tqdm
 import sys
+ex_bugs = ['Cli_6','Collections_20','Collections_24','Collections_1', \
+           'Collections_21','Collections_2','Collections_5','Collections_10', \
+           'Collections_6','Collections_15','Collections_7','Collections_17', \
+           'Collections_22','Collections_8','Collections_18', 'Collections_19', \
+           'Collections_4', 'Time_21']
 class filelog:
     def __init__(self, filename):
         self.file = open(filename, 'a')
@@ -190,8 +195,12 @@ def analyze(proj, bid, logger):
         path = '{}/{}.java'.format(src_dir, i.replace('.', '/'))
         logger.log(path)
         testcases = trigger_map[i]
-        with open(path, 'r') as src:
-            src = src.read()
+        try:
+            with open(path, 'r') as src:
+                src = src.read()
+        except UnicodeDecodeError:
+            with open(path, 'r', encoding='latin-1') as src:
+                src = src.read()
         tree = javalang.parse.parse(src)
         Nodes = []
         AllNodes = {}
@@ -209,7 +218,8 @@ def analyze(proj, bid, logger):
 logger = filelog('./logs/log5')
 for i in tqdm.tqdm(wait):
     i = i.split(':')[0].split('_')
-    if i[0] == 'Time' and i[1] == '21':
+    bugid = f"{i[0]}_{i[1]}"
+    if any(bug == bugid for bug in ex_bugs):
         continue
     analyze(i[0], i[1], logger)
 logger.log('-----')

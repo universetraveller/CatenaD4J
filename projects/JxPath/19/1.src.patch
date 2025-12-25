@@ -1,0 +1,19 @@
+{
+    "patch": [
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+            "from_line_no": 696,
+            "to_line_no": 697,
+            "replaced_with": "                if (child instanceof Element && matchesQName(((Element) child))) {\n",
+            "replaced": "                if ((child instanceof Element)\n                    && ((Element) child).getQualifiedName().equals(name)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 698
+        },
+        {
+            "file_name": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+            "replaced_with": "    private boolean matchesQName(Element element) {\n        if (getNamespaceURI() != null) {\n            String ns = getNamespaceURI(element);\n            if (ns == null || !ns.equals(getNamespaceURI())) {\n                return false;\n            }\n        }\n        return element.getName().equals(((Element) node).getName());\n    }\n",
+            "patch_type": "insert",
+            "next_line_no": 709
+        }
+    ]
+}

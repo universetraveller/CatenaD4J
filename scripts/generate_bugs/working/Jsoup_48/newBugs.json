@@ -1,0 +1,45 @@
+{
+    "original": {
+        "num_of_hunks": 2,
+        "0": {
+            "file_name": "src/main/java/org/jsoup/helper/HttpConnection.java",
+            "from_line_no": 773,
+            "to_line_no": 773,
+            "replaced_with": "                    if (values.size() == 1)\n",
+            "replaced": "                    if (!values.isEmpty())\n",
+            "patch_type": "replace",
+            "next_line_no": 774
+        },
+        "1": {
+            "file_name": "src/main/java/org/jsoup/helper/HttpConnection.java",
+            "replaced_with": "                    else if (values.size() > 1) {\n                        StringBuilder accum = new StringBuilder();\n                        for (int i = 0; i < values.size(); i++) {\n                            final String val = values.get(i);\n                            if (i != 0)\n                                accum.append(\", \");\n                            accum.append(val);\n                        }\n                        header(name, accum.toString());\n                    }\n",
+            "patch_type": "insert",
+            "next_line_no": 775
+        }
+    },
+    "method": {
+        "failing_tests": [
+            "org.jsoup.helper.HttpConnectionTest::sameHeadersCombineWithComma"
+        ],
+        "org.jsoup.helper.HttpConnectionTest::sameHeadersCombineWithComma": {
+            "file_path": "src/test/java/org/jsoup/helper/HttpConnectionTest.java",
+            "Instance": "Begin: Pos(55, 5)\nEnd: Pos(64, 5)\nSource: /tmp/c4j/Jsoup_48/src/test/java//org/jsoup/helper/HttpConnectionTest.java\nName: sameHeadersCombineWithComma\nChilds: [StatementAssertion<Begin: Pos(63, 9), End: Pos(63, 72)>,\n]",
+            "source": "/tmp/c4j/Jsoup_48/src/test/java//org/jsoup/helper/HttpConnectionTest.java",
+            "name": "sameHeadersCombineWithComma",
+            "begin": "Pos(55, 5)",
+            "end": "Pos(64, 5)",
+            "begin_line_no": 55,
+            "end_line_no": 64,
+            "child": [
+                "Begin: Pos(63, 9)\nEnd: Pos(63, 72)\nSource: StatementExpression\nName: <Unknown>\nChilds: []"
+            ],
+            "splited": [],
+            "func": {}
+        }
+    },
+    "11": {
+        "failing_tests": [
+            "org.jsoup.helper.HttpConnectionTest::sameHeadersCombineWithComma"
+        ]
+    }
+}

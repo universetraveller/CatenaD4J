@@ -1,0 +1,131 @@
+---
+Begin generate bug_id: Cli_38
+num_of_hunks: 2
+timeout for running: 3600
+use working dir: ./working/data/Cli_38
+Try to checkout Cli_38
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/apache/commons/cli/DefaultParser.java
+trying to replace old failing tests
+edit: replace from 76 range 12 at src/test/java/org/apache/commons/cli/bug/BugCLI265Test.java
+to
+    @Test
+    public void shouldParseConcatenatedShortOptions$catena_0() throws Exception {
+        String[] concatenatedShortOptions = new String[] { "-t1", "-ab" };
+
+        final CommandLine commandLine = parser.parse(options, concatenatedShortOptions);
+
+        assertTrue(commandLine.hasOption("t1"));                                                            /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertNull(commandLine.getOptionValue("t1"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("a"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("b"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(commandLine.hasOption("last"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseConcatenatedShortOptions$catena_1() throws Exception {
+        String[] concatenatedShortOptions = new String[] { "-t1", "-ab" };
+
+        final CommandLine commandLine = parser.parse(options, concatenatedShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertNull(commandLine.getOptionValue("t1"));                                                       /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(commandLine.hasOption("a"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("b"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(commandLine.hasOption("last"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseConcatenatedShortOptions$catena_2() throws Exception {
+        String[] concatenatedShortOptions = new String[] { "-t1", "-ab" };
+
+        final CommandLine commandLine = parser.parse(options, concatenatedShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(commandLine.getOptionValue("t1"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(commandLine.hasOption("a"));                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertTrue(commandLine.hasOption("b"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertFalse(commandLine.hasOption("last"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseConcatenatedShortOptions$catena_3() throws Exception {
+        String[] concatenatedShortOptions = new String[] { "-t1", "-ab" };
+
+        final CommandLine commandLine = parser.parse(options, concatenatedShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(commandLine.getOptionValue("t1"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("a"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertTrue(commandLine.hasOption("b"));                                                             /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertFalse(commandLine.hasOption("last"));                                                    }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void shouldParseConcatenatedShortOptions$catena_4() throws Exception {
+        String[] concatenatedShortOptions = new String[] { "-t1", "-ab" };
+
+        final CommandLine commandLine = parser.parse(options, concatenatedShortOptions);
+
+        try{ assertTrue(commandLine.hasOption("t1"));                                                       }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertNull(commandLine.getOptionValue("t1"));                                                  }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("a"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertTrue(commandLine.hasOption("b"));                                                        }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertFalse(commandLine.hasOption("last"));                                                         /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/apache/commons/cli/bug/BugCLI265Test.java
+new test num: 5
+ori test num: 0
+pattern: 00
+patches are written to file
+running tests...
+used time: Finished in 6.00 seconds
+Failing tests: 3
+	org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_1
+	org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_2
+	org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_3
+processed: 00
+pattern: 01
+try to fix hunk: 1
+insert before 312 with         return optName.length() > 0 && options.hasShortOption(String.valueOf(optName.charAt(0)));
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 01
+pattern: 10
+try to fix hunk: 0
+replace from 310 with range 1 to
+        if (options.hasShortOption(optName))
+        {
+            return true;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 10
+pattern: 11
+try to fix hunk: 0
+replace from 310 with range 1 to
+        if (options.hasShortOption(optName))
+        {
+            return true;
+        }
+
+try to fix hunk: 1
+insert before 312 with         return optName.length() > 0 && options.hasShortOption(String.valueOf(optName.charAt(0)));
+
+patches are written to file
+running tests...
+used time: Finished in 6.63 seconds
+Failing tests: 0
+Can independently fix ['org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_1', 'org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_2', 'org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_3']
+select new bug
+Pattern: 11
+new failing tests:
+org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_1
+org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_2
+org.apache.commons.cli.bug.BugCLI265Test::shouldParseConcatenatedShortOptions$catena_3
+Save found bug
+processed: 11
+Find 1 new bugs

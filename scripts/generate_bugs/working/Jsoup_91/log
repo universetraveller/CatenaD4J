@@ -1,0 +1,1516 @@
+---
+Begin generate bug_id: Jsoup_91
+num_of_hunks: 6
+timeout for running: 3600
+use working dir: ./working/data/Jsoup_91
+Try to checkout Jsoup_91
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/org/jsoup/UncheckedIOException.java
+trace file: src/main/java/org/jsoup/parser/CharacterReader.java
+trying to replace old failing tests
+edit: replace from 491 range 17 at src/test/java/org/jsoup/integration/ConnectTest.java
+to
+    @Test
+    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_0() {
+        Connection con = Jsoup.connect(FileServlet.Url);
+        con.data(FileServlet.LocationParam, "/htmltests/thumb.jpg");
+        con.data(FileServlet.ContentTypeParam, "image/jpeg");
+        con.ignoreContentType(true);
+
+        boolean threw = false;
+        try {
+            con.execute();
+            Document doc = con.response().parse();
+        } catch (IOException e) {
+            threw = true;
+            assertEquals("Input is binary and unsupported", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testBinaryThrowsExceptionWhenTypeIgnored$catena_1() {
+        Connection con = Jsoup.connect(FileServlet.Url);
+        con.data(FileServlet.LocationParam, "/htmltests/thumb.jpg");
+        con.data(FileServlet.ContentTypeParam, "image/jpeg");
+        con.ignoreContentType(true);
+
+        boolean threw = false;
+        try {
+            con.execute();
+            Document doc = con.response().parse();
+        } catch (IOException e) {
+            threw = true;
+            try{ assertEquals("Input is binary and unsupported", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 509 range 16 at src/test/java/org/jsoup/integration/ConnectTest.java
+to
+    @Test
+    public void testBinaryResultThrows$catena_0() {
+        Connection con = Jsoup.connect(FileServlet.Url);
+        con.data(FileServlet.LocationParam, "/htmltests/thumb.jpg");
+        con.data(FileServlet.ContentTypeParam, "text/html");
+
+        boolean threw = false;
+        try {
+            con.execute();
+            Document doc = con.response().parse();
+        } catch (IOException e) {
+            threw = true;
+            assertEquals("Input is binary and unsupported", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testBinaryResultThrows$catena_1() {
+        Connection con = Jsoup.connect(FileServlet.Url);
+        con.data(FileServlet.LocationParam, "/htmltests/thumb.jpg");
+        con.data(FileServlet.ContentTypeParam, "text/html");
+
+        boolean threw = false;
+        try {
+            con.execute();
+            Document doc = con.response().parse();
+        } catch (IOException e) {
+            threw = true;
+            try{ assertEquals("Input is binary and unsupported", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+edit: replace from 68 range 13 at src/test/java/org/jsoup/integration/ParseTest.java
+to
+    @Test
+    public void testBinaryThrowsException$catena_0() throws IOException {
+        File in = getFile("/htmltests/thumb.jpg");
+
+        boolean threw = false;
+        try {
+            Document doc = Jsoup.parse(in, "UTF-8");
+        } catch (IOException e) {
+            threw = true;
+            assertEquals("Input is binary and unsupported", e.getMessage());                                /***** ORIGINAL ASSERTION IS HERE *****/
+        }
+        try{ assertTrue(threw);                                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     @Test
+    public void testBinaryThrowsException$catena_1() throws IOException {
+        File in = getFile("/htmltests/thumb.jpg");
+
+        boolean threw = false;
+        try {
+            Document doc = Jsoup.parse(in, "UTF-8");
+        } catch (IOException e) {
+            threw = true;
+            try{ assertEquals("Input is binary and unsupported", e.getMessage());                           }catch(Throwable __SHOULD_BE_IGNORED){}
+        }
+        assertTrue(threw);                                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/org/jsoup/integration/ParseTest.java
+trace file: src/test/java/org/jsoup/integration/ConnectTest.java
+new test num: 6
+ori test num: 0
+pattern: 000000
+patches are written to file
+running tests...
+used time: Finished in 23.61 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+processed: 000000
+pattern: 000001
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000001
+pattern: 000010
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000010
+pattern: 000100
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000100
+pattern: 001000
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+patches are written to file
+running tests...
+used time: Finished in 24.59 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+No new failing tests but only 1 hunk
+processed: 001000
+pattern: 010000
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010000
+pattern: 100000
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 23.68 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+No new failing tests but only 1 hunk
+processed: 100000
+pattern: 000011
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000011
+pattern: 000101
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000101
+pattern: 000110
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000110
+pattern: 001001
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001001
+pattern: 001010
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001010
+pattern: 001100
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001100
+pattern: 010001
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010001
+pattern: 010010
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010010
+pattern: 010100
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010100
+pattern: 011000
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011000
+pattern: 100001
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100001
+pattern: 100010
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100010
+pattern: 100100
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100100
+pattern: 101000
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+patches are written to file
+running tests...
+used time: Finished in 23.16 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101000
+pattern: 110000
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110000
+pattern: 000111
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 000111
+pattern: 001011
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001011
+pattern: 001101
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 25.43 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001101
+pattern: 001110
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001110
+pattern: 010011
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010011
+pattern: 010101
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010101
+pattern: 010110
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010110
+pattern: 011001
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011001
+pattern: 011010
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011010
+pattern: 011100
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011100
+pattern: 100011
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100011
+pattern: 100101
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100101
+pattern: 100110
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100110
+pattern: 101001
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101001
+pattern: 101010
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101010
+pattern: 101100
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101100
+pattern: 110001
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110001
+pattern: 110010
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110010
+pattern: 110100
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110100
+pattern: 111000
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111000
+pattern: 001111
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 21.98 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 001111
+pattern: 010111
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010111
+pattern: 011011
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011011
+pattern: 011101
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011101
+pattern: 011110
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011110
+pattern: 100111
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100111
+pattern: 101011
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101011
+pattern: 101101
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 21.92 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101101
+pattern: 101110
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101110
+pattern: 110011
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110011
+pattern: 110101
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110101
+pattern: 110110
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110110
+pattern: 111001
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111001
+pattern: 111010
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111010
+pattern: 111100
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111100
+pattern: 011111
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 011111
+pattern: 101111
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 20.77 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 101111
+pattern: 110111
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110111
+pattern: 111011
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111011
+pattern: 111101
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 21.26 seconds
+Failing tests: 3
+	org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+	org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+	org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+Can independently fix []
+Could not fix independently
+processed: 111101
+pattern: 111110
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 111110
+pattern: 111111
+try to fix hunk: 0
+insert before 10 with     public UncheckedIOException(String message) {
+        super(new IOException(message));
+    }
+
+try to fix hunk: 1
+insert before 37 with         if (isBinary()) {
+            throw new UncheckedIOException("Input is binary and unsupported");
+        }
+
+try to fix hunk: 2
+insert before 452 with     private static final int numNullsConsideredBinary = 10; // conservative
+
+try to fix hunk: 3
+insert before 457 with     boolean isBinary() {
+        int nullsSeen = 0;
+
+try to fix hunk: 4
+insert before 458 with         for (int i = bufPos; i < bufLength; i++) {
+            if (charBuf[i] == '\0')
+                nullsSeen++;
+        }
+
+try to fix hunk: 5
+insert before 459 with         return nullsSeen >= numNullsConsideredBinary;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 23.05 seconds
+Failing tests: 0
+Can independently fix ['org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1', 'org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1', 'org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1']
+select new bug
+Pattern: 111111
+new failing tests:
+org.jsoup.integration.ConnectTest::testBinaryResultThrows$catena_1
+org.jsoup.integration.ParseTest::testBinaryThrowsException$catena_1
+org.jsoup.integration.ConnectTest::testBinaryThrowsExceptionWhenTypeIgnored$catena_1
+Save found bug
+processed: 111111
+Find 1 new bugs

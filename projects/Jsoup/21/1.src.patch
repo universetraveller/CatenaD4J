@@ -1,0 +1,25 @@
+{
+    "patch": [
+        {
+            "file_name": "src/main/java/org/jsoup/select/CombiningEvaluator.java",
+            "replaced_with": "        Or() {\n            super();\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 64
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/QueryParser.java",
+            "from_line_no": 58,
+            "to_line_no": 66,
+            "replaced_with": "            if (tq.matchesAny(combinators)) {\n",
+            "replaced": "            if (tq.matchChomp(\",\")) {\n                CombiningEvaluator.Or or = new CombiningEvaluator.Or(evals);\n                evals.clear();\n                evals.add(or);\n                while (!tq.isEmpty()) {\n                    String subQuery = tq.chompTo(\",\");\n                    or.add(parse(subQuery));\n                }\n            } else if (tq.matchesAny(combinators)) {\n",
+            "patch_type": "replace",
+            "next_line_no": 67
+        },
+        {
+            "file_name": "src/main/java/org/jsoup/select/QueryParser.java",
+            "replaced_with": "        else if (combinator == ',') { // group or\n            CombiningEvaluator.Or or;\n            if (e instanceof CombiningEvaluator.Or) {\n                or = (CombiningEvaluator.Or) e;\n                or.add(f);\n            } else {\n                or = new CombiningEvaluator.Or();\n                or.add(e);\n                or.add(f);\n            }\n            evals.add(or);\n        }\n",
+            "patch_type": "insert",
+            "next_line_no": 101
+        }
+    ]
+}

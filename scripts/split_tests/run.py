@@ -5,6 +5,11 @@ import os
 import logging
 import traceback
 import argparse
+ex_bugs = ['Cli_6','Collections_20','Collections_24','Collections_1', \
+           'Collections_21','Collections_2','Collections_5','Collections_10', \
+           'Collections_6','Collections_15','Collections_7','Collections_17', \
+           'Collections_22','Collections_8','Collections_18', 'Collections_19', \
+           'Collections_4', 'Time_21']
 class filelog:
     def __init__(self, filename):
         self.file = open(filename, 'a')
@@ -24,7 +29,7 @@ def run(waitlist):
         logger.log('-'*20)
         logger.log('Run: {}'.format(i))
         root[i] = {}
-        if i == 'Time_21':
+        if any(bug == i for bug in ex_bugs):
             continue
         path = '{}/{}/{}/'.format(path2buggy, i, database.get(i).get('dir.src.tests'))
         failing_tests = database.get(i).get('tests.trigger')
@@ -38,7 +43,7 @@ def run(waitlist):
             logger.log('file: {}'.format(path2file))
             temp['file_path'] = '{}/{}.java'.format(database.get(i).get('dir.src.tests'), test[0].replace('.', '/'))
             try:
-                fti, check = spliter.process_test_node_v2(path2file, test[1])
+                fti, check = spliter.process_test_node_v2(path2file, test[1], table)
             except Exception as E:
                 logger.log('# Exception:\n{}\n---'.format(traceback.format_exc()))
                 exception_list.append('{}@{}'.format(i, failing_test))
@@ -75,13 +80,20 @@ def run(waitlist):
     return root
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-b', '--bug-ids', required=False)
+    parser.add_argument("table", help="please input table file")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-s', help="select one single bug")
+    group.add_argument('-f', help="select one file containing bug names")
     parser.add_argument('-d', '--d4j-home', default='/root/defects4j', required=False)
     parser.add_argument('-w', '--path-to-buggy', default='/tmp', required=False)
     parser.add_argument('-m', '--database', default='./database.json', required=False)
     args = parser.parse_args()
-    with open('./2toMore', 'r') as f:
-        waitlist = [args.bug_ids] if args.bug_ids is not None else f.read().splitlines()
+    table = args.table
+    if args.s:
+        waitlist = [args.s]
+    else:
+        with open(args.f) as f:
+            waitlist = f.read().splitlines()
     path2d4j = args.d4j_home
     path2buggy = args.path_to_buggy
     with open(args.database, 'r') as f:

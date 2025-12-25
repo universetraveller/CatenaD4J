@@ -1,0 +1,12 @@
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipBig$catena_0
+org.apache.commons.codec.binary.Base64InputStreamTest::testCodec130
+org.apache.commons.codec.binary.Base64InputStreamTest::testAvailable$catena_1
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipWrongArgument
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipPastEnd$catena_0
+org.apache.commons.codec.binary.Base32InputStreamTest::testCodec130
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipWrongArgument
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipToEnd$catena_1
+org.apache.commons.codec.binary.Base64InputStreamTest::testSkipToEnd$catena_1
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipPastEnd$catena_0
+org.apache.commons.codec.binary.Base32InputStreamTest::testAvailable$catena_1
+org.apache.commons.codec.binary.Base32InputStreamTest::testSkipBig$catena_0

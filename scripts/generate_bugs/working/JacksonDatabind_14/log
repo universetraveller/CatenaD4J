@@ -1,0 +1,658 @@
+---
+Begin generate bug_id: JacksonDatabind_14
+num_of_hunks: 3
+timeout for running: 3600
+use working dir: ./working/data/JacksonDatabind_14
+Try to checkout JacksonDatabind_14
+build dir: ['target/classes', 'target/test-classes']
+init FileManager
+trace file: src/main/java/com/fasterxml/jackson/databind/ObjectReader.java
+trying to replace old failing tests
+edit: replace from 187 range 39 at src/test/java/com/fasterxml/jackson/databind/convert/TestUpdateValue.java
+to
+    public void testIssue744$catena_0() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        assertEquals(5, dbNewViaString.da.i);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_1() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(13, dbNewViaString.k);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_2() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        assertEquals(5, dbNewViaNode.da.i);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_3() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(13, dbNewViaNode.k);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_4() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        assertEquals(1, dbUpdViaString.da.i);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_5() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, dbUpdViaString.k);                                                                  /***** ORIGINAL ASSERTION IS HERE *****/
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_6() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        assertEquals(5, dbUpdViaString.da.i);                                                               /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_7() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(13, dbUpdViaString.k);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_8() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        assertEquals(1, dbUpdViaNode.da.i);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_9() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(3, dbUpdViaNode.k);                                                                    /***** ORIGINAL ASSERTION IS HERE *****/
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_10() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        assertEquals(5, dbUpdViaNode.da.i);                                                                 /***** ORIGINAL ASSERTION IS HERE *****/
+        try{ assertEquals(13, dbUpdViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+    }     public void testIssue744$catena_11() throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(DataA.class, new DataADeserializer());
+        mapper.registerModule(module);
+
+        DataB db = new DataB();
+        db.da.i = 11;
+        db.k = 13;
+        String jsonBString = mapper.writeValueAsString(db);
+        JsonNode jsonBNode = mapper.valueToTree(db);
+
+        // create parent
+        DataB dbNewViaString = mapper.readValue(jsonBString, DataB.class);
+        try{ assertEquals(5, dbNewViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        DataB dbNewViaNode = mapper.treeToValue(jsonBNode, DataB.class);
+        try{ assertEquals(5, dbNewViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbNewViaNode.k);                                                              }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        // update parent
+        DataB dbUpdViaString = new DataB();
+        DataB dbUpdViaNode = new DataB();
+
+        try{ assertEquals(1, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaString.k);                                                             }catch(Throwable __SHOULD_BE_IGNORED){}
+        mapper.readerForUpdating(dbUpdViaString).readValue(jsonBString);
+        try{ assertEquals(5, dbUpdViaString.da.i);                                                          }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(13, dbUpdViaString.k);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+
+        try{ assertEquals(1, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        try{ assertEquals(3, dbUpdViaNode.k);                                                               }catch(Throwable __SHOULD_BE_IGNORED){}
+        
+        mapper.readerForUpdating(dbUpdViaNode).readValue(jsonBNode);
+        try{ assertEquals(5, dbUpdViaNode.da.i);                                                            }catch(Throwable __SHOULD_BE_IGNORED){}
+        assertEquals(13, dbUpdViaNode.k);                                                                   /***** ORIGINAL ASSERTION IS HERE *****/
+    }
+trace file: src/test/java/com/fasterxml/jackson/databind/convert/TestUpdateValue.java
+new test num: 12
+ori test num: 0
+pattern: 000
+patches are written to file
+running tests...
+used time: Finished in 153.73 seconds
+Failing tests: 12
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_10
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_11
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_0
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_1
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_2
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_3
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_4
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_5
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_6
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_7
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_8
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_9
+processed: 000
+pattern: 001
+try to fix hunk: 2
+insert before 1578 with             deser = ctxt.findRootValueDeserializer(JSON_NODE_TYPE);
+            if (deser == null) { // can this happen?
+                throw new JsonMappingException("Can not find a deserializer for type "+JSON_NODE_TYPE);
+            }
+            _rootDeserializers.put(JSON_NODE_TYPE, deser);
+        }
+        return deser;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 001
+pattern: 010
+try to fix hunk: 1
+insert before 1577 with     protected JsonDeserializer<Object> _findTreeDeserializer(DeserializationContext ctxt)
+        throws JsonMappingException
+    {
+        JsonDeserializer<Object> deser = _rootDeserializers.get(JSON_NODE_TYPE);
+        if (deser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 010
+pattern: 100
+try to fix hunk: 0
+replace from 1476 with range 1 to
+            JsonDeserializer<Object> deser = _findTreeDeserializer(ctxt);
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 100
+pattern: 011
+try to fix hunk: 1
+insert before 1577 with     protected JsonDeserializer<Object> _findTreeDeserializer(DeserializationContext ctxt)
+        throws JsonMappingException
+    {
+        JsonDeserializer<Object> deser = _rootDeserializers.get(JSON_NODE_TYPE);
+        if (deser == null) {
+
+try to fix hunk: 2
+insert before 1578 with             deser = ctxt.findRootValueDeserializer(JSON_NODE_TYPE);
+            if (deser == null) { // can this happen?
+                throw new JsonMappingException("Can not find a deserializer for type "+JSON_NODE_TYPE);
+            }
+            _rootDeserializers.put(JSON_NODE_TYPE, deser);
+        }
+        return deser;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 113.96 seconds
+Failing tests: 12
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_10
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_11
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_0
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_1
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_2
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_3
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_4
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_5
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_6
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_7
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_8
+	com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_9
+Can independently fix []
+Could not fix independently
+processed: 011
+pattern: 101
+try to fix hunk: 0
+replace from 1476 with range 1 to
+            JsonDeserializer<Object> deser = _findTreeDeserializer(ctxt);
+
+try to fix hunk: 2
+insert before 1578 with             deser = ctxt.findRootValueDeserializer(JSON_NODE_TYPE);
+            if (deser == null) { // can this happen?
+                throw new JsonMappingException("Can not find a deserializer for type "+JSON_NODE_TYPE);
+            }
+            _rootDeserializers.put(JSON_NODE_TYPE, deser);
+        }
+        return deser;
+    }
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 101
+pattern: 110
+try to fix hunk: 0
+replace from 1476 with range 1 to
+            JsonDeserializer<Object> deser = _findTreeDeserializer(ctxt);
+
+try to fix hunk: 1
+insert before 1577 with     protected JsonDeserializer<Object> _findTreeDeserializer(DeserializationContext ctxt)
+        throws JsonMappingException
+    {
+        JsonDeserializer<Object> deser = _rootDeserializers.get(JSON_NODE_TYPE);
+        if (deser == null) {
+
+patches are written to file
+running tests...
+seems testing failed, see output:
+<OUTPUT>
+<Common Compile Failed>
+<ENDOUTPUT>
+processed: 110
+pattern: 111
+try to fix hunk: 0
+replace from 1476 with range 1 to
+            JsonDeserializer<Object> deser = _findTreeDeserializer(ctxt);
+
+try to fix hunk: 1
+insert before 1577 with     protected JsonDeserializer<Object> _findTreeDeserializer(DeserializationContext ctxt)
+        throws JsonMappingException
+    {
+        JsonDeserializer<Object> deser = _rootDeserializers.get(JSON_NODE_TYPE);
+        if (deser == null) {
+
+try to fix hunk: 2
+insert before 1578 with             deser = ctxt.findRootValueDeserializer(JSON_NODE_TYPE);
+            if (deser == null) { // can this happen?
+                throw new JsonMappingException("Can not find a deserializer for type "+JSON_NODE_TYPE);
+            }
+            _rootDeserializers.put(JSON_NODE_TYPE, deser);
+        }
+        return deser;
+    }
+
+patches are written to file
+running tests...
+used time: Finished in 119.12 seconds
+Failing tests: 0
+Can independently fix ['com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_3', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_9', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_5', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_0', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_4', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_2', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_8', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_11', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_7', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_10', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_1', 'com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_6']
+select new bug
+Pattern: 111
+new failing tests:
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_3
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_9
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_5
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_0
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_4
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_2
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_8
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_11
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_7
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_10
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_1
+com.fasterxml.jackson.databind.convert.TestUpdateValue::testIssue744$catena_6
+Save found bug
+processed: 111
+Find 1 new bugs

@@ -1,0 +1,4 @@
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::testDetectCharsetEncodingDeclaration$catena_0
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_2
+org.jsoup.parser.XmlTreeBuilderTest::testParseDeclarationAttributes$catena_1

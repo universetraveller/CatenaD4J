@@ -1,0 +1,2 @@
+org.jsoup.parser.CharacterReaderTest::handleCarriageReturnAsLineFeed$catena_0
+org.jsoup.parser.ParserTest::handlesNewlinesAndWhitespaceInTag
